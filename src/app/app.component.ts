@@ -6,6 +6,8 @@ import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Route
 import {AppState} from './reducers';
 import {isLoggedIn, isLoggedOut} from './auth/auth.selectors';
 import {login, logout} from './auth/auth.actions';
+import {MenuModule} from 'primeng/menu';
+import {MenuItem} from 'primeng/api';
 
 @Component({
     selector: 'app-root',
@@ -13,6 +15,8 @@ import {login, logout} from './auth/auth.actions';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+    menuLogggedInItems: MenuItem[] = [];
 
     loading = true;
 
@@ -26,8 +30,12 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.menuLogggedInItems = [
+            {label: 'Courses', icon: 'pi pi-fw pi-refresh',  routerLink: ['/courses']},
+            {label: 'Logout', icon: 'pi pi-fw pi-download',  command: (event) => { this.logout(); }}
+        ];
 
-        const userProfile = localStorage.getItem("user");
+        const userProfile = localStorage.getItem('user');
 
         if (userProfile) {
             this.store.dispatch(login({user: JSON.parse(userProfile)}));

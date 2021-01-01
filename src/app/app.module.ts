@@ -23,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {metaReducers, reducers} from './reducers';
 import {AuthGuard} from './auth/auth.guard';
 import {EntityDataModule} from '@ngrx/data';
+import {MenuModule} from 'primeng/menu';
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
         BrowserAnimationsModule,
         RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
         HttpClientModule,
+        MenuModule,
         MatMenuModule,
         MatIconModule,
         MatSidenavModule,
