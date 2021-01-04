@@ -32,7 +32,10 @@ const routes: Routes = [
         loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule),
         canActivate: [AuthGuard]
     },
-    { path: 'banques', loadChildren: () => import('./banques/banques.module').then(m => m.BanquesModule) },
+    { path: 'banques',
+        loadChildren: () => import('./banques/banques.module').then(m => m.BanquesModule),
+        canActivate: [AuthGuard]
+    },
     {
         path: '**',
         redirectTo: '/'

@@ -1,4 +1,4 @@
-<p-table [value]="banques">
+<p-table  [value]="banques$ | async">
     <ng-template pTemplate="header">
         <tr>
             <th *ngFor="let col of cols">
@@ -6,10 +6,10 @@
             </th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-car>
+    <ng-template pTemplate="body" let-banque>
         <tr>
             <td *ngFor="let col of cols">
-                {{car[col.field]}}
+                {{banque[col.field]}}
             </td>
         </tr>
     </ng-template>

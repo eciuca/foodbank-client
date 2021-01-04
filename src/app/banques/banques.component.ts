@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Banque } from './model/banque';
-import {BanqueService} from './services/banqueservice';
+import {BanqueEntityService} from './services/banque-entity.service';
+import {map, tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -12,13 +14,20 @@ import {BanqueService} from './services/banqueservice';
 
 export class BanquesComponent implements OnInit {
 
-  banques: Banque[];
+  banques$: Observable<Banque[]>;
   cols: any[];
 
-  constructor(private banqueService: BanqueService) { }
+  constructor(private banqueService: BanqueEntityService) { }
 
   ngOnInit() {
-    this.banqueService.getBanquesSmall().then(banques => this.banques = banques);
+    this.reload();
+  }
+
+  reload() {
+   this.banques$ = this.banqueService.entities$
+        .pipe(
+            tap( (banques) => { console.log('Banques npw loaded:', banques); })
+      );
     this.cols = [
       { field: 'vin', header: 'Vin' },
       { field: 'year', header: 'Year' },
