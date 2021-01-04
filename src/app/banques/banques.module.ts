@@ -1,15 +1,11 @@
-import { NgModule } from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { BanquesComponent } from './banques.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import { DialogModule } from 'primeng/dialog';
+import {BanqueService} from './services/banqueservice';
+
 
 const routes: Routes = [
   { path: '', component: BanquesComponent }
@@ -20,14 +16,13 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
     TableModule,
-    HttpClientModule,
-    InputTextModule,
-    DialogModule,
-    ButtonModule
-  ]
+    HttpClientModule
+  ],
+  providers: [
+    BanqueService
+  ],
 })
-export class BanquesModule { }
+export class BanquesModule {
+
+}
