@@ -8,7 +8,11 @@ import {BanquesDataService} from './services/banques-data.service';
 import {BanqueEntityService} from './services/banque-entity.service';
 import {BanquesResolver} from './banques.resolver';
 import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
-import {compareBanques} from '../banques/model/banque';
+import {Banque, compareBanques} from '../banques/model/banque';
+import {DialogModule} from 'primeng/dialog';
+import {PaginatorModule} from 'primeng/paginator';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
 
 const routes: Routes = [
   { path: '',
@@ -21,18 +25,23 @@ const routes: Routes = [
 const entityMetaData: EntityMetadataMap = {
   Banque: {
     sortComparer: compareBanques,
+    selectId: (banque: Banque) => banque.bankId,
     entityDispatcherOptions: { optimisticUpdate: true}
   },
 
 };
 @NgModule({
   declarations: [BanquesComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    TableModule,
-    HttpClientModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        TableModule,
+        HttpClientModule,
+        DialogModule,
+        PaginatorModule,
+        InputTextModule,
+        ButtonModule
+    ],
   providers: [
     BanquesDataService,
     BanqueEntityService,

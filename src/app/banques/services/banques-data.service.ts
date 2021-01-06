@@ -12,9 +12,9 @@ export class BanquesDataService extends DefaultDataService<Banque> {
         super('Banque', http, httpUrlGenerator);
     }
     getAll(): Observable<Banque[]>  {
-        return this.http.get<any>('assets/data/cars-small.json')
+        return this.http.get<any>('assets/data/banques.json')
             .pipe(
-                map (res =>  <Banque[]> res.data)
+                map (res =>  <Banque[]> res)
             );
 
     }
