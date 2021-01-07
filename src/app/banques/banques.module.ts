@@ -1,8 +1,8 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {Injectable, ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { BanquesComponent } from './banques.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HttpEvent, HttpHandler, HttpRequest} from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import {BanquesDataService} from './services/banques-data.service';
 import {BanqueEntityService} from './services/banque-entity.service';
@@ -13,6 +13,7 @@ import {DialogModule} from 'primeng/dialog';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
+import {Observable} from 'rxjs';
 
 const routes: Routes = [
   { path: '',
@@ -26,7 +27,7 @@ const entityMetaData: EntityMetadataMap = {
   Banque: {
     sortComparer: compareBanques,
     selectId: (banque: Banque) => banque.bankId,
-    entityDispatcherOptions: { optimisticUpdate: true}
+    entityDispatcherOptions: { optimisticUpdate: false}
   },
 
 };
@@ -46,7 +47,6 @@ const entityMetaData: EntityMetadataMap = {
     BanquesDataService,
     BanqueEntityService,
     BanquesResolver
-
   ],
 })
 export class BanquesModule {

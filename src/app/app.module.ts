@@ -22,20 +22,15 @@ import {EffectsModule} from '@ngrx/effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {metaReducers, reducers} from './reducers';
 import {AuthGuard} from './auth/auth.guard';
-import {EntityDataModule} from '@ngrx/data';
+import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
 import {MenuModule} from 'primeng/menu';
 
 
 const routes: Routes = [
-    {
-        path: 'courses',
-        loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule),
-        canActivate: [AuthGuard]
-    },
     { path: 'banques',
         loadChildren: () => import('./banques/banques.module').then(m => m.BanquesModule),
-        canActivate: [AuthGuard]
     },
+    { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
     {
         path: '**',
         redirectTo: '/'
@@ -77,6 +72,12 @@ const routes: Routes = [
             routerState: RouterState.Minimal
         })
     ],
+    providers: [{ provide: DefaultDataServiceConfig,
+        useValue: {
+            root: environment.apiUrl
+         }
+    }
+        ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

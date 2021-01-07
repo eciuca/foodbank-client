@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.menuLogggedInItems = [
-            {label: 'Courses', icon: 'pi pi-fw pi-refresh',  routerLink: ['/courses']},
             {label: 'Banques', icon: 'pi pi-fw pi-refresh',  routerLink: ['/banques']},
             {label: 'Logout', icon: 'pi pi-fw pi-download',  command: (event) => { this.logout(); }}
         ];
