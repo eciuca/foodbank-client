@@ -31,8 +31,9 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.menuLogggedInItems = [
-            {label: 'Banques', icon: 'pi pi-fw pi-refresh',  routerLink: ['/banques']},
-            {label: 'Logout', icon: 'pi pi-fw pi-download',  command: (event) => { this.logout(); }}
+            {label: 'Banques', icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
+            {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+            {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
         ];
 
         const userProfile = localStorage.getItem('user');

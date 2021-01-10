@@ -1,1 +1,40 @@
-<p>users works!</p>
+<p-table  [value]="users$ | async" selectionMode="single"  [paginator]="true" [rows]="4">
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of cols">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr (click)="handleSelect(user)">
+            <td *ngFor="let col of cols">
+                {{user[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog header="User Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [closable]="true" [style]="{'width':'300px'}">
+    <div class="ui-g ui-fluid" *ngIf="user">
+        <div class="ui-g-4"><label for="idUser">Identifiant</label></div>
+        <div class="ui-g-8"><input pInputText id="idUser" [(ngModel)]="user.idUser" /></div>
+        <div class="ui-g-4"><label for="userName">Nom Utilisateur</label></div>
+        <div class="ui-g-8"><input pInputText id="userName" [(ngModel)]="user.userName" /></div>
+        <div class="ui-g-4"><label for="idCompany">Banque</label></div>
+        <div class="ui-g-8"><input pInputText id="idCompany" [(ngModel)]="user.idCompany" /></div>
+
+        <div class="ui-g-4"><label for="idLanguage">Langue</label></div>
+        <div class="ui-g-8"><input pInputText id="idLanguage" [(ngModel)]="user.idLanguage" /></div>
+        <div class="ui-g-4"><label for="rights">E-mail</label></div>
+        <div class="ui-g-8"><input pInputText id="email" [(ngModel)]="user.email" /></div>
+        <div class="ui-g-4"><label for="rights">Droits</label></div>
+        <div class="ui-g-8"><input pInputText id="rights" [(ngModel)]="user.rights" /></div>
+    </div>
+    <p-footer class="ui-g-12">
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="delete()" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
+        </div>
+    </p-footer>
+</p-dialog>

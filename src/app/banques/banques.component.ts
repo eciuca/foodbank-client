@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Banque } from './model/banque';
 import {BanqueEntityService} from './services/banque-entity.service';
 import {concatMap, map, tap} from 'rxjs/operators';
-import {Observable, Subscription} from 'rxjs';
+import {Observable} from 'rxjs';
 
 
 @Component({
