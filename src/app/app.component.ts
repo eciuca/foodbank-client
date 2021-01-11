@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
         this.menuLogggedInItems = [
             {label: 'Banques', icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
             {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+            {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
             {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
         ];
 

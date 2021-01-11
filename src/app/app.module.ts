@@ -31,6 +31,7 @@ const routes: Routes = [
         loadChildren: () => import('./banques/banques.module').then(m => m.BanquesModule),
     },
     { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
+    { path: 'organisations', loadChildren: () => import('./organisations/organisations.module').then(m => m.OrganisationsModule) },
     {
         path: '**',
         redirectTo: '/'
