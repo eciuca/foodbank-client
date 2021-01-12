@@ -14,7 +14,6 @@ import {User} from '../model/user';
 export class UserComponent implements OnInit {
 
   user$: Observable<User>;
-  myuser: User;
   constructor(
       private usersService: UserEntityService,
       private route: ActivatedRoute) {}
@@ -33,9 +32,10 @@ export class UserComponent implements OnInit {
 
   }
 
-  save(user: User) {
-    console.log( 'Save Called with User:', user);
-    this.usersService.update(user);
+  save(oldUser: User, userForm: User) {
+    const newUser = Object.assign({}, oldUser, userForm);
+    console.log( 'Save Called with User:', newUser);
+    this.usersService.update(newUser);
 
   }
 }
