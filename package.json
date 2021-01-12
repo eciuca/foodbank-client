@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "api": "json-server src/server/api/db.json --routes src/server/api/routes.json --no-cors=true --port 8081"
+    "api": "json-server src/server/api/db.json --routes src/server/api/routes.json --no-cors=false --port 8081"
   },
   "private": true,
   "dependencies": {
