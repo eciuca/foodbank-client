@@ -5,13 +5,14 @@ import {
     createSelector,
     MetaReducer, on
 } from '@ngrx/store';
-import {User} from '../model/user.model';
+
 import {AuthActions} from '../action-types';
+import {User} from '../../users/model/user';
 
 
 
 export interface AuthState {
-    user: User
+    user: User;
 }
 
 export const initialAuthState: AuthState = {

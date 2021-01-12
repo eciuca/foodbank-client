@@ -13,6 +13,8 @@ import {DialogModule} from 'primeng/dialog';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
+import {UserComponent } from './user/user.component';
+import {PanelModule} from 'primeng/panel';
 
 
 
@@ -23,6 +25,14 @@ const routes: Routes = [
     resolve: {
       UsersResolver
     }
+  },
+  {
+    path: ':idUser',
+    component: UserComponent,
+    resolve: {
+      UsersResolver
+    }
+
   }
 ];
 const entityMetaData: EntityMetadataMap = {
@@ -34,17 +44,18 @@ const entityMetaData: EntityMetadataMap = {
 
 };
 @NgModule({
-  declarations: [UsersComponent],
+  declarations: [UsersComponent, UserComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     TableModule,
     HttpClientModule,
-    DialogModule,
+    PanelModule,
     PaginatorModule,
+    DialogModule,
     InputTextModule,
-    ButtonModule
-  ],
+    ButtonModule,
+ ],
   providers: [
     UsersDataService,
     UserEntityService,

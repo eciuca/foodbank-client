@@ -3,6 +3,7 @@ import {concatMap, map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
+import {Router} from '@angular/router';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -17,7 +18,9 @@ export class UsersComponent implements OnInit {
   cols: any[];
   displayDialog: boolean;
 
-  constructor(private userService: UserEntityService) { }
+  constructor(private userService: UserEntityService,
+              private router: Router
+  ) { }
 
   ngOnInit() {
     this.reload();
@@ -43,20 +46,8 @@ export class UsersComponent implements OnInit {
   handleSelect(user) {
     console.log( 'User was selected', user);
     this.user = {...user};
-    this.displayDialog = true;
+    this.router.navigateByUrl(`/users/${user.idUser}`);
+    // this.displayDialog = true;
   }
 
-  delete() {
-    console.log( 'Delete Called with User:', this.user);
-    this.userService.delete(this.user);
-    this.user = null;
-    this.displayDialog = false;
-  }
-
-  save() {
-    console.log( 'Save Called with User:', this.user);
-    this.userService.update(this.user);
-    this.user = null;
-    this.displayDialog = false;
-  }
 }

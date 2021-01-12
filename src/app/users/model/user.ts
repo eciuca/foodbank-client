@@ -1,5 +1,5 @@
 export interface User {
-    idUser: number;
+    idUser: string;
 
     userName: string;
 
@@ -44,12 +44,13 @@ export interface User {
 }
 export function compareUsers(c1: User, c2: User) {
 
-    const compare = c1.idUser - c2.idUser;
+    const compare = c1.idUser > c2.idUser;
 
-    if (compare > 0) {
+    if (compare) {
         return 1;
-    } else if ( compare < 0) {
+    } else if ( c1.idUser < c2.idUser) {
         return -1;
     } else { return 0; }
+
 
 }
