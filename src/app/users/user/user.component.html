@@ -1,22 +1,22 @@
-<p-panel >
-    <div class="ui-g ui-fluid" *ngIf="user$ |async as user">
+<p-panel>
+    <form class="ui-g ui-fluid" *ngIf="user$ | async as user" #userForm="ngForm">
         <div class="ui-g-4"><label for="idUser">Identifiant</label></div>
-        <div class="ui-g-8"><input pInputText id="idUser" [(ngModel)]="user.idUser" /></div>
+        <div class="ui-g-8"><input pInputText id="idUser" name="idUser" [ngModel]="user.idUser" /></div>
         <div class="ui-g-4"><label for="userName">Nom Utilisateur</label></div>
-        <div class="ui-g-8"><input pInputText id="userName" [(ngModel)]="user.userName" /></div>
+        <div class="ui-g-8"><input pInputText id="userName" name="userName" [ngModel]="user.userName" /></div>
         <div class="ui-g-4"><label for="idCompany">Banque</label></div>
-        <div class="ui-g-8"><input pInputText id="idCompany" [(ngModel)]="user.idCompany" /></div>
+        <div class="ui-g-8"><input pInputText id="idCompany" name="idCompany" [ngModel]="user.idCompany" /></div>
 
         <div class="ui-g-4"><label for="idLanguage">Langue</label></div>
-        <div class="ui-g-8"><input pInputText id="idLanguage" [(ngModel)]="user.idLanguage" /></div>
+        <div class="ui-g-8"><input pInputText id="idLanguage" name="idLanguage" [ngModel]="user.idLanguage" /></div>
         <div class="ui-g-4"><label for="rights">E-mail</label></div>
-        <div class="ui-g-8"><input pInputText id="email" [(ngModel)]="user.email" /></div>
+        <div class="ui-g-8"><input pInputText id="email" name="email" [ngModel]="user.email" /></div>
         <div class="ui-g-4"><label for="rights">Droits</label></div>
-        <div class="ui-g-8"><input pInputText id="rights" [(ngModel)]="user.rights" /></div>
+        <div class="ui-g-8"><input pInputText id="rights" name="rights" [ngModel]="user.rights" /></div>
 
         <div class="ui-g-12">
-            <button type="button" pButton icon="pi pi-times" (click)="delete(user)" label="Delete"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="save(user)" label="Save"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="delete(userForm.value)" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save"></button>
         </div>
-    </div>
+    </form>
 </p-panel>
