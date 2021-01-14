@@ -1,4 +1,10 @@
-<p-table  [value]="banques$ | async" selectionMode="single"  [paginator]="true" [rows]="4">
+<ng-container *ngIf="banques$ | async as banques">
+<p-table  [value]="banques" selectionMode="single"  [paginator]="true" [rows]="10">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            Banques
+        </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th *ngFor="let col of cols">
@@ -13,7 +19,13 @@
             </td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            Au total il y a {{banques ? banques.length : 0 }} banques.
+        </div>
+    </ng-template>
 </p-table>
+</ng-container>
 
 <p-dialog header="Banque Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [closable]="true" [style]="{'width':'300px'}">
     <div class="ui-g ui-fluid" *ngIf="banque">

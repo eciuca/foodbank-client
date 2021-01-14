@@ -1,4 +1,10 @@
-<p-table  [value]="users$ | async" selectionMode="single"  [paginator]="true" [rows]="4">
+<ng-container *ngIf="users$ | async as users">
+<p-table  [value]="users" selectionMode="single"  [paginator]="true" [rows]="10">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            Utilisateurs
+        </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th *ngFor="let col of cols">
@@ -13,6 +19,12 @@
             </td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+           Au total il y a {{users ? users.length : 0 }} utilisateurs.
+        </div>
+    </ng-template>
 </p-table>
+</ng-container>
 
 
