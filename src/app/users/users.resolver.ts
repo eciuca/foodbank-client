@@ -28,7 +28,10 @@ export class UsersResolver implements Resolve<boolean> {
                                     console.log('Logged In User is :', user);
                                     return this.usersService.getWithQuery({ 'idCompany': user.idCompany });
                                 })
-                            );
+                            ).subscribe(loadedUsers => {
+                                console.log("Loaded users: " + loadedUsers.length);
+                                this.usersService.setLoaded(true);
+                            });
                     }
                 }),
                 filter(loaded => !!loaded ),
