@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {concatMap, map, tap} from 'rxjs/operators';
+import {concatMap, flatMap, map, mergeMap, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
@@ -31,17 +31,16 @@ export class UsersComponent implements OnInit {
   }
 
   reload() {
-    /* Does not work console log is never executed
     this.users$  = this.store
         .pipe(
             select(loggedInUser),
-            map ( (user) => {
+            mergeMap((user) => {
               console.log('Logged In User is :', user);
-              this.userService.getWithQuery(user.idCompany);
+              return this.userService.getWithQuery({ "idCompany": user.idCompany });
             })
         );
-*/
-    this.users$  = this.userService.entities$;
+
+    // this.users$  = this.userService.entities$;
     this.cols = [
       { field: 'idUser', header: 'Identifiant' },
       { field: 'userName', header: 'Nom Utilisateur' },
