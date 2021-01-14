@@ -31,16 +31,7 @@ export class UsersComponent implements OnInit {
   }
 
   reload() {
-    this.users$  = this.store
-        .pipe(
-            select(loggedInUser),
-            mergeMap((user) => {
-              console.log('Logged In User is :', user);
-              return this.userService.getWithQuery({ "idCompany": user.idCompany });
-            })
-        );
-
-    // this.users$  = this.userService.entities$;
+    this.users$  = this.userService.entities$;
     this.cols = [
       { field: 'idUser', header: 'Identifiant' },
       { field: 'userName', header: 'Nom Utilisateur' },
