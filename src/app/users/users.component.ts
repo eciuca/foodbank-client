@@ -4,6 +4,9 @@ import {Observable} from 'rxjs';
 import {User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
 import {Router} from '@angular/router';
+import {isLoggedOut, loggedInUser} from '../auth/auth.selectors';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../reducers';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -19,20 +22,26 @@ export class UsersComponent implements OnInit {
   displayDialog: boolean;
 
   constructor(private userService: UserEntityService,
-              private router: Router
+              private router: Router,
+              private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.reload();
+        this.reload();
   }
 
   reload() {
-    this.users$  = this.userService.entities$
+    /* Does not work console log is never executed
+    this.users$  = this.store
         .pipe(
-            tap( (usersEntities) => {
-              console.log('Users now loaded:', usersEntities); }),
-        )
-    ;
+            select(loggedInUser),
+            map ( (user) => {
+              console.log('Logged In User is :', user);
+              this.userService.getWithQuery(user.idCompany);
+            })
+        );
+*/
+    this.users$  = this.userService.entities$;
     this.cols = [
       { field: 'idUser', header: 'Identifiant' },
       { field: 'userName', header: 'Nom Utilisateur' },

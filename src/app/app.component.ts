@@ -6,7 +6,7 @@ import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Route
 import {AppState} from './reducers';
 import {isLoggedIn, isLoggedOut} from './auth/auth.selectors';
 import {login, logout} from './auth/auth.actions';
-import {MenuModule} from 'primeng/menu';
+import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 
 @Component({

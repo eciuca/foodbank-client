@@ -23,15 +23,22 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {metaReducers, reducers} from './reducers';
 import {AuthGuard} from './auth/auth.guard';
 import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
-import {MenuModule} from 'primeng/menu';
+import {MenubarModule} from 'primeng/menubar';
 
 
 const routes: Routes = [
     { path: 'banques',
         loadChildren: () => import('./banques/banques.module').then(m => m.BanquesModule),
+        canActivate: [AuthGuard]
     },
-    { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
-    { path: 'organisations', loadChildren: () => import('./organisations/organisations.module').then(m => m.OrganisationsModule) },
+    { path: 'users',
+        loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
+        canActivate: [AuthGuard]
+    },
+    { path: 'organisations',
+        loadChildren: () => import('./organisations/organisations.module').then(m => m.OrganisationsModule),
+        canActivate: [AuthGuard]
+    },
     {
         path: '**',
         redirectTo: '/'
@@ -48,7 +55,7 @@ const routes: Routes = [
         BrowserAnimationsModule,
         RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
         HttpClientModule,
-        MenuModule,
+        MenubarModule,
         MatMenuModule,
         MatIconModule,
         MatSidenavModule,
