@@ -1,14 +1,54 @@
 <ng-container *ngIf="organisations$ | async as organisations">
-<p-table  [value]="organisations" selectionMode="single"  [paginator]="true" [rows]="10">
+    <p-table #dt [value]="organisations" selectionMode="single" [rowHover]="true"
+             [rows]="10" [showCurrentPageReport]="true"
+             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+             [filterDelay]="0" [globalFilterFields]="['societe','adresse','cp','localite']">
     <ng-template pTemplate="caption">
-        <div class="p-d-flex p-ai-center p-jc-between">
-            Organisations
+        <div class="table-header">
+            Liste des Organisations
+            <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+        </span>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th *ngFor="let col of cols">
-                {{col.header}}
+            <th pSortableColumn="idDis">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Identifiant
+                    <p-sortIcon field="idDis"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="lienBanque">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Banque
+                    <p-sortIcon field="lienBanque"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="societe">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Nom
+                    <p-sortIcon field="societe"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="adresse">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Adresse
+                    <p-sortIcon field="adresse"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="cp">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Code Postal
+                    <p-sortIcon field="cp"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="localite">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Ville
+                    <p-sortIcon field="localite"></p-sortIcon>
+                </div>
             </th>
         </tr>
     </ng-template>

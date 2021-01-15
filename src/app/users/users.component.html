@@ -1,24 +1,66 @@
 <ng-container *ngIf="users$ | async as users">
-<p-table  [value]="users" selectionMode="single"  [paginator]="true" [rows]="10">
-    <ng-template pTemplate="caption">
-        <div class="p-d-flex p-ai-center p-jc-between">
-            Utilisateurs
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th *ngFor="let col of cols">
-                {{col.header}}
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-user>
-        <tr (click)="handleSelect(user)">
-            <td *ngFor="let col of cols">
-                {{user[col.field]}}
-            </td>
-        </tr>
-    </ng-template>
+    <p-table #dt [value]="users" selectionMode="single" [rowHover]="true"
+             [rows]="10" [showCurrentPageReport]="true"
+             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+             [filterDelay]="0" [globalFilterFields]="['idUser','userName','email']">
+        <ng-template pTemplate="caption">
+            <div class="table-header">
+                Liste des Utilisateurs
+                <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+            </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="idUser">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Identifiant
+                        <p-sortIcon field="idUser"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="userName">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Nom
+                        <p-sortIcon field="userName"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="idCompany">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Banque
+                        <p-sortIcon field="idCompany"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="idLanguage">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Langue
+                        <p-sortIcon field="idLanguage"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="email">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Email
+                        <p-sortIcon field="email"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="rights">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Droits
+                        <p-sortIcon field="rights"></p-sortIcon>
+                    </div>
+                </th>
+
+                <th style="width: 8rem"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr (click)="handleSelect(user)">
+                <td *ngFor="let col of cols">
+                    {{user[col.field]}}
+                </td>
+            </tr>
+        </ng-template>
     <ng-template pTemplate="summary">
         <div class="p-d-flex p-ai-center p-jc-between">
            Au total il y a {{users ? users.length : 0 }} utilisateurs.

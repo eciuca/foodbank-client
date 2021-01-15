@@ -1,14 +1,19 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
-import {filter, first, map, tap} from 'rxjs/operators';
+import {filter, first, mergeMap, tap} from 'rxjs/operators';
 import {OrganisationEntityService} from './services/organisation-entity.service';
+
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../reducers';
+import {loggedInUser} from '../auth/auth.selectors';
 
 @Injectable()
 export class OrganisationsResolver implements Resolve<boolean> {
 
     constructor(
-        private organisationsService: OrganisationEntityService
+        private organisationsService: OrganisationEntityService,
+        private store: Store<AppState>
     ) {
 
     }
@@ -17,6 +22,20 @@ export class OrganisationsResolver implements Resolve<boolean> {
             .pipe(
                 tap( loaded => {
                     if (!loaded) {this.organisationsService.getAll(); }
+                      /*  this.store
+                            .pipe(
+                                select(loggedInUser),
+                                mergeMap((user) => {
+                                    console.log('Logged In User in organisations resolver is :', user);
+                                    return this.organisationsService.getWithQuery({'lienBanque': 2});
+                                })
+                            ).subscribe(loadedOrganisations => {
+                            console.log('Loaded Organisations: ' + loadedOrganisations.length);
+                            this.organisationsService.setLoaded(true);
+                        });
+
+                       */
+
                 }),
                 filter(loaded => !!loaded ),
                 first()

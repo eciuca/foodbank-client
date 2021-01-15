@@ -1,4 +1,4 @@
-import {filter, first, map, mergeMap, tap} from 'rxjs/operators';
+import {filter, first, mergeMap, tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {UserEntityService} from './services/user-entity.service';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
@@ -29,7 +29,7 @@ export class UsersResolver implements Resolve<boolean> {
                                     return this.usersService.getWithQuery({ 'idCompany': user.idCompany });
                                 })
                             ).subscribe(loadedUsers => {
-                                console.log("Loaded users: " + loadedUsers.length);
+                                console.log('Loaded users: ' + loadedUsers.length);
                                 this.usersService.setLoaded(true);
                             });
                     }

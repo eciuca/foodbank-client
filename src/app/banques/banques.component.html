@@ -1,30 +1,64 @@
 <ng-container *ngIf="banques$ | async as banques">
-<p-table  [value]="banques" selectionMode="single"  [paginator]="true" [rows]="10">
-    <ng-template pTemplate="caption">
-        <div class="p-d-flex p-ai-center p-jc-between">
-            Banques
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th *ngFor="let col of cols">
-                {{col.header}}
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-banque>
-        <tr (click)="handleSelect(banque)">
-            <td *ngFor="let col of cols">
-                {{banque[col.field]}}
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-        <div class="p-d-flex p-ai-center p-jc-between">
-            Au total il y a {{banques ? banques.length : 0 }} banques.
-        </div>
-    </ng-template>
-</p-table>
+    <p-table #dt [value]="banques" selectionMode="single" [rowHover]="true"
+             [rows]="10" [showCurrentPageReport]="true"
+             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+             [filterDelay]="0" [globalFilterFields]="['bankShortName','bankName','bankMail']">
+        <ng-template pTemplate="caption">
+            <div class="table-header">
+                Liste des Banques
+                <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+            </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="bankId">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Identifiant
+                        <p-sortIcon field="bankId"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="bankShortName">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Abbréviation
+                        <p-sortIcon field="bankShortName"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="bankName">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Nom
+                        <p-sortIcon field="bankName"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="nrEntr">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Numéro Entreprise
+                        <p-sortIcon field="nrEntr"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="bankMail">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        E-mail
+                        <p-sortIcon field="bankMail"></p-sortIcon>
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-banque>
+            <tr (click)="handleSelect(banque)">
+                <td *ngFor="let col of cols">
+                    {{banque[col.field]}}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                Au total il y a {{banques ? banques.length : 0 }} banques.
+            </div>
+        </ng-template>
+    </p-table>
 </ng-container>
 
 <p-dialog header="Banque Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [closable]="true" [style]="{'width':'300px'}">
