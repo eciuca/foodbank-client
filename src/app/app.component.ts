@@ -42,7 +42,8 @@ export class AppComponent implements OnInit {
 
         if (userProfileString && userProfileString !== 'undefined') {
             const userProfile: IAuthPrincipal = JSON.parse(userProfileString);
-            this.store.dispatch(login(userProfile));
+            const loginAction = login(userProfile);
+            this.store.dispatch(loginAction);
         }
 
         this.router.events.subscribe(event => {
