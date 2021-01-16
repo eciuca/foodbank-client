@@ -26,7 +26,12 @@ export class UsersResolver implements Resolve<boolean> {
                                 select(loggedInUser),
                                 mergeMap((user) => {
                                     console.log('Logged In User is :', user);
-                                    return this.usersService.getWithQuery({ 'idCompany': user.idCompany });
+                                    
+                                    if (user.idCompany) {
+                                        return this.usersService.getWithQuery({ 'idCompany': user.idCompany });
+                                    }
+
+                                    return this.usersService.getAll();
                                 })
                             ).subscribe(loadedUsers => {
                                 console.log('Loaded users: ' + loadedUsers.length);
