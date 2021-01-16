@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, of, combineLatest} from 'rxjs';
+import {Observable, of, forkJoin} from 'rxjs';
 import {User} from '../users/model/user';
 import {Banque} from '../banques/model/banque';
 import {map, mergeMap} from 'rxjs/operators';
@@ -22,7 +22,7 @@ export class AuthService {
         const authBanque$ =  this.http.get<Banque>(`/api/banque/getByShortName/${user.idCompany}`);
         const authOrganisation$ =  this.http.get<Organisation>(`/api/organisation/${user.idOrg}`);
 
-        return combineLatest([of(user), authBanque$, authOrganisation$])
+        return forkJoin([of(user), authBanque$, authOrganisation$])
                 .pipe(map(([user, banque, organisation]) => new AuthPrincipal(user, banque, organisation)))
     }
 
