@@ -8,6 +8,7 @@ import {isLoggedIn, isLoggedOut} from './auth/auth.selectors';
 import {login, logout} from './auth/auth.actions';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
+import { IAuthPrincipal } from './auth/auth-principal';
 
 @Component({
     selector: 'app-root',
@@ -37,10 +38,12 @@ export class AppComponent implements OnInit {
             {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
         ];
 
-        const userProfile = localStorage.getItem('user');
+        const userProfileString = localStorage.getItem('user');
 
-        if (userProfile) {
-            this.store.dispatch(login({user: JSON.parse(userProfile)}));
+        if (userProfileString && userProfileString !== 'undefined') {
+            const userProfile: IAuthPrincipal = JSON.parse(userProfileString);
+            const loginAction = login(userProfile);
+            this.store.dispatch(loginAction);
         }
 
         this.router.events.subscribe(event => {

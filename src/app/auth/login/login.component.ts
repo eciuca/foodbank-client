@@ -4,12 +4,13 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 
 import {AuthService} from '../auth.service';
-import {tap} from 'rxjs/operators';
+import {mergeMap, tap} from 'rxjs/operators';
 import {noop} from 'rxjs';
 import {Router} from '@angular/router';
 import {AppState} from '../../reducers';
 import {login} from '../auth.actions';
 import {AuthActions} from '../action-types';
+import { IAuthPrincipal } from '../auth-principal';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -44,19 +45,19 @@ export class LoginComponent implements OnInit {
 
       this.auth.login(val.idUser, val.password)
           .pipe(
-              tap({user,banque,organisation } => {
-
-                  console.log(user);
-
-                  this.store.dispatch(login({user,banque,organisation}));
-
-                  this.router.navigateByUrl('/users');
-
-              })
+              tap(principal => console.log(principal.user))
           )
           .subscribe(
-              noop,
-              () => alert('Login Failed')
+              principal => {
+                const loginAction = login(principal)
+                this.store.dispatch(loginAction);
+
+                this.router.navigateByUrl('/users');
+              },
+              error => {
+                  console.log(error);
+                  alert('Login Failed')
+              }
           );
 
 
