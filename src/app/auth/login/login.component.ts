@@ -44,13 +44,13 @@ export class LoginComponent implements OnInit {
 
       this.auth.login(val.idUser, val.password)
           .pipe(
-              tap(user => {
+              tap({user,banque,organisation } => {
 
                   console.log(user);
 
-                  this.store.dispatch(login({user}));
+                  this.store.dispatch(login({user,banque,organisation}));
 
-                  this.router.navigateByUrl('/banques');
+                  this.router.navigateByUrl('/users');
 
               })
           )
