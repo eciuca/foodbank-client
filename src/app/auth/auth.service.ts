@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable, of, forkJoin} from 'rxjs';
-import {User} from '../users/model/user';
-import {Banque} from '../banques/model/banque';
-import {map, mergeMap} from 'rxjs/operators';
-import {Organisation} from '../organisations/model/organisation';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, forkJoin, throwError } from 'rxjs';
+import { User } from '../users/model/user';
+import { Banque } from '../banques/model/banque';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { Organisation } from '../organisations/model/organisation';
 import { IAuthPrincipal, AuthPrincipal } from './auth-principal';
 
 @Injectable()
@@ -19,11 +19,24 @@ export class AuthService {
     }
 
     private createAuthPrincipalFromUser(user: User): Observable<IAuthPrincipal> {
-        const authBanque$ =  this.http.get<Banque>(`/api/banque/getByShortName/${user.idCompany}`);
-        const authOrganisation$ =  this.http.get<Organisation>(`/api/organisation/${user.idOrg}`);
+        const authBanque$ = !user.idCompany
+            ? of(undefined)
+            : this.http.get<Banque>(`/api/banque/getByShortName/${user.idCompany}`).pipe(catchError(err => this.handleNotFound(err)));
+
+        const authOrganisation$ = user.idOrg === 0
+            ? of(undefined)
+            : this.http.get<Organisation>(`/api/organisation/${user.idOrg}`).pipe(catchError(err => this.handleNotFound(err)));
 
         return forkJoin([of(user), authBanque$, authOrganisation$])
-                .pipe(map(([user, banque, organisation]) => new AuthPrincipal(user, banque, organisation)))
+            .pipe(map(([user, banque, organisation]) => new AuthPrincipal(user, banque, organisation)))
     }
 
+    private handleNotFound(error: any) {
+        if (error.status === 404) {
+            return of(undefined);
+        } else {
+            //important to use the rxjs error here not the standard one
+            return throwError(error);
+        }
+    }
 }
