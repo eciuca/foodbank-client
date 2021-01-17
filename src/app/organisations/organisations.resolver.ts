@@ -6,7 +6,7 @@ import {OrganisationEntityService} from './services/organisation-entity.service'
 
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
-import {loggedInUser} from '../auth/auth.selectors';
+import {globalAuthState} from '../auth/auth.selectors';
 
 @Injectable()
 export class OrganisationsResolver implements Resolve<boolean> {
@@ -21,21 +21,32 @@ export class OrganisationsResolver implements Resolve<boolean> {
         return this.organisationsService.loaded$
             .pipe(
                 tap( loaded => {
-                    if (!loaded) {this.organisationsService.getAll(); }
-                      /*  this.store
-                            .pipe(
-                                select(loggedInUser),
-                                mergeMap((user) => {
-                                    console.log('Logged In User in organisations resolver is :', user);
-                                    return this.organisationsService.getWithQuery({'lienBanque': 2});
-                                })
-                            ).subscribe(loadedOrganisations => {
-                            console.log('Loaded Organisations: ' + loadedOrganisations.length);
+                    if (!loaded) { this.store
+                        .pipe(
+                            select(globalAuthState),
+                            mergeMap((authState) => {
+                                console.log('Logged In User is :', authState.user);
+                                if (authState.user.idCompany) {
+                                    switch (authState.user.rights) {
+                                        case 'Bank':
+                                        case 'Admin_Banq':
+                                            return this.organisationsService.getWithQuery({ 'lienBanque': authState.banque.bankId.toString() });
+                                        case 'Asso':
+                                        case 'Admin_Asso':
+                                            return this.organisationsService.getWithQuery({ 'idDis': authState.user.idOrg.toString() });
+                                        default:
+                                            return this.organisationsService.getAll();
+                                    }
+
+                                }
+
+                                return this.organisationsService.getAll();
+                            })
+                        ).subscribe(loadedOrganisations => {
+                            console.log('Loaded organisations: ' + loadedOrganisations.length);
                             this.organisationsService.setLoaded(true);
                         });
-
-                       */
-
+                    }
                 }),
                 filter(loaded => !!loaded ),
                 first()

@@ -26,9 +26,18 @@ export class UsersResolver implements Resolve<boolean> {
                                 select(loggedInUser),
                                 mergeMap((user) => {
                                     console.log('Logged In User is :', user);
-                                    
                                     if (user.idCompany) {
-                                        return this.usersService.getWithQuery({ 'idCompany': user.idCompany });
+                                        switch (user.rights) {
+                                            case 'Bank':
+                                            case 'Admin_Banq':
+                                                return this.usersService.getWithQuery({ 'idCompany': user.idCompany });
+                                            case 'Asso':
+                                            case 'Admin_Asso':
+                                                return this.usersService.getWithQuery({ 'idOrg': user.idOrg.toString() });
+                                            default:
+                                                return this.usersService.getAll();
+                                        }
+
                                     }
 
                                     return this.usersService.getAll();

@@ -18,6 +18,12 @@ export const loggedInUser = createSelector(
 
 );
 
+export const globalAuthState = createSelector(
+    selectAuthState,
+    auth =>  auth
+
+);
+
 
 export const isLoggedOut = createSelector(
     isLoggedIn,
