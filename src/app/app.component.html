@@ -1,12 +1,8 @@
+<div *ngIf="loading">
+   <p-progressSpinner ></p-progressSpinner>
+</div>
 
-
-  <div class="spinner-container" *ngIf="loading">
-
-    <mat-spinner></mat-spinner>
-
-  </div>
-    <p-menubar [model]="menuLogggedInItems" *ngIf="isLoggedIn$ | async"></p-menubar>
-
-
+   <p-menubar [model]="menuLogggedInItems" *ngIf="isLoggedIn$ | async">
+   </p-menubar>
     <router-outlet></router-outlet>
 

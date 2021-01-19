@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {concatMap, flatMap, map, mergeMap, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
 import {Router} from '@angular/router';
-import {isLoggedOut, loggedInUser} from '../auth/auth.selectors';
+import {globalAuthState} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 
@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
   user: User = null;
   users$: Observable<User[]>;
   cols: any[];
-  displayDialog: boolean;
+  title: string;
 
   constructor(private userService: UserEntityService,
               private router: Router,
@@ -31,6 +31,32 @@ export class UsersComponent implements OnInit {
   }
 
   reload() {
+    this.store
+        .pipe(
+            select(globalAuthState),
+            map((authState) => {
+              if (authState.banque) {
+                switch (authState.user.rights) {
+                  case 'Bank':
+                  case 'Admin_Banq':
+                    this.title = 'Utilisateurs de la ' + authState.banque.bankName;
+                    break;
+                  case 'Asso':
+                  case 'Admin_Asso':
+                    this.title = `Utilisateurs de la Banque ${authState.banque.bankName} ${authState.organisation.societe}` ;
+                    break;
+                  default:
+                    this.title = 'Utilisateurs de toutes les banques';
+                }
+
+              } else {
+                this.title = 'Utilisateurs de toutes les banques';
+              }
+            })
+        )
+        .subscribe();
+
+
     this.users$  = this.userService.entities$;
     this.cols = [
       { field: 'idUser', header: 'Identifiant' },

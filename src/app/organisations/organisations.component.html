@@ -5,7 +5,7 @@
              [filterDelay]="0" [globalFilterFields]="['societe','adresse','cp','localite']">
     <ng-template pTemplate="caption">
         <div class="table-header">
-            Liste des Organisations
+            {{title}}
             <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
             <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />

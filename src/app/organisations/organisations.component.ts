@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Organisation } from './model/organisation';
 import {OrganisationEntityService} from './services/organisation-entity.service';
-import {concatMap, map, tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import {globalAuthState} from '../auth/auth.selectors';
 
 
 @Component({
@@ -15,16 +17,45 @@ import {Observable} from 'rxjs';
 export class OrganisationsComponent implements OnInit {
   organisation: Organisation = null;
   organisations$: Observable<Organisation[]>;
+  title: string;
   cols: any[];
   displayDialog: boolean;
 
-  constructor(private organisationService: OrganisationEntityService) { }
+  constructor(private organisationService: OrganisationEntityService,
+              private store: Store
+  ) { }
 
   ngOnInit() {
     this.reload();
   }
 
   reload() {
+   this.store
+        .pipe(
+            select(globalAuthState),
+            map((authState) => {
+                if (authState.banque) {
+                    switch (authState.user.rights) {
+                        case 'Bank':
+                        case 'Admin_Banq':
+                            this.title = 'Organisations de la ' + authState.banque.bankName;
+                            break;
+                        case 'Asso':
+                        case 'Admin_Asso':
+                            this.title = `Banque ${authState.banque.bankName} ${authState.organisation.societe}` ;
+                            break;
+                        default:
+                            this.title = 'Organisations de toutes les banques';
+                    }
+
+                } else {
+                    this.title = 'Organisations de toutes les banques';
+                }
+            })
+        )
+       .subscribe();
+
+
     this.organisations$  = this.organisationService.entities$
         .pipe(
             tap( (organisationsEntities) => {
@@ -33,7 +64,7 @@ export class OrganisationsComponent implements OnInit {
     ;
     this.cols = [
       { field: 'idDis', header: 'Identifiant' },
-      { field: 'lienBanque', header: 'Banque' },
+      { field: 'bankShortName', header: 'Banque' },
       { field: 'societe', header: 'Nom' },
       { field: 'adresse', header: 'Adresse' },
       { field: 'cp', header: 'Code Postal' },

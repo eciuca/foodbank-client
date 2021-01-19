@@ -224,6 +224,10 @@ export interface Organisation {
 
     lupdTs: Date;
 
+    bankShortName: string;
+
+    bankName: string;
+
 }
 
 export function compareOrganisations(c1: Organisation, c2: Organisation) {

@@ -1,20 +1,11 @@
-
->>> body {
-    margin: 0;
+.ui-menubar-root-list {
+    padding-left:32px;
 }
 
-main {
-    margin: 30px;
+img#logo {
+    position:absolute;
+    left:0;
 }
-
-.menu-button {
-    background: rgba(255, 170, 0, 0.76);
-    color: white;
-    border: none;
-    cursor:pointer;
-    outline:none;
-}
-
 
 .spinner-container {
   width: 100%;
