@@ -20,10 +20,10 @@
                     <p-sortIcon field="idDis"></p-sortIcon>
                 </div>
             </th>
-            <th pSortableColumn="lienBanque">
+            <th pSortableColumn="bankShortName">
                 <div class="p-d-flex p-jc-between p-ai-center">
                     Banque
-                    <p-sortIcon field="lienBanque"></p-sortIcon>
+                    <p-sortIcon field="bankShortName"></p-sortIcon>
                 </div>
             </th>
             <th pSortableColumn="societe">
@@ -67,25 +67,4 @@
 </p-table>
 </ng-container>
 
-<p-dialog header="Organisation Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [closable]="true" [style]="{'width':'300px'}">
-    <div class="ui-g ui-fluid" *ngIf="organisation">
-        <div class="ui-g-4"><label for="idDis">Identifiant</label></div>
-        <div class="ui-g-8"><input pInputText id="idDis" [(ngModel)]="organisation.idDis" /></div>
-        <div class="ui-g-4"><label for="lienBanque">Banque</label></div>
-        <div class="ui-g-8"><input pInputText id="lienBanque" [(ngModel)]="organisation.lienBanque" /></div>
-        <div class="ui-g-4"><label for="societe">Nom</label></div>
-        <div class="ui-g-8"><input pInputText id="societe" [(ngModel)]="organisation.societe" /></div>
-        <div class="ui-g-4"><label for="adresse">adresse</label></div>
-        <div class="ui-g-8"><input pInputText id="adresse" [(ngModel)]="organisation.adresse" /></div>
-        <div class="ui-g-4"><label for="cp">Code Postal</label></div>
-        <div class="ui-g-8"><input pInputText id="cp" [(ngModel)]="organisation.cp" /></div>
-        <div class="ui-g-4"><label for="localite">Commune</label></div>
-        <div class="ui-g-8"><input pInputText id="localite" [(ngModel)]="organisation.localite" /></div>
-    </div>
-    <p-footer class="ui-g-12">
-        <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton icon="pi pi-times" (click)="delete()" label="Delete"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
-        </div>
-    </p-footer>
-</p-dialog>
+

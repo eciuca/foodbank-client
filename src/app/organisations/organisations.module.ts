@@ -13,13 +13,22 @@ import {ButtonModule} from 'primeng/button';
 import {compareOrganisations, Organisation} from './model/organisation';
 import {OrganisationsResolver} from './organisations.resolver';
 import {OrganisationEntityService} from './services/organisation-entity.service';
+import { OrganisationComponent } from './organisation/organisation.component';
+import {PanelModule} from 'primeng/panel';
 
 const routes: Routes = [
-  { path: '',
-    component: OrganisationsComponent ,
-    resolve: {
-      OrganisationsResolver
-    }
+    { path: '',
+        component: OrganisationsComponent ,
+        resolve: {
+          OrganisationsResolver
+        }
+    },
+    {
+        path: ':idDis',
+        component: OrganisationComponent,
+        resolve: {
+            OrganisationsResolver
+        }
   }
 ];
 const entityMetaData: EntityMetadataMap = {
@@ -32,17 +41,18 @@ const entityMetaData: EntityMetadataMap = {
 };
 
 @NgModule({
-  declarations: [OrganisationsComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    TableModule,
-    HttpClientModule,
-    DialogModule,
-    PaginatorModule,
-    InputTextModule,
-    ButtonModule
-  ],
+  declarations: [OrganisationsComponent, OrganisationComponent],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        TableModule,
+        HttpClientModule,
+        DialogModule,
+        PaginatorModule,
+        InputTextModule,
+        ButtonModule,
+        PanelModule
+    ],
   providers: [
    OrganisationsDataService,
     OrganisationEntityService,

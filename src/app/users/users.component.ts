@@ -72,7 +72,6 @@ export class UsersComponent implements OnInit {
     console.log( 'User was selected', user);
     this.user = {...user};
     this.router.navigateByUrl(`/users/${user.idUser}`);
-    // this.displayDialog = true;
   }
 
 }

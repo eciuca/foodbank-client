@@ -5,6 +5,7 @@ import {map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -19,9 +20,9 @@ export class OrganisationsComponent implements OnInit {
   organisations$: Observable<Organisation[]>;
   title: string;
   cols: any[];
-  displayDialog: boolean;
 
   constructor(private organisationService: OrganisationEntityService,
+              private router: Router,
               private store: Store
   ) { }
 
@@ -74,22 +75,7 @@ export class OrganisationsComponent implements OnInit {
   }
   handleSelect(organisation) {
     console.log( 'Organisation was selected', organisation);
-    this.organisation = {...organisation};
-    this.displayDialog = true;
-  }
-
-  delete() {
-    console.log( 'Delete Called with Organisation:', this.organisation);
-    this.organisationService.delete(this.organisation);
-    this.organisation = null;
-    this.displayDialog = false;
-  }
-
-  save() {
-    console.log( 'Save Called with Organisation:', this.organisation);
-    this.organisationService.update(this.organisation);
-    this.organisation = null;
-    this.displayDialog = false;
+    this.router.navigateByUrl(`/organisations/${organisation.idDis}`);
   }
 }
 

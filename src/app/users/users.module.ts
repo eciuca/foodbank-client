@@ -4,8 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users.component';
 import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
 import {compareUsers, User} from './model/user';
-import {UsersDataService} from '../users/services/users-data.service';
-import {UserEntityService} from '../users/services/user-entity.service';
+import {UsersDataService} from './services/users-data.service';
+import {UserEntityService} from './services/user-entity.service';
 import {UsersResolver} from './users.resolver';
 import {TableModule} from 'primeng/table';
 import {HttpClientModule} from '@angular/common/http';
@@ -15,6 +15,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {UserComponent } from './user/user.component';
 import {PanelModule} from 'primeng/panel';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 
 

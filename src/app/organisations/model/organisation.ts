@@ -2,9 +2,9 @@ export interface Organisation {
 
     idDis: string;
 
-    refInt: string;
-
     lienBanque: number;
+
+    refInt: string;
 
     birbCode: string;
 

@@ -1,22 +1,39 @@
 <p-panel>
-    <form class="ui-g ui-fluid" *ngIf="user$ | async as user" #userForm="ngForm">
-        <div class="ui-g-4"><label for="idUser">Identifiant</label></div>
-        <div class="ui-g-8"><input pInputText id="idUser" name="idUser" [ngModel]="user.idUser" /></div>
-        <div class="ui-g-4"><label for="userName">Nom Utilisateur</label></div>
-        <div class="ui-g-8"><input pInputText id="userName" name="userName" [ngModel]="user.userName" /></div>
-        <div class="ui-g-4"><label for="idCompany">Banque</label></div>
-        <div class="ui-g-8"><input pInputText id="idCompany" name="idCompany" [ngModel]="user.idCompany" /></div>
-
-        <div class="ui-g-4"><label for="idLanguage">Langue</label></div>
-        <div class="ui-g-8"><input pInputText id="idLanguage" name="idLanguage" [ngModel]="user.idLanguage" /></div>
-        <div class="ui-g-4"><label for="rights">E-mail</label></div>
-        <div class="ui-g-8"><input pInputText id="email" name="email" [ngModel]="user.email" /></div>
-        <div class="ui-g-4"><label for="rights">Droits</label></div>
-        <div class="ui-g-8"><input pInputText id="rights" name="rights" [ngModel]="user.rights" /></div>
-
-        <div class="ui-g-12">
+    <form  *ngIf="user$ | async as user" #userForm="ngForm">
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="idUser">Identifiant</label>
+                <input pInputText id="idUser" name="idUser" [ngModel]="user.idUser" />
+            </div>
+            <div class="p-field p-col">
+                <label for="userName">Nom Utilisateur</label>
+                <input pInputText id="userName" name="userName" [ngModel]="user.userName" />
+            </div>
+            <div class="p-field p-col">
+                <label for="idCompany">Banque</label>
+                <input pInputText id="idCompany" name="idCompany" [ngModel]="user.idCompany" />
+            </div>
+        </div>
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="idLanguage">Langue</label>
+                <input pInputText id="idLanguage" name="idLanguage" [ngModel]="user.idLanguage" />
+            </div>
+            <div class="p-field p-col">
+                <label for="email">E-mail</label>
+                <input pInputText id="email" name="email" [ngModel]="user.email" />
+            </div>
+            <div class="p-field p-col">
+                <label for="rights">Droits</label>
+                <input pInputText id="rights" name="rights" [ngModel]="user.rights" />
+            </div>
+        </div>
+        <div class="p-formgroup-inline">
             <button type="button" pButton icon="pi pi-times" (click)="delete(userForm.value)" label="Delete"></button>
             <button type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="return()" label="return"></button>
         </div>
     </form>
+
+
 </p-panel>

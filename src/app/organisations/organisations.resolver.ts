@@ -21,32 +21,33 @@ export class OrganisationsResolver implements Resolve<boolean> {
         return this.organisationsService.loaded$
             .pipe(
                 tap( loaded => {
-                    if (!loaded) { this.store
-                        .pipe(
-                            select(globalAuthState),
-                            mergeMap((authState) => {
-                                console.log('Logged In User is :', authState.user);
-                                if (authState.user.idCompany) {
-                                    switch (authState.user.rights) {
-                                        case 'Bank':
-                                        case 'Admin_Banq':
-                                            return this.organisationsService.getWithQuery({ 'lienBanque': authState.banque.bankId.toString() });
-                                        case 'Asso':
-                                        case 'Admin_Asso':
-                                            return this.organisationsService.getWithQuery({ 'idDis': authState.user.idOrg.toString() });
-                                        default:
-                                            return this.organisationsService.getAll();
-                                    }
-
+                if (!loaded) { this.store
+                    .pipe(
+                        select(globalAuthState),
+                        mergeMap((authState) => {
+                            console.log('Logged In User is :', authState.user);
+                            if (authState.user) {
+                                switch (authState.user.rights) {
+                                    case 'Bank':
+                                    case 'Admin_Banq':
+                                        // tslint:disable-next-line:max-line-length
+                                        return this.organisationsService.getWithQuery({ 'bankShortName': authState.banque.bankShortName.toString() });
+                                    case 'Asso':
+                                    case 'Admin_Asso':
+                                        return this.organisationsService.getWithQuery({ 'idDis': authState.user.idOrg.toString() });
+                                    default:
+                                        return this.organisationsService.getWithQuery({ 'bankShortName': '????' });
                                 }
 
-                                return this.organisationsService.getAll();
-                            })
-                        ).subscribe(loadedOrganisations => {
-                            console.log('Loaded organisations: ' + loadedOrganisations.length);
-                            this.organisationsService.setLoaded(true);
-                        });
-                    }
+                            }
+                            this.organisationsService.clearCache();
+                            return this.organisationsService.getWithQuery({ 'bankShortName': '????' });
+                        })
+                    ).subscribe(loadedOrganisations => {
+                        console.log('Loaded organisations: ' + loadedOrganisations.length);
+                        this.organisationsService.setLoaded(true);
+                    });
+                }
                 }),
                 filter(loaded => !!loaded ),
                 first()

@@ -26,6 +26,7 @@ import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
 import {MenubarModule} from 'primeng/menubar';
 
 
+
 const routes: Routes = [
     { path: 'banques',
         loadChildren: () => import('./banques/banques.module').then(m => m.BanquesModule),

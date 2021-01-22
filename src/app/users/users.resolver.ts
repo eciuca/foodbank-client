@@ -1,11 +1,12 @@
-import {filter, first, mergeMap, tap} from 'rxjs/operators';
+import {filter, first, map, mergeMap, tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {UserEntityService} from './services/user-entity.service';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {loggedInUser} from '../auth/auth.selectors';
+import {globalAuthState, loggedInUser} from '../auth/auth.selectors';
 import {AppState} from '../reducers';
+
 
 @Injectable()
 export class UsersResolver implements Resolve<boolean> {
@@ -23,24 +24,25 @@ export class UsersResolver implements Resolve<boolean> {
                     if (!loaded) {
                         this.store
                             .pipe(
-                                select(loggedInUser),
-                                mergeMap((user) => {
-                                    console.log('Logged In User is :', user);
-                                    if (user.idCompany) {
-                                        switch (user.rights) {
+                                select(globalAuthState),
+                                mergeMap((authState) => {
+                                    console.log('Logged In User is :', authState.user);
+                                    if (authState.user) {
+                                        switch (authState.user.rights) {
                                             case 'Bank':
                                             case 'Admin_Banq':
-                                                return this.usersService.getWithQuery({ 'idCompany': user.idCompany });
+                                                return this.usersService.getWithQuery({ 'idCompany': authState.user.idCompany });
                                             case 'Asso':
                                             case 'Admin_Asso':
-                                                return this.usersService.getWithQuery({ 'idOrg': user.idOrg.toString() });
+                                                return this.usersService.getWithQuery({ 'idOrg': authState.user.idOrg.toString() });
                                             default:
-                                                return this.usersService.getAll();
+                                                return this.usersService.getWithQuery({ 'idCompany': '????' });
                                         }
 
                                     }
+                                    this.usersService.clearCache();
+                                    return this.usersService.getWithQuery({ 'idCompany': '????' });
 
-                                    return this.usersService.getAll();
                                 })
                             ).subscribe(loadedUsers => {
                                 console.log('Loaded users: ' + loadedUsers.length);
