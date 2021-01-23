@@ -1,0 +1,44 @@
+<p-panel>
+    <form  *ngIf="organisation$ | async as organisation" #organisationForm="ngForm">
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="idDis">Identifiant</label>
+                <input pInputText id="idDis" name="idDis" [ngModel]="organisation.idDis" />
+            </div>
+            <div class="p-field p-col">
+                <label for="bankShortName">Banque</label>
+                <input pInputText id="bankShortName" name="bankShortName" [ngModel]="organisation.bankShortName" />
+            </div>
+            <div class="p-field p-col">
+                <label for="societe">Nom</label>
+                <input pInputText id="societe" name="societe" [ngModel]="organisation.societe" />
+            </div>
+        </div>
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="adresse">Adresse</label>
+                <input pInputText id="adresse" name="adresse" [ngModel]="organisation.adresse" />
+            </div>
+
+            <div class="p-field p-col">
+                <label for="cp">cp</label>
+                <input pInputText id="cp" name="cp" [ngModel]="organisation.cp" />
+            </div>
+            <div class="p-field p-col">
+                <label for="localite">Commune</label>
+                <input pInputText id="localite" name="localite" [ngModel]="organisation.localite" />
+            </div>
+            <div class="p-field p-col">
+                <label for="email">E-mail</label>
+                <input pInputText id="email" name="email" [ngModel]="organisation.email" />
+            </div>
+        </div>
+        <div class="p-formgroup-inline">
+            <button type="button" pButton icon="pi pi-times" (click)="delete(organisationForm.value)" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="return()" label="return"></button>
+        </div>
+    </form>
+
+
+</p-panel>
