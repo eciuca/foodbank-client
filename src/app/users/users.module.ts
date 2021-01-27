@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { UsersComponent } from './users.component';
-import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
 import {compareUsers, User} from './model/user';
+import { UsersComponent } from './users.component';
+import {UsersResolver} from './users.resolver';
+import {UserComponent } from './user/user.component';
+
+import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
 import {UsersDataService} from './services/users-data.service';
 import {UserEntityService} from './services/user-entity.service';
-import {UsersResolver} from './users.resolver';
-import {TableModule} from 'primeng/table';
 import {HttpClientModule} from '@angular/common/http';
-import {DialogModule} from 'primeng/dialog';
+
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
-import {ButtonModule} from 'primeng/button';
-import {UserComponent } from './user/user.component';
-import {PanelModule} from 'primeng/panel';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 
@@ -54,7 +55,6 @@ const entityMetaData: EntityMetadataMap = {
     HttpClientModule,
     PanelModule,
     PaginatorModule,
-    DialogModule,
     InputTextModule,
     ButtonModule,
  ],

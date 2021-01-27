@@ -61,26 +61,4 @@
     </p-table>
 </ng-container>
 
-<p-dialog header="Banque Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [closable]="true" [style]="{'width':'300px'}">
-    <div class="ui-g ui-fluid" *ngIf="banque">
-        <div class="ui-g-4"><label for="bankId">Identifiant</label></div>
-        <div class="ui-g-8"><input pInputText id="bankId" [(ngModel)]="banque.bankId" /></div>
-        <div class="ui-g-4"><label for="bankShortName">Abbréviation</label></div>
-        <div class="ui-g-8"><input pInputText id="bankShortName" [(ngModel)]="banque.bankShortName" /></div>
 
-        <div class="ui-g-4"><label for="bankName">Nom</label></div>
-        <div class="ui-g-8"><input pInputText id="bankName" [(ngModel)]="banque.bankName" /></div>
-
-        <div class="ui-g-4"><label for="nrEntr">NrEntreprise</label></div>
-        <div class="ui-g-8"><input pInputText id="nrEntr" [(ngModel)]="banque.nrEntr" /></div>
-
-        <div class="ui-g-4"><label for="bankMail">E-mail</label></div>
-        <div class="ui-g-8"><input pInputText id="bankMail" [(ngModel)]="banque.bankMail" /></div>
-    </div>
-    <p-footer class="ui-g-12">
-        <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton icon="pi pi-times" (click)="delete()" label="Delete"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
-        </div>
-    </p-footer>
-</p-dialog>

@@ -3,6 +3,7 @@ import { Banque } from './model/banque';
 import {BanqueEntityService} from './services/banque-entity.service';
 import {concatMap, map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,10 @@ export class BanquesComponent implements OnInit {
   cols: any[];
   displayDialog: boolean;
 
-  constructor(private banqueService: BanqueEntityService) { }
+  constructor(
+      private banqueService: BanqueEntityService,
+      private router: Router,
+      ) { }
 
   ngOnInit() {
     this.reload();
@@ -41,22 +45,7 @@ export class BanquesComponent implements OnInit {
 
   }
     handleSelect(banque) {
-      console.log( 'Banque was selected', banque);
-        this.banque = {...banque};
-        this.displayDialog = true;
-    }
-
-    delete() {
-        console.log( 'Delete Called with Banque:', this.banque);
-        this.banqueService.delete(this.banque);
-        this.banque = null;
-        this.displayDialog = false;
-    }
-
-    save() {
-        console.log( 'Save Called with Banque:', this.banque);
-        this.banqueService.update(this.banque);
-        this.banque = null;
-        this.displayDialog = false;
+        console.log( 'Banque was selected', banque);
+        this.router.navigateByUrl(`/banques/${banque.bankId}`);
     }
 }
