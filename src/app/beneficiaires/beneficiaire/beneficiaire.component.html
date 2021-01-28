@@ -1,0 +1,48 @@
+<p-panel>
+    <form  *ngIf="beneficiaire$ | async as beneficiaire" #beneficiaireForm="ngForm">
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="idClient">Identifiant</label>
+                <input pInputText id="idClient" name="idClient" [ngModel]="beneficiaire.idClient" />
+            </div>
+            <div class="p-field p-col">
+                <label for="bankShortName">Banque</label>
+                <input pInputText id="bankShortName" name="bankShortName" [ngModel]="beneficiaire.bankShortName" />
+            </div>
+            <div class="p-field p-col">
+                <label for="nom">Nom</label>
+                <input pInputText id="nom" name="nom" [ngModel]="beneficiaire.nom" />
+            </div>
+            <div class="p-field p-col">
+                <label for="prenom">Nom</label>
+                <input pInputText id="prenom" name="prenom" [ngModel]="beneficiaire.prenom" />
+            </div>
+        </div>
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="adresse">Adresse</label>
+                <input pInputText id="adresse" name="adresse" [ngModel]="beneficiaire.adresse" />
+            </div>
+
+            <div class="p-field p-col">
+                <label for="cp">cp</label>
+                <input pInputText id="cp" name="cp" [ngModel]="beneficiaire.cp" />
+            </div>
+            <div class="p-field p-col">
+                <label for="localite">Commune</label>
+                <input pInputText id="localite" name="localite" [ngModel]="beneficiaire.localite" />
+            </div>
+            <div class="p-field p-col">
+                <label for="email">E-mail</label>
+                <input pInputText id="email" name="email" [ngModel]="beneficiaire.email" />
+            </div>
+        </div>
+        <div class="p-formgroup-inline">
+            <button type="button" pButton icon="pi pi-times" (click)="delete(beneficiaireForm.value)" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(beneficiaire, beneficiaireForm.value)" label="Save"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="return()" label="return"></button>
+        </div>
+    </form>
+
+
+</p-panel>
