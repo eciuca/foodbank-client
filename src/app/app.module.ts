@@ -40,7 +40,10 @@ const routes: Routes = [
         loadChildren: () => import('./organisations/organisations.module').then(m => m.OrganisationsModule),
         canActivate: [AuthGuard]
     },
-    { path: 'beneficiaires', loadChildren: () => import('./beneficiaires/beneficiaires.module').then(m => m.BeneficiairesModule) },
+    { path: 'beneficiaires',
+        loadChildren: () => import('./beneficiaires/beneficiaires.module').then(m => m.BeneficiairesModule),
+        canActivate: [AuthGuard]
+    },
     {
         path: '**',
         redirectTo: '/'

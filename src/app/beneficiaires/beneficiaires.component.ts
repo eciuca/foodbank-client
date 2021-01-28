@@ -76,6 +76,6 @@ export class BeneficiairesComponent implements OnInit {
   }
   handleSelect(beneficiaire) {
     console.log( 'Beneficiaire was selected', beneficiaire);
-    this.router.navigateByUrl(`/beneficiaires/${beneficiaire.idDis}`);
+    this.router.navigateByUrl(`/beneficiaires/${beneficiaire.idClient}`);
   }
 }

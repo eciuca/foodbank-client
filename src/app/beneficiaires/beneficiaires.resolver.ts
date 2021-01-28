@@ -34,7 +34,7 @@ export class BeneficiairesResolver implements Resolve<boolean> {
                                             return this.beneficiairesService.getWithQuery({ 'bankShortName': authState.banque.bankShortName.toString() });
                                         case 'Asso':
                                         case 'Admin_Asso':
-                                            return this.beneficiairesService.getWithQuery({ 'idOrg': authState.user.idOrg.toString() });
+                                            return this.beneficiairesService.getWithQuery({ 'lienDis': authState.user.idOrg.toString() });
                                         default:
                                             return this.beneficiairesService.getWithQuery({ 'bankShortName': '????' });
                                     }
