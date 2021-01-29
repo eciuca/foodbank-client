@@ -9,6 +9,7 @@ import {login, logout} from './auth/auth.actions';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 import { IAuthPrincipal } from './auth/auth-principal';
+import { MessagesComponent } from './messages/messages.component';
 
 @Component({
     selector: 'app-root',

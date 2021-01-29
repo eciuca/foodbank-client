@@ -24,6 +24,7 @@ import {metaReducers, reducers} from './reducers';
 import {AuthGuard} from './auth/auth.guard';
 import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
 import {MenubarModule} from 'primeng/menubar';
+import { MessagesComponent } from './messages/messages.component';
 
 
 
@@ -53,7 +54,8 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        MessagesComponent
     ],
     imports: [
         BrowserModule,

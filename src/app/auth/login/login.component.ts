@@ -11,6 +11,7 @@ import {AppState} from '../../reducers';
 import {login} from '../auth.actions';
 import {AuthActions} from '../action-types';
 import { IAuthPrincipal } from '../auth-principal';
+import { MessageService } from '../../message.service';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
       private fb: FormBuilder,
       private auth: AuthService,
       private router: Router,
-      private store: Store<AppState>) {
+      private store: Store<AppState>,
+      private messageService: MessageService) {
 
       this.form = fb.group({
           idUser: ['rvdmbat', [Validators.required]],
@@ -49,14 +51,15 @@ export class LoginComponent implements OnInit {
           )
           .subscribe(
               principal => {
-                const loginAction = login(principal)
+                const loginAction = login(principal);
                 this.store.dispatch(loginAction);
 
                 this.router.navigateByUrl('/users');
               },
               error => {
                   console.log(error);
-                  alert('Login Failed')
+                  alert('Login Failed');
+                  this.messageService.add('Login has failed');
               }
           );
 
