@@ -18,7 +18,8 @@ export class UserComponent implements OnInit {
   constructor(
       private usersService: UserEntityService,
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -30,20 +31,19 @@ export class UserComponent implements OnInit {
         );
      }
   delete(user: User) {
-    console.log( 'Delete Called with User:', user);
+    const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `L'utilisateur ${user.userName} a été détruit`};
     this.usersService.delete(user)
         .subscribe( ()  => {
-          console.log('User was deleted');
+          this.messageService.add(myMessage);
           this.router.navigateByUrl('/users');
         });
   }
 
   save(oldUser: User, userForm: User) {
-    const newUser = Object.assign({}, oldUser, userForm);
-    console.log( 'Save Called with User:', newUser);
-    this.usersService.update(newUser)
+    const modifiedUser = Object.assign({}, oldUser, userForm);
+    this.usersService.update(modifiedUser)
         .subscribe( ()  => {
-            console.log('User was updated');
+            this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `L'utilisateur ${modifiedUser.userName} a été modifié`});
             this.router.navigateByUrl('/users');
         });
 

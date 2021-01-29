@@ -24,8 +24,8 @@ import {metaReducers, reducers} from './reducers';
 import {AuthGuard} from './auth/auth.guard';
 import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
 import {MenubarModule} from 'primeng/menubar';
-import { MessagesComponent } from './messages/messages.component';
-
+import {MessagesModule} from 'primeng/messages';
+import {MessageService} from 'primeng/api';
 
 
 const routes: Routes = [
@@ -54,8 +54,7 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent,
-        MessagesComponent
+        AppComponent
     ],
     imports: [
         BrowserModule,
@@ -64,6 +63,7 @@ const routes: Routes = [
         HttpClientModule,
         MenubarModule,
         ProgressSpinnerModule,
+        MessagesModule,
         MatMenuModule,
         MatIconModule,
         MatSidenavModule,
@@ -87,7 +87,8 @@ const routes: Routes = [
             routerState: RouterState.Minimal
         })
     ],
-    providers: [{ provide: DefaultDataServiceConfig,
+    providers: [ MessageService,
+        { provide: DefaultDataServiceConfig,
         useValue: {
             root: environment.apiUrl
          }

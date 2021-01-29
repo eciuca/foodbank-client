@@ -18,7 +18,8 @@ export class BanqueComponent implements OnInit {
   constructor(
       private banquesService: BanqueEntityService,
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -30,20 +31,19 @@ export class BanqueComponent implements OnInit {
         );
   }
   delete(banque: Banque) {
-    console.log( 'Delete Called with Banque:', banque);
+    const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `La banque ${banque.bankShortName} ${banque.bankName}  a été détruite`};
     this.banquesService.delete(banque)
         .subscribe( ()  => {
-          console.log('Banque was deleted');
+          this.messageService.add(myMessage);
           this.router.navigateByUrl('/banques');
         });
   }
 
   save(oldBanque: Banque, banqueForm: Banque) {
-    const newBanque = Object.assign({}, oldBanque, banqueForm);
-    console.log( 'Save Called with Banque:', newBanque);
-    this.banquesService.update(newBanque)
+    const modifiedBanque = Object.assign({}, oldBanque, banqueForm);
+    this.banquesService.update(modifiedBanque)
         .subscribe( ()  => {
-          console.log('Banque was updated');
+          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `La banque ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  a été modifiée`});
           this.router.navigateByUrl('/banques');
         });
 

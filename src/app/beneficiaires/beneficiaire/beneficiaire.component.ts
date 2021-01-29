@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {Beneficiaire} from '../model/beneficiaire';
 import {MessageService} from 'primeng/api';
 
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'beneficiaire',
@@ -18,7 +19,8 @@ export class BeneficiaireComponent implements OnInit {
   constructor(
       private beneficiairesService: BeneficiaireEntityService,
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -30,20 +32,19 @@ export class BeneficiaireComponent implements OnInit {
         );
   }
   delete(beneficiaire: Beneficiaire) {
-    console.log( 'Delete Called with Beneficiaire:', beneficiaire);
-    this.beneficiairesService.delete(beneficiaire)
+      const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `Le bénéficiaire ${beneficiaire.nom} ${beneficiaire.prenom}  a été détruit`};
+      this.beneficiairesService.delete(beneficiaire)
         .subscribe( ()  => {
-          console.log('Beneficiaire was deleted');
+            this.messageService.add(myMessage);
           this.router.navigateByUrl('/beneficiaires');
         });
   }
 
   save(oldBeneficiaire: Beneficiaire, beneficiaireForm: Beneficiaire) {
-    const newBeneficiaire = Object.assign({}, oldBeneficiaire, beneficiaireForm);
-    console.log( 'Save Called with Beneficiaire:', newBeneficiaire);
-    this.beneficiairesService.update(newBeneficiaire)
+    const modifiedBeneficiaire = Object.assign({}, oldBeneficiaire, beneficiaireForm);
+    this.beneficiairesService.update(modifiedBeneficiaire)
         .subscribe( ()  => {
-          console.log('Beneficiaire was updated');
+          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `Le bénéficiaire ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  a été modifié`});
           this.router.navigateByUrl('/beneficiaires');
         });
 

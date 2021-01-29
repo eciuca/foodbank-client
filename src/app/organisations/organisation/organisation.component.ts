@@ -18,7 +18,8 @@ export class OrganisationComponent implements OnInit {
   constructor(
       private organisationsService: OrganisationEntityService,
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -30,20 +31,19 @@ export class OrganisationComponent implements OnInit {
         );
   }
   delete(organisation: Organisation) {
-    console.log( 'Delete Called with Organisation:', organisation);
+    const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `La banque ${organisation.idDis} ${organisation.societe}  a été détruite`};
     this.organisationsService.delete(organisation)
         .subscribe( ()  => {
-          console.log('Organisation was deleted');
-          this.router.navigateByUrl('/organisations');
+            this.messageService.add(myMessage);
+            this.router.navigateByUrl('/organisations');
         });
   }
 
   save(oldOrganisation: Organisation, organisationForm: Organisation) {
-    const newOrganisation = Object.assign({}, oldOrganisation, organisationForm);
-    console.log( 'Save Called with Organisation:', newOrganisation);
-    this.organisationsService.update(newOrganisation)
+    const modifiedOrganisation = Object.assign({}, oldOrganisation, organisationForm);
+    this.organisationsService.update(modifiedOrganisation)
         .subscribe( ()  => {
-          console.log('Organisation was updated');
+          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `La banque ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe}  a été modifiée`});
           this.router.navigateByUrl('/organisations');
         });
 

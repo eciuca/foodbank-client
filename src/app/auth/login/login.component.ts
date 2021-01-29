@@ -11,7 +11,7 @@ import {AppState} from '../../reducers';
 import {login} from '../auth.actions';
 import {AuthActions} from '../action-types';
 import { IAuthPrincipal } from '../auth-principal';
-import { MessageService } from '../../message.service';
+import {MessageService} from 'primeng/api';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -58,8 +58,7 @@ export class LoginComponent implements OnInit {
               },
               error => {
                   console.log(error);
-                  alert('Login Failed');
-                  this.messageService.add('Login has failed');
+                  this.messageService.add({severity: 'error', summary: 'Login has failed', detail: 'Wrong userid or password'});
               }
           );
 
