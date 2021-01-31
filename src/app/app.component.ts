@@ -6,9 +6,10 @@ import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Route
 import {AppState} from './reducers';
 import {isLoggedIn, isLoggedOut} from './auth/auth.selectors';
 import {login, logout} from './auth/auth.actions';
+import { PrimeNGConfig } from 'primeng/api';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
-import { IAuthPrincipal } from './auth/auth-principal';
+import {IAuthPrincipal } from './auth/auth-principal';
 import {MessageService} from 'primeng/api';
 
 @Component({
@@ -27,7 +28,9 @@ export class AppComponent implements OnInit {
     isLoggedOut$: Observable<boolean>;
 
     constructor(private router: Router,
-                private store: Store<AppState>) {
+                private store: Store<AppState>,
+                private config: PrimeNGConfig
+    ) {
 
     }
 
