@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import { Banque } from './model/banque';
 import {BanqueEntityService} from './services/banque-entity.service';
 import {concatMap, map, tap} from 'rxjs/operators';
@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
 })
 
 export class BanquesComponent implements OnInit {
-  banque: Banque = null;
+  selectedBankid$: Observable<string>;
   banques$: Observable<Banque[]>;
   cols: any[];
   displayDialog: boolean;
@@ -46,6 +46,7 @@ export class BanquesComponent implements OnInit {
   }
     handleSelect(banque) {
         console.log( 'Banque was selected', banque);
-        this.router.navigateByUrl(`/banques/${banque.bankId}`);
+        this.selectedBankid$ = banque.bankId.toString();
+        this.displayDialog = true;
     }
 }

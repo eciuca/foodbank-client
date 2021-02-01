@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {distinctUntilChanged, map} from 'rxjs/operators';
+import {distinctUntilChanged, map, tap} from 'rxjs/operators';
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
 import {AppState} from './reducers';
-import {isLoggedIn, isLoggedOut} from './auth/auth.selectors';
+import {globalAuthState, isLoggedIn, isLoggedOut} from './auth/auth.selectors';
 import {login, logout} from './auth/auth.actions';
-import { PrimeNGConfig } from 'primeng/api';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 import {IAuthPrincipal } from './auth/auth-principal';
@@ -28,20 +27,12 @@ export class AppComponent implements OnInit {
     isLoggedOut$: Observable<boolean>;
 
     constructor(private router: Router,
-                private store: Store<AppState>,
-                private config: PrimeNGConfig
+                private store: Store<AppState>
     ) {
 
     }
 
     ngOnInit() {
-        this.menuLogggedInItems = [
-            {label: 'Banques', icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
-            {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-            {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
-            {label: 'Beneficiaires', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
-            {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
-        ];
 
         const userProfileString = localStorage.getItem('user');
 
@@ -72,7 +63,53 @@ export class AppComponent implements OnInit {
 
         this.isLoggedIn$ = this.store
             .pipe(
-                select(isLoggedIn)
+                select(isLoggedIn),
+                tap(loggedIn => {
+                    if (loggedIn) {
+                        this.store.pipe(
+                        select(globalAuthState),
+                            map((authState) => {
+                                if (authState.banque) {
+                                    switch (authState.user.rights) {
+                                        case 'Bank':
+                                        case 'Admin_Banq':
+                                            this.menuLogggedInItems = [
+                                                {label: 'Banque', icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
+                                                {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
+                                                {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                                                {label: 'Beneficiaires', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
+                                                {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                                            ];
+
+                                            break;
+                                        case 'Asso':
+                                        case 'Admin_Asso':
+                                            this.menuLogggedInItems = [
+                                                {label: 'Organisation', icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/${authState.organisation.idDis}` ]},
+                                                {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                                                {label: 'Beneficiaires', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
+                                                {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                                            ];
+
+                                            break;
+                                        default:
+                                            this.menuLogggedInItems = [
+                                                {label: 'Banques', icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
+                                                {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                                                {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
+                                                {label: 'Beneficiaires', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
+                                                {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                                            ];
+
+                                    }
+
+                                }
+                            })
+                        )
+                            .subscribe();
+                    }
+
+                })
             );
 
         this.isLoggedOut$ = this.store

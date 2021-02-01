@@ -17,6 +17,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 
 import {PanelModule} from 'primeng/panel';
+import {DialogModule} from 'primeng/dialog';
 
 const routes: Routes = [
     {   path: '',
@@ -51,7 +52,8 @@ const entityMetaData: EntityMetadataMap = {
         PaginatorModule,
         InputTextModule,
         ButtonModule,
-        PanelModule
+        PanelModule,
+        DialogModule
     ],
   providers: [
     BanquesDataService,

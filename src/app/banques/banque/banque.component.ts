@@ -5,15 +5,15 @@ import {map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Banque} from '../model/banque';
 import {MessageService} from 'primeng/api';
+import { Input } from '@angular/core';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'banque',
+  selector: 'app-banque',
   templateUrl: './banque.component.html',
   styleUrls: ['./banque.component.css']
 })
 export class BanqueComponent implements OnInit {
-
+    @Input() bankId: string;
   banque$: Observable<Banque>;
   constructor(
       private banquesService: BanqueEntityService,
@@ -23,23 +23,18 @@ export class BanqueComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const bankId = this.route.snapshot.paramMap.get('bankId');
+
+      if (!this.bankId) {
+          this.bankId = this.route.snapshot.paramMap.get('bankId');
+      }
+
 
     this.banque$ = this.banquesService.entities$
         .pipe(
-            map( banques => banques.find(banque => bankId === banque.bankId.toString()))
+            map( banques => banques.find(banque => this.bankId === banque.bankId.toString()))
         );
   }
-  delete(banque: Banque) {
-    const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `La banque ${banque.bankShortName} ${banque.bankName}  a été détruite`};
-    this.banquesService.delete(banque)
-        .subscribe( ()  => {
-          this.messageService.add(myMessage);
-          this.router.navigateByUrl('/banques');
-        });
-  }
-
-  save(oldBanque: Banque, banqueForm: Banque) {
+ save(oldBanque: Banque, banqueForm: Banque) {
     const modifiedBanque = Object.assign({}, oldBanque, banqueForm);
     this.banquesService.update(modifiedBanque)
         .subscribe( ()  => {
@@ -49,8 +44,6 @@ export class BanqueComponent implements OnInit {
 
 
   }
-  return() {
-    this.router.navigateByUrl('/banques');
-  }
+
 }
 
