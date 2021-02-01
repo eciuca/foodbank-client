@@ -23,8 +23,10 @@ export class BanqueComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
+  // comment: this component is sometimes called from his parent Component with BankId @Input Decorator,
+  // or sometimes via a router link via the Main Menu
       if (!this.bankId) {
+          // we must come from the menu
           this.bankId = this.route.snapshot.paramMap.get('bankId');
       }
 

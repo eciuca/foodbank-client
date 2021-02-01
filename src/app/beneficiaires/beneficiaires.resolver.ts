@@ -25,8 +25,7 @@ export class BeneficiairesResolver implements Resolve<boolean> {
                         .pipe(
                             select(globalAuthState),
                             mergeMap((authState) => {
-                                console.log('Logged In User is :', authState.user);
-                                if (authState.user) {
+                                if (authState && authState.user) {
                                     switch (authState.user.rights) {
                                         case 'Bank':
                                         case 'Admin_Banq':
@@ -36,12 +35,10 @@ export class BeneficiairesResolver implements Resolve<boolean> {
                                         case 'Admin_Asso':
                                             return this.beneficiairesService.getWithQuery({ 'lienDis': authState.user.idOrg.toString() });
                                         default:
-                                            return this.beneficiairesService.getWithQuery({ 'bankShortName': '????' });
+                                            return this.beneficiairesService.getAll();
                                     }
 
                                 }
-                                this.beneficiairesService.clearCache();
-                                return this.beneficiairesService.getWithQuery({ 'bankShortName': '????' });
                             })
                         ).subscribe(loadedBeneficiaires => {
                             console.log('Loaded beneficiaires: ' + loadedBeneficiaires.length);

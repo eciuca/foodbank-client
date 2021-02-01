@@ -25,8 +25,7 @@ export class OrganisationsResolver implements Resolve<boolean> {
                     .pipe(
                         select(globalAuthState),
                         mergeMap((authState) => {
-                            console.log('Logged In User is :', authState.user);
-                            if (authState.user) {
+                            if (authState && authState.user) {
                                 switch (authState.user.rights) {
                                     case 'Bank':
                                     case 'Admin_Banq':
@@ -36,12 +35,10 @@ export class OrganisationsResolver implements Resolve<boolean> {
                                     case 'Admin_Asso':
                                         return this.organisationsService.getWithQuery({ 'idDis': authState.user.idOrg.toString() });
                                     default:
-                                        return this.organisationsService.getWithQuery({ 'bankShortName': '????' });
+                                        return this.organisationsService.getAll();
                                 }
 
                             }
-                            this.organisationsService.clearCache();
-                            return this.organisationsService.getWithQuery({ 'bankShortName': '????' });
                         })
                     ).subscribe(loadedOrganisations => {
                         console.log('Loaded organisations: ' + loadedOrganisations.length);

@@ -26,8 +26,7 @@ export class UsersResolver implements Resolve<boolean> {
                             .pipe(
                                 select(globalAuthState),
                                 mergeMap((authState) => {
-                                    console.log('Logged In User is :', authState.user);
-                                    if (authState.user) {
+                                    if (authState && authState.user) {
                                         switch (authState.user.rights) {
                                             case 'Bank':
                                             case 'Admin_Banq':
@@ -36,13 +35,10 @@ export class UsersResolver implements Resolve<boolean> {
                                             case 'Admin_Asso':
                                                 return this.usersService.getWithQuery({ 'idOrg': authState.user.idOrg.toString() });
                                             default:
-                                                return this.usersService.getWithQuery({ 'idCompany': '????' });
+                                                return this.usersService.getAll();
                                         }
 
                                     }
-                                    this.usersService.clearCache();
-                                    return this.usersService.getWithQuery({ 'idCompany': '????' });
-
                                 })
                             ).subscribe(loadedUsers => {
                                 console.log('Loaded users: ' + loadedUsers.length);
