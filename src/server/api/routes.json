@@ -4,5 +4,5 @@
     "/api/organisation/*": "/organisations/$1",
     "/api/banques": "/banques",
     "/api/banque/getByShortName/*": "/banques/$1",
-    "/api/user/*": "/user/$1"
+    "/api/user/*": "/users/?idUser=$1"
 }
