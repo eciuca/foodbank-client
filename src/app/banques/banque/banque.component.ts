@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {BanqueEntityService} from '../services/banque-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, tap} from 'rxjs/operators';
+import {map, tap, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Banque} from '../model/banque';
 import {MessageService} from 'primeng/api';
 import { Input } from '@angular/core';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-banque',
@@ -13,7 +14,7 @@ import { Input } from '@angular/core';
   styleUrls: ['./banque.component.css']
 })
 export class BanqueComponent implements OnInit {
-    @Input() bankId: string;
+    @Input() bankId$: Observable<number>;
   banque$: Observable<Banque>;
   constructor(
       private banquesService: BanqueEntityService,
@@ -25,15 +26,18 @@ export class BanqueComponent implements OnInit {
   ngOnInit(): void {
   // comment: this component is sometimes called from his parent Component with BankId @Input Decorator,
   // or sometimes via a router link via the Main Menu
-      if (!this.bankId) {
+      if (!this.bankId$) {
           // we must come from the menu
-          this.bankId = this.route.snapshot.paramMap.get('bankId');
+          const bankIdString = this.route.snapshot.paramMap.get('bankId')
+          const bankId = Number(bankIdString);
+          this.bankId$ = of(bankId);
       }
 
 
     this.banque$ = this.banquesService.entities$
         .pipe(
-            map( banques => banques.find(banque => this.bankId === banque.bankId.toString()))
+            withLatestFrom(this.bankId$),
+            map(([banques, bankId]) => banques.find(banque => bankId === banque.bankId))
         );
   }
  save(oldBanque: Banque, banqueForm: Banque) {
