@@ -24,20 +24,32 @@ export class BanqueComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-  // comment: this component is sometimes called from his parent Component with BankId @Input Decorator,
-  // or sometimes via a router link via the Main Menu
+      // comment: this component is sometimes called from his parent Component with BankId @Input Decorator,
+      // or sometimes via a router link via the Main Menu
+      console.log('We initialize a new banque object!');
       if (!this.bankId$) {
           // we must come from the menu
-          const bankIdString = this.route.snapshot.paramMap.get('bankId')
+          console.log('We initialize a new banque object from the router!');
+          const bankIdString = this.route.snapshot.paramMap.get('bankId');
           const bankId = Number(bankIdString);
           this.bankId$ = of(bankId);
+          this.reload();
       }
 
-
+  }
+  public loadNewBanque(bankId: number) {
+      console.log('We reload  a new banque object with id', bankId);
+      this.bankId$ = of(bankId);
+      this.reload();
+  }
+    reload() {
     this.banque$ = this.banquesService.entities$
         .pipe(
             withLatestFrom(this.bankId$),
-            map(([banques, bankId]) => banques.find(banque => bankId === banque.bankId))
+            map(([banques, bankId]) => {
+                console.log('bankid is: ', bankId);
+             return banques.find(banque => bankId === banque.bankId);
+            })
         );
   }
  save(oldBanque: Banque, banqueForm: Banque) {

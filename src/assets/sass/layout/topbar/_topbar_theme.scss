@@ -1,0 +1,75 @@
+.layout-topbar {
+    color: $topbarItemTextColor;
+    background-color: $topbarBgColor;
+
+    a {
+        color: $topbarItemTextColor;
+
+        &:hover {
+            background-color: $topbarItemTextHoverBgColor;
+            transition: background-color $transitionDuration;
+        }
+    }
+
+    .layout-topbar-left {
+        background-color: $topbarLeftBgColor;
+
+        .layout-menu-button {
+            color: $topbarMenuButtonTextColor;
+            background-color: $topbarMenuButtonBgColor;
+
+            &:hover {
+                background-color: rgba($topbarMenuButtonBgColor,.7);
+                transition: background-color $transitionDuration;
+            }
+        }
+    }
+
+    .layout-topbar-right {
+        .layout-topbar-actions-left {
+            .layout-megamenu {
+                background: none;
+
+                &.p-megamenu .p-megamenu-root-list > .p-menuitem {
+                    > .p-menuitem-link {
+                        .p-menuitem-text,
+                        .p-menuitem-icon,
+                        .p-submenu-icon {
+                            color: $topbarItemTextColor;
+                        }
+
+                        &:not(.p-disabled):hover {
+                            background: $topbarItemTextHoverBgColor;
+                            transition: background-color $transitionDuration;
+                        }
+                    }
+                }
+            }
+        }
+
+        .layout-topbar-actions-right {
+            .layout-topbar-items {
+                .layout-topbar-action-panel {
+                    background-color: $overlayContentBgColor;
+                    color: $textColor;
+
+                    a {
+                        color: $textColor;
+
+                        &:hover {
+                            background-color: transparent;
+                            transition: none;
+                        }
+                    }
+
+                    .layout-topbar-action-item {
+                        &:hover {
+                            background-color: $hoverBgColor;
+                            transition: background-color $transitionDuration;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

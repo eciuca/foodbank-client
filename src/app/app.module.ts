@@ -46,6 +46,11 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'membres',
+        loadChildren: () => import('./membres/membres.module').then(m => m.MembresModule),
+        canActivate: [AuthGuard]
+    },
+    {
         path: '**',
         redirectTo: '/'
     }

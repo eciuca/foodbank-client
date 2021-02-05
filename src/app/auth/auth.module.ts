@@ -4,7 +4,7 @@ import {LoginComponent} from './login/login.component';
 import {MatCardModule} from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import {RouterModule} from "@angular/router";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from "@angular/material/button";
 import { StoreModule } from '@ngrx/store';
 import {AuthService} from "./auth.service";
@@ -13,6 +13,7 @@ import {authReducer} from './reducers';
 import {AuthGuard} from './auth.guard';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './auth.effects';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
     imports: [
@@ -23,7 +24,9 @@ import {AuthEffects} from './auth.effects';
         MatButtonModule,
         RouterModule.forChild([{path: '', component: LoginComponent}]),
         StoreModule.forFeature('auth', authReducer),
-        EffectsModule.forFeature([AuthEffects])
+        EffectsModule.forFeature([AuthEffects]),
+        ButtonModule,
+        FormsModule
     ],
     declarations: [LoginComponent],
     exports: [LoginComponent]

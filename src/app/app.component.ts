@@ -9,6 +9,7 @@ import {login, logout} from './auth/auth.actions';
 import {MenuItem} from 'primeng/api';
 import {IAuthPrincipal } from './auth/auth-principal';
 import { AuthState } from './auth/reducers';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
     selector: 'app-root',
@@ -16,7 +17,23 @@ import { AuthState } from './auth/reducers';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+// Ultima variables
+    topbarTheme = 'blue';
 
+    menuTheme = 'light';
+
+    layoutMode = 'light';
+
+    menuMode = 'static';
+
+    inlineMenuPosition = 'bottom';
+
+    inputStyle = 'filled';
+
+    ripple = true;
+
+    isRTL = false;
+// application variables
     menuLogggedInItems: MenuItem[] = [];
 
     loading = true;
@@ -26,13 +43,14 @@ export class AppComponent implements OnInit {
     isLoggedOut$: Observable<boolean>;
 
     constructor(private router: Router,
-                private store: Store<AppState>
+                private store: Store<AppState>,
+                private primengConfig: PrimeNGConfig
     ) {
 
     }
 
     ngOnInit() {
-
+        this.primengConfig.ripple = true;
         const userProfileString = localStorage.getItem('user');
 
         if (userProfileString && userProfileString !== 'undefined') {
@@ -91,7 +109,7 @@ export class AppComponent implements OnInit {
                         {label: 'Banque', icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
                         {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                        {label: 'Beneficiaires', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
+                        {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
                         {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
 
@@ -101,6 +119,7 @@ export class AppComponent implements OnInit {
                     this.menuLogggedInItems = [
                         {label: 'Organisation', icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/${authState.organisation.idDis}` ]},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                        {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
                         {label: 'Beneficiaires', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
                         {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
@@ -110,8 +129,8 @@ export class AppComponent implements OnInit {
                     this.menuLogggedInItems = [
                         {label: 'Banques', icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                        {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
                         {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
-                        {label: 'Beneficiaires', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
                         {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
 
