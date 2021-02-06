@@ -1,8 +1,9 @@
 <ng-container *ngIf="membres$ | async as membres">
-    <p-table #dt [value]="membres" selectionMode="single" [rowHover]="true"
-             [rows]="10" [showCurrentPageReport]="true"
-             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-             [filterDelay]="0" [globalFilterFields]="['societe','adresse','cp','localite']">
+
+    <p-table #dt [value]="membres" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
+             [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
+             [paginator]="true" currentPageReportTemplate="'{currentPage} of {totalPages}'"
+             [filterDelay]="0" [globalFilterFields]="['nom','prenom','address','zip', 'city']">
         <ng-template pTemplate="caption">
             <div class="table-header">
                 {{title}}

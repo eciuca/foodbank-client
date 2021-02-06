@@ -5,12 +5,10 @@ import {compareMembres, Membre} from './model/membre';
 import { MembresComponent } from './membres.component';
 import {MembresResolver} from './membres.resolver';
 import {MembreComponent } from './membre/membre.component';
-
 import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
 import {MembresDataService} from './services/membres-data.service';
 import {MembreEntityService} from './services/membre-entity.service';
 import {HttpClientModule} from '@angular/common/http';
-
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
@@ -32,18 +30,22 @@ const routes: Routes = [
   {
     path: ':batId',
     component: MembreComponent,
-    resolve: {
-      MembresResolver
+    resolve:  {
+        MembresResolver
     }
-
   }
 ];
 const entityMetaData: EntityMetadataMap = {
   Membre: {
     sortComparer: compareMembres,
     selectId: (membre: Membre) => membre.batId,
-    entityDispatcherOptions: { optimisticUpdate: false}
-  },
+    entityDispatcherOptions: {optimisticUpdate: false},
+    filterFn: (entities: Membre[], pattern: { startIndex: number, endIndex: number }) => {
+      return entities.filter((entity, index) => {
+        return ((index >= pattern.startIndex) && (index <= pattern.endIndex));
+      });
+    }
+  }
 
 };
 @NgModule({

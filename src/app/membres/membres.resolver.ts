@@ -41,7 +41,7 @@ export class MembresResolver implements Resolve<boolean> {
                                     }
                                 })
                             ).subscribe(loadedMembres => {
-                            console.log('Loaded membres: ' + loadedMembres.length);
+                            console.log('Loaded membres from resolver: ' + loadedMembres.length);
                             this.membresService.setLoaded(true);
                         });
                     }

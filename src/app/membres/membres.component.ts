@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {globalAuthState} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
+import {LazyLoadEvent} from 'primeng/api';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -20,6 +21,7 @@ export class MembresComponent implements OnInit {
   membres$: Observable<Membre[]>;
   cols: any[];
   title: string;
+  totalRecords: number;
 
   constructor(private membreService: MembreEntityService,
               private router: Router,
@@ -31,6 +33,7 @@ export class MembresComponent implements OnInit {
   }
 
   reload() {
+
     this.store
         .pipe(
             select(globalAuthState),
@@ -56,8 +59,6 @@ export class MembresComponent implements OnInit {
         )
         .subscribe();
 
-
-    this.membres$  = this.membreService.entities$;
     this.cols = [
       { field: 'batId', header: 'Identifiant' },
       { field: 'nom', header: 'Nom' },
@@ -74,5 +75,15 @@ export class MembresComponent implements OnInit {
     this.router.navigateByUrl(`/membres/${membre.batId}`);
   }
 
+  nextPage(event: LazyLoadEvent) {
+     console.log('Lazy Loaded Event', event);
+     this.membreService.getWithQuery({ 'offset': event.first.toString(),'rows': event.rows.toString() })
+         .subscribe(loadedMembres => {
+           console.log('Loaded membres from nextpage: ' + loadedMembres.length);
+           this.totalRecords = loadedMembres.length;
+           this.membres$  = this.membreService.filteredEntities$;
+           this.membreService.setLoaded(true);
+         });
+  }
 }
 
