@@ -23,16 +23,10 @@ import {MessageModule} from 'primeng/message';
 const routes: Routes = [
   { path: '',
     component: MembresComponent,
-    resolve: {
-      MembresResolver
-    }
   },
   {
     path: ':batId',
     component: MembreComponent,
-    resolve:  {
-        MembresResolver
-    }
   }
 ];
 const entityMetaData: EntityMetadataMap = {

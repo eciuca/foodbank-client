@@ -18,10 +18,11 @@ import {LazyLoadEvent} from 'primeng/api';
 
 export class MembresComponent implements OnInit {
   membre: Membre = null;
-  membres$: Observable<Membre[]>;
+  membres: Membre[];
   cols: any[];
   title: string;
   totalRecords: number;
+  loading: boolean;
 
   constructor(private membreService: MembreEntityService,
               private router: Router,
@@ -33,7 +34,7 @@ export class MembresComponent implements OnInit {
   }
 
   reload() {
-
+      this.loading = true;
     this.store
         .pipe(
             select(globalAuthState),
@@ -77,11 +78,14 @@ export class MembresComponent implements OnInit {
 
   nextPage(event: LazyLoadEvent) {
      console.log('Lazy Loaded Event', event);
-     this.membreService.getWithQuery({ 'offset': event.first.toString(),'rows': event.rows.toString() })
+      this.loading = true;
+     this.membreService.getWithQuery({ 'offset': event.first.toString(), 'rows': event.rows.toString() })
          .subscribe(loadedMembres => {
            console.log('Loaded membres from nextpage: ' + loadedMembres.length);
-           this.totalRecords = loadedMembres.length;
-           this.membres$  = this.membreService.filteredEntities$;
+          // this.totalRecords = loadedMembres.length;
+             this.totalRecords = 150;
+             this.membres  = loadedMembres;
+           this.loading = false;
            this.membreService.setLoaded(true);
          });
   }
