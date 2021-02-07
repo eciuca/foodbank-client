@@ -69,6 +69,7 @@ export interface Membre {
     lDep: number;
     bankName: string;
     bankShortName: string;
+    totalRecords: number;
 }
 
 export function compareMembres(c1: Membre, c2: Membre) {

@@ -35,6 +35,7 @@ export class MembresComponent implements OnInit {
 
   reload() {
       this.loading = true;
+      this.totalRecords = 0;
     this.store
         .pipe(
             select(globalAuthState),
@@ -82,9 +83,10 @@ export class MembresComponent implements OnInit {
      this.membreService.getWithQuery({ 'offset': event.first.toString(), 'rows': event.rows.toString() })
          .subscribe(loadedMembres => {
            console.log('Loaded membres from nextpage: ' + loadedMembres.length);
-          // this.totalRecords = loadedMembres.length;
-             this.totalRecords = 150;
-             this.membres  = loadedMembres;
+           if (loadedMembres.length > 0) {
+                this.totalRecords = loadedMembres[0].totalRecords;
+            }
+           this.membres  = loadedMembres;
            this.loading = false;
            this.membreService.setLoaded(true);
          });
