@@ -8,6 +8,7 @@ import {globalAuthState} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
+import {QueryParams} from '@ngrx/data';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -23,6 +24,7 @@ export class MembresComponent implements OnInit {
   title: string;
   totalRecords: number;
   loading: boolean;
+  filterBase: any;
 
   constructor(private membreService: MembreEntityService,
               private router: Router,
@@ -45,10 +47,12 @@ export class MembresComponent implements OnInit {
                   case 'Bank':
                   case 'Admin_Banq':
                     this.title = 'Membres de la ' + authState.banque.bankName;
+                    this.filterBase = { 'bankShortName': authState.banque.bankShortName};
                     break;
                   case 'Asso':
                   case 'Admin_Asso':
                     this.title = `Membres de la Banque ${authState.banque.bankName} ${authState.organisation.societe}` ;
+                      this.filterBase = { 'lienDis': authState.organisation.idDis};
                     break;
                   default:
                     this.title = 'Membres de toutes les banques';
@@ -80,7 +84,16 @@ export class MembresComponent implements OnInit {
   nextPage(event: LazyLoadEvent) {
      console.log('Lazy Loaded Event', event);
       this.loading = true;
-     this.membreService.getWithQuery({ 'offset': event.first.toString(), 'rows': event.rows.toString() })
+      const queryParms = {...this.filterBase};
+      queryParms['offset'] = event.first.toString();
+      queryParms['rows'] = event.rows.toString();
+      queryParms['sortOrder'] = event.sortOrder.toString();
+      if (event.sortField) {
+          queryParms['sortField'] = event.sortField;
+      } else {
+          queryParms['sortField'] = 'nom';
+      }
+        this.membreService.getWithQuery(queryParms)
          .subscribe(loadedMembres => {
            console.log('Loaded membres from nextpage: ' + loadedMembres.length);
            if (loadedMembres.length > 0) {
