@@ -6,7 +6,6 @@ import {Observable} from 'rxjs';
 import {Banque} from '../model/banque';
 import {MessageService} from 'primeng/api';
 import { Input } from '@angular/core';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-banque',
@@ -14,8 +13,9 @@ import { of } from 'rxjs';
   styleUrls: ['./banque.component.css']
 })
 export class BanqueComponent implements OnInit {
-    @Input() bankId$: Observable<number>;
+  @Input() bankId$: Observable<number>;
   banque$: Observable<Banque>;
+  
   constructor(
       private banquesService: BanqueEntityService,
       private route: ActivatedRoute,
@@ -26,32 +26,23 @@ export class BanqueComponent implements OnInit {
   ngOnInit(): void {
       // comment: this component is sometimes called from his parent Component with BankId @Input Decorator,
       // or sometimes via a router link via the Main Menu
-      console.log('We initialize a new banque object!');
       if (!this.bankId$) {
           // we must come from the menu
           console.log('We initialize a new banque object from the router!');
-          const bankIdString = this.route.snapshot.paramMap.get('bankId');
-          const bankId = Number(bankIdString);
-          this.bankId$ = of(bankId);
-          this.reload();
+          this.bankId$ = this.route.paramMap
+            .pipe(
+              map(paramMap => paramMap.get('bankId')),
+              map(bankIdString => Number(bankIdString))
+            );
       }
 
-  }
-  public loadNewBanque(bankId: number) {
-      console.log('We reload  a new banque object with id', bankId);
-      this.bankId$ = of(bankId);
-      this.reload();
-  }
-    reload() {
-    this.banque$ = this.banquesService.entities$
+      this.banque$ = this.bankId$
         .pipe(
-            withLatestFrom(this.bankId$),
-            map(([banques, bankId]) => {
-                console.log('bankid is: ', bankId);
-             return banques.find(banque => bankId === banque.bankId);
-            })
+            withLatestFrom(this.banquesService.entities$),
+            map(([bankId, banques]) => banques.find(banque => bankId === banque.bankId))
         );
   }
+  
  save(oldBanque: Banque, banqueForm: Banque) {
     const modifiedBanque = Object.assign({}, oldBanque, banqueForm);
     this.banquesService.update(modifiedBanque)
@@ -59,8 +50,6 @@ export class BanqueComponent implements OnInit {
           this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `La banque ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  a été modifiée`});
           this.router.navigateByUrl('/banques');
         });
-
-
   }
 
 }
