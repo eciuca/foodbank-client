@@ -1,12 +1,15 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs';
-import {filter, first, mergeMap, tap} from 'rxjs/operators';
-import {OrganisationEntityService} from './services/organisation-entity.service';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { iif, Observable } from 'rxjs';
+import { filter, first, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
+import { OrganisationEntityService } from './services/organisation-entity.service';
 
-import {select, Store} from '@ngrx/store';
-import {AppState} from '../reducers';
-import {globalAuthState} from '../auth/auth.selectors';
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../reducers';
+import { globalAuthState } from '../auth/auth.selectors';
+import { AuthState } from '../auth/reducers';
+import { Organisation } from './model/organisation';
+import { ThrowStmt } from '@angular/compiler';
 
 @Injectable()
 export class OrganisationsResolver implements Resolve<boolean> {
@@ -17,38 +20,61 @@ export class OrganisationsResolver implements Resolve<boolean> {
     ) {
 
     }
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>  {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+        this.loadOrganisations();
+
         return this.organisationsService.loaded$
             .pipe(
-                tap( loaded => {
-                if (!loaded) { this.store
-                    .pipe(
-                        select(globalAuthState),
-                        mergeMap((authState) => {
-                            if (authState && authState.user) {
-                                switch (authState.user.rights) {
-                                    case 'Bank':
-                                    case 'Admin_Banq':
-                                        // tslint:disable-next-line:max-line-length
-                                        return this.organisationsService.getWithQuery({ 'bankShortName': authState.banque.bankShortName.toString() });
-                                    case 'Asso':
-                                    case 'Admin_Asso':
-                                        return this.organisationsService.getWithQuery({ 'idDis': authState.user.idOrg.toString() });
-                                    default:
-                                        return this.organisationsService.getAll();
-                                }
-
-                            }
-                        })
-                    ).subscribe(loadedOrganisations => {
-                        console.log('Loaded organisations: ' + loadedOrganisations.length);
-                        this.organisationsService.setLoaded(true);
-                    });
-                }
-                }),
-                filter(loaded => !!loaded ),
+                filter(loaded => !!loaded),
                 first()
             );
     }
 
+    private loadOrganisations() {
+        const authenticatedUserState$ = this.store
+            .pipe(
+                select(globalAuthState),
+                filter(authState => this.userIsPresent(authState))
+            );
+
+        const organisationsNotLoaded$ = this.organisationsService.loaded$
+            .pipe(
+                filter(loaded => !loaded)
+            );
+
+        organisationsNotLoaded$
+            .pipe(
+                mergeMap(_ => authenticatedUserState$),
+                mergeMap(authState => this.loadOrganisationsDependingOnUserRights(authState))
+            )
+            .subscribe(loadedOrganisations => {
+                console.log('Loaded organisations: ' + loadedOrganisations.length);
+                this.organisationsService.setLoaded(true);
+            })
+    }
+
+    private userIsPresent(authState: AuthState): boolean {
+        if (authState && authState.user) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private loadOrganisationsDependingOnUserRights(authState: AuthState): Observable<Organisation[]> {
+        console.log('checking authState for org')
+        switch (authState.user.rights) {
+            case 'Bank':
+            case 'Admin_Banq':
+                console.log('Requesting organisation')
+                const bankShortNameParam = { 'bankShortName': authState.banque.bankShortName.toString() };
+                return this.organisationsService.getWithQuery(bankShortNameParam);
+            case 'Asso':
+            case 'Admin_Asso':
+                const idDisParam = { 'idDis': authState.user.idOrg.toString() }
+                return this.organisationsService.getWithQuery(idDisParam);
+            default:
+                return this.organisationsService.getAll();
+        }
+    }
 }

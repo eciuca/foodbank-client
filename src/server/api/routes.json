@@ -1,8 +1,9 @@
 {
     "/api/users*": "/users$1",
     "/api/organisations": "/organisations",
-    "/api/organisation/*": "/organisations/$1",
+    "/api/organisations/*": "/organisations/$1",
+    "/api/organisation/:id": "/organisations/:id",
     "/api/banques": "/banques",
-    "/api/banque/getByShortName/*": "/banques/$1",
-    "/api/user/*": "/users/?idUser=$1"
+    "/api/banque/getByShortName/*": "/banques?bankShortName=$1&singular=1",
+    "/api/user/*": "/users?idUser=$1&singular=1"
 }
