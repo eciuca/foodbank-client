@@ -11,26 +11,34 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th></th>
                 <th>
                     <div class="p-d-flex p-jc-between p-ai-center">
-                        Nom
-                        <p-columnFilter type="text" field="nom" display="menu"></p-columnFilter>
+                       <p-columnFilter type="text" field="nom"  [matchModeOptions]="matchModes"   ></p-columnFilter>
                     </div>
                 </th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                       <p-columnFilter type="text" field="prenom"  [matchModeOptions]="matchModes"   ></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                      <p-columnFilter type="text" field="address"  [matchModeOptions]="matchModes"   ></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                      <p-columnFilter type="text" field="zip"  [matchModeOptions]="matchModes"   ></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                      <p-columnFilter type="text" field="city"  [matchModeOptions]="matchModes"   ></p-columnFilter>
+                    </div>
+                </th>
             </tr>
             <tr>
-                <th pSortableColumn="batId">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Identifiant
-                        <p-sortIcon field="batId"></p-sortIcon>
-                    </div>
-                </th>
-                <th pSortableColumn="nom">
+               <th pSortableColumn="nom">
                     <div class="p-d-flex p-jc-between p-ai-center">
                         Nom
                         <p-sortIcon field="nom"></p-sortIcon>
@@ -38,7 +46,7 @@
                 </th>
                 <th pSortableColumn="prenom">
                     <div class="p-d-flex p-jc-between p-ai-center">
-                        Nom
+                        Prenom
                         <p-sortIcon field="prenom"></p-sortIcon>
                     </div>
                 </th>

@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import {globalAuthState} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
-import {LazyLoadEvent} from 'primeng/api';
+import {FilterMatchMode, LazyLoadEvent, SelectItem} from 'primeng/api';
 import {QueryParams} from '@ngrx/data';
 
 @Component({
@@ -25,6 +25,7 @@ export class MembresComponent implements OnInit {
   totalRecords: number;
   loading: boolean;
   filterBase: any;
+  matchModes: SelectItem[];
 
   constructor(private membreService: MembreEntityService,
               private router: Router,
@@ -38,6 +39,9 @@ export class MembresComponent implements OnInit {
   reload() {
       this.loading = true;
       this.totalRecords = 0;
+      this.matchModes =  [
+          { label: 'Contains', value: FilterMatchMode.CONTAINS }
+      ];
     this.store
         .pipe(
             select(globalAuthState),
@@ -66,12 +70,11 @@ export class MembresComponent implements OnInit {
         .subscribe();
 
     this.cols = [
-      { field: 'batId', header: 'Identifiant' },
       { field: 'nom', header: 'Nom' },
       { field: 'prenom', header: 'Prenom' },
       { field: 'address', header: 'Adresse' },
+      { field: 'zip', header: 'Code Postal' },
       { field: 'city', header: 'Commune' },
-      { field: 'zip', header: 'Code Postal' }
     ];
 
   }
@@ -88,10 +91,35 @@ export class MembresComponent implements OnInit {
       queryParms['offset'] = event.first.toString();
       queryParms['rows'] = event.rows.toString();
       queryParms['sortOrder'] = event.sortOrder.toString();
-      if (event.sortField) {
-          queryParms['sortField'] = event.sortField;
-      } else {
-          queryParms['sortField'] = 'nom';
+      if (event.filters) {
+          if (event.filters.nom && event.filters.nom.value) {
+              queryParms['sortField'] = 'nom';
+              queryParms['searchField'] = 'nom';
+              queryParms['searchValue'] = event.filters.nom.value;
+          } else if (event.filters.prenom && event.filters.prenom.value) {
+              queryParms['sortField'] = 'prenom';
+              queryParms['searchField'] = 'prenom';
+              queryParms['searchValue'] = event.filters.prenom.value;
+          } else if (event.filters.address && event.filters.address.value) {
+              queryParms['sortField'] = 'address';
+              queryParms['searchField'] = 'address';
+              queryParms['searchValue'] = event.filters.address.value;
+          } else if (event.filters.zip && event.filters.zip.value) {
+              queryParms['sortField'] = 'zip';
+              queryParms['searchField'] = 'zip';
+              queryParms['searchValue'] = event.filters.zip.value;
+          } else if (event.filters.city && event.filters.city.value) {
+              queryParms['sortField'] = 'city';
+              queryParms['searchField'] = 'city';
+              queryParms['searchValue'] = event.filters.city.value;
+          }
+      }
+      if (!queryParms.hasOwnProperty('sortField')) {
+          if (event.sortField) {
+              queryParms['sortField'] = event.sortField;
+          } else {
+              queryParms['sortField'] = 'nom';
+          }
       }
         this.membreService.getWithQuery(queryParms)
          .subscribe(loadedMembres => {
