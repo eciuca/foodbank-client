@@ -1,32 +1,32 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LoginComponent} from './login/login.component';
-import {MatCardModule} from "@angular/material/card";
-import { MatInputModule } from "@angular/material/input";
-import {RouterModule} from "@angular/router";
+import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule} from "@angular/material/button";
 import { StoreModule } from '@ngrx/store';
-import {AuthService} from "./auth.service";
+import {AuthService} from './auth.service';
 import * as fromAuth from './reducers';
 import {authReducer} from './reducers';
 import {AuthGuard} from './auth.guard';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './auth.effects';
 import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
+import {MessageModule} from 'primeng/message';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        MatCardModule,
-        MatInputModule,
-        MatButtonModule,
         RouterModule.forChild([{path: '', component: LoginComponent}]),
         StoreModule.forFeature('auth', authReducer),
         EffectsModule.forFeature([AuthEffects]),
         ButtonModule,
-        FormsModule
+        FormsModule,
+        PanelModule,
+        MessageModule,
+        DropdownModule
     ],
     declarations: [LoginComponent],
     exports: [LoginComponent]

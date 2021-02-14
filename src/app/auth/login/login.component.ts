@@ -21,7 +21,14 @@ import {MessageService} from 'primeng/api';
 })
 export class LoginComponent implements OnInit {
 
-  form: FormGroup;
+  loginform: FormGroup;
+  submitted: boolean;
+
+    languages = [
+        {name: 'Nederlands', code: 'NL'},
+        {name: 'Français', code: 'FR'},
+        {name: 'English', code: 'EN'}
+    ];
 
   constructor(
       private fb: FormBuilder,
@@ -30,9 +37,10 @@ export class LoginComponent implements OnInit {
       private store: Store<AppState>,
       private messageService: MessageService) {
 
-      this.form = fb.group({
-          idUser: ['rvdmbat', [Validators.required]],
-          password: ['f00dBank', [Validators.required]]
+      this.loginform = fb.group({
+          idUser: ['', [Validators.required]],
+          password: ['', [Validators.required, Validators.minLength(6)]],
+          language: ['', [Validators.required]],
       });
 
   }
@@ -43,7 +51,8 @@ export class LoginComponent implements OnInit {
 
   login() {
 
-      const val = this.form.value;
+      const val = this.loginform.value;
+      console.log('Selected language: ', val.language);
 
       this.auth.login(val.idUser, val.password)
           .pipe(

@@ -3,12 +3,6 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
-
-import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import {HttpClientModule} from '@angular/common/http';
 
 import {RouterModule, Routes} from '@angular/router';
@@ -69,11 +63,6 @@ const routes: Routes = [
         MenubarModule,
         ProgressSpinnerModule,
         MessagesModule,
-        MatMenuModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatListModule,
-        MatToolbarModule,
         AuthModule.forRoot(),
         StoreModule.forRoot(reducers, {
             metaReducers,

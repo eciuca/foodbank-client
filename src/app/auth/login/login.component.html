@@ -1,28 +1,28 @@
-<mat-card class="login-page">
-    <mat-card-title>Login</mat-card-title>
-    <mat-card-content>
-        <form [formGroup]="form" class="login-form">
 
-            <mat-form-field>
+<form [formGroup]="loginform" (ngSubmit)="login()" style="padding-top: 5em">
+    <p-panel header="Login" class="p-grid p-dir-col p-align-center" >
+        <div style="margin: 1em 0">
+            <div class="p-col">
+                <div>User Name *</div>
+                <input pInputText type="text" formControlName="idUser" placeholder="Required"/>
+                <p-message severity="error" text="User Name is required" *ngIf="!loginform.controls['idUser'].valid&&loginform.controls['idUser'].dirty"></p-message>
+            </div>
+            <div class="p-col">
+                <div>Password *</div>
+                <input pInputText type="password" formControlName="password" placeholder="Required - Min(6)"/>
+                <p-message severity="error" [text]="loginform.controls['password'].errors['required'] ? 'Password is required' : loginform.controls['password'].errors['minlength'] ? 'Must be longer than 6 characters' : ''"
+                           *ngIf="!loginform.controls['password'].valid&&loginform.controls['password'].dirty"></p-message>
+            </div>
+            <div class="p-col">
+                <div>Language *</div>
+                    <p-dropdown [options]="languages" formControlName="language" placeholder="Select a Language" optionLabel="name" [showClear]="true"></p-dropdown>
+                </div>
 
-                <input matInput type="string"
-                       placeholder="Nom Uilisateur"
-                       formControlName="idUser">
+            <div class="p-col">
+                <button pButton type="submit" label="Submit" [disabled]="!loginform.valid"></button>
+            </div>
+        </div>
+    </p-panel>
+</form>
 
-            </mat-form-field>
 
-            <mat-form-field>
-
-                <input matInput type="password"
-                       placeholder="Password"
-                       formControlName="password">
-
-            </mat-form-field>
-
-            <button mat-raised-button color="primary"
-                    (click)="login()"
-                    [disabled]="!form.valid">Login</button>
-
-        </form>
-    </mat-card-content>
-</mat-card>
