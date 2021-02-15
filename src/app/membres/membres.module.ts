@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import {compareMembres, Membre} from './model/membre';
 import { MembresComponent } from './membres.component';
-import {MembresResolver} from './membres.resolver';
 import {MembreComponent } from './membre/membre.component';
 import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
 import {MembresDataService} from './services/membres-data.service';
@@ -53,8 +52,7 @@ const entityMetaData: EntityMetadataMap = {
   ],
   providers: [
     MembresDataService,
-    MembreEntityService,
-    MembresResolver
+    MembreEntityService
   ],
 })
 export class MembresModule {

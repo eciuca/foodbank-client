@@ -1,1 +1,56 @@
+<form  *ngIf="cpas$ | async as cpas" #cpasForm="ngForm" style="padding-top: 5em">
+    <p-panel header="CPAS" class="p-grid p-dir-col p-align-center">
+        <div style="margin: 1em 0">
+            <div class="p-field p-col">
+                <label for="cpasName">Nom</label>
+                <input pInputText id="cpasName" name="cpasName" [ngModel]="cpas.cpasName" />
+            </div>
+            <div class="p-field p-col">
+                <label for="cpasZip">Code Postal</label>
+                <input pInputText id="cpasZip" name="cpasZip" [ngModel]="cpas.cpasZip" />
+            </div>
+            <div class="p-field p-col">
+                <label for="cpasStreet">Adresse</label>
+                <input pInputText id="cpasStreet" name="cpasStreet" [ngModel]="cpas.cpasStreet" />
+            </div>
+            <div class="p-field p-col">
+                <label for="cpasGsm">Gsm</label>
+                <input pInputText id="cpasGsm" name="cpasGsm" [ngModel]="cpas.cpasGsm" />
+            </div>
+
+            <div class="p-field p-col">
+                <label for="cpasTel">Tel</label>
+                <input pInputText id="cpasTel" name="cpasTel" [ngModel]="cpas.cpasTel" />
+            </div>
+
+            <div class="p-field p-col">
+                <label for="langue">Langue</label>
+                <input pInputText id="langue" name="langue" [ngModel]="cpas.langue" />
+            </div>
+            <div class="p-field p-col">
+                <label for="cpasContactName">Responsable Nom</label>
+                <input pInputText id="cpasContactName" name="cpasContactName" [ngModel]="cpas.cpasContactName" />
+            </div>
+            <div class="p-field p-col">
+                <label for="cpasContactSurname">Responsable Prenom</label>
+                <input pInputText id="cpasContactSurname" name="cpasContactSurname" [ngModel]="cpas.cpasContactSurname" />
+            </div>
+            <div class="p-field p-col">
+                <label for="civilite">Civilite</label>
+                <input pInputText id="civilite" name="civilite" [ngModel]="cpas.civilite" />
+            </div>
+            <div class="p-field p-col">
+                <label for="rem">Remarques</label>
+                <input pInputText id="rem" name="rem" [ngModel]="cpas.rem" />
+            </div>
+        </div>
+        <div class="p-formgroup-inline">
+            <button type="button" pButton icon="pi pi-times" (click)="delete(cpasForm.value)" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(cpas, cpasForm.value)" label="Save"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="return()" label="return"></button>
+        </div>
+    </p-panel>
+    </form>
+
+
 
