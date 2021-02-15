@@ -50,7 +50,7 @@ export class OrganisationsResolver implements Resolve<boolean> {
             .subscribe(loadedOrganisations => {
                 console.log('Loaded organisations: ' + loadedOrganisations.length);
                 this.organisationsService.setLoaded(true);
-            })
+            });
     }
 
     private userIsPresent(authState: AuthState): boolean {
@@ -62,16 +62,16 @@ export class OrganisationsResolver implements Resolve<boolean> {
     }
 
     private loadOrganisationsDependingOnUserRights(authState: AuthState): Observable<Organisation[]> {
-        console.log('checking authState for org')
+        console.log('checking authState for org');
         switch (authState.user.rights) {
             case 'Bank':
             case 'Admin_Banq':
-                console.log('Requesting organisation')
+                console.log('Requesting organisations');
                 const bankShortNameParam = { 'bankShortName': authState.banque.bankShortName.toString() };
                 return this.organisationsService.getWithQuery(bankShortNameParam);
             case 'Asso':
             case 'Admin_Asso':
-                const idDisParam = { 'idDis': authState.user.idOrg.toString() }
+                const idDisParam = { 'idDis': authState.user.idOrg.toString() };
                 return this.organisationsService.getWithQuery(idDisParam);
             default:
                 return this.organisationsService.getAll();

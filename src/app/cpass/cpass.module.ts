@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import {compareMembres, Membre} from './model/membre';
-import { MembresComponent } from './membres.component';
-import {MembresResolver} from './membres.resolver';
-import {MembreComponent } from './membre/membre.component';
+import {compareCpass, Cpas} from './model/cpas';
+import { CpassComponent } from './cpass.component';
+import {CpasComponent } from './cpas/cpas.component';
 import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
-import {MembresDataService} from './services/membres-data.service';
-import {MembreEntityService} from './services/membre-entity.service';
+import {CpassDataService} from './services/cpass-data.service';
+import {CpasEntityService} from './services/cpas-entity.service';
 import {HttpClientModule} from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
@@ -19,19 +18,19 @@ import {MessageModule} from 'primeng/message';
 
 const routes: Routes = [
   { path: '',
-    component: MembresComponent,
+    component: CpassComponent,
   },
   {
-    path: ':batId',
-    component: MembreComponent,
+    path: ':cpasId',
+    component: CpasComponent,
   }
 ];
 const entityMetaData: EntityMetadataMap = {
-  Membre: {
-    sortComparer: compareMembres,
-    selectId: (membre: Membre) => membre.batId,
+  Cpas: {
+    sortComparer: compareCpass,
+    selectId: (cpas: Cpas) => cpas.cpasId,
     entityDispatcherOptions: {optimisticUpdate: false},
-    filterFn: (entities: Membre[], pattern: { startIndex: number, endIndex: number }) => {
+    filterFn: (entities: Cpas[], pattern: { startIndex: number, endIndex: number }) => {
       return entities.filter((entity, index) => {
         return ((index >= pattern.startIndex) && (index <= pattern.endIndex));
       });
@@ -40,7 +39,7 @@ const entityMetaData: EntityMetadataMap = {
 
 };
 @NgModule({
-  declarations: [MembresComponent, MembreComponent],
+  declarations: [CpassComponent, CpasComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -52,19 +51,18 @@ const entityMetaData: EntityMetadataMap = {
     ButtonModule,
   ],
   providers: [
-    MembresDataService,
-    MembreEntityService,
-    MembresResolver
+    CpassDataService,
+    CpasEntityService
   ],
 })
-export class MembresModule {
+export class CpassModule {
   constructor(
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
-      private membresDataService: MembresDataService
+      private cpassDataService: CpassDataService
   ) {
     eds.registerMetadataMap(entityMetaData);
-    entityDataService.registerService('Membre', membresDataService);
+    entityDataService.registerService('Cpas', cpassDataService);
   }
 
 }

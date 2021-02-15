@@ -9,6 +9,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {FilterMatchMode, LazyLoadEvent, SelectItem} from 'primeng/api';
 import {QueryParams} from '@ngrx/data';
+import {AuthState} from '../auth/reducers';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -46,25 +47,7 @@ export class MembresComponent implements OnInit {
         .pipe(
             select(globalAuthState),
             map((authState) => {
-              if (authState.banque) {
-                switch (authState.user.rights) {
-                  case 'Bank':
-                  case 'Admin_Banq':
-                    this.title = 'Membres de la ' + authState.banque.bankName;
-                    this.filterBase = { 'bankShortName': authState.banque.bankShortName};
-                    break;
-                  case 'Asso':
-                  case 'Admin_Asso':
-                    this.title = `Membres de la Banque ${authState.banque.bankName} ${authState.organisation.societe}` ;
-                      this.filterBase = { 'lienDis': authState.organisation.idDis};
-                    break;
-                  default:
-                    this.title = 'Membres de toutes les banques';
-                }
-
-              } else {
-                this.title = 'Membres de toutes les banques';
-              }
+             this.initializeDependingOnUserRights(authState);
             })
         )
         .subscribe();
@@ -78,6 +61,7 @@ export class MembresComponent implements OnInit {
     ];
 
   }
+
   handleSelect(membre) {
     console.log( 'Membre was selected', membre);
     this.membre = {...membre};
@@ -132,5 +116,26 @@ export class MembresComponent implements OnInit {
            this.membreService.setLoaded(true);
          });
   }
+    private initializeDependingOnUserRights(authState: AuthState) {
+        if (authState.banque) {
+            switch (authState.user.rights) {
+                case 'Bank':
+                case 'Admin_Banq':
+                    this.title = 'Membres de la ' + authState.banque.bankName;
+                    this.filterBase = { 'bankShortName': authState.banque.bankShortName};
+                    break;
+                case 'Asso':
+                case 'Admin_Asso':
+                    this.title = `Membres de la Banque ${authState.banque.bankName} ${authState.organisation.societe}` ;
+                    this.filterBase = { 'lienDis': authState.organisation.idDis};
+                    break;
+                default:
+                    this.title = 'Membres de toutes les banques';
+            }
+
+        } else {
+            this.title = 'Membres de toutes les banques';
+        }
+    }
 }
 
