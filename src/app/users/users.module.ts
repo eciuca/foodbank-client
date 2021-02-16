@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import {compareUsers, User} from './model/user';
 import { UsersComponent } from './users.component';
-import {UsersResolver} from './users.resolver';
 import {UserComponent } from './user/user.component';
 
 import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
@@ -24,18 +23,11 @@ import {MessageModule} from 'primeng/message';
 
 const routes: Routes = [
   { path: '',
-    component: UsersComponent,
-    resolve: {
-      UsersResolver
-    }
+    component: UsersComponent
   },
   {
     path: ':idUser',
-    component: UserComponent,
-    resolve: {
-      UsersResolver
-    }
-
+    component: UserComponent
   }
 ];
 const entityMetaData: EntityMetadataMap = {
@@ -60,8 +52,7 @@ const entityMetaData: EntityMetadataMap = {
  ],
   providers: [
     UsersDataService,
-    UserEntityService,
-    UsersResolver
+    UserEntityService
   ],
 })
 export class UsersModule {

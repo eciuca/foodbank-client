@@ -7,19 +7,26 @@ import {Router} from '@angular/router';
 import {globalAuthState} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
+import {FilterMatchMode, LazyLoadEvent, SelectItem} from 'primeng/api';
+import {QueryParams} from '@ngrx/data';
+import {AuthState} from '../auth/reducers';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'users',
+  selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
 
 export class UsersComponent implements OnInit {
   user: User = null;
-  users$: Observable<User[]>;
+  users: User[];
   cols: any[];
   title: string;
+  totalRecords: number;
+  loading: boolean;
+  filterBase: any;
+  matchModes: SelectItem[];
 
   constructor(private userService: UserEntityService,
               private router: Router,
@@ -31,6 +38,11 @@ export class UsersComponent implements OnInit {
   }
 
   reload() {
+      this.loading = true;
+      this.totalRecords = 0;
+      this.matchModes =  [
+          { label: 'Contains', value: FilterMatchMode.CONTAINS }
+      ];
     this.store
         .pipe(
             select(globalAuthState),
@@ -57,11 +69,8 @@ export class UsersComponent implements OnInit {
         .subscribe();
 
 
-    this.users$  = this.userService.entities$;
     this.cols = [
-      { field: 'idUser', header: 'Identifiant' },
       { field: 'userName', header: 'Nom Utilisateur' },
-      { field: 'idCompany', header: 'Banque' },
       { field: 'idLanguage', header: 'Langue' },
       { field: 'email', header: 'E-mail' },
       { field: 'rights', header: 'Droits' }
@@ -72,6 +81,42 @@ export class UsersComponent implements OnInit {
     console.log( 'User was selected', user);
     this.user = {...user};
     this.router.navigateByUrl(`/users/${user.idUser}`);
+  }
+ nextPage(event: LazyLoadEvent) {
+     console.log('Lazy Loaded Event', event);
+      this.loading = true;
+      const queryParms = {...this.filterBase};
+      queryParms['offset'] = event.first.toString();
+      queryParms['rows'] = event.rows.toString();
+      queryParms['sortOrder'] = event.sortOrder.toString();
+      if (event.filters) {
+          if (event.filters.userName && event.filters.userName.value) {
+              queryParms['sortField'] = 'userName';
+              queryParms['searchField'] = 'userName';
+              queryParms['searchValue'] = event.filters.userName.value;
+          } else if (event.filters.idLanguage && event.filters.idLanguage.value) {
+              queryParms['sortField'] = 'idLanguage';
+              queryParms['searchField'] = 'idLanguage';
+              queryParms['searchValue'] = event.filters.idLanguage.value;
+          }
+      }
+      if (!queryParms.hasOwnProperty('sortField')) {
+          if (event.sortField) {
+              queryParms['sortField'] = event.sortField;
+          } else {
+              queryParms['sortField'] = 'userName';
+          }
+      }
+        this.userService.getWithQuery(queryParms)
+         .subscribe(loadedUsers => {
+           console.log('Loaded users from nextpage: ' + loadedUsers.length);
+           if (loadedUsers.length > 0) {
+                this.totalRecords = loadedUsers[0].totalRecords;
+            }
+           this.users  = loadedUsers;
+           this.loading = false;
+           this.userService.setLoaded(true);
+         });
   }
 
 }

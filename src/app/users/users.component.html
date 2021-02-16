@@ -1,35 +1,32 @@
-<ng-container *ngIf="users$ | async as users">
-    <p-table #dt [value]="users" selectionMode="single" [rowHover]="true"
-             [rows]="10" [showCurrentPageReport]="true"
-             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-             [filterDelay]="0" [globalFilterFields]="['idUser','userName','email']">
+    <p-table #dt [value]="users" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
+             [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
+             [paginator]="true" currentPageReportTemplate="'{currentPage} of {totalPages}'"
+             [filterDelay]="0" >
         <ng-template pTemplate="caption">
             <div class="table-header">
                 {{title}}
-                <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
-            </span>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="idUser">
+                <th>
                     <div class="p-d-flex p-jc-between p-ai-center">
-                        Identifiant
-                        <p-sortIcon field="idUser"></p-sortIcon>
+                        <p-columnFilter type="text" field="userName"  [matchModeOptions]="matchModes"   ></p-columnFilter>
                     </div>
                 </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        <p-columnFilter type="text" field="idLanguage"  [matchModeOptions]="matchModes"   ></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                </th>
+            </tr>
+            <tr>
                 <th pSortableColumn="userName">
                     <div class="p-d-flex p-jc-between p-ai-center">
                         Nom
                         <p-sortIcon field="userName"></p-sortIcon>
-                    </div>
-                </th>
-                <th pSortableColumn="idCompany">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Banque
-                        <p-sortIcon field="idCompany"></p-sortIcon>
                     </div>
                 </th>
                 <th pSortableColumn="idLanguage">
@@ -61,12 +58,8 @@
                 </td>
             </tr>
         </ng-template>
-    <ng-template pTemplate="summary">
-        <div class="p-d-flex p-ai-center p-jc-between">
-           Au total il y a {{users ? users.length : 0 }} utilisateurs.
-        </div>
-    </ng-template>
+
 </p-table>
-</ng-container>
+
 
 

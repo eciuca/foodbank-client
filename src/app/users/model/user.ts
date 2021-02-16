@@ -41,6 +41,8 @@ export interface User {
 
     lienCpas: number;
 
+    totalRecords: number;
+
 }
 export function compareUsers(c1: User, c2: User) {
 
