@@ -1,6 +1,6 @@
     <p-table #dt [value]="users" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
              [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
-             [paginator]="true" currentPageReportTemplate="'{currentPage} of {totalPages}'"
+             [paginator]="true" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
              [filterDelay]="0" >
         <ng-template pTemplate="caption">
             <div class="table-header">
@@ -11,15 +11,27 @@
             <tr>
                 <th>
                     <div class="p-d-flex p-jc-between p-ai-center">
-                        <p-columnFilter type="text" field="userName"  [matchModeOptions]="matchModes"   ></p-columnFilter>
+                        <input #iname pInputText type="text" placeholder="Search by name" class="p-column-filter" (change)="dt.reset()">
+                          <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(iname.value, 'userName', 'contains')"></p-button>
                     </div>
                 </th>
                 <th>
                     <div class="p-d-flex p-jc-between p-ai-center">
-                        <p-columnFilter type="text" field="idLanguage"  [matchModeOptions]="matchModes"   ></p-columnFilter>
+                        <input #ilanguage pInputText type="text" placeholder="Search by language" class="p-column-filter" (change)="dt.reset()">
+                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(ilanguage.value, 'idLanguage', 'startsWith')"></p-button>
                     </div>
                 </th>
                 <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        <input #imail pInputText type="text" placeholder="Search by email" class="p-column-filter" (change)="dt.reset()">
+                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(imail.value, 'email', 'contains')"></p-button>
+                    </div>
+                </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        <input #irights pInputText type="text" placeholder="Search by rights" class="p-column-filter" (change)="dt.reset()">
+                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(irights.value, 'rights', 'contains')"></p-button>
+                    </div>
                 </th>
             </tr>
             <tr>
@@ -57,6 +69,11 @@
                     {{user[col.field]}}
                 </td>
             </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+            Au total il y a {{totalRecords}} utilisateurs dans la selection.
+            </div>
         </ng-template>
 
 </p-table>

@@ -98,21 +98,31 @@ export class UsersComponent implements OnInit {
               queryParms['sortField'] = 'idLanguage';
               queryParms['searchField'] = 'idLanguage';
               queryParms['searchValue'] = event.filters.idLanguage.value;
+          } else if (event.filters.email && event.filters.email.value) {
+              queryParms['sortField'] = 'email';
+              queryParms['searchField'] = 'email';
+              queryParms['searchValue'] = event.filters.email.value;
+          } else if (event.filters.rights && event.filters.rights.value) {
+              queryParms['sortField'] = 'rights';
+              queryParms['searchField'] = 'rights';
+              queryParms['searchValue'] = event.filters.rights.value;
           }
       }
-      if (!queryParms.hasOwnProperty('sortField')) {
-          if (event.sortField) {
-              queryParms['sortField'] = event.sortField;
-          } else {
-              queryParms['sortField'] = 'userName';
-          }
-      }
+     if (!queryParms.hasOwnProperty('sortField')) {
+         if (event.sortField) {
+             queryParms['sortField'] = event.sortField;
+         } else {
+             queryParms['sortField'] = 'userName';
+         }
+     }
         this.userService.getWithQuery(queryParms)
          .subscribe(loadedUsers => {
            console.log('Loaded users from nextpage: ' + loadedUsers.length);
            if (loadedUsers.length > 0) {
                 this.totalRecords = loadedUsers[0].totalRecords;
-            }
+            }  else {
+               this.totalRecords = 0;
+           }
            this.users  = loadedUsers;
            this.loading = false;
            this.userService.setLoaded(true);

@@ -6,8 +6,6 @@ export interface Organisation {
 
     refInt: string;
 
-    birbCode: string;
-
     lienDepot: number;
 
     societe: string;
@@ -105,8 +103,6 @@ export interface Organisation {
     cpasyN: number;
 
     lienCpas: number;
-
-    birbyN: number;
 
     depyN: number;
 

@@ -110,7 +110,9 @@ export class MembresComponent implements OnInit {
            console.log('Loaded membres from nextpage: ' + loadedMembres.length);
            if (loadedMembres.length > 0) {
                 this.totalRecords = loadedMembres[0].totalRecords;
-            }
+            } else {
+               this.totalRecords = 0;
+           }
            this.membres  = loadedMembres;
            this.loading = false;
            this.membreService.setLoaded(true);

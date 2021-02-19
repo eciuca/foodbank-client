@@ -26,7 +26,6 @@ export class CpassComponent implements OnInit {
   totalRecords: number;
   loading: boolean;
   filterBase: any;
-  matchModes: SelectItem[];
 
   constructor(private cpasService: CpasEntityService,
               private router: Router,
@@ -39,13 +38,7 @@ export class CpassComponent implements OnInit {
 
   reload() {
     this.loading = true;
-    this.totalRecords = 0;
-    this.matchModes =  [
-      { label: 'Contains', value: FilterMatchMode.CONTAINS }
-    ];
-
-
-    this.cols = [
+    this.totalRecords = 0; this.cols = [
       { field: 'cpasName', header: 'Nom' },
       { field: 'cpasZip', header: 'Code Postal' },
       { field: 'cpasStreet', header: 'Adresse' },
@@ -91,6 +84,8 @@ export class CpassComponent implements OnInit {
           console.log('Loaded cpass from nextpage: ' + loadedCpass.length);
           if (loadedCpass.length > 0) {
             this.totalRecords = loadedCpass[0].totalRecords;
+          } else {
+            this.totalRecords = 0;
           }
           this.cpass  = loadedCpass;
           this.loading = false;
