@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import {compareBeneficiaires, Beneficiaire} from './model/beneficiaire';
 import { BeneficiairesComponent } from './beneficiaires.component';
-import {BeneficiairesResolver} from './beneficiaires.resolver';
 import { BeneficiaireComponent } from './beneficiaire/beneficiaire.component';
 
 import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
@@ -22,16 +21,10 @@ const routes: Routes = [
   {
     path: '',
     component: BeneficiairesComponent,
-    resolve: {
-      BeneficiairesResolver
-    }
   },
   {
     path: ':idClient',
-    component: BeneficiaireComponent,
-    resolve: {
-      BeneficiairesResolver
-    }
+    component: BeneficiaireComponent
   }
 ];
 const entityMetaData: EntityMetadataMap = {
@@ -56,8 +49,7 @@ const entityMetaData: EntityMetadataMap = {
   ],
   providers: [
     BeneficiairesDataService,
-    BeneficiaireEntityService,
-    BeneficiairesResolver
+    BeneficiaireEntityService
   ]
 
 })

@@ -26,7 +26,6 @@ export class MembresComponent implements OnInit {
   totalRecords: number;
   loading: boolean;
   filterBase: any;
-  matchModes: SelectItem[];
 
   constructor(private membreService: MembreEntityService,
               private router: Router,
@@ -40,10 +39,8 @@ export class MembresComponent implements OnInit {
   reload() {
       this.loading = true;
       this.totalRecords = 0;
-      this.matchModes =  [
-          { label: 'Contains', value: FilterMatchMode.CONTAINS }
-      ];
-    this.store
+
+      this.store
         .pipe(
             select(globalAuthState),
             map((authState) => {

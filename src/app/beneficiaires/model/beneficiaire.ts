@@ -59,6 +59,7 @@ export interface  Beneficiaire {
     lbanque: number;
     bankName: string;
     bankShortName: string;
+    totalRecords: number;
 }
 export function compareBeneficiaires(c1: Beneficiaire, c2: Beneficiaire) {
 

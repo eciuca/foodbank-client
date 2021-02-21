@@ -1,12 +1,10 @@
     <p-table #dt [value]="membres" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
              [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
              [paginator]="true" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
-             [filterDelay]="0" [globalFilterFields]="['nom','prenom','address','zip', 'city']">
+             [filterDelay]="0" >
         <ng-template pTemplate="caption">
             <div class="table-header">
                 {{title}}
-                <span class="p-input-icon-left">
-        </span>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
