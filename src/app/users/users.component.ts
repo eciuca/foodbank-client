@@ -70,6 +70,7 @@ export class UsersComponent implements OnInit {
 
 
     this.cols = [
+      { field: 'idUser', header: 'Login' },
       { field: 'userName', header: 'Nom Utilisateur' },
       { field: 'idLanguage', header: 'Langue' },
       { field: 'email', header: 'E-mail' },
@@ -85,11 +86,21 @@ export class UsersComponent implements OnInit {
  nextPage(event: LazyLoadEvent) {
      console.log('Lazy Loaded Event', event);
       this.loading = true;
+     if (event.sortField == null) {
+         setTimeout(() => {
+             console.log('waiting first 250ms for reset to take place');
+         }, 250);
+     }
       const queryParms = {...this.filterBase};
       queryParms['offset'] = event.first.toString();
       queryParms['rows'] = event.rows.toString();
       queryParms['sortOrder'] = event.sortOrder.toString();
       if (event.filters) {
+          if (event.filters.idUser && event.filters.idUser.value) {
+              queryParms['sortField'] = 'idUser';
+              queryParms['searchField'] = 'idUser';
+              queryParms['searchValue'] = event.filters.idUser.value;
+          }
           if (event.filters.userName && event.filters.userName.value) {
               queryParms['sortField'] = 'userName';
               queryParms['searchField'] = 'userName';

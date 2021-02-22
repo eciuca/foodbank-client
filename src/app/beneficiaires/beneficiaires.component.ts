@@ -64,6 +64,11 @@ export class BeneficiairesComponent implements OnInit {
   nextPage(event: LazyLoadEvent) {
     console.log('Lazy Loaded Event', event);
     this.loading = true;
+    if (event.sortField == null) {
+      setTimeout(() => {
+        console.log('waiting first 250ms for reset to take place');
+      }, 250);
+    }
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();
     queryParms['rows'] = event.rows.toString();
@@ -100,8 +105,7 @@ export class BeneficiairesComponent implements OnInit {
     }
     this.beneficiaireService.getWithQuery(queryParms)
         .subscribe(loadedBeneficiaires => {
-          console.log('Loaded membres from nextpage: ' + loadedBeneficiaires.length);
-          if (loadedBeneficiaires.length > 0) {
+          console.log('Loaded membres from nextpage: ' + loadedBeneficiaires.length);if (loadedBeneficiaires.length > 0) {
             this.totalRecords = loadedBeneficiaires[0].totalRecords;
           } else {
             this.totalRecords = 0;

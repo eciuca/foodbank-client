@@ -57,6 +57,11 @@ export class CpassComponent implements OnInit {
   nextPage(event: LazyLoadEvent) {
     console.log('Lazy Loaded Event', event);
     this.loading = true;
+    if (event.sortField == null) {
+      setTimeout(() => {
+        console.log('waiting first 250ms for reset to take place');
+      }, 250);
+    }
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();
     queryParms['rows'] = event.rows.toString();

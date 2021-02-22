@@ -11,6 +11,12 @@
             <tr>
                 <th>
                     <div class="p-d-flex p-jc-between p-ai-center">
+                        <input #ilogin pInputText type="text" placeholder="Search by login" class="p-column-filter" (change)="dt.reset()">
+                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(ilogin.value, 'idUser', 'contains')"></p-button>
+                    </div>
+                </th>
+                <th>
+                    <div class="p-d-flex p-jc-between p-ai-center">
                         <input #iname pInputText type="text" placeholder="Search by name" class="p-column-filter" (change)="dt.reset()">
                           <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(iname.value, 'userName', 'contains')"></p-button>
                     </div>
@@ -35,6 +41,12 @@
                 </th>
             </tr>
             <tr>
+                <th pSortableColumn="idUser">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                       Login
+                        <p-sortIcon field="idUser"></p-sortIcon>
+                    </div>
+                </th>
                 <th pSortableColumn="userName">
                     <div class="p-d-flex p-jc-between p-ai-center">
                         Nom
