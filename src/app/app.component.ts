@@ -110,6 +110,7 @@ export class AppComponent implements OnInit {
                         {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
                         {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
                         {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
@@ -121,6 +122,7 @@ export class AppComponent implements OnInit {
                         {label: 'Organisation', icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/${authState.organisation.idDis}` ]},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
                         {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
                         {label: 'Beneficiaires', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
                         {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
@@ -134,6 +136,7 @@ export class AppComponent implements OnInit {
                         {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
                         {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
                         {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
+                        {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
                         {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
 

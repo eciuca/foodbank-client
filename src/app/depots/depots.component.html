@@ -1,0 +1,66 @@
+<ng-container *ngIf="depots$ | async as depots">
+    <p-table #dt [value]="depots" selectionMode="single" [rowHover]="true"
+             [rows]="10" [showCurrentPageReport]="true"
+             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+             [filterDelay]="0" [globalFilterFields]="['nom','adresse','cp','ville']">
+        <ng-template pTemplate="caption">
+            <div class="table-header">
+                Liste des Depots
+                <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+            </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="idDepot">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Identifiant
+                        <p-sortIcon field="idDepot"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="nom">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Nom
+                        <p-sortIcon field="nom"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="adresse">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Adresse
+                        <p-sortIcon field="adresse"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="cp">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Code Postal
+                        <p-sortIcon field="cp"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="ville">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Localité
+                        <p-sortIcon field="ville"></p-sortIcon>
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-depot>
+            <tr (click)="handleSelect(depot)">
+                <td *ngFor="let col of cols">
+                    {{depot[col.field]}}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                Au total il y a {{depots ? depots.length : 0 }} depots.
+            </div>
+        </ng-template>
+    </p-table>
+    <p-dialog header="Depot Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [style]="{'width':'1800px'}">
+        <app-depot *ngIf="selectedDepotid$" [idDepot$]="selectedDepotid$"></app-depot>
+    </p-dialog>
+</ng-container>
+

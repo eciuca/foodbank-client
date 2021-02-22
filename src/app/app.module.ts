@@ -48,6 +48,10 @@ const routes: Routes = [
         loadChildren: () => import('./cpass/cpass.module').then(m => m.CpassModule) ,
         canActivate: [AuthGuard]
     },
+    { path: 'depots',
+        loadChildren: () => import('./depots/depots.module').then(m => m.DepotsModule),
+        canActivate: [AuthGuard]
+    },
     {
         path: '**',
         redirectTo: '/'
