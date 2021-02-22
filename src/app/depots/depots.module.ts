@@ -16,10 +16,14 @@ import {InputTextModule} from 'primeng/inputtext';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {DialogModule} from 'primeng/dialog';
+import {DepotsResolver} from './depots.resolver';
 
 const routes: Routes = [
   { path: '',
     component: DepotsComponent,
+    resolve: {
+      DepotsResolver
+    }
   },
   {
     path: ':idDepot',
@@ -54,7 +58,8 @@ const entityMetaData: EntityMetadataMap = {
   ],
   providers: [
     DepotsDataService,
-    DepotEntityService
+    DepotEntityService,
+    DepotsResolver
   ],
 })
 export class DepotsModule {

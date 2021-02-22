@@ -1,5 +1,3 @@
-import {Depot} from '../../Depots/model/Depot';
-
 export interface Depot {
     idDepot: string;
 
