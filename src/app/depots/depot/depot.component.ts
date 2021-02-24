@@ -24,7 +24,7 @@ export class DepotComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // comment: this component is sometimes called from his parent Component with BankId @Input Decorator,
+    // comment: this component is sometimes called from his parent Component with idDepot @Input Decorator,
     // or sometimes via a router link via the Main Menu
     if (!this.idDepot$) {
       // we must come from the menu

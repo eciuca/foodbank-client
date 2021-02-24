@@ -1,1 +1,64 @@
-<p>depot works!</p>
+<p-panel>
+    <form  *ngIf="depot$ | async as depot" #depotForm="ngForm">
+        <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="idDepot">Identifiant</label>
+                <input pInputText id="idDepot" name="idDepot" [ngModel]="depot.idDepot" />
+            </div>
+            <div class="p-field p-col">
+                <label for="bankShortName">Banque</label>
+                <input pInputText id="bankShortName" name="bankShortName" [ngModel]="depot.bankShortName" />
+            </div>
+            <div class="p-field p-col">
+                <label for="nom">Nom</label>
+                <input pInputText id="nom" name="nom" [ngModel]="depot.nom" />
+            </div>
+            <div class="p-field p-col">
+                <label for="adresse">Adresse</label>
+                <input pInputText id="adresse" name="adresse" [ngModel]="depot.adresse" />
+            </div>
+            <div class="p-field p-col">
+                <label for="adresse2">2ème Adresse</label>
+                <input pInputText id="adresse2" name="adresse" [ngModel]="depot.adresse2" />
+            </div>
+            <div class="p-field p-col">
+                <label for="cp">cp</label>
+                <input pInputText id="cp" name="cp" [ngModel]="depot.cp" />
+            </div>
+            <div class="p-field p-col">
+                <label for="ville">Localité</label>
+                <input pInputText id="ville" name="ville" [ngModel]="depot.ville" />
+            </div>
+            <div class="p-field p-col">
+                <label for="telephone">Téléphone</label>
+                <input pInputText id="telephone" name="telephone" [ngModel]="depot.telephone" />
+            </div>
+            <div class="p-field p-col">
+                <label for="contact">Contact</label>
+                <input pInputText id="contact" name="contact" [ngModel]="depot.contact" />
+            </div>
+            <div class="p-field p-col">
+                <label for="email">E-mail</label>
+                <input pInputText id="email" name="email" [ngModel]="depot.email" />
+            </div>
+            <div class="p-field p-col">
+                <label for="memo">Memo</label>
+                <input pInputText id="memo" name="memo" [ngModel]="depot.memo" />
+            </div>
+            <div class="p-field p-col">
+                <label for="depPrinc">Depot Princpal?</label>
+                <input pInputText id="depPrinc" name="depPrinc" [ngModel]="depot.depPrinc" />
+            </div>
+            <div class="p-field p-col">
+                <label for="actif">Actif?</label>
+                <input pInputText id="actif" name="actif" [ngModel]="depot.actif" />
+            </div>
+            <div class="p-field p-col">
+                <label for="depFead">Dep Fead ?</label>
+                <input pInputText id="depFead" name="depFead" [ngModel]="depot.depFead" />
+            </div>
+        </div>
+        <div class="p-formgroup-inline">
+            <button type="button" pButton icon="pi pi-check" (click)="save(depot, depotForm.value)" label="Save"></button>
+        </div>
+    </form>
