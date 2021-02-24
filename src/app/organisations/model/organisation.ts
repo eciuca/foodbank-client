@@ -1,6 +1,6 @@
 export interface Organisation {
 
-    idDis: string;
+    idDis: number;
 
     lienBanque: number;
 

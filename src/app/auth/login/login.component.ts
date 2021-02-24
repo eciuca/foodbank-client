@@ -14,10 +14,9 @@ import { IAuthPrincipal } from '../auth-principal';
 import {MessageService} from 'primeng/api';
 
 @Component({
-    // tslint:disable-next-line:component-selector
-  selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 

@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {OrganisationEntityService} from '../services/organisation-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, tap} from 'rxjs/operators';
+import {map, tap, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Organisation} from '../model/organisation';
 import {MessageService} from 'primeng/api';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'organisation',
+  selector: 'app-organisation',
   templateUrl: './organisation.component.html',
   styleUrls: ['./organisation.component.css']
 })
 export class OrganisationComponent implements OnInit {
 
+  @Input() idDis$: Observable<number>;
   organisation$: Observable<Organisation>;
+
   constructor(
       private organisationsService: OrganisationEntityService,
       private route: ActivatedRoute,
@@ -23,19 +24,33 @@ export class OrganisationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const idDis = this.route.snapshot.paramMap.get('idDis');
+      // comment: this component is sometimes called from his parent Component with BankId @Input Decorator,
+      // or sometimes via a router link via the Main Menu
+      if (!this.idDis$) {
+          // we must come from the menu
+          console.log('We initialize a new organisation object from the router!');
+          this.idDis$ = this.route.paramMap
+              .pipe(
+                  map(paramMap => paramMap.get('idDis')),
+                  map(idDisString => Number(idDisString))
+              );
+      }
+      this.organisation$ = this.idDis$
+          .pipe(
+              withLatestFrom(this.organisationsService.entities$),
+              map(([idDis, organisations]) => {
+                  console.log('finding organisation with id', idDis);
+                  return organisations.find(organisation => idDis === organisation.idDis  );
 
-    this.organisation$ = this.organisationsService.entities$
-        .pipe(
-            map( organisations => organisations.find(organisation => idDis === organisation.idDis.toString()))
-        );
+              })
+          );
+
   }
   delete(organisation: Organisation) {
-    const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `La banque ${organisation.idDis} ${organisation.societe}  a été détruite`};
+    const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `L'organisation ${organisation.idDis} ${organisation.societe}  a été détruite`};
     this.organisationsService.delete(organisation)
         .subscribe( ()  => {
             this.messageService.add(myMessage);
-            this.router.navigateByUrl('/organisations');
         });
   }
 
@@ -43,13 +58,10 @@ export class OrganisationComponent implements OnInit {
     const modifiedOrganisation = Object.assign({}, oldOrganisation, organisationForm);
     this.organisationsService.update(modifiedOrganisation)
         .subscribe( ()  => {
-          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `La banque ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe}  a été modifiée`});
-          this.router.navigateByUrl('/organisations');
-        });
+          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `L'organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe}  a été modifiée`});
+         });
 
 
   }
-  return() {
-    this.router.navigateByUrl('/organisations');
-  }
+
 }

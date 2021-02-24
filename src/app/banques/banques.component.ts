@@ -7,8 +7,7 @@ import {Router} from '@angular/router';
 
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'banques',
+  selector: 'app-banques',
   templateUrl: './banques.component.html',
   styleUrls: ['./banques.component.css']
 })

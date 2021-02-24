@@ -7,7 +7,6 @@ import {Membre} from '../model/membre';
 import {MessageService} from 'primeng/api';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'app-membre',
   templateUrl: './membre.component.html',
   styleUrls: ['./membre.component.css']

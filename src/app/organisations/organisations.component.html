@@ -65,6 +65,9 @@
         </div>
     </ng-template>
 </p-table>
+    <p-dialog header="Organisation Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [style]="{'width':'1800px'}">
+        <app-organisation *ngIf="selectedIdDis$" [idDis$]="selectedIdDis$"></app-organisation>
+    </p-dialog>
 </ng-container>
 
 

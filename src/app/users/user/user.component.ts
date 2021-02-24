@@ -7,8 +7,7 @@ import {User} from '../model/user';
 import {MessageService} from 'primeng/api';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'user',
+  selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })

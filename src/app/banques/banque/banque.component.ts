@@ -13,9 +13,10 @@ import { Input } from '@angular/core';
   styleUrls: ['./banque.component.css']
 })
 export class BanqueComponent implements OnInit {
+
   @Input() bankId$: Observable<number>;
   banque$: Observable<Banque>;
-  
+
   constructor(
       private banquesService: BanqueEntityService,
       private route: ActivatedRoute,
@@ -42,7 +43,7 @@ export class BanqueComponent implements OnInit {
             map(([bankId, banques]) => banques.find(banque => bankId === banque.bankId))
         );
   }
-  
+
  save(oldBanque: Banque, banqueForm: Banque) {
     const modifiedBanque = Object.assign({}, oldBanque, banqueForm);
     this.banquesService.update(modifiedBanque)

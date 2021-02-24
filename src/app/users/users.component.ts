@@ -12,7 +12,6 @@ import {QueryParams} from '@ngrx/data';
 import {AuthState} from '../auth/reducers';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']

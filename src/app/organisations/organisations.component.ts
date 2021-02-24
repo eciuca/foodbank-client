@@ -2,22 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Organisation } from './model/organisation';
 import {OrganisationEntityService} from './services/organisation-entity.service';
 import {map, tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {Router} from '@angular/router';
 
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'organisations',
+  selector: 'app-organisations',
   templateUrl: './organisations.component.html',
   styleUrls: ['./organisations.component.css']
 })
 
 export class OrganisationsComponent implements OnInit {
+  selectedIdDis$ = new BehaviorSubject(0);
   organisation: Organisation = null;
   organisations$: Observable<Organisation[]>;
+  displayDialog: boolean;
   title: string;
   cols: any[];
 
@@ -73,9 +74,11 @@ export class OrganisationsComponent implements OnInit {
     ];
 
   }
-  handleSelect(organisation) {
+  handleSelect(organisation: Organisation) {
     console.log( 'Organisation was selected', organisation);
-    this.router.navigateByUrl(`/organisations/${organisation.idDis}`);
+      this.selectedIdDis$.next(organisation.idDis);
+      this.displayDialog = true;
+
   }
 }
 
