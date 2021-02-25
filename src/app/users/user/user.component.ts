@@ -42,7 +42,6 @@ export class UserComponent implements OnInit {
     this.usersService.delete(user)
         .subscribe( ()  => {
           this.messageService.add(myMessage);
-          this.router.navigateByUrl('/users');
         });
   }
 
@@ -51,7 +50,6 @@ export class UserComponent implements OnInit {
     this.usersService.update(modifiedUser)
         .subscribe( ()  => {
             this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `L'utilisateur ${modifiedUser.userName} a été modifié`});
-            this.router.navigateByUrl('/users');
         });
 
 
