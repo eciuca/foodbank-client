@@ -49,7 +49,6 @@ export class BanqueComponent implements OnInit {
     this.banquesService.update(modifiedBanque)
         .subscribe( ()  => {
           this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `La banque ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  a été modifiée`});
-          this.router.navigateByUrl('/banques');
         });
   }
 

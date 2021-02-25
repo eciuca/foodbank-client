@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
 import {Router} from '@angular/router';
@@ -18,6 +18,7 @@ import {AuthState} from '../auth/reducers';
 })
 
 export class UsersComponent implements OnInit {
+  selectedUserid$ = new BehaviorSubject('');
   user: User = null;
   users: User[];
   cols: any[];
@@ -25,7 +26,7 @@ export class UsersComponent implements OnInit {
   totalRecords: number;
   loading: boolean;
   filterBase: any;
-  matchModes: SelectItem[];
+    displayDialog: boolean;
 
   constructor(private userService: UserEntityService,
               private router: Router,
@@ -39,10 +40,7 @@ export class UsersComponent implements OnInit {
   reload() {
       this.loading = true;
       this.totalRecords = 0;
-      this.matchModes =  [
-          { label: 'Contains', value: FilterMatchMode.CONTAINS }
-      ];
-    this.store
+      this.store
         .pipe(
             select(globalAuthState),
             map((authState) => {
@@ -79,8 +77,8 @@ export class UsersComponent implements OnInit {
   }
   handleSelect(user) {
     console.log( 'User was selected', user);
-    this.user = {...user};
-    this.router.navigateByUrl(`/users/${user.idUser}`);
+      this.selectedUserid$.next( user.idUser);
+      this.displayDialog = true;
   }
  nextPage(event: LazyLoadEvent) {
      console.log('Lazy Loaded Event', event);

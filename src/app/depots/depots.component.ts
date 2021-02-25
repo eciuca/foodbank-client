@@ -35,7 +35,7 @@ export class DepotsComponent implements OnInit {
         )
     ;
     this.cols = [
-      { field: 'depotId', header: 'Identifiant' },
+      { field: 'idDepot', header: 'Identifiant' },
       { field: 'nom', header: 'Nom' },
       { field: 'adresse', header: 'Adresse' },
       { field: 'cp', header: 'Code Postal' },
