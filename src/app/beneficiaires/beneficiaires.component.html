@@ -87,6 +87,9 @@
         </div>
     </ng-template>
 </p-table>
+ <p-dialog header="Beneficiaire Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [style]="{'width':'1800px'}">
+     <app-beneficiaire *ngIf="selectedBeneficiaireid$" [idBeneficiaire$]="selectedBeneficiaireid$"></app-beneficiaire>
+ </p-dialog>
 
 
 

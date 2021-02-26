@@ -13,8 +13,7 @@ import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
+import {DialogModule} from 'primeng/dialog';
 
 const routes: Routes = [
   { path: '',
@@ -40,16 +39,17 @@ const entityMetaData: EntityMetadataMap = {
 };
 @NgModule({
   declarations: [CpassComponent, CpasComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    TableModule,
-    HttpClientModule,
-    PanelModule,
-    PaginatorModule,
-    InputTextModule,
-    ButtonModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        TableModule,
+        HttpClientModule,
+        PanelModule,
+        PaginatorModule,
+        InputTextModule,
+        ButtonModule,
+        DialogModule,
+    ],
   providers: [
     CpassDataService,
     CpasEntityService

@@ -1,36 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {Cpas} from './model/cpas';
 import {CpasEntityService} from './services/cpas-entity.service';
-import {Router} from '@angular/router';
-import {globalAuthState} from '../auth/auth.selectors';
-import {select, Store} from '@ngrx/store';
-import {AppState} from '../reducers';
-import {FilterMatchMode, LazyLoadEvent, SelectItem} from 'primeng/api';
-import {QueryParams} from '@ngrx/data';
-import {AuthState} from '../auth/reducers';
+import {LazyLoadEvent} from 'primeng/api';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'app-cpass',
   templateUrl: './cpass.component.html',
   styleUrls: ['./cpass.component.css']
 })
 
 export class CpassComponent implements OnInit {
-  cpas: Cpas = null;
+  selectedCpasid$ = new BehaviorSubject(0);
   cpass: Cpas[];
   cols: any[];
+  displayDialog: boolean;
   title: string;
   totalRecords: number;
   loading: boolean;
   filterBase: any;
 
-  constructor(private cpasService: CpasEntityService,
-              private router: Router,
-              private store: Store<AppState>
-  ) { }
+  constructor(private cpasService: CpasEntityService)   { }
 
   ngOnInit() {
     this.reload();
@@ -50,8 +40,8 @@ export class CpassComponent implements OnInit {
 
   handleSelect(cpas) {
     console.log( 'Cpas was selected', cpas);
-    this.cpas = {...cpas};
-    this.router.navigateByUrl(`/cpass/${cpas.cpasId}`);
+    this.selectedCpasid$.next(cpas.cpasId);
+    this.displayDialog = true;
   }
 
   nextPage(event: LazyLoadEvent) {

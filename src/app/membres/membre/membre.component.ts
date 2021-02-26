@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MembreEntityService} from '../services/membre-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, tap} from 'rxjs/operators';
+import {map, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Membre} from '../model/membre';
 import {MessageService} from 'primeng/api';
@@ -12,7 +12,7 @@ import {MessageService} from 'primeng/api';
   styleUrls: ['./membre.component.css']
 })
 export class MembreComponent implements OnInit {
-
+    @Input() idMembre$: Observable<number>;
   membre$: Observable<Membre>;
   constructor(
       private membresService: MembreEntityService,
@@ -22,19 +22,28 @@ export class MembreComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const batId = this.route.snapshot.paramMap.get('batId');
-
-    this.membre$ = this.membresService.entities$
-        .pipe(
-            map( membres => membres.find(membre => batId === membre.batId.toString()))
-        );
+      // comment: this component is sometimes called from his parent Component with idDepot @Input Decorator,
+      // or sometimes via a router link via the Main Menu
+      if (!this.idMembre$) {
+          // we must come from the menu
+          console.log('We initialize a new membre object from the router!');
+          this.idMembre$ = this.route.paramMap
+              .pipe(
+                  map(paramMap => paramMap.get('batId')),
+                  map(idMembreString => Number(idMembreString))
+              );
+      }
+      this.membre$ = this.idMembre$
+          .pipe(
+              withLatestFrom(this.membresService.entities$),
+              map(([batId, membres]) => membres.find(membre => batId === membre.batId))
+          );
   }
   delete(membre: Membre) {
     const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `Le membre ${membre.nom} ${membre.prenom}  a été détruit`};
     this.membresService.delete(membre)
         .subscribe( ()  => {
           this.messageService.add(myMessage);
-          this.router.navigateByUrl('/membres');
         });
   }
 
@@ -43,13 +52,8 @@ export class MembreComponent implements OnInit {
     this.membresService.update(modifiedMembre)
         .subscribe( ()  => {
           this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `Le membre ${modifiedMembre.nom} ${modifiedMembre.prenom}  a été modifié`});
-          this.router.navigateByUrl('/membres');
         });
-
-
   }
-  return() {
-    this.router.navigateByUrl('/membres');
-  }
+
 }
 

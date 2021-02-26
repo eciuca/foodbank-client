@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Beneficiaire } from './model/beneficiaire';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
-import {map, tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {Router} from '@angular/router';
@@ -11,17 +11,17 @@ import {LazyLoadEvent} from 'primeng/api';
 
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'beneficiaires',
+  selector: 'app-beneficiaires',
   templateUrl: './beneficiaires.component.html',
   styleUrls: ['./beneficiaires.component.css']
 })
 
 export class BeneficiairesComponent implements OnInit {
-  beneficiaire: Beneficiaire = null;
+  selectedBeneficiaireid$ = new BehaviorSubject(0);
   beneficiaires: Beneficiaire[];
   title: string;
   cols: any[];
+  displayDialog: boolean;
   totalRecords: number;
   loading: boolean;
   filterBase: any;
@@ -58,8 +58,8 @@ export class BeneficiairesComponent implements OnInit {
   }
   handleSelect(beneficiaire) {
     console.log( 'Beneficiaire was selected', beneficiaire);
-    this.beneficiaire = {...beneficiaire};
-    this.router.navigateByUrl(`/beneficiaires/${beneficiaire.idClient}`);
+    this.selectedBeneficiaireid$.next( beneficiaire.idClient);
+    this.displayDialog = true;
   }
   nextPage(event: LazyLoadEvent) {
     console.log('Lazy Loaded Event', event);
@@ -105,7 +105,8 @@ export class BeneficiairesComponent implements OnInit {
     }
     this.beneficiaireService.getWithQuery(queryParms)
         .subscribe(loadedBeneficiaires => {
-          console.log('Loaded membres from nextpage: ' + loadedBeneficiaires.length);if (loadedBeneficiaires.length > 0) {
+          console.log('Loaded membres from nextpage: ' + loadedBeneficiaires.length);
+          if (loadedBeneficiaires.length > 0) {
             this.totalRecords = loadedBeneficiaires[0].totalRecords;
           } else {
             this.totalRecords = 0;

@@ -15,6 +15,7 @@ import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {DialogModule} from 'primeng/dialog';
 
 const routes: Routes = [
   { path: '',
@@ -40,16 +41,17 @@ const entityMetaData: EntityMetadataMap = {
 };
 @NgModule({
   declarations: [MembresComponent, MembreComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    TableModule,
-    HttpClientModule,
-    PanelModule,
-    PaginatorModule,
-    InputTextModule,
-    ButtonModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        TableModule,
+        HttpClientModule,
+        PanelModule,
+        PaginatorModule,
+        InputTextModule,
+        ButtonModule,
+        DialogModule,
+    ],
   providers: [
     MembresDataService,
     MembreEntityService

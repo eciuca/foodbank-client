@@ -1,9 +1,8 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Depot } from './model/depot';
 import {DepotEntityService} from './services/depot-entity.service';
-import {concatMap, map, tap} from 'rxjs/operators';
+import { tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Router} from '@angular/router';
 
 
 @Component({
@@ -19,8 +18,7 @@ export class DepotsComponent implements OnInit {
   displayDialog: boolean;
 
   constructor(
-      private depotService: DepotEntityService,
-      private router: Router,
+      private depotService: DepotEntityService
   ) { }
 
   ngOnInit() {

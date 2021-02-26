@@ -54,7 +54,5 @@ export class UserComponent implements OnInit {
 
 
   }
-  return() {
-    this.router.navigateByUrl('/users');
-  }
+
 }

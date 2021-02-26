@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BeneficiaireEntityService} from '../services/beneficiaire-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, tap} from 'rxjs/operators';
+import {map, tap, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Beneficiaire} from '../model/beneficiaire';
 import {MessageService} from 'primeng/api';
 
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'beneficiaire',
+  selector: 'app-beneficiaire',
   templateUrl: './beneficiaire.component.html',
   styleUrls: ['./beneficiaire.component.css']
 })
 export class BeneficiaireComponent implements OnInit {
-
+  @Input()  idBeneficiaire$: Observable<number>;
   beneficiaire$: Observable<Beneficiaire>;
   constructor(
       private beneficiairesService: BeneficiaireEntityService,
@@ -24,13 +23,24 @@ export class BeneficiaireComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const idClient = this.route.snapshot.paramMap.get('idClient');
 
-    this.beneficiaire$ = this.beneficiairesService.entities$
-        .pipe(
-            map( beneficiaires => beneficiaires.find(beneficiaire => idClient === beneficiaire.idClient.toString()))
-        );
+      if (!this.idBeneficiaire$) {
+          // we must come from the menu
+          console.log('We initialize a new beneficiaire object from the router!');
+          this.idBeneficiaire$ = this.route.paramMap
+              .pipe(
+                  map(paramMap => paramMap.get('idClient')),
+                  map(idBeneficiaireString => Number(idBeneficiaireString))
+              );
+      }
+
+      this.beneficiaire$ = this.idBeneficiaire$
+          .pipe(
+              withLatestFrom(this.beneficiairesService.entities$),
+              map(([idClient, beneficiaires]) => beneficiaires.find(beneficiaire => idClient === beneficiaire.idClient))
+          );
   }
+
   delete(beneficiaire: Beneficiaire) {
       const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `Le bénéficiaire ${beneficiaire.nom} ${beneficiaire.prenom}  a été détruit`};
       this.beneficiairesService.delete(beneficiaire)
@@ -50,7 +60,5 @@ export class BeneficiaireComponent implements OnInit {
 
 
   }
-  return() {
-    this.router.navigateByUrl('/beneficiaires');
-  }
+
 }

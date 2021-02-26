@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {Membre} from './model/membre';
 import {MembreEntityService} from './services/membre-entity.service';
 import {Router} from '@angular/router';
 import {globalAuthState} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
-import {FilterMatchMode, LazyLoadEvent, SelectItem} from 'primeng/api';
-import {QueryParams} from '@ngrx/data';
+import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../auth/reducers';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'app-membres',
   templateUrl: './membres.component.html',
   styleUrls: ['./membres.component.css']
 })
 
 export class MembresComponent implements OnInit {
+  selectedMembreid$ = new BehaviorSubject(0);
   membre: Membre = null;
   membres: Membre[];
   cols: any[];
+  displayDialog: boolean;
   title: string;
   totalRecords: number;
   loading: boolean;
@@ -61,8 +61,8 @@ export class MembresComponent implements OnInit {
 
   handleSelect(membre) {
     console.log( 'Membre was selected', membre);
-    this.membre = {...membre};
-    this.router.navigateByUrl(`/membres/${membre.batId}`);
+      this.selectedMembreid$.next(membre.batId);
+      this.displayDialog = true;
   }
 
   nextPage(event: LazyLoadEvent) {
