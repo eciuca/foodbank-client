@@ -1,17 +1,13 @@
-<p-panel>
-    <form  *ngIf="depot$ | async as depot" #depotForm="ngForm">
+<p-panel *ngIf="depot$ | async as depot" >
+    <ng-template pTemplate="header">
+        Depot {{ depot.idDepot}} of bank {{ depot.bankShortName}}
+    </ng-template>
+    <form   #depotForm="ngForm">
         <div class="ui-fluid p-formgrid p-grid">
             <div class="p-field p-col">
-                <label for="idDepot">Identifiant</label>
-                <input pInputText id="idDepot" name="idDepot" [ngModel]="depot.idDepot" />
-            </div>
-            <div class="p-field p-col">
-                <label for="bankShortName">Banque</label>
-                <input pInputText id="bankShortName" name="bankShortName" [ngModel]="depot.bankShortName" />
-            </div>
-            <div class="p-field p-col">
                 <label for="nom">Nom</label>
-                <input pInputText id="nom" name="nom" [ngModel]="depot.nom" />
+                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="12" [ngModel]="depot.nom" />
+                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="User Name is required and must be minimum 12 chars long"></p-message>
             </div>
             <div class="p-field p-col">
                 <label for="adresse">Adresse</label>
@@ -62,3 +58,4 @@
             <button type="button" pButton icon="pi pi-check" (click)="save(depot, depotForm.value)" label="Save"></button>
         </div>
     </form>
+</p-panel>

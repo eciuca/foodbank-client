@@ -15,10 +15,10 @@ import { TableModule } from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
-
 import {PanelModule} from 'primeng/panel';
 import {DialogModule} from 'primeng/dialog';
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {F} from '@angular/cdk/keycodes';
 const routes: Routes = [
     {   path: '',
         component: BanquesComponent,
@@ -53,7 +53,9 @@ const entityMetaData: EntityMetadataMap = {
         InputTextModule,
         ButtonModule,
         PanelModule,
-        DialogModule
+        DialogModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
   providers: [
     BanquesDataService,

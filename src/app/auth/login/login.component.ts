@@ -20,9 +20,7 @@ import {MessageService} from 'primeng/api';
 })
 export class LoginComponent implements OnInit {
 
-  loginform: FormGroup;
-  submitted: boolean;
-
+    loginform: FormGroup;
     languages = [
         {name: 'Nederlands', code: 'NL'},
         {name: 'Français', code: 'FR'},

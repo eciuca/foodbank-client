@@ -45,17 +45,18 @@ const entityMetaData: EntityMetadataMap = {
 };
 @NgModule({
   declarations: [DepotsComponent, DepotComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    TableModule,
-    HttpClientModule,
-    PanelModule,
-    PaginatorModule,
-    InputTextModule,
-    ButtonModule,
-    DialogModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        TableModule,
+        HttpClientModule,
+        PanelModule,
+        PaginatorModule,
+        InputTextModule,
+        ButtonModule,
+        DialogModule,
+        MessageModule,
+    ],
   providers: [
     DepotsDataService,
     DepotEntityService,

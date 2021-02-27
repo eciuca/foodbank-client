@@ -14,6 +14,7 @@ import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {MessageModule} from 'primeng/message';
 import {DropdownModule} from 'primeng/dropdown';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import {DropdownModule} from 'primeng/dropdown';
         FormsModule,
         PanelModule,
         MessageModule,
-        DropdownModule
+        DropdownModule,
+        InputTextModule
     ],
     declarations: [LoginComponent],
     exports: [LoginComponent]
