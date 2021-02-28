@@ -19,11 +19,12 @@ export interface Depot {
 
     memo: string;
 
-    depPrinc: number;
+    depPrinc: boolean;
 
-    actif: number;
+    actif: boolean;
 
-    depFead: number;
+    depFead: boolean;
+
     bankName: string;
     bankShortName: string;
 }

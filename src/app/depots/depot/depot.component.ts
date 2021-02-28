@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DepotEntityService} from '../services/depot-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, tap, withLatestFrom} from 'rxjs/operators';
+import {map, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Depot} from '../model/depot';
 import {MessageService} from 'primeng/api';
@@ -48,8 +48,14 @@ export class DepotComponent implements OnInit {
     this.depotsService.update(modifiedDepot)
         .subscribe( ()  => {
           this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `Le depot ${modifiedDepot.bankShortName} ${modifiedDepot.bankName}  a été modifié`});
-          this.router.navigateByUrl('/depots');
-        });
+    });
   }
 
+    quit() {
+        this.depot$ = this.idDepot$
+            .pipe(
+                withLatestFrom(this.depotsService.entities$),
+                map(([idDepot, depots]) => depots.find(depot => depot['idDepot'] === idDepot.toString()))
+            );
+    }
 }

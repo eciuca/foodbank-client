@@ -3,59 +3,60 @@
         Depot {{ depot.idDepot}} of bank {{ depot.bankShortName}}
     </ng-template>
     <form   #depotForm="ngForm">
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-6">
                 <label for="nom">Nom</label>
-                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="12" [ngModel]="depot.nom" />
-                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="User Name is required and must be minimum 12 chars long"></p-message>
+                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxLength="45" [ngModel]="depot.nom" />
+                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="User Name is required and must be minimum 4 chars long"></p-message>
             </div>
-            <div class="p-field p-col">
-                <label for="adresse">Adresse</label>
-                <input pInputText id="adresse" name="adresse" [ngModel]="depot.adresse" />
-            </div>
-            <div class="p-field p-col">
-                <label for="adresse2">2ème Adresse</label>
-                <input pInputText id="adresse2" name="adresse" [ngModel]="depot.adresse2" />
-            </div>
-            <div class="p-field p-col">
-                <label for="cp">cp</label>
-                <input pInputText id="cp" name="cp" [ngModel]="depot.cp" />
-            </div>
-            <div class="p-field p-col">
-                <label for="ville">Localité</label>
-                <input pInputText id="ville" name="ville" [ngModel]="depot.ville" />
-            </div>
-            <div class="p-field p-col">
-                <label for="telephone">Téléphone</label>
-                <input pInputText id="telephone" name="telephone" [ngModel]="depot.telephone" />
-            </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col-12 p-md-6">
                 <label for="contact">Contact</label>
-                <input pInputText id="contact" name="contact" [ngModel]="depot.contact" />
+                <input pInputText id="contact" name="contact" maxLength="45" [ngModel]="depot.contact" />
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col-12 p-md-6">
+                <label for="adresse">Adresse</label>
+                <input pInputText id="adresse" name="adresse" maxLength="45" [ngModel]="depot.adresse" />
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label for="cp">Code Postal</label>
+                <input pInputText id="cp" name="cp" maxLength="8" [ngModel]="depot.cp" />
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label for="ville">Localité</label>
+                <input pInputText id="ville" name="ville" maxLength="45" [ngModel]="depot.ville" />
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <label for="adresse2">2ème Adresse</label>
+                <input pInputText id="adresse2" name="adresse2" maxLength="45" [ngModel]="depot.adresse2" />
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label for="telephone">Téléphone</label>
+                <input pInputText id="telephone" name="telephone" maxLength="20" [ngModel]="depot.telephone" />
+            </div>
+            <div class="p-field p-col-12 p-md-3">
                 <label for="email">E-mail</label>
-                <input pInputText id="email" name="email" [ngModel]="depot.email" />
+                <input pInputText id="email" name="email" maxLength="45" [ngModel]="depot.email" />
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col-12">
                 <label for="memo">Memo</label>
                 <input pInputText id="memo" name="memo" [ngModel]="depot.memo" />
             </div>
-            <div class="p-field p-col">
-                <label for="depPrinc">Depot Princpal?</label>
-                <input pInputText id="depPrinc" name="depPrinc" [ngModel]="depot.depPrinc" />
+            <div class="p-field p-col-12 p-md-4">
+                <label for="depPrinc">Depot Principal?</label>
+                 <p-inputSwitch id="depPrinc" name="depPrinc" [ngModel]="depot.depPrinc"></p-inputSwitch>
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col-12 p-md-4">
                 <label for="actif">Actif?</label>
-                <input pInputText id="actif" name="actif" [ngModel]="depot.actif" />
+                <p-inputSwitch id="actif" name="actif" [ngModel]="depot.actif"></p-inputSwitch>
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col-12 p-md-4">
                 <label for="depFead">Dep Fead ?</label>
-                <input pInputText id="depFead" name="depFead" [ngModel]="depot.depFead" />
+                <p-inputSwitch id="depFead" name="depFead" [ngModel]="depot.depFead"></p-inputSwitch>
             </div>
         </div>
         <div class="p-formgroup-inline">
-            <button type="button" pButton icon="pi pi-check" (click)="save(depot, depotForm.value)" label="Save"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(depot, depotForm.value)" label="Save" [disabled] = "depotForm.invalid" ></button>
+            <button type="button" pButton icon="pi pi-check" (click)="quit()" label="Return" ></button>
         </div>
     </form>
 </p-panel>

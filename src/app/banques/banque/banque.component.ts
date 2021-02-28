@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {Banque} from '../model/banque';
 import {MessageService} from 'primeng/api';
 import { Input } from '@angular/core';
+// import {MembreEntityService} from '../../membres/services/membre-entity.service';
 
 @Component({
   selector: 'app-banque',
@@ -15,10 +16,11 @@ import { Input } from '@angular/core';
 export class BanqueComponent implements OnInit {
 
   @Input() bankId$: Observable<number>;
-  banque$: Observable<Banque>;
+  banque: Banque;
 
   constructor(
       private banquesService: BanqueEntityService,
+     // private membreService: MembreEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private messageService: MessageService
@@ -37,12 +39,15 @@ export class BanqueComponent implements OnInit {
             );
       }
 
-      this.banque$ = this.bankId$
+      this.bankId$
         .pipe(
             withLatestFrom(this.banquesService.entities$),
             map(([bankId, banques]) => banques.find(banque => bankId === banque.bankId))
-        );
-  }
+        )
+          .subscribe(banque => {
+              this.banque = banque;
+          });
+}
 
  save(oldBanque: Banque, banqueForm: Banque) {
     const modifiedBanque = Object.assign({}, oldBanque, banqueForm);

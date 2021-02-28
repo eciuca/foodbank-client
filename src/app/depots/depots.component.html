@@ -59,7 +59,7 @@
             </div>
         </ng-template>
     </p-table>
-    <p-dialog header="Depot Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [style]="{'width':'1800px'}">
+    <p-dialog header="Depot Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" >
         <app-depot *ngIf="selectedDepotid$" [idDepot$]="selectedDepotid$"></app-depot>
     </p-dialog>
 </ng-container>

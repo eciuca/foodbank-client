@@ -13,10 +13,12 @@ import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
+import {InputSwitchModule} from 'primeng/inputswitch';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {DialogModule} from 'primeng/dialog';
 import {DepotsResolver} from './depots.resolver';
+import {FormsModule} from '@angular/forms';
 
 const routes: Routes = [
   { path: '',
@@ -53,9 +55,11 @@ const entityMetaData: EntityMetadataMap = {
         PanelModule,
         PaginatorModule,
         InputTextModule,
+        InputSwitchModule,
         ButtonModule,
         DialogModule,
         MessageModule,
+        FormsModule
     ],
   providers: [
     DepotsDataService,
