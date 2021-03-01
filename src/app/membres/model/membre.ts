@@ -40,7 +40,9 @@ export interface Membre {
     actif: number;
 
     authority: number;
-    datmand: Date;
+
+    datmand: string;
+
     rem: string;
 
     lastVisit: Date;

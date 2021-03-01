@@ -1,40 +1,71 @@
 <p-panel>
+    <ng-template pTemplate="header">
+        Banque {{ banque.bankName}} - President  {{ president$ | async}}
+    </ng-template>
     <form #banqueForm="ngForm">
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="idDis">Identifiant</label>
-                <input pInputText id="idDis" name="idDis" [ngModel]="banque.bankId" />
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-4">
+                <label for="bankname">Name</label>
+                <input #nom="ngModel" pInputText id="bankname" name="bankname" required minlength="10" maxLength="100" [ngModel]="banque.bankName" />
+                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Bank Name is required and must be minimum 4 chars long"></p-message>
             </div>
-            <div class="p-field p-col">
-                <label for="bankShortName">Banque</label>
-                <input pInputText id="bankShortName" name="bankShortName" [ngModel]="banque.bankShortName" />
+            <div class="p-field p-col-12 p-md-2">
+                <label for="nrentr">Entr Number</label>
+                <input #nrentr="ngModel" pInputText id="nrentr" name="nrentr" required minlength="9" maxLength="20" [ngModel]="banque.nrEntr" />
+                <p-message *ngIf="nrentr.invalid && (nrentr.dirty || nrentr.touched)" severity="error" text="Enterprise Number is required and must be minimum 9 chars long"></p-message>
             </div>
-            <div class="p-field p-col">
-                <label for="bankName">Nom</label>
-                <input pInputText id="bankName" name="bankName" [ngModel]="banque.bankName" />
+             <div class="p-field p-col-12 p-md-2">
+                <label for="gsm">Tel</label>
+                <input #tel="ngModel" pInputText id="tel" name="tel"  maxLength="20" [ngModel]="banque.bankTel" />
             </div>
-        </div>
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="adresse">Adresse</label>
-                <input pInputText id="adresse" name="adresse" [ngModel]="banque.adresse" />
+            <div class="p-field p-col-12 p-md-2">
+                <label for="gsm">Mobile</label>
+                <input #gsm="ngModel" pInputText id="gsm" name="gsm"  maxLength="20" [ngModel]="banque.bankGsm" />
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="bankMail">E-mail</label>
+                <input #bankmail="ngModel" pInputText id="bankMail" name="bankMail"  required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxLength="50" [ngModel]="banque.bankMail" />
+                <p-message *ngIf="bankmail.invalid && (bankmail.dirty || bankmail.touched)" severity="error" text="Bank mail is required and must be a valid e-mail"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <label for="adresse">Address</label>
+                <input #adresse="ngModel" pInputText id="adresse" name="adresse" required minlength="4" maxLength="50" [ngModel]="banque.adresse" />
+                <p-message *ngIf="adresse.invalid && (adresse.dirty || adresse.touched)" severity="error" text="Address is required and must be minimum 9 chars long"></p-message>
+
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="cp">Zip Code</label>
+                <input #zipcode="ngModel" pInputText id="cp" name="cp"  required minlength="4" maxLength="10" [ngModel]="banque.cp" />
+                <p-message *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)" severity="error" text="Zip Code is required and must be minimum 4 chars long"></p-message>
+
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="localite">City</label>
+                <input #localite="ngModel" pInputText id="localite" name="localite"  required minlength="4" maxLength="30" [ngModel]="banque.localite" />
+                <p-message *ngIf="localite.invalid && (localite.dirty || localite.touched)" severity="error" text="City is required and must be minimum 4 chars long"></p-message>
             </div>
 
-            <div class="p-field p-col">
-                <label for="cp">cp</label>
-                <input pInputText id="cp" name="cp" [ngModel]="banque.cp" />
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="adressedepot">Depot Address</label>
+                <input #adressedepot="ngModel" pInputText id="adressedepot" name="adressedepot" required minlength="4" maxLength="50" [ngModel]="banque.adresseDepotPrinc" />
+                <p-message *ngIf="adressedepot.invalid && (adressedepot.dirty || adressedepot.touched)" severity="error" text="Depot Address is required and must be minimum 9 chars long"></p-message>
+
             </div>
-            <div class="p-field p-col">
-                <label for="localite">Commune</label>
-                <input pInputText id="localite" name="localite" [ngModel]="banque.localite" />
+            <div class="p-field p-col-12 p-md-2">
+                <label for="cpdepot">Depot Zip Code</label>
+                <input #zipcodedepot="ngModel" pInputText id="cpdepot" name="cpdepot"  required minlength="4" maxLength="10" [ngModel]="banque.cpDepotPrinc" />
+                <p-message *ngIf="zipcodedepot.invalid && (zipcodedepot.dirty || zipcodedepot.touched)" severity="error" text="Depot Zip Code is required and must be minimum 4 chars long"></p-message>
+
             </div>
-            <div class="p-field p-col">
-                <label for="bankMail">E-mail</label>
-                <input pInputText id="bankMail" name="bankMail" [ngModel]="banque.bankMail" />
+            <div class="p-field p-col-12 p-md-4">
+                <label for="localitedepot">Depot City</label>
+                <input #localitedepot="ngModel" pInputText id="localitedepot" name="localitedepot"  required minlength="4" maxLength="30" [ngModel]="banque.cityDepotPrinc" />
+                <p-message *ngIf="localitedepot.invalid && (localitedepot.dirty || localitedepot.touched)" severity="error" text="Depot City is required and must be minimum 4 chars long"></p-message>
             </div>
         </div>
         <div class="p-formgroup-inline">
-            <button type="button" pButton icon="pi pi-check" (click)="save(banque, banqueForm.value)" label="Save"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(banque, banqueForm.value)" label="Save" [disabled] = "banqueForm.invalid"></button>
         </div>
     </form>
 

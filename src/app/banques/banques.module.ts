@@ -20,6 +20,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MembresDataService} from '../membres/services/membres-data.service';
 import {MembreEntityService} from '../membres/services/membre-entity.service';
 import {appEntityMetadata} from '../app-entity.metadata';
+import {MessageModule} from 'primeng/message';
 const routes: Routes = [
     {   path: '',
         component: BanquesComponent,
@@ -49,7 +50,8 @@ const routes: Routes = [
         PanelModule,
         DialogModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MessageModule
     ],
   providers: [
     BanquesDataService,

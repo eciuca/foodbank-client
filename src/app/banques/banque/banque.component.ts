@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {BanqueEntityService} from '../services/banque-entity.service';
+import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map, tap, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Banque} from '../model/banque';
 import {MessageService} from 'primeng/api';
 import { Input } from '@angular/core';
-// import {MembreEntityService} from '../../membres/services/membre-entity.service';
+import {Membre} from '../../membres/model/membre';
+
 
 @Component({
   selector: 'app-banque',
@@ -17,10 +19,11 @@ export class BanqueComponent implements OnInit {
 
   @Input() bankId$: Observable<number>;
   banque: Banque;
+  president$: Observable<String>;
 
   constructor(
       private banquesService: BanqueEntityService,
-     // private membreService: MembreEntityService,
+      private membresService: MembreEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private messageService: MessageService
@@ -46,7 +49,13 @@ export class BanqueComponent implements OnInit {
         )
           .subscribe(banque => {
               this.banque = banque;
-          });
+              console.log('Banque : ', banque);
+              const membreIdPres = banque.nomPres;
+              this.president$ = this.membresService.getByKey(membreIdPres)
+                  .pipe (
+                      map(membre => membre.nom)
+                  );
+        });
 }
 
  save(oldBanque: Banque, banqueForm: Banque) {

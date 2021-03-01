@@ -12,37 +12,37 @@ export interface  Banque {
 
  actif: number;
 
- comGestactif: number;
+ comGest: number;
 
  lastvisit: Date;
 
- nomPresactif: number;
+ nomPres: number;
 
- nomVpactif: number;
+ nomVp: number;
 
- nomSecactif: number;
+ nomSec: number;
 
- nomTresactif: number;
+ nomTres: number;
 
- nomItactif: number;
+ nomIt: number;
 
- nomLogactif: number;
+ nomLog: number;
 
- nomRhactif: number;
+ nomRh: number;
 
- nomShactif: number;
+ nomSh: number;
 
- nomPpactif: number;
+ nomPp: number;
 
- nomAssoactif: number;
+ nomAsso: number;
 
- nomApproactif: number;
+ nomAppro: number;
 
- nomPubrelactif: number;
+ nomPubrel: number;
 
- nomCeoactif: number;
+ nomCeo: number;
 
- nomFeadactif: number;
+ nomFead: number;
 
  adresse: string;
 
@@ -70,7 +70,7 @@ export interface  Banque {
 
  ssTel: string;
 
- regioactif: number;
+ regio: number;
 
  website: string;
 

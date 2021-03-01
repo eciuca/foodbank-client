@@ -59,7 +59,7 @@
             </div>
         </ng-template>
     </p-table>
-    <p-dialog header="Banque Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [style]="{'width':'1800px'}">
+    <p-dialog header="Banque Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true">
         <app-banque *ngIf="selectedBankid$" [bankId$]="selectedBankid$"></app-banque>
     </p-dialog>
 </ng-container>
