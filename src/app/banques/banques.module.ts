@@ -1,15 +1,15 @@
 import {NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import {Banque, compareBanques} from './model/banque';
+import { Banque } from './model/banque';
 import { BanquesComponent } from './banques.component';
-import {BanquesResolver} from './banques.resolver';
+import { BanquesResolver} from './banques.resolver';
 import { BanqueComponent } from './banque/banque.component';
 import {HttpClientModule} from '@angular/common/http';
 
 import {BanquesDataService} from './services/banques-data.service';
 import {BanqueEntityService} from './services/banque-entity.service';
-import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
+import {EntityDataService, EntityDefinitionService } from '@ngrx/data';
 import {TableModule } from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
@@ -19,6 +19,7 @@ import {DialogModule} from 'primeng/dialog';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MembresDataService} from '../membres/services/membres-data.service';
 import {MembreEntityService} from '../membres/services/membre-entity.service';
+import {appEntityMetadata} from '../app-entity.metadata';
 const routes: Routes = [
     {   path: '',
         component: BanquesComponent,
@@ -34,14 +35,7 @@ const routes: Routes = [
         }
     }
 ];
-const entityMetaData: EntityMetadataMap = {
-  Banque: {
-    sortComparer: compareBanques,
-    selectId: (banque: Banque) => banque.bankId,
-    entityDispatcherOptions: { optimisticUpdate: false}
-  },
 
-};
 @NgModule({
   declarations: [BanquesComponent, BanqueComponent],
     imports: [
@@ -72,7 +66,7 @@ export class BanquesModule {
       private banquesDataService: BanquesDataService,
       private membresDataService: MembresDataService
   ) {
-    eds.registerMetadataMap(entityMetaData);
+    eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('Membre', membresDataService);
   }

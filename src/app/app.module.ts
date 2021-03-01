@@ -20,6 +20,7 @@ import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
 import {MenubarModule} from 'primeng/menubar';
 import {MessagesModule} from 'primeng/messages';
 import {MessageService} from 'primeng/api';
+import {appEntityMetadata} from './app-entity.metadata';
 
 
 const routes: Routes = [
@@ -83,7 +84,9 @@ const routes: Routes = [
         }),
         StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
         EffectsModule.forRoot([]),
-        EntityDataModule.forRoot({}),
+        EntityDataModule.forRoot({
+            entityMetadata: appEntityMetadata,
+        }),
         StoreRouterConnectingModule.forRoot({
             stateKey: 'router',
             routerState: RouterState.Minimal

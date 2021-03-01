@@ -18,6 +18,7 @@ import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {AccordionModule} from 'primeng/accordion';
 import {DialogModule} from 'primeng/dialog';
+import {appEntityMetadata} from '../app-entity.metadata';
 
 const routes: Routes = [
     { path: '',
@@ -34,14 +35,6 @@ const routes: Routes = [
         }
   }
 ];
-const entityMetaData: EntityMetadataMap = {
-  Organisation: {
-    sortComparer: compareOrganisations,
-    selectId: (organisation: Organisation) => organisation.idDis,
-    entityDispatcherOptions: { optimisticUpdate: false}
-  },
-
-};
 
 @NgModule({
   declarations: [OrganisationsComponent, OrganisationComponent],
@@ -69,7 +62,7 @@ export class OrganisationsModule {
       private entityDataService: EntityDataService,
       private organisationsDataService: OrganisationsDataService
   ) {
-    eds.registerMetadataMap(entityMetaData);
+    eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Organisation', organisationsDataService);
   }
 }

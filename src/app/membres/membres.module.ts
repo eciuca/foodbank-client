@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import {compareMembres, Membre} from './model/membre';
+import { Membre} from './model/membre';
 import { MembresComponent } from './membres.component';
 import {MembreComponent } from './membre/membre.component';
-import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
+import {EntityDataService, EntityDefinitionService } from '@ngrx/data';
 import {MembresDataService} from './services/membres-data.service';
 import {MembreEntityService} from './services/membre-entity.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -13,10 +13,8 @@ import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
 import {DialogModule} from 'primeng/dialog';
-
+import {appEntityMetadata} from '../app-entity.metadata';
 const routes: Routes = [
   { path: '',
     component: MembresComponent,
@@ -26,19 +24,6 @@ const routes: Routes = [
     component: MembreComponent,
   }
 ];
-const entityMetaData: EntityMetadataMap = {
-  Membre: {
-    sortComparer: compareMembres,
-    selectId: (membre: Membre) => membre.batId,
-    entityDispatcherOptions: {optimisticUpdate: false},
-    filterFn: (entities: Membre[], pattern: { startIndex: number, endIndex: number }) => {
-      return entities.filter((entity, index) => {
-        return ((index >= pattern.startIndex) && (index <= pattern.endIndex));
-      });
-    }
-  }
-
-};
 @NgModule({
   declarations: [MembresComponent, MembreComponent],
     imports: [
@@ -63,7 +48,7 @@ export class MembresModule {
       private entityDataService: EntityDataService,
       private membresDataService: MembresDataService
   ) {
-    eds.registerMetadataMap(entityMetaData);
+    eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Membre', membresDataService);
   }
 

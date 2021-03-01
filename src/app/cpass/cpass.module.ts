@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import {compareCpass, Cpas} from './model/cpas';
+import {Cpas} from './model/cpas';
 import { CpassComponent } from './cpass.component';
 import {CpasComponent } from './cpas/cpas.component';
-import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
+import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {CpassDataService} from './services/cpass-data.service';
 import {CpasEntityService} from './services/cpas-entity.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -14,6 +14,7 @@ import {PanelModule} from 'primeng/panel';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
+import {appEntityMetadata} from '../app-entity.metadata';
 
 const routes: Routes = [
   { path: '',
@@ -24,19 +25,7 @@ const routes: Routes = [
     component: CpasComponent,
   }
 ];
-const entityMetaData: EntityMetadataMap = {
-  Cpas: {
-    sortComparer: compareCpass,
-    selectId: (cpas: Cpas) => cpas.cpasId,
-    entityDispatcherOptions: {optimisticUpdate: false},
-    filterFn: (entities: Cpas[], pattern: { startIndex: number, endIndex: number }) => {
-      return entities.filter((entity, index) => {
-        return ((index >= pattern.startIndex) && (index <= pattern.endIndex));
-      });
-    }
-  }
 
-};
 @NgModule({
   declarations: [CpassComponent, CpasComponent],
     imports: [
@@ -61,7 +50,7 @@ export class CpassModule {
       private entityDataService: EntityDataService,
       private cpassDataService: CpassDataService
   ) {
-    eds.registerMetadataMap(entityMetaData);
+    eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Cpas', cpassDataService);
   }
 

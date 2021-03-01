@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import {compareBeneficiaires, Beneficiaire} from './model/beneficiaire';
+import {Beneficiaire} from './model/beneficiaire';
 import { BeneficiairesComponent } from './beneficiaires.component';
 import { BeneficiaireComponent } from './beneficiaire/beneficiaire.component';
 
-import {EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
+import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
 import {BeneficiairesDataService} from './services/beneficiaires-data.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -15,6 +15,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {DialogModule} from 'primeng/dialog';
+import {appEntityMetadata} from '../app-entity.metadata';
 
 
 
@@ -28,14 +29,7 @@ const routes: Routes = [
     component: BeneficiaireComponent
   }
 ];
-const entityMetaData: EntityMetadataMap = {
-  Beneficiaire: {
-    sortComparer: compareBeneficiaires,
-    selectId: (beneficiaire: Beneficiaire) => beneficiaire.idClient,
-    entityDispatcherOptions: { optimisticUpdate: false}
-  },
 
-};
 @NgModule({
   declarations: [BeneficiairesComponent, BeneficiaireComponent],
     imports: [
@@ -61,7 +55,7 @@ export class BeneficiairesModule {
       private entityDataService: EntityDataService,
       private beneficiairesDataService: BeneficiairesDataService
   ) {
-    eds.registerMetadataMap(entityMetaData);
+    eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Beneficiaire', beneficiairesDataService);
   }
 }
