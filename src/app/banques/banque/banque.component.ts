@@ -50,10 +50,10 @@ export class BanqueComponent implements OnInit {
           .subscribe(banque => {
               this.banque = banque;
               console.log('Banque : ', banque);
-              const membreIdPres = banque.nomPres;
-              this.president$ = this.membresService.getByKey(membreIdPres)
+              const idMemberPres = banque.idMemberPres;
+              this.president$ = this.membresService.getByKey(idMemberPres)
                   .pipe (
-                      map(membre => membre.nom)
+                      map(membre => membre.prenom + ' ' + membre.nom)
                   );
         });
 }

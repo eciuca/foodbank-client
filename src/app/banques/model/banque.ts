@@ -16,33 +16,35 @@ export interface  Banque {
 
  lastvisit: Date;
 
- nomPres: number;
+ idMemberPres: number;
 
- nomVp: number;
+ idMemberVp: number;
 
- nomSec: number;
+ idMemberSec: number;
 
- nomTres: number;
+ idMemberTres: number;
 
- nomIt: number;
+ idMemberIt: number;
 
- nomLog: number;
+ idMemberLog: number;
 
- nomRh: number;
+ idMemberRh: number;
 
- nomSh: number;
+ idMemberSh: number;
 
- nomPp: number;
+ idMemberPp: number;
 
- nomAsso: number;
+ idMemberAsso: number;
 
- nomAppro: number;
+ idMemberAppro: number;
 
- nomPubrel: number;
+ idMemberPubrel: number;
 
- nomCeo: number;
+ idMemberCeo: number;
 
- nomFead: number;
+ idMemberFead: number;
+
+ idMemberQual: number;
 
  adresse: string;
 
