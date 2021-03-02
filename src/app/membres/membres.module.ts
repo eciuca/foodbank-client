@@ -15,6 +15,8 @@ import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
 import {appEntityMetadata} from '../app-entity.metadata';
+import {MessageModule} from 'primeng/message';
+import {SelectButtonModule} from 'primeng/selectbutton';
 const routes: Routes = [
   { path: '',
     component: MembresComponent,
@@ -36,6 +38,8 @@ const routes: Routes = [
         InputTextModule,
         ButtonModule,
         DialogModule,
+        MessageModule,
+        SelectButtonModule,
     ],
   providers: [
     MembresDataService,

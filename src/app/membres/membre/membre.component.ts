@@ -5,7 +5,14 @@ import {map, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Membre} from '../model/membre';
 import {MessageService} from 'primeng/api';
-
+interface Civilite {
+    name: string;
+    code: number;
+}
+interface Langue {
+    name: string;
+    code: number;
+}
 @Component({
   selector: 'app-membre',
   templateUrl: './membre.component.html',
@@ -14,12 +21,26 @@ import {MessageService} from 'primeng/api';
 export class MembreComponent implements OnInit {
     @Input() idMembre$: Observable<number>;
   membre$: Observable<Membre>;
+  civilites: Civilite[];
+  langues: Langue[];
   constructor(
       private membresService: MembreEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private messageService: MessageService
-  ) {}
+  ) {
+      this.civilites = [
+          {name: 'Mr.', code: 1},
+          {name: 'Mrs', code: 2},
+          {name: 'Miss', code: 3}
+      ];
+      this.langues = [
+          {name: 'Français', code: 1},
+          {name: 'Nederlands', code: 2},
+          {name: 'English', code: 3},
+          {name: 'German', code: 4}
+      ];
+  }
 
   ngOnInit(): void {
       // comment: this component is sometimes called from his parent Component with idDepot @Input Decorator,

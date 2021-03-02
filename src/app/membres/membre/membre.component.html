@@ -1,45 +1,59 @@
-<p-panel>
-    <form  *ngIf="membre$ | async as membre" #membreForm="ngForm">
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="batId">Identifiant</label>
-                <input pInputText id="batId" name="batId" [ngModel]="membre.batId" />
+<p-panel *ngIf="membre$ | async as membre">
+    <ng-template pTemplate="header">
+        Membre {{ membre.batId}} of bank {{ membre.bankName}}
+    </ng-template>
+    <form   #membreForm="ngForm">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-2">
+            <p-selectButton [options]="civilites" id="civilite" name="civilite" [ngModel]="membre.civilite" optionLabel="Gender" optionLabel="name" optionValue="code"></p-selectButton>
             </div>
-            <div class="p-field p-col">
-                <label for="bankShortName">Banque</label>
-                <input pInputText id="bankShortName" name="bankShortName" [ngModel]="membre.bankShortName" />
+            <div class="p-field p-col-12 p-md-4">
+                <label for="nom">Nom *</label>
+                <input #nom="ngModel"  pInputText id="nom" name="nom"  required minlength="4" maxlength="50" [ngModel]="membre.nom" />
+                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Member Name is required and must be minimum 4 chars long"></p-message>
             </div>
-            <div class="p-field p-col">
-                <label for="nom">Nom</label>
-                <input pInputText id="nom" name="nom" [ngModel]="membre.nom" />
+            <div class="p-field p-col-12 p-md-4">
+                <label for="prenom">Prenom *</label>
+                <input  #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="4" maxlength="40" [ngModel]="membre.prenom" />
+                <p-message *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" severity="error" text="Member First Name is required and must be minimum 4 chars long"></p-message>
             </div>
-            <div class="p-field p-col">
-                <label for="prenom">Prenom</label>
-                <input pInputText id="prenom" name="prenom" [ngModel]="membre.prenom" />
+            <div class="p-field p-col-12 p-md-2">
+                <p-selectButton [options]="langues" id="langue" name="langue" [ngModel]="membre.langue" optionLabel="Language" optionLabel="name" optionValue="code"></p-selectButton>
             </div>
-        </div>
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
+            <div class="p-field p-col-12 p-md-4">
                 <label for="address">Adresse</label>
-                <input pInputText id="address" name="address" [ngModel]="membre.address" />
+                <input pInputText id="address" name="address" maxlength="50" [ngModel]="membre.address" />
             </div>
 
-            <div class="p-field p-col">
+            <div class="p-field p-col-12 p-md-2">
                 <label for="zip">Code Postal</label>
-                <input pInputText id="zip" name="zip" [ngModel]="membre.zip" />
+                <input pInputText id="zip" name="zip" maxlength="10" [ngModel]="membre.zip" />
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col-12 p-md-3">
                 <label for="city">Commune</label>
-                <input pInputText id="city" name="city" [ngModel]="membre.city" />
+                <input pInputText id="city" name="city" maxlength="20" [ngModel]="membre.city" />
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col-12 p-md-3">
                 <label for="email">E-mail</label>
-                <input pInputText id="email" name="email" [ngModel]="membre.batmail" />
+                <input pInputText id="email" name="email" maxlength="50" [ngModel]="membre.batmail" />
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="veh">Car</label>
+                <input pInputText id="veh" name="veh" maxlength="30" [ngModel]="membre.veh" />
+            </div>
+
+            <div class="p-field p-col-12 p-md-2">
+                <label for="vehtype">Type</label>
+                <input pInputText id="vehtype" name="vehtype" maxlength="30" [ngModel]="membre.vehTyp" />
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label for="vehimm">Number Plate</label>
+                <input pInputText id="vehimm" name="vehimm" maxlength="30" [ngModel]="membre.vehImm" />
             </div>
         </div>
         <div class="p-formgroup-inline">
             <button type="button" pButton icon="pi pi-times" (click)="delete(membreForm.value)" label="Delete"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="save(membre, membreForm.value)" label="Save"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(membre, membreForm.value)" label="Save" [disabled] = "membreForm.invalid"></button>
         </div>
     </form>
 
