@@ -1,6 +1,6 @@
 <p-panel *ngIf="depot$ | async as depot" >
     <ng-template pTemplate="header">
-        Depot {{ depot.idDepot}} of bank {{ depot.bankShortName}}
+        Depot {{ depot.idDepot}} of bank {{ depot.bankName}}
     </ng-template>
     <form   #depotForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">
