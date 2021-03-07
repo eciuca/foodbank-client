@@ -113,10 +113,11 @@
                         <input pInputText id="societe" name="societe" maxlength="100" [ngModel]="organisation.societe" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                    <p-dropdown [options]="statuts" id="statut" name="statut" [ngModel]="organisation.statut" optionLabel="name" optionValue="code"></p-dropdown>
+                        <label for="statut">Statut</label>
+                         <p-dropdown [options]="statuts" id="statut" name="statut" [ngModel]="organisation.statut" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="adresse">Nr Entreprise</label>
+                        <label for="tva">Nr Entreprise</label>
                         <input pInputText id="tva" name="tva" maxlength="50" [ngModel]="organisation.tva" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
@@ -133,7 +134,7 @@
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="localite">Commune</label>
-                        <input pInputText id="localite" name="localite" maxlength="50"[ngModel]="organisation.localite" />
+                        <input pInputText id="localite" name="localite" maxlength="50" [ngModel]="organisation.localite" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="email">E-mail</label>

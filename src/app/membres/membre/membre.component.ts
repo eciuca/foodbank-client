@@ -5,10 +5,8 @@ import {map, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Membre} from '../model/membre';
 import {MessageService} from 'primeng/api';
-interface Civilite {
-    name: string;
-    code: number;
-}
+import {civilite, langue} from '../../shared/enums';
+
 interface Langue {
     name: string;
     code: number;
@@ -21,25 +19,19 @@ interface Langue {
 export class MembreComponent implements OnInit {
     @Input() idMembre$: Observable<number>;
   membre$: Observable<Membre>;
-  civilites: Civilite[];
-  langues: Langue[];
+  civilites: any[];
+  langues: any[];
   constructor(
       private membresService: MembreEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private messageService: MessageService
   ) {
-      this.civilites = [
-          {name: 'Mr.', code: 1},
-          {name: 'Mrs', code: 2},
-          {name: 'Miss', code: 3}
-      ];
-      this.langues = [
-          {name: 'Français', code: 1},
-          {name: 'Nederlands', code: 2},
-          {name: 'English', code: 3},
-          {name: 'German', code: 4}
-      ];
+      // Helper
+      const StringIsNumber = value => isNaN(Number(value)) === false;
+      // Note typescript needs filter to avoid reverse number to string entries when converting enum to object array
+      this.civilites =  Object.keys(civilite).filter(StringIsNumber).map(key => ({ name: civilite[key], code: key }));
+      this.langues =  Object.keys(langue).filter(StringIsNumber).map(key => ({ name: langue[key], code: key }));
   }
 
   ngOnInit(): void {

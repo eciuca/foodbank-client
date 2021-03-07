@@ -1,18 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {OrganisationEntityService} from '../services/organisation-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, tap, withLatestFrom} from 'rxjs/operators';
+import {map, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Organisation} from '../model/organisation';
 import {MessageService} from 'primeng/api';
-interface Statut {
-    name: string;
-    code: number;
-}
-interface Civilite {
-    name: string;
-    code: number;
-}
+import {statut, civilite} from '../../shared/enums';
+
 @Component({
   selector: 'app-organisation',
   templateUrl: './organisation.component.html',
@@ -22,8 +16,8 @@ export class OrganisationComponent implements OnInit {
 
   @Input() idDis$: Observable<number>;
   organisation$: Observable<Organisation>;
-   statuts: Statut[];
-   civilites: Civilite[];
+  civilites: any[];
+  statuts: any[];
 
   constructor(
       private organisationsService: OrganisationEntityService,
@@ -31,23 +25,17 @@ export class OrganisationComponent implements OnInit {
       private router: Router,
       private messageService: MessageService
   ) {
-      this.statuts = [
-          {name: 'Personne Physique', code: 0},
-          {name: 'A S B L', code: 1},
-          {name: 'Association de Fait', code: 2},
-          {name: 'CPAS', code: 3},
-          {name: 'Auxiliaire Publique', code: 4}
-      ];
-      this.civilites = [
-          {name: 'Mr.', code: 1},
-          {name: 'Mrs', code: 2},
-          {name: 'Miss', code: 3}
-      ];
+      // Helper
+      const StringIsNumber = value => isNaN(Number(value)) === false;
+      // Note typescript needs filter to avoid reverse number to string entries when converting enum to object array
+      this.statuts = Object.keys(statut).filter(StringIsNumber).map(key => ({ name: statut[key], code: key }));
+      this.civilites = Object.keys(civilite).filter(StringIsNumber).map(key => ({ name: civilite[key], code: key }));
   }
 
   ngOnInit(): void {
 // comment: this component is sometimes called from his parent Component with BankId @Input Decorator,
       // or sometimes via a router link via the Main Menu
+      console.log('Statuts:', this.statuts);
       if (!this.idDis$) {
           // we must come from the menu
           console.log('We initialize a new organisation object from the router!');
