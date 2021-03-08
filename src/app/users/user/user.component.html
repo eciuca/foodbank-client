@@ -1,33 +1,67 @@
-<p-panel>
-    <form  *ngIf="user$ | async as user" #userForm="ngForm">
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="idUser">Identifiant</label>
-                <input pInputText id="idUser" name="idUser" [ngModel]="user.idUser" />
-            </div>
-            <div class="p-field p-col">
-                <label for="userName">Nom Utilisateur</label>
-                <input pInputText id="userName" name="userName" [ngModel]="user.userName" />
-            </div>
-            <div class="p-field p-col">
-                <label for="idCompany">Banque</label>
-                <input pInputText id="idCompany" name="idCompany" [ngModel]="user.idCompany" />
-            </div>
-        </div>
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="idLanguage">Langue</label>
-                <input pInputText id="idLanguage" name="idLanguage" [ngModel]="user.idLanguage" />
-            </div>
-            <div class="p-field p-col">
-                <label for="email">E-mail</label>
-                <input pInputText id="email" name="email" [ngModel]="user.email" />
-            </div>
-            <div class="p-field p-col">
-                <label for="rights">Droits</label>
-                <input pInputText id="rights" name="rights" [ngModel]="user.rights" />
-            </div>
-        </div>
+<p-panel  *ngIf="user$ | async as user">
+    <ng-template pTemplate="header">
+       User {{ user.idUser}} for bank {{ user.idCompany}}
+    </ng-template>
+    <form  #userForm="ngForm">
+        <p-accordion [multiple]="true">
+            <p-accordionTab header="Profil" [selected]="true">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="userName">User Name</label>
+                        <input pInputText id="userName" name="userName" [ngModel]="user.userName" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="language">Language</label>
+                        <p-dropdown [options]="languages" id="language" name="language" [ngModel]="user.idLanguage" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="email">E-mail</label>
+                        <input pInputText id="email" name="email" [ngModel]="user.email" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="rights">Role</label>
+                        <p-dropdown [options]="rights" id="rights" name="rights" [ngModel]="user.rights" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actif">Active ?</label>
+                        <p-inputSwitch id="actif" name="actif" [ngModel]="user.actif"></p-inputSwitch>
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="User Rights">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="gestAsso">Manage Associations ?</label>
+                        <p-inputSwitch id="gestAsso" name="gestAsso" [ngModel]="user.gestAsso"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="gestDroits">Manage Association Rights ?</label>
+                        <p-inputSwitch id="gestDroits" name="gestDroits" [ngModel]="user.droit1"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="gestBen">Manage Beneficiaries ?</label>
+                        <p-inputSwitch id="gestBen" name="gestBen" [ngModel]="user.gestBen"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="gestInv">Manage Inventory ?</label>
+                        <p-inputSwitch id="gestInv" name="gestInv" [ngModel]="user.gestInv"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="gestFead">Manage Fead ?</label>
+                        <p-inputSwitch id="gestFead" name="gestFead" [ngModel]="user.gestFead"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="gestCpas">Manage Cpas/OCMW ?</label>
+                        <p-inputSwitch id="gestCpas" name="gestCpas" [ngModel]="user.gestCpas"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="gestDon">Manage Gifts ?</label>
+                        <p-inputSwitch id="gestDon" name="gestDon" [ngModel]="user.gestDon"></p-inputSwitch>
+                    </div>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
         <div class="p-formgroup-inline">
             <button type="button" pButton icon="pi pi-times" (click)="delete(userForm.value)" label="Delete"></button>
             <button type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save"></button>

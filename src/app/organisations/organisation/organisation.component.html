@@ -7,117 +7,121 @@
             <p-accordionTab header="Organisation" [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
-                        <p-dropdown [options]="civilites" id="civilite" name="civilite" [ngModel]="organisation.civilite" optionLabel="name" optionValue="code"></p-dropdown>
+                        <label for="gender">Gender President</label>
+                        <p-dropdown [options]="genders" id="gender" name="gender" [ngModel]="organisation.civilite" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="prenom">Prénom Président</label>
+                        <label for="prenom">First Name President</label>
                         <input pInputText id="prenom" name="prenom" maxlength="50" [ngModel]="organisation.prenom" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="nom">Nom Président</label>
+                        <label for="nom">Name President</label>
                         <input pInputText id="nom" name="nom" maxlength="50" [ngModel]="organisation.nom" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="telPres">Tel Président</label>
+                        <label for="telPres">Tel President</label>
                         <input pInputText id="telPres" name="telPres" maxlength="15" [ngModel]="organisation.telPres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="gsmPres">Gsm Président</label>
+                        <label for="gsmPres">Gsm President</label>
                         <input pInputText id="gsmPres" name="gsmPres" maxlength="20" [ngModel]="organisation.gsmPres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="emailPres">Email Président</label>
+                        <label for="emailPres">Email President</label>
                         <input pInputText id="emailPres" name="emailPres" maxlength="50" [ngModel]="organisation.emailPres" />
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
-                        <p-dropdown [options]="civilites" id="civiliteVp" name="civiliteVp" [ngModel]="organisation.civiliteVp" optionLabel="name" optionValue="code"></p-dropdown>
+                        <label for="genderVp">Gender Vice-President</label>
+                        <p-dropdown [options]="genders" id="genderVp" name="genderVp" [ngModel]="organisation.civiliteVp" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="prenomVp">Prénom Vice-Président</label>
+                        <label for="prenomVp">First Name Vice-President</label>
                         <input pInputText id="prenomVp" name="prenomVp" maxlength="50" [ngModel]="organisation.prenomVp" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="nomVp">Nom Vice-Président</label>
+                        <label for="nomVp">Name Vice-President</label>
                         <input pInputText id="nomVp" name="nomVp" maxlength="50" [ngModel]="organisation.nomVp" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="telVp">Tel Vice-Président</label>
+                        <label for="telVp">Tel Vice-President</label>
                         <input pInputText id="telVp" name="telVp" maxlength="15" [ngModel]="organisation.telVp" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="gsmVp">Gsm Vice-Président</label>
+                        <label for="gsmVp">Gsm Vice-President</label>
                         <input pInputText id="gsmVp" name="gsmVp" maxlength="20" [ngModel]="organisation.gsmVp" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="emailVp">Email Vice-Président</label>
+                        <label for="emailVp">Email Vice-President</label>
                         <input pInputText id="emailVp" name="emailVp" maxlength="50" [ngModel]="organisation.emailVp" />
                     </div>
                 </div>
-                <div class="p-fluid p-formgrid p-grid">
+                <div class="p-fluid p-formgrid p-grid">                    
                     <div class="p-field p-col-12 p-md-1">
-                        <p-dropdown [options]="civilites" id="civiliteSec" name="civiliteSec" [ngModel]="organisation.civiliteSec" optionLabel="name" optionValue="code"></p-dropdown>
+                        <label for="genderSec">Gender Secretary</label>
+                        <p-dropdown [options]="genders" id="genderSec" name="genderSec" [ngModel]="organisation.civiliteSec" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="prenomSec">Prénom Secretaire</label>
+                        <label for="prenomSec">First Name Secretary</label>
                         <input pInputText id="prenomSec" name="prenomSec" maxlength="50" [ngModel]="organisation.prenomSec" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="nomSec">Nom Secretaire</label>
+                        <label for="nomSec">Name Secretary</label>
                         <input pInputText id="nomSec" name="nomSec" maxlength="50" [ngModel]="organisation.nomSec" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="telSec">Tel Secretaire</label>
+                        <label for="telSec">Tel Secretary</label>
                         <input pInputText id="telSec" name="telSec" maxlength="15" [ngModel]="organisation.telSec" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="gsmSec">Gsm Secretaire</label>
+                        <label for="gsmSec">Gsm Secretary</label>
                         <input pInputText id="gsmSec" name="gsmSec" maxlength="20" [ngModel]="organisation.gsmSec" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="emailSec">Email Secretaire</label>
+                        <label for="emailSec">Email Secretary</label>
                         <input pInputText id="emailSec" name="emailSec" maxlength="50" [ngModel]="organisation.emailSec" />
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
-                        <p-dropdown [options]="civilites" id="civiliteTres" name="civiliteTres" [ngModel]="organisation.civiliteTres" optionLabel="name" optionValue="code"></p-dropdown>
+                        <label for="genderTres">Gender Treasurer</label>
+                        <p-dropdown [options]="genders" id="genderTres" name="genderTres" [ngModel]="organisation.civiliteTres" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="prenomTres">Prénom Trésorier</label>
+                        <label for="prenomTres">First Name Treasurer</label>
                         <input pInputText id="prenomTres" name="prenomTres" maxlength="50" [ngModel]="organisation.prenomTres" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="nomTres">Nom Trésorier</label>
+                        <label for="nomTres">Name Treasurer</label>
                         <input pInputText id="nomTres" name="nomTres" maxlength="50" [ngModel]="organisation.nomTres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="telTres">Tel Trésorier</label>
+                        <label for="telTres">Tel Treasurer</label>
                         <input pInputText id="telTres" name="telTres" maxlength="15" [ngModel]="organisation.telTres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="gsmTres">Gsm Trésorier</label>
+                        <label for="gsmTres">Gsm Treasurer</label>
                         <input pInputText id="gsmTres" name="gsmTres" maxlength="20" [ngModel]="organisation.gsmTres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="emailTres">Email Trésorier</label>
+                        <label for="emailTres">Email Treasurer</label>
                         <input pInputText id="emailTres" name="emailTres" maxlength="50" [ngModel]="organisation.emailTres" />
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab header="Signalétique">
+            <p-accordionTab header="Distribution Center">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-6">
-                        <label for="societe">Nom</label>
+                        <label for="societe">Name Company</label>
                         <input pInputText id="societe" name="societe" maxlength="100" [ngModel]="organisation.societe" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="statut">Statut</label>
+                        <label for="statut">Status Company</label>
                          <p-dropdown [options]="statuts" id="statut" name="statut" [ngModel]="organisation.statut" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="tva">Nr Entreprise</label>
+                        <label for="tva">Nr/Vat Enterprise</label>
                         <input pInputText id="tva" name="tva" maxlength="50" [ngModel]="organisation.tva" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
@@ -125,20 +129,56 @@
                         <input pInputText id="afsca" name="afsca" maxlength="20" [ngModel]="organisation.afsca" />
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <label for="adresse">Adresse de distribution</label>
+                        <label for="adresse">Distribution Address</label>
                         <input pInputText id="adresse" name="adresse" maxlength="100" [ngModel]="organisation.adresse" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="cp">Code Postal</label>
+                        <label for="cp">Zip Code</label>
                         <input pInputText id="cp" name="cp" maxlength="6" [ngModel]="organisation.cp" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="localite">Commune</label>
+                        <label for="localite">City</label>
                         <input pInputText id="localite" name="localite" maxlength="50" [ngModel]="organisation.localite" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="country">Country</label>
+                        <p-dropdown [options]="countries" id="country" name="country" [ngModel]="organisation.pays" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="email">E-mail</label>
                         <input pInputText id="email" name="email" maxlength="100" [ngModel]="organisation.email" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="tel">Telephone</label>
+                        <input pInputText id="tel" name="tel" maxlength="50" [ngModel]="organisation.tel" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="mobile">Mobile</label>
+                        <input pInputText id="mobile" name="mobile" maxlength="50" [ngModel]="organisation.gsm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="website">Web Site</label>
+                        <input pInputText id="website" name="website"  [ngModel]="organisation.website" />
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Headquarters">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="adresse2">Headquarters Address</label>
+                        <input pInputText id="adresse2" name="adresse2" maxlength="100" [ngModel]="organisation.adresse2" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="cp2">Zip Code</label>
+                        <input pInputText id="cp2" name="cp2" maxlength="6" [ngModel]="organisation.cp2" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="localite2">City</label>
+                        <input pInputText id="localite2" name="localite2" maxlength="50" [ngModel]="organisation.localite2" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="country2">Country</label>
+                        <p-dropdown [options]="countries" id="country2" name="country2" [ngModel]="organisation.pays2" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
                 </div>
             </p-accordionTab>
@@ -148,6 +188,5 @@
             <button type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save"></button>
         </div>
     </form>
-
 
 </p-panel>

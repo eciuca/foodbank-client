@@ -5,20 +5,22 @@
     <form   #membreForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
-            <p-dropdown [options]="civilites" id="civilite" name="civilite" [ngModel]="membre.civilite" optionLabel="name" optionValue="code"></p-dropdown>
+                <label for="gender">Gender</label>
+                <p-dropdown [options]="genders" id="gender" name="gender" [ngModel]="membre.civilite" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="nom">Nom *</label>
+                <label for="nom">Name *</label>
                 <input #nom="ngModel"  pInputText id="nom" name="nom"  required minlength="4" maxlength="50" [ngModel]="membre.nom" />
                 <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Member Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="prenom">Prenom *</label>
+                <label for="prenom">First Name *</label>
                 <input  #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="4" maxlength="40" [ngModel]="membre.prenom" />
                 <p-message *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" severity="error" text="Member First Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <p-dropdown [options]="langues" id="langue" name="langue" [ngModel]="membre.langue" optionLabel="name"  optionValue="code"></p-dropdown>
+                <label for="language">Language</label>
+                <p-dropdown [options]="languages" id="language" name="language" [ngModel]="membre.langue" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="address">Adresse</label>

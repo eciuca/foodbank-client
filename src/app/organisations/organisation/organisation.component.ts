@@ -5,7 +5,7 @@ import {map, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Organisation} from '../model/organisation';
 import {MessageService} from 'primeng/api';
-import {statut, civilite} from '../../shared/enums';
+import {enmStatusCompany, enmGender, enmCountry} from '../../shared/enums';
 
 @Component({
   selector: 'app-organisation',
@@ -16,8 +16,9 @@ export class OrganisationComponent implements OnInit {
 
   @Input() idDis$: Observable<number>;
   organisation$: Observable<Organisation>;
-  civilites: any[];
+  genders: any[];
   statuts: any[];
+  countries: any[];
 
   constructor(
       private organisationsService: OrganisationEntityService,
@@ -28,8 +29,9 @@ export class OrganisationComponent implements OnInit {
       // Helper
       const StringIsNumber = value => isNaN(Number(value)) === false;
       // Note typescript needs filter to avoid reverse number to string entries when converting enum to object array
-      this.statuts = Object.keys(statut).filter(StringIsNumber).map(key => ({ name: statut[key], code: key }));
-      this.civilites = Object.keys(civilite).filter(StringIsNumber).map(key => ({ name: civilite[key], code: key }));
+      this.statuts = Object.keys(enmStatusCompany).filter(StringIsNumber).map(key => ({ name: enmStatusCompany[key], code: key }));
+      this.genders = Object.keys(enmGender).filter(StringIsNumber).map(key => ({ name: enmGender[key], code: key }));
+      this.countries = Object.keys(enmCountry).filter(StringIsNumber).map(key => ({ name: enmCountry[key], code: key }));
   }
 
   ngOnInit(): void {

@@ -16,6 +16,8 @@ import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
 import {appEntityMetadata} from '../app-entity.metadata';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {AccordionModule} from 'primeng/accordion';
 
 
 
@@ -42,6 +44,8 @@ const routes: Routes = [
         InputTextModule,
         ButtonModule,
         DialogModule,
+        InputSwitchModule,
+        AccordionModule,
     ],
   providers: [
     UsersDataService,

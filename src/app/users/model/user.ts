@@ -11,7 +11,7 @@ export interface User {
 
     lienBat: number;
 
-    actif: number;
+    actif: boolean;
 
     rights: string;
 
@@ -19,23 +19,23 @@ export interface User {
 
     depot: string;
 
-    droit1: number;
+    droit1: boolean;
 
     email: string;
 
-    gestBen: number;
+    gestBen: boolean;
 
-    gestInv: number;
+    gestInv: boolean;
 
-    gestFead: number;
+    gestFead: boolean;
 
-    gestAsso: number;
+    gestAsso: boolean;
 
-    gestCpas: number;
+    gestCpas: boolean;
 
-    gestMemb: number;
+    gestMemb: boolean;
 
-    gestDon: number;
+    gestDon: boolean;
 
     lienBanque: number;
 
