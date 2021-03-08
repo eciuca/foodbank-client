@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {BanqueEntityService} from '../services/banque-entity.service';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, tap, withLatestFrom} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
+import {combineLatest, Observable} from 'rxjs';
 import {Banque} from '../model/banque';
 import {MessageService} from 'primeng/api';
 import { Input } from '@angular/core';
-import {Membre} from '../../membres/model/membre';
 
 
 @Component({
@@ -42,20 +41,22 @@ export class BanqueComponent implements OnInit {
             );
       }
 
-      this.bankId$
+      const bank$ = combineLatest([this.bankId$, this.banquesService.entities$])
         .pipe(
-            withLatestFrom(this.banquesService.entities$),
-            map(([bankId, banques]) => banques.find(banque => bankId === banque.bankId))
+          map(([bankId, banques]) => banques.find(banque => bankId === banque.bankId))
+        );
+      
+      bank$.subscribe(banque => {
+        this.banque = banque;
+        console.log('Banque : ', banque);
+      });
+
+      this.president$ = bank$
+        .pipe(
+          map(bank => bank.idMemberPres),
+          switchMap(idMemberPres => this.membresService.getByKey(idMemberPres)),
+          map(membre => membre.prenom + ' ' + membre.nom)
         )
-          .subscribe(banque => {
-              this.banque = banque;
-              console.log('Banque : ', banque);
-              const idMemberPres = banque.idMemberPres;
-              this.president$ = this.membresService.getByKey(idMemberPres)
-                  .pipe (
-                      map(membre => membre.prenom + ' ' + membre.nom)
-                  );
-        });
 }
 
  save(oldBanque: Banque, banqueForm: Banque) {
