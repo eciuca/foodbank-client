@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {DepotEntityService} from '../services/depot-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, withLatestFrom} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {combineLatest, Observable} from 'rxjs';
 import {Depot} from '../model/depot';
 import {MessageService} from 'primeng/api';
 import { Input } from '@angular/core';
@@ -37,9 +37,8 @@ export class DepotComponent implements OnInit {
           );
     }
 
-    this.depot$ = this.idDepot$
+    this.depot$ = combineLatest([this.idDepot$, this.depotsService.entities$])
         .pipe(
-            withLatestFrom(this.depotsService.entities$),
             map(([idDepot, depots]) => depots.find(depot => depot['idDepot'] === idDepot.toString()))
         );
   }
@@ -53,10 +52,11 @@ export class DepotComponent implements OnInit {
   }
 
     quit() {
-        this.depot$ = this.idDepot$
-            .pipe(
-                withLatestFrom(this.depotsService.entities$),
-                map(([idDepot, depots]) => depots.find(depot => depot['idDepot'] === idDepot.toString()))
-            );
+        // TODO: What were you trying to do here ?
+        // this.depot$ = this.idDepot$
+        //     .pipe(
+        //         withLatestFrom(this.depotsService.entities$),
+        //         map(([idDepot, depots]) => depots.find(depot => depot['idDepot'] === idDepot.toString()))
+        //     );
     }
 }

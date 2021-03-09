@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserEntityService} from '../services/user-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map, tap, withLatestFrom} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {User} from '../model/user';
 import {MessageService} from 'primeng/api';
 import {enmLanguage, enmUserRoles} from '../../shared/enums';
@@ -40,9 +40,8 @@ export class UserComponent implements OnInit {
             );
       }
 
-      this.user$ = this.idUser$
+      this.user$ = combineLatest([this.idUser$, this.usersService.entities$])
           .pipe(
-              withLatestFrom(this.usersService.entities$),
               map(([idUser, users]) => users.find(user => user['idUser'] === idUser))
           );
      }
