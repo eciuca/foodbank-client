@@ -15,7 +15,8 @@ import { Input } from '@angular/core';
 export class DepotComponent implements OnInit {
   @Input() idDepot$: Observable<number>;
   depot$: Observable<Depot>;
-
+  genders: any[];
+  languages: any[];
   constructor(
       private depotsService: DepotEntityService,
       private route: ActivatedRoute,

@@ -6,11 +6,13 @@ export enum enmStatusCompany {
     'Auxiliaire Publique'
 }
 export enum enmGender {
+    'Unspecified',
     'Mr.' = 1,
     'Mrs.',
     'Miss'
 }
 export enum enmLanguage {
+    'Unspecified',
     'Français' = 1,
     'Nederlands',
     'English',

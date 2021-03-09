@@ -13,8 +13,10 @@ import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DialogModule} from 'primeng/dialog';
 import {appEntityMetadata} from '../app-entity.metadata';
+import {MessageModule} from 'primeng/message';
 
 const routes: Routes = [
   { path: '',
@@ -38,6 +40,7 @@ const routes: Routes = [
         InputTextModule,
         ButtonModule,
         DialogModule,
+        MessageModule,
     ],
   providers: [
     CpassDataService,

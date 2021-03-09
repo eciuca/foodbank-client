@@ -5,6 +5,7 @@ import {map, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Cpas} from '../model/cpas';
 import {MessageService} from 'primeng/api';
+import {enmGender, enmLanguage} from '../../shared/enums';
 
 @Component({
   selector: 'app-cpas',
@@ -14,12 +15,20 @@ import {MessageService} from 'primeng/api';
 export class CpasComponent implements OnInit {
     @Input() idCpas$: Observable<number>;
   cpas$: Observable<Cpas>;
+    genders: any[];
+    languages: any[];
   constructor(
       private cpassService: CpasEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private messageService: MessageService
-  ) {}
+  ) {
+      // Helper
+      const StringIsNumber = value => isNaN(Number(value)) === false;
+      // Note typescript needs filter to avoid reverse number to string entries when converting enum to object array
+      this.genders =  Object.keys(enmGender).filter(StringIsNumber).map(key => ({ name: enmGender[key], code: key }));
+      this.languages =  Object.keys(enmLanguage).filter(StringIsNumber).map(key => ({ name: enmLanguage[key], code: key }));
+  }
 
   ngOnInit(): void {
       if (!this.idCpas$) {
