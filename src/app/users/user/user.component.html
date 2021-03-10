@@ -1,4 +1,4 @@
-<p-panel  *ngIf="user$ | async as user">
+<p-panel  *ngIf="user">
     <ng-template pTemplate="header">
        User {{ user.idUser}} for bank {{ user.idCompany}}
     </ng-template>
@@ -63,7 +63,7 @@
             </p-accordionTab>
         </p-accordion>
         <div class="p-formgroup-inline">
-            <button type="button" pButton icon="pi pi-times" (click)="delete(userForm.value)" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="delete(user)" label="Delete"></button>
             <button type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save"></button>
         </div>
     </form>
