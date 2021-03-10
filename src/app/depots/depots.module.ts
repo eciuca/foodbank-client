@@ -16,6 +16,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {MessageModule} from 'primeng/message';
 import {DialogModule} from 'primeng/dialog';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 import {DepotsResolver} from './depots.resolver';
 import {FormsModule} from '@angular/forms';
 import {appEntityMetadata} from '../app-entity.metadata';
@@ -46,12 +48,14 @@ const routes: Routes = [
         InputSwitchModule,
         ButtonModule,
         DialogModule,
+        ConfirmDialogModule,
         MessageModule,
         FormsModule
     ],
   providers: [
     DepotsDataService,
     DepotEntityService,
+    ConfirmationService,
     DepotsResolver
   ],
 })
