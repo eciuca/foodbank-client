@@ -54,9 +54,10 @@
                 <p-inputSwitch id="depFead" name="depFead" [ngModel]="depot.depFead"></p-inputSwitch>
             </div>
         </div>
+        <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
             <button type="button" pButton icon="pi pi-check" (click)="save(depot, depotForm.value)" label="Save" [disabled] = "depotForm.invalid" ></button>
-            <button type="button" pButton icon="pi pi-check" (click)="quit()" label="Return" ></button>
+            <button type="button" pButton icon="pi pi-check" (click)="quit($event)" label="Return" ></button>
         </div>
     </form>
 </p-panel>

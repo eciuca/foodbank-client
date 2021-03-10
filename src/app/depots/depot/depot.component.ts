@@ -6,6 +6,8 @@ import {combineLatest, Observable} from 'rxjs';
 import {Depot} from '../model/depot';
 import {MessageService} from 'primeng/api';
 import { Input } from '@angular/core';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-depot',
@@ -19,7 +21,8 @@ export class DepotComponent implements OnInit {
       private depotsService: DepotEntityService,
       private route: ActivatedRoute,
       private router: Router,
-      private messageService: MessageService
+      private messageService: MessageService,
+      private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -46,15 +49,27 @@ export class DepotComponent implements OnInit {
     this.depotsService.update(modifiedDepot)
         .subscribe( ()  => {
           this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Le depot ${modifiedDepot.bankShortName} ${modifiedDepot.bankName}  a été modifié`});
+          // Emanuel if we did not come from the router,
+          // post ( via an @Output event ? the displayDialog property of its parent depots.component to false so we are done
+          console.log('We hide the depot component');
     });
   }
 
-    quit() {
-        // TODO: What were you trying to do here ?
-        // this.depot$ = this.idDepot$
-        //     .pipe(
-        //         withLatestFrom(this.depotsService.entities$),
-        //         map(([idDepot, depots]) => depots.find(depot => depot['idDepot'] === idDepot.toString()))
-        //     );
+    quit(event: Event) {
+      // Emanuel Test if we did not come from the router then:
+      // test also if the form is dirty
+      this.confirmationService.confirm({
+        target: event.target,
+        message: 'Your changes may be lost. Are you sure that you want to proceed?',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+         // Emanuel if we did not come from the router,
+         // post ( via an @Output event ? the displayDialog property of its parent depots.component to false so we are done
+          console.log('We hide the depot component');
+        },
+        reject: () => {
+         console.log('We do nothing');
+        }
+      });
     }
 }
