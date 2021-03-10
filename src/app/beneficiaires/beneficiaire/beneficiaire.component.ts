@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BeneficiaireEntityService} from '../services/beneficiaire-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, tap, withLatestFrom} from 'rxjs/operators';
+import {map, withLatestFrom} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Beneficiaire} from '../model/beneficiaire';
 import {MessageService} from 'primeng/api';
-
+import {enmGender, enmCountry} from '../../shared/enums';
 
 @Component({
   selector: 'app-beneficiaire',
@@ -15,12 +15,17 @@ import {MessageService} from 'primeng/api';
 export class BeneficiaireComponent implements OnInit {
   @Input()  idBeneficiaire$: Observable<number>;
   beneficiaire$: Observable<Beneficiaire>;
+  civilites: any[];
+  countries: any[];
   constructor(
       private beneficiairesService: BeneficiaireEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private messageService: MessageService
-  ) {}
+  ) {
+    this.civilites =  enmGender;
+    this.countries = enmCountry;
+  }
 
   ngOnInit(): void {
 
@@ -46,7 +51,6 @@ export class BeneficiaireComponent implements OnInit {
       this.beneficiairesService.delete(beneficiaire)
         .subscribe( ()  => {
             this.messageService.add(myMessage);
-          this.router.navigateByUrl('/beneficiaires');
         });
   }
 
@@ -55,7 +59,6 @@ export class BeneficiaireComponent implements OnInit {
     this.beneficiairesService.update(modifiedBeneficiaire)
         .subscribe( ()  => {
           this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `Le bénéficiaire ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  a été modifié`});
-          this.router.navigateByUrl('/beneficiaires');
         });
 
 

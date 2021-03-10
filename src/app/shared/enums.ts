@@ -1,39 +1,42 @@
-export enum enmStatusCompany {
-    'Personne Physique',
-    'A S B L' ,
-    'Association de Fait',
-    'CPAS',
-    'Auxiliaire Publique'
-}
-export enum enmGender {
-    'Unspecified',
-    'Mr.' = 1,
-    'Mrs.',
-    'Miss'
-}
-export enum enmLanguage {
-    'Unspecified',
-    'Français' = 1,
-    'Nederlands',
-    'English',
-    'Deutsch'
-}
-export enum enmCountry {
-    'Belgium'= 1,
-    'France',
-    'Germany',
-    'Netherlands',
-    'Luxemburg'
-}
-export enum enmUserRoles {
-    'admin' = 'admin',
-    'Admin_Banq' = 'Admin_Banq',
-    'Admin_Asso' = 'Admin_Asso',
-    'Admin_CPAS' = 'Admin_CPAS',
-    'Admin_FEAD' = 'Admin_FEAD',
-    'Admin_FBBA' = 'Admin_FBBA',
-    'Asso' = 'Asso',
-    'Bank' = 'Bank',
-    'Bank_FBBA' = 'Bank_FBBA',
-}
+export let enmStatusCompany =  [
+    {name: 'Personne Physique', code: 0},
+    {name: 'A S B L', code: 1},
+    {name: 'Association de Fait', code: 2},
+    {name: 'CPAS/OCMW', code: 3 },
+    {name: 'Auxiliaire Publique', code: 4}
+];
+
+export let enmGender = [
+    {name: 'Unspecified', code: 0},
+    {name: 'Mr.', code: 1},
+    {name: 'Mrs.', code: 2 },
+    {name: 'Miss', code: 3}
+];
+export let enmLanguage = [
+    {name: 'Unspecified', code: 0},
+    {name: 'Français', code: 1},
+    {name: 'Nederlands', code: 2 },
+    {name: 'English', code: 3},
+    {name: 'Deutsch', code: 4}
+];
+export let enmCountry = [
+    {name: 'Belgium', code: 1},
+    {name: 'France', code: 2 },
+    {name: 'Germany', code: 3},
+    {name: 'Netherlands', code: 4},
+    {name: 'Luxemburg', code: 5}
+];
+export let enmUserRoles = [
+    {name: 'admin', code: 'admin'},
+    {name: 'Admin_Banq', code: 'Admin_Banq' },
+    {name: 'Admin_Asso', code: 'Admin_Asso'},
+    {name: 'Admin_CPAS', code: 'Admin_CPAS' },
+    {name: 'Admin_FEAD', code: 'Admin_FEAD'},
+    {name: 'Admin_FBBA', code: 'Admin_FBBA' },
+    {name: 'Asso', code: 'Asso'},
+    {name: 'Bank', code: 'Bank'},
+    {name: 'Bank_FBBA', code: 'Bank_FBBA'},
+];
+
+
 

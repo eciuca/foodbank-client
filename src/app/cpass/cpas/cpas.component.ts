@@ -23,11 +23,8 @@ export class CpasComponent implements OnInit {
       private router: Router,
       private messageService: MessageService
   ) {
-      // Helper
-      const StringIsNumber = value => isNaN(Number(value)) === false;
-      // Note typescript needs filter to avoid reverse number to string entries when converting enum to object array
-      this.genders =  Object.keys(enmGender).filter(StringIsNumber).map(key => ({ name: enmGender[key], code: key }));
-      this.languages =  Object.keys(enmLanguage).filter(StringIsNumber).map(key => ({ name: enmLanguage[key], code: key }));
+      this.genders = enmGender;
+      this.languages =  enmLanguage;
   }
 
   ngOnInit(): void {

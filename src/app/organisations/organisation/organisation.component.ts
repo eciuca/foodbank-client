@@ -26,12 +26,9 @@ export class OrganisationComponent implements OnInit {
       private router: Router,
       private messageService: MessageService
   ) {
-      // Helper
-      const StringIsNumber = value => isNaN(Number(value)) === false;
-      // Note typescript needs filter to avoid reverse number to string entries when converting enum to object array
-      this.statuts = Object.keys(enmStatusCompany).filter(StringIsNumber).map(key => ({ name: enmStatusCompany[key], code: key }));
-      this.genders = Object.keys(enmGender).filter(StringIsNumber).map(key => ({ name: enmGender[key], code: key }));
-      this.countries = Object.keys(enmCountry).filter(StringIsNumber).map(key => ({ name: enmCountry[key], code: key }));
+      this.statuts = enmStatusCompany;
+      this.genders = enmGender;
+      this.countries = enmCountry;
   }
 
   ngOnInit(): void {

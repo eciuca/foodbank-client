@@ -15,8 +15,6 @@ import { Input } from '@angular/core';
 export class DepotComponent implements OnInit {
   @Input() idDepot$: Observable<number>;
   depot$: Observable<Depot>;
-  genders: any[];
-  languages: any[];
   constructor(
       private depotsService: DepotEntityService,
       private route: ActivatedRoute,
@@ -47,7 +45,7 @@ export class DepotComponent implements OnInit {
     const modifiedDepot = Object.assign({}, oldDepot, depotForm);
     this.depotsService.update(modifiedDepot)
         .subscribe( ()  => {
-          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `Le depot ${modifiedDepot.bankShortName} ${modifiedDepot.bankName}  a été modifié`});
+          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Le depot ${modifiedDepot.bankShortName} ${modifiedDepot.bankName}  a été modifié`});
     });
   }
 

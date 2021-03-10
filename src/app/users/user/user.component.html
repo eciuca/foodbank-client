@@ -8,16 +8,16 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
                         <label for="userName">User Name</label>
-                        <input pInputText id="userName" name="userName" [ngModel]="user.userName" />
+                        <input pInputText id="userName" name="userName" maxlength="45" [ngModel]="user.userName" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="language">Language</label>
-                        <p-dropdown [options]="languages" id="language" name="language" [ngModel]="user.idLanguage" optionLabel="name" optionValue="code"></p-dropdown>
+                        <label for="idLanguage">Language</label>
+                        <p-dropdown [options]="languages" id="idLanguage" name="idLanguage" [ngModel]="user.idLanguage" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-2">
                         <label for="email">E-mail</label>
-                        <input pInputText id="email" name="email" [ngModel]="user.email" />
+                        <input pInputText id="email" name="email" maxlength="50" [ngModel]="user.email" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="rights">Role</label>
@@ -36,8 +36,8 @@
                         <p-inputSwitch id="gestAsso" name="gestAsso" [ngModel]="user.gestAsso"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="gestDroits">Manage Association Rights ?</label>
-                        <p-inputSwitch id="gestDroits" name="gestDroits" [ngModel]="user.droit1"></p-inputSwitch>
+                        <label for="droit1">Manage Association Rights ?</label>
+                        <p-inputSwitch id="droit1" name="droit1" [ngModel]="user.droit1"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="gestBen">Manage Beneficiaries ?</label>

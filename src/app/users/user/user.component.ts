@@ -23,11 +23,8 @@ export class UserComponent implements OnInit {
       private router: Router,
       private messageService: MessageService
   ) {
-      const StringIsNumber = value => isNaN(Number(value)) === false;
-      // Note typescript needs filter to avoid reverse number to string entries when converting enum to object array
-      this.languages =  Object.keys(enmLanguage).filter(StringIsNumber).map(key => ({ name: enmLanguage[key], code: key }));
-      // no need to filter for rights since values are strings identical to keys
-      this.rights =  Object.keys(enmUserRoles).map(key => ({ name:enmUserRoles[key], code: key }));
+      this.languages = enmLanguage;
+      this.rights = enmUserRoles;
   }
 
   ngOnInit(): void {

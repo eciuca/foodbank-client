@@ -1,41 +1,66 @@
-<p-panel>
-    <form  *ngIf="beneficiaire$ | async as beneficiaire" #beneficiaireForm="ngForm">
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="idClient">Identifiant</label>
-                <input pInputText id="idClient" name="idClient" [ngModel]="beneficiaire.idClient" />
+<p-panel  *ngIf="beneficiaire$ | async as beneficiaire">
+    <ng-template pTemplate="header">
+        Beneficiary of bank {{ beneficiaire.bankName}}
+    </ng-template>
+    <form  #beneficiaireForm="ngForm">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-2">
+                <label for="civilite">Gender</label>
+                <p-dropdown [options]="civilites" id="civilite" name="civilite" [ngModel]="beneficiaire.civilite" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
-            <div class="p-field p-col">
-                <label for="bankShortName">Banque</label>
-                <input pInputText id="bankShortName" name="bankShortName" [ngModel]="beneficiaire.bankShortName" />
+                <div class="p-field p-col-12 p-md-4">
+                <label for="nom">Name</label>
+                <input pInputText id="nom" name="nom"  maxlength="50" [ngModel]="beneficiaire.nom" />
             </div>
-            <div class="p-field p-col">
-                <label for="nom">Nom</label>
-                <input pInputText id="nom" name="nom" [ngModel]="beneficiaire.nom" />
+            <div class="p-field p-col-12 p-md-3">
+                <label for="prenom">First Name</label>
+                <input pInputText id="prenom" name="prenom"  maxlength="50" [ngModel]="beneficiaire.prenom" />
             </div>
-            <div class="p-field p-col">
-                <label for="prenom">Nom</label>
-                <input pInputText id="prenom" name="prenom" [ngModel]="beneficiaire.prenom" />
-            </div>
-        </div>
-        <div class="ui-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="adresse">Adresse</label>
-                <input pInputText id="adresse" name="adresse" [ngModel]="beneficiaire.adresse" />
+            <div class="p-field p-col-12 p-md-3">
+                <label for="daten">Birth Date</label>
+                <input pInputText id="daten"  name="daten" maxlength="10" [ngModel]="beneficiaire.daten" />
             </div>
 
-            <div class="p-field p-col">
-                <label for="cp">cp</label>
-                <input pInputText id="cp" name="cp" [ngModel]="beneficiaire.cp" />
+            <div class="p-field p-col-12 p-md-2">
+                <label for="civiliteconj">Gender Partner</label>
+                <p-dropdown [options]="civilites" id="civiliteconj" name="civiliteconj" [ngModel]="beneficiaire.civiliteconj" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
-            <div class="p-field p-col">
-                <label for="localite">Commune</label>
-                <input pInputText id="localite" name="localite" [ngModel]="beneficiaire.localite" />
+            <div class="p-field p-col-12 p-md-4">
+                <label for="nomconj">Name Partner</label>
+                <input pInputText id="nomconj" name="nomconj"  maxlength="50" [ngModel]="beneficiaire.nomconj" />
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col-12 p-md-3">
+                <label for="prenomconj">First Name Partner</label>
+                <input pInputText id="prenomconj" name="prenomconj"  maxlength="50" [ngModel]="beneficiaire.prenomconj" />
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label for="datenConj">Birth Date Partner</label>
+                <input pInputText id="datenConj"  name="datenConj" maxlength="10" [ngModel]="beneficiaire.datenConj" />
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="adresse">Address</label>
+                <input pInputText id="adresse" name="adresse"  maxlength="50" [ngModel]="beneficiaire.adresse" />
+            </div>
+            <div class="p-field p-col-12 p-md-1">
+                <label for="cp">Zip Code</label>
+                <input pInputText id="cp" name="cp"  maxlength="6" [ngModel]="beneficiaire.cp" />
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="localite">City</label>
+                <input pInputText id="localite" name="localite"  maxlength="50" [ngModel]="beneficiaire.localite" />
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="pays">Country</label>
+                <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="beneficiaire.pays" optionLabel="name" optionValue="code"></p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
                 <label for="email">E-mail</label>
-                <input pInputText id="email" name="email" [ngModel]="beneficiaire.email" />
+                <input pInputText id="email"  name="email" maxlength="50" [ngModel]="beneficiaire.email" />
             </div>
+
+
+
+
         </div>
         <div class="p-formgroup-inline">
             <button type="button" pButton icon="pi pi-times" (click)="delete(beneficiaireForm.value)" label="Delete"></button>
