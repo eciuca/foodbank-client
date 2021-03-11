@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserEntityService} from '../services/user-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map, tap, withLatestFrom} from 'rxjs/operators';
@@ -13,8 +13,9 @@ import {enmLanguage, enmUserRoles} from '../../shared/enums';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-    @Input() idUser$: Observable<string>;
-  user$: Observable<User>;
+  @Input() user: User;
+  @Output() onUserUpdate = new EventEmitter<User>();
+  @Output() onUserDelete = new EventEmitter<User>();
   languages: any[];
   rights: any[];
   constructor(
@@ -28,33 +29,33 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      if (!this.idUser$) {
+      if (!this.user) {
           // we must come from the menu
           console.log('We initialize a new user object from the router!');
-          this.idUser$ = this.route.paramMap
-              .pipe(
-                  map(paramMap => paramMap.get('idUser'))
-            );
+          this.route.paramMap
+            .pipe(
+                map(paramMap => paramMap.get('idUser')),
+                withLatestFrom(this.usersService.entities$),
+                map(([idUser, users]) => users.find(user => user['idUser'] === idUser))
+            )
+            .subscribe(user => this.user = user);
       }
-
-      this.user$ = combineLatest([this.idUser$, this.usersService.entities$])
-          .pipe(
-              map(([idUser, users]) => users.find(user => user['idUser'] === idUser))
-          );
      }
   delete(user: User) {
     const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `L'utilisateur ${user.userName} a été détruit`};
     this.usersService.delete(user)
-        .subscribe( ()  => {
+        .subscribe( () => {
           this.messageService.add(myMessage);
+          this.onUserDelete.emit();
         });
   }
 
   save(oldUser: User, userForm: User) {
     const modifiedUser = Object.assign({}, oldUser, userForm);
     this.usersService.update(modifiedUser)
-        .subscribe( ()  => {
+        .subscribe(updatedUser  => {
             this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `L'utilisateur ${modifiedUser.userName} a été modifié`});
+            this.onUserUpdate.emit(updatedUser);
         });
 
 

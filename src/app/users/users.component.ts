@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {map} from 'rxjs/operators';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {filter, map, mergeMap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
 import {Router} from '@angular/router';
@@ -18,7 +18,8 @@ import {AuthState} from '../auth/reducers';
 })
 
 export class UsersComponent implements OnInit {
-  selectedUserid$ = new BehaviorSubject('');
+  loadPageSubject$ = new BehaviorSubject(null);
+  userUpdateSubject$ = new Subject<User>();
   user: User = null;
   users: User[];
   cols: any[];
@@ -34,7 +35,30 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-        this.reload();
+      this.reload();
+
+      // this.userUpdateSubject$
+      //   .subscribe(updatedUser => {
+      //     const index = this.users.findIndex(user => user.idUser === updatedUser.idUser);
+      //     this.users[index] = updatedUser;
+      //   })
+
+      this.loadPageSubject$
+        .pipe(
+          filter(queryParams => !!queryParams),
+          mergeMap(queryParams => this.userService.getWithQuery(queryParams))
+          )
+        .subscribe(loadedUsers => {
+          console.log('Loaded users from nextpage: ' + loadedUsers.length);
+          if (loadedUsers.length > 0) {
+               this.totalRecords = loadedUsers[0].totalRecords;
+           }  else {
+              this.totalRecords = 0;
+          }
+          this.users  = loadedUsers;
+          this.loading = false;
+          this.userService.setLoaded(true);
+        });
   }
 
   reload() {
@@ -77,9 +101,22 @@ export class UsersComponent implements OnInit {
   }
   handleSelect(user) {
     console.log( 'User was selected', user);
-      this.selectedUserid$.next( user.idUser);
-      this.displayDialog = true;
+    this.displayDialog = true;
+    this.user = user;
   }
+
+  handleUserUpdate(updatedUser) {
+    const index = this.users.findIndex(user => user.idUser === updatedUser.idUser);
+    this.users[index] = updatedUser;
+    this.displayDialog = false;
+  }
+
+  handleUserDeleted() {
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
+    this.displayDialog = false;
+  }
+
  nextPage(event: LazyLoadEvent) {
      console.log('Lazy Loaded Event', event);
       this.loading = true;
@@ -123,18 +160,8 @@ export class UsersComponent implements OnInit {
              queryParms['sortField'] = 'userName';
          }
      }
-        this.userService.getWithQuery(queryParms)
-         .subscribe(loadedUsers => {
-           console.log('Loaded users from nextpage: ' + loadedUsers.length);
-           if (loadedUsers.length > 0) {
-                this.totalRecords = loadedUsers[0].totalRecords;
-            }  else {
-               this.totalRecords = 0;
-           }
-           this.users  = loadedUsers;
-           this.loading = false;
-           this.userService.setLoaded(true);
-         });
+
+     this.loadPageSubject$.next(queryParms);
   }
 
 }

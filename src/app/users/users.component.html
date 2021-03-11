@@ -91,7 +91,7 @@
 </p-table>
 
 <p-dialog header="User Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [style]="{'width':'1800px'}">
-    <app-user *ngIf="selectedUserid$" [idUser$]="selectedUserid$"></app-user>
+    <app-user *ngIf="user" [user]="user" (onUserUpdate)="handleUserUpdate($event)" (onUserDelete)="handleUserDeleted()"></app-user>
 </p-dialog>
 
 

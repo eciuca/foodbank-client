@@ -12,7 +12,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 })
 
 export class DepotsComponent implements OnInit {
-  selectedDepotid$ = new BehaviorSubject(0);
+  selectedDepot: Depot;
   depots$: Observable<Depot[]>;
   cols: any[];
   displayDialog: boolean;
@@ -43,7 +43,11 @@ export class DepotsComponent implements OnInit {
   }
   handleSelect(depot: Depot) {
     console.log( 'Depot was selected', depot);
-    this.selectedDepotid$.next( Number(depot.idDepot));
+    this.selectedDepot = depot;
     this.displayDialog = true;
+  }
+
+  handleDialogClose() {
+    this.displayDialog = false;
   }
 }
