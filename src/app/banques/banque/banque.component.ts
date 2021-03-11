@@ -63,7 +63,7 @@ export class BanqueComponent implements OnInit {
     const modifiedBanque = Object.assign({}, oldBanque, banqueForm);
     this.banquesService.update(modifiedBanque)
         .subscribe( ()  => {
-          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `La banque ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  a été modifiée`});
+          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `La banque ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  a été modifiée`});
         });
   }
 

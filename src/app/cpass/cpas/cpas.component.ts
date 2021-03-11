@@ -46,7 +46,7 @@ export class CpasComponent implements OnInit {
   }
 
   delete(cpas: Cpas) {
-    const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `Le cpas ${cpas.cpasName} a été détruit`};
+    const  myMessage = {severity: 'success', summary: 'Destruction', detail: `Le cpas ${cpas.cpasName} a été détruit`};
     this.cpassService.delete(cpas)
         .subscribe( ()  => {
           this.messageService.add(myMessage);
@@ -57,7 +57,7 @@ export class CpasComponent implements OnInit {
     const modifiedCpas = Object.assign({}, oldCpas, cpasForm);
     this.cpassService.update(modifiedCpas)
         .subscribe( ()  => {
-          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `Le cpas ${modifiedCpas.cpasName} a été modifié`});
+          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Le cpas ${modifiedCpas.cpasName} a été modifié`});
         });
 
 

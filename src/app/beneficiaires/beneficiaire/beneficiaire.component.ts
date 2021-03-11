@@ -47,7 +47,7 @@ export class BeneficiaireComponent implements OnInit {
   }
 
   delete(beneficiaire: Beneficiaire) {
-      const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `Le bénéficiaire ${beneficiaire.nom} ${beneficiaire.prenom}  a été détruit`};
+      const  myMessage = {severity: 'success', summary: 'Destruction', detail: `Le bénéficiaire ${beneficiaire.nom} ${beneficiaire.prenom}  a été détruit`};
       this.beneficiairesService.delete(beneficiaire)
         .subscribe( ()  => {
             this.messageService.add(myMessage);
@@ -58,7 +58,7 @@ export class BeneficiaireComponent implements OnInit {
     const modifiedBeneficiaire = Object.assign({}, oldBeneficiaire, beneficiaireForm);
     this.beneficiairesService.update(modifiedBeneficiaire)
         .subscribe( ()  => {
-          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `Le bénéficiaire ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  a été modifié`});
+          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Le bénéficiaire ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  a été modifié`});
         });
 
 

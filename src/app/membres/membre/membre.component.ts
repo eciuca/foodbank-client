@@ -46,7 +46,7 @@ export class MembreComponent implements OnInit {
           );
   }
   delete(membre: Membre) {
-    const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `Le membre ${membre.nom} ${membre.prenom}  a été détruit`};
+    const  myMessage = {severity: 'success', summary: 'Destruction', detail: `Le membre ${membre.nom} ${membre.prenom}  a été détruit`};
     this.membresService.delete(membre)
         .subscribe( ()  => {
           this.messageService.add(myMessage);
@@ -57,7 +57,7 @@ export class MembreComponent implements OnInit {
     const modifiedMembre = Object.assign({}, oldMembre, membreForm);
     this.membresService.update(modifiedMembre)
         .subscribe( ()  => {
-          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `Le membre ${modifiedMembre.nom} ${modifiedMembre.prenom}  a été modifié`});
+          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Le membre ${modifiedMembre.nom} ${modifiedMembre.prenom}  a été modifié`});
         });
   }
 

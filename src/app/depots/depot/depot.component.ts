@@ -41,7 +41,6 @@ export class DepotComponent implements OnInit {
             map(([idDepot, depots]) => depots.find(depot => depot.idDepot === idDepot))
         )
         .subscribe(depot => this.depot = depot);
-        
     }
   }
 

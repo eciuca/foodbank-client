@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserEntityService} from '../services/user-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, tap, withLatestFrom} from 'rxjs/operators';
-import {combineLatest, Observable} from 'rxjs';
+import {map, withLatestFrom} from 'rxjs/operators';
 import {User} from '../model/user';
 import {MessageService} from 'primeng/api';
-import {enmLanguage, enmUserRoles} from '../../shared/enums';
+import {enmLanguageLegacy, enmUserRoles} from '../../shared/enums';
 
 @Component({
   selector: 'app-user',
@@ -24,7 +23,7 @@ export class UserComponent implements OnInit {
       private router: Router,
       private messageService: MessageService
   ) {
-      this.languages = enmLanguage;
+      this.languages = enmLanguageLegacy;
       this.rights = enmUserRoles;
   }
 
@@ -42,7 +41,7 @@ export class UserComponent implements OnInit {
       }
      }
   delete(user: User) {
-    const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `L'utilisateur ${user.userName} a été détruit`};
+    const  myMessage = {severity: 'success', summary: 'Destruction', detail: `L'utilisateur ${user.userName} a été détruit`};
     this.usersService.delete(user)
         .subscribe( () => {
           this.messageService.add(myMessage);
@@ -54,7 +53,7 @@ export class UserComponent implements OnInit {
     const modifiedUser = Object.assign({}, oldUser, userForm);
     this.usersService.update(modifiedUser)
         .subscribe(updatedUser  => {
-            this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `L'utilisateur ${modifiedUser.userName} a été modifié`});
+            this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `L'utilisateur ${modifiedUser.userName} a été modifié`});
             this.onUserUpdate.emit(updatedUser);
         });
 

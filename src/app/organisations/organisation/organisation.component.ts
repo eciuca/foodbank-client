@@ -56,7 +56,7 @@ export class OrganisationComponent implements OnInit {
 
   }
   delete(organisation: Organisation) {
-    const  myMessage = {severity: 'succes', summary: 'Destruction', detail: `L'organisation ${organisation.idDis} ${organisation.societe}  a été détruite`};
+    const  myMessage = {severity: 'success', summary: 'Destruction', detail: `L'organisation ${organisation.idDis} ${organisation.societe}  a été détruite`};
     this.organisationsService.delete(organisation)
         .subscribe( ()  => {
             this.messageService.add(myMessage);
@@ -67,7 +67,7 @@ export class OrganisationComponent implements OnInit {
     const modifiedOrganisation = Object.assign({}, oldOrganisation, organisationForm);
     this.organisationsService.update(modifiedOrganisation)
         .subscribe( ()  => {
-          this.messageService.add({severity: 'succes', summary: 'Mise à jour', detail: `L'organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe}  a été modifiée`});
+          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `L'organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe}  a été modifiée`});
          });
 
 

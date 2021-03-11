@@ -19,6 +19,13 @@ export let enmLanguage = [
     {name: 'English', code: 3},
     {name: 'Deutsch', code: 4}
 ];
+export let enmLanguageLegacy = [
+    {name: 'Unspecified', code: ''},
+    {name: 'Français', code: 'fr'},
+    {name: 'Nederlands', code: 'nl' },
+    {name: 'English', code: 'en'},
+    {name: 'Deutsch', code: 'ge'}
+];
 export let enmCountry = [
     {name: 'Belgium', code: 1},
     {name: 'France', code: 2 },

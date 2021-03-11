@@ -21,6 +21,7 @@ import {ConfirmationService} from 'primeng/api';
 import {DepotsResolver} from './depots.resolver';
 import {FormsModule} from '@angular/forms';
 import {appEntityMetadata} from '../app-entity.metadata';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
 const routes: Routes = [
   { path: '',
@@ -50,7 +51,8 @@ const routes: Routes = [
         DialogModule,
         ConfirmDialogModule,
         MessageModule,
-        FormsModule
+        FormsModule,
+        ConfirmPopupModule
     ],
   providers: [
     DepotsDataService,
