@@ -17,7 +17,7 @@ export class DepotComponent implements OnInit {
     @Output() onDepotUpdate = new EventEmitter<Depot>();
     @Output() onDepotDelete = new EventEmitter<Depot>();
     @Output() onDepotQuit = new EventEmitter<Depot>();
-    booCanDelete: boolean;
+    booCanDeleteAndQuit: boolean;
   constructor(
       private depotsService: DepotEntityService,
       private route: ActivatedRoute,
@@ -25,7 +25,7 @@ export class DepotComponent implements OnInit {
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
-      this.booCanDelete = true;
+      this.booCanDeleteAndQuit = true;
   }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class DepotComponent implements OnInit {
     if (!this.depot) {
       // we must come from the menu
       console.log('We initialize a new user object from the router!');
-      this.booCanDelete = false;
+      this.booCanDeleteAndQuit = false;
       this.route.paramMap
         .pipe(
             map(paramMap => paramMap.get('idDepot')),
@@ -70,8 +70,6 @@ export class DepotComponent implements OnInit {
     this.depotsService.update(modifiedDepot)
         .subscribe( ()  => {
           this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Le depot ${modifiedDepot.bankShortName} ${modifiedDepot.bankName}  a été modifié`});
-          // Emanuel if we did not come from the router,
-          // post ( via an @Output event ? the displayDialog property of its parent depots.component to false so we are done
           console.log('We hide the depot component');
           this.onDepotUpdate.emit(modifiedDepot);
         });

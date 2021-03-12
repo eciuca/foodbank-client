@@ -15,12 +15,12 @@
                 <p-message *ngIf="nrentr.invalid && (nrentr.dirty || nrentr.touched)" severity="error" text="Enterprise Number is required and must be minimum 9 chars long"></p-message>
             </div>
              <div class="p-field p-col-12 p-md-2">
-                <label for="gsm">Tel</label>
-                <input #tel="ngModel" pInputText id="tel" name="tel"  maxLength="20" [ngModel]="banque.bankTel" />
+                <label for="bankTel">Tel</label>
+                <input #tel="ngModel" pInputText id="bankTel" name="bankTel"  maxLength="20" [ngModel]="banque.bankTel" />
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="gsm">Mobile</label>
-                <input #gsm="ngModel" pInputText id="gsm" name="gsm"  maxLength="20" [ngModel]="banque.bankGsm" />
+                <label for="bankGsm">Mobile</label>
+                <input #gsm="ngModel" pInputText id="bankGsm" name="bankGsm"  maxLength="20" [ngModel]="banque.bankGsm" />
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="bankMail">E-mail</label>
@@ -64,8 +64,11 @@
                 <p-message *ngIf="localitedepot.invalid && (localitedepot.dirty || localitedepot.touched)" severity="error" text="Depot City is required and must be minimum 4 chars long"></p-message>
             </div>
         </div>
+        <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
+            <button  *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event, banque)" label="Delete"></button>
             <button type="button" pButton icon="pi pi-check" (click)="save(banque, banqueForm.value)" label="Save" [disabled] = "banqueForm.invalid"></button>
+            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, banque, banqueForm,banqueForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

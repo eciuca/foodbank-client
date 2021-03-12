@@ -21,6 +21,8 @@ import {MembresDataService} from '../membres/services/membres-data.service';
 import {MembreEntityService} from '../membres/services/membre-entity.service';
 import {appEntityMetadata} from '../app-entity.metadata';
 import {MessageModule} from 'primeng/message';
+import {ConfirmationService} from 'primeng/api';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 const routes: Routes = [
     {   path: '',
         component: BanquesComponent,
@@ -51,13 +53,15 @@ const routes: Routes = [
         DialogModule,
         FormsModule,
         ReactiveFormsModule,
-        MessageModule
+        MessageModule,
+        ConfirmPopupModule
     ],
   providers: [
     BanquesDataService,
     BanqueEntityService,
     MembresDataService,
     MembreEntityService,
+    ConfirmationService,
     BanquesResolver
   ],
 })

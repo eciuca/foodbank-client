@@ -48,4 +48,17 @@ export class BanquesComponent implements OnInit {
         this.selectedBankid$.next(banque.bankId);
         this.displayDialog = true;
     }
+    handleBanqueQuit() {
+        this.displayDialog = false;
+    }
+
+    handleBanqueUpdate(updatedBanque) {
+        // Non-paged nothing to be done
+        this.displayDialog = false;
+    }
+
+    handleBanqueDeleted() {
+        // Non-paged nothing to be done
+        this.displayDialog = false;
+    }
 }

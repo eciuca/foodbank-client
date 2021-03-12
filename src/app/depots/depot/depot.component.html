@@ -56,9 +56,9 @@
         </div>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, depot)" label="Delete"></button>
+            <button  *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event, depot)" label="Delete"></button>
             <button type="button" pButton icon="pi pi-check" (click)="save(depot, depotForm.value)" label="Save" [disabled] = "depotForm.invalid" ></button>
-            <button type="button" pButton icon="pi pi-check" (click)="quit($event, depot, depotForm,depotForm.dirty)" label="Return" ></button>
+            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, depot, depotForm,depotForm.dirty)" label="Return" ></button>
         </div>
     </form>
 </p-panel>
