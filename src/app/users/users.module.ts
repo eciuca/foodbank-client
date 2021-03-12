@@ -18,6 +18,8 @@ import {DialogModule} from 'primeng/dialog';
 import {appEntityMetadata} from '../app-entity.metadata';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {AccordionModule} from 'primeng/accordion';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {ConfirmationService} from 'primeng/api';
 
 
 
@@ -46,10 +48,12 @@ const routes: Routes = [
         DialogModule,
         InputSwitchModule,
         AccordionModule,
+        ConfirmPopupModule,
     ],
   providers: [
-    UsersDataService,
-    UserEntityService
+        UsersDataService,
+        UserEntityService,
+        ConfirmationService,
   ],
 })
 export class UsersModule {

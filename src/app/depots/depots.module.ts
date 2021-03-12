@@ -17,10 +17,10 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {MessageModule} from 'primeng/message';
 import {DialogModule} from 'primeng/dialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService} from 'primeng/api';
 import {DepotsResolver} from './depots.resolver';
 import {FormsModule} from '@angular/forms';
 import {appEntityMetadata} from '../app-entity.metadata';
+import {ConfirmationService} from 'primeng/api';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
 const routes: Routes = [

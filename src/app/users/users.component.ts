@@ -104,6 +104,9 @@ export class UsersComponent implements OnInit {
     this.displayDialog = true;
     this.user = user;
   }
+  handleUserQuit() {
+    this.displayDialog = false;
+  }
 
   handleUserUpdate(updatedUser) {
     const index = this.users.findIndex(user => user.idUser === updatedUser.idUser);
