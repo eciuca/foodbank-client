@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
 import {Router} from '@angular/router';
 import {globalAuthState} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
-import {FilterMatchMode, LazyLoadEvent, SelectItem} from 'primeng/api';
-import {QueryParams} from '@ngrx/data';
-import {AuthState} from '../auth/reducers';
+import {LazyLoadEvent} from 'primeng/api';
 
 @Component({
   selector: 'app-users',
@@ -19,7 +17,6 @@ import {AuthState} from '../auth/reducers';
 
 export class UsersComponent implements OnInit {
   loadPageSubject$ = new BehaviorSubject(null);
-  userUpdateSubject$ = new Subject<User>();
   user: User = null;
   users: User[];
   cols: any[];
@@ -36,12 +33,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
       this.reload();
-
-      // this.userUpdateSubject$
-      //   .subscribe(updatedUser => {
-      //     const index = this.users.findIndex(user => user.idUser === updatedUser.idUser);
-      //     this.users[index] = updatedUser;
-      //   })
 
       this.loadPageSubject$
         .pipe(
@@ -114,7 +105,9 @@ export class UsersComponent implements OnInit {
     this.displayDialog = false;
   }
 
-  handleUserDeleted() {
+  handleUserDeleted(deletedUser) {
+    const index = this.users.findIndex(user => user.idUser === deletedUser.idUser);
+    this.users.splice(index, 1);
     const latestQueryParams = this.loadPageSubject$.getValue();
     this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;

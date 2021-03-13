@@ -64,9 +64,9 @@
         </p-accordion>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
+            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
             <button type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
+            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

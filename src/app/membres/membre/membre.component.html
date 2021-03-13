@@ -1,4 +1,4 @@
-<p-panel *ngIf="membre$ | async as membre">
+<p-panel *ngIf="membre">
     <ng-template pTemplate="header">
         Membre {{ membre.batId}} of bank {{ membre.bankName}}
     </ng-template>
@@ -53,9 +53,11 @@
                 <input pInputText id="vehimm" name="vehimm" maxlength="30" [ngModel]="membre.vehImm" />
             </div>
         </div>
+        <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button type="button" pButton icon="pi pi-times" (click)="delete(membreForm.value)" label="Delete"></button>
+            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event,membre)" label="Delete"></button>
             <button type="button" pButton icon="pi pi-check" (click)="save(membre, membreForm.value)" label="Save" [disabled] = "membreForm.invalid"></button>
+            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, membre, membreForm,membreForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

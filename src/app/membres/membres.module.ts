@@ -17,6 +17,9 @@ import {DialogModule} from 'primeng/dialog';
 import {appEntityMetadata} from '../app-entity.metadata';
 import {MessageModule} from 'primeng/message';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {UserEntityService} from '../users/services/user-entity.service';
+import {ConfirmationService} from 'primeng/api';
 const routes: Routes = [
   { path: '',
     component: MembresComponent,
@@ -40,10 +43,12 @@ const routes: Routes = [
         DialogModule,
         MessageModule,
         SelectButtonModule,
+        ConfirmPopupModule
     ],
   providers: [
     MembresDataService,
-    MembreEntityService
+    MembreEntityService,
+    ConfirmationService
   ],
 })
 export class MembresModule {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {map} from 'rxjs/operators';
+import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {Membre} from './model/membre';
 import {MembreEntityService} from './services/membre-entity.service';
@@ -17,15 +17,15 @@ import {AuthState} from '../auth/reducers';
 })
 
 export class MembresComponent implements OnInit {
-  selectedMembreid$ = new BehaviorSubject(0);
-  membre: Membre = null;
-  membres: Membre[];
-  cols: any[];
-  displayDialog: boolean;
-  title: string;
-  totalRecords: number;
-  loading: boolean;
-  filterBase: any;
+    loadPageSubject$ = new BehaviorSubject(null);
+    membre: Membre = null;
+    membres: Membre[];
+    cols: any[];
+    displayDialog: boolean;
+    title: string;
+    totalRecords: number;
+    loading: boolean;
+    filterBase: any;
 
   constructor(private membreService: MembreEntityService,
               private router: Router,
@@ -34,6 +34,22 @@ export class MembresComponent implements OnInit {
 
   ngOnInit() {
     this.reload();
+      this.loadPageSubject$
+          .pipe(
+              filter(queryParams => !!queryParams),
+              mergeMap(queryParams => this.membreService.getWithQuery(queryParams))
+          )
+          .subscribe(loadedMembres => {
+              console.log('Loaded membres from nextpage: ' + loadedMembres.length);
+              if (loadedMembres.length > 0) {
+                  this.totalRecords = loadedMembres[0].totalRecords;
+              }  else {
+                  this.totalRecords = 0;
+              }
+              this.membres  = loadedMembres;
+              this.loading = false;
+              this.membreService.setLoaded(true);
+          });
   }
 
   reload() {
@@ -61,9 +77,26 @@ export class MembresComponent implements OnInit {
 
   handleSelect(membre) {
     console.log( 'Membre was selected', membre);
-      this.selectedMembreid$.next(membre.batId);
+      this.membre = membre;
       this.displayDialog = true;
   }
+    handleMembreQuit() {
+        this.displayDialog = false;
+    }
+
+    handleMembreUpdate(updatedMembre) {
+        const index = this.membres.findIndex(membre => membre.batId === updatedMembre.batId);
+        this.membres[index] = updatedMembre;
+        this.displayDialog = false;
+    }
+
+    handleMembreDeleted(deletedMembre) {
+        const index = this.membres.findIndex(membre => membre.batId === deletedMembre.batId);
+        this.membres.splice(index, 1);
+        const latestQueryParams = this.loadPageSubject$.getValue();
+        this.loadPageSubject$.next(latestQueryParams);
+        this.displayDialog = false;
+    }
 
   nextPage(event: LazyLoadEvent) {
      console.log('Lazy Loaded Event', event);

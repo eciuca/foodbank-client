@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
   @Output() onUserUpdate = new EventEmitter<User>();
   @Output() onUserDelete = new EventEmitter<User>();
   @Output() onUserQuit = new EventEmitter<User>();
-  booCanDelete: boolean;
+  booCanDeleteAndQuit: boolean;
   languages: any[];
   rights: any[];
   constructor(
@@ -30,14 +30,14 @@ export class UserComponent implements OnInit {
   ) {
       this.languages = enmLanguageLegacy;
       this.rights = enmUserRoles;
-      this.booCanDelete = true;
+      this.booCanDeleteAndQuit = true;
   }
 
   ngOnInit(): void {
       if (!this.user) {
           // we must come from the menu
           console.log('We initialize a new user object from the router!');
-          this.booCanDelete = false;
+          this.booCanDeleteAndQuit = false;
           this.route.paramMap
             .pipe(
                 map(paramMap => paramMap.get('idUser')),
@@ -58,7 +58,7 @@ export class UserComponent implements OnInit {
               this.usersService.delete(user)
                   .subscribe( () => {
                       this.messageService.add(myMessage);
-                      this.onUserDelete.emit();
+                      this.onUserDelete.emit(user);
                   });
           },
           reject: () => {
