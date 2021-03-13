@@ -1,4 +1,4 @@
-<p-panel  *ngIf="beneficiaire$ | async as beneficiaire">
+<p-panel  *ngIf="beneficiaire">
     <ng-template pTemplate="header">
         Beneficiary of bank {{ beneficiaire.bankName}}
     </ng-template>
@@ -57,14 +57,12 @@
                 <label for="email">E-mail</label>
                 <input pInputText id="email"  name="email" maxlength="50" [ngModel]="beneficiaire.email" />
             </div>
-
-
-
-
         </div>
+        <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button type="button" pButton icon="pi pi-times" (click)="delete(beneficiaireForm.value)" label="Delete"></button>
+            <button  *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event,beneficiaire)" label="Delete"></button>
             <button type="button" pButton icon="pi pi-check" (click)="save(beneficiaire, beneficiaireForm.value)" label="Save"></button>
+            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, beneficiaire, beneficiaireForm, beneficiaireForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

@@ -16,6 +16,8 @@ import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {DialogModule} from 'primeng/dialog';
 import {appEntityMetadata} from '../app-entity.metadata';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {ConfirmationService} from 'primeng/api';
 
 
 
@@ -41,11 +43,13 @@ const routes: Routes = [
         InputTextModule,
         ButtonModule,
         PanelModule,
-        DialogModule
+        DialogModule,
+        ConfirmPopupModule
     ],
   providers: [
     BeneficiairesDataService,
-    BeneficiaireEntityService
+    BeneficiaireEntityService,
+    ConfirmationService
   ]
 
 })

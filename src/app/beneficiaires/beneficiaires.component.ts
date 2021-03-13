@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Beneficiaire } from './model/beneficiaire';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
-import {map} from 'rxjs/operators';
+import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
@@ -17,8 +17,9 @@ import {LazyLoadEvent} from 'primeng/api';
 })
 
 export class BeneficiairesComponent implements OnInit {
-  selectedBeneficiaireid$ = new BehaviorSubject(0);
+  loadPageSubject$ = new BehaviorSubject(null);
   beneficiaires: Beneficiaire[];
+  beneficiaire: Beneficiaire = null;
   title: string;
   cols: any[];
   displayDialog: boolean;
@@ -33,6 +34,22 @@ export class BeneficiairesComponent implements OnInit {
 
   ngOnInit() {
     this.reload();
+    this.loadPageSubject$
+        .pipe(
+            filter(queryParams => !!queryParams),
+            mergeMap(queryParams => this.beneficiaireService.getWithQuery(queryParams))
+        )
+        .subscribe(loadedBeneficiaires => {
+          console.log('Loaded beneficiaires from nextpage: ' + loadedBeneficiaires.length);
+          if (loadedBeneficiaires.length > 0) {
+            this.totalRecords = loadedBeneficiaires[0].totalRecords;
+          }  else {
+            this.totalRecords = 0;
+          }
+          this.beneficiaires  = loadedBeneficiaires;
+          this.loading = false;
+          this.beneficiaireService.setLoaded(true);
+        });
   }
 
   reload() {
@@ -58,9 +75,28 @@ export class BeneficiairesComponent implements OnInit {
   }
   handleSelect(beneficiaire) {
     console.log( 'Beneficiaire was selected', beneficiaire);
-    this.selectedBeneficiaireid$.next( beneficiaire.idClient);
+    this.beneficiaire = beneficiaire;
     this.displayDialog = true;
   }
+
+  handleBeneficiaireQuit() {
+    this.displayDialog = false;
+  }
+
+  handleBeneficiaireUpdate(updatedBeneficiaire) {
+    const index = this.beneficiaires.findIndex(beneficiaire => beneficiaire.idClient === updatedBeneficiaire.idClient);
+    this.beneficiaires[index] = updatedBeneficiaire;
+    this.displayDialog = false;
+  }
+
+  handleBeneficiaireDeleted(deletedBeneficiaire) {
+    const index = this.beneficiaires.findIndex(beneficiaire => beneficiaire.idClient === deletedBeneficiaire.idClient);
+    this.beneficiaires.splice(index, 1);
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
+    this.displayDialog = false;
+  }
+
   nextPage(event: LazyLoadEvent) {
     console.log('Lazy Loaded Event', event);
     this.loading = true;
