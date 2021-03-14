@@ -69,7 +69,7 @@ export class DepotComponent implements OnInit {
     const modifiedDepot = Object.assign({}, oldDepot, depotForm);
     this.depotsService.update(modifiedDepot)
         .subscribe( ()  => {
-          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Le depot ${modifiedDepot.bankShortName} ${modifiedDepot.bankName}  a été modifié`});
+          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Le depot ${modifiedDepot.nom}  a été modifié`});
           console.log('We hide the depot component');
           this.onDepotUpdate.emit(modifiedDepot);
         });

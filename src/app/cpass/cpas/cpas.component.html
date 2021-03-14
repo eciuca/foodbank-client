@@ -1,4 +1,4 @@
-<p-panel  *ngIf="cpas$ | async as cpas">
+<p-panel  *ngIf="cpas">
     <ng-template pTemplate="header">
         CPAS
     </ng-template>
@@ -53,9 +53,11 @@
                 <textarea pInputTextarea  id="rem" name="rem" [ngModel]="cpas.rem"></textarea>
             </div>
         </div>
+        <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button type="button" pButton icon="pi pi-times" (click)="delete(cpasForm.value)" label="Delete"></button>
+            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event, cpas)" label="Delete"></button>
             <button type="button" pButton icon="pi pi-check" (click)="save(cpas, cpasForm.value)" label="Save" [disabled] = "cpasForm.invalid"></button>
+            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, cpas, cpasForm,cpasForm.dirty)" label="Return" ></button>
         </div>
 
     </form>

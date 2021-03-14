@@ -78,5 +78,5 @@
     </ng-template>
 </p-table>
 <p-dialog header="Cpas Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [style]="{'width':'1800px'}">
-    <app-cpas *ngIf="selectedCpasid$" [idCpas$]="selectedCpasid$"></app-cpas>
+    <app-cpas *ngIf="cpas" [cpas]="cpas" (onCpasUpdate)="handleCpasUpdate($event)" (onCpasDelete)="handleCpasDeleted($event)" (onCpasQuit)="handleCpasQuit()"></app-cpas>
 </p-dialog>

@@ -17,6 +17,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DialogModule} from 'primeng/dialog';
 import {appEntityMetadata} from '../app-entity.metadata';
 import {MessageModule} from 'primeng/message';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {ConfirmationService} from 'primeng/api';
 
 const routes: Routes = [
   { path: '',
@@ -41,10 +43,13 @@ const routes: Routes = [
         ButtonModule,
         DialogModule,
         MessageModule,
+        ConfirmPopupModule,
+        InputTextareaModule,
     ],
   providers: [
-    CpassDataService,
-    CpasEntityService
+        CpassDataService,
+        CpasEntityService,
+        ConfirmationService
   ],
 })
 export class CpassModule {

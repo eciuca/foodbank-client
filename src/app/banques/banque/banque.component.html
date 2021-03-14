@@ -1,4 +1,4 @@
-<p-panel>
+<p-panel *ngIf="banque">
     <ng-template pTemplate="header">
         Banque {{banque.bankName}} - President  {{ president$ | async}}
     </ng-template>

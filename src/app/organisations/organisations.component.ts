@@ -80,5 +80,18 @@ export class OrganisationsComponent implements OnInit {
       this.displayDialog = true;
 
   }
+    handleOrganisationQuit() {
+        this.displayDialog = false;
+    }
+
+    handleOrganisationUpdate(updatedOrganisation) {
+        // Non-paged nothing to be done
+        this.displayDialog = false;
+    }
+
+    handleOrganisationDeleted() {
+        // Non-paged nothing to be done
+        this.displayDialog = false;
+    }
 }
 
