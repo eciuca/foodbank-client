@@ -10,8 +10,8 @@
                 <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Bank Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="nrentr">Entr Number</label>
-                <input #nrentr="ngModel" pInputText id="nrentr" name="nrentr" required minlength="9" maxLength="20" [ngModel]="banque.nrEntr" />
+                <label for="nrEntr">Entr Number</label>
+                <input #nrentr="ngModel" pInputText id="nrEntr" name="nrEntr" required minlength="9" maxLength="20" [ngModel]="banque.nrEntr" />
                 <p-message *ngIf="nrentr.invalid && (nrentr.dirty || nrentr.touched)" severity="error" text="Enterprise Number is required and must be minimum 9 chars long"></p-message>
             </div>
              <div class="p-field p-col-12 p-md-2">

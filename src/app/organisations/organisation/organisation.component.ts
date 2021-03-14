@@ -66,6 +66,7 @@ export class OrganisationComponent implements OnInit {
     this.organisationsService.update(modifiedOrganisation)
         .subscribe( ()  => {
           this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `L'organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe}  a été modifiée`});
+            this.onOrganisationUpdate.emit(modifiedOrganisation);
          });
   }
     delete(event: Event, organisation: Organisation) {
