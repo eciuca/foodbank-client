@@ -7,6 +7,8 @@ export interface Membre {
 
     prenom: string;
 
+    fullname: string; // fullname is a calculated field
+
     address: string;
 
     city: string;

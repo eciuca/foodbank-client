@@ -23,6 +23,7 @@ import {appEntityMetadata} from '../app-entity.metadata';
 import {MessageModule} from 'primeng/message';
 import {ConfirmationService} from 'primeng/api';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 const routes: Routes = [
     {   path: '',
         component: BanquesComponent,
@@ -54,7 +55,8 @@ const routes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         MessageModule,
-        ConfirmPopupModule
+        ConfirmPopupModule,
+        AutoCompleteModule
     ],
   providers: [
     BanquesDataService,

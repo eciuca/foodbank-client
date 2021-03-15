@@ -1,9 +1,22 @@
 <p-panel *ngIf="banque">
     <ng-template pTemplate="header">
-        Banque {{banque.bankName}} - President  {{ president$ | async}}
+        Banque {{banque.bankName}}
     </ng-template>
     <form #banqueForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedPresident">President</label>
+                <p-autoComplete  [(ngModel)]="selectedPresident" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  [multiple]="false"   id="selectedPresident" name="selectedPresident" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-8">
+            </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="bankname">Name</label>
                 <input #nom="ngModel" pInputText id="bankname" name="bankname" required minlength="10" maxLength="100" [ngModel]="banque.bankName" />
@@ -16,11 +29,11 @@
             </div>
              <div class="p-field p-col-12 p-md-2">
                 <label for="bankTel">Tel</label>
-                <input #tel="ngModel" pInputText id="bankTel" name="bankTel"  maxLength="20" [ngModel]="banque.bankTel" />
+                <input  pInputText id="bankTel" name="bankTel"  maxLength="20" [ngModel]="banque.bankTel" />
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="bankGsm">Mobile</label>
-                <input #gsm="ngModel" pInputText id="bankGsm" name="bankGsm"  maxLength="20" [ngModel]="banque.bankGsm" />
+                <input pInputText id="bankGsm" name="bankGsm"  maxLength="20" [ngModel]="banque.bankGsm" />
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="bankMail">E-mail</label>
