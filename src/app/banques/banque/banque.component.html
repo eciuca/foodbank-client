@@ -7,7 +7,7 @@
             <div class="p-field p-col-12 p-md-4">
                 <label for="selectedPresident">President</label>
                 <p-autoComplete  [(ngModel)]="selectedPresident" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
-                                 [forceSelection]="true"  [multiple]="false"   id="selectedPresident" name="selectedPresident" field="fullname" [dropdown]="true">
+                                 [forceSelection]="true"  id="selectedPresident" name="selectedPresident" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
                         <div class="membre-item">
                             <div> {{membre.nom}} {{membre.prenom}}</div>
@@ -15,7 +15,159 @@
                     </ng-template>
                 </p-autoComplete>
             </div>
-            <div class="p-field p-col-12 p-md-8">
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedVicePresident">VicePresident</label>
+                <p-autoComplete  [(ngModel)]="selectedVicePresident" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedVicePresident" name="selectedVicePresident" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedCEO">CEO</label>
+                <p-autoComplete  [(ngModel)]="selectedCEO" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedCEO" name="selectedCEO" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedSecretary">Secretary</label>
+                <p-autoComplete  [(ngModel)]="selectedSecretary" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedSecretary" name="selectedSecretary" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedTreasurer">Treasurer</label>
+                <p-autoComplete  [(ngModel)]="selectedTreasurer" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedTreasurer" name="selectedTreasurer" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedHR">Human Resources</label>
+                <p-autoComplete  [(ngModel)]="selectedHR" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedHR" name="selectedHR" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedLogistics">Logistics</label>
+                <p-autoComplete  [(ngModel)]="selectedLogistics" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedLogistics" name="selectedLogistics" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedSecHygiene">Security & Hygiene</label>
+                <p-autoComplete  [(ngModel)]="selectedSecHygiene" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedSecHygiene" name="selectedSecHygiene" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedIT">Information Technology</label>
+                <p-autoComplete  [(ngModel)]="selectedIT" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedIT" name="selectedIT" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedSupply">Supply</label>
+                <p-autoComplete  [(ngModel)]="selectedSupply" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedSupply" name="selectedSupply" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedPress">Press</label>
+                <p-autoComplete  [(ngModel)]="selectedPress" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedPress" name="selectedPress" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedAssocRel">Relations with Organisations</label>
+                <p-autoComplete  [(ngModel)]="selectedAssocRel" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedAssocRel" name="selectedAssocRel" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedPubRel">Public Relations</label>
+                <p-autoComplete  [(ngModel)]="selectedPubRel" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedPubRel" name="selectedPubRel" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedFEAD">FEAD Relation</label>
+                <p-autoComplete  [(ngModel)]="selectedFEAD" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedFEAD" name="selectedFEAD" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="selectedQuality">Quality</label>
+                <p-autoComplete  [(ngModel)]="selectedQuality" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedQuality" name="selectedQuality" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="bankname">Name</label>

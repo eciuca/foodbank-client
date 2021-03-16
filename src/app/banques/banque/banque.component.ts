@@ -27,7 +27,23 @@ export class BanqueComponent implements OnInit {
     booCanDeleteAndQuit: boolean;
   banque: Banque;
     selectedPresident: Membre;
+    selectedVicePresident: Membre;
+    selectedCEO: Membre;
+    selectedSecretary: Membre;
+    selectedTreasurer: Membre;
+    selectedHR: Membre;
+    selectedLogistics: Membre;
+    selectedSecHygiene: Membre;
+    selectedIT: Membre;
+    selectedSupply: Membre;
+    selectedPress: Membre;
+    selectedAssocRel: Membre;
+    selectedPubRel: Membre;
+    selectedFEAD: Membre;
+    selectedQuality: Membre;
+
     filteredMembres: any[];
+
   constructor(
       private banquesService: BanqueEntityService,
       private membresService: MembreEntityService,
@@ -64,13 +80,157 @@ export class BanqueComponent implements OnInit {
           this.membresService.getByKey(banque.idMemberPres)
               .subscribe(
                   membre => {
-                      this.selectedPresident =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
-                      console.log('our president:', this.selectedPresident);
+                      if (membre !== null) {
+                          this.selectedPresident = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our president:', this.selectedPresident);
+                      } else {
+                          console.log('There is no president!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberVp)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                      this.selectedVicePresident =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                      console.log('our  vice president:', this.selectedVicePresident);
+                      } else {
+                          console.log('There is no vice-president!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberCeo)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedCEO =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our  CEO:', this.selectedCEO);
+                      } else {
+                          console.log('There is no CEO!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberSec)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedSecretary = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our secretary:', this.selectedSecretary);
+                      } else {
+                          console.log('There is no secretary!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberTres)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedTreasurer =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our  Treasurer:', this.selectedTreasurer);
+                      } else {
+                          console.log('There is no Treasurer!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberRh)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedHR =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our  HR:', this.selectedHR);
+                      } else {
+                          console.log('There is no HR!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberLog)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedLogistics = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our resp logistics:', this.selectedLogistics);
+                      } else {
+                          console.log('There is no resp logistics!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberSh)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedSecHygiene =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our  Resp Sec&Hygiene:', this.selectedSecHygiene);
+                      } else {
+                          console.log('There is no Resp Sec&Hygiene!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberIt)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedIT =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our  Resp IT:', this.selectedIT);
+                      } else {
+                          console.log('There is no Resp IT!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberAppro)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedSupply = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our resp Supply:', this.selectedSupply);
+                      } else {
+                          console.log('There is no resp Supply!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberPp)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedPress =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our  Resp Press:', this.selectedPress);
+                      } else {
+                          console.log('There is no Resp Press!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberAsso)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedAssocRel =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our  Resp Assoc Rel:', this.selectedAssocRel);
+                      } else {
+                          console.log('There is no Resp Assoc Rel!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberPubrel)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedPubRel =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our  Resp PubRel:', this.selectedPubRel);
+                      } else {
+                          console.log('There is no Resp PubRel!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberFead)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedFEAD =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our  Resp FEAD:', this.selectedFEAD);
+                      } else {
+                          console.log('There is no Resp FEAD!');
+                      }
+                  });
+          this.membresService.getByKey(banque.idMemberQual)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          this.selectedQuality =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                          console.log('our  Resp Quality:', this.selectedQuality);
+                      } else {
+                          console.log('There is no Resp Quality!');
+                      }
                   });
         });
 }
 
-    filterMembre(event) {
+    filterMembre(event ) {
       const  queryMemberParms: QueryParams = {};
         const query = event.query;
         queryMemberParms['offset'] = '0';
@@ -91,6 +251,21 @@ export class BanqueComponent implements OnInit {
       console.log('Banque Form value', banqueForm);
       const modifiedBanque = Object.assign({}, oldBanque, banqueForm);
       modifiedBanque.idMemberPres = this.selectedPresident.batId;
+      modifiedBanque.idMemberVp = this.selectedVicePresident.batId;
+      modifiedBanque.idMemberCeo = this.selectedCEO.batId;
+      modifiedBanque.idMemberSec = this.selectedSecretary.batId;
+      modifiedBanque.idMemberTres = this.selectedTreasurer.batId;
+      modifiedBanque.idMemberRh = this.selectedHR.batId;
+      modifiedBanque.idMemberLog = this.selectedLogistics.batId;
+      modifiedBanque.idMemberSh = this.selectedSecHygiene.batId;
+      modifiedBanque.idMemberIt = this.selectedIT.batId;
+      modifiedBanque.idMemberAppro = this.selectedSupply.batId;
+      modifiedBanque.idMemberPp = this.selectedPress.batId;
+      modifiedBanque.idMemberAsso = this.selectedAssocRel.batId;
+      modifiedBanque.idMemberPubrel = this.selectedPubRel.batId;
+      modifiedBanque.idMemberFead = this.selectedFEAD.batId;
+      modifiedBanque.idMemberQual = this.selectedQuality.batId;
+
     this.banquesService.update(modifiedBanque)
         .subscribe( ()  => {
           this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `La banque ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  a été modifiée`});
