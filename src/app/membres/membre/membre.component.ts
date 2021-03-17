@@ -7,6 +7,9 @@ import {Membre} from '../model/membre';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {enmGender, enmLanguage} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
+import {select, Store} from '@ngrx/store';
+import {globalAuthState} from '../../auth/auth.selectors';
+import {AppState} from '../../reducers';
 
 @Component({
   selector: 'app-membre',
@@ -18,20 +21,33 @@ export class MembreComponent implements OnInit {
     @Output() onMembreUpdate = new EventEmitter<Membre>();
     @Output() onMembreDelete = new EventEmitter<Membre>();
     @Output() onMembreQuit = new EventEmitter<Membre>();
-    booCanDeleteAndQuit: boolean;
+    booCalledFromTable: boolean;
+    booCanSave: boolean;
+    booCanDelete: boolean;
+    booCanQuit: boolean;
   membre$: Observable<Membre>;
   genders: any[];
   languages: any[];
+  bankName: string;
+  bankShortName: string;
+  lienDis: number;
   constructor(
       private membresService: MembreEntityService,
       private route: ActivatedRoute,
       private router: Router,
+      private store: Store<AppState>,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
       this.genders =  enmGender;
       this.languages =  enmLanguage;
-      this.booCanDeleteAndQuit = true;
+      this.booCalledFromTable = true;
+      this.booCanDelete = false;
+      this.booCanSave = false;
+      this.booCanQuit = true;
+      this.bankName = '';
+      this.bankShortName = '';
+      this.lienDis = 0;
   }
 
   ngOnInit(): void {
@@ -40,7 +56,8 @@ export class MembreComponent implements OnInit {
       if (!this.membre) {
           // we must come from the menu
           console.log('We initialize a new membre object from the router!');
-          this.booCanDeleteAndQuit = false;
+          this.booCalledFromTable = false;
+          this.booCanQuit = false;
           this.route.paramMap
               .pipe(
                   map(paramMap => paramMap.get('batId')),
@@ -52,6 +69,38 @@ export class MembreComponent implements OnInit {
                   membre => this.membre = membre
               );
       }
+      this.store
+          .pipe(
+              select(globalAuthState),
+              map((authState) => {
+                  switch (authState.user.rights) {
+                      case 'Bank':
+                          this.bankName = authState.banque.bankName;
+                          this.bankShortName = authState.banque.bankShortName;
+                          break;
+                      case 'Admin_Banq':
+                          this.bankName = authState.banque.bankName;
+                          this.bankShortName = authState.banque.bankShortName;
+                          this.booCanSave = true;
+                          if (this.booCalledFromTable && this.membre.hasOwnProperty('batId')) {this.booCanDelete = true; }
+                          break;
+                      case 'Asso':
+                          this.bankName = authState.banque.bankName;
+                          this.bankShortName = authState.banque.bankShortName;
+                          this.lienDis = authState.user.idOrg;
+                          break;
+                      case 'Admin_Asso':
+                          this.bankName = authState.banque.bankName;
+                          this.bankShortName = authState.banque.bankShortName;
+                          this.lienDis = authState.user.idOrg;
+                          this.booCanSave = true;
+                          if (this.booCalledFromTable) {this.booCanDelete = true; }
+                          break;
+                      default:
+                  }
+              })
+          )
+          .subscribe();
   }
     delete(event: Event, membre: Membre) {
         this.confirmationService.confirm({
@@ -74,11 +123,32 @@ export class MembreComponent implements OnInit {
 
   save(oldMembre: Membre, membreForm: Membre) {
     const modifiedMembre = Object.assign({}, oldMembre, membreForm);
-    this.membresService.update(modifiedMembre)
-        .subscribe( ()  => {
-          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Le membre ${modifiedMembre.nom} ${modifiedMembre.prenom}  a été modifié`});
-          this.onMembreUpdate.emit(modifiedMembre);
-        });
+      if (modifiedMembre.hasOwnProperty('batId')) {
+          console.log('Updating Membre with content:', modifiedMembre);
+          this.membresService.update(modifiedMembre)
+              .subscribe(() => {
+                  this.messageService.add({
+                      severity: 'success',
+                      summary: 'Mise à jour',
+                      detail: `Le membre ${modifiedMembre.nom} ${modifiedMembre.prenom}  a été modifié`
+                  });
+                  this.onMembreUpdate.emit(modifiedMembre);
+              });
+      } else {
+          modifiedMembre.bankName = this.bankName;
+          modifiedMembre.bankShortName = this.bankShortName;
+          modifiedMembre.lienDis = this.lienDis;
+          console.log('Creating Membre with content:', modifiedMembre);
+          this.membresService.add(modifiedMembre)
+              .subscribe(() => {
+                  this.messageService.add({
+                      severity: 'success',
+                      summary: 'Création',
+                      detail: `Le membre ${modifiedMembre.nom} ${modifiedMembre.prenom}  a été créé`
+                  });
+                  this.onMembreUpdate.emit(modifiedMembre);
+              });
+      }
   }
 
     quit(event: Event, oldMembre: Membre, membreForm: NgForm, formDirty: boolean) {

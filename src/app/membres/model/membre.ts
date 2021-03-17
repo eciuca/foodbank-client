@@ -47,8 +47,6 @@ export interface Membre {
 
     rem: string;
 
-    lastVisit: Date;
-
     ben: number;
 
     codeAcces: number;
@@ -86,4 +84,55 @@ export function compareMembres(c1: Membre, c2: Membre) {
         return -1;
     } else { return 0; }
 
+}
+export class DefaultMembre implements Membre {
+
+    actif: number;
+    address: string;
+    ag: number;
+    authority: number;
+    bankName: string;
+    bankShortName: string;
+    batId: number;
+    batmail: string;
+    ben: number;
+    ca: number;
+    cg: number;
+    city: string;
+    civilite: number;
+    codeAcces: number;
+    dateContrat: string;
+    dateFin: string;
+    dateNaissance: string;
+    datedeb: string;
+    datmand: string;
+    deleted: number;
+    fonction: number;
+    fullname: string;
+    gsm: string;
+    lDep: number;
+    langue: number;
+    lienDis: number;
+    nnat: string;
+    nom: string;
+    nrCodeAcces: number;
+    pays: number;
+    prenom: string;
+    rem: string;
+    tel: string;
+    totalRecords: number;
+    typEmploi: number;
+    veh: string;
+    vehImm: string;
+    vehTyp: string;
+    zip: string;
+
+    constructor() {
+       this.pays = 1;
+       this.civilite = 1;
+       this.langue = 2 ;
+       this.actif = 1;
+       this.authority = 1;
+       this.ben = 1;
+    }
 }

@@ -4,7 +4,7 @@
              [filterDelay]="0" >
         <ng-template pTemplate="caption">
             <div class="table-header">
-                {{title}}
+                {{title}} <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -83,7 +83,7 @@
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
-               Au total il y a {{totalRecords}} membres dans la selection.
+                Au total il y a {{totalRecords}} membres dans la selection.
             </div>
         </ng-template>
     </p-table>

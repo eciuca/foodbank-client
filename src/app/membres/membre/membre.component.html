@@ -54,10 +54,10 @@
             </div>
         </div>
         <p-confirmPopup></p-confirmPopup>
-        <div class="p-formgroup-inline">
-            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event,membre)" label="Delete"></button>
+        <div *ngIf="booCanSave" class="p-formgroup-inline">
+            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,membre)" label="Delete"></button>
             <button type="button" pButton icon="pi pi-check" (click)="save(membre, membreForm.value)" label="Save" [disabled] = "membreForm.invalid"></button>
-            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, membre, membreForm,membreForm.dirty)" label="Return" ></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, membre, membreForm,membreForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

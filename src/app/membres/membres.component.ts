@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
-import {Membre} from './model/membre';
+import {Membre, DefaultMembre} from './model/membre';
 import {MembreEntityService} from './services/membre-entity.service';
 import {Router} from '@angular/router';
 import {globalAuthState} from '../auth/auth.selectors';
@@ -9,6 +9,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../auth/reducers';
+
 
 @Component({
   selector: 'app-membres',
@@ -18,7 +19,7 @@ import {AuthState} from '../auth/reducers';
 
 export class MembresComponent implements OnInit {
     loadPageSubject$ = new BehaviorSubject(null);
-    membre: Membre = null;
+    membre: Membre = new DefaultMembre();
     membres: Membre[];
     cols: any[];
     displayDialog: boolean;
@@ -26,11 +27,14 @@ export class MembresComponent implements OnInit {
     totalRecords: number;
     loading: boolean;
     filterBase: any;
+    booCanCreate: boolean;
 
   constructor(private membreService: MembreEntityService,
               private router: Router,
               private store: Store<AppState>
-  ) { }
+  ) {
+      this.booCanCreate = false;
+  }
 
   ngOnInit() {
     this.reload();
@@ -160,11 +164,13 @@ export class MembresComponent implements OnInit {
                 case 'Admin_Banq':
                     this.title = 'Membres de la ' + authState.banque.bankName;
                     this.filterBase = { 'bankShortName': authState.banque.bankShortName};
+                    if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
                     this.title = `Membres de la Banque ${authState.banque.bankName} ${authState.organisation.societe}` ;
                     this.filterBase = { 'lienDis': authState.organisation.idDis};
+                    if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                 default:
                     this.title = 'Membres de toutes les banques';
@@ -173,6 +179,11 @@ export class MembresComponent implements OnInit {
         } else {
             this.title = 'Membres de toutes les banques';
         }
+    }
+
+    showDialogToAdd() {
+        this.membre = new DefaultMembre();
+        this.displayDialog = true;
     }
 }
 
