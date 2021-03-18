@@ -1,9 +1,24 @@
 <div class="spinner-container" *ngIf="loading">
    <p-progressSpinner ></p-progressSpinner>
 </div>
-
-   <p-menubar [model]="menuLogggedInItems" *ngIf="isLoggedIn$ | async">
+<div  *ngIf="isLoggedIn$ | async">
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-col-12 p-md-4">
+            {{ loggedInBankName }}
+        </div>
+        <div class="p-col-12 p-md-4">
+            {{ loggedInOrganisationName }}
+        </div>
+        <div class="p-col-12 p-md-2">
+            {{ loggedInUserName }}
+        </div>
+        <div class="p-col-12 p-md-2">
+            {{ loggedInUserRole }}
+        </div>
+    </div>
+   <p-menubar [model]="menuLoggedInItems">
    </p-menubar>
+</div>
     <router-outlet></router-outlet>
 <p-messages></p-messages>
 

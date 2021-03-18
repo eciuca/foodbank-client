@@ -34,7 +34,11 @@ export class AppComponent implements OnInit {
 
     isRTL = false;
 // application variables
-    menuLogggedInItems: MenuItem[] = [];
+    menuLoggedInItems: MenuItem[] = [];
+    loggedInBankName = '';
+    loggedInOrganisationName = '';
+    loggedInUserName = '';
+    loggedInUserRole = '';
 
     loading = true;
 
@@ -101,11 +105,15 @@ export class AppComponent implements OnInit {
     }
 
     private processAuthState(authState: AuthState) {
+        this.loggedInUserName =  authState.user.userName;
+        this.loggedInUserRole = authState.user.rights;
         if (authState.banque) {
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
-                    this.menuLogggedInItems = [
+                    this.loggedInBankName = authState.banque.bankName;
+                    this.loggedInOrganisationName = '';
+                    this.menuLoggedInItems = [
                         {label: 'Banque', icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
                         {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
@@ -118,7 +126,9 @@ export class AppComponent implements OnInit {
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
-                    this.menuLogggedInItems = [
+                    this.loggedInBankName = authState.banque.bankName;
+                    this.loggedInOrganisationName = authState.organisation.societe;
+                    this.menuLoggedInItems = [
                         {label: 'Organisation', icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/${authState.organisation.idDis}` ]},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
@@ -130,7 +140,9 @@ export class AppComponent implements OnInit {
 
                     break;
                 default:
-                    this.menuLogggedInItems = [
+                    this.loggedInBankName = authState.banque.bankName;
+                    this.loggedInOrganisationName = '';
+                    this.menuLoggedInItems = [
                         {label: 'Banques', icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
