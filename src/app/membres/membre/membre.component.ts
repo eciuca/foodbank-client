@@ -25,8 +25,7 @@ export class MembreComponent implements OnInit {
     booCanSave: boolean;
     booCanDelete: boolean;
     booCanQuit: boolean;
-  membre$: Observable<Membre>;
-  genders: any[];
+    genders: any[];
   languages: any[];
   bankName: string;
   bankShortName: string;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
-import {User} from './model/user';
+import {DefaultUser, User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
 import {Router} from '@angular/router';
 import {globalAuthState} from '../auth/auth.selectors';
@@ -20,16 +20,18 @@ export class UsersComponent implements OnInit {
   user: User = null;
   users: User[];
   cols: any[];
-  title: string;
   totalRecords: number;
   loading: boolean;
   filterBase: any;
-    displayDialog: boolean;
+  displayDialog: boolean;
+  booCanCreate: boolean;
 
   constructor(private userService: UserEntityService,
               private router: Router,
               private store: Store<AppState>
-  ) { }
+  ) {
+      this.booCanCreate = false;
+  }
 
   ngOnInit() {
       this.reload();
@@ -63,18 +65,17 @@ export class UsersComponent implements OnInit {
                 switch (authState.user.rights) {
                   case 'Bank':
                   case 'Admin_Banq':
-                    this.title = 'Utilisateurs de la ' + authState.banque.bankName;
+                    this.filterBase = { 'idCompany': authState.banque.bankShortName};
+                    if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     break;
                   case 'Asso':
                   case 'Admin_Asso':
-                    this.title = `Utilisateurs de la Banque ${authState.banque.bankName} ${authState.organisation.societe}` ;
+                    this.filterBase = { 'idOrg': authState.organisation.idDis};
+                    if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                   default:
-                    this.title = 'Utilisateurs de toutes les banques';
                 }
 
-              } else {
-                this.title = 'Utilisateurs de toutes les banques';
               }
             })
         )
@@ -160,4 +161,8 @@ export class UsersComponent implements OnInit {
      this.loadPageSubject$.next(queryParms);
   }
 
+    showDialogToAdd() {
+        this.user = new DefaultUser();
+        this.displayDialog = true;
+    }
 }

@@ -56,3 +56,41 @@ export function compareUsers(c1: User, c2: User) {
 
 
 }
+export class DefaultUser implements User {
+    actif: boolean;
+    depot: string;
+    droit1: boolean;
+    email: string;
+    gestAsso: boolean;
+    gestBen: boolean;
+    gestCpas: boolean;
+    gestDon: boolean;
+    gestFead: boolean;
+    gestInv: boolean;
+    gestMemb: boolean;
+    idCompany: string;
+    idLanguage: string;
+    idOrg: number;
+    idUser: string;
+    lienBanque: number;
+    lienBat: number;
+    lienCpas: number;
+    password: string;
+    rights: string;
+    totalRecords: number;
+    userName: string;
+    isNew: boolean; // calculated property to indicate we are creating a new member
+
+    constructor() {
+        this.idLanguage = 'nl';
+        this.actif = true;
+        this.droit1 = false;
+        this.gestAsso = false;
+        this.gestCpas = false;
+        this.gestDon = false;
+        this.gestFead = false;
+        this.gestInv = false;
+        this.gestMemb = false;
+        this.isNew = true;
+    }
+}

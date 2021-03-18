@@ -4,7 +4,7 @@
              [filterDelay]="0" >
         <ng-template pTemplate="caption">
             <div class="table-header">
-                {{title}}
+               Users <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">

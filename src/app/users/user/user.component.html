@@ -4,11 +4,17 @@
     </ng-template>
     <form  #userForm="ngForm">
         <p-accordion [multiple]="true">
-            <p-accordionTab header="Profil" [selected]="true">
+            <p-accordionTab header="Profile" [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="idUser">Login</label>
+                        <input #iduser="ngModel" pInputText id="idUser" name="idUser"  required minlength="4" maxlength="60" [ngModel]="user.idUser" />
+                        <p-message *ngIf="iduser.invalid && (iduser.dirty || iduser.touched)" severity="error" text="User Login is required and must be minimum 4 chars long"></p-message>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
                         <label for="userName">User Name</label>
-                        <input pInputText id="userName" name="userName" maxlength="45" [ngModel]="user.userName" />
+                        <input #username="ngModel" pInputText id="userName" name="userName"  required minlength="4" maxlength="45" [ngModel]="user.userName" />
+                        <p-message *ngIf="username.invalid && (username.dirty || username.touched)" severity="error" text="User Login is required and must be minimum 4 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="idLanguage">Language</label>
@@ -17,7 +23,9 @@
 
                     <div class="p-field p-col-12 p-md-2">
                         <label for="email">E-mail</label>
-                        <input pInputText id="email" name="email" maxlength="50" [ngModel]="user.email" />
+                        <input #email="ngModel" pInputText id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [ngModel]="user.email" />
+                        <p-message *ngIf="email.invalid && (email.dirty || email.touched)" severity="error" text="E-mail is required and must be a valid e-mail"></p-message>
+
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="rights">Role</label>
@@ -64,9 +72,9 @@
         </p-accordion>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save"></button>
-            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
+            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
+            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save" [disabled] = "userForm.invalid"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

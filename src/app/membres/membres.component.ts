@@ -23,7 +23,6 @@ export class MembresComponent implements OnInit {
     membres: Membre[];
     cols: any[];
     displayDialog: boolean;
-    title: string;
     totalRecords: number;
     loading: boolean;
     filterBase: any;
@@ -162,22 +161,16 @@ export class MembresComponent implements OnInit {
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
-                    this.title = 'Membres de la ' + authState.banque.bankName;
                     this.filterBase = { 'bankShortName': authState.banque.bankShortName};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
-                    this.title = `Membres de la Banque ${authState.banque.bankName} ${authState.organisation.societe}` ;
                     this.filterBase = { 'lienDis': authState.organisation.idDis};
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                 default:
-                    this.title = 'Membres de toutes les banques';
-            }
-
-        } else {
-            this.title = 'Membres de toutes les banques';
+              }
         }
     }
 

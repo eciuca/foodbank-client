@@ -7,6 +7,9 @@ import {MessageService} from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
 import {enmLanguageLegacy, enmUserRoles} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
+import {select, Store} from '@ngrx/store';
+import {globalAuthState} from '../../auth/auth.selectors';
+import {AppState} from '../../reducers';
 
 @Component({
   selector: 'app-user',
@@ -15,29 +18,43 @@ import {NgForm} from '@angular/forms';
 })
 export class UserComponent implements OnInit {
   @Input() user: User;
-  @Output() onUserUpdate = new EventEmitter<User>();
-  @Output() onUserDelete = new EventEmitter<User>();
-  @Output() onUserQuit = new EventEmitter<User>();
-  booCanDeleteAndQuit: boolean;
+    @Output() onUserUpdate = new EventEmitter<User>();
+    @Output() onUserDelete = new EventEmitter<User>();
+    @Output() onUserQuit = new EventEmitter<User>();
+    booCalledFromTable: boolean;
+    booCanSave: boolean;
+    booCanDelete: boolean;
+    booCanQuit: boolean;
+    lienBanque: number;
+    idOrg: number;
+    idCompany: string;
   languages: any[];
   rights: any[];
   constructor(
       private usersService: UserEntityService,
       private route: ActivatedRoute,
       private router: Router,
+      private store: Store<AppState>,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
       this.languages = enmLanguageLegacy;
       this.rights = enmUserRoles;
-      this.booCanDeleteAndQuit = true;
+      this.booCalledFromTable = true;
+      this.booCanDelete = false;
+      this.booCanSave = false;
+      this.booCanQuit = true;
+      this.lienBanque = 0;
+      this.idOrg = 0;
+      this.idCompany = '';
   }
 
   ngOnInit(): void {
       if (!this.user) {
           // we must come from the menu
           console.log('We initialize a new user object from the router!');
-          this.booCanDeleteAndQuit = false;
+          this.booCalledFromTable = false;
+          this.booCanQuit = false;
           this.route.paramMap
             .pipe(
                 map(paramMap => paramMap.get('idUser')),
@@ -47,6 +64,31 @@ export class UserComponent implements OnInit {
             .subscribe(
                 user => this.user = user);
             }
+      this.store
+          .pipe(
+              select(globalAuthState),
+              map((authState) => {
+                  this.lienBanque = authState.banque.bankId;
+                  this.idCompany = authState.banque.bankShortName;
+                  switch (authState.user.rights) {
+                      case 'Bank':
+                          break;
+                      case 'Admin_Banq':
+                          this.booCanSave = true;
+                          if (this.booCalledFromTable && !this.user.hasOwnProperty('isNew')) {this.booCanDelete = true; }
+                          break;
+                      case 'Asso':
+                          this.idOrg = authState.organisation.idDis;
+                          break;
+                      case 'Admin_Asso':
+                          this.booCanSave = true;
+                          if (this.booCalledFromTable) {this.booCanDelete = true; }
+                          break;
+                      default:
+                  }
+              })
+          )
+          .subscribe();
      }
   delete(event: Event, user: User) {
       this.confirmationService.confirm({
@@ -54,7 +96,7 @@ export class UserComponent implements OnInit {
           message: 'Confirm Deletion?',
           icon: 'pi pi-exclamation-triangle',
           accept: () => {
-              const  myMessage = {severity: 'success', summary: 'Destruction', detail: `L'utilisateur ${user.userName} a été détruit`};
+              const  myMessage = {severity: 'success', summary: 'Destruction', detail: `The user ${user.idUser} ${user.userName}  was deleted`};
               this.usersService.delete(user)
                   .subscribe( () => {
                       this.messageService.add(myMessage);
@@ -69,12 +111,29 @@ export class UserComponent implements OnInit {
 
   save(oldUser: User, userForm: User) {
     const modifiedUser = Object.assign({}, oldUser, userForm);
-    this.usersService.update(modifiedUser)
+      if (!modifiedUser.hasOwnProperty('isNew')) {
+          console.log('Updating User with content:', modifiedUser);
+          this.usersService.update(modifiedUser)
         .subscribe(updatedUser  => {
-            this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `L'utilisateur ${modifiedUser.userName} a été modifié`});
+            this.messageService.add({severity: 'success', summary: 'Update', detail: `User  ${modifiedUser.idUser} ${modifiedUser.userName} has been modified`});
             this.onUserUpdate.emit(updatedUser);
         });
+      } else {
 
+          console.log('Creating User with content:', modifiedUser);
+          modifiedUser.lienBanque = this.lienBanque;
+          modifiedUser.idOrg = this.idOrg;
+          modifiedUser.idCompany = this.idCompany;
+          this.usersService.add(modifiedUser)
+              .subscribe(() => {
+                  this.messageService.add({
+                      severity: 'success',
+                      summary: 'Création',
+                      detail: `User  ${modifiedUser.idUser} ${modifiedUser.userName} has been created`
+                  });
+                  this.onUserUpdate.emit(modifiedUser);
+              });
+      }
 
   }
     quit(event: Event, oldUser: User, userForm: NgForm, formDirty: boolean) {

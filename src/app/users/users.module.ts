@@ -20,6 +20,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {AccordionModule} from 'primeng/accordion';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
+import {MessageModule} from 'primeng/message';
 
 
 
@@ -49,6 +50,7 @@ const routes: Routes = [
         InputSwitchModule,
         AccordionModule,
         ConfirmPopupModule,
+        MessageModule,
     ],
   providers: [
         UsersDataService,
