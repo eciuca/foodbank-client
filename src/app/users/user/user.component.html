@@ -17,6 +17,17 @@
                         <p-message *ngIf="username.invalid && (username.dirty || username.touched)" severity="error" text="User Login is required and must be minimum 4 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
+                        <label for="selectedMembre">Member</label>
+                        <p-autoComplete  [(ngModel)]="selectedMembre" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                         [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">
+                            <ng-template let-membre pTemplate="item">
+                                <div class="membre-item">
+                                    <div> {{membre.nom}} {{membre.prenom}}</div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
                         <label for="idLanguage">Language</label>
                         <p-dropdown [options]="languages" id="idLanguage" name="idLanguage" [ngModel]="user.idLanguage" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
@@ -31,7 +42,7 @@
                         <label for="rights">Role</label>
                         <p-dropdown [options]="rights" id="rights" name="rights" [ngModel]="user.rights" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
-                    <div class="p-field p-col-12 p-md-2">
+                    <div class="p-field p-col-12 p-md-1">
                         <label for="actif">Active ?</label>
                         <p-inputSwitch id="actif" name="actif" [ngModel]="user.actif"></p-inputSwitch>
                     </div>

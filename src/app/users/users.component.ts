@@ -17,7 +17,7 @@ import {LazyLoadEvent} from 'primeng/api';
 
 export class UsersComponent implements OnInit {
   loadPageSubject$ = new BehaviorSubject(null);
-  user: User = null;
+  selectedIdUser$ = new BehaviorSubject(null);
   users: User[];
   cols: any[];
   totalRecords: number;
@@ -94,8 +94,12 @@ export class UsersComponent implements OnInit {
   handleSelect(user) {
     console.log( 'User was selected', user);
     this.displayDialog = true;
-    this.user = user;
+      this.selectedIdUser$.next(user.idUser);
   }
+    showDialogToAdd() {
+        this.selectedIdUser$.next('new');
+        this.displayDialog = true;
+    }
   handleUserQuit() {
     this.displayDialog = false;
   }
@@ -157,12 +161,6 @@ export class UsersComponent implements OnInit {
              queryParms['sortField'] = 'userName';
          }
      }
-
      this.loadPageSubject$.next(queryParms);
   }
-
-    showDialogToAdd() {
-        this.user = new DefaultUser();
-        this.displayDialog = true;
-    }
 }

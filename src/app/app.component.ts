@@ -105,9 +105,9 @@ export class AppComponent implements OnInit {
     }
 
     private processAuthState(authState: AuthState) {
-        this.loggedInUserName =  authState.user.userName;
-        this.loggedInUserRole = authState.user.rights;
-        if (authState.banque) {
+        if (authState.user) {
+            this.loggedInUserName =  authState.user.userName;
+            this.loggedInUserRole = authState.user.rights;
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':

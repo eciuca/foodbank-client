@@ -42,7 +42,7 @@ export class BanqueComponent implements OnInit {
     selectedFEAD: Membre;
     selectedQuality: Membre;
 
-    filteredMembres: any[];
+    filteredMembres: Membre[];
 
   constructor(
       private banquesService: BanqueEntityService,

@@ -21,6 +21,9 @@ import {AccordionModule} from 'primeng/accordion';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
 import {MessageModule} from 'primeng/message';
+import {MembresDataService} from '../membres/services/membres-data.service';
+import {MembreEntityService} from '../membres/services/membre-entity.service';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 
 
@@ -51,10 +54,13 @@ const routes: Routes = [
         AccordionModule,
         ConfirmPopupModule,
         MessageModule,
+        AutoCompleteModule,
     ],
   providers: [
         UsersDataService,
         UserEntityService,
+        MembresDataService,
+        MembreEntityService,
         ConfirmationService,
   ],
 })
@@ -62,10 +68,12 @@ export class UsersModule {
   constructor(
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
-      private usersDataService: UsersDataService
+      private usersDataService: UsersDataService,
+      private membresDataService: MembresDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('User', usersDataService);
+    entityDataService.registerService('Membre', membresDataService);
   }
 
 }

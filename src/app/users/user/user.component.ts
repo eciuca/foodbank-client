@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserEntityService} from '../services/user-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, withLatestFrom} from 'rxjs/operators';
-import {User} from '../model/user';
+import {map} from 'rxjs/operators';
+import {DefaultUser, User} from '../model/user';
 import {MessageService} from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
 import {enmLanguageLegacy, enmUserRoles} from '../../shared/enums';
@@ -10,6 +10,10 @@ import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
+import {MembreEntityService} from '../../membres/services/membre-entity.service';
+import {Membre} from '../../membres/model/membre';
+import {QueryParams} from '@ngrx/data';
+import {Observable, combineLatest} from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -17,7 +21,10 @@ import {AppState} from '../../reducers';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  @Input() user: User;
+    @Input() idUser$: Observable<string>;
+    user: User;
+    selectedMembre: Membre;
+    filteredMembres: Membre[];
     @Output() onUserUpdate = new EventEmitter<User>();
     @Output() onUserDelete = new EventEmitter<User>();
     @Output() onUserQuit = new EventEmitter<User>();
@@ -32,6 +39,7 @@ export class UserComponent implements OnInit {
   rights: any[];
   constructor(
       private usersService: UserEntityService,
+      private membresService: MembreEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
@@ -50,41 +58,68 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      if (!this.user) {
+      if (!this.idUser$) {
           // we must come from the menu
           console.log('We initialize a new user object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
-          this.route.paramMap
-            .pipe(
-                map(paramMap => paramMap.get('idUser')),
-                withLatestFrom(this.usersService.entities$),
-                map(([idUser, users]) => users.find(user => user['idUser'] === idUser))
-            )
-            .subscribe(
-                user => this.user = user);
-            }
+          this.idUser$ = this.route.paramMap
+              .pipe(
+                  map(paramMap => paramMap.get('idUser'))
+              );
+      }
+      const user$ = combineLatest([this.idUser$, this.usersService.entities$])
+          .pipe(
+              map(([idUser, users]) => users.find(user => idUser === user.idUser))
+          );
+
+      user$.subscribe(
+            user => {
+                if (user) {
+                    this.user = user;
+                    this.membresService.getByKey(user.lienBat)
+                        .subscribe(
+                            membre => {
+                                if (membre !== null) {
+                                    this.selectedMembre = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                                    console.log('our users membre:', this.selectedMembre);
+                                } else {
+                                    console.log('There is no membre for this user!');
+                                }
+                            });
+                } else {
+                    this.user = new DefaultUser();
+                    console.log('we have a new default user');
+                }
+            });
+
       this.store
           .pipe(
               select(globalAuthState),
               map((authState) => {
-                  this.lienBanque = authState.banque.bankId;
-                  this.idCompany = authState.banque.bankShortName;
-                  switch (authState.user.rights) {
-                      case 'Bank':
-                          break;
-                      case 'Admin_Banq':
-                          this.booCanSave = true;
-                          if (this.booCalledFromTable && !this.user.hasOwnProperty('isNew')) {this.booCanDelete = true; }
-                          break;
-                      case 'Asso':
-                          this.idOrg = authState.organisation.idDis;
-                          break;
-                      case 'Admin_Asso':
-                          this.booCanSave = true;
-                          if (this.booCalledFromTable) {this.booCanDelete = true; }
-                          break;
-                      default:
+                  if (authState.user) {
+                      this.lienBanque = authState.banque.bankId;
+                      this.idCompany = authState.banque.bankShortName;
+                      switch (authState.user.rights) {
+                          case 'Bank':
+                              break;
+                          case 'Admin_Banq':
+                              this.booCanSave = true;
+                              if (this.booCalledFromTable) {
+                                  this.booCanDelete = true;
+                              }
+                              break;
+                          case 'Asso':
+                              this.idOrg = authState.organisation.idDis;
+                              break;
+                          case 'Admin_Asso':
+                              this.booCanSave = true;
+                              if (this.booCalledFromTable) {
+                                  this.booCanDelete = true;
+                              }
+                              break;
+                          default:
+                      }
                   }
               })
           )
@@ -111,6 +146,7 @@ export class UserComponent implements OnInit {
 
   save(oldUser: User, userForm: User) {
     const modifiedUser = Object.assign({}, oldUser, userForm);
+      modifiedUser.lienBat = this.selectedMembre.batId;
       if (!modifiedUser.hasOwnProperty('isNew')) {
           console.log('Updating User with content:', modifiedUser);
           this.usersService.update(modifiedUser)
@@ -119,11 +155,10 @@ export class UserComponent implements OnInit {
             this.onUserUpdate.emit(updatedUser);
         });
       } else {
-
-          console.log('Creating User with content:', modifiedUser);
           modifiedUser.lienBanque = this.lienBanque;
           modifiedUser.idOrg = this.idOrg;
           modifiedUser.idCompany = this.idCompany;
+          console.log('Creating User with content:', modifiedUser);
           this.usersService.add(modifiedUser)
               .subscribe(() => {
                   this.messageService.add({
@@ -155,5 +190,21 @@ export class UserComponent implements OnInit {
             console.log('Form is not dirty, closing');
             this.onUserQuit.emit();
         }
+    }
+    filterMembre(event ) {
+        const  queryMemberParms: QueryParams = {};
+        const query = event.query;
+        queryMemberParms['offset'] = '0';
+        queryMemberParms['rows'] = '10';
+        queryMemberParms['sortField'] = 'nom';
+        queryMemberParms['sortOrder'] = '1';
+        queryMemberParms['searchField'] = 'nom';
+        queryMemberParms['searchValue'] = query.toLowerCase();
+        this.membresService.getWithQuery(queryMemberParms)
+            .subscribe(filteredMembres => {
+                this.filteredMembres = filteredMembres.map((membre) =>
+                    Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom})
+                );
+            });
     }
 }
