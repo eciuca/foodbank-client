@@ -4,7 +4,7 @@
          [filterDelay]="0" >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            {{title}}
+            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Beneficiary"></button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -83,12 +83,12 @@
     </ng-template>
     <ng-template pTemplate="summary">
         <div class="p-d-flex p-ai-center p-jc-between">
-            Au total il y a {{totalRecords}} beneficiaires dans la selection.
+           There are {{totalRecords}} beneficiaries selected.
         </div>
     </ng-template>
 </p-table>
- <p-dialog header="Beneficiaire Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [style]="{'width':'1800px'}">
-     <app-beneficiaire *ngIf="beneficiaire" [beneficiaire]="beneficiaire" (onBeneficiaireUpdate)="handleBeneficiaireUpdate($event)" (onBeneficiaireDelete)="handleBeneficiaireDeleted($event)" (onBeneficiaireQuit)="handleBeneficiaireQuit()"></app-beneficiaire>
+ <p-dialog header="Beneficiaire Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true">
+     <app-beneficiaire *ngIf="selectedIdClient$" [idClient$]="selectedIdClient$" (onBeneficiaireUpdate)="handleBeneficiaireUpdate($event)" (onBeneficiaireDelete)="handleBeneficiaireDeleted($event)" (onBeneficiaireQuit)="handleBeneficiaireQuit()"></app-beneficiaire>
  </p-dialog>
 
 

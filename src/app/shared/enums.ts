@@ -44,6 +44,11 @@ export let enmUserRoles = [
     {name: 'Bank', code: 'Bank'},
     {name: 'Bank_FBBA', code: 'Bank_FBBA'},
 ];
+export let enmStatutFead = [
+    {name: 'Refused', code: 0},
+    {name: 'Accepted', code: 1},
+    {name: 'Under Study', code: 2},
+];
 
 
 

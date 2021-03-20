@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Beneficiaire } from './model/beneficiaire';
+import {Beneficiaire, DefaultBeneficiaire} from './model/beneficiaire';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
@@ -18,19 +18,22 @@ import {LazyLoadEvent} from 'primeng/api';
 
 export class BeneficiairesComponent implements OnInit {
   loadPageSubject$ = new BehaviorSubject(null);
+  selectedIdClient$ = new BehaviorSubject(0);
   beneficiaires: Beneficiaire[];
   beneficiaire: Beneficiaire = null;
-  title: string;
   cols: any[];
   displayDialog: boolean;
   totalRecords: number;
   loading: boolean;
   filterBase: any;
+  booCanCreate: boolean;
 
   constructor(private beneficiaireService: BeneficiaireEntityService,
               private router: Router,
               private store: Store
-  ) { }
+  ) {
+    this.booCanCreate = false;
+  }
 
   ngOnInit() {
     this.reload();
@@ -75,7 +78,11 @@ export class BeneficiairesComponent implements OnInit {
   }
   handleSelect(beneficiaire) {
     console.log( 'Beneficiaire was selected', beneficiaire);
-    this.beneficiaire = beneficiaire;
+    this.selectedIdClient$.next(beneficiaire.idClient);
+    this.displayDialog = true;
+  }
+  showDialogToAdd() {
+    this.selectedIdClient$.next(0);
     this.displayDialog = true;
   }
 
@@ -158,20 +165,17 @@ export class BeneficiairesComponent implements OnInit {
       switch (authState.user.rights) {
         case 'Bank':
         case 'Admin_Banq':
-          this.title = 'Beneficiaires de la ' + authState.banque.bankName;
           this.filterBase = { 'bankShortName': authState.banque.bankShortName};
+          if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
           break;
         case 'Asso':
         case 'Admin_Asso':
-          this.title = `Beneficiaires de la Banque ${authState.banque.bankName} ${authState.organisation.societe}` ;
           this.filterBase = { 'lienDis': authState.organisation.idDis};
+          if ( authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
           break;
         default:
-          this.title = 'Beneficiaires de toutes les banques';
       }
 
-    } else {
-      this.title = 'Beneficiaires de toutes les banques';
     }
   }
 }

@@ -27,21 +27,11 @@ export const appEntityMetadata: EntityMetadataMap = {
         sortComparer: compareCpass,
         selectId: (cpas: Cpas) => cpas.cpasId,
         entityDispatcherOptions: {optimisticUpdate: false},
-        filterFn: (entities: Cpas[], pattern: { startIndex: number, endIndex: number }) => {
-            return entities.filter((entity, index) => {
-                return ((index >= pattern.startIndex) && (index <= pattern.endIndex));
-            });
-        }
     },
     Depot: {
         sortComparer: compareDepots,
         selectId: (depot: Depot) => depot.idDepot,
-        entityDispatcherOptions: {optimisticUpdate: false},
-        filterFn: (entities: Depot[], pattern: { startIndex: number, endIndex: number }) => {
-            return entities.filter((entity, index) => {
-                return ((index >= pattern.startIndex) && (index <= pattern.endIndex));
-            });
-        }
+        entityDispatcherOptions: {optimisticUpdate: false}
     },
     Organisation: {
         sortComparer: compareOrganisations,

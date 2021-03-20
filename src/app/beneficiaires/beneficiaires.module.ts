@@ -7,6 +7,7 @@ import { BeneficiaireComponent } from './beneficiaire/beneficiaire.component';
 
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
+import {CpassDataService} from '../cpass/services/cpass-data.service';
 import {BeneficiairesDataService} from './services/beneficiaires-data.service';
 import {HttpClientModule} from '@angular/common/http';
 import {TableModule} from 'primeng/table';
@@ -18,6 +19,9 @@ import {DialogModule} from 'primeng/dialog';
 import {appEntityMetadata} from '../app-entity.metadata';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {CpasEntityService} from '../cpass/services/cpas-entity.service';
+
 
 
 
@@ -44,11 +48,14 @@ const routes: Routes = [
         ButtonModule,
         PanelModule,
         DialogModule,
-        ConfirmPopupModule
+        ConfirmPopupModule,
+        AutoCompleteModule
     ],
   providers: [
     BeneficiairesDataService,
+    CpassDataService,
     BeneficiaireEntityService,
+    CpasEntityService,
     ConfirmationService
   ]
 
@@ -57,9 +64,11 @@ export class BeneficiairesModule {
   constructor(
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
-      private beneficiairesDataService: BeneficiairesDataService
+      private beneficiairesDataService: BeneficiairesDataService,
+      private cpassDataService: CpassDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Beneficiaire', beneficiairesDataService);
+    entityDataService.registerService('Cpas', cpassDataService);
   }
 }
