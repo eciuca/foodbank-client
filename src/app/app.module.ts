@@ -18,9 +18,12 @@ import {metaReducers, reducers} from './reducers';
 import {AuthGuard} from './auth/auth.guard';
 import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
 import {MenubarModule} from 'primeng/menubar';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {MessagesModule} from 'primeng/messages';
 import {MessageService} from 'primeng/api';
 import {appEntityMetadata} from './app-entity.metadata';
+import {ButtonModule} from 'primeng/button';
+import {PanelModule} from 'primeng/panel';
 
 
 const routes: Routes = [
@@ -67,15 +70,16 @@ const routes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
+        RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'}),
         HttpClientModule,
         MenubarModule,
+        OverlayPanelModule,
         ProgressSpinnerModule,
         MessagesModule,
         AuthModule.forRoot(),
         StoreModule.forRoot(reducers, {
             metaReducers,
-            runtimeChecks : {
+            runtimeChecks: {
                 strictStateImmutability: true,
                 strictActionImmutability: true,
                 strictActionSerializability: true,
@@ -90,7 +94,9 @@ const routes: Routes = [
         StoreRouterConnectingModule.forRoot({
             stateKey: 'router',
             routerState: RouterState.Minimal
-        })
+        }),
+        ButtonModule,
+        PanelModule
     ],
     providers: [ MessageService,
         { provide: DefaultDataServiceConfig,

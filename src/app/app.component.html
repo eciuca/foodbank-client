@@ -2,20 +2,22 @@
    <p-progressSpinner ></p-progressSpinner>
 </div>
 <div  *ngIf="isLoggedIn$ | async">
-    <div class="p-fluid p-formgrid p-grid">
-        <div class="p-col-12 p-md-4">
-            {{ loggedInBankName }}
-        </div>
-        <div class="p-col-12 p-md-4">
-            {{ loggedInOrganisationName }}
-        </div>
-        <div class="p-col-12 p-md-2">
-            {{ loggedInUserName }}
-        </div>
-        <div class="p-col-12 p-md-2">
-            {{ loggedInUserRole }}
-        </div>
-    </div>
+    <p-button [label]="loggedInUserName" icon="pi pi-user" (click)="op.show($event)"></p-button>
+    <p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '450px'}">
+        <ng-template pTemplate>
+           <div class="p-d-flex p-flex-column">
+               <div  class="p-mb-2">
+                 {{loggedInBankName }}
+                </div>
+                <div  class="p-mb-2">
+                 {{ loggedInOrganisationName }}
+                </div>
+                <div  class="p-mb-2">
+                  {{ loggedInUserRole }}
+                </div>
+           </div>
+        </ng-template>
+    </p-overlayPanel>
    <p-menubar [model]="menuLoggedInItems">
    </p-menubar>
 </div>
