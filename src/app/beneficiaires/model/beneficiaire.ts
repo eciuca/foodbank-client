@@ -109,7 +109,6 @@ export class DefaultBeneficiaire implements Beneficiaire {
     regio: string;
     tel: string;
     totalRecords: number;
-    isNew: boolean; // calculated property to indicate we are creating a new beneficiary
     constructor() {
         this.pays = '1';
         this.civilite = 1;
@@ -123,7 +122,5 @@ export class DefaultBeneficiaire implements Beneficiaire {
         this.daten = '';
         this.datenConj = '';
         this.regio = '';
-        this.isNew = true;
     }
-
 }
