@@ -19,6 +19,7 @@ import {AuthState} from '../auth/reducers';
 
 export class MembresComponent implements OnInit {
     loadPageSubject$ = new BehaviorSubject(null);
+    selectedBatid$ = new BehaviorSubject(0);
     membre: Membre = new DefaultMembre();
     membres: Membre[];
     cols: any[];
@@ -80,7 +81,7 @@ export class MembresComponent implements OnInit {
 
   handleSelect(membre) {
     console.log( 'Membre was selected', membre);
-      this.membre = membre;
+      this.selectedBatid$.next(membre.batId);
       this.displayDialog = true;
   }
     handleMembreQuit() {

@@ -19,8 +19,8 @@
                 <p-message *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" severity="error" text="Member First Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="language">Language</label>
-                <p-dropdown [options]="languages" id="language" name="language" [ngModel]="membre.langue" optionLabel="name" optionValue="code"></p-dropdown>
+                <label for="langue">Language</label>
+                <p-dropdown [options]="languages" id="langue" name="langue" [ngModel]="membre.langue" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="address">Adresse</label>

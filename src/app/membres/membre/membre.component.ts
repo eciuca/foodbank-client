@@ -1,8 +1,8 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {MembreEntityService} from '../services/membre-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, withLatestFrom} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {combineLatest, Observable} from 'rxjs';
 import {Membre} from '../model/membre';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {enmGender, enmLanguage} from '../../shared/enums';
@@ -17,10 +17,12 @@ import {AppState} from '../../reducers';
   styleUrls: ['./membre.component.css']
 })
 export class MembreComponent implements OnInit {
-    @Input() membre: Membre;
+    @Input() batId$: Observable<number>;
     @Output() onMembreUpdate = new EventEmitter<Membre>();
     @Output() onMembreDelete = new EventEmitter<Membre>();
     @Output() onMembreQuit = new EventEmitter<Membre>();
+    membre: Membre;
+    membre$: Observable<Membre>;
     booCalledFromTable: boolean;
     booCanSave: boolean;
     booCanDelete: boolean;
@@ -52,52 +54,64 @@ export class MembreComponent implements OnInit {
   ngOnInit(): void {
       // comment: this component is sometimes called from his parent Component with idDepot @Input Decorator,
       // or sometimes via a router link via the Main Menu
-      if (!this.membre) {
+      if (!this.batId$) {
           // we must come from the menu
           console.log('We initialize a new membre object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
-          this.route.paramMap
+          this.batId$ = this.route.paramMap
               .pipe(
                   map(paramMap => paramMap.get('batId')),
-                  withLatestFrom(this.membresService.entities$),
-                  map(([batId, membres]) => membres.find(membre => membre['batId'].toString() === batId))
-              )
-
-              .subscribe(
-                  membre => this.membre = membre
+                  map(batIdString => Number(batIdString))
+              );
+         this.batId$.subscribe( batid => {
+             this.membre$ = this.membresService.getByKey(batid);
+          });
+      } else {
+          this.membre$ = combineLatest([this.batId$, this.membresService.entities$])
+              .pipe(
+                  map(([batId, membres]) => membres.find(membre => membre['batId'] === batId))
               );
       }
-      this.store
+        this.membre$.subscribe(
+                  membre => {
+                      console.log('Membre : ', membre);
+                      this.membre = membre;
+                  });
+        this.store
           .pipe(
               select(globalAuthState),
               map((authState) => {
-                  switch (authState.user.rights) {
-                      case 'Bank':
-                          this.bankName = authState.banque.bankName;
-                          this.bankShortName = authState.banque.bankShortName;
-                          break;
-                      case 'Admin_Banq':
-                          this.bankName = authState.banque.bankName;
-                          this.bankShortName = authState.banque.bankShortName;
-                          this.booCanSave = true;
-                          if (this.booCalledFromTable && this.membre.hasOwnProperty('batId')) {this.booCanDelete = true; }
-                          break;
-                      case 'Asso':
-                          this.bankName = authState.banque.bankName;
-                          this.bankShortName = authState.banque.bankShortName;
-                          this.lienDis = authState.user.idOrg;
-                          break;
-                      case 'Admin_Asso':
-                          this.bankName = authState.banque.bankName;
-                          this.bankShortName = authState.banque.bankShortName;
-                          this.lienDis = authState.user.idOrg;
-                          this.booCanSave = true;
-                          if (this.booCalledFromTable) {this.booCanDelete = true; }
-                          break;
-                      default:
-                  }
-              })
+                   switch (authState.user.rights) {
+                          case 'Bank':
+                              this.bankName = authState.banque.bankName;
+                              this.bankShortName = authState.banque.bankShortName;
+                              break;
+                          case 'Admin_Banq':
+                              this.bankName = authState.banque.bankName;
+                              this.bankShortName = authState.banque.bankShortName;
+                              this.booCanSave = true;
+                              if (this.booCalledFromTable) {
+                                  this.booCanDelete = true;
+                              }
+                              break;
+                          case 'Asso':
+                              this.bankName = authState.banque.bankName;
+                              this.bankShortName = authState.banque.bankShortName;
+                              this.lienDis = authState.user.idOrg;
+                              break;
+                          case 'Admin_Asso':
+                              this.bankName = authState.banque.bankName;
+                              this.bankShortName = authState.banque.bankShortName;
+                              this.lienDis = authState.user.idOrg;
+                              this.booCanSave = true;
+                              if (this.booCalledFromTable) {
+                                  this.booCanDelete = true;
+                              }
+                              break;
+                          default:
+                      }
+                 })
           )
           .subscribe();
   }

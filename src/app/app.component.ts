@@ -106,6 +106,7 @@ export class AppComponent implements OnInit {
 
     private processAuthState(authState: AuthState) {
         if (authState.user) {
+            console.log('User lienbat is:', authState.user.lienBat);
             this.loggedInUserName =  authState.user.userName;
             this.loggedInUserRole = authState.user.rights;
             switch (authState.user.rights) {
@@ -114,6 +115,7 @@ export class AppComponent implements OnInit {
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
                     this.menuLoggedInItems = [
+                        {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
                         {label: 'Banque', icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
                         {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
@@ -129,6 +131,7 @@ export class AppComponent implements OnInit {
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = authState.organisation.societe;
                     this.menuLoggedInItems = [
+                        {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
                         {label: 'Organisation', icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/${authState.organisation.idDis}` ]},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
@@ -143,6 +146,7 @@ export class AppComponent implements OnInit {
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
                     this.menuLoggedInItems = [
+                        {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
                         {label: 'Banques', icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
