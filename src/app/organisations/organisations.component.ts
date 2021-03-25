@@ -19,13 +19,15 @@ export class OrganisationsComponent implements OnInit {
   organisation: Organisation = null;
   organisations$: Observable<Organisation[]>;
   displayDialog: boolean;
-  title: string;
   cols: any[];
+  booCanCreate: boolean;
 
   constructor(private organisationService: OrganisationEntityService,
               private router: Router,
               private store: Store
-  ) { }
+  ) {
+      this.booCanCreate = false;
+  }
 
   ngOnInit() {
     this.reload();
@@ -40,18 +42,15 @@ export class OrganisationsComponent implements OnInit {
                     switch (authState.user.rights) {
                         case 'Bank':
                         case 'Admin_Banq':
-                            this.title = 'Organisations de la ' + authState.banque.bankName;
+                            if (authState.user.rights === 'Admin_Banq') {
+                                this.booCanCreate = true;
+                            }
                             break;
                         case 'Asso':
                         case 'Admin_Asso':
-                            this.title = `Banque ${authState.banque.bankName} ${authState.organisation.societe}` ;
                             break;
                         default:
-                            this.title = 'Organisations de toutes les banques';
                     }
-
-                } else {
-                    this.title = 'Organisations de toutes les banques';
                 }
             })
         )
@@ -80,6 +79,10 @@ export class OrganisationsComponent implements OnInit {
       this.displayDialog = true;
 
   }
+    showDialogToAdd() {
+        this.selectedIdDis$.next(0);
+        this.displayDialog = true;
+    }
     handleOrganisationQuit() {
         this.displayDialog = false;
     }

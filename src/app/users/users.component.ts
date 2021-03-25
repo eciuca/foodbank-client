@@ -109,6 +109,12 @@ export class UsersComponent implements OnInit {
     this.users[index] = updatedUser;
     this.displayDialog = false;
   }
+    handleUserCreate(createdUser: User) {
+        this.users.push({...createdUser});
+        const latestQueryParams = this.loadPageSubject$.getValue();
+        this.loadPageSubject$.next(latestQueryParams);
+        this.displayDialog = false;
+    }
 
   handleUserDeleted(deletedUser) {
     const index = this.users.findIndex(user => user.idUser === deletedUser.idUser);

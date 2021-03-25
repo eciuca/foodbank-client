@@ -3,10 +3,18 @@ import {OrganisationEntityService} from '../services/organisation-entity.service
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {Observable, combineLatest} from 'rxjs';
-import {Organisation} from '../model/organisation';
+import {DefaultOrganisation, Organisation} from '../model/organisation';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {enmStatusCompany, enmGender, enmCountry} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
+import {Cpas} from '../../cpass/model/cpas';
+import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
+import {QueryParams} from '@ngrx/data';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../reducers';
+import {globalAuthState} from '../../auth/auth.selectors';
+import {DepotEntityService} from '../../depots/services/depot-entity.service';
+import {Depot} from '../../depots/model/depot';
 
 @Component({
   selector: 'app-organisation',
@@ -19,23 +27,38 @@ export class OrganisationComponent implements OnInit {
     @Output() onOrganisationUpdate = new EventEmitter<Organisation>();
     @Output() onOrganisationDelete = new EventEmitter<Organisation>();
     @Output() onOrganisationQuit = new EventEmitter<Organisation>();
-    booCanDeleteAndQuit: boolean;
+    booCalledFromTable: boolean;
+    booCanSave: boolean;
+    booCanDelete: boolean;
+    booCanQuit: boolean;
   organisation: Organisation;
+    selectedCpas: Cpas;
+    filteredCpass: Cpas[];
+    selectedDepot: Depot;
+    filteredDepots: Depot[];
   genders: any[];
   statuts: any[];
   countries: any[];
+  lienBanque: number;
 
   constructor(
       private organisationsService: OrganisationEntityService,
+      private cpassService: CpasEntityService,
+      private depotsService: DepotEntityService,
       private route: ActivatedRoute,
       private router: Router,
+      private store: Store<AppState>,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
       this.statuts = enmStatusCompany;
       this.genders = enmGender;
       this.countries = enmCountry;
-      this.booCanDeleteAndQuit = true;
+      this.booCalledFromTable = true;
+      this.booCanDelete = false;
+      this.booCanSave = false;
+      this.booCanQuit = true;
+      this.lienBanque = 0;
   }
 
   ngOnInit(): void {
@@ -44,7 +67,8 @@ export class OrganisationComponent implements OnInit {
          if (!this.idDis$) {
           // we must come from the menu
           console.log('We initialize a new organisation object from the router!');
-          this.booCanDeleteAndQuit = false;
+             this.booCalledFromTable = false;
+             this.booCanQuit = false;
           this.idDis$ = this.route.paramMap
               .pipe(
                   map(paramMap => paramMap.get('idDis')),
@@ -57,17 +81,90 @@ export class OrganisationComponent implements OnInit {
           );
 
       organisation$.subscribe(organisation => {
-          this.organisation = organisation;
-          console.log('Organisation : ', organisation);
+          if (organisation) {
+              this.organisation = organisation;
+              console.log('our organisation:',  this.organisation);
+              this.cpassService.getByKey(organisation.lienCpas)
+                  .subscribe(
+                      cpas => {
+                          if (cpas !== null) {
+                              this.selectedCpas = {...cpas};
+                              console.log('our organisation cpas:', this.selectedCpas);
+                          } else {
+                              console.log('There is no cpas for this organisation!');
+                          }
+                      });
+              this.depotsService.getByKey(organisation.lienDepot)
+                  .subscribe(
+                      depot => {
+                          if (depot !== null) {
+                              this.selectedDepot = {...depot};
+                              console.log('our organisation depot:', this.selectedDepot);
+                          } else {
+                              console.log('There is no depot for this organisation!');
+                          }
+                      });
+          } else {
+              this.organisation = new DefaultOrganisation();
+              console.log('we have a new default organisation');
+          }
       });
+      this.store
+          .pipe(
+              select(globalAuthState),
+              map((authState) => {
+                  if (authState.user) {
+                      switch (authState.user.rights) {
+                          case 'Bank':
+                              this.lienBanque = authState.banque.bankId;
+                              break;
+                          case 'Admin_Banq':
+                              this.lienBanque = authState.banque.bankId;
+                              this.booCanSave = true;
+                              if (this.booCalledFromTable ) {
+                                  this.booCanDelete = true;
+                              }
+                              break;
+                          case 'Asso':
+                              this.lienBanque = authState.banque.bankId;
+                               break;
+                          case 'Admin_Asso':
+                              this.lienBanque = authState.banque.bankId;
+                              this.booCanSave = true;
+                              if (this.booCalledFromTable) {
+                                  this.booCanDelete = true;
+                              }
+                              break;
+                          default:
+                      }
+                  }
+              })
+          )
+          .subscribe();
   }
   save(oldOrganisation: Organisation, organisationForm: Organisation) {
     const modifiedOrganisation = Object.assign({}, oldOrganisation, organisationForm);
-    this.organisationsService.update(modifiedOrganisation)
-        .subscribe( ()  => {
-          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `L'organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe}  a été modifiée`});
-            this.onOrganisationUpdate.emit(modifiedOrganisation);
-         });
+      modifiedOrganisation.lienCpas = this.selectedCpas.cpasId;
+      modifiedOrganisation.lienDepot = Number(this.selectedDepot.idDepot);
+      if (modifiedOrganisation.hasOwnProperty('idDis')) {
+          this.organisationsService.update(modifiedOrganisation)
+              .subscribe( ()  => {
+                  this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Organisation ${modifiedOrganisation.societe} was updated`});
+                  this.onOrganisationUpdate.emit(modifiedOrganisation);
+              });
+      } else {
+          modifiedOrganisation.lienBanque = this.lienBanque;
+          console.log('Creating Organisation with content:', modifiedOrganisation);
+          this.organisationsService.add(modifiedOrganisation)
+              .subscribe(() => {
+                  this.messageService.add({
+                      severity: 'success',
+                      summary: 'Creation',
+                      detail: `Organisation ${modifiedOrganisation.societe} was created`
+                  });
+                  this.onOrganisationUpdate.emit(modifiedOrganisation);
+              });
+      }
   }
     delete(event: Event, organisation: Organisation) {
         this.confirmationService.confirm({
@@ -106,5 +203,24 @@ export class OrganisationComponent implements OnInit {
             console.log('Form is not dirty, closing');
             this.onOrganisationQuit.emit();
         }
+    }
+    filterCpas(event ) {
+        const  queryCpasParms: QueryParams = {};
+        const query = event.query;
+        queryCpasParms['offset'] = '0';
+        queryCpasParms['rows'] = '10';
+        queryCpasParms['sortField'] = 'cpasName';
+        queryCpasParms['sortOrder'] = '1';
+        queryCpasParms['searchField'] = 'cpasName';
+        queryCpasParms['searchValue'] = query.toLowerCase();
+        this.cpassService.getWithQuery(queryCpasParms)
+            .subscribe(filteredCpass =>  this.filteredCpass = filteredCpass);
+    }
+    filterDepot(event ) {
+        const  queryDepotParms: QueryParams = {};
+
+        queryDepotParms['bankShortName'] = this.organisation.bankShortName;
+        this.depotsService.getWithQuery(queryDepotParms)
+            .subscribe(filteredDepots =>  this.filteredDepots = filteredDepots);
     }
 }

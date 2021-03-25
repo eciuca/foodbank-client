@@ -22,6 +22,7 @@ import {QueryParams} from '@ngrx/data';
 export class BeneficiaireComponent implements OnInit {
     @Input() idClient$: Observable<number>;
     @Output() onBeneficiaireUpdate = new EventEmitter<Beneficiaire>();
+    @Output() onBeneficiaireCreate = new EventEmitter<Beneficiaire>();
     @Output() onBeneficiaireDelete = new EventEmitter<Beneficiaire>();
     @Output() onBeneficiaireQuit = new EventEmitter<Beneficiaire>();
     beneficiaire: Beneficiaire;
@@ -162,13 +163,13 @@ export class BeneficiaireComponent implements OnInit {
           modifiedBeneficiaire.lienDis = this.lienDis;
           console.log('Creating Beneficiaire with content:', modifiedBeneficiaire);
           this.beneficiairesService.add(modifiedBeneficiaire)
-              .subscribe(() => {
+              .subscribe((newBeneficiaire) => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Création',
-                      detail: `Le beneficiaire ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  a été créé`
+                      detail: `Le beneficiaire ${newBeneficiaire.nom} ${newBeneficiaire.prenom}  a été créé`
                   });
-                  this.onBeneficiaireUpdate.emit(modifiedBeneficiaire);
+                  this.onBeneficiaireCreate.emit(newBeneficiaire);
               });
       }
 

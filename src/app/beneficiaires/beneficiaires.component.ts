@@ -95,6 +95,12 @@ export class BeneficiairesComponent implements OnInit {
     this.beneficiaires[index] = updatedBeneficiaire;
     this.displayDialog = false;
   }
+  handleBeneficiaireCreate(createdBeneficiaire: Beneficiaire) {
+    this.beneficiaires.push({...createdBeneficiaire});
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
+    this.displayDialog = false;
+  }
 
   handleBeneficiaireDeleted(deletedBeneficiaire) {
     const index = this.beneficiaires.findIndex(beneficiaire => beneficiaire.idClient === deletedBeneficiaire.idClient);

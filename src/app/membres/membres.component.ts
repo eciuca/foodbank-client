@@ -87,6 +87,12 @@ export class MembresComponent implements OnInit {
     handleMembreQuit() {
         this.displayDialog = false;
     }
+    handleMembreCreate(createdMembre: Membre) {
+        this.membres.push({...createdMembre});
+        const latestQueryParams = this.loadPageSubject$.getValue();
+        this.loadPageSubject$.next(latestQueryParams);
+        this.displayDialog = false;
+    }
 
     handleMembreUpdate(updatedMembre) {
         const index = this.membres.findIndex(membre => membre.batId === updatedMembre.batId);

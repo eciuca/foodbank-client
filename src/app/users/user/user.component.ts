@@ -27,6 +27,7 @@ export class UserComponent implements OnInit {
     filteredMembres: Membre[];
     @Output() onUserUpdate = new EventEmitter<User>();
     @Output() onUserDelete = new EventEmitter<User>();
+    @Output() onUserCreate = new EventEmitter<User>();
     @Output() onUserQuit = new EventEmitter<User>();
     booCalledFromTable: boolean;
     booCanSave: boolean;
@@ -113,6 +114,7 @@ export class UserComponent implements OnInit {
                               this.idOrg = authState.organisation.idDis;
                               break;
                           case 'Admin_Asso':
+                              this.idOrg = authState.organisation.idDis;
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;
@@ -160,13 +162,13 @@ export class UserComponent implements OnInit {
           modifiedUser.idCompany = this.idCompany;
           console.log('Creating User with content:', modifiedUser);
           this.usersService.add(modifiedUser)
-              .subscribe(() => {
+              .subscribe((newUser) => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Création',
-                      detail: `User  ${modifiedUser.idUser} ${modifiedUser.userName} has been created`
+                      detail: `User  ${newUser.idUser} ${newUser.userName} has been created`
                   });
-                  this.onUserUpdate.emit(modifiedUser);
+                  this.onUserCreate.emit(newUser);
               });
       }
 

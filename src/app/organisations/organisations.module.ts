@@ -21,6 +21,11 @@ import {DialogModule} from 'primeng/dialog';
 import {appEntityMetadata} from '../app-entity.metadata';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {CpassDataService} from '../cpass/services/cpass-data.service';
+import {CpasEntityService} from '../cpass/services/cpas-entity.service';
+import {DepotsDataService} from '../depots/services/depots-data.service';
+import {DepotEntityService} from '../depots/services/depot-entity.service';
 
 const routes: Routes = [
     { path: '',
@@ -51,11 +56,16 @@ const routes: Routes = [
         PanelModule,
         AccordionModule,
         DialogModule,
-        ConfirmPopupModule
+        ConfirmPopupModule,
+        AutoCompleteModule
     ],
   providers: [
         OrganisationsDataService,
         OrganisationEntityService,
+        CpassDataService,
+        CpasEntityService,
+        DepotsDataService,
+        DepotEntityService,
         ConfirmationService,
         OrganisationsResolver
   ]
@@ -64,9 +74,13 @@ export class OrganisationsModule {
   constructor(
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
-      private organisationsDataService: OrganisationsDataService
+      private organisationsDataService: OrganisationsDataService,
+      private cpassDataService: CpassDataService,
+      private depotsDataService: DepotsDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Organisation', organisationsDataService);
+    entityDataService.registerService('Cpas', cpassDataService);
+    entityDataService.registerService('Depot', depotsDataService);
   }
 }

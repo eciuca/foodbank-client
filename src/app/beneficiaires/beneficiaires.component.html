@@ -88,7 +88,8 @@
     </ng-template>
 </p-table>
  <p-dialog header="Beneficiaire Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false">
-     <app-beneficiaire *ngIf="selectedIdClient$" [idClient$]="selectedIdClient$" (onBeneficiaireUpdate)="handleBeneficiaireUpdate($event)" (onBeneficiaireDelete)="handleBeneficiaireDeleted($event)" (onBeneficiaireQuit)="handleBeneficiaireQuit()"></app-beneficiaire>
+     <app-beneficiaire *ngIf="selectedIdClient$" [idClient$]="selectedIdClient$" (onBeneficiaireUpdate)="handleBeneficiaireUpdate($event)"
+                       (onBeneficiaireCreate)="handleBeneficiaireCreate($event)"  (onBeneficiaireDelete)="handleBeneficiaireDeleted($event)" (onBeneficiaireQuit)="handleBeneficiaireQuit()"></app-beneficiaire>
  </p-dialog>
 
 

@@ -2,8 +2,8 @@
    <p-progressSpinner ></p-progressSpinner>
 </div>
 <div  *ngIf="isLoggedIn$ | async">
-    <p-button [label]="loggedInUserName" icon="pi pi-user" (click)="op.show($event)"></p-button>
-    <p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '450px'}">
+    <p-button [label]="loggedInUserName" icon="pi pi-user" (click)="op.toggle($event)"></p-button>
+    <p-overlayPanel #op [showCloseIcon]="false" [style]="{width: '450px'}">
         <ng-template pTemplate>
            <div class="p-d-flex p-flex-column">
                <div  class="p-mb-2">

@@ -3,7 +3,7 @@ import {MembreEntityService} from '../services/membre-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
-import {Membre} from '../model/membre';
+import {DefaultMembre, Membre} from '../model/membre';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {enmGender, enmLanguage} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
@@ -19,10 +19,10 @@ import {AppState} from '../../reducers';
 export class MembreComponent implements OnInit {
     @Input() batId$: Observable<number>;
     @Output() onMembreUpdate = new EventEmitter<Membre>();
+    @Output() onMembreCreate = new EventEmitter<Membre>();
     @Output() onMembreDelete = new EventEmitter<Membre>();
     @Output() onMembreQuit = new EventEmitter<Membre>();
     membre: Membre;
-    membre$: Observable<Membre>;
     booCalledFromTable: boolean;
     booCanSave: boolean;
     booCanDelete: boolean;
@@ -64,56 +64,57 @@ export class MembreComponent implements OnInit {
                   map(paramMap => paramMap.get('batId')),
                   map(batIdString => Number(batIdString))
               );
-         this.batId$.subscribe( batid => {
-             this.membre$ = this.membresService.getByKey(batid);
-          });
-      } else {
-          this.membre$ = combineLatest([this.batId$, this.membresService.entities$])
+      }
+      const membre$ = combineLatest([this.batId$, this.membresService.entities$])
               .pipe(
                   map(([batId, membres]) => membres.find(membre => membre['batId'] === batId))
               );
-      }
-        this.membre$.subscribe(
-                  membre => {
-                      console.log('Membre : ', membre);
-                      this.membre = membre;
-                  });
-        this.store
-          .pipe(
-              select(globalAuthState),
-              map((authState) => {
-                   switch (authState.user.rights) {
-                          case 'Bank':
-                              this.bankName = authState.banque.bankName;
-                              this.bankShortName = authState.banque.bankShortName;
-                              break;
-                          case 'Admin_Banq':
-                              this.bankName = authState.banque.bankName;
-                              this.bankShortName = authState.banque.bankShortName;
-                              this.booCanSave = true;
-                              if (this.booCalledFromTable) {
-                                  this.booCanDelete = true;
-                              }
-                              break;
-                          case 'Asso':
-                              this.bankName = authState.banque.bankName;
-                              this.bankShortName = authState.banque.bankShortName;
-                              this.lienDis = authState.user.idOrg;
-                              break;
-                          case 'Admin_Asso':
-                              this.bankName = authState.banque.bankName;
-                              this.bankShortName = authState.banque.bankShortName;
-                              this.lienDis = authState.user.idOrg;
-                              this.booCanSave = true;
-                              if (this.booCalledFromTable) {
-                                  this.booCanDelete = true;
-                              }
-                              break;
-                          default:
-                      }
-                 })
-          )
-          .subscribe();
+      membre$.subscribe(
+          membre => {
+              if (membre) {
+                  console.log('Existing Membre : ', membre);
+                  this.membre = membre;
+              } else {
+                  this.membre = new DefaultMembre();
+                  console.log('we have a new default membre');
+              }
+      });
+    this.store
+      .pipe(
+          select(globalAuthState),
+          map((authState) => {
+               switch (authState.user.rights) {
+                      case 'Bank':
+                          this.bankName = authState.banque.bankName;
+                          this.bankShortName = authState.banque.bankShortName;
+                          break;
+                      case 'Admin_Banq':
+                          this.bankName = authState.banque.bankName;
+                          this.bankShortName = authState.banque.bankShortName;
+                          this.booCanSave = true;
+                          if (this.booCalledFromTable) {
+                              this.booCanDelete = true;
+                          }
+                          break;
+                      case 'Asso':
+                          this.bankName = authState.banque.bankName;
+                          this.bankShortName = authState.banque.bankShortName;
+                          this.lienDis = authState.user.idOrg;
+                          break;
+                      case 'Admin_Asso':
+                          this.bankName = authState.banque.bankName;
+                          this.bankShortName = authState.banque.bankShortName;
+                          this.lienDis = authState.user.idOrg;
+                          this.booCanSave = true;
+                          if (this.booCalledFromTable) {
+                              this.booCanDelete = true;
+                          }
+                          break;
+                      default:
+                  }
+             })
+      )
+      .subscribe();
   }
     delete(event: Event, membre: Membre) {
         this.confirmationService.confirm({
@@ -153,13 +154,13 @@ export class MembreComponent implements OnInit {
           modifiedMembre.lienDis = this.lienDis;
           console.log('Creating Membre with content:', modifiedMembre);
           this.membresService.add(modifiedMembre)
-              .subscribe(() => {
+              .subscribe((newMembre) => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Création',
-                      detail: `Le membre ${modifiedMembre.nom} ${modifiedMembre.prenom}  a été créé`
+                      detail: `Le membre ${newMembre.nom} ${newMembre.prenom}  a été créé`
                   });
-                  this.onMembreUpdate.emit(modifiedMembre);
+                  this.onMembreCreate.emit(newMembre);
               });
       }
   }

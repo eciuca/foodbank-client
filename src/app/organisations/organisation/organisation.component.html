@@ -1,6 +1,6 @@
 <p-panel *ngIf="organisation">
     <ng-template pTemplate="header">
-       Organisation {{ organisation.idDis}} of bank {{ organisation.bankName}}
+       Organisation {{ organisation.societe}} of bank {{ organisation.bankName}}
     </ng-template>
     <form   #organisationForm="ngForm">
         <p-accordion [multiple]="true">
@@ -182,12 +182,38 @@
                     </div>
                 </div>
             </p-accordionTab>
+            <p-accordionTab header="OCMW/CPAS and Depot">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="selectedCpas">Cpas</label>
+                        <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" (completeMethod)="filterCpas($event)"
+                                         [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true">
+                            <ng-template let-cpas pTemplate="item">
+                                <div class="cpas-item">
+                                    <div> {{cpas.cpasName}}</div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="selectedDepot">Depot</label>
+                        <p-autoComplete  [(ngModel)]="selectedDepot" [suggestions]="filteredDepots" (completeMethod)="filterDepot($event)"
+                                         [forceSelection]="true"  id="selectedDepot" name="selectedDepot" field="nom" [dropdown]="true">
+                            <ng-template let-depot pTemplate="item">
+                                <div class="depot-item">
+                                    <div> {{depot.nom}}</div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+                    </div>
+                </div>
+            </p-accordionTab>
         </p-accordion>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button  *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event,organisation)" label="Delete"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save" [disabled] = "organisationForm.invalid"></button>
-            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, organisationForm,organisationForm.dirty)" label="Return" ></button>
+            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,organisation)" label="Delete"></button>
+            <button *ngIf="booCanSave"type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save" [disabled] = "organisationForm.invalid"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, organisationForm,organisationForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

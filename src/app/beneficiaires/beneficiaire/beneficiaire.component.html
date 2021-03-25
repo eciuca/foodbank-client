@@ -70,7 +70,7 @@
                 <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" (completeMethod)="filterCpas($event)"
                                  [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true">
                     <ng-template let-cpas pTemplate="item">
-                        <div class="membre-item">
+                        <div class="cpas-item">
                             <div> {{cpas.cpasName}}</div>
                         </div>
                     </ng-template>
