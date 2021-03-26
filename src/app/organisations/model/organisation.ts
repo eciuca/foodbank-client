@@ -96,7 +96,7 @@ export interface Organisation {
 
     langue: number;
 
-    lastvisit: Date;
+    lastvisit: string;
 
     nbrefix: number;
 
@@ -218,7 +218,7 @@ export interface Organisation {
 
     lupdUserName: string;
 
-    lupdTs: Date;
+    lupdTs: string;
 
     bankShortName: string;
 
@@ -299,7 +299,7 @@ export class DefaultOrganisation implements Organisation {
     iban: string;
     idDis: number;
     langue: number;
-    lastvisit: Date;
+    lastvisit: string;
     lienBanque: number;
     lienCpas: number;
     lienDepot: number;
@@ -308,7 +308,7 @@ export class DefaultOrganisation implements Organisation {
     localite: string;
     localite2: string;
     logBirb: number;
-    lupdTs: Date;
+    lupdTs: string;
     lupdUserName: string;
     montCot: number;
     msonac: number;
@@ -412,9 +412,9 @@ export class DefaultOrganisation implements Organisation {
         this.gsmTres = '';
         this.gsmVp = '';
         this.iban = '';
-        this.idDis = 0;
+        // this.idDis = 0; Omit table key
         this.langue = 0;
-        this.lastvisit = new Date();
+        this.lastvisit = '';
         this.lienBanque = 0;
         this.lienCpas = 0;
         this.lienDepot = 0;
@@ -423,7 +423,7 @@ export class DefaultOrganisation implements Organisation {
         this.localite = '';
         this.localite2 = '';
         this.logBirb = 0;
-        this.lupdTs = new Date();
+        this.lupdTs = '';
         this.lupdUserName = '';
         this.montCot = 0;
         this.msonac = 0;

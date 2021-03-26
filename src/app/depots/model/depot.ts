@@ -24,9 +24,7 @@ export interface Depot {
     actif: boolean;
 
     depFead: boolean;
-
-    bankName: string;
-    bankShortName: string;
+    lienBanque: number;
 }
 export function compareDepots(c1: Depot, c2: Depot) {
 

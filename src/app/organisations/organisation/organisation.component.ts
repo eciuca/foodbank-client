@@ -25,6 +25,7 @@ export class OrganisationComponent implements OnInit {
 
   @Input() idDis$: Observable<number>;
     @Output() onOrganisationUpdate = new EventEmitter<Organisation>();
+    @Output() onOrganisationCreate = new EventEmitter<Organisation>();
     @Output() onOrganisationDelete = new EventEmitter<Organisation>();
     @Output() onOrganisationQuit = new EventEmitter<Organisation>();
     booCalledFromTable: boolean;
@@ -39,7 +40,8 @@ export class OrganisationComponent implements OnInit {
   genders: any[];
   statuts: any[];
   countries: any[];
-  lienBanque: number;
+    bankName: string;
+    bankShortName: string;
 
   constructor(
       private organisationsService: OrganisationEntityService,
@@ -58,7 +60,8 @@ export class OrganisationComponent implements OnInit {
       this.booCanDelete = false;
       this.booCanSave = false;
       this.booCanQuit = true;
-      this.lienBanque = 0;
+      this.bankName = '';
+      this.bankShortName = '';
   }
 
   ngOnInit(): void {
@@ -116,20 +119,24 @@ export class OrganisationComponent implements OnInit {
                   if (authState.user) {
                       switch (authState.user.rights) {
                           case 'Bank':
-                              this.lienBanque = authState.banque.bankId;
+                              this.bankName = authState.banque.bankName;
+                              this.bankShortName = authState.banque.bankShortName;
                               break;
                           case 'Admin_Banq':
-                              this.lienBanque = authState.banque.bankId;
+                              this.bankName = authState.banque.bankName;
+                              this.bankShortName = authState.banque.bankShortName;
                               this.booCanSave = true;
                               if (this.booCalledFromTable ) {
                                   this.booCanDelete = true;
                               }
                               break;
                           case 'Asso':
-                              this.lienBanque = authState.banque.bankId;
+                              this.bankName = authState.banque.bankName;
+                              this.bankShortName = authState.banque.bankShortName;
                                break;
                           case 'Admin_Asso':
-                              this.lienBanque = authState.banque.bankId;
+                              this.bankName = authState.banque.bankName;
+                              this.bankShortName = authState.banque.bankShortName;
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;
@@ -147,22 +154,24 @@ export class OrganisationComponent implements OnInit {
       modifiedOrganisation.lienCpas = this.selectedCpas.cpasId;
       modifiedOrganisation.lienDepot = Number(this.selectedDepot.idDepot);
       if (modifiedOrganisation.hasOwnProperty('idDis')) {
+          console.log('Creating Organisation with content:', modifiedOrganisation);
           this.organisationsService.update(modifiedOrganisation)
               .subscribe( ()  => {
                   this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Organisation ${modifiedOrganisation.societe} was updated`});
                   this.onOrganisationUpdate.emit(modifiedOrganisation);
               });
       } else {
-          modifiedOrganisation.lienBanque = this.lienBanque;
+          modifiedOrganisation.bankShortName = this.bankShortName;
+          modifiedOrganisation.bankName = this.bankName;
           console.log('Creating Organisation with content:', modifiedOrganisation);
           this.organisationsService.add(modifiedOrganisation)
-              .subscribe(() => {
+              .subscribe((newOrganisation) => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: `Organisation ${modifiedOrganisation.societe} was created`
+                      detail: `Organisation ${newOrganisation.societe} was created`
                   });
-                  this.onOrganisationUpdate.emit(modifiedOrganisation);
+                  this.onOrganisationCreate.emit(newOrganisation);
               });
       }
   }
@@ -218,8 +227,8 @@ export class OrganisationComponent implements OnInit {
     }
     filterDepot(event ) {
         const  queryDepotParms: QueryParams = {};
-
-        queryDepotParms['bankShortName'] = this.organisation.bankShortName;
+        const query = event.query;
+        queryDepotParms['searchValue'] = query.toLowerCase();
         this.depotsService.getWithQuery(queryDepotParms)
             .subscribe(filteredDepots =>  this.filteredDepots = filteredDepots);
     }

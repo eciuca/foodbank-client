@@ -92,8 +92,14 @@ export class OrganisationsComponent implements OnInit {
         this.displayDialog = false;
     }
 
-    handleOrganisationDeleted() {
+    handleOrganisationDeleted(deletedOrganisation) {
         // Non-paged nothing to be done
+        this.displayDialog = false;
+    }
+    handleOrganisationCreated(createdOrganisation: Organisation) {
+        // this.organisations.push({...createdOrganisation});
+        // const latestQueryParams = this.loadPageSubject$.getValue();
+        // this.loadPageSubject$.next(latestQueryParams);
         this.displayDialog = false;
     }
 }
