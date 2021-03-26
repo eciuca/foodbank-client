@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import { Depot } from './model/depot';
 import {DepotEntityService} from './services/depot-entity.service';
-import { tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import {globalAuthState} from '../auth/auth.selectors';
 
 
 @Component({
@@ -12,14 +14,18 @@ import {Observable} from 'rxjs';
 })
 
 export class DepotsComponent implements OnInit {
-  selectedDepot: Depot;
+  selectedIdDepot$ = new BehaviorSubject('');
+  depot: Depot = null;
   depots$: Observable<Depot[]>;
   cols: any[];
   displayDialog: boolean;
+  booCanCreate: boolean;
 
   constructor(
-      private depotService: DepotEntityService
+      private depotService: DepotEntityService,
+      private store: Store
   ) {
+    this.booCanCreate = false;
   }
 
   ngOnInit() {
@@ -41,12 +47,27 @@ export class DepotsComponent implements OnInit {
       {field: 'cp', header: 'Code Postal'},
       {field: 'ville', header: 'Ville'}
     ];
-
+    this.store
+        .pipe(
+            select(globalAuthState),
+            map((authState) => {
+              if (authState.banque) {
+                switch (authState.user.rights) {
+                  case 'admin':
+                  case 'Admin_Banq':
+                      this.booCanCreate = true;
+                   break;
+                 default:
+                }
+              }
+            })
+        )
+        .subscribe();
   }
 
   handleSelect(depot: Depot) {
     console.log('Depot was selected', depot);
-    this.selectedDepot = depot;
+    this.selectedIdDepot$.next(depot.idDepot);
     this.displayDialog = true;
   }
 
@@ -59,9 +80,18 @@ export class DepotsComponent implements OnInit {
     // Non-paged nothing to be done
     this.displayDialog = false;
   }
-
-  handleDepotDeleted() {
+  handleDepotCreated(createdDepot: Depot) {
+    // this.organisations.push({...createdOrganisation});
+    this.displayDialog = false;
+  }
+  handleDepotDeleted(deletedDepot) {
     // Non-paged nothing to be done
     this.displayDialog = false;
   }
+  showDialogToAdd() {
+    this.selectedIdDepot$.next('');
+    this.displayDialog = true;
+  }
+
+
 }

@@ -5,7 +5,7 @@
              [filterDelay]="0" [globalFilterFields]="['nom','adresse','cp','ville']">
         <ng-template pTemplate="caption">
             <div class="table-header">
-                Liste des Depots
+                <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Depot"></button>
                 <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
@@ -60,7 +60,8 @@
         </ng-template>
     </p-table>
     <p-dialog header="Depot Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false" >
-        <app-depot *ngIf="selectedDepot" [depot]="selectedDepot" (onDepotUpdate)="handleDepotUpdate($event)" (onDepotDelete)="handleDepotDeleted()" (onDepotQuit)="handleDepotQuit()"></app-depot>
+        <app-depot *ngIf="selectedIdDepot$" [idDepot$]="selectedIdDepot$" (onDepotUpdate)="handleDepotUpdate($event)"
+                   (onDepotCreate)="handleDepotCreated($event)" (onDepotDelete)="handleDepotDeleted($event)" (onDepotQuit)="handleDepotQuit()"></app-depot>
     </p-dialog>
 </ng-container>
 

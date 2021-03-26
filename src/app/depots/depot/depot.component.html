@@ -4,7 +4,12 @@
     </ng-template>
     <form   #depotForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col-12 p-md-6">
+            <div class="p-field p-col-12 p-md-2">
+                <label for="idDepot">Identifiant</label>
+                <input #idDepot="ngModel" pInputText id="idDepot" name="idDepot" required minlength="4" maxLength="10" [ngModel]="depot.idDepot" />
+                <p-message *ngIf="idDepot.invalid && (idDepot.dirty || idDepot.touched)" severity="error" text="Depot Id is required and must be minimum 4 chars long"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
                 <label for="nom">Nom</label>
                 <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxLength="45" [ngModel]="depot.nom" />
                 <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="User Name is required and must be minimum 4 chars long"></p-message>
@@ -56,9 +61,9 @@
         </div>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button  *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event, depot)" label="Delete"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="save(depot, depotForm.value)" label="Save" [disabled] = "depotForm.invalid" ></button>
-            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, depot, depotForm,depotForm.dirty)" label="Return" ></button>
+            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, depot)" label="Delete"></button>
+            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(depot, depotForm.value)" label="Save" [disabled] = "depotForm.invalid" ></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, depot, depotForm,depotForm.dirty)" label="Return" ></button>
         </div>
     </form>
 </p-panel>

@@ -154,7 +154,7 @@ export class OrganisationComponent implements OnInit {
       modifiedOrganisation.lienCpas = this.selectedCpas.cpasId;
       modifiedOrganisation.lienDepot = Number(this.selectedDepot.idDepot);
       if (modifiedOrganisation.hasOwnProperty('idDis')) {
-          console.log('Creating Organisation with content:', modifiedOrganisation);
+          console.log('Modifying Organisation with content:', modifiedOrganisation);
           this.organisationsService.update(modifiedOrganisation)
               .subscribe( ()  => {
                   this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Organisation ${modifiedOrganisation.societe} was updated`});
