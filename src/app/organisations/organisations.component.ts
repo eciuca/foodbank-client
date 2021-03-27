@@ -38,16 +38,10 @@ export class OrganisationsComponent implements OnInit {
         .pipe(
             select(globalAuthState),
             map((authState) => {
-                if (authState.banque) {
+                if (authState.user) {
                     switch (authState.user.rights) {
-                        case 'Bank':
-                        case 'Admin_Banq':
-                            if (authState.user.rights === 'Admin_Banq') {
-                                this.booCanCreate = true;
-                            }
-                            break;
-                        case 'Asso':
-                        case 'Admin_Asso':
+                         case 'Admin_Banq':
+                             this.booCanCreate = true;
                             break;
                         default:
                     }

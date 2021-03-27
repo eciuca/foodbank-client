@@ -170,9 +170,9 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="bankname">Name</label>
-                <input #nom="ngModel" pInputText id="bankname" name="bankname" required minlength="10" maxLength="100" [ngModel]="banque.bankName" />
-                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Bank Name is required and must be minimum 4 chars long"></p-message>
+                <label for="bankName">Name</label>
+                <input #nom="ngModel" pInputText id="bankName" name="bankName" required minlength="10" maxLength="100" [ngModel]="banque.bankName" />
+                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Bank Name is required and must be minimum 10 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="nrEntr">Entr Number</label>
@@ -212,28 +212,28 @@
 
 
             <div class="p-field p-col-12 p-md-6">
-                <label for="adressedepot">Depot Address</label>
-                <input #adressedepot="ngModel" pInputText id="adressedepot" name="adressedepot" required minlength="4" maxLength="50" [ngModel]="banque.adresseDepotPrinc" />
+                <label for="adresseDepotPrinc">Depot Address</label>
+                <input #adressedepot="ngModel" pInputText id="adresseDepotPrinc" name="adresseDepotPrinc" required minlength="4" maxLength="50" [ngModel]="banque.adresseDepotPrinc" />
                 <p-message *ngIf="adressedepot.invalid && (adressedepot.dirty || adressedepot.touched)" severity="error" text="Depot Address is required and must be minimum 9 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="cpdepot">Depot Zip Code</label>
-                <input #zipcodedepot="ngModel" pInputText id="cpdepot" name="cpdepot"  required minlength="4" maxLength="10" [ngModel]="banque.cpDepotPrinc" />
+                <label for="cpDepotPrinc">Depot Zip Code</label>
+                <input #zipcodedepot="ngModel" pInputText id="cpDepotPrinc" name="cpDepotPrinc"  required minlength="4" maxLength="10" [ngModel]="banque.cpDepotPrinc" />
                 <p-message *ngIf="zipcodedepot.invalid && (zipcodedepot.dirty || zipcodedepot.touched)" severity="error" text="Depot Zip Code is required and must be minimum 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="localitedepot">Depot City</label>
-                <input #localitedepot="ngModel" pInputText id="localitedepot" name="localitedepot"  required minlength="4" maxLength="30" [ngModel]="banque.cityDepotPrinc" />
+                <label for="cityDepotPrinc">Depot City</label>
+                <input #localitedepot="ngModel" pInputText id="cityDepotPrinc" name="cityDepotPrinc"  required minlength="4" maxLength="30" [ngModel]="banque.cityDepotPrinc" />
                 <p-message *ngIf="localitedepot.invalid && (localitedepot.dirty || localitedepot.touched)" severity="error" text="Depot City is required and must be minimum 4 chars long"></p-message>
             </div>
         </div>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button  *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-times" (click)="delete($event, banque)" label="Delete"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="save(banque, banqueForm.value)" label="Save" [disabled] = "banqueForm.invalid"></button>
-            <button *ngIf="booCanDeleteAndQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, banque, banqueForm,banqueForm.dirty)" label="Return" ></button>
+            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, banque)" label="Delete"></button>
+            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(banque, banqueForm.value)" label="Save" [disabled] = "banqueForm.invalid"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, banque, banqueForm,banqueForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

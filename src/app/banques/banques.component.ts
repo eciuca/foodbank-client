@@ -1,9 +1,11 @@
-import {Component, OnInit, Output} from '@angular/core';
-import { Banque } from './model/banque';
+import {Component, OnInit } from '@angular/core';
+import {Banque } from './model/banque';
 import {BanqueEntityService} from './services/banque-entity.service';
-import {concatMap, map, tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Router} from '@angular/router';
+import {select, Store} from '@ngrx/store';
+import {globalAuthState} from '../auth/auth.selectors';
 
 
 @Component({
@@ -17,11 +19,15 @@ export class BanquesComponent implements OnInit {
   banques$: Observable<Banque[]>;
   cols: any[];
   displayDialog: boolean;
+  booCanCreate: boolean;
 
   constructor(
       private banqueService: BanqueEntityService,
       private router: Router,
-      ) { }
+      private store: Store
+      ) {
+      this.booCanCreate = false;
+  }
 
   ngOnInit() {
     this.reload();
@@ -41,11 +47,30 @@ export class BanquesComponent implements OnInit {
       { field: 'nrEntr', header: 'NrEntreprise' },
       { field: 'bankMail', header: 'E-mail' }
     ];
+      this.store
+          .pipe(
+              select(globalAuthState),
+              map((authState) => {
+                  if (authState.user) {
+                      switch (authState.user.rights) {
+                          case 'admin':
+                              this.booCanCreate = true;
+                              break;
+                          default:
+                      }
+                  }
+              })
+          )
+          .subscribe();
 
   }
     handleSelect(banque: Banque) {
         console.log( 'Banque was selected', banque);
         this.selectedBankid$.next(banque.bankId);
+        this.displayDialog = true;
+    }
+    showDialogToAdd() {
+        this.selectedBankid$.next(0);
         this.displayDialog = true;
     }
     handleBanqueQuit() {
@@ -58,6 +83,11 @@ export class BanquesComponent implements OnInit {
     }
 
     handleBanqueDeleted() {
+        // Non-paged nothing to be done
+        this.displayDialog = false;
+    }
+
+    handleBanqueCreate(createdBanque: Banque) {
         // Non-paged nothing to be done
         this.displayDialog = false;
     }
