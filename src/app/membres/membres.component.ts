@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
-import {Membre, DefaultMembre} from './model/membre';
+import {Membre} from './model/membre';
 import {MembreEntityService} from './services/membre-entity.service';
 import {Router} from '@angular/router';
 import {globalAuthState} from '../auth/auth.selectors';
@@ -20,7 +20,7 @@ import {AuthState} from '../auth/reducers';
 export class MembresComponent implements OnInit {
     loadPageSubject$ = new BehaviorSubject(null);
     selectedBatid$ = new BehaviorSubject(0);
-    membre: Membre = new DefaultMembre();
+    membre: Membre = null;
     membres: Membre[];
     cols: any[];
     displayDialog: boolean;
@@ -182,7 +182,7 @@ export class MembresComponent implements OnInit {
     }
 
     showDialogToAdd() {
-        this.membre = new DefaultMembre();
+        this.selectedBatid$.next(0);
         this.displayDialog = true;
     }
 }

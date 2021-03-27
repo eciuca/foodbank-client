@@ -156,7 +156,7 @@ export class CpassComponent implements OnInit {
   }
 
   showDialogToAdd() {
-    this.cpas = new DefaultCpas();
+    this.selectedCpasid$.next(0);
     this.displayDialog = true;
   }
 }
