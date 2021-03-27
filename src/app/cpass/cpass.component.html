@@ -4,7 +4,7 @@
          [filterDelay]="0" >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            {{title}}
+            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Cpas"></button>
             <span class="p-input-icon-left">
         </span>
         </div>
@@ -78,5 +78,6 @@
     </ng-template>
 </p-table>
 <p-dialog header="Cpas Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false" [style]="{'width':'1800px'}">
-    <app-cpas *ngIf="cpas" [cpas]="cpas" (onCpasUpdate)="handleCpasUpdate($event)" (onCpasDelete)="handleCpasDeleted($event)" (onCpasQuit)="handleCpasQuit()"></app-cpas>
+    <app-cpas *ngIf=" selectedCpasid$" [cpasId$]=" selectedCpasid$" (onCpasUpdate)="handleCpasUpdate($event)" (onCpasCreate)="handleCpasCreate($event)"
+              (onCpasDelete)="handleCpasDeleted($event)" (onCpasQuit)="handleCpasQuit()"></app-cpas>
 </p-dialog>

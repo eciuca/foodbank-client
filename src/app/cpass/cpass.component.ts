@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Cpas} from './model/cpas';
+import {Cpas, DefaultCpas} from './model/cpas';
 import {CpasEntityService} from './services/cpas-entity.service';
 import {LazyLoadEvent} from 'primeng/api';
-import {filter, mergeMap} from 'rxjs/operators';
+import {filter, map, mergeMap} from 'rxjs/operators';
+import {AuthState} from '../auth/reducers';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../reducers';
+import {globalAuthState} from '../auth/auth.selectors';
 
 @Component({
   selector: 'app-cpass',
@@ -13,16 +17,20 @@ import {filter, mergeMap} from 'rxjs/operators';
 
 export class CpassComponent implements OnInit {
   loadPageSubject$ = new BehaviorSubject(null);
+  selectedCpasid$ = new BehaviorSubject(0);
   cpas: Cpas = null;
   cpass: Cpas[];
   cols: any[];
   displayDialog: boolean;
-  title: string;
   totalRecords: number;
   loading: boolean;
   filterBase: any;
+  booCanCreate: boolean;
 
-  constructor(private cpasService: CpasEntityService)   { }
+  constructor(private cpasService: CpasEntityService,
+              private store: Store<AppState>)   {
+    this.booCanCreate = false;
+  }
 
   ngOnInit() {
     this.reload();
@@ -54,12 +62,19 @@ export class CpassComponent implements OnInit {
       { field: 'cpasTel', header: 'Tel' },
       { field: 'cpasGsm', header: 'Gsm' },
     ];
-
+    this.store
+        .pipe(
+            select(globalAuthState),
+            map((authState) => {
+              this.initializeDependingOnUserRights(authState);
+            })
+        )
+        .subscribe();
   }
 
   handleSelect(cpas) {
     console.log( 'Cpas was selected', cpas);
-    this.cpas = cpas;
+    this.selectedCpasid$.next(cpas.cpasId);
     this.displayDialog = true;
   }
   handleCpasQuit() {
@@ -71,6 +86,12 @@ export class CpassComponent implements OnInit {
     this.cpass[index] = updatedCpas;
     this.displayDialog = false;
   }
+  handleCpasCreate(createdCpas: Cpas) {
+    this.cpass.push({...createdCpas});
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
+    this.displayDialog = false;
+  }
 
   handleCpasDeleted(deletedCpas) {
     const index = this.cpass.findIndex(cpas => cpas.cpasId === deletedCpas.cpasId);
@@ -78,7 +99,7 @@ export class CpassComponent implements OnInit {
     const latestQueryParams = this.loadPageSubject$.getValue();
     this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
-  };
+  }
 
   nextPage(event: LazyLoadEvent) {
     console.log('Lazy Loaded Event', event);
@@ -123,7 +144,21 @@ export class CpassComponent implements OnInit {
           this.cpasService.setLoaded(true);
         });
   }
+  private initializeDependingOnUserRights(authState: AuthState) {
+    if (authState.banque) {
+      switch (authState.user.rights) {
+        case 'admin':
+         this.booCanCreate = true;
+          break;
+        default:
+      }
+    }
+  }
 
+  showDialogToAdd() {
+    this.cpas = new DefaultCpas();
+    this.displayDialog = true;
+  }
 }
 
 
