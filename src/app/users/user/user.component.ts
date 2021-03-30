@@ -38,6 +38,7 @@ export class UserComponent implements OnInit {
     idCompany: string;
   languages: any[];
   rights: any[];
+    filterMemberBase: any;
   constructor(
       private usersService: UserEntityService,
       private membresService: MembreEntityService,
@@ -103,8 +104,10 @@ export class UserComponent implements OnInit {
                       this.idCompany = authState.banque.bankShortName;
                       switch (authState.user.rights) {
                           case 'Bank':
+                              this.filterMemberBase = { 'bankShortName': authState.banque.bankShortName};
                               break;
                           case 'Admin_Banq':
+                              this.filterMemberBase = { 'bankShortName': authState.banque.bankShortName};
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;
@@ -112,9 +115,11 @@ export class UserComponent implements OnInit {
                               break;
                           case 'Asso':
                               this.idOrg = authState.organisation.idDis;
+                              this.filterMemberBase = { 'lienDis': authState.organisation.idDis};
                               break;
                           case 'Admin_Asso':
                               this.idOrg = authState.organisation.idDis;
+                              this.filterMemberBase = { 'lienDis': authState.organisation.idDis};
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;
@@ -194,7 +199,7 @@ export class UserComponent implements OnInit {
         }
     }
     filterMembre(event ) {
-        const  queryMemberParms: QueryParams = {};
+        const  queryMemberParms = {...this.filterMemberBase};
         const query = event.query;
         queryMemberParms['offset'] = '0';
         queryMemberParms['rows'] = '10';

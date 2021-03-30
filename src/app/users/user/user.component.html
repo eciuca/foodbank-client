@@ -27,7 +27,7 @@
                             </ng-template>
                         </p-autoComplete>
                     </div>
-                    <div class="p-field p-col-12 p-md-1">
+                    <div class="p-field p-col-12 p-md-2">
                         <label for="idLanguage">Language</label>
                         <p-dropdown [options]="languages" id="idLanguage" name="idLanguage" [ngModel]="user.idLanguage" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
@@ -38,7 +38,7 @@
                         <p-message *ngIf="email.invalid && (email.dirty || email.touched)" severity="error" text="E-mail is required and must be a valid e-mail"></p-message>
 
                     </div>
-                    <div class="p-field p-col-12 p-md-2">
+                    <div class="p-field p-col-12 p-md-1">
                         <label for="rights">Role</label>
                         <p-dropdown [options]="rights" id="rights" name="rights" [ngModel]="user.rights" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>

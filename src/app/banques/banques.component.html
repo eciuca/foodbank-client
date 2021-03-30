@@ -59,7 +59,7 @@
             </div>
         </ng-template>
     </p-table>
-    <p-dialog header="Banque Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false">
+    <p-dialog header="Banque Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
         <app-banque *ngIf="selectedBankid$" [bankId$]="selectedBankid$" (onBanqueUpdate)="handleBanqueUpdate($event)" (onBanqueCreate)="handleBanqueCreate($event)"
                     (onBanqueDelete)="handleBanqueDeleted()" (onBanqueQuit)="handleBanqueQuit()"></app-banque>
     </p-dialog>

@@ -65,7 +65,7 @@
         </div>
     </ng-template>
 </p-table>
-    <p-dialog header="Organisation Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false" [style]="{'width':'1800px'}">
+    <p-dialog header="Organisation Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false" [style]="{'width':'1800px'}">
         <app-organisation *ngIf="selectedIdDis$" [idDis$]="selectedIdDis$" (onOrganisationUpdate)="handleOrganisationUpdate($event)"
                           (onOrganisationCreate)="handleOrganisationCreated($event)" (onOrganisationDelete)="handleOrganisationDeleted($event)" (onOrganisationQuit)="handleOrganisationQuit()"></app-organisation>
     </p-dialog>

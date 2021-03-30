@@ -87,7 +87,7 @@
             </div>
         </ng-template>
     </p-table>
-    <p-dialog header="Membre Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false" [style]="{'width':'1800px'}">
+    <p-dialog header="Member Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
         <app-membre *ngIf="selectedBatid$" [batId$]="selectedBatid$" (onMembreUpdate)="handleMembreUpdate($event)" (onMembreCreate)="handleMembreCreate($event)"
                     (onMembreDelete)="handleMembreDeleted($event)" (onMembreQuit)="handleMembreQuit()"></app-membre>
     </p-dialog>
