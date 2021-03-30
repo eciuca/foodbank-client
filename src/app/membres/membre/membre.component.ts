@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {MembreEntityService} from '../services/membre-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import {DefaultMembre, Membre} from '../model/membre';
 import {ConfirmationService, MessageService} from 'primeng/api';
@@ -59,26 +59,32 @@ export class MembreComponent implements OnInit {
           console.log('We initialize a new membre object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
-          this.batId$ = this.route.paramMap
+          this.route.paramMap
               .pipe(
                   map(paramMap => paramMap.get('batId')),
-                  map(batIdString => Number(batIdString))
-              );
-      }
-      const membre$ = combineLatest([this.batId$, this.membresService.entities$])
+                  map(batIdString => Number(batIdString)),
+                  switchMap(batId => this.membresService.getByKey(batId))
+              ).subscribe(membre => {
+              console.log('Membre from Link : ', membre);
+              this.membre = membre;
+          });
+      }  else {
+         const membre$ = combineLatest([this.batId$, this.membresService.entities$])
               .pipe(
                   map(([batId, membres]) => membres.find(membre => membre['batId'] === batId))
               );
-      membre$.subscribe(
-          membre => {
-              if (membre) {
-                  console.log('Existing Membre : ', membre);
-                  this.membre = membre;
-              } else {
-                  this.membre = new DefaultMembre();
-                  console.log('we have a new default membre');
-              }
-      });
+
+          membre$.subscribe(
+              membre => {
+                  if (membre) {
+                      console.log('Existing Membre : ', membre);
+                      this.membre = membre;
+                  } else {
+                      this.membre = new DefaultMembre();
+                      console.log('we have a new default membre');
+                  }
+              });
+      }
     this.store
       .pipe(
           select(globalAuthState),

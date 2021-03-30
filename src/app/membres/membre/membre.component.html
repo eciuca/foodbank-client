@@ -2,7 +2,7 @@
     <ng-template pTemplate="header">
         Membre {{ membre.batId}} of bank {{ membre.bankName}}
     </ng-template>
-    <form   #membreForm="ngForm">
+    <form   #membreForm="ngForm" style="padding: 1em">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label for="civilite">Gender</label>
@@ -13,7 +13,7 @@
                 <input #nom="ngModel"  pInputText id="nom" name="nom"  required minlength="4" maxlength="50" [ngModel]="membre.nom" />
                 <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Member Name is required and must be minimum 4 chars long"></p-message>
             </div>
-            <div class="p-field p-col-12 p-md-4">
+            <div class="p-field p-col-12 p-md-2">
                 <label for="prenom">First Name *</label>
                 <input  #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="4" maxlength="40" [ngModel]="membre.prenom" />
                 <p-message *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" severity="error" text="Member First Name is required and must be minimum 4 chars long"></p-message>
@@ -22,6 +22,11 @@
                 <label for="langue">Language</label>
                 <p-dropdown [options]="languages" id="langue" name="langue" [ngModel]="membre.langue" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="nnat">National Number</label>
+                <input pInputText id="nnat" name="nnat" maxlength="50" [ngModel]="membre.nnat" />
+            </div>
+
             <div class="p-field p-col-12 p-md-4">
                 <label for="address">Adresse</label>
                 <input pInputText id="address" name="address" maxlength="50" [ngModel]="membre.address" />
@@ -31,13 +36,17 @@
                 <label for="zip">Code Postal</label>
                 <input pInputText id="zip" name="zip" maxlength="10" [ngModel]="membre.zip" />
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label for="city">Commune</label>
                 <input pInputText id="city" name="city" maxlength="20" [ngModel]="membre.city" />
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-4">
                 <label for="email">E-mail</label>
                 <input pInputText id="email" name="email" maxlength="50" [ngModel]="membre.batmail" />
+            </div>
+            <div class="p-field p-col-12 p-md-1">
+                <label for="dateNaissance">Birth Date</label>
+                <p-calendar id="dateNaissance" name="dateNaissance" dataType="string" dateFormat="d/m/yy" class="p-text-nowrap"  style="font-size:9px" [ngModel]="membre.dateNaissance"></p-calendar>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="veh">Car</label>
