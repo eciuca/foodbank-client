@@ -1,6 +1,6 @@
 <p-panel  *ngIf="beneficiaire">
     <ng-template pTemplate="header">
-        Beneficiary of bank {{ beneficiaire.bankName}}
+        Beneficiary of bank {{ beneficiaire.bankName}} Updated On {{beneficiaire.dateUpd}}
     </ng-template>
     <form  #beneficiaireForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">

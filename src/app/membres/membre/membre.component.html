@@ -1,6 +1,6 @@
 <p-panel *ngIf="membre">
     <ng-template pTemplate="header">
-        Membre {{ membre.batId}} of bank {{ membre.bankName}}
+        Membre {{ membre.batId}} of bank {{ membre.bankName}} Updated On {{ membre.lastVisit}}
     </ng-template>
     <form   #membreForm="ngForm" style="padding: 1em">
         <div class="p-fluid p-formgrid p-grid">

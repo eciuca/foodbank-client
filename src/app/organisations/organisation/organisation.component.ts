@@ -42,6 +42,7 @@ export class OrganisationComponent implements OnInit {
   countries: any[];
     bankName: string;
     bankShortName: string;
+    userName: string;
 
   constructor(
       private organisationsService: OrganisationEntityService,
@@ -62,6 +63,7 @@ export class OrganisationComponent implements OnInit {
       this.booCanQuit = true;
       this.bankName = '';
       this.bankShortName = '';
+      this.userName = '' ;
   }
 
   ngOnInit(): void {
@@ -117,6 +119,7 @@ export class OrganisationComponent implements OnInit {
               select(globalAuthState),
               map((authState) => {
                   if (authState.user) {
+                      this.userName = authState.user.userName;
                       switch (authState.user.rights) {
                           case 'Bank':
                               this.bankName = authState.banque.bankName;
@@ -153,6 +156,7 @@ export class OrganisationComponent implements OnInit {
     const modifiedOrganisation = Object.assign({}, oldOrganisation, organisationForm);
       modifiedOrganisation.lienCpas = this.selectedCpas.cpasId;
       modifiedOrganisation.lienDepot = Number(this.selectedDepot.idDepot);
+      modifiedOrganisation.lupdUserName = this.userName;
       if (modifiedOrganisation.hasOwnProperty('idDis')) {
           console.log('Modifying Organisation with content:', modifiedOrganisation);
           this.organisationsService.update(modifiedOrganisation)

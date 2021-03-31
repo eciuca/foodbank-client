@@ -1,6 +1,6 @@
 <p-panel *ngIf="organisation">
     <ng-template pTemplate="header">
-       Organisation {{ organisation.societe}} of bank {{ organisation.bankName}}
+       Organisation {{ organisation.societe}} of bank {{ organisation.bankName}} Updated on {{organisation.lupdTs}} By {{organisation.lupdUserName}}
     </ng-template>
     <form   #organisationForm="ngForm">
         <p-accordion [multiple]="true">

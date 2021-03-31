@@ -89,7 +89,8 @@ export class MembreComponent implements OnInit {
       .pipe(
           select(globalAuthState),
           map((authState) => {
-               switch (authState.user.rights) {
+              if (authState.user) {
+                  switch (authState.user.rights) {
                       case 'Bank':
                           this.bankName = authState.banque.bankName;
                           this.bankShortName = authState.banque.bankShortName;
@@ -118,6 +119,7 @@ export class MembreComponent implements OnInit {
                           break;
                       default:
                   }
+              }
              })
       )
       .subscribe();

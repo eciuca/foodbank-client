@@ -72,6 +72,7 @@ export interface Membre {
     bankName: string;
     bankShortName: string;
     totalRecords: number;
+    lastVisit: string;
 }
 
 export function compareMembres(c1: Membre, c2: Membre) {
@@ -126,7 +127,7 @@ export class DefaultMembre implements Membre {
     vehImm: string;
     vehTyp: string;
     zip: string;
-
+    lastVisit: string;
     constructor() {
        this.pays = 1;
        this.civilite = 1;
@@ -134,5 +135,6 @@ export class DefaultMembre implements Membre {
        this.actif = 1;
        this.authority = 1;
        this.ben = 1;
-    }
+       this.lastVisit = '';
+    };
 }

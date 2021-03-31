@@ -1,6 +1,6 @@
 <p-panel *ngIf="banque">
     <ng-template pTemplate="header">
-        Banque {{banque.bankName}}
+        Banque {{banque.bankName}} Updated On {{ banque.lastvisit}}
     </ng-template>
     <form #banqueForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">
