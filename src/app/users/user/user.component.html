@@ -18,7 +18,7 @@
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="selectedMembre">Member</label>
-                        <p-autoComplete  [(ngModel)]="selectedMembre" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                        <p-autoComplete #membre="ngModel" [(ngModel)]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
                                          [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">
                             <ng-template let-membre pTemplate="item">
                                 <div class="membre-item">
@@ -26,6 +26,7 @@
                                 </div>
                             </ng-template>
                         </p-autoComplete>
+                        <p-message *ngIf="membre.invalid && (membre.dirty || membre.touched)" severity="error" text="A member must be selected"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="idLanguage">Language</label>

@@ -111,7 +111,9 @@ export class OrganisationComponent implements OnInit {
                       });
           } else {
               this.organisation = new DefaultOrganisation();
-              console.log('we have a new default organisation');
+              this.selectedCpas = null;
+              this.selectedDepot = null;
+                  console.log('we have a new default organisation');
           }
       });
       this.store

@@ -46,7 +46,8 @@
             </div>
             <div class="p-field p-col-12 p-md-1">
                 <label for="dateNaissance">Birth Date</label>
-                <p-calendar id="dateNaissance" name="dateNaissance" dataType="string" dateFormat="d/m/yy"  [ngModel]="membre.dateNaissance"></p-calendar>
+                <p-calendar #dateNaissance="ngModel" id="dateNaissance" name="dateNaissance" dataType="string" dateFormat="d/m/yy" required [ngModel]="membre.dateNaissance"></p-calendar>
+                <p-message *ngIf="dateNaissance.invalid && (dateNaissance.dirty || dateNaissance.touched)" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="veh">Car</label>
