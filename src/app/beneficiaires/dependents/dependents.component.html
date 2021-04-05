@@ -1,0 +1,35 @@
+<p-table #dt [value]="dependents" selectionMode="single" [rowHover]="true"
+          [loading]="loading"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of cols">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dependent>
+        <tr (click)="handleSelect(dependent)">
+            <td>
+               {{ labelCivilite (dependent.civilite) }}
+            </td>
+            <td>
+                {{dependent.nom}}
+            </td>
+            <td>
+                {{dependent.prenom}}
+            </td>
+            <td>
+                {{dependent.datenais}}
+            </td>
+            <td>
+                {{dependent.datenais}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+            There are {{totalRecords}} dependents.
+        </div>
+    </ng-template>
+</p-table>
