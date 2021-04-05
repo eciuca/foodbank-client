@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Beneficiaire, DefaultBeneficiaire} from './model/beneficiaire';
+import {Beneficiaire} from './model/beneficiaire';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';

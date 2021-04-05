@@ -6,6 +6,7 @@ import {compareCpass, Cpas} from './cpass/model/cpas';
 import {compareDepots, Depot} from './depots/model/depot';
 import {compareOrganisations, Organisation} from './organisations/model/organisation';
 import {compareUsers, User} from './users/model/user';
+import {compareDependents, Dependent} from './beneficiaires/model/dependent';
 
 export const appEntityMetadata: EntityMetadataMap = {
     Membre: {
@@ -21,6 +22,11 @@ export const appEntityMetadata: EntityMetadataMap = {
     Beneficiaire: {
         sortComparer: compareBeneficiaires,
         selectId: (beneficiaire: Beneficiaire) => beneficiaire.idClient,
+        entityDispatcherOptions: { optimisticUpdate: false}
+    },
+    Dependent: {
+        sortComparer: compareDependents,
+        selectId: (dependent: Dependent) => dependent.idDep,
         entityDispatcherOptions: { optimisticUpdate: false}
     },
     Cpas: {

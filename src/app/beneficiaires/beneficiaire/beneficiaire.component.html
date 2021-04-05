@@ -84,6 +84,7 @@
             <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, beneficiaire, beneficiaireForm, beneficiaireForm.dirty)" label="Return" ></button>
         </div>
     </form>
-
-
 </p-panel>
+<app-dependents *ngIf="idClient$" [masterId$]="idClient$"></app-dependents>
+
+

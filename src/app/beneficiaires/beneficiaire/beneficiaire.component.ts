@@ -206,4 +206,6 @@ export class BeneficiaireComponent implements OnInit {
         this.cpassService.getWithQuery(queryCpasParms)
             .subscribe(filteredCpass =>  this.filteredCpass = filteredCpass);
         }
+
+
 }

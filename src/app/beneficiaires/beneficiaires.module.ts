@@ -21,23 +21,35 @@ import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {CpasEntityService} from '../cpass/services/cpas-entity.service';
+import { DependentsComponent } from './dependents/dependents.component';
+import { DependentComponent } from './dependents/dependent/dependent.component';
+import {DependentsDataService} from './services/dependents-data.service';
+import {DependentEntityService} from './services/dependent-entity.service';
 
 
 
 
 const routes: Routes = [
-  {
-    path: '',
-    component: BeneficiairesComponent,
-  },
-  {
-    path: ':idClient',
-    component: BeneficiaireComponent
-  }
+    {
+        path: '',
+        component: BeneficiairesComponent,
+    },
+    {
+        path: ':idClient',
+        component: BeneficiaireComponent
+    },
+    {
+        path: 'Dependent',
+        component: DependentsComponent,
+    },
+    {
+        path: 'Dependent/:idDep',
+        component: DependentComponent
+    }
 ];
 
 @NgModule({
-  declarations: [BeneficiairesComponent, BeneficiaireComponent],
+  declarations: [BeneficiairesComponent, BeneficiaireComponent, DependentsComponent, DependentComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -52,11 +64,13 @@ const routes: Routes = [
         AutoCompleteModule
     ],
   providers: [
-    BeneficiairesDataService,
-    CpassDataService,
-    BeneficiaireEntityService,
-    CpasEntityService,
-    ConfirmationService
+        BeneficiairesDataService,
+        DependentsDataService,
+        CpassDataService,
+        BeneficiaireEntityService,
+        DependentEntityService,
+        CpasEntityService,
+        ConfirmationService
   ]
 
 })
