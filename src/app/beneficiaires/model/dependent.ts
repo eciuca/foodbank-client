@@ -11,7 +11,6 @@ export interface  Dependent {
     lienBanque: number;
     regio: number;
     civilite: number;
-    civilitelabel: string; // calculated Property
     eq: number;
     totalRecords: number;
 }
@@ -30,7 +29,6 @@ export function compareDependents(c1: Dependent, c2: Dependent) {
 export class DefaultDependent implements Dependent {
     actif: boolean;
     civilite: number;
-    civilitelabel: string; // calculated Property
     datenais: string;
     deleted: boolean;
     depTyp: number;
@@ -48,7 +46,6 @@ export class DefaultDependent implements Dependent {
     constructor() {
         this.actif = true;
         this.civilite = 1;
-        this.civilitelabel = 'Mr.';
         this.datenais = '';
         this.deleted = false;
         this.depTyp = 1;

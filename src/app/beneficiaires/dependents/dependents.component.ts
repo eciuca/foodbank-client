@@ -2,7 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Dependent} from '../model/dependent';
 import {DependentEntityService} from '../services/dependent-entity.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {enmGender} from '../../shared/enums';
+import {select, Store} from '@ngrx/store';
+import {globalAuthState} from '../../auth/auth.selectors';
+import {map} from 'rxjs/operators';
 
 
 
@@ -19,10 +21,10 @@ export class DependentsComponent implements OnInit {
   dependent: Dependent = null;
   cols: any[];
   displayDialog: boolean;
-  totalRecords: number;
   loading: boolean;
   booCanCreate: boolean;
-  constructor(private dependentService: DependentEntityService
+  constructor(private dependentService: DependentEntityService,
+              private store: Store
   ) {
     this.booCanCreate = false;
   }
@@ -34,17 +36,25 @@ export class DependentsComponent implements OnInit {
       { field: 'datenais', header: 'Birth Date' },
       { field: 'actif', header: 'Active' }
     ];
+    this.store
+        .pipe(
+            select(globalAuthState),
+            map((authState) => {
+              if (authState.user && ( authState.user.rights === 'Admin_Asso' ) ) {
+                this.booCanCreate = true;
+              }
+            })
+        )
+        .subscribe();
     this.masterId$.subscribe(masterId => {
     if (masterId) {
         console.log('initializing dependents of idClient', masterId);
         this.loading = true;
-        this.totalRecords = 0;
         const queryParms = {};
         queryParms['lienMast'] = masterId;
         this.dependentService.getWithQuery(queryParms)
             .subscribe(loadedDependents => {
               console.log('Loaded dependents: ' + loadedDependents.length);
-              this.totalRecords = loadedDependents.length;
               this.dependents = loadedDependents;
               this.loading = false;
               this.dependentService.setLoaded(true);
@@ -72,13 +82,13 @@ export class DependentsComponent implements OnInit {
     this.displayDialog = false;
   }
   handleDependentCreate(createdDependent: Dependent) {
-    // this.dependents.push({...createdDependent});
+   this.dependents.push({...createdDependent});
     this.displayDialog = false;
   }
 
   handleDependentDeleted(deletedDependent) {
-    // const index = this.dependents.findIndex(dependent => dependent.idDep === deletedDependent.idDep);
-    // this.dependents.splice(index, 1);
+   const index = this.dependents.findIndex(dependent => dependent.idDep === deletedDependent.idDep);
+   this.dependents.splice(index, 1);
     this.displayDialog = false;
   }
 
@@ -90,7 +100,6 @@ export class DependentsComponent implements OnInit {
         return 'Mrs.';
       case 3:
         return 'Miss';
-        break;
       default:
         return 'Unspecified';
     }

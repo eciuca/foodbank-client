@@ -25,6 +25,9 @@ import { DependentsComponent } from './dependents/dependents.component';
 import { DependentComponent } from './dependents/dependent/dependent.component';
 import {DependentsDataService} from './services/dependents-data.service';
 import {DependentEntityService} from './services/dependent-entity.service';
+import {CalendarModule} from 'primeng/calendar';
+import {MessageModule} from 'primeng/message';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 
 
@@ -61,7 +64,10 @@ const routes: Routes = [
         PanelModule,
         DialogModule,
         ConfirmPopupModule,
-        AutoCompleteModule
+        AutoCompleteModule,
+        CalendarModule,
+        MessageModule,
+        InputSwitchModule
     ],
   providers: [
         BeneficiairesDataService,

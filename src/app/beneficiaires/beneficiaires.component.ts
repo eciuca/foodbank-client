@@ -167,7 +167,7 @@ export class BeneficiairesComponent implements OnInit {
   }
 
   private initializeDependingOnUserRights(authState: AuthState) {
-    if (authState.banque) {
+    if (authState.user) {
       switch (authState.user.rights) {
         case 'Bank':
         case 'Admin_Banq':

@@ -1,1 +1,35 @@
-<p>dependent works!</p>
+<p-panel  *ngIf="dependent">
+      <form  #dependentForm="ngForm">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-2">
+                <label for="civilite">Gender</label>
+                <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="dependent.civilite" optionLabel="name" optionValue="code"></p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="nom">Name</label>
+                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxlength="50" [ngModel]="dependent.nom" />
+                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Dependent Name is required and must be minimum 4 chars long"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="prenom">First Name</label>
+                <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="4" maxlength="50" [ngModel]="dependent.prenom" />
+                <p-message *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" severity="error" text="Dependent First Name is required and must be minimum 4 chars long"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="datenais">Birth Date</label>
+                <p-calendar #datenais="ngModel" id="datenais" name="datenais" dataType="string" dateFormat="d/m/yy" required [ngModel]="dependent.datenais"></p-calendar>
+                <p-message *ngIf="datenais.invalid && (datenais.dirty || datenais.touched)" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="actif">Actif?</label>
+                <p-inputSwitch id="actif" name="actif" [ngModel]="dependent.actif"></p-inputSwitch>
+            </div>
+        </div>
+        <p-confirmPopup></p-confirmPopup>
+        <div class="p-formgroup-inline">
+            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,dependent)" label="Delete"></button>
+            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(dependent, dependentForm.value)" [disabled] = "dependentForm.invalid" label="Save"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, dependent, dependentForm, dependentForm.dirty)" label="Return" ></button>
+        </div>
+    </form>
+</p-panel>

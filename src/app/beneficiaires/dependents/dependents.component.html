@@ -1,6 +1,11 @@
 <p-table #dt [value]="dependents" selectionMode="single" [rowHover]="true"
           [loading]="loading"
 >
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Dependent"></button>
+        </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th *ngFor="let col of cols">
@@ -23,13 +28,12 @@
                 {{dependent.datenais}}
             </td>
             <td>
-                {{dependent.datenais}}
+                {{dependent.actif}}
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="summary">
-        <div class="p-d-flex p-ai-center p-jc-between">
-            There are {{totalRecords}} dependents.
-        </div>
-    </ng-template>
 </p-table>
+<p-dialog header="Dependent Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+    <app-dependent *ngIf="selectedIdDep$" [idDep$]="selectedIdDep$" [masterId$]="masterId$" (onDependentUpdate)="handleDependentUpdate($event)"
+                   (onDependentCreate)="handleDependentCreate($event)"  (onDependentDelete)="handleDependentDeleted($event)" (onDependentQuit)="handleDependentQuit()"></app-dependent>
+</p-dialog>
