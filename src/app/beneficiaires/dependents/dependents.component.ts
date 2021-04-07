@@ -23,10 +23,12 @@ export class DependentsComponent implements OnInit {
   displayDialog: boolean;
   loading: boolean;
   booCanCreate: boolean;
+  booIsAdmin: boolean;
   constructor(private dependentService: DependentEntityService,
               private store: Store
   ) {
     this.booCanCreate = false;
+    this.booIsAdmin = false;
   }
   ngOnInit() {
     this.cols = [
@@ -41,7 +43,7 @@ export class DependentsComponent implements OnInit {
             select(globalAuthState),
             map((authState) => {
               if (authState.user && ( authState.user.rights === 'Admin_Asso' ) ) {
-                this.booCanCreate = true;
+                 this.booIsAdmin = true;
               }
             })
         )
@@ -56,11 +58,16 @@ export class DependentsComponent implements OnInit {
             .subscribe(loadedDependents => {
               console.log('Loaded dependents: ' + loadedDependents.length);
               this.dependents = loadedDependents;
+              if (this.booIsAdmin) {
+                  this.booCanCreate = true;
+              }
               this.loading = false;
               this.dependentService.setLoaded(true);
         });
       } else {
-        console.log(' not yet initializing dependents of masterId');
+        this.dependents = [];
+        this.booCanCreate = false;
+        console.log(' not yet initializing dependents of masterId, we are creating a new beneficiary !!!');
       }
     });
   }
@@ -79,6 +86,8 @@ export class DependentsComponent implements OnInit {
   }
 
   handleDependentUpdate(updatedDependent) {
+   const index = this.dependents.findIndex(dependent => dependent.idDep === updatedDependent.idDep);
+   this.dependents[index] = updatedDependent;
     this.displayDialog = false;
   }
   handleDependentCreate(createdDependent: Dependent) {

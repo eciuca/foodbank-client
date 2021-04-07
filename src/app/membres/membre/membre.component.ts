@@ -130,7 +130,8 @@ export class MembreComponent implements OnInit {
             message: 'Confirm Deletion?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                const  myMessage = {severity: 'success', summary: 'Destruction', detail: `Le membre ${membre.prenom} ${membre.nom} a été détruit`};
+                const  myMessage = {severity: 'success', summary: 'Delete',
+                    detail: `The member ${membre.prenom} ${membre.nom} was deleted`};
                 this.membresService.delete(membre)
                     .subscribe( () => {
                         this.messageService.add(myMessage);
@@ -151,8 +152,8 @@ export class MembreComponent implements OnInit {
               .subscribe(() => {
                   this.messageService.add({
                       severity: 'success',
-                      summary: 'Mise à jour',
-                      detail: `Le membre ${modifiedMembre.nom} ${modifiedMembre.prenom}  a été modifié`
+                      summary: 'Update',
+                      detail: `The member ${modifiedMembre.nom} ${modifiedMembre.prenom}  was updated`
                   });
                   this.onMembreUpdate.emit(modifiedMembre);
               });
@@ -165,8 +166,8 @@ export class MembreComponent implements OnInit {
               .subscribe((newMembre) => {
                   this.messageService.add({
                       severity: 'success',
-                      summary: 'Création',
-                      detail: `Le membre ${newMembre.nom} ${newMembre.prenom}  a été créé`
+                      summary: 'Creation',
+                      detail: `The member ${newMembre.nom} ${newMembre.prenom}  was created`
                   });
                   this.onMembreCreate.emit(newMembre);
               });

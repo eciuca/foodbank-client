@@ -138,7 +138,7 @@ export class UserComponent implements OnInit {
           message: 'Confirm Deletion?',
           icon: 'pi pi-exclamation-triangle',
           accept: () => {
-              const  myMessage = {severity: 'success', summary: 'Destruction', detail: `The user ${user.idUser} ${user.userName}  was deleted`};
+              const  myMessage = {severity: 'success', summary: 'Delete', detail: `The user ${user.idUser} ${user.userName}  was deleted`};
               this.usersService.delete(user)
                   .subscribe( () => {
                       this.messageService.add(myMessage);
@@ -158,7 +158,7 @@ export class UserComponent implements OnInit {
           console.log('Updating User with content:', modifiedUser);
           this.usersService.update(modifiedUser)
         .subscribe(updatedUser  => {
-            this.messageService.add({severity: 'success', summary: 'Update', detail: `User  ${modifiedUser.idUser} ${modifiedUser.userName} has been modified`});
+            this.messageService.add({severity: 'success', summary: 'Update', detail: `User  ${modifiedUser.idUser} ${modifiedUser.userName} was updated`});
             this.onUserUpdate.emit(updatedUser);
         });
       } else {
@@ -170,7 +170,7 @@ export class UserComponent implements OnInit {
               .subscribe((newUser) => {
                   this.messageService.add({
                       severity: 'success',
-                      summary: 'Création',
+                      summary: 'Creation',
                       detail: `User  ${newUser.idUser} ${newUser.userName} has been created`
                   });
                   this.onUserCreate.emit(newUser);

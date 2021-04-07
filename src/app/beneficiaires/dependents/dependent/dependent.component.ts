@@ -95,7 +95,7 @@ export class DependentComponent implements OnInit {
       accept: () => {
         const myMessage = {
           severity: 'success',
-          summary: 'Destruction',
+          summary: 'Delete',
           detail: `The dependent ${dependent.nom} ${dependent.prenom} has been deleted`
         };
         this.dependentsService.delete(dependent)
@@ -118,8 +118,8 @@ export class DependentComponent implements OnInit {
           .subscribe(() => {
             this.messageService.add({
               severity: 'success',
-              summary: 'Mise à jour',
-              detail: `The dependent ${modifiedDependent.nom} ${modifiedDependent.prenom}  has been modified`
+              summary: 'Update',
+              detail: `The dependent ${modifiedDependent.nom} ${modifiedDependent.prenom}  was updated`
             });
             this.onDependentUpdate.emit(modifiedDependent);
           });
@@ -132,8 +132,8 @@ export class DependentComponent implements OnInit {
           .subscribe((newDependent) => {
             this.messageService.add({
               severity: 'success',
-              summary: 'Création',
-              detail: `Le dependent ${newDependent.nom} ${newDependent.prenom}  a été créé`
+              summary: 'Creation',
+              detail: `The dependent ${newDependent.nom} ${newDependent.prenom}  has been created`
             });
             this.onDependentCreate.emit(newDependent);
           });

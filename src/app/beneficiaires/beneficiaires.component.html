@@ -11,13 +11,13 @@
         <tr>
             <th>
                 <div class="p-d-flex p-jc-between p-ai-center">
-                    <input #inom pInputText type="text" placeholder="Search by nom" class="p-column-filter" (change)="dt.reset()">
+                    <input #inom pInputText type="text" placeholder="Search by name" class="p-column-filter" (change)="dt.reset()">
                     <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter( inom.value, 'nom', 'contains')"></p-button>
                 </div>
             </th>
             <th>
                 <div class="p-d-flex p-jc-between p-ai-center">
-                    <input #iprenom pInputText type="text" placeholder="Search by prenom" class="p-column-filter" (change)="dt.reset()">
+                    <input #iprenom pInputText type="text" placeholder="Search by first name" class="p-column-filter" (change)="dt.reset()">
                     <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(iprenom.value, 'prenom', 'contains')"></p-button>
                 </div>
             </th>
@@ -44,31 +44,31 @@
         <tr>
             <th pSortableColumn="nom">
                 <div class="p-d-flex p-jc-between p-ai-center">
-                    Nom
+                    Name
                     <p-sortIcon field="nom"></p-sortIcon>
                 </div>
             </th>
             <th pSortableColumn="prenom">
                 <div class="p-d-flex p-jc-between p-ai-center">
-                    Prenom
+                    First Name
                     <p-sortIcon field="prenom"></p-sortIcon>
                 </div>
             </th>
             <th pSortableColumn="adresse">
                 <div class="p-d-flex p-jc-between p-ai-center">
-                    Adresse
+                    Address
                     <p-sortIcon field="adresse"></p-sortIcon>
                 </div>
             </th>
             <th pSortableColumn="cp">
                 <div class="p-d-flex p-jc-between p-ai-center">
-                    Code Postal
+                    Post Code
                     <p-sortIcon field="cp"></p-sortIcon>
                 </div>
             </th>
             <th pSortableColumn="localite">
                 <div class="p-d-flex p-jc-between p-ai-center">
-                    Ville
+                    City
                     <p-sortIcon field="localite"></p-sortIcon>
                 </div>
             </th>

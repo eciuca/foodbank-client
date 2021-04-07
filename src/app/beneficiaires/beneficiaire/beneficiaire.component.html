@@ -6,64 +6,68 @@
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label for="civilite">Gender</label>
-                <p-dropdown [options]="civilites" id="civilite" name="civilite" [ngModel]="beneficiaire.civilite" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown [options]="civilites" id="civilite" name="civilite" [(ngModel)]="beneficiaire.civilite" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
                 <div class="p-field p-col-12 p-md-4">
                 <label for="nom">Name</label>
-                <input pInputText id="nom" name="nom"  maxlength="50" [ngModel]="beneficiaire.nom" />
+                <input #nom="ngModel" pInputText id="nom" name="nom"  maxlength="50" [(ngModel)]="beneficiaire.nom" />
+                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Beneficiary Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="prenom">First Name</label>
-                <input pInputText id="prenom" name="prenom"  maxlength="50" [ngModel]="beneficiaire.prenom" />
+                <input #prenom="ngModel" pInputText id="prenom" name="prenom"  maxlength="50" [(ngModel)]="beneficiaire.prenom" />
+                <p-message *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" severity="error" text="Beneficiary First Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="daten">Birth Date</label>
-                <input pInputText id="daten"  name="daten" maxlength="10" [ngModel]="beneficiaire.daten" />
+                <p-calendar #datenais="ngModel" id="daten" name="daten" dataType="string" dateFormat="d/m/yy" required [(ngModel)]="beneficiaire.daten"></p-calendar>
+                <p-message *ngIf="datenais.invalid && (datenais.dirty || datenais.touched)" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
             </div>
 
             <div class="p-field p-col-12 p-md-2">
                 <label for="civiliteconj">Gender Partner</label>
-                <p-dropdown [options]="civilites" id="civiliteconj" name="civiliteconj" [ngModel]="beneficiaire.civiliteconj" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown [options]="civilites" id="civiliteconj" name="civiliteconj" [(ngModel)]="beneficiaire.civiliteconj" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="nomconj">Name Partner</label>
-                <input pInputText id="nomconj" name="nomconj"  maxlength="50" [ngModel]="beneficiaire.nomconj" />
+                <input pInputText id="nomconj" name="nomconj"  maxlength="50" [(ngModel)]="beneficiaire.nomconj" />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="prenomconj">First Name Partner</label>
-                <input pInputText id="prenomconj" name="prenomconj"  maxlength="50" [ngModel]="beneficiaire.prenomconj" />
+                <input pInputText id="prenomconj" name="prenomconj"  maxlength="50" [(ngModel)]="beneficiaire.prenomconj" />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="datenConj">Birth Date Partner</label>
-                <input pInputText id="datenConj"  name="datenConj" maxlength="10" [ngModel]="beneficiaire.datenConj" />
+                <p-calendar #datenconj="ngModel" id="datenConj" name="datenConj" dataType="string" dateFormat="d/m/yy" [(ngModel)]="beneficiaire.datenConj"></p-calendar>
+                <p-message *ngIf="datenconj.invalid && (datenconj.dirty || datenconj.touched)" severity="error" text="Birthday must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="adresse">Address</label>
-                <input pInputText id="adresse" name="adresse"  maxlength="50" [ngModel]="beneficiaire.adresse" />
+                <input pInputText id="adresse" name="adresse"  maxlength="50" [(ngModel)]="beneficiaire.adresse" />
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="cp">Zip Code</label>
-                <input pInputText id="cp" name="cp"  maxlength="6" [ngModel]="beneficiaire.cp" />
+                <input pInputText id="cp" name="cp"  maxlength="6" [(ngModel)]="beneficiaire.cp" />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="localite">City</label>
-                <input pInputText id="localite" name="localite"  maxlength="50" [ngModel]="beneficiaire.localite" />
+                <input pInputText id="localite" name="localite"  maxlength="50" [(ngModel)]="beneficiaire.localite" />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="pays">Country</label>
-                <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="beneficiaire.pays" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown [options]="countries" id="pays" name="pays" [(ngModel)]="beneficiaire.pays" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="natnr">National Number</label>
-                <input pInputText id="natnr"  name="natnr" maxlength="50" [ngModel]="beneficiaire.natnr" />
+                <input pInputText id="natnr"  name="natnr" maxlength="50" [(ngModel)]="beneficiaire.natnr" />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="email">E-mail</label>
-                <input pInputText id="email"  name="email" maxlength="50" [ngModel]="beneficiaire.email" />
+                <input pInputText id="email"  name="email" maxlength="50" [(ngModel)]="beneficiaire.email" />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="birb">Fead Status</label>
-                <p-dropdown [options]="feadStatuses" id="birb" name="birb" [ngModel]="beneficiaire.birb" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown [options]="feadStatuses" id="birb" name="birb" [(ngModel)]="beneficiaire.birb" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="selectedCpas">Cpas</label>
@@ -80,7 +84,7 @@
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
             <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,beneficiaire)" label="Delete"></button>
-            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(beneficiaire, beneficiaireForm.value)" label="Save"></button>
+            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(beneficiaire, beneficiaireForm.value)" [disabled] = "beneficiaireForm.invalid" label="Save"></button>
             <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, beneficiaire, beneficiaireForm, beneficiaireForm.dirty)" label="Return" ></button>
         </div>
     </form>

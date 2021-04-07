@@ -136,7 +136,7 @@ export class BeneficiaireComponent implements OnInit {
             message: 'Confirm Deletion?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                const  myMessage = {severity: 'success', summary: 'Destruction', detail: `Le bénéficiaire ${beneficiaire.nom} ${beneficiaire.prenom} a été détruit`};
+                const  myMessage = {severity: 'success', summary: 'Delete', detail: `The beneficiary ${beneficiaire.nom} ${beneficiaire.prenom} was deleted`};
                 this.beneficiairesService.delete(beneficiaire)
                     .subscribe( () => {
                         this.messageService.add(myMessage);
@@ -155,7 +155,7 @@ export class BeneficiaireComponent implements OnInit {
       if (modifiedBeneficiaire.hasOwnProperty('idClient')) {
     this.beneficiairesService.update(modifiedBeneficiaire)
         .subscribe( ()  => {
-          this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Le bénéficiaire ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  a été modifié`});
+          this.messageService.add({severity: 'success', summary: 'Update', detail: `The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was updated`});
             this.onBeneficiaireUpdate.emit(modifiedBeneficiaire);
         });
       } else {
@@ -166,8 +166,8 @@ export class BeneficiaireComponent implements OnInit {
               .subscribe((newBeneficiaire) => {
                   this.messageService.add({
                       severity: 'success',
-                      summary: 'Création',
-                      detail: `Le beneficiaire ${newBeneficiaire.nom} ${newBeneficiaire.prenom}  a été créé`
+                      summary: 'Creation',
+                      detail: `The beneficiary ${newBeneficiaire.nom} ${newBeneficiaire.prenom}  was created`
                   });
                   this.onBeneficiaireCreate.emit(newBeneficiaire);
               });

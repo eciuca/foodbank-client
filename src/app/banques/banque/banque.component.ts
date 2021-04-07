@@ -308,8 +308,8 @@ export class BanqueComponent implements OnInit {
              .subscribe(() => {
                  this.messageService.add({
                      severity: 'success',
-                     summary: 'Mise à jour',
-                     detail: `La banque ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  a été modifiée`
+                     summary: 'Update',
+                     detail: `La banque ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  was updatede`
                  });
                  this.onBanqueUpdate.emit(modifiedBanque);
              });
@@ -332,7 +332,7 @@ export class BanqueComponent implements OnInit {
             message: 'Confirm Deletion?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                const  myMessage = {severity: 'success', summary: 'Destruction', detail: `Le banque ${banque.bankName} a été détruite`};
+                const  myMessage = {severity: 'success', summary: 'Delete', detail: `Le banque ${banque.bankName} was deletede`};
                 this.banquesService.delete(banque)
                     .subscribe( () => {
                         this.messageService.add(myMessage);

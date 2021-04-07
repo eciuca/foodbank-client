@@ -94,7 +94,7 @@ export class DepotComponent implements OnInit {
             message: 'Confirm Deletion?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                const  myMessage = {severity: 'success', summary: 'Destruction', detail: `Depot ${depot.nom} was deleted`};
+                const  myMessage = {severity: 'success', summary: 'Delete', detail: `Depot ${depot.nom} was deleted`};
                 this.depotsService.delete(depot)
                     .subscribe( () => {
                         this.messageService.add(myMessage);
@@ -112,7 +112,7 @@ export class DepotComponent implements OnInit {
           console.log('Modifying Depot with content:', modifiedDepot);
           this.depotsService.update(modifiedDepot)
               .subscribe( ()  => {
-                  this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Depot ${modifiedDepot.nom} was updated`});
+                  this.messageService.add({severity: 'success', summary: 'Update', detail: `Depot ${modifiedDepot.nom} was updated`});
                   this.onDepotUpdate.emit(modifiedDepot);
               });
       } else {

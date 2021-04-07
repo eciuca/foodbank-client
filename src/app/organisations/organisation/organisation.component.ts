@@ -163,7 +163,7 @@ export class OrganisationComponent implements OnInit {
           console.log('Modifying Organisation with content:', modifiedOrganisation);
           this.organisationsService.update(modifiedOrganisation)
               .subscribe( ()  => {
-                  this.messageService.add({severity: 'success', summary: 'Mise à jour', detail: `Organisation ${modifiedOrganisation.societe} was updated`});
+                  this.messageService.add({severity: 'success', summary: 'Update', detail: `Organisation ${modifiedOrganisation.societe} was updated`});
                   this.onOrganisationUpdate.emit(modifiedOrganisation);
               });
       } else {
@@ -187,7 +187,7 @@ export class OrganisationComponent implements OnInit {
             message: 'Confirm Deletion?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                const  myMessage = {severity: 'success', summary: 'Destruction', detail: `L' organisation ${organisation.societe} a été détruite`};
+                const  myMessage = {severity: 'success', summary: 'Delete', detail: `L' organisation ${organisation.societe} was deletede`};
                 this.organisationsService.delete(organisation)
                     .subscribe( () => {
                         this.messageService.add(myMessage);

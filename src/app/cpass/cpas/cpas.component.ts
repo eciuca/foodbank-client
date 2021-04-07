@@ -98,7 +98,7 @@ export class CpasComponent implements OnInit {
             message: 'Confirm Deletion?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                const  myMessage = {severity: 'success', summary: 'Destruction', detail: `Cpas ${cpas.cpasName} was deleted`};
+                const  myMessage = {severity: 'success', summary: 'Delete', detail: `Cpas ${cpas.cpasName} was deleted`};
                 this.cpassService.delete(cpas)
                     .subscribe( () => {
                         this.messageService.add(myMessage);
@@ -118,7 +118,7 @@ export class CpasComponent implements OnInit {
               .subscribe(() => {
                   this.messageService.add({
                       severity: 'success',
-                      summary: 'Mise à jour',
+                      summary: 'Update',
                       detail: `Cpas/Ocmw ${modifiedCpas.cpasName} was updated`
                   });
                   this.onCpasUpdate.emit(modifiedCpas);
