@@ -65,7 +65,7 @@ export class UsersComponent implements OnInit {
                 switch (authState.user.rights) {
                   case 'Bank':
                   case 'Admin_Banq':
-                    this.filterBase = { 'idCompany': authState.banque.bankShortName};
+                    this.filterBase = { 'lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     break;
                   case 'Asso':
