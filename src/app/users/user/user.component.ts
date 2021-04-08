@@ -104,10 +104,10 @@ export class UserComponent implements OnInit {
                       this.idCompany = authState.banque.bankShortName;
                       switch (authState.user.rights) {
                           case 'Bank':
-                              this.filterMemberBase = { 'bankShortName': authState.banque.bankShortName};
+                              this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
                               break;
                           case 'Admin_Banq':
-                              this.filterMemberBase = { 'bankShortName': authState.banque.bankShortName};
+                              this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;

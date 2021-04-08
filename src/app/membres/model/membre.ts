@@ -67,10 +67,8 @@ export interface Membre {
     nnat: string;
 
     dateContrat: string;
-
     lDep: number;
-    bankName: string;
-    bankShortName: string;
+    lienBanque: number;
     totalRecords: number;
     lastVisit: string;
 }
@@ -92,8 +90,7 @@ export class DefaultMembre implements Membre {
     address: string;
     ag: number;
     authority: number;
-    bankName: string;
-    bankShortName: string;
+    lienBanque: number;
     batId: number;
     batmail: string;
     ben: number;
@@ -136,5 +133,5 @@ export class DefaultMembre implements Membre {
        this.authority = 1;
        this.ben = 1;
        this.lastVisit = '';
-    };
+    }
 }

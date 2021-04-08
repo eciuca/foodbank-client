@@ -29,8 +29,7 @@ export class MembreComponent implements OnInit {
     booCanQuit: boolean;
     genders: any[];
   languages: any[];
-  bankName: string;
-  bankShortName: string;
+  lienBanque: number;
   lienDis: number;
   constructor(
       private membresService: MembreEntityService,
@@ -46,8 +45,7 @@ export class MembreComponent implements OnInit {
       this.booCanDelete = false;
       this.booCanSave = false;
       this.booCanQuit = true;
-      this.bankName = '';
-      this.bankShortName = '';
+      this.lienBanque = 0 ;
       this.lienDis = 0;
   }
 
@@ -92,25 +90,21 @@ export class MembreComponent implements OnInit {
               if (authState.user) {
                   switch (authState.user.rights) {
                       case 'Bank':
-                          this.bankName = authState.banque.bankName;
-                          this.bankShortName = authState.banque.bankShortName;
+                          this.lienBanque = authState.banque.bankId;
                           break;
                       case 'Admin_Banq':
-                          this.bankName = authState.banque.bankName;
-                          this.bankShortName = authState.banque.bankShortName;
+                          this.lienBanque = authState.banque.bankId;
                           this.booCanSave = true;
                           if (this.booCalledFromTable) {
                               this.booCanDelete = true;
                           }
                           break;
                       case 'Asso':
-                          this.bankName = authState.banque.bankName;
-                          this.bankShortName = authState.banque.bankShortName;
+                          this.lienBanque = authState.banque.bankId;
                           this.lienDis = authState.user.idOrg;
                           break;
                       case 'Admin_Asso':
-                          this.bankName = authState.banque.bankName;
-                          this.bankShortName = authState.banque.bankShortName;
+                          this.lienBanque = authState.banque.bankId;
                           this.lienDis = authState.user.idOrg;
                           this.booCanSave = true;
                           if (this.booCalledFromTable) {
@@ -158,8 +152,7 @@ export class MembreComponent implements OnInit {
                   this.onMembreUpdate.emit(modifiedMembre);
               });
       } else {
-          modifiedMembre.bankName = this.bankName;
-          modifiedMembre.bankShortName = this.bankShortName;
+          modifiedMembre.lienBanque = this.lienBanque;
           modifiedMembre.lienDis = this.lienDis;
           console.log('Creating Membre with content:', modifiedMembre);
           this.membresService.add(modifiedMembre)
