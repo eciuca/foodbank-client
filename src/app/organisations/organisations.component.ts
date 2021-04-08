@@ -58,8 +58,6 @@ export class OrganisationsComponent implements OnInit {
         )
     ;
     this.cols = [
-      { field: 'idDis', header: 'Identifiant' },
-      { field: 'bankShortName', header: 'Banque' },
       { field: 'societe', header: 'Nom' },
       { field: 'adresse', header: 'Adresse' },
       { field: 'cp', header: 'Code Postal' },

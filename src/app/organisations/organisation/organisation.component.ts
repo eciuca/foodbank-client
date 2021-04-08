@@ -40,8 +40,7 @@ export class OrganisationComponent implements OnInit {
   genders: any[];
   statuts: any[];
   countries: any[];
-    bankName: string;
-    bankShortName: string;
+   lienBanque: number;
     userName: string;
 
   constructor(
@@ -61,8 +60,7 @@ export class OrganisationComponent implements OnInit {
       this.booCanDelete = false;
       this.booCanSave = false;
       this.booCanQuit = true;
-      this.bankName = '';
-      this.bankShortName = '';
+      this.lienBanque = 0;
       this.userName = '' ;
   }
 
@@ -124,26 +122,12 @@ export class OrganisationComponent implements OnInit {
                       this.userName = authState.user.userName;
                       switch (authState.user.rights) {
                           case 'Bank':
-                              this.bankName = authState.banque.bankName;
-                              this.bankShortName = authState.banque.bankShortName;
+                              this.lienBanque = authState.banque.bankId;
                               break;
                           case 'Admin_Banq':
-                              this.bankName = authState.banque.bankName;
-                              this.bankShortName = authState.banque.bankShortName;
+                              this.lienBanque = authState.banque.bankId;
                               this.booCanSave = true;
                               if (this.booCalledFromTable ) {
-                                  this.booCanDelete = true;
-                              }
-                              break;
-                          case 'Asso':
-                              this.bankName = authState.banque.bankName;
-                              this.bankShortName = authState.banque.bankShortName;
-                               break;
-                          case 'Admin_Asso':
-                              this.bankName = authState.banque.bankName;
-                              this.bankShortName = authState.banque.bankShortName;
-                              this.booCanSave = true;
-                              if (this.booCalledFromTable) {
                                   this.booCanDelete = true;
                               }
                               break;
@@ -167,8 +151,7 @@ export class OrganisationComponent implements OnInit {
                   this.onOrganisationUpdate.emit(modifiedOrganisation);
               });
       } else {
-          modifiedOrganisation.bankShortName = this.bankShortName;
-          modifiedOrganisation.bankName = this.bankName;
+          modifiedOrganisation.lienBanque = this.lienBanque;
           console.log('Creating Organisation with content:', modifiedOrganisation);
           this.organisationsService.add(modifiedOrganisation)
               .subscribe((newOrganisation) => {

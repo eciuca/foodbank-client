@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { iif, Observable } from 'rxjs';
-import { filter, first, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { filter, first, mergeMap } from 'rxjs/operators';
 import { OrganisationEntityService } from './services/organisation-entity.service';
 
 import { select, Store } from '@ngrx/store';
@@ -9,7 +9,6 @@ import { AppState } from '../reducers';
 import { globalAuthState } from '../auth/auth.selectors';
 import { AuthState } from '../auth/reducers';
 import { Organisation } from './model/organisation';
-import { ThrowStmt } from '@angular/compiler';
 
 @Injectable()
 export class OrganisationsResolver implements Resolve<boolean> {
@@ -57,7 +56,6 @@ export class OrganisationsResolver implements Resolve<boolean> {
         if (authState && authState.user) {
             return true;
         }
-
         return false;
     }
 
@@ -67,14 +65,10 @@ export class OrganisationsResolver implements Resolve<boolean> {
             case 'Bank':
             case 'Admin_Banq':
                 console.log('Requesting organisations');
-                const bankShortNameParam = { 'bankShortName': authState.banque.bankShortName.toString() };
-                return this.organisationsService.getWithQuery(bankShortNameParam);
-            case 'Asso':
-            case 'Admin_Asso':
-                const idDisParam = { 'idDis': authState.user.idOrg.toString() };
-                return this.organisationsService.getWithQuery(idDisParam);
+                const bankParam = { 'lienBanque': authState.banque.bankId.toString() };
+                return this.organisationsService.getWithQuery(bankParam);
             default:
-                return this.organisationsService.getAll();
+                return null;
         }
     }
 }

@@ -220,10 +220,6 @@ export interface Organisation {
 
     lupdTs: string;
 
-    bankShortName: string;
-
-    bankName: string;
-
 }
 
 export function compareOrganisations(c1: Organisation, c2: Organisation) {
@@ -253,8 +249,6 @@ export class DefaultOrganisation implements Organisation {
     afsca2: string;
     afsca3: string;
     antenne: number;
-    bankName: string;
-    bankShortName: string;
     banque: string;
     bic: string;
     civilite: number;
@@ -368,8 +362,6 @@ export class DefaultOrganisation implements Organisation {
         this.afsca2 = '';
         this.afsca3 = '';
         this.antenne = 0;
-        this.bankName = '';
-        this.bankShortName = '';
         this.banque = '';
         this.bic = '';
         this.civilite = 0;
