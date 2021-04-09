@@ -67,6 +67,10 @@ export class OrganisationsResolver implements Resolve<boolean> {
                 console.log('Requesting organisations');
                 const bankParam = { 'lienBanque': authState.banque.bankId.toString() };
                 return this.organisationsService.getWithQuery(bankParam);
+            case 'Asso':
+            case 'Admin_Asso':
+                const orgParam = { 'idDis': authState.organisation.idDis.toString() };
+                return this.organisationsService.getWithQuery(orgParam);
             default:
                 return null;
         }

@@ -140,8 +140,12 @@ export class OrganisationComponent implements OnInit {
   }
   save(oldOrganisation: Organisation, organisationForm: Organisation) {
     const modifiedOrganisation = Object.assign({}, oldOrganisation, organisationForm);
-      modifiedOrganisation.lienCpas = this.selectedCpas.cpasId;
-      modifiedOrganisation.lienDepot = Number(this.selectedDepot.idDepot);
+    if (this.selectedCpas) {
+        modifiedOrganisation.lienCpas = this.selectedCpas.cpasId;
+    }
+    if (this.selectedDepot) {
+        modifiedOrganisation.lienDepot = Number(this.selectedDepot.idDepot);
+    }
       modifiedOrganisation.lupdUserName = this.userName;
       if (modifiedOrganisation.hasOwnProperty('idDis')) {
           console.log('Modifying Organisation with content:', modifiedOrganisation);
