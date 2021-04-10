@@ -12,42 +12,42 @@ export const appEntityMetadata: EntityMetadataMap = {
     Membre: {
         sortComparer: compareMembres,
         selectId: (membre: Membre) => membre.batId,
-        entityDispatcherOptions: {optimisticUpdate: false},
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
     },
     Banque: {
         sortComparer: compareBanques,
         selectId: (banque: Banque) => banque.bankId,
-        entityDispatcherOptions: {optimisticUpdate: false}
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
     },
     Beneficiaire: {
         sortComparer: compareBeneficiaires,
         selectId: (beneficiaire: Beneficiaire) => beneficiaire.idClient,
-        entityDispatcherOptions: { optimisticUpdate: false}
+        entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
     },
     Dependent: {
         sortComparer: compareDependents,
         selectId: (dependent: Dependent) => dependent.idDep,
-        entityDispatcherOptions: { optimisticUpdate: false}
+        entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
     },
     Cpas: {
         sortComparer: compareCpass,
         selectId: (cpas: Cpas) => cpas.cpasId,
-        entityDispatcherOptions: {optimisticUpdate: false},
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
     },
     Depot: {
         sortComparer: compareDepots,
         selectId: (depot: Depot) => depot.idDepot,
-        entityDispatcherOptions: {optimisticUpdate: false}
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
     },
     Organisation: {
         sortComparer: compareOrganisations,
         selectId: (organisation: Organisation) => organisation.idDis,
-        entityDispatcherOptions: { optimisticUpdate: false}
+        entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
     },
     User: {
         sortComparer: compareUsers,
         selectId: (user: User) => user.idUser,
-        entityDispatcherOptions: { optimisticUpdate: false}
+        entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
     },
 };
 

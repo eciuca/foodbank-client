@@ -10,6 +10,7 @@ import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
+import {DataServiceError} from '@ngrx/data';
 
 @Component({
   selector: 'app-membre',
@@ -128,9 +129,19 @@ export class MembreComponent implements OnInit {
                     detail: `The member ${membre.prenom} ${membre.nom} was deleted`};
                 this.membresService.delete(membre)
                     .subscribe( () => {
+                        console.log('successfully deleted member');
                         this.messageService.add(myMessage);
                         this.onMembreDelete.emit(membre);
-                    });
+                    },
+                        (dataserviceerror: DataServiceError) => {
+                            console.log('Error deleting membre', dataserviceerror.message);
+                            const  errMessage = {severity: 'error', summary: 'Delete',
+                                // tslint:disable-next-line:max-line-length
+                                detail: `The member ${membre.prenom} ${membre.nom} could not be deleted: error: ${dataserviceerror.message}`,
+                                life: 6000 };
+                                this.messageService.add(errMessage) ;
+                        }
+                    );
             },
             reject: () => {
                 console.log('We do nothing');

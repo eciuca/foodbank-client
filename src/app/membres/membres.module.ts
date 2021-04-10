@@ -20,6 +20,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
 import {CalendarModule} from 'primeng/calendar';
+import {ToastModule} from 'primeng/toast';
+
 const routes: Routes = [
   { path: '',
     component: MembresComponent,
@@ -44,7 +46,8 @@ const routes: Routes = [
         MessageModule,
         SelectButtonModule,
         ConfirmPopupModule,
-        CalendarModule
+        CalendarModule,
+        ToastModule
     ],
   providers: [
     MembresDataService,

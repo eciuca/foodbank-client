@@ -63,6 +63,7 @@
                 <input pInputText id="vehimm" name="vehimm" maxlength="30" [ngModel]="membre.vehImm" />
             </div>
         </div>
+        <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
         <div *ngIf="booCanSave" class="p-formgroup-inline">
             <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,membre)" label="Delete"></button>
