@@ -40,6 +40,10 @@
                     <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(icity.value, 'localite', 'contains')"></p-button>
                 </div>
             </th>
+            <th>
+                <div class="p-d-flex p-jc-between p-ai-center">
+                </div>
+            </th>
         </tr>
         <tr>
             <th pSortableColumn="nom">
@@ -70,6 +74,12 @@
                 <div class="p-d-flex p-jc-between p-ai-center">
                     City
                     <p-sortIcon field="localite"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="nbDep">
+                <div class="p-d-flex p-jc-between p-ai-center">
+                    Nb of Dependents
+                    <p-sortIcon field="nbDep"></p-sortIcon>
                 </div>
             </th>
         </tr>

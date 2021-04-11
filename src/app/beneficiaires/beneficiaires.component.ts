@@ -72,7 +72,8 @@ export class BeneficiairesComponent implements OnInit {
       { field: 'prenom', header: 'Prenom' },
       { field: 'adresse', header: 'Adresse' },
       { field: 'cp', header: 'Code Postal' },
-      { field: 'localite', header: 'Commune' }
+      { field: 'localite', header: 'Commune' },
+      { field: 'nbDep', header: 'Dependants' }
     ];
 
   }
