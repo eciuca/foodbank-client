@@ -1,6 +1,6 @@
 <p-panel *ngIf="membre">
     <ng-template pTemplate="header">
-        Membre {{ membre.batId}} of bank {{ membre.bankName}} Updated On {{ membre.lastVisit}}
+        Membre {{ membre.batId}} Updated On {{ membre.lastVisit}}
     </ng-template>
     <form   #membreForm="ngForm" style="padding: 1em">
         <div class="p-fluid p-formgrid p-grid">
@@ -8,7 +8,7 @@
                 <label for="civilite">Gender</label>
                 <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="membre.civilite" optionLabel="name" optionValue="code"></p-dropdown>
             </div>
-            <div class="p-field p-col-12 p-md-4">
+            <div class="p-field p-col-12 p-md-3">
                 <label for="nom">Name *</label>
                 <input #nom="ngModel"  pInputText id="nom" name="nom"  required minlength="4" maxlength="50" [ngModel]="membre.nom" />
                 <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Member Name is required and must be minimum 4 chars long"></p-message>
@@ -17,6 +17,16 @@
                 <label for="prenom">First Name *</label>
                 <input  #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="4" maxlength="40" [ngModel]="membre.prenom" />
                 <p-message *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" severity="error" text="Member First Name is required and must be minimum 4 chars long"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label for="batmail">E-mail *</label>
+                <input #batmail="ngModel" pInputText id="batmail" name="batmail" required minlength="5" maxlength="50" [ngModel]="membre.batmail" />
+                <p-message *ngIf="batmail.invalid && (batmail.dirty || batmail.touched)" severity="error" text="E-mail is required and must be minimum 5 chars long"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="dateNaissance">Birth Date *</label>
+                <p-calendar #dateNaissance="ngModel" id="dateNaissance" name="dateNaissance" dataType="string" dateFormat="d/m/yy" required [ngModel]="membre.dateNaissance"></p-calendar>
+                <p-message *ngIf="dateNaissance.invalid && (dateNaissance.dirty || dateNaissance.touched)" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="langue">Language</label>
@@ -40,15 +50,8 @@
                 <label for="city">Commune</label>
                 <input pInputText id="city" name="city" maxlength="20" [ngModel]="membre.city" />
             </div>
-            <div class="p-field p-col-12 p-md-4">
-                <label for="email">E-mail</label>
-                <input pInputText id="email" name="email" maxlength="50" [ngModel]="membre.batmail" />
-            </div>
-            <div class="p-field p-col-12 p-md-1">
-                <label for="dateNaissance">Birth Date</label>
-                <p-calendar #dateNaissance="ngModel" id="dateNaissance" name="dateNaissance" dataType="string" dateFormat="d/m/yy" required [ngModel]="membre.dateNaissance"></p-calendar>
-                <p-message *ngIf="dateNaissance.invalid && (dateNaissance.dirty || dateNaissance.touched)" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
-            </div>
+
+
             <div class="p-field p-col-12 p-md-4">
                 <label for="veh">Car</label>
                 <input pInputText id="veh" name="veh" maxlength="30" [ngModel]="membre.veh" />

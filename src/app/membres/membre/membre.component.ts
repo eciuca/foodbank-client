@@ -161,20 +161,39 @@ export class MembreComponent implements OnInit {
                       detail: `The member ${modifiedMembre.nom} ${modifiedMembre.prenom}  was updated`
                   });
                   this.onMembreUpdate.emit(modifiedMembre);
-              });
+              },
+                  (dataserviceerror: DataServiceError) => {
+                      console.log('Error updating membre', dataserviceerror.message);
+                      const  errMessage = {severity: 'error', summary: 'Update',
+                          // tslint:disable-next-line:max-line-length
+                          detail: `The member ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be updated: error: ${dataserviceerror.message}`,
+                          life: 6000 };
+                      this.messageService.add(errMessage) ;
+                  }
+              );
       } else {
           modifiedMembre.lienBanque = this.lienBanque;
           modifiedMembre.lienDis = this.lienDis;
           console.log('Creating Membre with content:', modifiedMembre);
           this.membresService.add(modifiedMembre)
               .subscribe((newMembre) => {
+                  console.log('new membre was created', newMembre);
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
                       detail: `The member ${newMembre.nom} ${newMembre.prenom}  was created`
                   });
                   this.onMembreCreate.emit(newMembre);
-              });
+              },
+                  (dataserviceerror: DataServiceError) => {
+                      console.log('Error creating membre', dataserviceerror.message);
+                      const  errMessage = {severity: 'error', summary: 'Create',
+                          // tslint:disable-next-line:max-line-length
+                          detail: `The member ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${dataserviceerror.message}`,
+                          life: 6000 };
+                      this.messageService.add(errMessage) ;
+                  }
+              );
       }
   }
 
