@@ -12,7 +12,7 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {Membre} from '../../membres/model/membre';
-import {QueryParams} from '@ngrx/data';
+import {DataServiceError, QueryParams} from '@ngrx/data';
 import {Observable, combineLatest} from 'rxjs';
 
 @Component({
@@ -160,7 +160,16 @@ export class UserComponent implements OnInit {
         .subscribe(updatedUser  => {
             this.messageService.add({severity: 'success', summary: 'Update', detail: `User  ${modifiedUser.idUser} ${modifiedUser.userName} was updated`});
             this.onUserUpdate.emit(updatedUser);
-        });
+        } ,
+            (dataserviceerror: DataServiceError) => {
+                console.log('Error updating user', dataserviceerror.message);
+                const  errMessage = {severity: 'error', summary: 'Update',
+                    // tslint:disable-next-line:max-line-length
+                    detail: `The member ${modifiedUser.idUser} ${modifiedUser.userName} could not be updated: error: ${dataserviceerror.message}`,
+                    life: 6000 };
+                this.messageService.add(errMessage) ;
+            }
+        );
       } else {
           modifiedUser.lienBanque = this.lienBanque;
           modifiedUser.idOrg = this.idOrg;
@@ -174,7 +183,16 @@ export class UserComponent implements OnInit {
                       detail: `User  ${newUser.idUser} ${newUser.userName} has been created`
                   });
                   this.onUserCreate.emit(newUser);
-              });
+              },
+                  (dataserviceerror: DataServiceError) => {
+                      console.log('Error creating user', dataserviceerror.message);
+                      const  errMessage = {severity: 'error', summary: 'Create',
+                          // tslint:disable-next-line:max-line-length
+                          detail: `The userer ${modifiedUser.idUser} ${modifiedUser.userName} could not be created: error: ${dataserviceerror.message}`,
+                          life: 6000 };
+                      this.messageService.add(errMessage) ;
+                  }
+              );
       }
 
   }
