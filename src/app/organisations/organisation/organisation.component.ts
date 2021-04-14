@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {Observable, combineLatest} from 'rxjs';
 import {DefaultOrganisation, Organisation} from '../model/organisation';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmStatusCompany, enmGender, enmCountry} from '../../shared/enums';
+import {enmStatusCompany, enmGender, enmCountry, enmOrgActivities} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {Cpas} from '../../cpass/model/cpas';
 import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
@@ -40,8 +40,10 @@ export class OrganisationComponent implements OnInit {
   genders: any[];
   statuts: any[];
   countries: any[];
+    orgActivities: any[];
    lienBanque: number;
     userName: string;
+    gestBen: boolean;
 
   constructor(
       private organisationsService: OrganisationEntityService,
@@ -56,12 +58,14 @@ export class OrganisationComponent implements OnInit {
       this.statuts = enmStatusCompany;
       this.genders = enmGender;
       this.countries = enmCountry;
+      this.orgActivities = enmOrgActivities;
       this.booCalledFromTable = true;
       this.booCanDelete = false;
       this.booCanSave = false;
       this.booCanQuit = true;
       this.lienBanque = 0;
       this.userName = '' ;
+      this.gestBen = false;
   }
 
   ngOnInit(): void {
@@ -86,6 +90,9 @@ export class OrganisationComponent implements OnInit {
       organisation$.subscribe(organisation => {
           if (organisation) {
               this.organisation = organisation;
+              if (organisation.gestBen !== 0) {
+                  this.gestBen = false; // the organisation does not maintain a list of beneficiaries
+              }
               console.log('our organisation:',  this.organisation);
               this.cpassService.getByKey(organisation.lienCpas)
                   .subscribe(

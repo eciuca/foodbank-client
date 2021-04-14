@@ -26,6 +26,7 @@ import {CpassDataService} from '../cpass/services/cpass-data.service';
 import {CpasEntityService} from '../cpass/services/cpas-entity.service';
 import {DepotsDataService} from '../depots/services/depots-data.service';
 import {DepotEntityService} from '../depots/services/depot-entity.service';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 const routes: Routes = [
     { path: '',
@@ -57,7 +58,8 @@ const routes: Routes = [
         AccordionModule,
         DialogModule,
         ConfirmPopupModule,
-        AutoCompleteModule
+        AutoCompleteModule,
+        InputNumberModule
     ],
   providers: [
         OrganisationsDataService,

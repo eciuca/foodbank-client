@@ -183,6 +183,91 @@
                     </div>
                 </div>
             </p-accordionTab>
+            <p-accordionTab *ngIf="gestBen == false" header="Beneficiaries Summary">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="nPers">Registered population</label>
+                        <p-inputNumber [ngModel]="organisation.nPers" id="nPers" name="nPers" mode="decimal" [showButtons]="true" inputId="nPers" [min]="0" [max]="100">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="nFam">Families</label>
+                        <p-inputNumber [ngModel]="organisation.nFam" id="nFam" name="nFam" mode="decimal" [showButtons]="true" inputId="nFam" [min]="0" [max]="100">
+                        </p-inputNumber>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="nNour">Infants (< 6 months)</label>
+                        <p-inputNumber [ngModel]="organisation.nNour" id="nNour" name="nNour" mode="decimal" [showButtons]="true" inputId="nNour" [min]="0" [max]="100">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="nBebe">Babies (> 6 months et < 24 months)</label>
+                        <p-inputNumber [ngModel]="organisation.nBebe" id="nBebe" name="nBebe" mode="decimal" [showButtons]="true" inputId="nBebe" [min]="0" [max]="100">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="nEnf">Children (from 2 to 14 years)</label>
+                        <p-inputNumber [ngModel]="organisation.nEnf" id="nEnf" name="nEnf" mode="decimal" [showButtons]="true" inputId="nEnf" [min]="0" [max]="100">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="nAdo">Teens (from 14 to 18 years)</label>
+                        <p-inputNumber [ngModel]="organisation.nAdo" id="nAdo" name="nAdo" mode="decimal" [showButtons]="true" inputId="nAdo" [min]="0" [max]="100">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="n1824">Young Adults( 18-24) </label>
+                        <p-inputNumber [ngModel]="organisation.n1824" id="n1824" name="n1824" mode="decimal" [showButtons]="true" inputId="n1824" [min]="0" [max]="100">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="nSen">Seniors</label>
+                        <p-inputNumber [ngModel]="organisation.nSen" id="nSen" name="nSen" mode="decimal" [showButtons]="true" inputId="nSen" [min]="0" [max]="100">
+                        </p-inputNumber>
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Planning">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-12">
+                        <label for="disprog">Distribution Program</label>
+                        <input pInputText id="disprog" name="disprog" maxlength="100" [ngModel]="organisation.disprog" />
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Additional Activities">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp1">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp1" name="actComp1" [ngModel]="organisation.actComp1" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp2">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp2" name="actComp2" [ngModel]="organisation.actComp2" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp3">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp3" name="actComp3" [ngModel]="organisation.actComp3" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp4">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp4" name="actComp4" [ngModel]="organisation.actComp4" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp5">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp5" name="actComp5" [ngModel]="organisation.actComp5" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp6">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp6" name="actComp6" [ngModel]="organisation.actComp6" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-12">
+                        <label for="actComp7">Other Activity</label>
+                        <input pInputText id="actComp7" name="actComp7" maxlength="100" [ngModel]="organisation.actComp7" />
+                    </div>
+                </div>
+            </p-accordionTab>
             <p-accordionTab header="OCMW/CPAS and Depot">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">

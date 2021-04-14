@@ -44,10 +44,27 @@ export let enmUserRoles = [
     {name: 'Bank', code: 'Bank'},
     {name: 'Bank_FBBA', code: 'Bank_FBBA'},
 ];
+export let enmUserRolesBank = [
+    {name: 'Admin_Banq', code: 'Admin_Banq' },
+    {name: 'Bank', code: 'Bank'}
+];
+export let enmUserRolesAsso = [
+    {name: 'Admin_Asso', code: 'Admin_Asso'},
+    {name: 'Asso', code: 'Asso'},
+];
 export let enmStatutFead = [
     {name: 'Refused', code: 0},
     {name: 'Accepted', code: 1},
     {name: 'Under Study', code: 2},
+];
+export let enmOrgActivities = [
+    {name: '', code: 0},
+    {name: '2nd hand Clothes Collect & Sell', code: 1},
+    {name: 'Social grocery', code: 2},
+    {name: '2nd hand Furniture Collect & Sell', code: 3},
+    {name: 'Homework club', code: 4},
+    {name: 'Social Restaurant', code: 5},
+    {name: 'Community kitchen', code: 6}
 ];
 
 

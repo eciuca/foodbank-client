@@ -150,6 +150,8 @@ export interface Organisation {
 
     nAdo: number;
 
+    n1824: number;
+
     nEq: number;
 
     nSen: number;
@@ -307,6 +309,7 @@ export class DefaultOrganisation implements Organisation {
     montCot: number;
     msonac: number;
     nAdo: number;
+    n1824: number;
     nBebe: number;
     nEnf: number;
     nEq: number;
@@ -420,6 +423,7 @@ export class DefaultOrganisation implements Organisation {
         this.montCot = 0;
         this.msonac = 0;
         this.nAdo = 0;
+        this.n1824 = 0;
         this.nBebe = 0;
         this.nEnf = 0;
         this.nEq = 0;

@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {DefaultUser, User} from '../model/user';
 import {MessageService} from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
-import {enmLanguageLegacy, enmUserRoles} from '../../shared/enums';
+import {enmLanguageLegacy, enmUserRoles, enmUserRolesAsso, enmUserRolesBank} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
@@ -49,7 +49,7 @@ export class UserComponent implements OnInit {
       private confirmationService: ConfirmationService
   ) {
       this.languages = enmLanguageLegacy;
-      this.rights = enmUserRoles;
+      this.rights = [];
       this.booCalledFromTable = true;
       this.booCanDelete = false;
       this.booCanSave = false;
@@ -105,9 +105,11 @@ export class UserComponent implements OnInit {
                       switch (authState.user.rights) {
                           case 'Bank':
                               this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
+                              this.rights = enmUserRolesBank;
                               break;
                           case 'Admin_Banq':
                               this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
+                              this.rights = enmUserRolesBank;
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;
@@ -116,10 +118,12 @@ export class UserComponent implements OnInit {
                           case 'Asso':
                               this.idOrg = authState.organisation.idDis;
                               this.filterMemberBase = { 'lienDis': authState.organisation.idDis};
+                              this.rights = enmUserRolesAsso;
                               break;
                           case 'Admin_Asso':
                               this.idOrg = authState.organisation.idDis;
                               this.filterMemberBase = { 'lienDis': authState.organisation.idDis};
+                              this.rights = enmUserRolesAsso;
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;
