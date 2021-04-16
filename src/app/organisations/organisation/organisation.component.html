@@ -55,10 +55,6 @@
                         <label for="website">Web Site</label>
                         <input pInputText id="website" name="website"  [ngModel]="organisation.website" />
                     </div>
-                </div>
-            </p-accordionTab>
-            <p-accordionTab header="Headquarters">
-                <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
                         <label for="adresse2">Headquarters Address</label>
                         <input pInputText id="adresse2" name="adresse2" maxlength="100" [ngModel]="organisation.adresse2" />
@@ -183,6 +179,160 @@
                     </div>
                 </div>
             </p-accordionTab>
+
+            <p-accordionTab header="Detailed Activities">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-12">
+                         <input pInputText id="disprog" name="disprog" maxlength="100" placeholder="Distribution Program" [ngModel]="organisation.disprog" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="luam">Monday Morning</label>
+                        <p-inputSwitch id="luam" name="luam" [ngModel]="organisation.luam"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <input pInputText id="reluam" name="reluam"  placeholder="Activity Description" [ngModel]="organisation.reluam" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="lupm">Monday Afternoon</label>
+                        <p-inputSwitch id="lupm" name="lupm" [ngModel]="organisation.lupm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <input pInputText id="relupm" name="relupm" placeholder="Activity Description" [ngModel]="organisation.relupm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="tuam">Tuesday Morning</label>
+                        <p-inputSwitch id="tuam" name="tuam" [ngModel]="organisation.tuam"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                         <input pInputText id="retuam" name="retuam" placeholder="Activity Description" [ngModel]="organisation.retuam" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="tupm">Tuesday Afternoon</label>
+                        <p-inputSwitch id="tupm" name="tupm" [ngModel]="organisation.tupm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                         <input pInputText id="retupm" name="retupm" placeholder="Activity Description" [ngModel]="organisation.retupm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="weam">Wednesday Morning</label>
+                        <p-inputSwitch id="weam" name="weam" [ngModel]="organisation.weam"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                         <input pInputText id="reweam" name="reweam" placeholder="Activity Description" [ngModel]="organisation.reweam" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="wepm">Wednesday Afternoon</label>
+                        <p-inputSwitch id="wepm" name="wepm" [ngModel]="organisation.wepm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <input pInputText id="rewepm" name="rewepm" placeholder="Activity Description" [ngModel]="organisation.rewepm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="tham">Thursday Morning</label>
+                        <p-inputSwitch id="tham" name="tham" [ngModel]="organisation.tham"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <input pInputText id="retham" name="retham" placeholder="Activity Description" [ngModel]="organisation.retham" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="thpm">Thursday Afternoon</label>
+                        <p-inputSwitch id="thpm" name="thpm" [ngModel]="organisation.thpm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <input pInputText id="rethpm" name="rethpm" placeholder="Activity Description" [ngModel]="organisation.rethpm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="fram">Friday Morning</label>
+                        <p-inputSwitch id="fram" name="fram" [ngModel]="organisation.fram"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <input pInputText id="refram" name="refram" placeholder="Activity Description" [ngModel]="organisation.refram" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="frpm">Friday Afternoon</label>
+                        <p-inputSwitch id="frpm" name="frpm" [ngModel]="organisation.frpm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <input pInputText id="refrpm" name="refrpm" placeholder="Activity Description" [ngModel]="organisation.refrpm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="saam">Saturday Morning</label>
+                        <p-inputSwitch id="saam" name="saam" [ngModel]="organisation.saam"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <input pInputText id="resaam" name="resaam" placeholder="Activity Description" [ngModel]="organisation.resaam" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="sapm">Saturday Afternoon</label>
+                        <p-inputSwitch id="sapm" name="sapm" [ngModel]="organisation.sapm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <input pInputText id="resapm" name="resapm" placeholder="Activity Description" [ngModel]="organisation.resapm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="sunam">Sunday Morning</label>
+                        <p-inputSwitch id="sunam" name="sunam" [ngModel]="organisation.sunam"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                         <input pInputText id="resunam" name="resunam" placeholder="Activity Description" [ngModel]="organisation.resunam" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="sunpm">Sunday Afternoon</label>
+                        <p-inputSwitch id="sunpm" name="sunpm" [ngModel]="organisation.sunpm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <input pInputText id="resunpm" name="resunpm" placeholder="Activity Description" [ngModel]="organisation.resunpm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="porc">Pork Food</label>
+                        <p-inputSwitch id="porc" name="porc" [ngModel]="organisation.porc"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="legFrais">Fresh Vegetables</label>
+                        <p-inputSwitch id="legFrais" name="legFrais" [ngModel]="organisation.legFrais"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="congel">Frozen Food</label>
+                        <p-inputSwitch id="congel" name="congel" [ngModel]="organisation.congel"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="congel">Capacite en Litres</label>
+                        <input pInputText id="congelCap" name="congelCap" [ngModel]="organisation.congelCap" />
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Complementary Non-Food Activities">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp1">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp1" name="actComp1" [ngModel]="organisation.actComp1" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp2">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp2" name="actComp2" [ngModel]="organisation.actComp2" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp3">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp3" name="actComp3" [ngModel]="organisation.actComp3" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp4">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp4" name="actComp4" [ngModel]="organisation.actComp4" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp5">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp5" name="actComp5" [ngModel]="organisation.actComp5" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="actComp6">Activity</label>
+                        <p-dropdown [options]="orgActivities" id="actComp6" name="actComp6" [ngModel]="organisation.actComp6" optionLabel="name" optionValue="code"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-12">
+                        <label for="actComp7">Other Activity</label>
+                        <input pInputText id="actComp7" name="actComp7" maxlength="100" [ngModel]="organisation.actComp7" />
+                    </div>
+                </div>
+            </p-accordionTab>
             <p-accordionTab *ngIf="gestBen == false" header="Beneficiaries Summary">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
@@ -228,46 +378,6 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab header="Planning">
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-12">
-                        <label for="disprog">Distribution Program</label>
-                        <input pInputText id="disprog" name="disprog" maxlength="100" [ngModel]="organisation.disprog" />
-                    </div>
-                </div>
-            </p-accordionTab>
-            <p-accordionTab header="Additional Activities">
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp1">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp1" name="actComp1" [ngModel]="organisation.actComp1" optionLabel="name" optionValue="code"></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp2">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp2" name="actComp2" [ngModel]="organisation.actComp2" optionLabel="name" optionValue="code"></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp3">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp3" name="actComp3" [ngModel]="organisation.actComp3" optionLabel="name" optionValue="code"></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp4">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp4" name="actComp4" [ngModel]="organisation.actComp4" optionLabel="name" optionValue="code"></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp5">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp5" name="actComp5" [ngModel]="organisation.actComp5" optionLabel="name" optionValue="code"></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp6">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp6" name="actComp6" [ngModel]="organisation.actComp6" optionLabel="name" optionValue="code"></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-12">
-                        <label for="actComp7">Other Activity</label>
-                        <input pInputText id="actComp7" name="actComp7" maxlength="100" [ngModel]="organisation.actComp7" />
-                    </div>
-                </div>
-            </p-accordionTab>
             <p-accordionTab header="OCMW/CPAS and Depot">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
@@ -298,7 +408,7 @@
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
             <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,organisation)" label="Delete"></button>
-            <button *ngIf="booCanSave"type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save" [disabled] = "organisationForm.invalid"></button>
+            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save" [disabled] = "organisationForm.invalid"></button>
             <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, organisationForm,organisationForm.dirty)" label="Return" ></button>
         </div>
     </form>

@@ -27,6 +27,7 @@ import {CpasEntityService} from '../cpass/services/cpas-entity.service';
 import {DepotsDataService} from '../depots/services/depots-data.service';
 import {DepotEntityService} from '../depots/services/depot-entity.service';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 const routes: Routes = [
     { path: '',
@@ -59,7 +60,8 @@ const routes: Routes = [
         DialogModule,
         ConfirmPopupModule,
         AutoCompleteModule,
-        InputNumberModule
+        InputNumberModule,
+        InputSwitchModule
     ],
   providers: [
         OrganisationsDataService,
