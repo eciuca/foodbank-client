@@ -225,11 +225,4 @@ export class OrganisationComponent implements OnInit {
         this.cpassService.getWithQuery(queryCpasParms)
             .subscribe(filteredCpass =>  this.filteredCpass = filteredCpass);
     }
-    filterDepot(event ) {
-        const  queryDepotParms: QueryParams = {};
-        const query = event.query;
-        queryDepotParms['searchValue'] = query.toLowerCase();
-        this.depotsService.getWithQuery(queryDepotParms)
-            .subscribe(filteredDepots =>  this.filteredDepots = filteredDepots);
-    }
 }

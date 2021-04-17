@@ -71,6 +71,32 @@
                         <label for="pays2">Country</label>
                         <p-dropdown [options]="countries" id="pays2" name="pays2" [ngModel]="organisation.pays2" optionLabel="name" optionValue="code"></p-dropdown>
                     </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="banque">Bank</label>
+                        <input pInputText id="banque" name="banque" maxlength="50" [ngModel]="organisation.banque" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="iban">IBAN</label>
+                        <input pInputText id="iban" name="iban" maxlength="50" [ngModel]="organisation.iban" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="msonac">Guest Home?</label>
+                        <p-inputSwitch id="msonac" name="msonac" [ngModel]="organisation.msonac"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="nPers">Guest Capacity</label>
+                        <p-inputNumber [ngModel]="organisation.nbrefix" id="nbrefix" name="nbrefix" mode="decimal" [showButtons]="true" inputId="nbrefix" [min]="0" [max]="500">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="iban">FEAD Code</label>
+                        <input pInputText id="birbCode" name="birbCode" maxlength="10" [ngModel]="organisation.birbCode" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="nPers">FEAD Beneficiaries</label>
+                        <p-inputNumber [ngModel]="organisation.nrFead" id="nrFead" name="nrFead" mode="decimal" [showButtons]="true" inputId="nrFead" [min]="0" [max]="500">
+                        </p-inputNumber>
+                    </div>
                 </div>
             </p-accordionTab>
             <p-accordionTab header="Organisation">
@@ -378,7 +404,11 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab header="OCMW/CPAS and Depot">
+            <p-accordionTab header="Relations with the Public authorities">
+                <div class="p-field p-col-12 p-md-3">
+                    <label for="cpasyN">Cooperation with CPAS/OCMW?</label>
+                    <p-inputSwitch id="cpasyN" name="cpasyN" [ngModel]="organisation.cpasyN"></p-inputSwitch>
+                </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
                         <label for="selectedCpas">Cpas</label>
@@ -391,17 +421,7 @@
                             </ng-template>
                         </p-autoComplete>
                     </div>
-                    <div class="p-field p-col-12 p-md-4">
-                        <label for="selectedDepot">Depot</label>
-                        <p-autoComplete  [ngModel]="selectedDepot" [suggestions]="filteredDepots" required (completeMethod)="filterDepot($event)"
-                                         [forceSelection]="true"  id="selectedDepot" name="selectedDepot" field="nom" [dropdown]="true">
-                            <ng-template let-depot pTemplate="item">
-                                <div class="depot-item">
-                                    <div> {{depot.nom}}</div>
-                                </div>
-                            </ng-template>
-                        </p-autoComplete>
-                    </div>
+
                 </div>
             </p-accordionTab>
         </p-accordion>

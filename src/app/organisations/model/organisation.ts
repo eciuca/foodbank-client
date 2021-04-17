@@ -6,6 +6,8 @@ export interface Organisation {
 
     refInt: string;
 
+    birbCode: string;
+
     lienDepot: number;
 
     societe: string;
@@ -100,7 +102,7 @@ export interface Organisation {
 
     nbrefix: number;
 
-    cpasyN: number;
+    cpasyN: boolean;
 
     lienCpas: number;
 
@@ -130,7 +132,7 @@ export interface Organisation {
 
     rem: string;
 
-    msonac: number;
+    msonac: boolean;
 
     classeFbba1: number;
 
@@ -306,6 +308,7 @@ export class DefaultOrganisation implements Organisation {
     antenne: number;
     banque: string;
     bic: string;
+    birbCode: string;
     civilite: number;
     civiliteSec: number;
     civiliteTres: number;
@@ -321,7 +324,7 @@ export class DefaultOrganisation implements Organisation {
     cotSup: number;
     cp: string;
     cp2: string;
-    cpasyN: number;
+    cpasyN: boolean;
     dateReg: string;
     daten: number;
     depPrinc: number;
@@ -360,7 +363,7 @@ export class DefaultOrganisation implements Organisation {
     lupdTs: string;
     lupdUserName: string;
     montCot: number;
-    msonac: number;
+    msonac: boolean;
     nAdo: number;
     n1824: number;
     nBebe: number;
@@ -473,6 +476,7 @@ export class DefaultOrganisation implements Organisation {
         this.antenne = 0;
         this.banque = '';
         this.bic = '';
+        this.birbCode = '';
         this.civilite = 0;
         this.civiliteSec = 0;
         this.civiliteTres = 0;
@@ -488,7 +492,7 @@ export class DefaultOrganisation implements Organisation {
         this.cotSup = 0;
         this.cp = '';
         this.cp2 = '';
-        this.cpasyN = 0;
+        this.cpasyN = false;
         this.dateReg = '';
         this.daten = 0;
         this.depPrinc = 0;
@@ -527,7 +531,7 @@ export class DefaultOrganisation implements Organisation {
         this.lupdTs = '';
         this.lupdUserName = '';
         this.montCot = 0;
-        this.msonac = 0;
+        this.msonac = false;
         this.nAdo = 0;
         this.n1824 = 0;
         this.nBebe = 0;
