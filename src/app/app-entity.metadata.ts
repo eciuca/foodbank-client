@@ -7,6 +7,7 @@ import {compareDepots, Depot} from './depots/model/depot';
 import {compareOrganisations, Organisation} from './organisations/model/organisation';
 import {compareUsers, User} from './users/model/user';
 import {compareDependents, Dependent} from './beneficiaires/model/dependent';
+import {compareOrgcontacts, Orgcontact} from './organisations/model/orgcontact';
 
 export const appEntityMetadata: EntityMetadataMap = {
     Membre: {
@@ -44,6 +45,12 @@ export const appEntityMetadata: EntityMetadataMap = {
         selectId: (organisation: Organisation) => organisation.idDis,
         entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
     },
+    Orgcontact: {
+        sortComparer: compareOrgcontacts,
+        selectId: (orgcontact: Orgcontact) => orgcontact.orgPersId,
+        entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
+    },
+
     User: {
         sortComparer: compareUsers,
         selectId: (user: User) => user.idUser,

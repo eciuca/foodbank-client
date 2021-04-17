@@ -28,6 +28,11 @@ import {DepotsDataService} from '../depots/services/depots-data.service';
 import {DepotEntityService} from '../depots/services/depot-entity.service';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import { OrgcontactsComponent } from './orgcontacts/orgcontacts.component';
+import { OrgcontactComponent } from './orgcontacts/orgcontact/orgcontact.component';
+import {OrgcontactsDataService} from './services/orgcontacts-data.service';
+import {OrgcontactEntityService} from './services/orgcontact-entity.service';
+import {MessageModule} from 'primeng/message';
 
 const routes: Routes = [
     { path: '',
@@ -42,11 +47,18 @@ const routes: Routes = [
         resolve: {
             OrganisationsResolver
         }
-  }
+  },
+    {
+        path: 'contacts/:idDis',
+        component: OrgcontactsComponent,
+        resolve: {
+            OrganisationsResolver
+        }
+    }
 ];
 
 @NgModule({
-  declarations: [OrganisationsComponent, OrganisationComponent],
+  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -61,11 +73,14 @@ const routes: Routes = [
         ConfirmPopupModule,
         AutoCompleteModule,
         InputNumberModule,
-        InputSwitchModule
+        InputSwitchModule,
+        MessageModule
     ],
   providers: [
         OrganisationsDataService,
         OrganisationEntityService,
+        OrgcontactsDataService,
+        OrgcontactEntityService,
         CpassDataService,
         CpasEntityService,
         DepotsDataService,
@@ -79,11 +94,13 @@ export class OrganisationsModule {
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
       private organisationsDataService: OrganisationsDataService,
+      private orgcontactsDataService: OrgcontactsDataService,
       private cpassDataService: CpassDataService,
       private depotsDataService: DepotsDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Organisation', organisationsDataService);
+    entityDataService.registerService('Orgcontact', orgcontactsDataService);
     entityDataService.registerService('Cpas', cpassDataService);
     entityDataService.registerService('Depot', depotsDataService);
   }
