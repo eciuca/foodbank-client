@@ -13,8 +13,6 @@ import {QueryParams} from '@ngrx/data';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {globalAuthState} from '../../auth/auth.selectors';
-import {DepotEntityService} from '../../depots/services/depot-entity.service';
-import {Depot} from '../../depots/model/depot';
 
 @Component({
   selector: 'app-organisation',
@@ -35,11 +33,9 @@ export class OrganisationComponent implements OnInit {
   organisation: Organisation;
     selectedCpas: Cpas;
     filteredCpass: Cpas[];
-    selectedDepot: Depot;
-    filteredDepots: Depot[];
-  genders: any[];
-  statuts: any[];
-  countries: any[];
+    genders: any[];
+    statuts: any[];
+    countries: any[];
     orgActivities: any[];
    lienBanque: number;
     userName: string;
@@ -48,7 +44,6 @@ export class OrganisationComponent implements OnInit {
   constructor(
       private organisationsService: OrganisationEntityService,
       private cpassService: CpasEntityService,
-      private depotsService: DepotEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
@@ -90,10 +85,6 @@ export class OrganisationComponent implements OnInit {
       organisation$.subscribe(organisation => {
           if (organisation) {
               this.organisation = organisation;
-              if (organisation.gestBen !== 0) {
-                  this.gestBen = false; // the organisation does not maintain a list of beneficiaries
-              }
-              console.log('our organisation:',  this.organisation);
               this.cpassService.getByKey(organisation.lienCpas)
                   .subscribe(
                       cpas => {
@@ -104,21 +95,10 @@ export class OrganisationComponent implements OnInit {
                               console.log('There is no cpas for this organisation!');
                           }
                       });
-              this.depotsService.getByKey(organisation.lienDepot)
-                  .subscribe(
-                      depot => {
-                          if (depot !== null) {
-                              this.selectedDepot = {...depot};
-                              console.log('our organisation depot:', this.selectedDepot);
-                          } else {
-                              console.log('There is no depot for this organisation!');
-                          }
-                      });
           } else {
               this.organisation = new DefaultOrganisation();
               this.selectedCpas = null;
-              this.selectedDepot = null;
-                  console.log('we have a new default organisation');
+              console.log('we have a new default organisation');
           }
       });
       this.store
@@ -138,6 +118,9 @@ export class OrganisationComponent implements OnInit {
                                   this.booCanDelete = true;
                               }
                               break;
+                          case 'Admin_Asso':
+                              this.booCanSave = true;
+                              break;
                           default:
                       }
                   }
@@ -150,10 +133,7 @@ export class OrganisationComponent implements OnInit {
     if (this.selectedCpas) {
         modifiedOrganisation.lienCpas = this.selectedCpas.cpasId;
     }
-    if (this.selectedDepot) {
-        modifiedOrganisation.lienDepot = Number(this.selectedDepot.idDepot);
-    }
-      modifiedOrganisation.lupdUserName = this.userName;
+    modifiedOrganisation.lupdUserName = this.userName;
       if (modifiedOrganisation.hasOwnProperty('idDis')) {
           console.log('Modifying Organisation with content:', modifiedOrganisation);
           this.organisationsService.update(modifiedOrganisation)

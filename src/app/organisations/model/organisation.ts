@@ -40,7 +40,7 @@ export interface Organisation {
     classique: string;
     bic: string;
 
-    actif: number;
+    actif: boolean;
 
     civilite: number;
 
@@ -106,7 +106,7 @@ export interface Organisation {
 
     lienCpas: number;
 
-    depyN: number;
+    depyN: boolean;
 
     logBirb: number;
 
@@ -158,9 +158,9 @@ export interface Organisation {
 
     nSen: number;
 
-    depPrinc: number;
+    depPrinc: boolean;
 
-    gestBen: number;
+    gestBen: boolean;
 
     tourneeJour: number;
 
@@ -186,13 +186,13 @@ export interface Organisation {
 
     tourneeMois: number;
 
-    distrListPdt: number;
+    distrListPdt: boolean;
 
-    distrListVp: number;
+    distrListVp: boolean;
 
-    distrListSec: number;
+    distrListSec: boolean;
 
-    distrListTres: number;
+    distrListTres: boolean;
 
     adresse2: string;
 
@@ -298,7 +298,7 @@ export class DefaultOrganisation implements Organisation {
     actComp5: number;
     actComp6: number;
     actComp7: string;
-    actif: number;
+    actif: boolean;
     adresse: string;
     adresse2: string;
     afsca: string;
@@ -327,14 +327,14 @@ export class DefaultOrganisation implements Organisation {
     cpasyN: boolean;
     dateReg: string;
     daten: number;
-    depPrinc: number;
+    depPrinc: boolean;
     depotram: number;
-    depyN: number;
+    depyN: boolean;
     disprog: string;
-    distrListPdt: number;
-    distrListSec: number;
-    distrListTres: number;
-    distrListVp: number;
+    distrListPdt: boolean;
+    distrListSec: boolean;
+    distrListTres: boolean;
+    distrListVp: boolean;
     email: string;
     emailPres: string;
     emailSec: string;
@@ -342,7 +342,7 @@ export class DefaultOrganisation implements Organisation {
     emailVp: string;
     fax: string;
     feadN: number;
-    gestBen: number;
+    gestBen: boolean;
     gsm: string;
     gsmPres: string;
     gsmSec: string;
@@ -466,7 +466,7 @@ export class DefaultOrganisation implements Organisation {
         this.actComp5 = 0;
         this.actComp6 = 0;
         this.actComp7 = '';
-        this.actif = 0;
+        this.actif = true;
         this.adresse = '';
         this.adresse2 = '';
         this.afsca = '';
@@ -495,14 +495,14 @@ export class DefaultOrganisation implements Organisation {
         this.cpasyN = false;
         this.dateReg = '';
         this.daten = 0;
-        this.depPrinc = 0;
+        this.depPrinc = false;
         this.depotram = 0;
-        this.depyN = 0;
+        this.depyN = false;
         this.disprog = '';
-        this.distrListPdt = 0;
-        this.distrListSec = 0;
-        this.distrListTres = 0;
-        this.distrListVp = 0;
+        this.distrListPdt = true;
+        this.distrListSec = true;
+        this.distrListTres = false;
+        this.distrListVp = true;
         this.email = '';
         this.emailPres = '';
         this.emailSec = '';
@@ -510,7 +510,7 @@ export class DefaultOrganisation implements Organisation {
         this.emailVp = '';
         this.fax = '';
         this.feadN = 0;
-        this.gestBen = 0;
+        this.gestBen = false;
         this.gsm = '';
         this.gsmPres = '';
         this.gsmSec = '';
