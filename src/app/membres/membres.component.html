@@ -1,7 +1,8 @@
     <p-table #dt [value]="membres" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
              [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
+             [globalFilterFields]="['nom','prenom', 'address', 'zip', 'city']"
              [paginator]="true" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
-             [filterDelay]="0" >
+            >
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Member"></button>
@@ -9,68 +10,27 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        <input #inom pInputText type="text" placeholder="Search by nom" class="p-column-filter" (change)="dt.reset()">
-                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter( inom.value, 'nom', 'contains')"></p-button>
-                    </div>
-                </th>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        <input #iprenom pInputText type="text" placeholder="Search by prenom" class="p-column-filter" (change)="dt.reset()">
-                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(iprenom.value, 'prenom', 'contains')"></p-button>
-                    </div>
-                </th>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        <input #iaddress pInputText type="text" placeholder="Search by address" class="p-column-filter" (change)="dt.reset()">
-                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(iaddress.value, 'address', 'contains')"></p-button>
-                    </div>
-                </th>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        <input #izip pInputText type="text" placeholder="Search by post code" class="p-column-filter" (change)="dt.reset()">
-                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(izip.value, 'zip', 'startsWith')"></p-button>
-                    </div>
-                </th>
-
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        <input #icity pInputText type="text" placeholder="Search by City" class="p-column-filter"  (change)="dt.reset()">
-                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(icity.value, 'city', 'contains')"></p-button>
-                    </div>
-                </th>
+                <th pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
+                <th pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
+                <th pSortableColumn="address">Address<p-sortIcon field="address"></p-sortIcon></th>
+                <th pSortableColumn="zip">Zip<p-sortIcon field="zip"></p-sortIcon></th>
+                <th pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
             </tr>
             <tr>
-               <th pSortableColumn="nom">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Nom
-                        <p-sortIcon field="nom"></p-sortIcon>
-                    </div>
+                <th>
+                    <p-columnFilter type="text" field="nom" ></p-columnFilter>
                 </th>
-                <th pSortableColumn="prenom">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Prenom
-                        <p-sortIcon field="prenom"></p-sortIcon>
-                    </div>
+                <th>
+                    <p-columnFilter type="text" field="prenom" ></p-columnFilter>
                 </th>
-                <th pSortableColumn="address">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Adresse
-                        <p-sortIcon field="address"></p-sortIcon>
-                    </div>
+                <th>
+                    <p-columnFilter type="text" field="address" ></p-columnFilter>
                 </th>
-                <th pSortableColumn="zip">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Code Postal
-                        <p-sortIcon field="zip"></p-sortIcon>
-                    </div>
+                <th>
+                    <p-columnFilter type="text" field="zip"></p-columnFilter>
                 </th>
-                <th pSortableColumn="city">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Commune
-                        <p-sortIcon field="city"></p-sortIcon>
-                    </div>
+                <th>
+                    <p-columnFilter type="text" field="city"></p-columnFilter>
                 </th>
             </tr>
         </ng-template>

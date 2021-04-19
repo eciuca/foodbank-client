@@ -1,7 +1,7 @@
     <p-table #dt [value]="users" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
              [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
              [paginator]="true" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
-             [filterDelay]="0" >
+             [globalFilterFields]="['idUser','userName', 'idLanguage', 'email', 'rights']">
         <ng-template pTemplate="caption">
             <div class="table-header">
                <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add User"></button>
@@ -9,70 +9,28 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        <input #ilogin pInputText type="text" placeholder="Search by login" class="p-column-filter" (change)="dt.reset()">
-                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(ilogin.value, 'idUser', 'contains')"></p-button>
-                    </div>
-                </th>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        <input #iname pInputText type="text" placeholder="Search by name" class="p-column-filter" (change)="dt.reset()">
-                          <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(iname.value, 'userName', 'contains')"></p-button>
-                    </div>
-                </th>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        <input #ilanguage pInputText type="text" placeholder="Search by language" class="p-column-filter" (change)="dt.reset()">
-                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(ilanguage.value, 'idLanguage', 'startsWith')"></p-button>
-                    </div>
-                </th>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        <input #imail pInputText type="text" placeholder="Search by email" class="p-column-filter" (change)="dt.reset()">
-                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(imail.value, 'email', 'contains')"></p-button>
-                    </div>
-                </th>
-                <th>
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        <input #irights pInputText type="text" placeholder="Search by rights" class="p-column-filter" (change)="dt.reset()">
-                        <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(irights.value, 'rights', 'contains')"></p-button>
-                    </div>
-                </th>
+                <th pSortableColumn="idUser">Login<p-sortIcon field="idUser"></p-sortIcon></th>
+                <th pSortableColumn="userName">User Name<p-sortIcon field="userName"></p-sortIcon></th>
+                <th pSortableColumn="idLanguage">Language<p-sortIcon field="idLanguage"></p-sortIcon></th>
+                <th pSortableColumn="email">E-Mail<p-sortIcon field="email"></p-sortIcon></th>
+                <th pSortableColumn="rights">Rights<p-sortIcon field="rights"></p-sortIcon></th>
             </tr>
             <tr>
-                <th pSortableColumn="idUser">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                       Login
-                        <p-sortIcon field="idUser"></p-sortIcon>
-                    </div>
+                <th>
+                    <p-columnFilter type="text" field="idUser" ></p-columnFilter>
                 </th>
-                <th pSortableColumn="userName">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Nom
-                        <p-sortIcon field="userName"></p-sortIcon>
-                    </div>
+                <th>
+                    <p-columnFilter type="text" field="userName" ></p-columnFilter>
                 </th>
-                <th pSortableColumn="idLanguage">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Langue
-                        <p-sortIcon field="idLanguage"></p-sortIcon>
-                    </div>
+                <th>
+                    <p-columnFilter type="text" field="idLanguage" ></p-columnFilter>
                 </th>
-                <th pSortableColumn="email">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Email
-                        <p-sortIcon field="email"></p-sortIcon>
-                    </div>
+                <th>
+                    <p-columnFilter type="text" field="email"></p-columnFilter>
                 </th>
-                <th pSortableColumn="rights">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Droits
-                        <p-sortIcon field="rights"></p-sortIcon>
-                    </div>
+                <th>
+                    <p-columnFilter type="text" field="rights"></p-columnFilter>
                 </th>
-
-                <th style="width: 8rem"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>

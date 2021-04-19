@@ -84,10 +84,10 @@ export class UsersComponent implements OnInit {
 
     this.cols = [
       { field: 'idUser', header: 'Login' },
-      { field: 'userName', header: 'Nom Utilisateur' },
-      { field: 'idLanguage', header: 'Langue' },
+      { field: 'userName', header: 'User name' },
+      { field: 'idLanguage', header: 'Languagee' },
       { field: 'email', header: 'E-mail' },
-      { field: 'rights', header: 'Droits' }
+      { field: 'rights', header: 'Rights' }
     ];
 
   }

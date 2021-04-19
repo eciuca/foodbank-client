@@ -6,7 +6,7 @@ import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Route
 import {AppState} from './reducers';
 import {globalAuthState, isLoggedIn, isLoggedOut} from './auth/auth.selectors';
 import {login, logout} from './auth/auth.actions';
-import {MenuItem} from 'primeng/api';
+import {FilterMatchMode, MenuItem} from 'primeng/api';
 import {IAuthPrincipal } from './auth/auth-principal';
 import { AuthState } from './auth/reducers';
 import { PrimeNGConfig } from 'primeng/api';
@@ -55,6 +55,26 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.primengConfig.ripple = true;
+        this.primengConfig.filterMatchModeOptions = {
+            text: [
+                FilterMatchMode.CONTAINS
+            ],
+            numeric: [
+                FilterMatchMode.EQUALS,
+                FilterMatchMode.NOT_EQUALS,
+                FilterMatchMode.LESS_THAN,
+                FilterMatchMode.LESS_THAN_OR_EQUAL_TO,
+                FilterMatchMode.GREATER_THAN,
+                FilterMatchMode.GREATER_THAN_OR_EQUAL_TO
+            ],
+            date: [
+                FilterMatchMode.DATE_IS,
+                FilterMatchMode.DATE_IS_NOT,
+                FilterMatchMode.DATE_BEFORE,
+                FilterMatchMode.DATE_AFTER
+            ]
+        };
+
         const userProfileString = localStorage.getItem('user');
 
         if (userProfileString && userProfileString !== 'undefined') {

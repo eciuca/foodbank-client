@@ -2,7 +2,7 @@
     <p-table #dt [value]="banques" selectionMode="single" [rowHover]="true"
              [rows]="10" [showCurrentPageReport]="true"
              [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-             [filterDelay]="0" [globalFilterFields]="['bankShortName','bankName','bankMail']">
+             [globalFilterFields]="['bankShortName','bankName','bankMail']">
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Banque"></button>
@@ -16,25 +16,25 @@
             <tr>
                 <th pSortableColumn="bankId">
                     <div class="p-d-flex p-jc-between p-ai-center">
-                        Identifiant
+                        Id
                         <p-sortIcon field="bankId"></p-sortIcon>
                     </div>
                 </th>
                 <th pSortableColumn="bankShortName">
                     <div class="p-d-flex p-jc-between p-ai-center">
-                        Abbréviation
+                       Short Name
                         <p-sortIcon field="bankShortName"></p-sortIcon>
                     </div>
                 </th>
                 <th pSortableColumn="bankName">
                     <div class="p-d-flex p-jc-between p-ai-center">
-                        Nom
+                        Name
                         <p-sortIcon field="bankName"></p-sortIcon>
                     </div>
                 </th>
                 <th pSortableColumn="nrEntr">
                     <div class="p-d-flex p-jc-between p-ai-center">
-                        Numéro Entreprise
+                       Enterprise Number
                         <p-sortIcon field="nrEntr"></p-sortIcon>
                     </div>
                 </th>
@@ -55,11 +55,11 @@
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
-                Au total il y a {{banques ? banques.length : 0 }} banques.
+               There are {{banques ? banques.length : 0 }} food banks selected.
             </div>
         </ng-template>
     </p-table>
-    <p-dialog header="Banque Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+    <p-dialog header="Bank Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
         <app-banque *ngIf="selectedBankid$" [bankId$]="selectedBankid$" (onBanqueUpdate)="handleBanqueUpdate($event)" (onBanqueCreate)="handleBanqueCreate($event)"
                     (onBanqueDelete)="handleBanqueDeleted()" (onBanqueQuit)="handleBanqueQuit()"></app-banque>
     </p-dialog>
