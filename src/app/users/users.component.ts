@@ -97,7 +97,7 @@ export class UsersComponent implements OnInit {
                   }
               }
              })
-    );
+    ).subscribe();
   }
   handleSelect(user) {
     console.log( 'User was selected', user);
@@ -133,7 +133,7 @@ export class UsersComponent implements OnInit {
   }
 
  nextPage(event: LazyLoadEvent) {
-     console.log('Lazy Loaded Event', event);
+     console.log('Lazy Loaded Event', event, 'FilterBase:', this.filterBase);
       this.loading = true;
       const queryParms = {...this.filterBase};
       queryParms['offset'] = event.first.toString();
@@ -176,13 +176,13 @@ export class UsersComponent implements OnInit {
   }
 
     filterOrganisation(event ) {
-      console.log('Got Query with value:', event);
+      console.log('Got Query with value:', event, 'bankid:', this.bankid);
         const  queryOrganisationParms: QueryParams = {};
         queryOrganisationParms['offset'] = '0';
         queryOrganisationParms['rows'] = '10';
         queryOrganisationParms['sortField'] = 'societe';
         queryOrganisationParms['sortOrder'] = '1';
-        queryOrganisationParms['lienBanque'] = '1';
+        queryOrganisationParms['lienBanque'] = this.bankid.toString();
         queryOrganisationParms['searchField'] = 'societe';
         queryOrganisationParms['searchValue'] = event.query.toLowerCase();
         this.organisationService.getWithQuery(queryOrganisationParms)
