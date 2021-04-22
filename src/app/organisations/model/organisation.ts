@@ -275,7 +275,7 @@ export interface Organisation {
     auditor: number;
     dateAudit: string;
     lastAudit: number;
-
+    totalRecords: number;
 
 }
 
@@ -457,6 +457,7 @@ export class DefaultOrganisation implements Organisation {
     auditor: number;
     dateAudit: string;
     lastAudit: number;
+    totalRecords: number;
 
     constructor() {
         this.actComp1 = 0;

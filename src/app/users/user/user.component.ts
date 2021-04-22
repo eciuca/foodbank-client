@@ -5,13 +5,14 @@ import {map} from 'rxjs/operators';
 import {DefaultUser, User} from '../model/user';
 import {MessageService} from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
-import {enmLanguageLegacy, enmUserRoles, enmUserRolesAsso, enmUserRolesBank} from '../../shared/enums';
+import {enmLanguageLegacy, enmUserRoles, enmUserRolesAsso, enmUserRolesBankAsso} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {Membre} from '../../membres/model/membre';
+
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {Observable, combineLatest} from 'rxjs';
 
@@ -105,11 +106,11 @@ export class UserComponent implements OnInit {
                       switch (authState.user.rights) {
                           case 'Bank':
                               this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
-                              this.rights = enmUserRolesBank;
+                              this.rights = enmUserRolesBankAsso;
                               break;
                           case 'Admin_Banq':
                               this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
-                              this.rights = enmUserRolesBank;
+                              this.rights = enmUserRolesBankAsso;
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;

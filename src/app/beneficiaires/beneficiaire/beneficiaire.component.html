@@ -6,7 +6,7 @@
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label for="civilite">Gender</label>
-                <p-dropdown [options]="civilites" id="civilite" name="civilite" [(ngModel)]="beneficiaire.civilite" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown [options]="civilites" id="civilite" name="civilite" [(ngModel)]="beneficiaire.civilite" ></p-dropdown>
             </div>
                 <div class="p-field p-col-12 p-md-4">
                 <label for="nom">Name</label>
@@ -26,7 +26,7 @@
 
             <div class="p-field p-col-12 p-md-2">
                 <label for="civiliteconj">Gender Partner</label>
-                <p-dropdown [options]="civilites" id="civiliteconj" name="civiliteconj" [(ngModel)]="beneficiaire.civiliteconj" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown [options]="civilites" id="civiliteconj" name="civiliteconj" [(ngModel)]="beneficiaire.civiliteconj" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="nomconj">Name Partner</label>
@@ -55,7 +55,7 @@
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="pays">Country</label>
-                <p-dropdown [options]="countries" id="pays" name="pays" [(ngModel)]="beneficiaire.pays" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown [options]="countries" id="pays" name="pays" [(ngModel)]="beneficiaire.pays" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="natnr">National Number</label>
@@ -67,7 +67,7 @@
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="birb">Fead Status</label>
-                <p-dropdown [options]="feadStatuses" id="birb" name="birb" [(ngModel)]="beneficiaire.birb" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown [options]="feadStatuses" id="birb" name="birb" [(ngModel)]="beneficiaire.birb" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="selectedCpas">Cpas</label>

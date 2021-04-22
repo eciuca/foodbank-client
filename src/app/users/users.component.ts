@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
-import {DefaultUser, User} from './model/user';
+import {User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
 import {Router} from '@angular/router';
 import {globalAuthState} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
+import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguageLegacy } from '../shared/enums';
+import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
+import {QueryParams} from '@ngrx/data';
+import {Organisation} from '../organisations/model/organisation';
+
 
 @Component({
   selector: 'app-users',
@@ -25,12 +30,20 @@ export class UsersComponent implements OnInit {
   filterBase: any;
   displayDialog: boolean;
   booCanCreate: boolean;
+  rightOptions: any[];
+  languageOptions: any[];
+  filteredOrganisations: Organisation[];
+  bankid: number;
 
   constructor(private userService: UserEntityService,
+              private organisationService: OrganisationEntityService,
               private router: Router,
               private store: Store<AppState>
   ) {
       this.booCanCreate = false;
+      this.rightOptions = enmUserRolesBankAsso;
+      this.languageOptions = enmLanguageLegacy;
+      this.bankid = 0;
   }
 
   ngOnInit() {
@@ -62,34 +75,29 @@ export class UsersComponent implements OnInit {
             select(globalAuthState),
             map((authState) => {
               if (authState.banque) {
-                switch (authState.user.rights) {
-                  case 'Bank':
-                  case 'Admin_Banq':
-                    this.filterBase = { 'lienBanque': authState.banque.bankId};
-                    if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
-                    break;
-                  case 'Asso':
-                  case 'Admin_Asso':
-                    this.filterBase = { 'idOrg': authState.organisation.idDis};
-                    if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
-                    break;
-                  default:
-                }
-
+                  this.bankid = authState.banque.bankId;
+                  switch (authState.user.rights) {
+                      case 'Bank':
+                      case 'Admin_Banq':
+                          this.filterBase = {'lienBanque': authState.banque.bankId};
+                          this.rightOptions = enmUserRolesBankAsso;
+                          if (authState.user.rights === 'Admin_Banq') {
+                              this.booCanCreate = true;
+                          }
+                          break;
+                      case 'Asso':
+                      case 'Admin_Asso':
+                          this.filterBase = {'idOrg': authState.organisation.idDis};
+                          this.rightOptions = enmUserRolesAsso;
+                          if (authState.user.rights === 'Admin_Asso') {
+                              this.booCanCreate = true;
+                          }
+                          break;
+                      default:
+                  }
               }
-            })
-        )
-        .subscribe();
-
-
-    this.cols = [
-      { field: 'idUser', header: 'Login' },
-      { field: 'userName', header: 'User name' },
-      { field: 'idLanguage', header: 'Languagee' },
-      { field: 'email', header: 'E-mail' },
-      { field: 'rights', header: 'Rights' }
-    ];
-
+             })
+    );
   }
   handleSelect(user) {
     console.log( 'User was selected', user);
@@ -127,11 +135,6 @@ export class UsersComponent implements OnInit {
  nextPage(event: LazyLoadEvent) {
      console.log('Lazy Loaded Event', event);
       this.loading = true;
-     if (event.sortField == null) {
-         setTimeout(() => {
-             console.log('waiting first 250ms for reset to take place');
-         }, 250);
-     }
       const queryParms = {...this.filterBase};
       queryParms['offset'] = event.first.toString();
       queryParms['rows'] = event.rows.toString();
@@ -141,11 +144,13 @@ export class UsersComponent implements OnInit {
               queryParms['sortField'] = 'idUser';
               queryParms['searchField'] = 'idUser';
               queryParms['searchValue'] = event.filters.idUser.value;
-          }
-          if (event.filters.userName && event.filters.userName.value) {
+          } else if (event.filters.userName && event.filters.userName.value) {
               queryParms['sortField'] = 'userName';
               queryParms['searchField'] = 'userName';
               queryParms['searchValue'] = event.filters.userName.value;
+          } else if (event.filters.idOrg && event.filters.idOrg.value) {
+              queryParms['sortField'] = 'userName';
+              queryParms['idOrg'] = event.filters.idOrg.value;
           } else if (event.filters.idLanguage && event.filters.idLanguage.value) {
               queryParms['sortField'] = 'idLanguage';
               queryParms['searchField'] = 'idLanguage';
@@ -169,4 +174,22 @@ export class UsersComponent implements OnInit {
      }
      this.loadPageSubject$.next(queryParms);
   }
+
+    filterOrganisation(event ) {
+      console.log('Got Query with value:', event);
+        const  queryOrganisationParms: QueryParams = {};
+        queryOrganisationParms['offset'] = '0';
+        queryOrganisationParms['rows'] = '10';
+        queryOrganisationParms['sortField'] = 'societe';
+        queryOrganisationParms['sortOrder'] = '1';
+        queryOrganisationParms['lienBanque'] = '1';
+        queryOrganisationParms['searchField'] = 'societe';
+        queryOrganisationParms['searchValue'] = event.query.toLowerCase();
+        this.organisationService.getWithQuery(queryOrganisationParms)
+            .subscribe(filteredOrganisations => {
+                this.filteredOrganisations = filteredOrganisations.map((organisation) =>
+                    Object.assign({}, organisation, {fullname: organisation.societe})
+                );
+            });
+    }
 }

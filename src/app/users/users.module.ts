@@ -24,9 +24,8 @@ import {MessageModule} from 'primeng/message';
 import {MembresDataService} from '../membres/services/membres-data.service';
 import {MembreEntityService} from '../membres/services/membre-entity.service';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-
-
-
+import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
+import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
 
 const routes: Routes = [
   { path: '',
@@ -61,7 +60,9 @@ const routes: Routes = [
         UserEntityService,
         MembresDataService,
         MembreEntityService,
-        ConfirmationService,
+        OrganisationsDataService,
+        OrganisationEntityService,
+        ConfirmationService
   ],
 })
 export class UsersModule {
@@ -69,11 +70,13 @@ export class UsersModule {
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
       private usersDataService: UsersDataService,
-      private membresDataService: MembresDataService
+      private membresDataService: MembresDataService,
+      private organisationsDataService: OrganisationsDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('User', usersDataService);
     entityDataService.registerService('Membre', membresDataService);
+    entityDataService.registerService('Organisation', organisationsDataService);
   }
 
 }

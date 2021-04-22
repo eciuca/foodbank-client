@@ -13,7 +13,7 @@
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="statut">Status Company</label>
-                         <p-dropdown [options]="statuts" id="statut" name="statut" [ngModel]="organisation.statut" optionLabel="name" optionValue="code"></p-dropdown>
+                         <p-dropdown [options]="statuts" id="statut" name="statut" [ngModel]="organisation.statut"></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="tva">Nr/Vat Enterprise</label>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="pays">Country</label>
-                        <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="organisation.pays" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="organisation.pays"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="email">E-mail</label>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="pays2">Country</label>
-                        <p-dropdown [options]="countries" id="pays2" name="pays2" [ngModel]="organisation.pays2" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="countries" id="pays2" name="pays2" [ngModel]="organisation.pays2"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="banque">Bank</label>
@@ -103,7 +103,7 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
                         <label for="civilite">Gender President</label>
-                        <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="organisation.civilite" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="organisation.civilite"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="prenom">First Name President</label>
@@ -129,7 +129,7 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
                         <label for="civiliteVp">Gender Vice-President</label>
-                        <p-dropdown [options]="genders" id="civiliteVp" name="civiliteVp" [ngModel]="organisation.civiliteVp" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="genders" id="civiliteVp" name="civiliteVp" [ngModel]="organisation.civiliteVp"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="prenomVp">First Name Vice-President</label>
@@ -155,7 +155,7 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
                         <label for="civiliteSec">Gender Secretary</label>
-                        <p-dropdown [options]="genders" id="civiliteSec" name="civiliteSec" [ngModel]="organisation.civiliteSec" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="genders" id="civiliteSec" name="civiliteSec" [ngModel]="organisation.civiliteSec"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="prenomSec">First Name Secretary</label>
@@ -181,7 +181,7 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
                         <label for="civiliteTres">Gender Treasurer</label>
-                        <p-dropdown [options]="genders" id="civiliteTres" name="civiliteTres" [ngModel]="organisation.civiliteTres" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="genders" id="civiliteTres" name="civiliteTres" [ngModel]="organisation.civiliteTres"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="prenomTres">First Name Treasurer</label>
@@ -331,27 +331,27 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
                         <label for="actComp1">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp1" name="actComp1" [ngModel]="organisation.actComp1" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="orgActivities" id="actComp1" name="actComp1" [ngModel]="organisation.actComp1"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="actComp2">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp2" name="actComp2" [ngModel]="organisation.actComp2" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="orgActivities" id="actComp2" name="actComp2" [ngModel]="organisation.actComp2"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="actComp3">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp3" name="actComp3" [ngModel]="organisation.actComp3" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="orgActivities" id="actComp3" name="actComp3" [ngModel]="organisation.actComp3"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="actComp4">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp4" name="actComp4" [ngModel]="organisation.actComp4" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="orgActivities" id="actComp4" name="actComp4" [ngModel]="organisation.actComp4"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="actComp5">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp5" name="actComp5" [ngModel]="organisation.actComp5" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="orgActivities" id="actComp5" name="actComp5" [ngModel]="organisation.actComp5"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="actComp6">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp6" name="actComp6" [ngModel]="organisation.actComp6" optionLabel="name" optionValue="code"></p-dropdown>
+                        <p-dropdown [options]="orgActivities" id="actComp6" name="actComp6" [ngModel]="organisation.actComp6"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-12">
                         <label for="actComp7">Other Activity</label>

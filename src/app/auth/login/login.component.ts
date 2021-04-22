@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
 
     loginform: FormGroup;
     languages = [
-        {name: 'Nederlands', code: 'NL'},
-        {name: 'Français', code: 'FR'},
-        {name: 'English', code: 'EN'}
+        {label: 'Nederlands', value: 'NL'},
+        {label: 'Français', value: 'FR'},
+        {label: 'English', value: 'EN'}
     ];
 
   constructor(

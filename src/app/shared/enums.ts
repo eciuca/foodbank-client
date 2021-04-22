@@ -1,70 +1,74 @@
 export let enmStatusCompany =  [
-    {name: 'Personne Physique', code: 0},
-    {name: 'A S B L', code: 1},
-    {name: 'Association de Fait', code: 2},
-    {name: 'CPAS/OCMW', code: 3 },
-    {name: 'Auxiliaire Publique', code: 4}
+    {label: 'Personne Physique', value: 0},
+    {label: 'A S B L', value: 1},
+    {label: 'Association de Fait', value: 2},
+    {label: 'CPAS/OCMW', value: 3 },
+    {label: 'Auxiliaire Publique', value: 4}
 ];
 
 export let enmGender = [
-    {name: 'Unspecified', code: 0},
-    {name: 'Mr.', code: 1},
-    {name: 'Mrs.', code: 2 },
-    {name: 'Miss', code: 3}
+    {label: 'Mr.', value: 1},
+    {label: 'Mrs.', value: 2 },
+    {label: 'Miss', value: 3}
 ];
 export let enmLanguage = [
-    {name: 'Unspecified', code: 0},
-    {name: 'Français', code: 1},
-    {name: 'Nederlands', code: 2 },
-    {name: 'English', code: 3},
-    {name: 'Deutsch', code: 4}
+    {label: 'Français', value: 1},
+    {label: 'Nederlands', value: 2 },
+    {label: 'English', value: 3},
+    {label: 'Deutsch', value: 4}
 ];
 export let enmLanguageLegacy = [
-    {name: 'Unspecified', code: ''},
-    {name: 'Français', code: 'fr'},
-    {name: 'Nederlands', code: 'nl' },
-    {name: 'English', code: 'en'},
-    {name: 'Deutsch', code: 'ge'}
+    {label: 'Unspecified', value: ''},
+    {label: 'Français', value: 'fr'},
+    {label: 'Nederlands', value: 'nl' },
+    {label: 'English', value: 'en'},
+    {label: 'Deutsch', value: 'ge'}
 ];
 export let enmCountry = [
-    {name: 'Belgium', code: 1},
-    {name: 'France', code: 2 },
-    {name: 'Germany', code: 3},
-    {name: 'Netherlands', code: 4},
-    {name: 'Luxemburg', code: 5}
+    {label: 'Belgium', value: 1},
+    {label: 'France', value: 2 },
+    {label: 'Germany', value: 3},
+    {label: 'Netherlands', value: 4},
+    {label: 'Luxemburg', value: 5}
 ];
 export let enmUserRoles = [
-    {name: 'admin', code: 'admin'},
-    {name: 'Admin_Banq', code: 'Admin_Banq' },
-    {name: 'Admin_Asso', code: 'Admin_Asso'},
-    {name: 'Admin_CPAS', code: 'Admin_CPAS' },
-    {name: 'Admin_FEAD', code: 'Admin_FEAD'},
-    {name: 'Admin_FBBA', code: 'Admin_FBBA' },
-    {name: 'Asso', code: 'Asso'},
-    {name: 'Bank', code: 'Bank'},
-    {name: 'Bank_FBBA', code: 'Bank_FBBA'},
+    {label: 'admin', value: 'admin'},
+    {label: 'Admin_Banq', value: 'Admin_Banq' },
+    {label: 'Admin_Asso', value: 'Admin_Asso'},
+    {label: 'Admin_CPAS', value: 'Admin_CPAS' },
+    {label: 'Admin_FEAD', value: 'Admin_FEAD'},
+    {label: 'Admin_FBBA', value: 'Admin_FBBA' },
+    {label: 'Asso', value: 'Asso'},
+    {label: 'Bank', value: 'Bank'},
+    {label: 'Bank_FBBA', value: 'Bank_FBBA'},
+];
+export let enmUserRolesBankAsso = [
+    {label: 'Admin_Banq', value: 'Admin_Banq' },
+    {label: 'Bank', value: 'Bank'},
+    {label: 'Admin_Asso', value: 'Admin_Asso'},
+    {label: 'Asso', value: 'Asso'},
 ];
 export let enmUserRolesBank = [
-    {name: 'Admin_Banq', code: 'Admin_Banq' },
-    {name: 'Bank', code: 'Bank'}
+    {label: 'Admin_Banq', value: 'Admin_Banq' },
+    {label: 'Bank', value: 'Bank'}
 ];
 export let enmUserRolesAsso = [
-    {name: 'Admin_Asso', code: 'Admin_Asso'},
-    {name: 'Asso', code: 'Asso'},
+    {label: 'Admin_Asso', value: 'Admin_Asso'},
+    {label: 'Asso', value: 'Asso'},
 ];
 export let enmStatutFead = [
-    {name: 'Refused', code: 0},
-    {name: 'Accepted', code: 1},
-    {name: 'Under Study', code: 2},
+    {label: 'Refused', value: 0},
+    {label: 'Accepted', value: 1},
+    {label: 'Under Study', value: 2},
 ];
 export let enmOrgActivities = [
-    {name: '', code: 0},
-    {name: '2nd hand Clothes Collect & Sell', code: 1},
-    {name: 'Social grocery', code: 2},
-    {name: '2nd hand Furniture Collect & Sell', code: 3},
-    {name: 'Homework club', code: 4},
-    {name: 'Social Restaurant', code: 5},
-    {name: 'Community kitchen', code: 6}
+    {label: '', value: 0},
+    {label: '2nd hand Clothes Collect & Sell', value: 1},
+    {label: 'Social grocery', value: 2},
+    {label: '2nd hand Furniture Collect & Sell', value: 3},
+    {label: 'Homework club', value: 4},
+    {label: 'Social Restaurant', value: 5},
+    {label: 'Community kitchen', value: 6}
 ];
 
 

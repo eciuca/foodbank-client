@@ -6,7 +6,7 @@
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label for="civilite">Gender</label>
-                <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="membre.civilite" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="membre.civilite"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="nom">Name *</label>
@@ -30,7 +30,7 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="langue">Language</label>
-                <p-dropdown [options]="languages" id="langue" name="langue" [ngModel]="membre.langue" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown [options]="languages" id="langue" name="langue" [ngModel]="membre.langue"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="nnat">National Number</label>

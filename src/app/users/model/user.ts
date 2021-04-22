@@ -41,6 +41,8 @@ export interface User {
 
     lienCpas: number;
 
+    societe: string;
+
     totalRecords: number;
 
 }
@@ -77,6 +79,7 @@ export class DefaultUser implements User {
     lienCpas: number;
     password: string;
     rights: string;
+    societe: string;
     totalRecords: number;
     userName: string;
     isNew: boolean; // calculated property to indicate we are creating a new member

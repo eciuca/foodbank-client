@@ -34,7 +34,7 @@
 
             <div class="p-field p-col-12 p-md-3">
                 <label for="langue">Language</label>
-                <p-dropdown  [options]="languages" id="langue" name="langue" [ngModel]="cpas.langue" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown  [options]="languages" id="langue" name="langue" [ngModel]="cpas.langue"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="cpasContactName">Responsable Nom</label>
@@ -46,7 +46,7 @@
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="civilite">Gender</label>
-                <p-dropdown  [options]="genders" id="civilite" name="civilite" [ngModel]="cpas.civilite" optionLabel="name" optionValue="code"></p-dropdown>
+                <p-dropdown  [options]="genders" id="civilite" name="civilite" [ngModel]="cpas.civilite"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-12">
                 <label for="rem">Remarks</label>

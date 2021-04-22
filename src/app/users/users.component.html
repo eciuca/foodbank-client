@@ -1,7 +1,7 @@
     <p-table #dt [value]="users" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
              [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
              [paginator]="true" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
-             [globalFilterFields]="['idUser','userName', 'idLanguage', 'email', 'rights']">
+             [globalFilterFields]="['idUser','userName', 'idOrg','idLanguage', 'email', 'rights']">
         <ng-template pTemplate="caption">
             <div class="table-header">
                <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add User"></button>
@@ -11,6 +11,7 @@
             <tr>
                 <th pSortableColumn="idUser">Login<p-sortIcon field="idUser"></p-sortIcon></th>
                 <th pSortableColumn="userName">User Name<p-sortIcon field="userName"></p-sortIcon></th>
+                <th>Organisation</th>
                 <th pSortableColumn="idLanguage">Language<p-sortIcon field="idLanguage"></p-sortIcon></th>
                 <th pSortableColumn="email">E-Mail<p-sortIcon field="email"></p-sortIcon></th>
                 <th pSortableColumn="rights">Rights<p-sortIcon field="rights"></p-sortIcon></th>
@@ -23,20 +24,60 @@
                     <p-columnFilter type="text" field="userName" ></p-columnFilter>
                 </th>
                 <th>
-                    <p-columnFilter type="text" field="idLanguage" ></p-columnFilter>
+                    <p-columnFilter field="idOrg" matchMode="equals" [showMenu]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-autoComplete [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
+                                             [forceSelection]="true"  field="societe" [dropdown]="true">
+                            </p-autoComplete>
+                        </ng-template>
+                    </p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter field="idLanguage" matchMode="equals" [showMenu]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-dropdown [ngModel]="value" [options]="languageOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                                <ng-template let-option pTemplate="item">
+                                    <span>{{option.label}}</span>
+                                </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                    </p-columnFilter>
                 </th>
                 <th>
                     <p-columnFilter type="text" field="email"></p-columnFilter>
                 </th>
                 <th>
-                    <p-columnFilter type="text" field="rights"></p-columnFilter>
+                    <p-columnFilter field="rights" matchMode="equals" [showMenu]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-dropdown [ngModel]="value" [options]="rightOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                                <ng-template let-option pTemplate="item">
+                                    <span>{{option.label}}</span>
+                                </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                    </p-columnFilter>
                 </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>
             <tr (click)="handleSelect(user)">
-                <td *ngFor="let col of cols">
-                    {{user[col.field]}}
+                <td>
+                    {{ user.idUser }}
+                </td>
+                <td>
+                    {{user.userName}}
+                </td>
+                <td>
+                    {{ user.societe }}
+                </td>
+                <td>
+                    {{user.idLanguage}}
+                </td>
+                <td>
+                    {{user.email}}
+                </td>
+                <td>
+                    {{user.rights}}
                 </td>
             </tr>
         </ng-template>

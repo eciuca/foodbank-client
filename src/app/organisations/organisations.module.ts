@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import {Organisation} from './model/organisation';
 import {OrganisationsComponent } from './organisations.component';
-import {OrganisationsResolver} from './organisations.resolver';
 import {OrganisationComponent } from './organisation/organisation.component';
 
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
@@ -36,24 +35,15 @@ import {MessageModule} from 'primeng/message';
 
 const routes: Routes = [
     { path: '',
-        component: OrganisationsComponent ,
-        resolve: {
-          OrganisationsResolver
-        }
+        component: OrganisationsComponent
     },
     {
         path: ':idDis',
-        component: OrganisationComponent,
-        resolve: {
-            OrganisationsResolver
-        }
-  },
+        component: OrganisationComponent
+   },
     {
         path: 'contacts/:idDis',
-        component: OrgcontactsComponent,
-        resolve: {
-            OrganisationsResolver
-        }
+        component: OrgcontactsComponent
     }
 ];
 
@@ -85,8 +75,7 @@ const routes: Routes = [
         CpasEntityService,
         DepotsDataService,
         DepotEntityService,
-        ConfirmationService,
-        OrganisationsResolver
+        ConfirmationService
   ]
 })
 export class OrganisationsModule {
