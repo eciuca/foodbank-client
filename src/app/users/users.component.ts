@@ -139,39 +139,31 @@ export class UsersComponent implements OnInit {
       queryParms['offset'] = event.first.toString();
       queryParms['rows'] = event.rows.toString();
       queryParms['sortOrder'] = event.sortOrder.toString();
+      if (event.sortField) {
+          queryParms['sortField'] = event.sortField.toString();
+      } else {
+          queryParms['sortField'] =  'idUser';
+      }
       if (event.filters) {
           if (event.filters.idUser && event.filters.idUser.value) {
-              queryParms['sortField'] = 'idUser';
-              queryParms['searchField'] = 'idUser';
-              queryParms['searchValue'] = event.filters.idUser.value;
-          } else if (event.filters.userName && event.filters.userName.value) {
-              queryParms['sortField'] = 'userName';
-              queryParms['searchField'] = 'userName';
-              queryParms['searchValue'] = event.filters.userName.value;
-          } else if (event.filters.idOrg && event.filters.idOrg.value) {
-              queryParms['sortField'] = 'userName';
+              queryParms['idUser'] =  event.filters.idUser.value;
+          }
+          if (event.filters.userName && event.filters.userName.value) {
+              queryParms['userName'] = event.filters.userName.value;
+          }
+          if (event.filters.idOrg && event.filters.idOrg.value) {
               queryParms['idOrg'] = event.filters.idOrg.value;
-          } else if (event.filters.idLanguage && event.filters.idLanguage.value) {
-              queryParms['sortField'] = 'idLanguage';
-              queryParms['searchField'] = 'idLanguage';
-              queryParms['searchValue'] = event.filters.idLanguage.value;
-          } else if (event.filters.email && event.filters.email.value) {
-              queryParms['sortField'] = 'email';
-              queryParms['searchField'] = 'email';
-              queryParms['searchValue'] = event.filters.email.value;
-          } else if (event.filters.rights && event.filters.rights.value) {
-              queryParms['sortField'] = 'rights';
-              queryParms['searchField'] = 'rights';
-              queryParms['searchValue'] = event.filters.rights.value;
+          }
+          if (event.filters.idLanguage && event.filters.idLanguage.value) {
+                queryParms['idLanguage'] = event.filters.idLanguage.value;
+          }
+          if (event.filters.email && event.filters.email.value) {
+                queryParms['email'] = event.filters.email.value;
+          }
+          if (event.filters.rights && event.filters.rights.value) {
+                queryParms['rights'] = event.filters.rights.value;
           }
       }
-     if (!queryParms.hasOwnProperty('sortField')) {
-         if (event.sortField) {
-             queryParms['sortField'] = event.sortField;
-         } else {
-             queryParms['sortField'] = 'userName';
-         }
-     }
      this.loadPageSubject$.next(queryParms);
   }
 
