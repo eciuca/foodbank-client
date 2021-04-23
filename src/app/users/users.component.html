@@ -27,7 +27,7 @@
                     <p-columnFilter field="idOrg" matchMode="equals" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-autoComplete [ngModel]="value" [suggestions]="filteredOrganisations"  (onSelect)="filter($event.idDis);"(completeMethod)="filterOrganisation($event)"
-                                            [forceSelection]="true" field="societe" [dropdown]="true">
+                                   [type]="'search'"  (onClear)="filter($event.idDis)"  field="societe" [dropdown]="true">
                             </p-autoComplete>
                         </ng-template>
                     </p-columnFilter>
