@@ -1,6 +1,6 @@
     <p-table #dt [value]="membres" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
              [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
-             [globalFilterFields]="['nom','prenom', 'address', 'zip', 'city']"
+             [globalFilterFields]="['nom','prenom', 'lienDis', 'address', 'zip', 'city']"
              [paginator]="true" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
             >
         <ng-template pTemplate="caption">
@@ -12,6 +12,7 @@
             <tr>
                 <th pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
                 <th pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
+                <th>Organisation</th>
                 <th pSortableColumn="address">Address<p-sortIcon field="address"></p-sortIcon></th>
                 <th pSortableColumn="zip">Zip<p-sortIcon field="zip"></p-sortIcon></th>
                 <th pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
@@ -23,6 +24,13 @@
                 <th>
                     <p-columnFilter type="text" field="prenom" ></p-columnFilter>
                 </th>
+                <p-columnFilter field="lienDis" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-autoComplete [ngModel]="value" [suggestions]="filteredOrganisations"  (onSelect)="filter($event.idDis);"(completeMethod)="filterOrganisation($event)"
+                                        [type]="'search'"  (onClear)="filter($event.idDis)"  field="societe" [dropdown]="true">
+                        </p-autoComplete>
+                    </ng-template>
+                </p-columnFilter>
                 <th>
                     <p-columnFilter type="text" field="address" ></p-columnFilter>
                 </th>
@@ -36,8 +44,23 @@
         </ng-template>
         <ng-template pTemplate="body" let-membre>
             <tr (click)="handleSelect(membre)">
-                <td *ngFor="let col of cols">
-                    {{membre[col.field]}}
+                <td>
+                    {{ membre.nom }}
+                </td>
+                <td>
+                    {{membre.prenom}}
+                </td>
+                <td>
+                    {{ membre.societe }}
+                </td>
+                <td>
+                    {{membre.address}}
+                </td>
+                <td>
+                    {{membre.zip}}
+                </td>
+                <td>
+                    {{membre.city}}
                 </td>
             </tr>
         </ng-template>

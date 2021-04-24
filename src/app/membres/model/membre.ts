@@ -69,6 +69,7 @@ export interface Membre {
     dateContrat: string;
     lDep: number;
     lienBanque: number;
+    societe: string; // calculated field
     totalRecords: number;
     lastVisit: string;
 }
@@ -117,6 +118,7 @@ export class DefaultMembre implements Membre {
     pays: number;
     prenom: string;
     rem: string;
+    societe: string; // calculated field
     tel: string;
     totalRecords: number;
     typEmploi: number;

@@ -9,6 +9,9 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../auth/reducers';
+import {Organisation} from '../organisations/model/organisation';
+import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
+import {QueryParams} from '@ngrx/data';
 
 
 @Component({
@@ -22,18 +25,21 @@ export class MembresComponent implements OnInit {
     selectedBatid$ = new BehaviorSubject(0);
     membre: Membre = null;
     membres: Membre[];
-    cols: any[];
     displayDialog: boolean;
     totalRecords: number;
     loading: boolean;
     filterBase: any;
     booCanCreate: boolean;
+    filteredOrganisations: Organisation[];
+    bankid: number;
 
   constructor(private membreService: MembreEntityService,
+              private organisationService: OrganisationEntityService,
               private router: Router,
               private store: Store<AppState>
   ) {
       this.booCanCreate = false;
+      this.bankid = 0;
   }
 
   ngOnInit() {
@@ -68,15 +74,6 @@ export class MembresComponent implements OnInit {
             })
         )
         .subscribe();
-
-    this.cols = [
-      { field: 'nom', header: 'Nom' },
-      { field: 'prenom', header: 'Prenom' },
-      { field: 'address', header: 'Adresse' },
-      { field: 'zip', header: 'Code Postal' },
-      { field: 'city', header: 'Commune' },
-    ];
-
   }
 
   handleSelect(membre) {
@@ -115,37 +112,32 @@ export class MembresComponent implements OnInit {
       queryParms['offset'] = event.first.toString();
       queryParms['rows'] = event.rows.toString();
       queryParms['sortOrder'] = event.sortOrder.toString();
+      if (event.sortField) {
+          queryParms['sortField'] = event.sortField.toString();
+      } else {
+          queryParms['sortField'] =  'nom';
+      }
       if (event.filters) {
           if (event.filters.nom && event.filters.nom.value) {
-              queryParms['sortField'] = 'nom';
-              queryParms['searchField'] = 'nom';
-              queryParms['searchValue'] = event.filters.nom.value;
-          } else if (event.filters.prenom && event.filters.prenom.value) {
-              queryParms['sortField'] = 'prenom';
-              queryParms['searchField'] = 'prenom';
-              queryParms['searchValue'] = event.filters.prenom.value;
-          } else if (event.filters.address && event.filters.address.value) {
-              queryParms['sortField'] = 'address';
-              queryParms['searchField'] = 'address';
-              queryParms['searchValue'] = event.filters.address.value;
-          } else if (event.filters.zip && event.filters.zip.value) {
-              queryParms['sortField'] = 'zip';
-              queryParms['searchField'] = 'zip';
-              queryParms['searchValue'] = event.filters.zip.value;
-          } else if (event.filters.city && event.filters.city.value) {
-              queryParms['sortField'] = 'city';
-              queryParms['searchField'] = 'city';
-              queryParms['searchValue'] = event.filters.city.value;
+                queryParms['nom'] = event.filters.nom.value;
+          }
+          if (event.filters.prenom && event.filters.prenom.value) {
+               queryParms['prenom'] = event.filters.prenom.value;
+          }
+          if (event.filters.lienDis && event.filters.lienDis.value) {
+              queryParms['lienDis'] = event.filters.lienDis.value;
+          }
+          if (event.filters.address && event.filters.address.value) {
+               queryParms['address'] = event.filters.address.value;
+          }
+          if (event.filters.zip && event.filters.zip.value) {
+              queryParms['zip'] = event.filters.zip.value;
+          }
+          if (event.filters.city && event.filters.city.value) {
+              queryParms['city'] = event.filters.city.value;
           }
       }
-      if (!queryParms.hasOwnProperty('sortField')) {
-          if (event.sortField) {
-              queryParms['sortField'] = event.sortField;
-          } else {
-              queryParms['sortField'] = 'nom';
-          }
-      }
-        this.membreService.getWithQuery(queryParms)
+     this.membreService.getWithQuery(queryParms)
          .subscribe(loadedMembres => {
            console.log('Loaded membres from nextpage: ' + loadedMembres.length);
            if (loadedMembres.length > 0) {
@@ -160,6 +152,7 @@ export class MembresComponent implements OnInit {
   }
     private initializeDependingOnUserRights(authState: AuthState) {
         if (authState.banque) {
+            this.bankid = authState.banque.bankId;
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
@@ -179,6 +172,23 @@ export class MembresComponent implements OnInit {
     showDialogToAdd() {
         this.selectedBatid$.next(0);
         this.displayDialog = true;
+    }
+    filterOrganisation(event ) {
+        console.log('Got Query with value:', event, 'bankid:', this.bankid);
+        const  queryOrganisationParms: QueryParams = {};
+        queryOrganisationParms['offset'] = '0';
+        queryOrganisationParms['rows'] = '10';
+        queryOrganisationParms['sortField'] = 'societe';
+        queryOrganisationParms['sortOrder'] = '1';
+        queryOrganisationParms['lienBanque'] = this.bankid.toString();
+        queryOrganisationParms['searchField'] = 'societe';
+        queryOrganisationParms['searchValue'] = event.query.toLowerCase();
+        this.organisationService.getWithQuery(queryOrganisationParms)
+            .subscribe(filteredOrganisations => {
+                this.filteredOrganisations = filteredOrganisations.map((organisation) =>
+                    Object.assign({}, organisation, {fullname: organisation.societe})
+                );
+            });
     }
 }
 

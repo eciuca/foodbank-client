@@ -21,6 +21,9 @@ import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
 import {CalendarModule} from 'primeng/calendar';
 import {ToastModule} from 'primeng/toast';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
+import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
 
 const routes: Routes = [
   { path: '',
@@ -47,11 +50,14 @@ const routes: Routes = [
         SelectButtonModule,
         ConfirmPopupModule,
         CalendarModule,
-        ToastModule
+        ToastModule,
+        AutoCompleteModule
     ],
   providers: [
     MembresDataService,
     MembreEntityService,
+      OrganisationsDataService,
+      OrganisationEntityService,
     ConfirmationService
   ],
 })
@@ -59,10 +65,12 @@ export class MembresModule {
   constructor(
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
-      private membresDataService: MembresDataService
+      private membresDataService: MembresDataService,
+      private organisationsDataService: OrganisationsDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Membre', membresDataService);
+    entityDataService.registerService('Organisation', organisationsDataService);
   }
 
 }
