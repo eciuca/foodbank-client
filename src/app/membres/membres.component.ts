@@ -31,6 +31,7 @@ export class MembresComponent implements OnInit {
     filterBase: any;
     booCanCreate: boolean;
     filteredOrganisations: Organisation[];
+    booShowOrganisations: boolean;
     bankid: number;
 
   constructor(private membreService: MembreEntityService,
@@ -40,6 +41,7 @@ export class MembresComponent implements OnInit {
   ) {
       this.booCanCreate = false;
       this.bankid = 0;
+      this.booShowOrganisations = false;
   }
 
   ngOnInit() {
@@ -156,6 +158,7 @@ export class MembresComponent implements OnInit {
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
+                    this.booShowOrganisations = true;
                     this.filterBase = { 'lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     break;

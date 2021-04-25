@@ -12,7 +12,7 @@
             <tr>
                 <th pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
                 <th pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
-                <th>Organisation</th>
+                <th *ngIf="booShowOrganisations">Organisation</th>
                 <th pSortableColumn="address">Address<p-sortIcon field="address"></p-sortIcon></th>
                 <th pSortableColumn="zip">Zip<p-sortIcon field="zip"></p-sortIcon></th>
                 <th pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
@@ -24,9 +24,9 @@
                 <th>
                     <p-columnFilter type="text" field="prenom" ></p-columnFilter>
                 </th>
-                <p-columnFilter field="lienDis" matchMode="equals" [showMenu]="false">
+                <p-columnFilter *ngIf="booShowOrganisations" field="lienDis" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-autoComplete [ngModel]="value" [suggestions]="filteredOrganisations"  (onSelect)="filter($event.idDis);"(completeMethod)="filterOrganisation($event)"
+                        <p-autoComplete [ngModel]="value" [suggestions]="filteredOrganisations"  (onSelect)="filter($event.idDis);" (completeMethod)="filterOrganisation($event)"
                                         [type]="'search'"  (onClear)="filter($event.idDis)"  field="societe" [dropdown]="true">
                         </p-autoComplete>
                     </ng-template>
@@ -50,7 +50,7 @@
                 <td>
                     {{membre.prenom}}
                 </td>
-                <td>
+                <td *ngIf="booShowOrganisations">
                     {{ membre.societe }}
                 </td>
                 <td>

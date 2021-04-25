@@ -11,7 +11,7 @@
             <tr>
                 <th pSortableColumn="idUser">Login<p-sortIcon field="idUser"></p-sortIcon></th>
                 <th pSortableColumn="userName">User Name<p-sortIcon field="userName"></p-sortIcon></th>
-                <th>Organisation</th>
+                <th *ngIf="booShowOrganisations">Organisation</th>
                 <th pSortableColumn="idLanguage">Language<p-sortIcon field="idLanguage"></p-sortIcon></th>
                 <th pSortableColumn="email">E-Mail<p-sortIcon field="email"></p-sortIcon></th>
                 <th pSortableColumn="rights">Rights<p-sortIcon field="rights"></p-sortIcon></th>
@@ -24,9 +24,9 @@
                     <p-columnFilter type="text" field="userName" ></p-columnFilter>
                 </th>
                 <th>
-                    <p-columnFilter field="idOrg" matchMode="equals" [showMenu]="false">
+                    <p-columnFilter *ngIf="booShowOrganisations" field="idOrg" matchMode="equals" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-autoComplete [ngModel]="value" [suggestions]="filteredOrganisations"  (onSelect)="filter($event.idDis);"(completeMethod)="filterOrganisation($event)"
+                            <p-autoComplete [ngModel]="value" [suggestions]="filteredOrganisations"  (onSelect)="filter($event.idDis);" (completeMethod)="filterOrganisation($event)"
                                    [type]="'search'"  (onClear)="filter($event.idDis)"  field="societe" [dropdown]="true">
                             </p-autoComplete>
                         </ng-template>
@@ -67,7 +67,7 @@
                 <td>
                     {{user.userName}}
                 </td>
-                <td>
+                <td *ngIf="booShowOrganisations">
                     {{ user.societe }}
                 </td>
                 <td>

@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
   languageOptions: any[];
   filteredOrganisations: Organisation[];
   bankid: number;
+  booShowOrganisations: boolean;
 
   constructor(private userService: UserEntityService,
               private organisationService: OrganisationEntityService,
@@ -44,6 +45,7 @@ export class UsersComponent implements OnInit {
       this.rightOptions = enmUserRolesBankAsso;
       this.languageOptions = enmLanguageLegacy;
       this.bankid = 0;
+      this.booShowOrganisations = false;
   }
 
   ngOnInit() {
@@ -79,6 +81,7 @@ export class UsersComponent implements OnInit {
                   switch (authState.user.rights) {
                       case 'Bank':
                       case 'Admin_Banq':
+                          this.booShowOrganisations = true;
                           this.filterBase = {'lienBanque': authState.banque.bankId};
                           this.rightOptions = enmUserRolesBankAsso;
                           if (authState.user.rights === 'Admin_Banq') {
