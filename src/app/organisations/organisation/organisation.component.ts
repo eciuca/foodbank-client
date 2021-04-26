@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {OrganisationEntityService} from '../services/organisation-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
 import {Observable, combineLatest} from 'rxjs';
 import {DefaultOrganisation, Organisation} from '../model/organisation';
 import {ConfirmationService, MessageService} from 'primeng/api';
@@ -66,26 +66,28 @@ export class OrganisationComponent implements OnInit {
   ngOnInit(): void {
 // comment: this component is sometimes called from his parent Component with BankId @Input Decorator,
       // or sometimes via a router link via the Main Menu
-         if (!this.idDis$) {
+      let organisation$: Observable<Organisation>;
+      if (!this.idDis$) {
           // we must come from the menu
           console.log('We initialize a new organisation object from the router!');
              this.booCalledFromTable = false;
              this.booCanQuit = false;
-          this.idDis$ = this.route.paramMap
+          organisation$ = this.route.paramMap
               .pipe(
                   map(paramMap => paramMap.get('idDis')),
-                  map(idDisString => Number(idDisString))
+                  map(idDisString => Number(idDisString)),
+                switchMap(idDis => this.organisationsService.getByKey(idDis))
+             );
+      } else {
+          organisation$ = combineLatest([this.idDis$, this.organisationsService.entities$])
+              .pipe(
+                  map(([idDis, organisations]) => organisations.find(organisation => idDis === organisation.idDis))
               );
       }
-      const organisation$ = combineLatest([this.idDis$, this.organisationsService.entities$])
-          .pipe(
-              map(([idDis, organisations]) => organisations.find(organisation => idDis === organisation.idDis))
-          );
-
       organisation$.subscribe(organisation => {
           if (organisation) {
               this.organisation = organisation;
-              this.cpassService.getByKey(organisation.lienCpas)
+              this.cpassService.getByKey(this.organisation.lienCpas)
                   .subscribe(
                       cpas => {
                           if (cpas !== null) {

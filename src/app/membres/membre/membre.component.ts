@@ -19,11 +19,13 @@ import {DataServiceError} from '@ngrx/data';
 })
 export class MembreComponent implements OnInit {
     @Input() batId$: Observable<number>;
+    @Input() currentFilteredOrgId: number;
     @Output() onMembreUpdate = new EventEmitter<Membre>();
     @Output() onMembreCreate = new EventEmitter<Membre>();
     @Output() onMembreDelete = new EventEmitter<Membre>();
     @Output() onMembreQuit = new EventEmitter<Membre>();
     membre: Membre;
+    booIsOrganisation: boolean;
     booCalledFromTable: boolean;
     booCanSave: boolean;
     booCanDelete: boolean;
@@ -48,6 +50,7 @@ export class MembreComponent implements OnInit {
       this.booCanQuit = true;
       this.lienBanque = 0 ;
       this.lienDis = 0;
+      this.booIsOrganisation = false;
   }
 
   ngOnInit(): void {
@@ -80,7 +83,13 @@ export class MembreComponent implements OnInit {
                       this.membre = membre;
                   } else {
                       this.membre = new DefaultMembre();
-                      console.log('we have a new default membre');
+                      if (this.booIsOrganisation === false) { // a bank can create members of its own or members for its organisations
+                          if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
+                              this.lienDis = this.currentFilteredOrgId;
+                          } else {
+                              this.lienDis = 0;
+                          }
+                      }
                   }
               });
       }
@@ -91,26 +100,26 @@ export class MembreComponent implements OnInit {
               if (authState.user) {
                   switch (authState.user.rights) {
                       case 'Bank':
-                          this.lienBanque = authState.banque.bankId;
-                          break;
                       case 'Admin_Banq':
                           this.lienBanque = authState.banque.bankId;
-                          this.booCanSave = true;
-                          if (this.booCalledFromTable) {
-                              this.booCanDelete = true;
+                          if (authState.user.rights === 'Admin_Banq' ) {
+                              this.booCanSave = true;
+                              if (this.booCalledFromTable) {
+                                  this.booCanDelete = true;
+                              }
                           }
                           break;
                       case 'Asso':
-                          this.lienBanque = authState.banque.bankId;
-                          this.lienDis = authState.user.idOrg;
-                          break;
                       case 'Admin_Asso':
                           this.lienBanque = authState.banque.bankId;
                           this.lienDis = authState.user.idOrg;
-                          this.booCanSave = true;
-                          if (this.booCalledFromTable) {
-                              this.booCanDelete = true;
-                          }
+                          this.booIsOrganisation = true;
+                         if  (authState.user.rights === 'Admin_Asso') {
+                             this.booCanSave = true;
+                             if (this.booCalledFromTable) {
+                                 this.booCanDelete = true;
+                             }
+                         }
                           break;
                       default:
                   }

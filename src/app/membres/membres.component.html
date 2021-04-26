@@ -5,7 +5,8 @@
             >
         <ng-template pTemplate="caption">
             <div class="table-header">
-                <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Member"></button>
+                <label *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-mx-auto">Members of {{currentFilteredOrg.societe}}</label>
+                <button *ngIf="booCanCreate" class="p-mx-auto" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Member"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -66,12 +67,12 @@
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
-                Au total il y a {{totalRecords}} membres dans la selection.
+               There are {{totalRecords}} members in the selection.
             </div>
         </ng-template>
     </p-table>
     <p-dialog header="Member Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
-        <app-membre *ngIf="selectedBatid$" [batId$]="selectedBatid$" (onMembreUpdate)="handleMembreUpdate($event)" (onMembreCreate)="handleMembreCreate($event)"
+        <app-membre *ngIf="selectedBatid$" [batId$]="selectedBatid$"  [currentFilteredOrgId] ="currentFilteredOrgId" (onMembreUpdate)="handleMembreUpdate($event)" (onMembreCreate)="handleMembreCreate($event)"
                     (onMembreDelete)="handleMembreDeleted($event)" (onMembreQuit)="handleMembreQuit()"></app-membre>
     </p-dialog>
 

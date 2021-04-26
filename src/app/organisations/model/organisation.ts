@@ -106,6 +106,8 @@ export interface Organisation {
 
     lienCpas: number;
 
+    birbyN: boolean;
+
     depyN: boolean;
 
     logBirb: number;
@@ -329,6 +331,7 @@ export class DefaultOrganisation implements Organisation {
     daten: number;
     depPrinc: boolean;
     depotram: number;
+    birbyN: boolean;
     depyN: boolean;
     disprog: string;
     distrListPdt: boolean;
@@ -498,6 +501,7 @@ export class DefaultOrganisation implements Organisation {
         this.daten = 0;
         this.depPrinc = false;
         this.depotram = 0;
+        this.birbyN = false;
         this.depyN = false;
         this.disprog = '';
         this.distrListPdt = true;

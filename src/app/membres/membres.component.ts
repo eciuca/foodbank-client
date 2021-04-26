@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Membre} from './model/membre';
 import {MembreEntityService} from './services/membre-entity.service';
 import {Router} from '@angular/router';
@@ -32,6 +32,8 @@ export class MembresComponent implements OnInit {
     booCanCreate: boolean;
     filteredOrganisations: Organisation[];
     booShowOrganisations: boolean;
+    currentFilteredOrgId: number;
+    currentFilteredOrg$: Observable<Organisation> ;
     bankid: number;
 
   constructor(private membreService: MembreEntityService,
@@ -42,6 +44,7 @@ export class MembresComponent implements OnInit {
       this.booCanCreate = false;
       this.bankid = 0;
       this.booShowOrganisations = false;
+      this.currentFilteredOrgId = 0;
   }
 
   ngOnInit() {
@@ -128,6 +131,11 @@ export class MembresComponent implements OnInit {
           }
           if (event.filters.lienDis && event.filters.lienDis.value) {
               queryParms['lienDis'] = event.filters.lienDis.value;
+              this.currentFilteredOrgId = event.filters.lienDis.value;
+              this.currentFilteredOrg$ = this.organisationService.getByKey(this.currentFilteredOrgId);
+          }  else {
+              this.currentFilteredOrgId = 0;
+              this.currentFilteredOrg$ = null;
           }
           if (event.filters.address && event.filters.address.value) {
                queryParms['address'] = event.filters.address.value;

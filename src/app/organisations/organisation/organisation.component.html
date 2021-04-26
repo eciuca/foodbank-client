@@ -412,14 +412,13 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
                         <label for="selectedCpas">Cpas</label>
-                        <p-autoComplete  [ngModel]="selectedCpas" [suggestions]="filteredCpass" required (completeMethod)="filterCpas($event)"
+                        <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" required (completeMethod)="filterCpas($event)"
                                          [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true">
-                            <ng-template let-cpas pTemplate="item">
-                                <div class="cpas-item">
-                                    <div> {{cpas.cpasName}}</div>
-                                </div>
-                            </ng-template>
                         </p-autoComplete>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label for="birbyN">Does the public authority validate the access of beneficiaries to FEAD?</label>
+                        <p-inputSwitch id="birbyN" name="birbyN" [ngModel]="organisation.birbyN"></p-inputSwitch>
                     </div>
 
                 </div>
