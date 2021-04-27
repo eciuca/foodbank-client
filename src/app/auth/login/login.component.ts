@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
                 const loginAction = login(principal);
                 this.store.dispatch(loginAction);
 
-                this.router.navigateByUrl('/users');
+                this.router.navigateByUrl(`/membres/${principal.user.lienBat}`);
               },
               error => {
                   console.log(error);

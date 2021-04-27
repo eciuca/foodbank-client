@@ -236,8 +236,7 @@ export class UserComponent implements OnInit {
         queryMemberParms['rows'] = '10';
         queryMemberParms['sortField'] = 'nom';
         queryMemberParms['sortOrder'] = '1';
-        queryMemberParms['searchField'] = 'nom';
-        queryMemberParms['searchValue'] = query.toLowerCase();
+        queryMemberParms['nom'] = query.toLowerCase();
         this.membresService.getWithQuery(queryMemberParms)
             .subscribe(filteredMembres => {
                 this.filteredMembres = filteredMembres.map((membre) =>

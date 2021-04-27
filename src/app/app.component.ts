@@ -140,8 +140,6 @@ export class AppComponent implements OnInit {
                         {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
-                        {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
-                        {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
                         {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
 
@@ -161,20 +159,24 @@ export class AppComponent implements OnInit {
                     ];
 
                     break;
-                default:
+                case 'admin':
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
                     this.menuLoggedInItems = [
                         {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
                         {label: 'Banques', icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
-                        {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                        {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
                         {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
-                        {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
                         {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
                         {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
-
+                    break;
+                default:
+                    this.loggedInBankName = authState.banque.bankName;
+                    this.loggedInOrganisationName = '';
+                    this.menuLoggedInItems = [
+                        {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                        {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                    ];
             }
         }
     }
