@@ -133,7 +133,6 @@ export class DefaultMembre implements Membre {
         this.ag = 0;
         this.authority = 0;
         this.lienBanque = 0;
-        this.batId = 0;
         this.batmail = '';
         this.ben = 0;
         this.ca = 0;
