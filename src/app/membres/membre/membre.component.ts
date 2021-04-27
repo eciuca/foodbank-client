@@ -34,7 +34,7 @@ export class MembreComponent implements OnInit {
   languages: any[];
   lienBanque: number;
   lienDis: number;
-  constructor(
+   constructor(
       private membresService: MembreEntityService,
       private route: ActivatedRoute,
       private router: Router,

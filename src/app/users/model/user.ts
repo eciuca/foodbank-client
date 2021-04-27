@@ -87,13 +87,24 @@ export class DefaultUser implements User {
     constructor() {
         this.idLanguage = 'nl';
         this.actif = true;
+        this.depot = '';
         this.droit1 = false;
+        this.email = '';
         this.gestAsso = false;
         this.gestCpas = false;
         this.gestDon = false;
         this.gestFead = false;
         this.gestInv = false;
         this.gestMemb = false;
+        this.idCompany = '';
+        this.idOrg = 0;
+        this.idUser = '';
+        this.lienBanque = 0;
+        this.lienBat = 0;
+        this.lienCpas = 0;
+        this.password = '';
+        this.rights = '';
+        this.societe = '';
         this.isNew = true;
     }
 }

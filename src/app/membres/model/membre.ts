@@ -128,12 +128,45 @@ export class DefaultMembre implements Membre {
     zip: string;
     lastVisit: string;
     constructor() {
-       this.pays = 1;
-       this.civilite = 1;
-       this.langue = 2 ;
-       this.actif = 1;
-       this.authority = 1;
-       this.ben = 1;
-       this.lastVisit = '';
+        this.actif = 1;
+        this.address = '';
+        this.ag = 0;
+        this.authority = 0;
+        this.lienBanque = 0;
+        this.batId = 0;
+        this.batmail = '';
+        this.ben = 0;
+        this.ca = 0;
+        this.cg = 0;
+        this.city = '';
+        this.civilite = 1;
+        this.codeAcces = 0;
+        this.dateContrat = '';
+        this.dateFin = '';
+        this.dateNaissance = '';
+        this.datedeb = '';
+        this.datmand = '';
+        this.deleted = 0;
+        this.fonction = 0;
+        this.fullname = '';
+        this.gsm = '';
+        this.lDep = 0;
+        this.langue = 2;
+        this.lienDis = 0;
+        this.nnat = '';
+        this.nom = '';
+        this.nrCodeAcces = 0;
+        this.pays = 1;
+        this.prenom = '';
+        this.rem = '';
+        this.societe = ''; // calculated field
+        this.tel = '';
+        this.totalRecords = 0;
+        this.typEmploi = 0;
+        this.veh = '';
+        this.vehImm = '';
+        this.vehTyp = '';
+        this.zip = '';
+        this.lastVisit = '';
     }
 }

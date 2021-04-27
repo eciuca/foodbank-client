@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
 import {Router} from '@angular/router';
@@ -35,6 +35,8 @@ export class UsersComponent implements OnInit {
   filteredOrganisations: Organisation[];
   bankid: number;
   booShowOrganisations: boolean;
+  currentFilteredOrgId: number;
+  currentFilteredOrg$: Observable<Organisation> ;
 
   constructor(private userService: UserEntityService,
               private organisationService: OrganisationEntityService,
@@ -46,6 +48,7 @@ export class UsersComponent implements OnInit {
       this.languageOptions = enmLanguageLegacy;
       this.bankid = 0;
       this.booShowOrganisations = false;
+      this.currentFilteredOrgId = 0;
   }
 
   ngOnInit() {
@@ -156,6 +159,11 @@ export class UsersComponent implements OnInit {
           }
           if (event.filters.idOrg && event.filters.idOrg.value) {
               queryParms['idOrg'] = event.filters.idOrg.value;
+              this.currentFilteredOrgId = event.filters.idOrg.value;
+              this.currentFilteredOrg$ = this.organisationService.getByKey(this.currentFilteredOrgId);
+          }  else {
+              this.currentFilteredOrgId = 0;
+              this.currentFilteredOrg$ = null;
           }
           if (event.filters.idLanguage && event.filters.idLanguage.value) {
                 queryParms['idLanguage'] = event.filters.idLanguage.value;

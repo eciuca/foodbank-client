@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {DefaultUser, User} from '../model/user';
 import {MessageService} from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
-import {enmLanguageLegacy, enmUserRoles, enmUserRolesAsso, enmUserRolesBankAsso} from '../../shared/enums';
+import {enmLanguageLegacy, enmUserRolesAsso, enmUserRolesBankAsso} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
@@ -13,7 +13,7 @@ import {AppState} from '../../reducers';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {Membre} from '../../membres/model/membre';
 
-import {DataServiceError, QueryParams} from '@ngrx/data';
+import {DataServiceError} from '@ngrx/data';
 import {Observable, combineLatest} from 'rxjs';
 
 @Component({
@@ -23,6 +23,7 @@ import {Observable, combineLatest} from 'rxjs';
 })
 export class UserComponent implements OnInit {
     @Input() idUser$: Observable<string>;
+    @Input() currentFilteredOrgId: number;
     user: User;
     selectedMembre: Membre;
     filteredMembres: Membre[];
@@ -30,6 +31,7 @@ export class UserComponent implements OnInit {
     @Output() onUserDelete = new EventEmitter<User>();
     @Output() onUserCreate = new EventEmitter<User>();
     @Output() onUserQuit = new EventEmitter<User>();
+    booIsOrganisation: boolean;
     booCalledFromTable: boolean;
     booCanSave: boolean;
     booCanDelete: boolean;
@@ -58,6 +60,7 @@ export class UserComponent implements OnInit {
       this.lienBanque = 0;
       this.idOrg = 0;
       this.idCompany = '';
+      this.booIsOrganisation = false;
   }
 
   ngOnInit(): void {
@@ -92,7 +95,13 @@ export class UserComponent implements OnInit {
                             });
                 } else {
                     this.user = new DefaultUser();
-                    console.log('we have a new default user');
+                    if (this.booIsOrganisation === false) { // a bank can create members of its own or members for its organisations
+                        if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
+                            this.idOrg = this.currentFilteredOrgId;
+                        } else {
+                            this.idOrg = 0;
+                        }
+                    }
                 }
             });
 
@@ -117,17 +126,16 @@ export class UserComponent implements OnInit {
                               }
                               break;
                           case 'Asso':
-                              this.idOrg = authState.organisation.idDis;
-                              this.filterMemberBase = { 'lienDis': authState.organisation.idDis};
-                              this.rights = enmUserRolesAsso;
-                              break;
                           case 'Admin_Asso':
                               this.idOrg = authState.organisation.idDis;
                               this.filterMemberBase = { 'lienDis': authState.organisation.idDis};
+                              this.booIsOrganisation = true;
                               this.rights = enmUserRolesAsso;
-                              this.booCanSave = true;
-                              if (this.booCalledFromTable) {
-                                  this.booCanDelete = true;
+                              if  (authState.user.rights === 'Admin_Asso') {
+                                  this.booCanSave = true;
+                                  if (this.booCalledFromTable) {
+                                      this.booCanDelete = true;
+                                  }
                               }
                               break;
                           default:

@@ -122,5 +122,28 @@ export class DefaultBeneficiaire implements Beneficiaire {
         this.daten = '';
         this.datenConj = '';
         this.regio = '';
+        this.adresse = '';
+        this.bankName = '';
+        this.bankShortName = '';
+        this.coeff = 0;
+        this.cp = '';
+        this.critBirb = 0;
+        this.datUpdBirb = '';
+        this.email = '';
+        this.gsm = '';
+        this.idClient = 0;
+        this.idInt = '';
+        this.lcpas = 0;
+        this.lbanque = 0;
+        this.lienDis = 0;
+        this.localite = '';
+        this.natnr = '';
+        this.nom = '';
+        this.nomconj = '';
+        this.nomsav = '';
+        this.prenom = '';
+        this.prenomconj = '';
+        this.prenomsav = '';
+        this.tel = '';
     }
 }
