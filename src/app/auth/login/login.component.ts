@@ -47,29 +47,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
       const val = this.loginform.value;
       console.log('Selected language: ', val.language);
 
-      this.auth.login(val.idUser, val.password)
-          .pipe(
-              tap(principal => console.log(principal.user))
-          )
-          .subscribe(
-              principal => {
-                const loginAction = login(principal);
-                this.store.dispatch(loginAction);
-
-                this.router.navigateByUrl(`/membres/${principal.user.lienBat}`);
-              },
-              error => {
-                  console.log(error);
-                  this.messageService.add({severity: 'error', summary: 'Login has failed', detail: 'Wrong userid or password'});
-              }
-          );
-
-
-
+      this.auth.login();
   }
 
 }

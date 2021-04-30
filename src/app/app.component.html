@@ -1,4 +1,4 @@
-<div class="spinner-container" *ngIf="loading">
+<div class="spinner-container" *ngIf="!(isDoneLoading | async)">
    <p-progressSpinner ></p-progressSpinner>
 </div>
 <div  *ngIf="isLoggedIn$ | async">
