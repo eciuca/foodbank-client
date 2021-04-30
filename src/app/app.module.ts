@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {RouterModule, Routes} from '@angular/router';
 import {AuthModule} from './auth/auth.module';
+import { OAuthModule } from 'angular-oauth2-oidc';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
@@ -24,6 +25,8 @@ import {MessageService} from 'primeng/api';
 import {appEntityMetadata} from './app-entity.metadata';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
+import { FallbackComponent } from './fallback.component';
+import { ShouldLoginComponent } from './should-login.component';
 
 
 const routes: Routes = [
@@ -33,7 +36,7 @@ const routes: Routes = [
     },
     { path: 'users',
         loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuardWithForcedLogin]
     },
     { path: 'organisations',
         loadChildren: () => import('./organisations/organisations.module').then(m => m.OrganisationsModule),
@@ -56,16 +59,20 @@ const routes: Routes = [
         loadChildren: () => import('./depots/depots.module').then(m => m.DepotsModule),
         canActivate: [AuthGuard]
     },
+    { path: 'should-login', component: ShouldLoginComponent },
+    { path: '', redirectTo: '/users', pathMatch: 'full' },
     {
         path: '**',
-        redirectTo: '/'
+        component: FallbackComponent
     }
 ];
 
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        FallbackComponent,
+        ShouldLoginComponent
     ],
     imports: [
         BrowserModule,
