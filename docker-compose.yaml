@@ -40,7 +40,7 @@ services:
     ports:
       - 80:80
     environment:
-      - apiUrl='http://localhost:8081/api/'
+      - apiUrl='http://food-it-server:8081/api/'
           
 volumes:
   mysql-data:
