@@ -1,3 +1,10 @@
+FROM node:14-alpine as dist-build
+RUN mkdir -p /dist-build && chown -R node:node /dist-build
+WORKDIR /dist-build
+COPY ./ /dist-build
+USER node
+RUN npm install
+
 FROM httpd:alpine
 # https://blog.neoprime.it/ng-in-httpd/
 
@@ -36,9 +43,9 @@ RUN rm -r /usr/local/apache2/htdocs/*
 #   /usr/local/apache2/conf/httpd.conf
 
 # Copy all the files from the docker build context into the public htdocs of the apache container.
-COPY ./dist/ /usr/local/apache2/htdocs/
-COPY ./docker/httpd-vhosts.conf /usr/local/apache2/conf/extra
-COPY ./docker/httpd.conf /usr/local/apache2/conf/
+COPY --from=dist-build /dist-build/dist /usr/local/apache2/htdocs/
+COPY --from=dist-build /dist-build/docker/httpd-vhosts.conf /usr/local/apache2/conf/extra
+COPY --from=dist-build /dist-build/docker/httpd.conf /usr/local/apache2/conf/
 
 # Change owner of the publicly available files to root user and daemon group. Httpd threads run as daemon.
 RUN chown -R root:daemon \
