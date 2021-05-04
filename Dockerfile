@@ -3,7 +3,7 @@ RUN mkdir -p /dist-build && chown -R node:node /dist-build
 WORKDIR /dist-build
 COPY ./ /dist-build
 USER node
-RUN npm install
+RUN npm install && npm run build-prod
 
 FROM httpd:alpine
 # https://blog.neoprime.it/ng-in-httpd/
