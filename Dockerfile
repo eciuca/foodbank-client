@@ -35,7 +35,7 @@ RUN mkdir -p /dist-build && chown -R node:node /dist-build
 WORKDIR /dist-build
 COPY ./ /dist-build
 USER node
-RUN npm install
+RUN npm install && npm run build-prod
 
 >>>>>>> 9ac3119 (Add docker multi stage build)
 FROM httpd:alpine
