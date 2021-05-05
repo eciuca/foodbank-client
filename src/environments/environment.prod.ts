@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://dev.foodbankit.org/api/'
+  apiUrl: 'https://dev.foodbankit.org/api/'
 };
