@@ -1,35 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# Stage 1: Compile and Build angular codebase
-
-# Use official node image as the base image
-FROM node:latest as build
-
-# Set the working directory
-WORKDIR /usr/local/app
-
-# Add the source code to app
-COPY ./ /usr/local/app/
-
-# Install all the dependencies
-RUN npm install
-
-# Generate the build of the application
-RUN npm run build --prod
-
-
-# Stage 2: Serve app with nginx server
-
-# Use official nginx image as the base image
-FROM nginx:latest
-
-# Copy the build output to replace the default nginx contents.
-COPY --from=build /usr/local/app/dist /usr/share/nginx/html
-
-# Expose port 80
-EXPOSE 80
-=======
-=======
 FROM node:14-alpine as dist-build
 RUN mkdir -p /dist-build && chown -R node:node /dist-build
 WORKDIR /dist-build
@@ -37,7 +5,6 @@ COPY ./ /dist-build
 USER node
 RUN npm install && npm run build-prod && rm -rf node_modules
 
->>>>>>> 9ac3119 (Add docker multi stage build)
 FROM httpd:alpine
 # https://blog.neoprime.it/ng-in-httpd/
 
@@ -93,4 +60,3 @@ RUN chmod -R 440 \
 # at least one level into the served root. (-mindepth 1, otherwise the served directory itself
 # would be included - no need for that.
 RUN find /usr/local/apache2/htdocs/ -mindepth 1 -type d -exec chmod +x {} \;
->>>>>>> 5514caf (Add dockerfile and apache container configuration)
