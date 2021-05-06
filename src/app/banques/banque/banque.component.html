@@ -229,6 +229,7 @@
                 <p-message *ngIf="localitedepot.invalid && (localitedepot.dirty || localitedepot.touched)" severity="error" text="Depot City is required and must be minimum 4 chars long"></p-message>
             </div>
         </div>
+        <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
             <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, banque)" label="Delete"></button>

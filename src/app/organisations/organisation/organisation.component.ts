@@ -9,7 +9,7 @@ import {enmStatusCompany, enmGender, enmCountry, enmOrgActivities} from '../../s
 import {NgForm} from '@angular/forms';
 import {Cpas} from '../../cpass/model/cpas';
 import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
-import {QueryParams} from '@ngrx/data';
+import {DataServiceError, QueryParams} from '@ngrx/data';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {globalAuthState} from '../../auth/auth.selectors';
@@ -163,12 +163,21 @@ export class OrganisationComponent implements OnInit {
             message: 'Confirm Deletion?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                const  myMessage = {severity: 'success', summary: 'Delete', detail: `L' organisation ${organisation.societe} was deletede`};
+                const  myMessage = {severity: 'success', summary: 'Delete', detail: `Organisation ${organisation.societe} was deleted`};
                 this.organisationsService.delete(organisation)
                     .subscribe( () => {
                         this.messageService.add(myMessage);
                         this.onOrganisationDelete.emit();
-                    });
+                    },
+                        (dataserviceerror: DataServiceError) => {
+                            console.log('Error deleting organisation', dataserviceerror.message);
+                            const  errMessage = {severity: 'error', summary: 'Delete',
+                                // tslint:disable-next-line:max-line-length
+                                detail: `The organisation ${organisation.idDis} ${organisation.societe} could not be deleted: error: ${dataserviceerror.message}`,
+                                life: 6000 };
+                            this.messageService.add(errMessage) ;
+                        }
+                    );
             },
             reject: () => {
                 console.log('We do nothing');

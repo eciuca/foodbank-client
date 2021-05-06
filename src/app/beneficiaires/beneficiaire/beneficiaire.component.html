@@ -70,7 +70,7 @@
                 <p-dropdown [options]="feadStatuses" id="birb" name="birb" [(ngModel)]="beneficiaire.birb" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="selectedCpas">Cpas</label>
+                <label for="selectedCpas">Cpas-Ocmw</label>
                 <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" (completeMethod)="filterCpas($event)"
                                  [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true">
                     <ng-template let-cpas pTemplate="item">

@@ -5,12 +5,12 @@
     <form   #depotForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
-                <label for="idDepot">Identifiant</label>
+                <label for="idDepot">Id</label>
                 <input #idDepot="ngModel" pInputText id="idDepot" name="idDepot" required minlength="4" maxLength="10" [ngModel]="depot.idDepot" />
                 <p-message *ngIf="idDepot.invalid && (idDepot.dirty || idDepot.touched)" severity="error" text="Depot Id is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="nom">Nom</label>
+                <label for="nom">Name</label>
                 <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxLength="45" [ngModel]="depot.nom" />
                 <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="User Name is required and must be minimum 4 chars long"></p-message>
             </div>
@@ -19,23 +19,23 @@
                 <input pInputText id="contact" name="contact" maxLength="45" [ngModel]="depot.contact" />
             </div>
             <div class="p-field p-col-12 p-md-6">
-                <label for="adresse">Adresse</label>
+                <label for="adresse">Address</label>
                 <input pInputText id="adresse" name="adresse" maxLength="45" [ngModel]="depot.adresse" />
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="cp">Code Postal</label>
+                <label for="cp">Zip Code</label>
                 <input pInputText id="cp" name="cp" maxLength="8" [ngModel]="depot.cp" />
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="ville">Localité</label>
+                <label for="ville">City</label>
                 <input pInputText id="ville" name="ville" maxLength="45" [ngModel]="depot.ville" />
             </div>
             <div class="p-field p-col-12 p-md-6">
-                <label for="adresse2">2ème Adresse</label>
+                <label for="adresse2">2nd Address</label>
                 <input pInputText id="adresse2" name="adresse2" maxLength="45" [ngModel]="depot.adresse2" />
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="telephone">Téléphone</label>
+                <label for="telephone">Tel</label>
                 <input pInputText id="telephone" name="telephone" maxLength="20" [ngModel]="depot.telephone" />
             </div>
             <div class="p-field p-col-12 p-md-3">
@@ -47,7 +47,7 @@
                 <input pInputText id="memo" name="memo" [ngModel]="depot.memo" />
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="depPrinc">Depot Principal?</label>
+                <label for="depPrinc">Main Depot?</label>
                  <p-inputSwitch id="depPrinc" name="depPrinc" [ngModel]="depot.depPrinc"></p-inputSwitch>
             </div>
             <div class="p-field p-col-12 p-md-4">

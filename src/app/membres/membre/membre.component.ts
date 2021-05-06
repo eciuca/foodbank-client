@@ -143,7 +143,7 @@ export class MembreComponent implements OnInit {
                         this.onMembreDelete.emit(membre);
                     },
                         (dataserviceerror: DataServiceError) => {
-                            console.log('Error deleting membre', dataserviceerror.message);
+                            console.log('Error deleting member', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: `The member ${membre.prenom} ${membre.nom} could not be deleted: error: ${dataserviceerror.message}`,

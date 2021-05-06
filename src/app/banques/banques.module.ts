@@ -24,6 +24,7 @@ import {MessageModule} from 'primeng/message';
 import {ConfirmationService} from 'primeng/api';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {ToastModule} from 'primeng/toast';
 const routes: Routes = [
     {   path: '',
         component: BanquesComponent,
@@ -56,7 +57,8 @@ const routes: Routes = [
         ReactiveFormsModule,
         MessageModule,
         ConfirmPopupModule,
-        AutoCompleteModule
+        AutoCompleteModule,
+        ToastModule
     ],
   providers: [
     BanquesDataService,

@@ -8,7 +8,7 @@ import {Banque, DefaultBanque} from '../model/banque';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import { Input } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {QueryParams} from '@ngrx/data';
+import {DataServiceError, QueryParams} from '@ngrx/data';
 import {Membre} from '../../membres/model/membre';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
@@ -337,7 +337,16 @@ export class BanqueComponent implements OnInit {
                     .subscribe( () => {
                         this.messageService.add(myMessage);
                         this.onBanqueDelete.emit();
-                    });
+                    },
+                        (dataserviceerror: DataServiceError) => {
+                            console.log('Error deleting bank', dataserviceerror.message);
+                            const  errMessage = {severity: 'error', summary: 'Delete',
+                                // tslint:disable-next-line:max-line-length
+                                detail: `The bank ${banque.bankId} ${banque.bankShortName} ${banque.bankName} could not be deleted: error: ${dataserviceerror.message}`,
+                                life: 6000 };
+                            this.messageService.add(errMessage) ;
+                        }
+                        );
             },
             reject: () => {
                 console.log('We do nothing');

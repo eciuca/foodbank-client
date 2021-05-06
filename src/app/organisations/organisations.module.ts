@@ -32,6 +32,7 @@ import { OrgcontactComponent } from './orgcontacts/orgcontact/orgcontact.compone
 import {OrgcontactsDataService} from './services/orgcontacts-data.service';
 import {OrgcontactEntityService} from './services/orgcontact-entity.service';
 import {MessageModule} from 'primeng/message';
+import {ToastModule} from 'primeng/toast';
 
 const routes: Routes = [
     { path: '',
@@ -64,7 +65,8 @@ const routes: Routes = [
         AutoCompleteModule,
         InputNumberModule,
         InputSwitchModule,
-        MessageModule
+        MessageModule,
+        ToastModule
     ],
   providers: [
         OrganisationsDataService,

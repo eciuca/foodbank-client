@@ -11,12 +11,7 @@
                         <input #iduser="ngModel" pInputText id="idUser" name="idUser"  required minlength="4" maxlength="60" [ngModel]="user.idUser" />
                         <p-message *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 4 chars long"></p-message>
                     </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="userName">User Name</label>
-                        <input #username="ngModel" pInputText id="userName" name="userName"  required minlength="4" maxlength="45" [ngModel]="user.userName" />
-                        <p-message *ngIf="username.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 4 chars long"></p-message>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
+                    <div class="p-field p-col-12 p-md-3">
                         <label for="selectedMembre">Member</label>
                         <p-autoComplete #membre="ngModel" [(ngModel)]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
                                          [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">
@@ -28,16 +23,10 @@
                         </p-autoComplete>
                         <p-message *ngIf="membre.invalid && userForm.touched" severity="error" text="A member must be selected"></p-message>
                     </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="idLanguage">Language</label>
-                        <p-dropdown [options]="languages" id="idLanguage" name="idLanguage" [ngModel]="user.idLanguage"  ></p-dropdown>
-                    </div>
-
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="email">E-mail</label>
-                        <input #email="ngModel" pInputText id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [ngModel]="user.email" />
-                        <p-message *ngIf="email.invalid && userForm.touched" severity="error" text="E-mail is required and must be a valid e-mail"></p-message>
-
+                    <div *ngIf="booIsCreate" class="p-field p-col-12 p-md-2">
+                        <label for="password">Password</label>
+                        <input #password="ngModel" pInputText id="password" name="password"  required minlength="6" maxlength="12" [ngModel]="user.password" />
+                        <p-message *ngIf="password.invalid && userForm.touched" severity="error" text="Password is required for a new user and must be minimum 6 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="rights">Role</label>

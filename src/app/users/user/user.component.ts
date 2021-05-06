@@ -12,7 +12,6 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {Membre} from '../../membres/model/membre';
-
 import {DataServiceError} from '@ngrx/data';
 import {Observable, combineLatest} from 'rxjs';
 
@@ -32,6 +31,7 @@ export class UserComponent implements OnInit {
     @Output() onUserCreate = new EventEmitter<User>();
     @Output() onUserQuit = new EventEmitter<User>();
     booIsOrganisation: boolean;
+    booIsCreate: boolean;
     booCalledFromTable: boolean;
     booCanSave: boolean;
     booCanDelete: boolean;
@@ -61,6 +61,7 @@ export class UserComponent implements OnInit {
       this.idOrg = 0;
       this.idCompany = '';
       this.booIsOrganisation = false;
+      this.booIsCreate = false;
   }
 
   ngOnInit(): void {
@@ -69,6 +70,7 @@ export class UserComponent implements OnInit {
           console.log('We initialize a new user object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
+          this.booIsCreate = false;
           this.idUser$ = this.route.paramMap
               .pipe(
                   map(paramMap => paramMap.get('idUser'))
@@ -83,6 +85,7 @@ export class UserComponent implements OnInit {
             user => {
                 if (user) {
                     this.user = user;
+                    this.booIsCreate = false;
                     this.membresService.getByKey(user.lienBat)
                         .subscribe(
                             membre => {
@@ -95,6 +98,7 @@ export class UserComponent implements OnInit {
                             });
                 } else {
                     this.user = new DefaultUser();
+                    this.booIsCreate = true;
                     if (this.booIsOrganisation === false) { // a bank can create members of its own or members for its organisations
                         if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
                             this.idOrg = this.currentFilteredOrgId;
@@ -184,28 +188,62 @@ export class UserComponent implements OnInit {
             }
         );
       } else {
-          modifiedUser.lienBanque = this.lienBanque;
-          modifiedUser.idOrg = this.idOrg;
-          modifiedUser.idCompany = this.idCompany;
-          console.log('Creating User with content:', modifiedUser);
-          this.usersService.add(modifiedUser)
-              .subscribe((newUser) => {
-                  this.messageService.add({
-                      severity: 'success',
-                      summary: 'Creation',
-                      detail: `User  ${newUser.idUser} ${newUser.userName} has been created`
+          // todo later if we encrypt on client  const salt = bcrypt.genSaltSync(10);
+          //  modifiedUser.password = bcrypt.hashSync(modifiedUser.password, salt);
+          this.membresService.getByKey(modifiedUser.lienBat)
+              .subscribe(
+                  membre => {
+                      if (membre !== null) {
+                          modifiedUser.userName = membre.nom + ' ' + membre.prenom;
+                          modifiedUser.email = membre.batmail;
+                          switch (membre.langue) {
+                              case 1:
+                                  modifiedUser.idLanguage = 'fr';
+                                  break;
+                              case 2:
+                                  modifiedUser.idLanguage = 'nl';
+                                  break;
+                              case 3:
+                                  modifiedUser.idLanguage = 'en';
+                                  break;
+                              case 4:
+                                  modifiedUser.idLanguage = 'de';
+                                  break;
+                              default:
+                                  modifiedUser.idLanguage = '??';
+                          }
+                          modifiedUser.lienBanque = this.lienBanque;
+                          modifiedUser.idOrg = this.idOrg;
+                          modifiedUser.idCompany = this.idCompany;
+                          console.log('Creating User with content:', modifiedUser);
+                          this.usersService.add(modifiedUser)
+                              .subscribe((newUser) => {
+                                      this.messageService.add({
+                                          severity: 'success',
+                                          summary: 'Creation',
+                                          detail: `User  ${newUser.idUser} ${newUser.userName} has been created`
+                                      });
+                                      this.onUserCreate.emit(newUser);
+                                  },
+                                  (dataserviceerror: DataServiceError) => {
+                                      console.log('Error creating user', dataserviceerror.message);
+                                      const  errMessage = {severity: 'error', summary: 'Create',
+                                          // tslint:disable-next-line:max-line-length
+                                          detail: `The user ${modifiedUser.idUser} ${modifiedUser.userName} could not be created: error: ${dataserviceerror.message}`,
+                                          life: 6000 };
+                                      this.messageService.add(errMessage) ;
+                                  }
+                            );
+                      } else {
+                          console.log('Error creating user: no member was selected');
+                          const  errMessage = {severity: 'error', summary: 'Create',
+                              // tslint:disable-next-line:max-line-length
+                              detail: `The user ${modifiedUser.idUser}  could not be created: no member was selected`,
+                              life: 6000 };
+                          this.messageService.add(errMessage) ;
+                      }
                   });
-                  this.onUserCreate.emit(newUser);
-              },
-                  (dataserviceerror: DataServiceError) => {
-                      console.log('Error creating user', dataserviceerror.message);
-                      const  errMessage = {severity: 'error', summary: 'Create',
-                          // tslint:disable-next-line:max-line-length
-                          detail: `The userer ${modifiedUser.idUser} ${modifiedUser.userName} could not be created: error: ${dataserviceerror.message}`,
-                          life: 6000 };
-                      this.messageService.add(errMessage) ;
-                  }
-              );
+
       }
 
   }

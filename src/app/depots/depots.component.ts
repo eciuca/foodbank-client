@@ -41,11 +41,11 @@ export class DepotsComponent implements OnInit {
         )
     ;
     this.cols = [
-      {field: 'idDepot', header: 'Identifiant'},
-      {field: 'nom', header: 'Nom'},
-      {field: 'adresse', header: 'Adresse'},
-      {field: 'cp', header: 'Code Postal'},
-      {field: 'ville', header: 'Ville'}
+      {field: 'idDepot', header: 'Id'},
+      {field: 'nom', header: 'Name'},
+      {field: 'adresse', header: 'Address'},
+      {field: 'cp', header: 'Zip Code'},
+      {field: 'ville', header: 'City'}
     ];
     this.store
         .pipe(
