@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-ngrx-course": {
+    "foodbank-it-client": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -48,24 +48,32 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ]
+            },
+            "docker-local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.docker-local.ts"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-ngrx-course:build"
+            "browserTarget": "foodbank-it-client:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-ngrx-course:build:production"
+              "browserTarget": "foodbank-it-client:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-ngrx-course:build"
+            "browserTarget": "foodbank-it-client:build"
           }
         },
         "test": {
@@ -99,7 +107,7 @@
         }
       }
     },
-    "angular-ngrx-course-e2e": {
+    "foodbank-it-client-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -108,7 +116,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "angular-ngrx-course:serve"
+            "devServerTarget": "foodbank-it-client:serve"
           }
         },
         "lint": {
@@ -125,7 +133,7 @@
       }
     }
   },
-  "defaultProject": "angular-ngrx-course",
+  "defaultProject": "foodbank-it-client",
   "schematics": {
     "@ngrx/schematics:component": {
       "prefix": "",
