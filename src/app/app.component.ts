@@ -139,7 +139,7 @@ export class AppComponent implements OnInit {
                         {label: 'Banque', icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
                         {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                        {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: 'Members', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
                         {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
 
@@ -152,11 +152,17 @@ export class AppComponent implements OnInit {
                         {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
                         {label: 'Organisation', icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/${authState.organisation.idDis}` ]},
                         {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                        {label: 'Membres', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
-                        {label: 'Contacts', icon: 'pi pi-fw pi-users',  routerLink: [`/organisations/contacts/${authState.organisation.idDis}` ]},
-                        {label: 'Beneficiaires', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
-                        {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                        {label: 'Members', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: 'Contacts', icon: 'pi pi-fw pi-users',  routerLink: [`/organisations/contacts/${authState.organisation.idDis}` ]}
                     ];
+                    if (authState.organisation && authState.organisation.gestBen) {
+                        this.menuLoggedInItems.push(
+                            {label: 'Beneficiaires', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']}
+                        );
+                    }
+                    this.menuLoggedInItems.push(
+                        {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                    );
 
                     break;
                 case 'admin':

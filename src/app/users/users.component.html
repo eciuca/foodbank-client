@@ -4,8 +4,14 @@
              [globalFilterFields]="['idUser','userName', 'idOrg','idLanguage', 'email', 'rights']">
         <ng-template pTemplate="caption">
             <div class="table-header">
-               <label *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-mx-auto">Users of {{currentFilteredOrg.societe}}</label>
-               <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add User"></button>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-field p-col-12 p-md-6">
+                        Users of {{currentFilteredOrg.societe}}
+                    </div>
+                    <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
+                        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add User"></button>
+                    </div>
+                </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header">

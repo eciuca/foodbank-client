@@ -5,8 +5,14 @@
             >
         <ng-template pTemplate="caption">
             <div class="table-header">
-                <label *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-mx-auto">Members of {{currentFilteredOrg.societe}}</label>
-                <button *ngIf="booCanCreate" class="p-mx-auto" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Member"></button>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-field p-col-12 p-md-6">
+                        Members of {{currentFilteredOrg.societe}}
+                    </div>
+                    <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
+                        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Member"></button>
+                    </div>
+                </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
