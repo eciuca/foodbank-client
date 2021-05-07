@@ -20,7 +20,7 @@
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="daten">Birth Date</label>
-                <p-calendar #datenais="ngModel" id="daten" name="daten" dataType="string" dateFormat="d/m/yy" required [(ngModel)]="beneficiaire.daten"></p-calendar>
+                <input #datenais="ngModel" id="daten" name="daten" required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [(ngModel)]="beneficiaire.daten"/>
                 <p-message *ngIf="datenais.invalid && (datenais.dirty || datenais.touched)" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
             </div>
 
@@ -38,7 +38,7 @@
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="datenConj">Birth Date Partner</label>
-                <p-calendar #datenconj="ngModel" id="datenConj" name="datenConj" dataType="string" dateFormat="d/m/yy" [(ngModel)]="beneficiaire.datenConj"></p-calendar>
+                <input #datenconj="ngModel" id="datenConj" name="datenConj"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy"[(ngModel)]="beneficiaire.datenConj"/>
                 <p-message *ngIf="datenconj.invalid && (datenconj.dirty || datenconj.touched)" severity="error" text="Birthday must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">

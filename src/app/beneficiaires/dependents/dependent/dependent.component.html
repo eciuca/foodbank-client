@@ -17,7 +17,7 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="datenais">Birth Date</label>
-                <p-calendar #datenais="ngModel" id="datenais" name="datenais" dataType="string" dateFormat="d/m/yy" required [(ngModel)]="dependent.datenais"></p-calendar>
+                <input #datenais="ngModel" id="datenais" name="datenais" required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [(ngModel)]="dependent.datenais"/>
                 <p-message *ngIf="datenais.invalid && (datenais.dirty || datenais.touched)" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
