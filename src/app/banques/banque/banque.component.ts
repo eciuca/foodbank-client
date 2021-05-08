@@ -71,7 +71,7 @@ export class BanqueComponent implements OnInit {
       // or sometimes via a router link via the Main Menu
       if (!this.bankId$) {
           // we must come from the menu
-          console.log('We initialize a new banque object from the router!');
+         // console.log('We initialize a new banque object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
           this.bankId$ = this.route.paramMap
@@ -89,7 +89,7 @@ export class BanqueComponent implements OnInit {
       bank$.subscribe(banque => {
           if (banque) {
               this.banque = banque;
-              console.log('Banque : ', banque);
+              // console.log('Banque : ', banque);
               this.membresService.getByKey(banque.idMemberPres)
                   .subscribe(
                       membre => {
@@ -275,6 +275,7 @@ export class BanqueComponent implements OnInit {
         queryMemberParms['rows'] = '10';
         queryMemberParms['sortField'] = 'nom';
         queryMemberParms['sortOrder'] = '1';
+        queryMemberParms['lienBanque'] = this.banque.bankId.toString();
         queryMemberParms['nom'] = query.toLowerCase();
         this.membresService.getWithQuery(queryMemberParms)
         .subscribe(filteredMembres => {
