@@ -4,12 +4,12 @@
     </ng-template>
     <form   #organisationForm="ngForm">
         <p-accordion [multiple]="true">
-
             <p-accordionTab header="Distribution Center"  [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-6">
                         <label for="societe">Name Company</label>
-                        <input pInputText id="societe" name="societe" required minlength = "10" maxlength="100" [ngModel]="organisation.societe" />
+                        <input #societe="ngModel" pInputText id="societe" name="societe" required minlength = "10" maxlength="100" [ngModel]="organisation.societe" />
+                        <p-message *ngIf="societe.invalid && organisationForm.touched" severity="error" text="Company Name is required and must be minimum 4 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="statut">Status Company</label>
@@ -363,43 +363,43 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
                         <label for="nPers">Registered population</label>
-                        <p-inputNumber [ngModel]="organisation.nPers" id="nPers" name="nPers" mode="decimal" [showButtons]="true" inputId="nPers" [min]="0" [max]="100">
+                        <p-inputNumber [ngModel]="organisation.nPers" id="nPers" name="nPers" mode="decimal" [showButtons]="true" inputId="nPers" [min]="0" >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="nFam">Families</label>
-                        <p-inputNumber [ngModel]="organisation.nFam" id="nFam" name="nFam" mode="decimal" [showButtons]="true" inputId="nFam" [min]="0" [max]="100">
+                        <p-inputNumber [ngModel]="organisation.nFam" id="nFam" name="nFam" mode="decimal" [showButtons]="true" inputId="nFam" [min]="0" >
                         </p-inputNumber>
                     </div>
 
                     <div class="p-field p-col-12 p-md-2">
                         <label for="nNour">Infants (< 6 months)</label>
-                        <p-inputNumber [ngModel]="organisation.nNour" id="nNour" name="nNour" mode="decimal" [showButtons]="true" inputId="nNour" [min]="0" [max]="100">
+                        <p-inputNumber [ngModel]="organisation.nNour" id="nNour" name="nNour" mode="decimal" [showButtons]="true" inputId="nNour" [min]="0" >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="nBebe">Babies (> 6 months et < 24 months)</label>
-                        <p-inputNumber [ngModel]="organisation.nBebe" id="nBebe" name="nBebe" mode="decimal" [showButtons]="true" inputId="nBebe" [min]="0" [max]="100">
+                        <p-inputNumber [ngModel]="organisation.nBebe" id="nBebe" name="nBebe" mode="decimal" [showButtons]="true" inputId="nBebe" [min]="0"  >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="nEnf">Children (from 2 to 14 years)</label>
-                        <p-inputNumber [ngModel]="organisation.nEnf" id="nEnf" name="nEnf" mode="decimal" [showButtons]="true" inputId="nEnf" [min]="0" [max]="100">
+                        <p-inputNumber [ngModel]="organisation.nEnf" id="nEnf" name="nEnf" mode="decimal" [showButtons]="true" inputId="nEnf" [min]="0"  >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="nAdo">Teens (from 14 to 18 years)</label>
-                        <p-inputNumber [ngModel]="organisation.nAdo" id="nAdo" name="nAdo" mode="decimal" [showButtons]="true" inputId="nAdo" [min]="0" [max]="100">
+                        <p-inputNumber [ngModel]="organisation.nAdo" id="nAdo" name="nAdo" mode="decimal" [showButtons]="true" inputId="nAdo" [min]="0"  >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="n1824">Young Adults( 18-24) </label>
-                        <p-inputNumber [ngModel]="organisation.n1824" id="n1824" name="n1824" mode="decimal" [showButtons]="true" inputId="n1824" [min]="0" [max]="100">
+                        <p-inputNumber [ngModel]="organisation.n1824" id="n1824" name="n1824" mode="decimal" [showButtons]="true" inputId="n1824" [min]="0"  >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="nSen">Seniors</label>
-                        <p-inputNumber [ngModel]="organisation.nSen" id="nSen" name="nSen" mode="decimal" [showButtons]="true" inputId="nSen" [min]="0" [max]="100">
+                        <p-inputNumber [ngModel]="organisation.nSen" id="nSen" name="nSen" mode="decimal" [showButtons]="true" inputId="nSen" [min]="0"  >
                         </p-inputNumber>
                     </div>
                 </div>
@@ -412,7 +412,7 @@
                     </div>
                     <div class="p-field p-col-12 p-md-4">
                         <label for="selectedCpas">Cpas</label>
-                        <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" required (completeMethod)="filterCpas($event)"
+                        <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass"  (completeMethod)="filterCpas($event)"
                                          [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true">
                         </p-autoComplete>
                     </div>

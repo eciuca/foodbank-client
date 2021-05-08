@@ -8,17 +8,17 @@
             <div class="p-field p-col-12 p-md-4">
                 <label for="nom">Name</label>
                 <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxlength="50" [(ngModel)]="dependent.nom" />
-                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="Dependent Name is required and must be minimum 4 chars long"></p-message>
+                <p-message *ngIf="nom.invalid && dependentForm.touched" severity="error" text="Dependent Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="prenom">First Name</label>
                 <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="4" maxlength="50" [(ngModel)]="dependent.prenom" />
-                <p-message *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" severity="error" text="Dependent First Name is required and must be minimum 4 chars long"></p-message>
+                <p-message *ngIf="prenom.invalid && dependentForm.touched" severity="error" text="Dependent First Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="datenais">Birth Date</label>
                 <input #datenais="ngModel" id="datenais" name="datenais" required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [(ngModel)]="dependent.datenais"/>
-                <p-message *ngIf="datenais.invalid && (datenais.dirty || datenais.touched)" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
+                <p-message *ngIf="datenais.invalid && dependentForm.touched" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="actif">Actif?</label>

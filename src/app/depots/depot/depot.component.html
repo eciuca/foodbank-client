@@ -7,12 +7,12 @@
             <div class="p-field p-col-12 p-md-2">
                 <label for="idDepot">Id</label>
                 <input #idDepot="ngModel" pInputText id="idDepot" name="idDepot" required minlength="4" maxLength="10" [ngModel]="depot.idDepot" />
-                <p-message *ngIf="idDepot.invalid && (idDepot.dirty || idDepot.touched)" severity="error" text="Depot Id is required and must be minimum 4 chars long"></p-message>
+                <p-message *ngIf="idDepot.invalid && depotForm.touched" severity="error" text="Depot Id is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="nom">Name</label>
                 <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxLength="45" [ngModel]="depot.nom" />
-                <p-message *ngIf="nom.invalid && (nom.dirty || nom.touched)" severity="error" text="User Name is required and must be minimum 4 chars long"></p-message>
+                <p-message *ngIf="nom.invalid && depotForm.touched" severity="error" text="User Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-6">
                 <label for="contact">Contact</label>

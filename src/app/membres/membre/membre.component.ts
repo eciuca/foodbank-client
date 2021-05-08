@@ -185,14 +185,13 @@ export class MembreComponent implements OnInit {
           modifiedMembre.lienDis = this.lienDis;
           console.log('Creating Membre with content:', modifiedMembre);
           this.membresService.add(modifiedMembre)
-              .subscribe((newMembre) => {
-                  console.log('new membre was created', newMembre);
+              .subscribe(() => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: `The member ${newMembre.nom} ${newMembre.prenom}  was created`
+                      detail: `The member ${modifiedMembre.nom} ${modifiedMembre.prenom}  was created`
                   });
-                  this.onMembreCreate.emit(newMembre);
+                  this.onMembreCreate.emit(modifiedMembre);
               },
                   (dataserviceerror: DataServiceError) => {
                       console.log('Error creating membre', dataserviceerror.message);

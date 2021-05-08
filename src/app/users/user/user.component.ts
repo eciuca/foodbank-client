@@ -217,13 +217,13 @@ export class UserComponent implements OnInit {
                           modifiedUser.idCompany = this.idCompany;
                           console.log('Creating User with content:', modifiedUser);
                           this.usersService.add(modifiedUser)
-                              .subscribe((newUser) => {
+                              .subscribe(() => {
                                       this.messageService.add({
                                           severity: 'success',
                                           summary: 'Creation',
-                                          detail: `User  ${newUser.idUser} ${newUser.userName} has been created`
+                                          detail: `User  ${modifiedUser.idUser} ${modifiedUser.userName} has been created`
                                       });
-                                      this.onUserCreate.emit(newUser);
+                                      this.onUserCreate.emit(modifiedUser);
                                   },
                                   (dataserviceerror: DataServiceError) => {
                                       console.log('Error creating user', dataserviceerror.message);

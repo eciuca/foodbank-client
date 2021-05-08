@@ -26,6 +26,7 @@ import {MembreEntityService} from '../membres/services/membre-entity.service';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
 import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
+import {ToastModule} from 'primeng/toast';
 
 const routes: Routes = [
   { path: '',
@@ -54,6 +55,7 @@ const routes: Routes = [
         ConfirmPopupModule,
         MessageModule,
         AutoCompleteModule,
+        ToastModule,
     ],
   providers: [
         UsersDataService,
