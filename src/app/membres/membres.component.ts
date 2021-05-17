@@ -35,6 +35,8 @@ export class MembresComponent implements OnInit {
     currentFilteredOrgId: number;
     currentFilteredOrg$: Observable<Organisation> ;
     bankid: number;
+    bankName: string;
+    orgName: string; // if logging in with asso role we need to display the organisation
 
   constructor(private membreService: MembreEntityService,
               private organisationService: OrganisationEntityService,
@@ -45,6 +47,8 @@ export class MembresComponent implements OnInit {
       this.bankid = 0;
       this.booShowOrganisations = false;
       this.currentFilteredOrgId = 0;
+      this.bankName = '';
+      this.orgName = '';
   }
 
   ngOnInit() {
@@ -147,22 +151,12 @@ export class MembresComponent implements OnInit {
               queryParms['city'] = event.filters.city.value;
           }
       }
-     this.membreService.getWithQuery(queryParms)
-         .subscribe(loadedMembres => {
-           console.log('Loaded membres from nextpage: ' + loadedMembres.length);
-           if (loadedMembres.length > 0) {
-                this.totalRecords = loadedMembres[0].totalRecords;
-            } else {
-               this.totalRecords = 0;
-           }
-           this.membres  = loadedMembres;
-           this.loading = false;
-           this.membreService.setLoaded(true);
-         });
+      this.loadPageSubject$.next(queryParms);
   }
     private initializeDependingOnUserRights(authState: AuthState) {
         if (authState.banque) {
             this.bankid = authState.banque.bankId;
+            this.bankName = authState.banque.bankName;
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
@@ -173,6 +167,7 @@ export class MembresComponent implements OnInit {
                 case 'Asso':
                 case 'Admin_Asso':
                     this.filterBase = { 'lienDis': authState.organisation.idDis};
+                    this.orgName = authState.organisation.societe;
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                 default:

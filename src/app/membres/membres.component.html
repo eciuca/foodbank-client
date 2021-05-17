@@ -6,8 +6,14 @@
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <div class="p-fluid p-formgrid p-grid">
-                    <div *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-field p-col-12 p-md-6">
-                        Members of {{currentFilteredOrg.societe}}
+                    <div class="p-field p-col-12 p-md-4">
+                        Members of {{bankName}}
+                    </div>
+                    <div *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-field p-col-12 p-md-4">
+                        {{currentFilteredOrg.societe}}
+                    </div>
+                    <div   *ngIf="orgName != ''" class="p-field p-col-12 p-md-4">
+                        {{orgName}}
                     </div>
                     <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
                         <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Member"></button>

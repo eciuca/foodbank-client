@@ -34,6 +34,8 @@ export class UsersComponent implements OnInit {
   languageOptions: any[];
   filteredOrganisations: Organisation[];
   bankid: number;
+    bankName: string;
+    orgName: string; // if logging in with asso role we need to display the organisation
   booShowOrganisations: boolean;
   currentFilteredOrgId: number;
   currentFilteredOrg$: Observable<Organisation> ;
@@ -47,6 +49,8 @@ export class UsersComponent implements OnInit {
       this.rightOptions = enmUserRolesBankAsso;
       this.languageOptions = enmLanguageLegacy;
       this.bankid = 0;
+      this.bankName = '';
+      this.orgName = '';
       this.booShowOrganisations = false;
       this.currentFilteredOrgId = 0;
   }
@@ -81,6 +85,7 @@ export class UsersComponent implements OnInit {
             map((authState) => {
               if (authState.banque) {
                   this.bankid = authState.banque.bankId;
+                  this.bankName = authState.banque.bankName;
                   switch (authState.user.rights) {
                       case 'Bank':
                       case 'Admin_Banq':
@@ -94,6 +99,7 @@ export class UsersComponent implements OnInit {
                       case 'Asso':
                       case 'Admin_Asso':
                           this.filterBase = {'idOrg': authState.organisation.idDis};
+                          this.orgName = authState.organisation.societe;
                           this.rightOptions = enmUserRolesAsso;
                           if (authState.user.rights === 'Admin_Asso') {
                               this.booCanCreate = true;

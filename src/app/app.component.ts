@@ -138,8 +138,8 @@ export class AppComponent implements OnInit {
                         {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
                         {label: 'Banque', icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
                         {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
-                        {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Members', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
 
@@ -151,8 +151,8 @@ export class AppComponent implements OnInit {
                     this.menuLoggedInItems = [
                         {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
                         {label: 'Organisation', icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/${authState.organisation.idDis}` ]},
-                        {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Members', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Contacts', icon: 'pi pi-fw pi-users',  routerLink: [`/organisations/contacts/${authState.organisation.idDis}` ]}
                     ];
                     if (authState.organisation && authState.organisation.gestBen) {

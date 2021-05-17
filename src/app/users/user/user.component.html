@@ -8,8 +8,8 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
                         <label for="idUser">Login</label>
-                        <input #iduser="ngModel" pInputText id="idUser" name="idUser"  required minlength="4" maxlength="60" [ngModel]="user.idUser" />
-                        <p-message *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 4 chars long"></p-message>
+                        <input #iduser="ngModel" pInputText id="idUser" name="idUser"  required [disabled] ="!booIsCreate" minlength="6" maxlength="60" [ngModel]="user.idUser" />
+                        <p-message *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label for="selectedMembre">Member</label>
