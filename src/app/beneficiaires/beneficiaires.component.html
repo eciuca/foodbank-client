@@ -3,8 +3,15 @@
          [paginator]="true" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
           [globalFilterFields]="['nom','prenom', 'adresse', 'cp', 'localite']" >
     <ng-template pTemplate="caption">
-        <div class="table-header">
-            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Beneficiary"></button>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-4">
+                <button *ngIf="booCanCreate"  type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Beneficiary"></button>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="archived">Show Archived?</label>
+                <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="refreshTable($event)"></p-checkbox>
+
+            </div>
         </div>
     </ng-template>
      <ng-template pTemplate="header">

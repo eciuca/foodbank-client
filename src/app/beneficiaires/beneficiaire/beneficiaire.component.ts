@@ -12,7 +12,7 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {combineLatest, Observable} from 'rxjs';
 import {Cpas} from '../../cpass/model/cpas';
 import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
-import {QueryParams} from '@ngrx/data';
+import {DataServiceError, QueryParams} from '@ngrx/data';
 
 @Component({
   selector: 'app-beneficiaire',
@@ -78,16 +78,21 @@ export class BeneficiaireComponent implements OnInit {
           if (beneficiaire) {
               this.beneficiaire = beneficiaire;
               console.log('our beneficiaire:',  this.beneficiaire);
-              this.cpassService.getByKey(beneficiaire.lcpas)
-                  .subscribe(
-                      cpas => {
-                          if (cpas !== null) {
-                              this.selectedCpas = {...cpas};
-                              console.log('our beneficiaire cpas:', this.selectedCpas);
-                          } else {
-                              console.log('There is no cpas for this beneficiaire!');
-                          }
-                      });
+              if (beneficiaire.lcpas && beneficiaire.lcpas !== 0) {
+                  this.cpassService.getByKey(beneficiaire.lcpas)
+                      .subscribe(
+                          cpas => {
+                              if (cpas !== null) {
+                                  this.selectedCpas = {...cpas};
+                                  console.log('our beneficiaire cpas:', this.selectedCpas);
+                              } else {
+                                  console.log('There is no cpas for this beneficiaire!');
+                              }
+                          },
+                          (dataserviceerror: DataServiceError) => {
+                              console.log('Could not retrieve Cpas with id:', beneficiaire.lcpas);
+                          });
+              }
           } else {
               this.beneficiaire = new DefaultBeneficiaire();
               console.log('we have a new default beneficiaire');
@@ -151,7 +156,9 @@ export class BeneficiaireComponent implements OnInit {
 
   save(oldBeneficiaire: Beneficiaire, beneficiaireForm: Beneficiaire) {
     const modifiedBeneficiaire = Object.assign({}, oldBeneficiaire, beneficiaireForm);
-      modifiedBeneficiaire.lcpas = this.selectedCpas.cpasId;
+      if (this.selectedCpas) {
+          modifiedBeneficiaire.lcpas = this.selectedCpas.cpasId;
+      }
       if (modifiedBeneficiaire.hasOwnProperty('idClient')) {
     this.beneficiairesService.update(modifiedBeneficiaire)
         .subscribe( ()  => {

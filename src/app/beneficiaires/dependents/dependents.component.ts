@@ -35,8 +35,7 @@ export class DependentsComponent implements OnInit {
       { field: 'civilite', header: 'Gender' },
       { field: 'nom', header: 'Name' },
       { field: 'prenom', header: 'First Name' },
-      { field: 'datenais', header: 'Birth Date' },
-      { field: 'actif', header: 'Active' }
+      { field: 'datenais', header: 'Birth Date' }
     ];
     this.store
         .pipe(

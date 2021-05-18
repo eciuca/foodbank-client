@@ -3,16 +3,16 @@
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label for="civilite">Gender</label>
-                <p-dropdown [options]="genders" id="civilite" name="civilite" [(ngModel)]="orgcontact.civilite"  ></p-dropdown>
+                <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="orgcontact.civilite"  ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="nom">Name *</label>
-                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxlength="50" [(ngModel)]="orgcontact.nom" />
+                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxlength="50" [ngModel]="orgcontact.nom" />
                 <p-message *ngIf="nom.invalid && orgcontactForm.touched" severity="error" text="Orgcontact Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="prenom">First Name *</label>
-                <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="4" maxlength="50" [(ngModel)]="orgcontact.prenom" />
+                <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="4" maxlength="50" [ngModel]="orgcontact.prenom" />
                 <p-message *ngIf="prenom.invalid && orgcontactForm.touched" severity="error" text="Contact First Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
@@ -21,7 +21,7 @@
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="email">E-Mail</label>
-                <input #email="ngModel" pInputText id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="100" [(ngModel)]="orgcontact.email" />
+                <input #email="ngModel" pInputText id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="100" [ngModel]="orgcontact.email" />
                 <p-message *ngIf="email.invalid && orgcontactForm.touched" severity="error" text="Contact e-mail is invalid"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
@@ -34,7 +34,7 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="distr">Distribution ?</label>
-                <p-inputSwitch id="distr" name="distr" [(ngModel)]="orgcontact.distr"></p-inputSwitch>
+                <p-inputSwitch id="distr" name="distr" [ngModel]="orgcontact.distr"></p-inputSwitch>
             </div>
         </div>
         <p-confirmPopup></p-confirmPopup>

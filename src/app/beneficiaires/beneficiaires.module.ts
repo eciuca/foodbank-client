@@ -28,6 +28,7 @@ import {DependentEntityService} from './services/dependent-entity.service';
 import {CalendarModule} from 'primeng/calendar';
 import {MessageModule} from 'primeng/message';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import {CheckboxModule} from 'primeng/checkbox';
 
 
 
@@ -67,7 +68,8 @@ const routes: Routes = [
         AutoCompleteModule,
         CalendarModule,
         MessageModule,
-        InputSwitchModule
+        InputSwitchModule,
+        CheckboxModule
     ],
   providers: [
         BeneficiairesDataService,

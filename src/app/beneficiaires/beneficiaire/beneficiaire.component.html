@@ -6,68 +6,71 @@
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label for="civilite">Gender</label>
-                <p-dropdown [options]="civilites" id="civilite" name="civilite" [(ngModel)]="beneficiaire.civilite" ></p-dropdown>
+                <p-dropdown [options]="civilites" id="civilite" name="civilite" [ngModel]="beneficiaire.civilite" ></p-dropdown>
             </div>
                 <div class="p-field p-col-12 p-md-4">
                 <label for="nom">Name</label>
-                <input #nom="ngModel" pInputText id="nom" name="nom"  maxlength="50" [(ngModel)]="beneficiaire.nom" />
-                <p-message *ngIf="nom.invalid && beneficiaireForm.touched" severity="error" text="Beneficiary Name is required and must be minimum 4 chars long"></p-message>
+                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="2" maxlength="50" [ngModel]="beneficiaire.nom" />
+                <p-message *ngIf="nom.invalid && beneficiaireForm.touched" severity="error" text="Beneficiary Name is required and must be minimum 2 chars long"></p-message>
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label for="prenom">First Name</label>
-                <input #prenom="ngModel" pInputText id="prenom" name="prenom"  maxlength="50" [(ngModel)]="beneficiaire.prenom" />
-                <p-message *ngIf="prenom.invalid && beneficiaireForm.touched" severity="error" text="Beneficiary First Name is required and must be minimum 4 chars long"></p-message>
+                <input #prenom="ngModel" pInputText id="prenom" name="prenom"  required minlength="2" maxlength="50" [ngModel]="beneficiaire.prenom" />
+                <p-message *ngIf="prenom.invalid && beneficiaireForm.touched" severity="error" text="Beneficiary First Name is required and must be minimum 2 chars long"></p-message>
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label for="daten">Birth Date</label>
-                <input #datenais="ngModel" pInputText id="daten" name="daten" required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [(ngModel)]="beneficiaire.daten"/>
+                <input #datenais="ngModel" pInputText id="daten" name="daten" required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="beneficiaire.daten"/>
                 <p-message *ngIf="datenais.invalid && beneficiaireForm.touched" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
             </div>
-
+            <div class="p-field p-col-12 p-md-2">
+                <label for="actif">Actif?</label>
+                <p-inputSwitch id="actif" name="actif" [ngModel]="beneficiaire.actif"></p-inputSwitch>
+            </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="civiliteconj">Gender Partner</label>
-                <p-dropdown [options]="civilites" id="civiliteconj" name="civiliteconj" [(ngModel)]="beneficiaire.civiliteconj" ></p-dropdown>
+                <p-dropdown [options]="civilites" id="civiliteconj" name="civiliteconj" [ngModel]="beneficiaire.civiliteconj" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="nomconj">Name Partner</label>
-                <input pInputText id="nomconj" name="nomconj"  maxlength="50" [(ngModel)]="beneficiaire.nomconj" />
+                <input pInputText id="nomconj" name="nomconj"  maxlength="50" [ngModel]="beneficiaire.nomconj" />
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label for="prenomconj">First Name Partner</label>
-                <input pInputText id="prenomconj" name="prenomconj"  maxlength="50" [(ngModel)]="beneficiaire.prenomconj" />
+                <input pInputText id="prenomconj" name="prenomconj"  maxlength="50" [ngModel]="beneficiaire.prenomconj" />
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label for="datenConj">Birth Date Partner</label>
-                <input #datenconj="ngModel" pInputText id="datenConj" name="datenConj"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy"[(ngModel)]="beneficiaire.datenConj"/>
+                <input #datenconj="ngModel" pInputText id="datenConj" name="datenConj"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy"[ngModel]="beneficiaire.datenConj"/>
                 <p-message *ngIf="datenconj.invalid && beneficiaireForm.touched" severity="error" text="Birthday must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="adresse">Address</label>
-                <input pInputText id="adresse" name="adresse"  maxlength="50" [(ngModel)]="beneficiaire.adresse" />
+                <input pInputText id="adresse" name="adresse"  maxlength="50" [ngModel]="beneficiaire.adresse" />
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="cp">Zip Code</label>
-                <input pInputText id="cp" name="cp"  maxlength="6" [(ngModel)]="beneficiaire.cp" />
+                <input pInputText id="cp" name="cp"  maxlength="6" [ngModel]="beneficiaire.cp" />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="localite">City</label>
-                <input pInputText id="localite" name="localite"  maxlength="50" [(ngModel)]="beneficiaire.localite" />
+                <input pInputText id="localite" name="localite"  maxlength="50" [ngModel]="beneficiaire.localite" />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="pays">Country</label>
-                <p-dropdown [options]="countries" id="pays" name="pays" [(ngModel)]="beneficiaire.pays" ></p-dropdown>
+                <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="beneficiaire.pays" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="natnr">National Number</label>
-                <input pInputText id="natnr"  name="natnr" maxlength="50" [(ngModel)]="beneficiaire.natnr" />
+                <input pInputText id="natnr"  name="natnr" maxlength="50" [ngModel]="beneficiaire.natnr" />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="email">E-mail</label>
-                <input pInputText id="email"  name="email" maxlength="50" [(ngModel)]="beneficiaire.email" />
+                <input pInputText id="email"  name="email" maxlength="50" [ngModel]="beneficiaire.email" />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="birb">Fead Status</label>
-                <p-dropdown [options]="feadStatuses" id="birb" name="birb" [(ngModel)]="beneficiaire.birb" ></p-dropdown>
+                <p-dropdown [options]="feadStatuses" id="birb" name="birb" [ngModel]="beneficiaire.birb" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="selectedCpas">Cpas-Ocmw</label>

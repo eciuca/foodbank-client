@@ -27,12 +27,14 @@ export class BeneficiairesComponent implements OnInit {
   loading: boolean;
   filterBase: any;
   booCanCreate: boolean;
+  booShowArchived: boolean;
 
   constructor(private beneficiaireService: BeneficiaireEntityService,
               private router: Router,
               private store: Store
   ) {
     this.booCanCreate = false;
+    this.booShowArchived = false;
   }
 
   ngOnInit() {
@@ -94,6 +96,8 @@ export class BeneficiairesComponent implements OnInit {
   handleBeneficiaireUpdate(updatedBeneficiaire) {
     const index = this.beneficiaires.findIndex(beneficiaire => beneficiaire.idClient === updatedBeneficiaire.idClient);
     this.beneficiaires[index] = updatedBeneficiaire;
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
   handleBeneficiaireCreate(createdBeneficiaire: Beneficiaire) {
@@ -110,7 +114,18 @@ export class BeneficiairesComponent implements OnInit {
     this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
-
+  refreshTable($event) {
+    console.log('Archive is now:', $event);
+    this.booShowArchived = $event.checked;
+    const latestQueryParams = {...this.loadPageSubject$.getValue()};
+    console.log('Latest Query Parms', latestQueryParams);
+    if (this.booShowArchived ) {
+      latestQueryParams['archive'] = '1';
+    } else {
+      latestQueryParams['archive'] = '0';
+    }
+    this.loadPageSubject$.next(latestQueryParams);
+  }
   nextPage(event: LazyLoadEvent) {
     console.log('Lazy Loaded Event', event);
     this.loading = true;
@@ -123,6 +138,11 @@ export class BeneficiairesComponent implements OnInit {
     queryParms['offset'] = event.first.toString();
     queryParms['rows'] = event.rows.toString();
     queryParms['sortOrder'] = event.sortOrder.toString();
+    if (this.booShowArchived ) {
+      queryParms['archive'] = '1';
+    }  else {
+      queryParms['archive'] = '0';
+    }
     if (event.filters) {
       if (event.filters.nom && event.filters.nom.value) {
         queryParms['sortField'] = 'nom';
@@ -153,18 +173,7 @@ export class BeneficiairesComponent implements OnInit {
         queryParms['sortField'] = 'nom';
       }
     }
-    this.beneficiaireService.getWithQuery(queryParms)
-        .subscribe(loadedBeneficiaires => {
-          console.log('Loaded membres from nextpage: ' + loadedBeneficiaires.length);
-          if (loadedBeneficiaires.length > 0) {
-            this.totalRecords = loadedBeneficiaires[0].totalRecords;
-          } else {
-            this.totalRecords = 0;
-          }
-          this.beneficiaires  = loadedBeneficiaires;
-          this.loading = false;
-          this.beneficiaireService.setLoaded(true);
-        });
+    this.loadPageSubject$.next(queryParms);
   }
 
   private initializeDependingOnUserRights(authState: AuthState) {
