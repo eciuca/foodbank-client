@@ -120,9 +120,9 @@ export class BeneficiairesComponent implements OnInit {
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
     console.log('Latest Query Parms', latestQueryParams);
     if (this.booShowArchived ) {
-      latestQueryParams['archive'] = '1';
+      latestQueryParams['archived'] = '1';
     } else {
-      latestQueryParams['archive'] = '0';
+      latestQueryParams['archived'] = '0';
     }
     this.loadPageSubject$.next(latestQueryParams);
   }
@@ -139,9 +139,9 @@ export class BeneficiairesComponent implements OnInit {
     queryParms['rows'] = event.rows.toString();
     queryParms['sortOrder'] = event.sortOrder.toString();
     if (this.booShowArchived ) {
-      queryParms['archive'] = '1';
+      queryParms['archived'] = '1';
     }  else {
-      queryParms['archive'] = '0';
+      queryParms['archived'] = '0';
     }
     if (event.filters) {
       if (event.filters.nom && event.filters.nom.value) {

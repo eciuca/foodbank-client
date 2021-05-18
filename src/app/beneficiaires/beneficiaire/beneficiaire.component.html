@@ -24,8 +24,8 @@
                 <p-message *ngIf="datenais.invalid && beneficiaireForm.touched" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="actif">Actif?</label>
-                <p-inputSwitch id="actif" name="actif" [ngModel]="beneficiaire.actif"></p-inputSwitch>
+                <label for="archived">Archived?</label>
+                <p-inputSwitch id="archived" name="archived" [ngModel]="beneficiaire.archived"></p-inputSwitch>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="civiliteconj">Gender Partner</label>

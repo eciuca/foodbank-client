@@ -32,7 +32,7 @@ export interface  Beneficiaire {
 
     genre: number;
 
-    actif: boolean;
+    archived: boolean;
 
     birb: number;
 
@@ -73,7 +73,7 @@ export function compareBeneficiaires(c1: Beneficiaire, c2: Beneficiaire) {
 
 }
 export class DefaultBeneficiaire implements Beneficiaire {
-    actif: boolean;
+    archived: boolean;
     adresse: string;
     bankName: string;
     bankShortName: string;
@@ -113,7 +113,7 @@ export class DefaultBeneficiaire implements Beneficiaire {
         this.pays = '1';
         this.civilite = 1;
         this.civiliteconj = 1;
-        this.actif = true;
+        this.archived = false;
         this.genre = 1; // duplicate of civilite
         this.genreconj = 1; // duplicate of civilite for conjoint
         this.birb = 1; // statut FEAD
