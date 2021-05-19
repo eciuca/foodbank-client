@@ -21,11 +21,13 @@ import {DataServiceError, QueryParams} from '@ngrx/data';
 })
 export class BeneficiaireComponent implements OnInit {
     @Input() idClient$: Observable<number>;
+    @Input() currentFilteredOrgId: number;
     @Output() onBeneficiaireUpdate = new EventEmitter<Beneficiaire>();
     @Output() onBeneficiaireCreate = new EventEmitter<Beneficiaire>();
     @Output() onBeneficiaireDelete = new EventEmitter<Beneficiaire>();
     @Output() onBeneficiaireQuit = new EventEmitter<Beneficiaire>();
     beneficiaire: Beneficiaire;
+    booIsOrganisation: boolean;
     selectedCpas: Cpas;
     filteredCpass: Cpas[];
     booCalledFromTable: boolean;
@@ -55,6 +57,7 @@ export class BeneficiaireComponent implements OnInit {
       this.booCanQuit = true;
       this.lienDis = 0;
       this.lienBanque = 0;
+      this.booIsOrganisation = false;
   }
 
   ngOnInit(): void {
@@ -96,6 +99,13 @@ export class BeneficiaireComponent implements OnInit {
           } else {
               this.beneficiaire = new DefaultBeneficiaire();
               console.log('we have a new default beneficiaire');
+              if (this.booIsOrganisation === false) { // a bank can create beneficiaries of its own or beneficiaries for its organisations
+                  if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
+                      this.lienDis = this.currentFilteredOrgId;
+                  } else {
+                      this.lienDis = 0;
+                  }
+              }
           }
           });
 
@@ -115,16 +125,16 @@ export class BeneficiaireComponent implements OnInit {
                                   this.booCanDelete = true;
                               }
                               break;
+                          case 'Admin_Asso':
                           case 'Asso':
                               this.lienBanque = authState.banque.bankId;
                               this.lienDis = authState.user.idOrg;
-                              break;
-                          case 'Admin_Asso':
-                              this.lienBanque = authState.banque.bankId;
-                              this.lienDis = authState.user.idOrg;
-                              this.booCanSave = true;
-                              if (this.booCalledFromTable) {
-                                  this.booCanDelete = true;
+                              this.booIsOrganisation = true;
+                              if  (authState.user.rights === 'Admin_Asso') {
+                                  this.booCanSave = true;
+                                  if (this.booCalledFromTable) {
+                                      this.booCanDelete = true;
+                                  }
                               }
                               break;
                           default:

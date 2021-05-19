@@ -7,7 +7,7 @@
             <div class="table-header">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
-                        Members of {{bankName}}
+                        Employees of {{bankName}}
                     </div>
                     <div *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-field p-col-12 p-md-4">
                         {{currentFilteredOrg.societe}}
@@ -16,7 +16,7 @@
                         {{orgName}}
                     </div>
                     <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
-                        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Member"></button>
+                        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Employee"></button>
                     </div>
                 </div>
             </div>
@@ -79,11 +79,11 @@
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
-               There are {{totalRecords}} members in the selection.
+               There are {{totalRecords}} employees in the selection.
             </div>
         </ng-template>
     </p-table>
-    <p-dialog header="Member Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+    <p-dialog header="Employee Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
         <app-membre *ngIf="selectedBatid$" [batId$]="selectedBatid$"  [currentFilteredOrgId] ="currentFilteredOrgId" (onMembreUpdate)="handleMembreUpdate($event)" (onMembreCreate)="handleMembreCreate($event)"
                     (onMembreDelete)="handleMembreDeleted($event)" (onMembreQuit)="handleMembreQuit()"></app-membre>
     </p-dialog>

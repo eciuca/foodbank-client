@@ -99,7 +99,7 @@ export class UserComponent implements OnInit {
                 } else {
                     this.user = new DefaultUser();
                     this.booIsCreate = true;
-                    if (this.booIsOrganisation === false) { // a bank can create members of its own or members for its organisations
+                    if (this.booIsOrganisation === false) { // a bank can create employees of its own or employees for its organisations
                         if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
                             this.idOrg = this.currentFilteredOrgId;
                         } else {
@@ -182,7 +182,7 @@ export class UserComponent implements OnInit {
                 console.log('Error updating user', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                     // tslint:disable-next-line:max-line-length
-                    detail: `The member ${modifiedUser.idUser} ${modifiedUser.userName} could not be updated: error: ${dataserviceerror.message}`,
+                    detail: `The employee ${modifiedUser.idUser} ${modifiedUser.userName} could not be updated: error: ${dataserviceerror.message}`,
                     life: 6000 };
                 this.messageService.add(errMessage) ;
             }
@@ -235,10 +235,10 @@ export class UserComponent implements OnInit {
                                   }
                             );
                       } else {
-                          console.log('Error creating user: no member was selected');
+                          console.log('Error creating user: no employee was selected');
                           const  errMessage = {severity: 'error', summary: 'Create',
                               // tslint:disable-next-line:max-line-length
-                              detail: `The user ${modifiedUser.idUser}  could not be created: no member was selected`,
+                              detail: `The user ${modifiedUser.idUser}  could not be created: no employee was selected`,
                               life: 6000 };
                           this.messageService.add(errMessage) ;
                       }

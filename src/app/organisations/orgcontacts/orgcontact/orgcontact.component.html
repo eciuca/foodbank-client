@@ -7,13 +7,13 @@
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="nom">Name *</label>
-                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxlength="50" [ngModel]="orgcontact.nom" />
-                <p-message *ngIf="nom.invalid && orgcontactForm.touched" severity="error" text="Orgcontact Name is required and must be minimum 4 chars long"></p-message>
+                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="2" maxlength="50" [ngModel]="orgcontact.nom" />
+                <p-message *ngIf="nom.invalid && orgcontactForm.touched" severity="error" text="Orgcontact Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="prenom">First Name *</label>
-                <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="4" maxlength="50" [ngModel]="orgcontact.prenom" />
-                <p-message *ngIf="prenom.invalid && orgcontactForm.touched" severity="error" text="Contact First Name is required and must be minimum 4 chars long"></p-message>
+                <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="2" maxlength="50" [ngModel]="orgcontact.prenom" />
+                <p-message *ngIf="prenom.invalid && orgcontactForm.touched" severity="error" text="Contact First Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="fonction">Function</label>

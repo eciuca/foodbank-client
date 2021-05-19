@@ -82,7 +82,7 @@ export class DefaultUser implements User {
     societe: string;
     totalRecords: number;
     userName: string;
-    isNew: boolean; // calculated property to indicate we are creating a new member
+    isNew: boolean; // calculated property to indicate we are creating a new employee
 
     constructor() {
         this.idLanguage = 'nl';

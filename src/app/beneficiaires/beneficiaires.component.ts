@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {Beneficiaire} from './model/beneficiaire';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
 import {filter, map, mergeMap} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {Router} from '@angular/router';
 import {AuthState} from '../auth/reducers';
 import {LazyLoadEvent} from 'primeng/api';
+import {Organisation} from '../organisations/model/organisation';
+import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
+import {QueryParams} from '@ngrx/data';
 
 
 @Component({
@@ -28,13 +31,27 @@ export class BeneficiairesComponent implements OnInit {
   filterBase: any;
   booCanCreate: boolean;
   booShowArchived: boolean;
-
+  filteredOrganisations: Organisation[];
+  booShowOrganisations: boolean;
+  currentFilteredOrgId: number;
+  currentFilteredOrg$: Observable<Organisation> ;
+  first: number;
+  bankid: number;
+  bankName: string;
+  orgName: string; // if logging in with asso role we need to display the organisation
   constructor(private beneficiaireService: BeneficiaireEntityService,
+              private organisationService: OrganisationEntityService,
               private router: Router,
               private store: Store
   ) {
     this.booCanCreate = false;
     this.booShowArchived = false;
+    this.bankid = 0;
+    this.booShowOrganisations = false;
+    this.currentFilteredOrgId = 0;
+    this.first = 0;
+    this.bankName = '';
+    this.orgName = '';
   }
 
   ngOnInit() {
@@ -117,8 +134,11 @@ export class BeneficiairesComponent implements OnInit {
   refreshTable($event) {
     console.log('Archive is now:', $event);
     this.booShowArchived = $event.checked;
+    this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
     console.log('Latest Query Parms', latestQueryParams);
+    // when we switch from active to archived list and vice versa , we need to restart from first page
+    latestQueryParams['offset'] = '0';
     if (this.booShowArchived ) {
       latestQueryParams['archived'] = '1';
     } else {
@@ -138,6 +158,11 @@ export class BeneficiairesComponent implements OnInit {
     queryParms['offset'] = event.first.toString();
     queryParms['rows'] = event.rows.toString();
     queryParms['sortOrder'] = event.sortOrder.toString();
+    if (event.sortField) {
+      queryParms['sortField'] = event.sortField.toString();
+    } else {
+      queryParms['sortField'] =  'nom';
+    }
     if (this.booShowArchived ) {
       queryParms['archived'] = '1';
     }  else {
@@ -145,32 +170,27 @@ export class BeneficiairesComponent implements OnInit {
     }
     if (event.filters) {
       if (event.filters.nom && event.filters.nom.value) {
-        queryParms['sortField'] = 'nom';
-        queryParms['searchField'] = 'nom';
-        queryParms['searchValue'] = event.filters.nom.value;
-      } else if (event.filters.prenom && event.filters.prenom.value) {
-        queryParms['sortField'] = 'prenom';
-        queryParms['searchField'] = 'prenom';
-        queryParms['searchValue'] = event.filters.prenom.value;
-      } else if (event.filters.adresse && event.filters.adresse.value) {
-        queryParms['sortField'] = 'adresse';
-        queryParms['searchField'] = 'adresse';
-        queryParms['searchValue'] = event.filters.adresse.value;
-      } else if (event.filters.cp && event.filters.cp.value) {
-        queryParms['sortField'] = 'cp';
-        queryParms['searchField'] = 'cp';
-        queryParms['searchValue'] = event.filters.cp.value;
-      } else if (event.filters.localite && event.filters.localite.value) {
-        queryParms['sortField'] = 'localite';
-        queryParms['searchField'] = 'localite';
-        queryParms['searchValue'] = event.filters.localite.value;
+        queryParms['nom'] = event.filters.nom.value;
       }
-    }
-    if (!queryParms.hasOwnProperty('sortField')) {
-      if (event.sortField) {
-        queryParms['sortField'] = event.sortField;
-      } else {
-        queryParms['sortField'] = 'nom';
+      if (event.filters.prenom && event.filters.prenom.value) {
+        queryParms['prenom'] = event.filters.prenom.value;
+      }
+      if (event.filters.lienDis && event.filters.lienDis.value) {
+        queryParms['lienDis'] = event.filters.lienDis.value;
+        this.currentFilteredOrgId = event.filters.lienDis.value;
+        this.currentFilteredOrg$ = this.organisationService.getByKey(this.currentFilteredOrgId);
+      }  else {
+        this.currentFilteredOrgId = 0;
+        this.currentFilteredOrg$ = null;
+      }
+       if (event.filters.adresse && event.filters.adresse.value) {
+        queryParms['adresse'] = event.filters.adresse.value;
+      }
+       if (event.filters.cp && event.filters.cp.value) {
+         queryParms['cp'] = event.filters.cp.value;
+      }
+       if (event.filters.localite && event.filters.localite.value) {
+         queryParms['localite'] = event.filters.localite.value;
       }
     }
     this.loadPageSubject$.next(queryParms);
@@ -178,20 +198,41 @@ export class BeneficiairesComponent implements OnInit {
 
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.user) {
+      this.bankid = authState.banque.bankId;
+      this.bankName = authState.banque.bankName;
       switch (authState.user.rights) {
         case 'Bank':
         case 'Admin_Banq':
-          this.filterBase = { 'bankShortName': authState.banque.bankShortName};
+          this.booShowOrganisations = true;
+          this.filterBase = { 'lienBanque': authState.banque.bankId};
           if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
           break;
         case 'Asso':
         case 'Admin_Asso':
           this.filterBase = { 'lienDis': authState.organisation.idDis};
+          this.orgName = authState.organisation.societe;
           if ( authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
           break;
         default:
       }
 
     }
+  }
+  filterOrganisation(event ) {
+    console.log('Got Query with value:', event, 'bankid:', this.bankid);
+    const  queryOrganisationParms: QueryParams = {};
+    queryOrganisationParms['offset'] = '0';
+    queryOrganisationParms['rows'] = '10';
+    queryOrganisationParms['sortField'] = 'societe';
+    queryOrganisationParms['sortOrder'] = '1';
+    queryOrganisationParms['lienBanque'] = this.bankid.toString();
+    queryOrganisationParms['searchField'] = 'societe';
+    queryOrganisationParms['searchValue'] = event.query.toLowerCase();
+    this.organisationService.getWithQuery(queryOrganisationParms)
+        .subscribe(filteredOrganisations => {
+          this.filteredOrganisations = filteredOrganisations.map((organisation) =>
+              Object.assign({}, organisation, {fullname: organisation.societe})
+          );
+        });
   }
 }

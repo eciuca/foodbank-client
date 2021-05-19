@@ -51,11 +51,13 @@ export class OrgcontactsComponent implements OnInit {
             })
         )
         .subscribe();
-    this.lienAsso$ = this.route.paramMap
-        .pipe(
-            map(paramMap => paramMap.get('idDis')),
-            map(idDisString => Number(idDisString))
-        );
+    if (!this.lienAsso$ ) {
+      this.lienAsso$ = this.route.paramMap
+          .pipe(
+              map(paramMap => paramMap.get('idDis')),
+              map(idDisString => Number(idDisString))
+          );
+    }
     this.lienAsso$.subscribe(lienAsso => {
       if (lienAsso) {
         console.log('initializing orgcontacts of id of Association', lienAsso);

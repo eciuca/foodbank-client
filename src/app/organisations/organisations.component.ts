@@ -114,44 +114,26 @@ export class OrganisationsComponent implements OnInit {
         queryParms['offset'] = event.first.toString();
         queryParms['rows'] = event.rows.toString();
         queryParms['sortOrder'] = event.sortOrder.toString();
+        if (event.sortField) {
+            queryParms['sortField'] = event.sortField.toString();
+        } else {
+            queryParms['sortField'] =  'societe';
+        }
         if (event.filters) {
             if (event.filters.societe && event.filters.societe.value) {
-                queryParms['sortField'] = 'societe';
-                queryParms['searchField'] = 'societe';
-                queryParms['searchValue'] = event.filters.societe.value;
-            } else if (event.filters.adresse && event.filters.adresse.value) {
-                queryParms['sortField'] = 'adresse';
-                queryParms['searchField'] = 'adresse';
-                queryParms['searchValue'] = event.filters.adresse.value;
-            } else if (event.filters.cp && event.filters.cp.value) {
-                queryParms['sortField'] = 'cp';
-                queryParms['searchField'] = 'cp';
-                queryParms['searchValue'] = event.filters.cp.value;
-            } else if (event.filters.localite && event.filters.localite.value) {
-                queryParms['sortField'] = 'localite';
-                queryParms['searchField'] = 'localite';
-                queryParms['searchValue'] = event.filters.localite.value;
+                queryParms['societe'] = event.filters.societe.value;
+            }
+            if (event.filters.adresse && event.filters.adresse.value) {
+                queryParms['adresse'] = event.filters.adresse.value;
+            }
+            if (event.filters.cp && event.filters.cp.value) {
+                queryParms['cp'] = event.filters.cp.value;
+            }
+            if (event.filters.localite && event.filters.localite.value) {
+                queryParms['localite'] = event.filters.localite.value;
             }
         }
-        if (!queryParms.hasOwnProperty('sortField')) {
-            if (event.sortField) {
-                queryParms['sortField'] = event.sortField;
-            } else {
-                queryParms['sortField'] = 'nom';
-            }
-        }
-        this.organisationService.getWithQuery(queryParms)
-            .subscribe(loadedOrganisations => {
-                console.log('Loaded organisations from nextpage: ' + loadedOrganisations.length);
-                if (loadedOrganisations.length > 0) {
-                    this.totalRecords = loadedOrganisations[0].totalRecords;
-                } else {
-                    this.totalRecords = 0;
-                }
-                this.organisations  = loadedOrganisations;
-                this.loading = false;
-                this.organisationService.setLoaded(true);
-            });
+        this.loadPageSubject$.next(queryParms);
     }
     private initializeDependingOnUserRights(authState: AuthState) {
         if (authState.banque) {

@@ -83,7 +83,7 @@ export class MembreComponent implements OnInit {
                       this.membre = membre;
                   } else {
                       this.membre = new DefaultMembre();
-                      if (this.booIsOrganisation === false) { // a bank can create members of its own or members for its organisations
+                      if (this.booIsOrganisation === false) { // a bank can create employees of its own or employees for its organisations
                           if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
                               this.lienDis = this.currentFilteredOrgId;
                           } else {
@@ -135,18 +135,18 @@ export class MembreComponent implements OnInit {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 const  myMessage = {severity: 'success', summary: 'Delete',
-                    detail: `The member ${membre.prenom} ${membre.nom} was deleted`};
+                    detail: `The employee ${membre.prenom} ${membre.nom} was deleted`};
                 this.membresService.delete(membre)
                     .subscribe( () => {
-                        console.log('successfully deleted member');
+                        console.log('successfully deleted employee');
                         this.messageService.add(myMessage);
                         this.onMembreDelete.emit(membre);
                     },
                         (dataserviceerror: DataServiceError) => {
-                            console.log('Error deleting member', dataserviceerror.message);
+                            console.log('Error deleting employee', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
-                                detail: `The member ${membre.prenom} ${membre.nom} could not be deleted: error: ${dataserviceerror.message}`,
+                                detail: `The employee ${membre.prenom} ${membre.nom} could not be deleted: error: ${dataserviceerror.message}`,
                                 life: 6000 };
                                 this.messageService.add(errMessage) ;
                         }
@@ -167,7 +167,7 @@ export class MembreComponent implements OnInit {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Update',
-                      detail: `The member ${modifiedMembre.nom} ${modifiedMembre.prenom}  was updated`
+                      detail: `The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was updated`
                   });
                   this.onMembreUpdate.emit(modifiedMembre);
               },
@@ -175,7 +175,7 @@ export class MembreComponent implements OnInit {
                       console.log('Error updating membre', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Update',
                           // tslint:disable-next-line:max-line-length
-                          detail: `The member ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be updated: error: ${dataserviceerror.message}`,
+                          detail: `The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be updated: error: ${dataserviceerror.message}`,
                           life: 6000 };
                       this.messageService.add(errMessage) ;
                   }
@@ -189,7 +189,7 @@ export class MembreComponent implements OnInit {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: `The member ${modifiedMembre.nom} ${modifiedMembre.prenom}  was created`
+                      detail: `The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was created`
                   });
                   this.onMembreCreate.emit(modifiedMembre);
               },
@@ -197,7 +197,7 @@ export class MembreComponent implements OnInit {
                       console.log('Error creating membre', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length
-                          detail: `The member ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${dataserviceerror.message}`,
+                          detail: `The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${dataserviceerror.message}`,
                           life: 6000 };
                       this.messageService.add(errMessage) ;
                   }

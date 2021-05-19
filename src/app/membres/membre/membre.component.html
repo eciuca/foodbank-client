@@ -1,6 +1,6 @@
 <p-panel *ngIf="membre">
     <ng-template pTemplate="header">
-        Membre {{ membre.batId}} Updated On {{ membre.lastVisit}}
+        Employee {{ membre.nom}} {{ membre.prenom}} Updated On {{ membre.lastVisit}}
     </ng-template>
     <form   #membreForm="ngForm" style="padding: 1em">
         <div class="p-fluid p-formgrid p-grid">
@@ -11,12 +11,12 @@
             <div class="p-field p-col-12 p-md-3">
                 <label for="nom">Name *</label>
                 <input #nom="ngModel"  pInputText id="nom" name="nom"  required minlength="2" maxlength="50" [ngModel]="membre.nom" />
-                <p-message *ngIf="nom.invalid && membreForm.touched" severity="error" text="Member Name is required and must be minimum 2 chars long"></p-message>
+                <p-message *ngIf="nom.invalid && membreForm.touched" severity="error" text="Employee Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="prenom">First Name *</label>
                 <input  #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="2" maxlength="40" [ngModel]="membre.prenom" />
-                <p-message *ngIf="prenom.invalid && membreForm.touched" severity="error" text="Member First Name is required and must be minimum 2 chars long"></p-message>
+                <p-message *ngIf="prenom.invalid && membreForm.touched" severity="error" text="Employee First Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="batmail">E-mail *</label>

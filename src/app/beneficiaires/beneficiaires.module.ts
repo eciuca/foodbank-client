@@ -29,6 +29,8 @@ import {CalendarModule} from 'primeng/calendar';
 import {MessageModule} from 'primeng/message';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {CheckboxModule} from 'primeng/checkbox';
+import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
+import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
 
 
 
@@ -78,7 +80,9 @@ const routes: Routes = [
         BeneficiaireEntityService,
         DependentEntityService,
         CpasEntityService,
-        ConfirmationService
+        ConfirmationService,
+      OrganisationsDataService,
+      OrganisationEntityService,
   ]
 
 })
@@ -87,10 +91,12 @@ export class BeneficiairesModule {
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
       private beneficiairesDataService: BeneficiairesDataService,
-      private cpassDataService: CpassDataService
+      private cpassDataService: CpassDataService,
+      private organisationsDataService: OrganisationsDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Beneficiaire', beneficiairesDataService);
     entityDataService.registerService('Cpas', cpassDataService);
+    entityDataService.registerService('Organisation', organisationsDataService);
   }
 }

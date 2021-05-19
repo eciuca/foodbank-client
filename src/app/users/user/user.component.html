@@ -6,13 +6,8 @@
         <p-accordion [multiple]="true">
             <p-accordionTab header="Profile" [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="idUser">Login</label>
-                        <input #iduser="ngModel" pInputText id="idUser" name="idUser"  required [disabled] ="!booIsCreate" minlength="6" maxlength="60" [ngModel]="user.idUser" />
-                        <p-message *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
-                    </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="selectedMembre">Member</label>
+                        <label for="selectedMembre">Employee</label>
                         <p-autoComplete #membre="ngModel" [(ngModel)]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
                                          [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">
                             <ng-template let-membre pTemplate="item">
@@ -21,7 +16,12 @@
                                 </div>
                             </ng-template>
                         </p-autoComplete>
-                        <p-message *ngIf="membre.invalid && userForm.touched" severity="error" text="A member must be selected"></p-message>
+                        <p-message *ngIf="membre.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="idUser">Login</label>
+                        <input #iduser="ngModel" pInputText id="idUser" name="idUser"  required [disabled] ="!booIsCreate" minlength="6" maxlength="60" [ngModel]="user.idUser" />
+                        <p-message *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
                     </div>
                     <div *ngIf="booIsCreate" class="p-field p-col-12 p-md-2">
                         <label for="password">Password</label>
