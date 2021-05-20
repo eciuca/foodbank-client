@@ -192,8 +192,7 @@ export class UsersComponent implements OnInit {
         queryOrganisationParms['sortField'] = 'societe';
         queryOrganisationParms['sortOrder'] = '1';
         queryOrganisationParms['lienBanque'] = this.bankid.toString();
-        queryOrganisationParms['searchField'] = 'societe';
-        queryOrganisationParms['searchValue'] = event.query.toLowerCase();
+        queryOrganisationParms['societe'] = event.query.toLowerCase();
         this.organisationService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
                 this.filteredOrganisations = filteredOrganisations.map((organisation) =>

@@ -1,6 +1,6 @@
 
 <form [formGroup]="loginform" (ngSubmit)="login()" style="padding-top: 5em">
-    <p-panel header="Login V19052021" class="p-grid p-dir-col p-align-center" >
+    <p-panel header="Login V20052021" class="p-grid p-dir-col p-align-center" >
         <div style="margin: 1em 0">
             <div class="p-col">
                 <div>User Name *</div>
@@ -16,8 +16,7 @@
             <div class="p-col">
                 <div>Language *</div>
                     <p-dropdown [options]="languages" formControlName="language" placeholder="Select a Language" [showClear]="true"></p-dropdown>
-                </div>
-
+            </div>
             <div class="p-col">
                 <button pButton type="submit" label="Submit" [disabled]="!loginform.valid"></button>
             </div>
