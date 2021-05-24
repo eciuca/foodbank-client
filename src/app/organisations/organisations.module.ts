@@ -33,6 +33,7 @@ import {OrgcontactsDataService} from './services/orgcontacts-data.service';
 import {OrgcontactEntityService} from './services/orgcontact-entity.service';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
+import {CheckboxModule} from 'primeng/checkbox';
 
 const routes: Routes = [
     { path: '',
@@ -66,7 +67,8 @@ const routes: Routes = [
         InputNumberModule,
         InputSwitchModule,
         MessageModule,
-        ToastModule
+        ToastModule,
+        CheckboxModule
     ],
   providers: [
         OrganisationsDataService,

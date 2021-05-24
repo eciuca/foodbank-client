@@ -14,6 +14,9 @@
             <th pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
             <th pSortableColumn="cp">Zip<p-sortIcon field="cp"></p-sortIcon></th>
             <th pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
+            <th pSortableColumn="depyN">Is Depot<p-sortIcon field="depyN"></p-sortIcon></th>
+            <th pSortableColumn="birbyN">Uses FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
+            <th pSortableColumn="statut">Statut<p-sortIcon field="statut"></p-sortIcon></th>
 
         </tr>
         <tr>
@@ -29,13 +32,65 @@
             <th>
                 <p-columnFilter type="text" field="localite"></p-columnFilter>
             </th>
+            <th>
+                <p-columnFilter field="depyN" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="birbyN" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="statut" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="statutOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-organisation>
         <tr (click)="handleSelect(organisation)">
-            <td *ngFor="let col of cols">
-                {{organisation[col.field]}}
+            <td>
+                {{ organisation.societe }}
             </td>
+            <td>
+                {{ organisation.adresse }}
+            </td>
+            <td>
+                {{ organisation.cp }}
+            </td>
+            <td>
+                {{ organisation.localite }}
+            </td>
+            <td>
+                {{ getYNLabel(organisation.depyN)}}
+            </td>
+            <td>
+                {{ getYNLabel(organisation.birbyN)}}
+            </td>
+            <td>
+                {{ getStatutLabel(organisation.statut) }}
+            </td>
+
         </tr>
     </ng-template>
     <ng-template pTemplate="summary">

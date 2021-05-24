@@ -9,6 +9,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../auth/reducers';
+import {enmStatusCompany} from '../shared/enums';
 
 
 @Component({
@@ -22,18 +23,24 @@ export class OrganisationsComponent implements OnInit {
     selectedIdDis$ = new BehaviorSubject(0);
     organisation: Organisation = null;
     organisations: Organisation[];
-    cols: any[];
     displayDialog: boolean;
     totalRecords: number;
     loading: boolean;
     filterBase: any;
     booCanCreate: boolean;
+    statutOptions: any[];
+    YNOptions: any[];
 
     constructor(private organisationService: OrganisationEntityService,
                 private router: Router,
                 private store: Store<AppState>
     ) {
         this.booCanCreate = false;
+        this.statutOptions = enmStatusCompany;
+        this.YNOptions =  [
+            {label: 'false', value: 0},
+            {label: 'true', value: 1}
+        ];;
     }
 
     ngOnInit() {
@@ -68,13 +75,6 @@ export class OrganisationsComponent implements OnInit {
                 })
             )
             .subscribe();
-
-        this.cols = [
-            { field: 'societe', header: 'Nom' },
-            { field: 'adresse', header: 'Adresse' },
-            { field: 'cp', header: 'Code Postal' },
-            { field: 'localite', header: 'Commune' }
-        ];
 
     }
 
@@ -132,6 +132,22 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.localite && event.filters.localite.value) {
                 queryParms['localite'] = event.filters.localite.value;
             }
+            console.log('Depot Filter : ', event.filters.depyN);
+            if (event.filters.depyN && event.filters.depyN.value === 0) {
+                queryParms['isDepot'] = '0';
+            }
+            if (event.filters.depyN && event.filters.depyN.value === 1) {
+                queryParms['isDepot'] = '1';
+            }
+            if (event.filters.birbyN && event.filters.birbyN.value === 0) {
+                queryParms['isBirb'] = '0';
+            }
+            if (event.filters.birbyN && event.filters.birbyN.value === 1) {
+                queryParms['isBirb'] = '1';
+            }
+            if (event.filters.statut ) {
+                queryParms['statut'] = event.filters.statut.value;
+            }
         }
         this.loadPageSubject$.next(queryParms);
     }
@@ -156,6 +172,20 @@ export class OrganisationsComponent implements OnInit {
     showDialogToAdd() {
         this.selectedIdDis$.next(0);
         this.displayDialog = true;
+    }
+
+    getStatutLabel(statut) {
+        const key = Number(statut);
+
+        const label = this.statutOptions.find(i => i.value === key).label;
+        return label;
+    }
+    getYNLabel(isTrue: boolean) {
+       if (isTrue) {
+           return 'true';
+       } else {
+           return 'false';
+       }
     }
 }
 
