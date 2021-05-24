@@ -160,7 +160,15 @@ export class UserComponent implements OnInit {
                   .subscribe( () => {
                       this.messageService.add(myMessage);
                       this.onUserDelete.emit(user);
-                  });
+                  },
+                      (dataserviceerror: DataServiceError) => {
+                          console.log('Error deleting user', dataserviceerror.message);
+                          const  errMessage = {severity: 'error', summary: 'Delete',
+                              // tslint:disable-next-line:max-line-length
+                              detail: `The user ${user.idUser} ${user.userName} could not be deleted: error: ${dataserviceerror.message}`,
+                              life: 6000 };
+                          this.messageService.add(errMessage) ;
+                      });
           },
           reject: () => {
               console.log('We do nothing');

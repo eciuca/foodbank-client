@@ -1,5 +1,5 @@
 import {combineLatest, Observable} from 'rxjs';
-import {QueryParams} from '@ngrx/data';
+import {DataServiceError, QueryParams} from '@ngrx/data';
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {DefaultOrgcontact, Orgcontact} from '../../model/orgcontact';
 import {OrgcontactEntityService} from '../../services/orgcontact-entity.service';
@@ -94,6 +94,14 @@ export class OrgcontactComponent implements OnInit {
             .subscribe(() => {
               this.messageService.add(myMessage);
               this.onOrgcontactDelete.emit(orgcontact);
+            },
+                (dataserviceerror: DataServiceError) => {
+                  console.log('Error deleting contact', dataserviceerror.message);
+                  const  errMessage = {severity: 'error', summary: 'Delete',
+                    // tslint:disable-next-line:max-line-length
+                    detail: `The contact  ${orgcontact.nom} ${orgcontact.prenom} could not be deleted: error: ${dataserviceerror.message}`,
+                    life: 6000 };
+                  this.messageService.add(errMessage) ;
             });
       },
       reject: () => {
@@ -114,7 +122,15 @@ export class OrgcontactComponent implements OnInit {
               detail: `The contact ${modifiedOrgcontact.nom} ${modifiedOrgcontact.prenom}  was updated`
             });
             this.onOrgcontactUpdate.emit(modifiedOrgcontact);
-          });
+          },
+              (dataserviceerror: DataServiceError) => {
+                console.log('Error updating contact', dataserviceerror.message);
+                const  errMessage = {severity: 'error', summary: 'Update',
+                  // tslint:disable-next-line:max-line-length
+                  detail: `The contact  ${modifiedOrgcontact.nom} ${modifiedOrgcontact.prenom} could not be updated: error: ${dataserviceerror.message}`,
+                  life: 6000 };
+                this.messageService.add(errMessage) ;
+              });
     } else {
       modifiedOrgcontact.lienAsso = this.lienAsso;
       console.log('Creating Orgcontact with content:', modifiedOrgcontact);
@@ -126,6 +142,14 @@ export class OrgcontactComponent implements OnInit {
               detail: `The contact ${newOrgcontact.nom} ${newOrgcontact.prenom}  has been created`
             });
             this.onOrgcontactCreate.emit(newOrgcontact);
+          },
+              (dataserviceerror: DataServiceError) => {
+                console.log('Error creating contact', dataserviceerror.message);
+                const  errMessage = {severity: 'error', summary: 'Create',
+                  // tslint:disable-next-line:max-line-length
+                  detail: `The contact  ${modifiedOrgcontact.nom} ${modifiedOrgcontact.prenom} could not be created: error: ${dataserviceerror.message}`,
+                  life: 6000 };
+                this.messageService.add(errMessage) ;
           });
     }
 

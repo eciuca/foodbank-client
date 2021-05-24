@@ -1,5 +1,5 @@
 import {combineLatest, Observable} from 'rxjs';
-import {QueryParams} from '@ngrx/data';
+import {DataServiceError, QueryParams} from '@ngrx/data';
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {DefaultDependent, Dependent} from '../../model/dependent';
 import {DependentEntityService} from '../../services/dependent-entity.service';
@@ -102,7 +102,15 @@ export class DependentComponent implements OnInit {
             .subscribe(() => {
               this.messageService.add(myMessage);
               this.onDependentDelete.emit(dependent);
-            });
+            },
+                (dataserviceerror: DataServiceError) => {
+                  console.log('Error deleting beneficiary', dataserviceerror.message);
+                  const  errMessage = {severity: 'error', summary: 'Delete',
+                    // tslint:disable-next-line:max-line-length
+                    detail: `The dependent  ${dependent.nom} ${dependent.prenom} could not be deleted: error: ${dataserviceerror.message}`,
+                    life: 6000 };
+                  this.messageService.add(errMessage) ;
+                });
       },
       reject: () => {
         console.log('We do nothing');
@@ -122,6 +130,14 @@ export class DependentComponent implements OnInit {
               detail: `The dependent ${modifiedDependent.nom} ${modifiedDependent.prenom}  was updated`
             });
             this.onDependentUpdate.emit(modifiedDependent);
+          },
+              (dataserviceerror: DataServiceError) => {
+                console.log('Error updating dependent', dataserviceerror.message);
+                const  errMessage = {severity: 'error', summary: 'Update',
+                  // tslint:disable-next-line:max-line-length
+                  detail: `The beneficiary  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be updated: error: ${dataserviceerror.message}`,
+                  life: 6000 };
+                this.messageService.add(errMessage) ;
           });
     } else {
       modifiedDependent.lienBanque = this.lienBanque;
@@ -136,7 +152,15 @@ export class DependentComponent implements OnInit {
               detail: `The dependent ${newDependent.nom} ${newDependent.prenom}  has been created`
             });
             this.onDependentCreate.emit(newDependent);
-          });
+          },
+              (dataserviceerror: DataServiceError) => {
+                console.log('Error creating beneficiary', dataserviceerror.message);
+                const  errMessage = {severity: 'error', summary: 'Create',
+                  // tslint:disable-next-line:max-line-length
+                  detail: `The beneficiary  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be created: error: ${dataserviceerror.message}`,
+                  life: 6000 };
+                this.messageService.add(errMessage) ;
+              });
     }
 
   }

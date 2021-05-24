@@ -142,6 +142,14 @@ export class OrganisationComponent implements OnInit {
               .subscribe( ()  => {
                   this.messageService.add({severity: 'success', summary: 'Update', detail: `Organisation ${modifiedOrganisation.societe} was updated`});
                   this.onOrganisationUpdate.emit(modifiedOrganisation);
+              },
+                  (dataserviceerror: DataServiceError) => {
+                      console.log('Error updating organisation', dataserviceerror.message);
+                      const  errMessage = {severity: 'error', summary: 'Update',
+                          // tslint:disable-next-line:max-line-length
+                          detail: `The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
+                          life: 6000 };
+                      this.messageService.add(errMessage) ;
               });
       } else {
           modifiedOrganisation.lienBanque = this.lienBanque;
@@ -154,7 +162,15 @@ export class OrganisationComponent implements OnInit {
                       detail: `Organisation ${newOrganisation.societe} was created`
                   });
                   this.onOrganisationCreate.emit(newOrganisation);
-              });
+              },
+                  (dataserviceerror: DataServiceError) => {
+                      console.log('Error creating organisation', dataserviceerror.message);
+                      const  errMessage = {severity: 'error', summary: 'Creation',
+                          // tslint:disable-next-line:max-line-length
+                          detail: `The organisation ${modifiedOrganisation.societe} could not be created: error: ${dataserviceerror.message}`,
+                          life: 6000 };
+                      this.messageService.add(errMessage) ;
+                  });
       }
   }
     delete(event: Event, organisation: Organisation) {

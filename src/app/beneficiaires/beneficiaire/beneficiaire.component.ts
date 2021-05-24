@@ -156,7 +156,15 @@ export class BeneficiaireComponent implements OnInit {
                     .subscribe( () => {
                         this.messageService.add(myMessage);
                         this.onBeneficiaireDelete.emit(beneficiaire);
-                    });
+                    },
+                        (dataserviceerror: DataServiceError) => {
+                            console.log('Error deleting beneficiary', dataserviceerror.message);
+                            const  errMessage = {severity: 'error', summary: 'Delete',
+                                // tslint:disable-next-line:max-line-length
+                                detail: `The beneficiary  ${beneficiaire.nom} ${beneficiaire.prenom} could not be deleted: error: ${dataserviceerror.message}`,
+                                life: 6000 };
+                            this.messageService.add(errMessage) ;
+                        });
             },
             reject: () => {
                 console.log('We do nothing');
@@ -174,20 +182,36 @@ export class BeneficiaireComponent implements OnInit {
         .subscribe( ()  => {
           this.messageService.add({severity: 'success', summary: 'Update', detail: `The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was updated`});
             this.onBeneficiaireUpdate.emit(modifiedBeneficiaire);
+        },
+            (dataserviceerror: DataServiceError) => {
+                console.log('Error updating beneficiary', dataserviceerror.message);
+                const  errMessage = {severity: 'error', summary: 'Update',
+                    // tslint:disable-next-line:max-line-length
+                    detail: `The beneficiary  ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} could not be updated: error: ${dataserviceerror.message}`,
+                    life: 6000 };
+                this.messageService.add(errMessage) ;
         });
       } else {
           modifiedBeneficiaire.lbanque = this.lienBanque;
           modifiedBeneficiaire.lienDis = this.lienDis;
           console.log('Creating Beneficiaire with content:', modifiedBeneficiaire);
           this.beneficiairesService.add(modifiedBeneficiaire)
-              .subscribe((newBeneficiaire) => {
+              .subscribe(() => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: `The beneficiary ${newBeneficiaire.nom} ${newBeneficiaire.prenom}  was created`
+                      detail: `The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was created`
                   });
-                  this.onBeneficiaireCreate.emit(newBeneficiaire);
-              });
+                  this.onBeneficiaireCreate.emit(modifiedBeneficiaire);
+              },
+                  (dataserviceerror: DataServiceError) => {
+                      console.log('Error updating beneficiary', dataserviceerror.message);
+                      const  errMessage = {severity: 'error', summary: 'Create',
+                          // tslint:disable-next-line:max-line-length
+                          detail: `The beneficiary  ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} could not be created: error: ${dataserviceerror.message}`,
+                          life: 6000 };
+                      this.messageService.add(errMessage) ;
+                  });
       }
 
   }
