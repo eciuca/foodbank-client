@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
-import {Organisation} from './model/organisation';
 import {OrganisationsComponent } from './organisations.component';
 import {OrganisationComponent } from './organisation/organisation.component';
 
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {OrganisationEntityService} from './services/organisation-entity.service';
 import {OrganisationsDataService} from './services/organisations-data.service';
-import {HttpClientModule} from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
@@ -55,7 +53,6 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         TableModule,
-        HttpClientModule,
         PaginatorModule,
         InputTextModule,
         ButtonModule,

@@ -3,7 +3,8 @@ RUN mkdir -p /dist-build && chown -R node:node /dist-build
 WORKDIR /dist-build
 COPY ./ /dist-build
 USER node
-RUN npm install && npm run build-prod && rm -rf node_modules
+ARG ENV=prod
+RUN npm install && npm run build-${ENV} && rm -rf node_modules
 
 FROM httpd:alpine
 # https://blog.neoprime.it/ng-in-httpd/
@@ -60,3 +61,10 @@ RUN chmod -R 440 \
 # at least one level into the served root. (-mindepth 1, otherwise the served directory itself
 # would be included - no need for that.
 RUN find /usr/local/apache2/htdocs/ -mindepth 1 -type d -exec chmod +x {} \;
+
+RUN apk --no-cache add openssl
+RUN mkdir -p /home/letsencrypt/certs/live/localhost && \
+    openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 \
+               -subj "/C=BE/ST=BE/L=Brussels/O=FoodBank/OU=IT/CN=localhost" \ 
+               -keyout /home/letsencrypt/certs/live/localhost/privkey.pem \ 
+               -out /home/letsencrypt/certs/live/localhost/cert.pem

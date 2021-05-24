@@ -7,7 +7,6 @@ import {UserComponent } from './user/user.component';
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {UsersDataService} from './services/users-data.service';
 import {UserEntityService} from './services/user-entity.service';
-import {HttpClientModule} from '@angular/common/http';
 
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
@@ -44,7 +43,6 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         TableModule,
-        HttpClientModule,
         PanelModule,
         PaginatorModule,
         InputTextModule,

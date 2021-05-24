@@ -1,11 +1,12 @@
 import { AuthConfig } from "angular-oauth2-oidc";
+import { environment } from "../../environments/environment";
 
 export const authConfig: AuthConfig = {
     // Url of the Identity Provider
-    issuer: 'http://localhost:8083/auth/realms/FoodBank',
+    issuer: environment.authServerIssuer,
 
     // URL of the SPA to redirect the user to after login
-    redirectUri: window.location.origin + '/index.html',
+    redirectUri: window.location.origin + '/',
 
     silentRefreshRedirectUri: window.location.origin + '/silent-refresh.html',
 
@@ -27,10 +28,10 @@ export const authConfig: AuthConfig = {
     // The api scope is a usecase specific one
     scope: 'openid profile email',
     requireHttps: false,
-    useSilentRefresh: true, // Needed for Code Flow to suggest using iframe-based refreshes
-    silentRefreshTimeout: 60000, // For faster testing
+    useSilentRefresh: false, // Needed for Code Flow to suggest using iframe-based refreshes
+    // silentRefreshTimeout: 60000, // For faster testing
     // timeoutFactor: 0.25, // For faster testing
-    sessionChecksEnabled: true,
+    sessionChecksEnabled: false,
     showDebugInformation: true, // Also requires enabling "Verbose" level in devtools
     clearHashAfterLogin: false, // https://github.com/manfredsteyer/angular-oauth2-oidc/issues/457#issuecomment-431807040,
     nonceStateSeparator : 'semicolon' // Real semicolon gets mangled by IdentityServer's URI encoding

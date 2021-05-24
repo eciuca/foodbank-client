@@ -11,8 +11,6 @@ import {User} from '../../users/model/user';
 import {Banque} from '../../banques/model/banque';
 import {Organisation} from '../../organisations/model/organisation';
 
-
-
 export interface AuthState {
     user: User;
     banque: Banque;

@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { Depot } from './model/depot';
 import { DepotsComponent } from './depots.component';
 import {DepotComponent } from './depot/depot.component';
 import {EntityDataService, EntityDefinitionService } from '@ngrx/data';
 import {DepotsDataService} from './services/depots-data.service';
 import {DepotEntityService} from './services/depot-entity.service';
-import {HttpClientModule} from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
@@ -42,7 +40,6 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         TableModule,
-        HttpClientModule,
         PanelModule,
         PaginatorModule,
         InputTextModule,

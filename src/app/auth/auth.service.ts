@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { OAuthErrorEvent, OAuthService, UserInfo } from 'angular-oauth2-oidc';
 import { BehaviorSubject, combineLatest, forkJoin, Observable, of, ReplaySubject, throwError } from 'rxjs';
-import { catchError, filter, map, mergeMap } from 'rxjs/operators';
+import { catchError, defaultIfEmpty, filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { Banque } from '../banques/model/banque';
 import { Organisation } from '../organisations/model/organisation';
 import { AppState } from '../reducers';
@@ -25,8 +25,8 @@ export class AuthService {
   public isDoneLoading$ = this.isDoneLoadingSubject$.asObservable();
 
 
-  private userInfoSubject$ = new ReplaySubject<UserInfo>();
-  public userInfo$ = this.userInfoSubject$.asObservable();
+  private userInfoSubject$ = new BehaviorSubject<UserInfo>(null);
+  public userInfo$ = this.userInfoSubject$.asObservable().pipe(filter(userInfo => !!userInfo));
 
   private userProfileSubject$ = new ReplaySubject<IAuthPrincipal>();
   public userProfile$ = this.userProfileSubject$.asObservable();
@@ -98,13 +98,20 @@ export class AuthService {
 
     this.oauthService.setupAutomaticSilentRefresh();
 
-    this.userInfoSubject$.pipe(
+    console.log('subscribe to user info subject');  
+    combineLatest([this.canActivateProtectedRoutes$, this.userInfoSubject$])
+    .pipe(filter((_, userInfo) => !userInfo))
+    .subscribe(_ => this.oauthService.loadUserProfile()
+        .then(newUserInfo => this.userInfoSubject$.next(newUserInfo))
+    )
+
+    this.userInfo$.pipe(
       mergeMap(userInfo => {
         const userId = userInfo.sub.split(':')[2]
         const groups = userInfo['groups'];
-
-        return this.http.get<User>(`/api/user/${userId}`).pipe(
-          mergeMap(user => this.createAuthPrincipalFromUser(user, groups))
+        const header = { headers: { 'Authorization': this.oauthService.authorizationHeader()  } };
+        return this.http.get<User>(`/api/user/${userId}`, header).pipe(
+          mergeMap(user => this.createAuthPrincipalFromUser(user, groups, header))
         )
       }),
       map(authState => login(authState))
@@ -123,7 +130,7 @@ export class AuthService {
     return this.oauthService.loadDiscoveryDocument()
 
       // For demo purposes, we pretend the previous call was very slow
-      .then(() => new Promise<void>(resolve => setTimeout(() => resolve(), 1000)))
+      // .then(() => new Promise<void>(resolve => setTimeout(() => resolve(), 1000)))
 
       // 1. HASH LOGIN:
       // Try to log in via hash fragment after redirect back
@@ -138,44 +145,48 @@ export class AuthService {
         // 2. SILENT LOGIN:
         // Try to log in via a refresh because then we can prevent
         // needing to redirect the user:
-        return this.oauthService.silentRefresh()
-          .then(() => Promise.resolve())
-          .catch(result => {
-            // Subset of situations from https://openid.net/specs/openid-connect-core-1_0.html#AuthError
-            // Only the ones where it's reasonably sure that sending the
-            // user to the IdServer will help.
-            const errorResponsesRequiringUserInteraction = [
-              'interaction_required',
-              'login_required',
-              'account_selection_required',
-              'consent_required',
-            ];
+        // return this.oauthService.silentRefresh()
+        //   .then(result => {
+        //     console.log("result");
+        //     Promise.resolve();
+        //   })
+        //   .catch(result => {
+        //     // Subset of situations from https://openid.net/specs/openid-connect-core-1_0.html#AuthError
+        //     // Only the ones where it's reasonably sure that sending the
+        //     // user to the IdServer will help.
+        //     const errorResponsesRequiringUserInteraction = [
+        //       'interaction_required',
+        //       'login_required',
+        //       'account_selection_required',
+        //       'consent_required',
+        //     ];
 
-            if (result
-              && result.reason
-              && errorResponsesRequiringUserInteraction.indexOf(result.reason.error) >= 0) {
+        //     if (result
+        //       && result.reason
+        //       && errorResponsesRequiringUserInteraction.indexOf(result.params.error) >= 0) {
 
-              // 3. ASK FOR LOGIN:
-              // At this point we know for sure that we have to ask the
-              // user to log in, so we redirect them to the IdServer to
-              // enter credentials.
-              //
-              // Enable this to ALWAYS force a user to login.
-              // this.login();
-              //
-              // Instead, we'll now do this:
-              console.warn('User interaction is needed to log in, we will wait for the user to manually log in.');
-              return Promise.resolve();
-            }
+        //       // 3. ASK FOR LOGIN:
+        //       // At this point we know for sure that we have to ask the
+        //       // user to log in, so we redirect them to the IdServer to
+        //       // enter credentials.
+        //       //
+        //       // Enable this to ALWAYS force a user to login.
+        //       this.login();
+        //       //
+        //       // Instead, we'll now do this:
+        //       console.warn('User interaction is needed to log in, we will wait for the user to manually log in.');
+        //       return Promise.resolve();
+        //     }
 
-            // We can't handle the truth, just pass on the problem to the
-            // next handler.
-            return Promise.reject(result);
-          });
+        //     // We can't handle the truth, just pass on the problem to the
+        //     // next handler.
+        //     return Promise.reject(result);
+        //   });
       })
 
       .then(() => {
         this.isDoneLoadingSubject$.next(true);
+        console.log('isDoneLoadingSubject');
 
         // Check for the strings 'undefined' and 'null' just to be sure. Our current
         // login(...) should never have this, but in case someone ever calls
@@ -189,17 +200,20 @@ export class AuthService {
           this.router.navigateByUrl(stateUrl);
         }
       })
-      .catch(() => this.isDoneLoadingSubject$.next(true));
+      .catch(error => {
+        console.log(error);
+        this.isDoneLoadingSubject$.next(true);
+      });
   }
 
-  private createAuthPrincipalFromUser(user: User, groups: string[]): Observable<IAuthPrincipal> {
+  private createAuthPrincipalFromUser(user: User, groups: string[], header): Observable<IAuthPrincipal> {
       const authBanque$ = !user.idCompany
           ? of(undefined)
-          : this.http.get<Banque>(`/api/banque/getByShortName/${user.idCompany}`).pipe(catchError(err => this.handleNotFound(err)));
+          : this.http.get<Banque>(`/api/banque/getByShortName/${user.idCompany}`, header).pipe(catchError(err => this.handleNotFound(err)));
 
       const authOrganisation$ = user.idOrg === 0
           ? of(undefined)
-          : this.http.get<Organisation>(`/api/organisation/${user.idOrg}`).pipe(catchError(err => this.handleNotFound(err)));
+          : this.http.get<Organisation>(`/api/organisation/${user.idOrg}`, header).pipe(catchError(err => this.handleNotFound(err)));
 
       return forkJoin([of(user), authBanque$, authOrganisation$])
           .pipe(map(([user, banque, organisation]) => new AuthPrincipal(user, banque, organisation, groups)))

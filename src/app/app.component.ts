@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
             ]
         };
 
-        const userProfileString = localStorage.getItem('user');
+        // const userProfileString = localStorage.getItem('user');
 
         // if (userProfileString && userProfileString !== 'undefined') {
         //     const userProfile: IAuthPrincipal = JSON.parse(userProfileString);
@@ -145,7 +145,6 @@ export class AppComponent implements OnInit {
     }
 
     private processAuthState(authState: AuthState) {
-        console.log('processAuthState')
         console.log('User lienbat is:', authState.user.lienBat);
         const groups: string[] = authState.groups;
         this.loggedInUserName = authState.user?.idUser;

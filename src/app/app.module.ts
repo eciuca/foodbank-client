@@ -3,11 +3,10 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+// import {HttpClientModule} from '@angular/common/http';
 
 import {RouterModule, Routes} from '@angular/router';
 import {AuthModule} from './auth/auth.module';
-import { OAuthModule } from 'angular-oauth2-oidc';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
@@ -27,43 +26,42 @@ import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import { FallbackComponent } from './fallback.component';
 import { ShouldLoginComponent } from './should-login.component';
-
+import { AuthGuardWithForcedLogin } from './auth/auth-guard-with-forced-login.guard';
 
 const routes: Routes = [
     { path: 'banques',
         loadChildren: () => import('./banques/banques.module').then(m => m.BanquesModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuardWithForcedLogin]
     },
     { path: 'users',
         loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
-        // canActivate: [AuthGuardWithForcedLogin]
+        canActivate: [AuthGuardWithForcedLogin]
     },
     { path: 'organisations',
         loadChildren: () => import('./organisations/organisations.module').then(m => m.OrganisationsModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuardWithForcedLogin]
     },
     { path: 'beneficiaires',
         loadChildren: () => import('./beneficiaires/beneficiaires.module').then(m => m.BeneficiairesModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuardWithForcedLogin]
     },
     {
         path: 'membres',
         loadChildren: () => import('./membres/membres.module').then(m => m.MembresModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuardWithForcedLogin]
     },
     { path: 'cpass',
         loadChildren: () => import('./cpass/cpass.module').then(m => m.CpassModule) ,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuardWithForcedLogin]
     },
     { path: 'depots',
         loadChildren: () => import('./depots/depots.module').then(m => m.DepotsModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuardWithForcedLogin]
     },
-    { path: 'should-login', component: ShouldLoginComponent },
     { path: '', redirectTo: '/users', pathMatch: 'full' },
     {
         path: '**',
-        component: FallbackComponent
+        redirectTo: '/users'
     }
 ];
 
@@ -78,7 +76,6 @@ const routes: Routes = [
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'}),
-        HttpClientModule,
         MenubarModule,
         OverlayPanelModule,
         ProgressSpinnerModule,
@@ -107,11 +104,10 @@ const routes: Routes = [
     ],
     providers: [ MessageService,
         { provide: DefaultDataServiceConfig,
-        useValue: {
-            root: environment.apiUrl
-         }
-    }
-        ],
+            useValue: {
+                root: environment.apiUrl
+            }
+        }],
     bootstrap: [AppComponent]
 })
 export class AppModule {
