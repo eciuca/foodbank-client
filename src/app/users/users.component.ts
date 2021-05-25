@@ -127,6 +127,8 @@ export class UsersComponent implements OnInit {
   handleUserUpdate(updatedUser) {
     const index = this.users.findIndex(user => user.idUser === updatedUser.idUser);
     this.users[index] = updatedUser;
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
     handleUserCreate(createdUser: User) {

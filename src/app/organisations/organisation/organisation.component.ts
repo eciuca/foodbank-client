@@ -87,16 +87,18 @@ export class OrganisationComponent implements OnInit {
       organisation$.subscribe(organisation => {
           if (organisation) {
               this.organisation = organisation;
-              this.cpassService.getByKey(this.organisation.lienCpas)
-                  .subscribe(
-                      cpas => {
-                          if (cpas !== null) {
-                              this.selectedCpas = {...cpas};
-                              console.log('our organisation cpas:', this.selectedCpas);
-                          } else {
-                              console.log('There is no cpas for this organisation!');
-                          }
-                      });
+              if (this.organisation.lienCpas != null && this.organisation.lienCpas !== 0  ) {
+                  this.cpassService.getByKey(this.organisation.lienCpas)
+                      .subscribe(
+                          cpas => {
+                              if (cpas !== null) {
+                                  this.selectedCpas = {...cpas};
+                                  console.log('our organisation cpas:', this.selectedCpas);
+                              } else {
+                                  console.log('There is no cpas for this organisation!');
+                              }
+                          });
+              }
           } else {
               this.organisation = new DefaultOrganisation();
               this.selectedCpas = null;

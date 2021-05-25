@@ -29,18 +29,12 @@ export class OrganisationsComponent implements OnInit {
     filterBase: any;
     booCanCreate: boolean;
     statutOptions: any[];
-    YNOptions: any[];
-
     constructor(private organisationService: OrganisationEntityService,
                 private router: Router,
                 private store: Store<AppState>
     ) {
         this.booCanCreate = false;
         this.statutOptions = enmStatusCompany;
-        this.YNOptions =  [
-            {label: 'false', value: 0},
-            {label: 'true', value: 1}
-        ];;
     }
 
     ngOnInit() {
@@ -96,6 +90,8 @@ export class OrganisationsComponent implements OnInit {
     handleOrganisationUpdate(updatedOrganisation) {
         const index = this.organisations.findIndex(organisation => organisation.idDis === updatedOrganisation.idDis);
         this.organisations[index] = updatedOrganisation;
+        const latestQueryParams = this.loadPageSubject$.getValue();
+        this.loadPageSubject$.next(latestQueryParams);
         this.displayDialog = false;
     }
 
@@ -132,20 +128,16 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.localite && event.filters.localite.value) {
                 queryParms['localite'] = event.filters.localite.value;
             }
-            console.log('Depot Filter : ', event.filters.depyN);
-            if (event.filters.depyN && event.filters.depyN.value === 0) {
-                queryParms['isDepot'] = '0';
+            if (event.filters.depyN && event.filters.depyN.value != null ) {
+                queryParms['isDepot'] = event.filters.depyN.value;
             }
-            if (event.filters.depyN && event.filters.depyN.value === 1) {
-                queryParms['isDepot'] = '1';
+            if (event.filters.birbyN && event.filters.birbyN.value != null) {
+                queryParms['isBirb'] = event.filters.birbyN.value;
             }
-            if (event.filters.birbyN && event.filters.birbyN.value === 0) {
-                queryParms['isBirb'] = '0';
+            if (event.filters.webauthority && event.filters.webauthority.value != null) {
+                queryParms['isWeb'] = event.filters.webauthority.value;
             }
-            if (event.filters.birbyN && event.filters.birbyN.value === 1) {
-                queryParms['isBirb'] = '1';
-            }
-            if (event.filters.statut ) {
+            if (event.filters.statut && event.filters.statut.value != null ) {
                 queryParms['statut'] = event.filters.statut.value;
             }
         }
@@ -175,10 +167,13 @@ export class OrganisationsComponent implements OnInit {
     }
 
     getStatutLabel(statut) {
-        const key = Number(statut);
+        const key = statut;
 
-        const label = this.statutOptions.find(i => i.value === key).label;
-        return label;
+        const statutObject = this.statutOptions.find(i => i.value === key);
+        if (statutObject) {
+            return statutObject.label;
+        }
+        return 'Unknown Status';
     }
     getYNLabel(isTrue: boolean) {
        if (isTrue) {

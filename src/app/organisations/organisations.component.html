@@ -16,6 +16,7 @@
             <th pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
             <th pSortableColumn="depyN">Is Depot<p-sortIcon field="depyN"></p-sortIcon></th>
             <th pSortableColumn="birbyN">Uses FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
+            <th pSortableColumn="webauthority">Web Site<p-sortIcon field="webauthority"></p-sortIcon></th>
             <th pSortableColumn="statut">Statut<p-sortIcon field="statut"></p-sortIcon></th>
 
         </tr>
@@ -55,6 +56,17 @@
                 </p-columnFilter>
             </th>
             <th>
+                <p-columnFilter field="webauthority" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th>
                 <p-columnFilter field="statut" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                         <p-dropdown [ngModel]="value" [options]="statutOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
@@ -82,10 +94,13 @@
                 {{ organisation.localite }}
             </td>
             <td>
-                {{ getYNLabel(organisation.depyN)}}
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.depyN, 'false-icon pi-times-circle': !organisation.depyN}"></i>
             </td>
             <td>
-                {{ getYNLabel(organisation.birbyN)}}
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.birbyN, 'false-icon pi-times-circle': !organisation.birbyN}"></i>
+            </td>
+            <td>
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.webauthority, 'false-icon pi-times-circle': !organisation.webauthority}"></i>
             </td>
             <td>
                 {{ getStatutLabel(organisation.statut) }}

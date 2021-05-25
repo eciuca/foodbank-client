@@ -1,10 +1,10 @@
 
 export let enmStatusCompany =  [
-    {label: 'Personne Physique', value: 0},
-    {label: 'A S B L', value: 1},
-    {label: 'Association de Fait', value: 2},
-    {label: 'CPAS/OCMW', value: 3 },
-    {label: 'Auxiliaire Publique', value: 4}
+    {label: 'A S B L', value: '1'},
+    {label: 'Association de Fait', value: '2'},
+    {label: 'CPAS/OCMW', value: '3' },
+    {label: 'Auxiliaire Publique', value: '4'},
+    {label: 'Personne Physique', value: '0'}
 ];
 
 export let enmGender = [
