@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, ViewChild} from '@angular/core';
 import {MembreEntityService} from '../services/membre-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map, switchMap} from 'rxjs/operators';
@@ -18,6 +18,7 @@ import {DataServiceError} from '@ngrx/data';
   styleUrls: ['./membre.component.css']
 })
 export class MembreComponent implements OnInit {
+    @ViewChild('membreForm') myform: NgForm;
     @Input() batId$: Observable<number>;
     @Input() currentFilteredOrgId: number;
     @Output() onMembreUpdate = new EventEmitter<Membre>();
@@ -83,6 +84,9 @@ export class MembreComponent implements OnInit {
                       this.membre = membre;
                   } else {
                       this.membre = new DefaultMembre();
+                      if (this.myform) {
+                          this.myform.reset(this.membre);
+                      }
                       if (this.booIsOrganisation === false) { // a bank can create employees of its own or employees for its organisations
                           if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
                               this.lienDis = this.currentFilteredOrgId;

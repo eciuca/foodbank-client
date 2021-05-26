@@ -1,10 +1,10 @@
 <p-panel  *ngIf="user">
-    <ng-template pTemplate="header">
+    <ng-template i18n pTemplate="header">
        User {{ user.idUser}} for bank {{ user.idCompany}}
     </ng-template>
     <form  #userForm="ngForm">
         <p-accordion [multiple]="true">
-            <p-accordionTab header="Profile" [selected]="true">
+            <p-accordionTab i18n="User Profile Accordion" header="Profile" [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
                         <label for="selectedMembre">Employee</label>
@@ -16,17 +16,17 @@
                                 </div>
                             </ng-template>
                         </p-autoComplete>
-                        <p-message *ngIf="membre.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
+                        <p-message i18n *ngIf="membre.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="idUser">Login</label>
                         <input #iduser="ngModel" pInputText id="idUser" name="idUser"  required [disabled] ="!booIsCreate" minlength="6" maxlength="60" [ngModel]="user.idUser" />
-                        <p-message *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
+                        <p-message i18n *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
                     </div>
                     <div *ngIf="booIsCreate" class="p-field p-col-12 p-md-2">
                         <label for="password">Password</label>
                         <input #password="ngModel" pInputText id="password" name="password"  required minlength="6" maxlength="12" [ngModel]="user.password" />
-                        <p-message *ngIf="password.invalid && userForm.touched" severity="error" text="Password is required for a new user and must be minimum 6 chars long"></p-message>
+                        <p-message i18n *ngIf="password.invalid && userForm.touched" severity="error" text="Password is required for a new user and must be minimum 6 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label for="rights">Role</label>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab header="User Rights">
+            <p-accordionTab i18n="User Rights Accordion" header="User Rights">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
                         <label for="gestAsso">Manage Associations ?</label>

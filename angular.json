@@ -7,6 +7,12 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "fr": "src/locale/messages.fr.xlf"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -49,6 +55,20 @@
                 }
               ]
             },
+            "fr": {
+              "aot": true,
+               "outputPath": "dist/foodbank-it-client-fr/",
+              "i18nFile": "src/locale/messages.fr.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "fr",
+              "i18nMissingTranslation": "error",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.fr.ts"
+                }
+              ]
+            },
             "docker-local": {
               "fileReplacements": [
                 {
@@ -67,6 +87,9 @@
           "configurations": {
             "production": {
               "browserTarget": "foodbank-it-client:build:production"
+            },
+            "fr": {
+              "browserTarget": "foodbank-it-client:build:fr"
             }
           }
         },

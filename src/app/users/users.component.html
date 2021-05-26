@@ -5,7 +5,7 @@
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
+                    <div i18n class="p-field p-col-12 p-md-4">
                         Users of {{bankName}}
                     </div>
                     <div *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-field p-col-12 p-md-4">
@@ -15,19 +15,19 @@
                         {{orgName}}
                     </div>
                     <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
-                        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add User"></button>
+                        <button i18n type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add User"></button>
                     </div>
                 </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="idUser">Login<p-sortIcon field="idUser"></p-sortIcon></th>
-                <th pSortableColumn="userName">User Name<p-sortIcon field="userName"></p-sortIcon></th>
-                <th *ngIf="booShowOrganisations">Organisation</th>
-                <th pSortableColumn="idLanguage">Language<p-sortIcon field="idLanguage"></p-sortIcon></th>
-                <th pSortableColumn="email">E-Mail<p-sortIcon field="email"></p-sortIcon></th>
-                <th pSortableColumn="rights">Rights<p-sortIcon field="rights"></p-sortIcon></th>
+                <th i18n pSortableColumn="idUser">Login<p-sortIcon field="idUser"></p-sortIcon></th>
+                <th i18n pSortableColumn="userName">User Name<p-sortIcon field="userName"></p-sortIcon></th>
+                <th *ngIf="booShowOrganisations" i18n >Organisation</th>
+                <th i18n pSortableColumn="idLanguage">Language<p-sortIcon field="idLanguage"></p-sortIcon></th>
+                <th i18n pSortableColumn="email">E-Mail<p-sortIcon field="email"></p-sortIcon></th>
+                <th i18n pSortableColumn="rights">Rights<p-sortIcon field="rights"></p-sortIcon></th>
             </tr>
             <tr>
                 <th>
@@ -95,7 +95,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
-            <div class="p-d-flex p-ai-center p-jc-between">
+            <div i18n class="p-d-flex p-ai-center p-jc-between">
             Au total il y a {{totalRecords}} utilisateurs dans la selection.
             </div>
         </ng-template>

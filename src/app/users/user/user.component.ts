@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {UserEntityService} from '../services/user-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
@@ -21,6 +21,7 @@ import {Observable, combineLatest} from 'rxjs';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+    @ViewChild('userForm') myform: NgForm;
     @Input() idUser$: Observable<string>;
     @Input() currentFilteredOrgId: number;
     user: User;
@@ -99,6 +100,9 @@ export class UserComponent implements OnInit {
                 } else {
                     this.user = new DefaultUser();
                     this.booIsCreate = true;
+                    if (this.myform) {
+                        this.myform.reset(this.user);
+                    }
                     if (this.booIsOrganisation === false) { // a bank can create employees of its own or employees for its organisations
                         if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
                             this.idOrg = this.currentFilteredOrgId;
