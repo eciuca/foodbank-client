@@ -60,12 +60,26 @@
                "outputPath": "dist/foodbank-it-client-fr/",
               "i18nFile": "src/locale/messages.fr.xlf",
               "i18nFormat": "xlf",
-              "i18nLocale": "fr",
+              "i18nLocale": "fr-FR",
               "i18nMissingTranslation": "error",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.fr.ts"
+                }
+              ]
+            },
+            "nl": {
+              "aot": true,
+              "outputPath": "dist/foodbank-it-client-nl/",
+              "i18nFile": "src/locale/messages.nl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "nl-NL",
+              "i18nMissingTranslation": "error",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.nl.ts"
                 }
               ]
             },
@@ -90,6 +104,9 @@
             },
             "fr": {
               "browserTarget": "foodbank-it-client:build:fr"
+            },
+            "nl": {
+              "browserTarget": "foodbank-it-client:build:nl"
             }
           }
         },

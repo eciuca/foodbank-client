@@ -1,13 +1,13 @@
 <p-panel  *ngIf="user">
-    <ng-template i18n pTemplate="header">
+    <ng-template i18n="@@UserHeader" pTemplate="header">
        User {{ user.idUser}} for bank {{ user.idCompany}}
     </ng-template>
     <form  #userForm="ngForm">
         <p-accordion [multiple]="true">
-            <p-accordionTab i18n="User Profile Accordion" header="Profile" [selected]="true">
+            <p-accordionTab i18n-header="@@UserProfile" header="Profile" [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="selectedMembre">Employee</label>
+                        <label i18n="@@Employee" for="selectedMembre">Employee</label>
                         <p-autoComplete #membre="ngModel" [(ngModel)]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
                                          [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">
                             <ng-template let-membre pTemplate="item">
@@ -16,52 +16,52 @@
                                 </div>
                             </ng-template>
                         </p-autoComplete>
-                        <p-message i18n *ngIf="membre.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
+                        <p-message i18n-text="@@EmployeeMandatory" *ngIf="membre.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="idUser">Login</label>
+                        <label i18n="@@UserLogin" for="idUser">Login</label>
                         <input #iduser="ngModel" pInputText id="idUser" name="idUser"  required [disabled] ="!booIsCreate" minlength="6" maxlength="60" [ngModel]="user.idUser" />
-                        <p-message i18n *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
+                        <p-message i18n-text="@@UserLoginMandatory" *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
                     </div>
                     <div *ngIf="booIsCreate" class="p-field p-col-12 p-md-2">
-                        <label for="password">Password</label>
+                        <label i18n="@@UserPassword" for="password">Password</label>
                         <input #password="ngModel" pInputText id="password" name="password"  required minlength="6" maxlength="12" [ngModel]="user.password" />
-                        <p-message i18n *ngIf="password.invalid && userForm.touched" severity="error" text="Password is required for a new user and must be minimum 6 chars long"></p-message>
+                        <p-message i18n-text="@@UserPasswordMandatory" *ngIf="password.invalid && userForm.touched" severity="error" text="Password is required for a new user and must be minimum 6 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="rights">Role</label>
+                        <label i18n="@@UserRole" for="rights">Role</label>
                         <p-dropdown [options]="rights" id="rights" name="rights" [ngModel]="user.rights"  ></p-dropdown>
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab i18n="User Rights Accordion" header="User Rights">
+            <p-accordionTab i18n-header="@@UserRights" header="User Rights">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="gestAsso">Manage Associations ?</label>
+                        <label i18n="@@UserRightsManageAssociations" for="gestAsso">Manage Associations ?</label>
                         <p-inputSwitch id="gestAsso" name="gestAsso" [ngModel]="user.gestAsso"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="droit1">Manage Association Rights ?</label>
+                        <label i18n="@@UserRightsManageAssociationsRights" for="droit1">Manage Association Rights ?</label>
                         <p-inputSwitch id="droit1" name="droit1" [ngModel]="user.droit1"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="gestBen">Manage Beneficiaries ?</label>
+                        <label i18n="@@UserRightsManageBeneficiaries" for="gestBen">Manage Beneficiaries ?</label>
                         <p-inputSwitch id="gestBen" name="gestBen" [ngModel]="user.gestBen"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="gestInv">Manage Inventory ?</label>
+                        <label i18n="@@UserRightsManageInventory" for="gestInv">Manage Inventory ?</label>
                         <p-inputSwitch id="gestInv" name="gestInv" [ngModel]="user.gestInv"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <label for="gestFead">Manage Fead ?</label>
+                        <label i18n="@@UserRightsManageFead" for="gestFead">Manage Fead ?</label>
                         <p-inputSwitch id="gestFead" name="gestFead" [ngModel]="user.gestFead"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <label for="gestCpas">Manage Cpas/OCMW ?</label>
+                        <label i18n="@@UserRightsManageOCMW" for="gestCpas">Manage Cpas/OCMW ?</label>
                         <p-inputSwitch id="gestCpas" name="gestCpas" [ngModel]="user.gestCpas"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <label for="gestDon">Manage Gifts ?</label>
+                        <label i18n="@@UserRightsManageGifts" for="gestDon">Manage Gifts ?</label>
                         <p-inputSwitch id="gestDon" name="gestDon" [ngModel]="user.gestDon"></p-inputSwitch>
                     </div>
                 </div>
@@ -70,9 +70,9 @@
         <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
-            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save" [disabled] = "userForm.invalid"></button>
-            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
+            <button i18n.label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
+            <button  i18n.label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save" [disabled] = "userForm.invalid"></button>
+            <button  i18n.label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

@@ -1,22 +1,22 @@
 <p-panel *ngIf="organisation">
-    <ng-template pTemplate="header">
+    <ng-template i18n="@@OrganisationHeader" pTemplate="header">
        Organisation {{ organisation.societe}} Updated on {{organisation.lupdTs}} By {{organisation.lupdUserName}}
     </ng-template>
     <form   #organisationForm="ngForm">
         <p-accordion [multiple]="true">
-            <p-accordionTab header="Distribution Center"  [selected]="true">
+            <p-accordionTab i18n-header="@@OrganisationDisCenter" header="Distribution Center"  [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-6">
-                        <label for="societe">Name Company</label>
+                        <label i18n="@@OrganisationName" for="societe">Name Company</label>
                         <input #societe="ngModel" pInputText id="societe" name="societe" required minlength = "10" maxlength="100" [ngModel]="organisation.societe" />
                         <p-message *ngIf="societe.invalid && organisationForm.touched" severity="error" text="Company Name is required and must be minimum 4 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="statut">Status Company</label>
+                        <label  i18n="@@OrganisationStatus" for="statut">Status Company</label>
                          <p-dropdown [options]="statuts" id="statut" name="statut" [ngModel]="organisation.statut"></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="tva">Nr/Vat Enterprise</label>
+                        <label i18n="@@OrganisationNumber" for="tva">Nr/Vat Enterprise</label>
                         <input pInputText id="tva" name="tva" maxlength="50" [ngModel]="organisation.tva" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
@@ -24,55 +24,55 @@
                         <input pInputText id="afsca" name="afsca" maxlength="20" [ngModel]="organisation.afsca" />
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <label for="adresse">Distribution Address</label>
+                        <label i18n="@@OrganisationDistAddress" for="adresse">Distribution Address</label>
                         <input pInputText id="adresse" name="adresse" maxlength="100" [ngModel]="organisation.adresse" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="cp">Zip Code</label>
+                        <label i18n="@@ZipCode" for="cp">Zip Code</label>
                         <input pInputText id="cp" name="cp" maxlength="6" [ngModel]="organisation.cp" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="localite">City</label>
+                        <label i18n="@@City" for="localite">City</label>
                         <input pInputText id="localite" name="localite" maxlength="50" [ngModel]="organisation.localite" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="pays">Country</label>
+                        <label i18n="@@Country" for="pays">Country</label>
                         <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="organisation.pays"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="email">E-mail</label>
+                        <label i18n="@@Email" for="email">E-mail</label>
                         <input pInputText id="email" name="email" maxlength="100" [ngModel]="organisation.email" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="tel">Telephone</label>
+                        <label  i18n="@@Phone" for="tel">Telephone</label>
                         <input pInputText id="tel" name="tel" maxlength="50" [ngModel]="organisation.tel" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="mobile">Mobile</label>
+                        <label i18n="@@Mobile" for="mobile">Mobile</label>
                         <input pInputText id="mobile" name="mobile" maxlength="50" [ngModel]="organisation.gsm" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="website">Web Site</label>
+                        <label i18n="@@Website" for="website">Web Site</label>
                         <input pInputText id="website" name="website"  [ngModel]="organisation.website" />
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <label for="adresse2">Headquarters Address</label>
+                        <label i18n="@@OrganisationHeadQuarters"for="adresse2">Headquarters Address</label>
                         <input pInputText id="adresse2" name="adresse2" maxlength="100" [ngModel]="organisation.adresse2" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="cp2">Zip Code</label>
+                        <label i18n="@@ZipCode" for="cp2">Zip Code</label>
                         <input pInputText id="cp2" name="cp2" maxlength="6" [ngModel]="organisation.cp2" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="localite2">City</label>
+                        <label i18n="@@City" for="localite2">City</label>
                         <input pInputText id="localite2" name="localite2" maxlength="50" [ngModel]="organisation.localite2" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="pays2">Country</label>
+                        <label i18n="@@Country" for="pays2">Country</label>
                         <p-dropdown [options]="countries" id="pays2" name="pays2" [ngModel]="organisation.pays2"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="banque">Bank</label>
+                        <label i18n="@@Bank" for="banque">Bank</label>
                         <input pInputText id="banque" name="banque" maxlength="50" [ngModel]="organisation.banque" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab header="Organisation">
+            <p-accordionTab i18n-header="@@Organisation" header="Organisation">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
                         <label for="civilite">Gender President</label>
@@ -205,10 +205,10 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab header="Contacts">
+            <p-accordionTab i18n-header="@@OrganisationContacts" header="Contacts">
                 <app-orgcontacts  [lienAsso$]="idDis$"></app-orgcontacts>
             </p-accordionTab>
-            <p-accordionTab header="Detailed Activities">
+            <p-accordionTab i18n-header="@@OrganisationActivities" header="Detailed Activities">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-12">
                          <input pInputText id="disprog" name="disprog" maxlength="100" placeholder="Distribution Program" [ngModel]="organisation.disprog" />
@@ -329,7 +329,7 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab header="Complementary Non-Food Activities">
+            <p-accordionTab i18n-header="@@OrganisationActivitiesNonFood" header="Complementary Non-Food Activities">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
                         <label for="actComp1">Activity</label>
@@ -361,7 +361,7 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab *ngIf="organisation.gestBen == false" header="Beneficiaries Summary">
+            <p-accordionTab i18n-header="@@OrganisationBeneficiariesSummary" *ngIf="organisation.gestBen == false" header="Beneficiaries Summary">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
                         <label for="nPers">Registered population</label>
@@ -406,7 +406,7 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab *ngIf="organisation.lienBanque < 11" header="Relations with the Public authorities">
+            <p-accordionTab i18n-header="@@OrganisationPublicAuthorities"  *ngIf="organisation.lienBanque < 11" header="Relations with the Public authorities">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
                         <label for="cpasyN">Cooperation with CPAS/OCMW?</label>
@@ -431,9 +431,9 @@
         <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,organisation)" label="Delete"></button>
-            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save" [disabled] = "organisationForm.invalid"></button>
-            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, organisationForm,organisationForm.dirty)" label="Return" ></button>
+            <button i18n.label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,organisation)" label="Delete"></button>
+            <button i18n.label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save" [disabled] = "organisationForm.invalid"></button>
+            <button i18n.label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, organisationForm,organisationForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

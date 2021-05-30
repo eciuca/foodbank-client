@@ -6,7 +6,7 @@
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
+                    <div i18n="@@EmployeesHeader" class="p-field p-col-12 p-md-4">
                         Employees of {{bankName}}
                     </div>
                     <div *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-field p-col-12 p-md-4">
@@ -16,19 +16,19 @@
                         {{orgName}}
                     </div>
                     <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
-                        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Employee"></button>
+                        <button i18n.label="@@AddEmployee" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Employee"></button>
                     </div>
                 </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
-                <th pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
-                <th *ngIf="booShowOrganisations">Organisation</th>
-                <th pSortableColumn="address">Address<p-sortIcon field="address"></p-sortIcon></th>
-                <th pSortableColumn="zip">Zip<p-sortIcon field="zip"></p-sortIcon></th>
-                <th pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
+                <th i18n="@@NameSorted" pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
+                <th i18n="@@NameFirstSorted" pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
+                <th i18n="@@Organisation" *ngIf="booShowOrganisations">Organisation</th>
+                <th i18n="@@AddressSorted" pSortableColumn="address">Address<p-sortIcon field="address"></p-sortIcon></th>
+                <th i18n="@@ZipCodeSorted" pSortableColumn="zip">Zip Code<p-sortIcon field="zip"></p-sortIcon></th>
+                <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
             </tr>
             <tr>
                 <th>
@@ -78,12 +78,12 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
-            <div class="p-d-flex p-ai-center p-jc-between">
+            <div i18n="@@EmployeesSelected" class="p-d-flex p-ai-center p-jc-between">
                There are {{totalRecords}} employees in the selection.
             </div>
         </ng-template>
     </p-table>
-    <p-dialog header="Employee Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+    <p-dialog i18n-header="@@EmployeeDetails"header="Employee Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
         <app-membre *ngIf="selectedBatid$" [batId$]="selectedBatid$"  [currentFilteredOrgId] ="currentFilteredOrgId" (onMembreUpdate)="handleMembreUpdate($event)" (onMembreCreate)="handleMembreCreate($event)"
                     (onMembreDelete)="handleMembreDeleted($event)" (onMembreQuit)="handleMembreQuit()"></app-membre>
     </p-dialog>

@@ -1,59 +1,59 @@
 <p-panel *ngIf="membre">
-    <ng-template pTemplate="header">
+    <ng-template i18n="@@EmployeeHeader" pTemplate="header">
         Employee {{ membre.nom}} {{ membre.prenom}} Updated On {{ membre.lastVisit}}
     </ng-template>
     <form   #membreForm="ngForm" style="padding: 1em">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
-                <label for="civilite">Gender</label>
+                <label i18n="@@Gender" for="civilite">Gender</label>
                 <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="membre.civilite"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="nom">Name *</label>
+                <label i18n="@@NameMandatory" for="nom">Name *</label>
                 <input #nom="ngModel"  pInputText id="nom" name="nom"  required minlength="2" maxlength="50" [ngModel]="membre.nom" />
                 <p-message *ngIf="nom.invalid && membreForm.touched" severity="error" text="Employee Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="prenom">First Name *</label>
+                <label i18n="@@NameFirstMandatory" for="prenom">First Name *</label>
                 <input  #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="2" maxlength="40" [ngModel]="membre.prenom" />
                 <p-message *ngIf="prenom.invalid && membreForm.touched" severity="error" text="Employee First Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="batmail">E-mail *</label>
+                <label i18n="@@EMailMandatory" for="batmail">E-mail *</label>
                 <input #batmail="ngModel" pInputText id="batmail" name="batmail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [ngModel]="membre.batmail" />
                 <p-message *ngIf="batmail.invalid && membreForm.touched" severity="error" text="E-mail is required and must be valid"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="dateNaissance">Birth Date *</label>
+                <label i18n="@@BirthDateMandatory" for="dateNaissance">Birth Date *</label>
                 <input #dateNaissance="ngModel" pInputText id="dateNaissance" name="dateNaissance"  required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateNaissance"/>
                 <p-message *ngIf="dateNaissance.invalid && membreForm.touched" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="langue">Language</label>
+                <label i18n="@@Language" for="langue">Language</label>
                 <p-dropdown [options]="languages" id="langue" name="langue" [ngModel]="membre.langue"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="nnat">National Number</label>
+                <label i18n="@@NationalNumber" for="nnat">National Number</label>
                 <input pInputText id="nnat" name="nnat" maxlength="50" [ngModel]="membre.nnat" />
             </div>
 
             <div class="p-field p-col-12 p-md-4">
-                <label for="address">Address</label>
+                <label i18n="@@Address" for="address">Address</label>
                 <input pInputText id="address" name="address" maxlength="50" [ngModel]="membre.address" />
             </div>
 
             <div class="p-field p-col-12 p-md-2">
-                <label for="zip">Zip Code</label>
+                <label i18n="@@ZipCode" for="zip">Zip Code</label>
                 <input pInputText id="zip" name="zip" maxlength="10" [ngModel]="membre.zip" />
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="city">City</label>
+                <label i18n="@@City" for="city">City</label>
                 <input pInputText id="city" name="city" maxlength="20" [ngModel]="membre.city" />
             </div>
 
 
             <div class="p-field p-col-12 p-md-4">
-                <label for="veh">Car</label>
+                <label i18n="@@Car" for="veh">Car</label>
                 <input pInputText id="veh" name="veh" maxlength="30" [ngModel]="membre.veh" />
             </div>
 
@@ -62,16 +62,16 @@
                 <input pInputText id="vehtype" name="vehtype" maxlength="30" [ngModel]="membre.vehTyp" />
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="vehimm">Number Plate</label>
+                <label i18n="@@PlateNumber" for="vehimm">Number Plate</label>
                 <input pInputText id="vehimm" name="vehimm" maxlength="30" [ngModel]="membre.vehImm" />
             </div>
         </div>
         <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
         <div *ngIf="booCanSave" class="p-formgroup-inline">
-            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,membre)" label="Delete"></button>
-            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(membre, membreForm.value)" label="Save" [disabled] = "membreForm.invalid"></button>
-            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, membre, membreForm,membreForm.dirty)" label="Return" ></button>
+            <button i18n.label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,membre)" label="Delete"></button>
+            <button i18n.label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(membre, membreForm.value)" label="Save" [disabled] = "membreForm.invalid"></button>
+            <button i18n.label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, membre, membreForm,membreForm.dirty)" label="Return" ></button>
         </div>
     </form>
 
