@@ -16,17 +16,17 @@
                                 </div>
                             </ng-template>
                         </p-autoComplete>
-                        <p-message i18n-text="@@EmployeeMandatory" *ngIf="membre.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
+                        <p-message i18n-text="@@EmployeeIsMandatory" *ngIf="membre.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@UserLogin" for="idUser">Login</label>
                         <input #iduser="ngModel" pInputText id="idUser" name="idUser"  required [disabled] ="!booIsCreate" minlength="6" maxlength="60" [ngModel]="user.idUser" />
-                        <p-message i18n-text="@@UserLoginMandatory" *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
+                        <p-message i18n-text="@@UserLoginIsMandatory" *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
                     </div>
                     <div *ngIf="booIsCreate" class="p-field p-col-12 p-md-2">
                         <label i18n="@@UserPassword" for="password">Password</label>
                         <input #password="ngModel" pInputText id="password" name="password"  required minlength="6" maxlength="12" [ngModel]="user.password" />
-                        <p-message i18n-text="@@UserPasswordMandatory" *ngIf="password.invalid && userForm.touched" severity="error" text="Password is required for a new user and must be minimum 6 chars long"></p-message>
+                        <p-message i18n-text="@@UserPasswordIsMandatory" *ngIf="password.invalid && userForm.touched" severity="error" text="Password is required for a new user and must be minimum 6 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@UserRole" for="rights">Role</label>
@@ -70,9 +70,9 @@
         <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button i18n.label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
-            <button  i18n.label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save" [disabled] = "userForm.invalid"></button>
-            <button  i18n.label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
+            <button i18n-label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
+            <button  i18n-label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save" [disabled] = "userForm.invalid"></button>
+            <button  i18n-label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

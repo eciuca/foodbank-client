@@ -9,7 +9,7 @@
                     <div class="p-field p-col-12 p-md-6">
                         <label i18n="@@OrganisationName" for="societe">Name Company</label>
                         <input #societe="ngModel" pInputText id="societe" name="societe" required minlength = "10" maxlength="100" [ngModel]="organisation.societe" />
-                        <p-message *ngIf="societe.invalid && organisationForm.touched" severity="error" text="Company Name is required and must be minimum 4 chars long"></p-message>
+                        <p-message i18n-text="@@OrganisationIsMandatory" *ngIf="societe.invalid && organisationForm.touched" severity="error" text="Organisation Name is required and must be minimum 4 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label  i18n="@@OrganisationStatus" for="statut">Status Company</label>
@@ -80,11 +80,11 @@
                         <input pInputText id="iban" name="iban" maxlength="50" [ngModel]="organisation.iban" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="msonac">Guest Home?</label>
+                        <label i18n="@@OrganisationIsGuestHome" for="msonac">Guest Home?</label>
                         <p-inputSwitch id="msonac" name="msonac" [ngModel]="organisation.msonac"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="nPers">Guest Capacity</label>
+                        <label i18n="@@OrganisationGuestCapacity" for="nPers">Guest Capacity</label>
                         <p-inputNumber [ngModel]="organisation.nbrefix" id="nbrefix" name="nbrefix" mode="decimal" [showButtons]="true" inputId="nbrefix" [min]="0" [max]="500">
                         </p-inputNumber>
                     </div>
@@ -93,7 +93,7 @@
                         <input pInputText id="birbCode" name="birbCode" maxlength="10" [ngModel]="organisation.birbCode" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="nPers">FEAD Beneficiaries</label>
+                        <label i18n="@@OrganisationNbFEADBeneficiaries" for="nPers">Nb FEAD Beneficiaries</label>
                         <p-inputNumber [ngModel]="organisation.nrFead" id="nrFead" name="nrFead" mode="decimal" [showButtons]="true" inputId="nrFead" [min]="0" [max]="500">
                         </p-inputNumber>
                     </div>
@@ -102,105 +102,105 @@
             <p-accordionTab i18n-header="@@Organisation" header="Organisation">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
-                        <label for="civilite">Gender President</label>
+                        <label i18n="@@OrganisationPresidentGender" for="civilite">Gender President</label>
                         <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="organisation.civilite"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="prenom">First Name President</label>
+                        <label i18n="@@OrganisationPresidentFirstName" for="prenom">First Name President</label>
                         <input pInputText id="prenom" name="prenom" maxlength="50" [ngModel]="organisation.prenom" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="nom">Name President</label>
+                        <label i18n="@@OrganisationPresidentName"for="nom">Name President</label>
                         <input pInputText id="nom" name="nom" maxlength="50" [ngModel]="organisation.nom" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="telPres">Tel President</label>
+                        <label i18n="@@OrganisationPresidentTel" for="telPres">Tel President</label>
                         <input pInputText id="telPres" name="telPres" maxlength="15" [ngModel]="organisation.telPres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="gsmPres">Gsm President</label>
+                        <label i18n="@@OrganisationPresidentMobile" for="gsmPres">Mobile President</label>
                         <input pInputText id="gsmPres" name="gsmPres" maxlength="20" [ngModel]="organisation.gsmPres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="emailPres">Email President</label>
+                        <label i18n="@@OrganisationPresidentEmail" for="emailPres">Email President</label>
                         <input pInputText id="emailPres" name="emailPres" maxlength="50" [ngModel]="organisation.emailPres" />
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
-                        <label for="civiliteVp">Gender Vice-President</label>
+                        <label i18n="@@OrganisationVPGender" for="civiliteVp">Gender Vice-President</label>
                         <p-dropdown [options]="genders" id="civiliteVp" name="civiliteVp" [ngModel]="organisation.civiliteVp"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="prenomVp">First Name Vice-President</label>
+                        <label i18n="@@OrganisationVPFirstName" for="prenomVp">First Name Vice-President</label>
                         <input pInputText id="prenomVp" name="prenomVp" maxlength="50" [ngModel]="organisation.prenomVp" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="nomVp">Name Vice-President</label>
+                        <label i18n="@@OrganisationVPName" for="nomVp">Name Vice-President</label>
                         <input pInputText id="nomVp" name="nomVp" maxlength="50" [ngModel]="organisation.nomVp" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="telVp">Tel Vice-President</label>
+                        <label i18n="@@OrganisationVPTel" for="telVp">Tel Vice-President</label>
                         <input pInputText id="telVp" name="telVp" maxlength="15" [ngModel]="organisation.telVp" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="gsmVp">Gsm Vice-President</label>
+                        <label i18n="@@OrganisationVPMobile" for="gsmVp">Gsm Vice-President</label>
                         <input pInputText id="gsmVp" name="gsmVp" maxlength="20" [ngModel]="organisation.gsmVp" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="emailVp">Email Vice-President</label>
+                        <label i18n="@@OrganisationVPEmail" for="emailVp">Email Vice-President</label>
                         <input pInputText id="emailVp" name="emailVp" maxlength="50" [ngModel]="organisation.emailVp" />
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
-                        <label for="civiliteSec">Gender Secretary</label>
+                        <label i18n="@@OrganisationSecGender" for="civiliteSec">Gender Secretary</label>
                         <p-dropdown [options]="genders" id="civiliteSec" name="civiliteSec" [ngModel]="organisation.civiliteSec"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="prenomSec">First Name Secretary</label>
+                        <label i18n="@@OrganisationSecFirstName" for="prenomSec">First Name Secretary</label>
                         <input pInputText id="prenomSec" name="prenomSec" maxlength="50" [ngModel]="organisation.prenomSec" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="nomSec">Name Secretary</label>
+                        <label i18n="@@OrganisationSecName" for="nomSec">Name Secretary</label>
                         <input pInputText id="nomSec" name="nomSec" maxlength="50" [ngModel]="organisation.nomSec" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="telSec">Tel Secretary</label>
+                        <label i18n="@@OrganisationSecTel" for="telSec">Tel Secretary</label>
                         <input pInputText id="telSec" name="telSec" maxlength="15" [ngModel]="organisation.telSec" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="gsmSec">Gsm Secretary</label>
+                        <label i18n="@@OrganisationSecMobile" for="gsmSec">Mobile Secretary</label>
                         <input pInputText id="gsmSec" name="gsmSec" maxlength="20" [ngModel]="organisation.gsmSec" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="emailSec">Email Secretary</label>
+                        <label i18n="@@OrganisationSecEmail" for="emailSec">Email Secretary</label>
                         <input pInputText id="emailSec" name="emailSec" maxlength="50" [ngModel]="organisation.emailSec" />
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-1">
-                        <label for="civiliteTres">Gender Treasurer</label>
+                        <label i18n="@@OrganisationTreasGender" for="civiliteTres">Gender Treasurer</label>
                         <p-dropdown [options]="genders" id="civiliteTres" name="civiliteTres" [ngModel]="organisation.civiliteTres"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="prenomTres">First Name Treasurer</label>
+                        <label i18n="@@OrganisationTreasFirstName" for="prenomTres">First Name Treasurer</label>
                         <input pInputText id="prenomTres" name="prenomTres" maxlength="50" [ngModel]="organisation.prenomTres" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="nomTres">Name Treasurer</label>
+                        <label i18n="@@OrganisationTreasName"for="nomTres">Name Treasurer</label>
                         <input pInputText id="nomTres" name="nomTres" maxlength="50" [ngModel]="organisation.nomTres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="telTres">Tel Treasurer</label>
+                        <label i18n="@@OrganisationTreasTel" for="telTres">Tel Treasurer</label>
                         <input pInputText id="telTres" name="telTres" maxlength="15" [ngModel]="organisation.telTres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="gsmTres">Gsm Treasurer</label>
+                        <label i18n="@@OrganisationTreasMobile" for="gsmTres">Mobile Treasurer</label>
                         <input pInputText id="gsmTres" name="gsmTres" maxlength="20" [ngModel]="organisation.gsmTres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="emailTres">Email Treasurer</label>
+                        <label i18n="@@OrganisationTreasEmail" for="emailTres">Email Treasurer</label>
                         <input pInputText id="emailTres" name="emailTres" maxlength="50" [ngModel]="organisation.emailTres" />
                     </div>
                 </div>
@@ -211,120 +211,120 @@
             <p-accordionTab i18n-header="@@OrganisationActivities" header="Detailed Activities">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-12">
-                         <input pInputText id="disprog" name="disprog" maxlength="100" placeholder="Distribution Program" [ngModel]="organisation.disprog" />
+                         <input i18n-placeholder="@@OrganisationDistribProgram" pInputText id="disprog" name="disprog" maxlength="100" placeholder="Distribution Program" [ngModel]="organisation.disprog" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="luam">Monday Morning</label>
+                        <label i18n="@@MondayMorning" for="luam">Monday Morning</label>
                         <p-inputSwitch id="luam" name="luam" [ngModel]="organisation.luam"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <input pInputText id="reluam" name="reluam"  placeholder="Activity Description" [ngModel]="organisation.reluam" />
+                        <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="reluam" name="reluam"  placeholder="Activity Description" [ngModel]="organisation.reluam" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="lupm">Monday Afternoon</label>
+                        <label i18n="@@MondayAfternoon" for="lupm">Monday Afternoon</label>
                         <p-inputSwitch id="lupm" name="lupm" [ngModel]="organisation.lupm"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <input pInputText id="relupm" name="relupm" placeholder="Activity Description" [ngModel]="organisation.relupm" />
+                        <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="relupm" name="relupm" placeholder="Activity Description" [ngModel]="organisation.relupm" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="tuam">Tuesday Morning</label>
+                        <label i18n="@@TuesdayMorning" for="tuam">Tuesday Morning</label>
                         <p-inputSwitch id="tuam" name="tuam" [ngModel]="organisation.tuam"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                         <input pInputText id="retuam" name="retuam" placeholder="Activity Description" [ngModel]="organisation.retuam" />
+                         <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="retuam" name="retuam" placeholder="Activity Description" [ngModel]="organisation.retuam" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="tupm">Tuesday Afternoon</label>
+                        <label i18n="@@TuesdayAfternoon" for="tupm">Tuesday Afternoon</label>
                         <p-inputSwitch id="tupm" name="tupm" [ngModel]="organisation.tupm"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                         <input pInputText id="retupm" name="retupm" placeholder="Activity Description" [ngModel]="organisation.retupm" />
+                         <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="retupm" name="retupm" placeholder="Activity Description" [ngModel]="organisation.retupm" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="weam">Wednesday Morning</label>
+                        <label i18n="@@WednesdayMorning" for="weam">Wednesday Morning</label>
                         <p-inputSwitch id="weam" name="weam" [ngModel]="organisation.weam"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                         <input pInputText id="reweam" name="reweam" placeholder="Activity Description" [ngModel]="organisation.reweam" />
+                         <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="reweam" name="reweam" placeholder="Activity Description" [ngModel]="organisation.reweam" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="wepm">Wednesday Afternoon</label>
+                        <label i18n="@@WednesdayAfternoon" for="wepm">Wednesday Afternoon</label>
                         <p-inputSwitch id="wepm" name="wepm" [ngModel]="organisation.wepm"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <input pInputText id="rewepm" name="rewepm" placeholder="Activity Description" [ngModel]="organisation.rewepm" />
+                        <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="rewepm" name="rewepm" placeholder="Activity Description" [ngModel]="organisation.rewepm" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="tham">Thursday Morning</label>
+                        <label i18n="@@ThursdayMorning" for="tham">Thursday Morning</label>
                         <p-inputSwitch id="tham" name="tham" [ngModel]="organisation.tham"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <input pInputText id="retham" name="retham" placeholder="Activity Description" [ngModel]="organisation.retham" />
+                        <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="retham" name="retham" placeholder="Activity Description" [ngModel]="organisation.retham" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="thpm">Thursday Afternoon</label>
+                        <label i18n="@@ThursdayAfternoon" for="thpm">Thursday Afternoon</label>
                         <p-inputSwitch id="thpm" name="thpm" [ngModel]="organisation.thpm"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <input pInputText id="rethpm" name="rethpm" placeholder="Activity Description" [ngModel]="organisation.rethpm" />
+                        <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="rethpm" name="rethpm" placeholder="Activity Description" [ngModel]="organisation.rethpm" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="fram">Friday Morning</label>
+                        <label i18n="@@FridayMorning" for="fram">Friday Morning</label>
                         <p-inputSwitch id="fram" name="fram" [ngModel]="organisation.fram"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <input pInputText id="refram" name="refram" placeholder="Activity Description" [ngModel]="organisation.refram" />
+                        <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="refram" name="refram" placeholder="Activity Description" [ngModel]="organisation.refram" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="frpm">Friday Afternoon</label>
+                        <label i18n="@@FridayAfternoon" for="frpm">Friday Afternoon</label>
                         <p-inputSwitch id="frpm" name="frpm" [ngModel]="organisation.frpm"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <input pInputText id="refrpm" name="refrpm" placeholder="Activity Description" [ngModel]="organisation.refrpm" />
+                        <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="refrpm" name="refrpm" placeholder="Activity Description" [ngModel]="organisation.refrpm" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="saam">Saturday Morning</label>
+                        <label i18n="@@SaturdayMorning" for="saam">Saturday Morning</label>
                         <p-inputSwitch id="saam" name="saam" [ngModel]="organisation.saam"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <input pInputText id="resaam" name="resaam" placeholder="Activity Description" [ngModel]="organisation.resaam" />
+                        <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="resaam" name="resaam" placeholder="Activity Description" [ngModel]="organisation.resaam" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="sapm">Saturday Afternoon</label>
+                        <label i18n="@@SaturdayAfternoon" for="sapm">Saturday Afternoon</label>
                         <p-inputSwitch id="sapm" name="sapm" [ngModel]="organisation.sapm"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <input pInputText id="resapm" name="resapm" placeholder="Activity Description" [ngModel]="organisation.resapm" />
+                        <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="resapm" name="resapm" placeholder="Activity Description" [ngModel]="organisation.resapm" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="sunam">Sunday Morning</label>
+                        <label i18n="@@SundayMorning" for="sunam">Sunday Morning</label>
                         <p-inputSwitch id="sunam" name="sunam" [ngModel]="organisation.sunam"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                         <input pInputText id="resunam" name="resunam" placeholder="Activity Description" [ngModel]="organisation.resunam" />
+                         <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="resunam" name="resunam" placeholder="Activity Description" [ngModel]="organisation.resunam" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="sunpm">Sunday Afternoon</label>
+                        <label i18n="@@SundayAfternoon" for="sunpm">Sunday Afternoon</label>
                         <p-inputSwitch id="sunpm" name="sunpm" [ngModel]="organisation.sunpm"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <input pInputText id="resunpm" name="resunpm" placeholder="Activity Description" [ngModel]="organisation.resunpm" />
+                        <input i18n-placeholder="@@OrganisationActivityDescription" pInputText id="resunpm" name="resunpm" placeholder="Activity Description" [ngModel]="organisation.resunpm" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="porc">Pork Food</label>
+                        <label i18n="@@OrganisationPorkFood" for="porc">Pork Food</label>
                         <p-inputSwitch id="porc" name="porc" [ngModel]="organisation.porc"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="legFrais">Fresh Vegetables</label>
+                        <label i18n="@@OrganisationFreshVegetables" for="legFrais">Fresh Vegetables</label>
                         <p-inputSwitch id="legFrais" name="legFrais" [ngModel]="organisation.legFrais"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="congel">Frozen Food</label>
+                        <label i18n="@@OrganisationFrozenFood" for="congel">Frozen Food</label>
                         <p-inputSwitch id="congel" name="congel" [ngModel]="organisation.congel"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="congel">Capacite en Litres</label>
+                        <label i18n="@@OrganisationFrozenCapacity" for="congel">Frozen Food Capacity</label>
                         <input pInputText id="congelCap" name="congelCap" [ngModel]="organisation.congelCap" />
                     </div>
                 </div>
@@ -332,31 +332,31 @@
             <p-accordionTab i18n-header="@@OrganisationActivitiesNonFood" header="Complementary Non-Food Activities">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp1">Activity</label>
+                        <label i18n="@@Activity" for="actComp1">Activity</label>
                         <p-dropdown [options]="orgActivities" id="actComp1" name="actComp1" [ngModel]="organisation.actComp1"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp2">Activity</label>
+                        <label i18n="@@Activity" for="actComp2">Activity</label>
                         <p-dropdown [options]="orgActivities" id="actComp2" name="actComp2" [ngModel]="organisation.actComp2"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp3">Activity</label>
+                        <label i18n="@@Activity" for="actComp3">Activity</label>
                         <p-dropdown [options]="orgActivities" id="actComp3" name="actComp3" [ngModel]="organisation.actComp3"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp4">Activity</label>
+                        <label i18n="@@Activity" for="actComp4">Activity</label>
                         <p-dropdown [options]="orgActivities" id="actComp4" name="actComp4" [ngModel]="organisation.actComp4"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp5">Activity</label>
+                        <label i18n="@@Activity" for="actComp5">Activity</label>
                         <p-dropdown [options]="orgActivities" id="actComp5" name="actComp5" [ngModel]="organisation.actComp5"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="actComp6">Activity</label>
+                        <label i18n="@@Activity" for="actComp6">Activity</label>
                         <p-dropdown [options]="orgActivities" id="actComp6" name="actComp6" [ngModel]="organisation.actComp6"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-12">
-                        <label for="actComp7">Other Activity</label>
+                        <label i18n="@@ActivityOther" for="actComp7">Other Activity</label>
                         <input pInputText id="actComp7" name="actComp7" maxlength="100" [ngModel]="organisation.actComp7" />
                     </div>
                 </div>
@@ -364,43 +364,43 @@
             <p-accordionTab i18n-header="@@OrganisationBeneficiariesSummary" *ngIf="organisation.gestBen == false" header="Beneficiaries Summary">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="nPers">Registered population</label>
+                        <label i18n="@@OrganisationPopulation" for="nPers">Registered population</label>
                         <p-inputNumber [ngModel]="organisation.nPers" id="nPers" name="nPers" mode="decimal" [showButtons]="true" inputId="nPers" [min]="0" >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="nFam">Families</label>
+                        <label i18n="@@OrganisationFamilies" for="nFam">Families</label>
                         <p-inputNumber [ngModel]="organisation.nFam" id="nFam" name="nFam" mode="decimal" [showButtons]="true" inputId="nFam" [min]="0" >
                         </p-inputNumber>
                     </div>
 
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="nNour">Infants (< 6 months)</label>
+                        <label i18n="@@OrganisationInfants" for="nNour">Infants (< 6 months)</label>
                         <p-inputNumber [ngModel]="organisation.nNour" id="nNour" name="nNour" mode="decimal" [showButtons]="true" inputId="nNour" [min]="0" >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="nBebe">Babies (> 6 months et < 24 months)</label>
+                        <label i18n="@@OrganisationBabies" for="nBebe">Babies (> 6 months and < 24 months)</label>
                         <p-inputNumber [ngModel]="organisation.nBebe" id="nBebe" name="nBebe" mode="decimal" [showButtons]="true" inputId="nBebe" [min]="0"  >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="nEnf">Children (from 2 to 14 years)</label>
+                        <label i18n="@@OrganisationChildren" for="nEnf">Children (from 2 to 14 years)</label>
                         <p-inputNumber [ngModel]="organisation.nEnf" id="nEnf" name="nEnf" mode="decimal" [showButtons]="true" inputId="nEnf" [min]="0"  >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="nAdo">Teens (from 14 to 18 years)</label>
+                        <label i18n="@@OrganisationTeens" for="nAdo">Teens (from 14 to 18 years)</label>
                         <p-inputNumber [ngModel]="organisation.nAdo" id="nAdo" name="nAdo" mode="decimal" [showButtons]="true" inputId="nAdo" [min]="0"  >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="n1824">Young Adults( 18-24) </label>
+                        <label i18n="@@OrganisationYoungAdults" for="n1824">Young Adults( 18-24) </label>
                         <p-inputNumber [ngModel]="organisation.n1824" id="n1824" name="n1824" mode="decimal" [showButtons]="true" inputId="n1824" [min]="0"  >
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label for="nSen">Seniors</label>
+                        <label i18n="@@OrganisationSeniors" for="nSen">Seniors</label>
                         <p-inputNumber [ngModel]="organisation.nSen" id="nSen" name="nSen" mode="decimal" [showButtons]="true" inputId="nSen" [min]="0"  >
                         </p-inputNumber>
                     </div>
@@ -409,11 +409,11 @@
             <p-accordionTab i18n-header="@@OrganisationPublicAuthorities"  *ngIf="organisation.lienBanque < 11" header="Relations with the Public authorities">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="cpasyN">Cooperation with CPAS/OCMW?</label>
+                        <label i18n="@@OrganisationCpasCooperation" for="cpasyN">Cooperation with CPAS/OCMW?</label>
                         <p-inputSwitch id="cpasyN" name="cpasyN" [ngModel]="organisation.cpasyN"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <label for="selectedCpas">Cpas</label>
+                        <label i18n="@@Cpas" for="selectedCpas">Cpas</label>
                         <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass"  (completeMethod)="filterCpas($event)"
                                          [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true">
                         </p-autoComplete>
@@ -421,7 +421,7 @@
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
-                        <label for="birbyN">Does the public authority validate the access of beneficiaries to FEAD?</label>
+                        <label i18n="@@OrganisationFead"for="birbyN">Does the public authority validate the access of beneficiaries to FEAD?</label>
                         <p-inputSwitch id="birbyN" name="birbyN" [ngModel]="organisation.birbyN"></p-inputSwitch>
                     </div>
 
@@ -431,9 +431,9 @@
         <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button i18n.label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,organisation)" label="Delete"></button>
-            <button i18n.label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save" [disabled] = "organisationForm.invalid"></button>
-            <button i18n.label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, organisationForm,organisationForm.dirty)" label="Return" ></button>
+            <button i18n-label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,organisation)" label="Delete"></button>
+            <button i18n-label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save" [disabled] = "organisationForm.invalid"></button>
+            <button i18n-label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, organisationForm,organisationForm.dirty)" label="Return" ></button>
         </div>
     </form>
 

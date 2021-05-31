@@ -16,7 +16,7 @@
                         {{orgName}}
                     </div>
                     <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
-                        <button i18n.label="@@AddEmployee" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Employee"></button>
+                        <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddEmployee" label="Add Employee"></button>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
             </div>
         </ng-template>
     </p-table>
-    <p-dialog i18n-header="@@EmployeeDetails"header="Employee Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+    <p-dialog i18n-header="@@EmployeeDetails" header="Employee Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
         <app-membre *ngIf="selectedBatid$" [batId$]="selectedBatid$"  [currentFilteredOrgId] ="currentFilteredOrgId" (onMembreUpdate)="handleMembreUpdate($event)" (onMembreCreate)="handleMembreCreate($event)"
                     (onMembreDelete)="handleMembreDeleted($event)" (onMembreQuit)="handleMembreQuit()"></app-membre>
     </p-dialog>
