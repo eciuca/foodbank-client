@@ -1,79 +1,79 @@
 <p-panel  *ngIf="beneficiaire">
-    <ng-template pTemplate="header">
+    <ng-template i18n="@@BeneficiaryHeader" pTemplate="header">
         Beneficiary of bank {{ beneficiaire.bankName}} Updated On {{beneficiaire.dateUpd}}
     </ng-template>
     <form  #beneficiaireForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
-                <label for="civilite">Gender</label>
+                <label i18n="@@Gender" for="civilite">Gender</label>
                 <p-dropdown [options]="civilites" id="civilite" name="civilite" [ngModel]="beneficiaire.civilite" ></p-dropdown>
             </div>
                 <div class="p-field p-col-12 p-md-4">
-                <label for="nom">Name</label>
+                <label i18n="@@NameMandatory" for="nom">Name *</label>
                 <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="2" maxlength="50" [ngModel]="beneficiaire.nom" />
-                <p-message *ngIf="nom.invalid && beneficiaireForm.touched" severity="error" text="Beneficiary Name is required and must be minimum 2 chars long"></p-message>
+                <p-message i18n-text="@@NameIsMandatory" *ngIf="nom.invalid && beneficiaireForm.touched" severity="error" text="Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="prenom">First Name</label>
+                <label i18n="@@NameFirstMandatory" for="prenom">First Name *</label>
                 <input #prenom="ngModel" pInputText id="prenom" name="prenom"  required minlength="2" maxlength="50" [ngModel]="beneficiaire.prenom" />
-                <p-message *ngIf="prenom.invalid && beneficiaireForm.touched" severity="error" text="Beneficiary First Name is required and must be minimum 2 chars long"></p-message>
+                <p-message i18n-text="@@NameFirstIsMandatory" *ngIf="prenom.invalid && beneficiaireForm.touched" severity="error" text="First Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="daten">Birth Date</label>
+                <label i18n="@@BirthDateMandatory" for="daten">Birth Date *</label>
                 <input #datenais="ngModel" pInputText id="daten" name="daten" required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="beneficiaire.daten"/>
-                <p-message *ngIf="datenais.invalid && beneficiaireForm.touched" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
+                <p-message i18n-text="@@BirthDateIsMandatory" *ngIf="datenais.invalid && beneficiaireForm.touched" severity="error" text="Birth date is required and must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="archived">Archived?</label>
+                <label i18n="@@IsArchived" for="archived">Archived?</label>
                 <p-inputSwitch id="archived" name="archived" [ngModel]="beneficiaire.archived"></p-inputSwitch>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="civiliteconj">Gender Partner</label>
+                <label i18n="@@GenderPartner" for="civiliteconj">Gender Partner</label>
                 <p-dropdown [options]="civilites" id="civiliteconj" name="civiliteconj" [ngModel]="beneficiaire.civiliteconj" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="nomconj">Name Partner</label>
+                <label i18n="@@NamePartner" for="nomconj">Name Partner</label>
                 <input pInputText id="nomconj" name="nomconj"  maxlength="50" [ngModel]="beneficiaire.nomconj" />
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="prenomconj">First Name Partner</label>
+                <label i18n="@@FirstNamePartner" for="prenomconj">First Name Partner</label>
                 <input pInputText id="prenomconj" name="prenomconj"  maxlength="50" [ngModel]="beneficiaire.prenomconj" />
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="datenConj">Birth Date Partner</label>
-                <input #datenconj="ngModel" pInputText id="datenConj" name="datenConj"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy"[ngModel]="beneficiaire.datenConj"/>
-                <p-message *ngIf="datenconj.invalid && beneficiaireForm.touched" severity="error" text="Birthday must in format dd/mm/yyyy"></p-message>
+                <label i18n="@@BirthDatePartner" for="datenConj">Birth Date Partner</label>
+                <input #datenconj="ngModel" pInputText id="datenConj" name="datenConj"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="beneficiaire.datenConj"/>
+                <p-message i18n-text="@@BirthDateNotValid" *ngIf="datenconj.invalid && beneficiaireForm.touched" severity="error" text="Birth Date must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="adresse">Address</label>
+                <label i18n="@@Address" for="adresse">Address</label>
                 <input pInputText id="adresse" name="adresse"  maxlength="50" [ngModel]="beneficiaire.adresse" />
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="cp">Zip Code</label>
+                <label i18n="@@ZipCode" for="cp">Zip Code</label>
                 <input pInputText id="cp" name="cp"  maxlength="6" [ngModel]="beneficiaire.cp" />
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="localite">City</label>
+                <label i18n="@@City" for="localite">City</label>
                 <input pInputText id="localite" name="localite"  maxlength="50" [ngModel]="beneficiaire.localite" />
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="pays">Country</label>
+                <label i18n="@@Country" for="pays">Country</label>
                 <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="beneficiaire.pays" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="natnr">National Number</label>
+                <label i18n="@@NationalNumber" for="natnr">National Number</label>
                 <input pInputText id="natnr"  name="natnr" maxlength="50" [ngModel]="beneficiaire.natnr" />
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="email">E-mail</label>
+                <label i18n="@@Email" for="email">E-mail</label>
                 <input pInputText id="email"  name="email" maxlength="50" [ngModel]="beneficiaire.email" />
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="birb">Fead Status</label>
+                <label i18n="@@FeadStatus" for="birb">Fead Status</label>
                 <p-dropdown [options]="feadStatuses" id="birb" name="birb" [ngModel]="beneficiaire.birb" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="selectedCpas">Cpas-Ocmw</label>
+                <label i18n="@@Cpas" for="selectedCpas">Cpas</label>
                 <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" (completeMethod)="filterCpas($event)"
                                  [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true">
                     <ng-template let-cpas pTemplate="item">
@@ -86,9 +86,9 @@
         </div>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,beneficiaire)" label="Delete"></button>
-            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(beneficiaire, beneficiaireForm.value)" [disabled] = "beneficiaireForm.invalid" label="Save"></button>
-            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, beneficiaire, beneficiaireForm, beneficiaireForm.dirty)" label="Return" ></button>
+            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,beneficiaire)" i18n-label="@@Delete" label="Delete"></button>
+            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(beneficiaire, beneficiaireForm.value)" [disabled] = "beneficiaireForm.invalid" i18n-label="@@Save" label="Save"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, beneficiaire, beneficiaireForm, beneficiaireForm.dirty)" i18n-label="@@Return" label="Return" ></button>
         </div>
     </form>
 </p-panel>

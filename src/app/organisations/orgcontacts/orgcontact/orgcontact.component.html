@@ -2,46 +2,46 @@
     <form  #orgcontactForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
-                <label for="civilite">Gender</label>
+                <label i18n="@@Gender" for="civilite">Gender</label>
                 <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="orgcontact.civilite"  ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="nom">Name *</label>
+                <label i18n="@@NameMandatory" for="nom">Name *</label>
                 <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="2" maxlength="50" [ngModel]="orgcontact.nom" />
                 <p-message *ngIf="nom.invalid && orgcontactForm.touched" severity="error" text="Orgcontact Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="prenom">First Name *</label>
+                <label i18n="@@NameFirstMandatory" for="prenom">First Name *</label>
                 <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="2" maxlength="50" [ngModel]="orgcontact.prenom" />
                 <p-message *ngIf="prenom.invalid && orgcontactForm.touched" severity="error" text="Contact First Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="fonction">Function</label>
+                <label i18n="@@Function" for="fonction">Function</label>
                 <input pInputText id="fonction" name="fonction" maxlength="100" [ngModel]="orgcontact.fonction" />
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="email">E-Mail</label>
+                <label i18n="@@Email" for="email">E-mail</label>
                 <input #email="ngModel" pInputText id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="100" [ngModel]="orgcontact.email" />
                 <p-message *ngIf="email.invalid && orgcontactForm.touched" severity="error" text="Contact e-mail is invalid"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="tel">Tel</label>
+                <label i18n="@@Tel" for="tel">Tel</label>
                 <input pInputText id="tel" name="tel" maxlength="20" [ngModel]="orgcontact.tel" />
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="tel">Mobile</label>
+                <label i18n="@@Mobile" for="gsm">Mobile</label>
                 <input pInputText id="gsm" name="gsm" maxlength="20" [ngModel]="orgcontact.gsm" />
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="distr">Distribution ?</label>
+                <label i18n="@@IsDistribution" for="distr">Distribution ?</label>
                 <p-inputSwitch id="distr" name="distr" [ngModel]="orgcontact.distr"></p-inputSwitch>
             </div>
         </div>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,orgcontact)" label="Delete"></button>
-            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(orgcontact, orgcontactForm.value)" [disabled] = "orgcontactForm.invalid" label="Save"></button>
-            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, orgcontact, orgcontactForm, orgcontactForm.dirty)" label="Return" ></button>
+            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,orgcontact)" i18n-label="@@Delete" label="Delete"></button>
+            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(orgcontact, orgcontactForm.value)" [disabled] = "orgcontactForm.invalid" i18n-label="@@Save" label="Save"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, orgcontact, orgcontactForm, orgcontactForm.dirty)" i18n-label="@@Return" label="Return" ></button>
         </div>
     </form>
 </p-panel>

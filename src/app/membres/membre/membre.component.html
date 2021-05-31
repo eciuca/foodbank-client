@@ -11,12 +11,12 @@
             <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@NameMandatory" for="nom">Name *</label>
                 <input #nom="ngModel"  pInputText id="nom" name="nom"  required minlength="2" maxlength="50" [ngModel]="membre.nom" />
-                <p-message i18n-text="@@EmployeeNameIsMandatory" *ngIf="nom.invalid && membreForm.touched" severity="error" text="Employee Name is required and must be minimum 2 chars long"></p-message>
+                <p-message i18n-text="@@NameIsMandatory" *ngIf="nom.invalid && membreForm.touched" severity="error" text="Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@NameFirstMandatory" for="prenom">First Name *</label>
                 <input  #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="2" maxlength="40" [ngModel]="membre.prenom" />
-                <p-message i18n-text="@@EmployeeFirstNameIsMandatory" *ngIf="prenom.invalid && membreForm.touched" severity="error" text="Employee First Name is required and must be minimum 2 chars long"></p-message>
+                <p-message i18n-text="@@NameFirstIsMandatory" *ngIf="prenom.invalid && membreForm.touched" severity="error" text="First Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@EMailMandatory" for="batmail">E-mail *</label>

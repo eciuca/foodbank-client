@@ -2,30 +2,30 @@
       <form  #dependentForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
-                <label for="civilite">Gender</label>
+                <label i18n="@@Gender" for="civilite">Gender</label>
                 <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="dependent.civilite" ></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="nom">Name</label>
-                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxlength="50" [ngModel]="dependent.nom" />
-                <p-message *ngIf="nom.invalid && dependentForm.touched" severity="error" text="Dependent Name is required and must be minimum 4 chars long"></p-message>
+                <label i18n="@@NameMandatory" for="nom">Name *</label>
+                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="2" maxlength="50" [ngModel]="dependent.nom" />
+                <p-message i18n-text="@@NameIsMandatory"  *ngIf="nom.invalid && dependentForm.touched" severity="error" text="Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="prenom">First Name</label>
-                <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="4" maxlength="50" [ngModel]="dependent.prenom" />
-                <p-message *ngIf="prenom.invalid && dependentForm.touched" severity="error" text="Dependent First Name is required and must be minimum 4 chars long"></p-message>
+                <label i18n="@@NameFirstMandatory" for="prenom">First Name *</label>
+                <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="2" maxlength="50" [ngModel]="dependent.prenom" />
+                <p-message i18n-text="@@NameFirstIsMandatory" *ngIf="prenom.invalid && dependentForm.touched" severity="error" text="First Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="datenais">Birth Date</label>
+                <label i18n="@@BirthDateMandatory"  for="datenais">Birth Date *</label>
                 <input #datenais="ngModel" pInputText id="datenais" name="datenais" required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="dependent.datenais"/>
-                <p-message *ngIf="datenais.invalid && dependentForm.touched" severity="error" text="Birthday is required and must in format dd/mm/yyyy"></p-message>
+                <p-message  i18n-text="@@BirthDateIsMandatory" *ngIf="datenais.invalid && dependentForm.touched" severity="error" text="Birth date is required and must in format dd/mm/yyyy"></p-message>
             </div>
         </div>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,dependent)" label="Delete"></button>
-            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(dependent, dependentForm.value)" [disabled] = "dependentForm.invalid" label="Save"></button>
-            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, dependent, dependentForm, dependentForm.dirty)" label="Return" ></button>
+            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,dependent)" i18n-label="@@Delete" label="Delete"></button>
+            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(dependent, dependentForm.value)" [disabled] = "dependentForm.invalid" i18n-label="@@Save" label="Save"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, dependent, dependentForm, dependentForm.dirty)" i18n-label="@@Return" label="Return" ></button>
         </div>
     </form>
 </p-panel>

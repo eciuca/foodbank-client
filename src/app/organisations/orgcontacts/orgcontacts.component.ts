@@ -20,7 +20,6 @@ export class OrgcontactsComponent implements OnInit {
   selectedOrgPersId$ = new BehaviorSubject(0);
   orgcontacts: Orgcontact[];
   orgcontact: Orgcontact = null;
-  cols: any[];
   displayDialog: boolean;
   loading: boolean;
   booCanCreate: boolean;
@@ -34,14 +33,7 @@ export class OrgcontactsComponent implements OnInit {
     this.booIsAdmin = false;
   }
   ngOnInit() {
-    this.cols = [
-      { field: 'civilite', header: 'Gender' },
-      { field: 'nom', header: 'Name' },
-      { field: 'prenom', header: 'First Name' },
-      { field: 'email', header: 'E-mail' },
-      { field: 'fonction', header: 'Function' }
-    ];
-    this.store
+     this.store
         .pipe(
             select(globalAuthState),
             map((authState) => {

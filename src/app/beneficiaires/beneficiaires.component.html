@@ -15,7 +15,7 @@
                     {{orgName}}
                 </div>
                 <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
-                    <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Beneficiary"></button>
+                    <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddBeneficiary" label="Add Beneficiary"></button>
                 </div>
                 <div class="p-field p-col-12 p-md-2">
                     <label for="archived">Show Archived?</label>
@@ -26,13 +26,13 @@
     </ng-template>
      <ng-template pTemplate="header">
          <tr>
-             <th pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
-             <th pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
+             <th i18n="@@NameSorted" pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
+             <th i18n="@@NameFirstSorted" pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
              <th *ngIf="booShowOrganisations">Organisation</th>
-             <th pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
-             <th pSortableColumn="cp">Zip<p-sortIcon field="cp"></p-sortIcon></th>
-             <th pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
-             <th pSortableColumn="nbDep">Nb Dependents<p-sortIcon field="nbDep"></p-sortIcon></th>
+             <th i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
+             <th i18n="@@ZipCodeSorted" pSortableColumn="cp">Zip Code<p-sortIcon field="cp"></p-sortIcon></th>
+             <th i18n="@@CitySorted" pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
+             <th i18n="@@NbDependentsSorted" pSortableColumn="nbDep">Nb Dependents<p-sortIcon field="nbDep"></p-sortIcon></th>
          </tr>
          <tr>
              <th>
@@ -89,12 +89,12 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="summary">
-        <div class="p-d-flex p-ai-center p-jc-between">
+        <div i18n="@@BeneficiariesSelected" class="p-d-flex p-ai-center p-jc-between">
            There are {{totalRecords}} beneficiaries selected.
         </div>
     </ng-template>
 </p-table>
- <p-dialog header="Beneficiaire Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+ <p-dialog i18n-header="@@BeneficiaryDetails"header="Beneficiary Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
      <app-beneficiaire *ngIf="selectedIdClient$" [idClient$]="selectedIdClient$" [currentFilteredOrgId] ="currentFilteredOrgId" (onBeneficiaireUpdate)="handleBeneficiaireUpdate($event)"
                        (onBeneficiaireCreate)="handleBeneficiaireCreate($event)"  (onBeneficiaireDelete)="handleBeneficiaireDeleted($event)" (onBeneficiaireQuit)="handleBeneficiaireQuit()"></app-beneficiaire>
  </p-dialog>

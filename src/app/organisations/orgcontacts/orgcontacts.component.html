@@ -3,14 +3,16 @@
 >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Orgcontact"></button>
+            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Contact" i18n-label="@@AddOrgcontact"></button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th *ngFor="let col of cols">
-                {{col.header}}
-            </th>
+            <th i18n="@@Gender">Gender</th>
+            <th i18n="@@Name">Name</th>
+            <th i18n="@@NameFirst">First Name</th>
+            <th i18n="@@Email">E-mail</th>
+            <th i18n="@@Function">Function</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-orgcontact>
