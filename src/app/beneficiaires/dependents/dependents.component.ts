@@ -19,7 +19,6 @@ export class DependentsComponent implements OnInit {
   selectedIdDep$ = new BehaviorSubject(0);
   dependents: Dependent[];
   dependent: Dependent = null;
-  cols: any[];
   displayDialog: boolean;
   loading: boolean;
   booCanCreate: boolean;
@@ -31,12 +30,6 @@ export class DependentsComponent implements OnInit {
     this.booIsAdmin = false;
   }
   ngOnInit() {
-    this.cols = [
-      { field: 'civilite', header: 'Gender' },
-      { field: 'nom', header: 'Name' },
-      { field: 'prenom', header: 'First Name' },
-      { field: 'datenais', header: 'Birth Date' }
-    ];
     this.store
         .pipe(
             select(globalAuthState),

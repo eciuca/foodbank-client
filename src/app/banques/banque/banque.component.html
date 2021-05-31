@@ -5,7 +5,7 @@
     <form #banqueForm="ngForm">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedPresident">President</label>
+                <label i18n="@@President" for="selectedPresident">President</label>
                 <p-autoComplete  [(ngModel)]="selectedPresident" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedPresident" name="selectedPresident" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -16,7 +16,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedVicePresident">VicePresident</label>
+                <label i18n="@@VicePresident" for="selectedVicePresident">VicePresident</label>
                 <p-autoComplete  [(ngModel)]="selectedVicePresident" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedVicePresident" name="selectedVicePresident" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -38,7 +38,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedSecretary">Secretary</label>
+                <label i18n="@@Secretary" for="selectedSecretary">Secretary</label>
                 <p-autoComplete  [(ngModel)]="selectedSecretary" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedSecretary" name="selectedSecretary" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -49,7 +49,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedTreasurer">Treasurer</label>
+                <label i18n="@@Treasurer" for="selectedTreasurer">Treasurer</label>
                 <p-autoComplete  [(ngModel)]="selectedTreasurer" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedTreasurer" name="selectedTreasurer" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -60,7 +60,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedHR">Human Resources</label>
+                <label i18n="@@HumanResources" for="selectedHR">Human Resources</label>
                 <p-autoComplete  [(ngModel)]="selectedHR" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedHR" name="selectedHR" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -71,7 +71,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedLogistics">Logistics</label>
+                <label i18n="@@Logistics" for="selectedLogistics">Logistics</label>
                 <p-autoComplete  [(ngModel)]="selectedLogistics" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedLogistics" name="selectedLogistics" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -82,7 +82,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedSecHygiene">Security & Hygiene</label>
+                <label i18n="@@SecHygiene" for="selectedSecHygiene">Security & Hygiene</label>
                 <p-autoComplete  [(ngModel)]="selectedSecHygiene" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedSecHygiene" name="selectedSecHygiene" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -93,7 +93,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedIT">Information Technology</label>
+                <label i18n="@@InformationTechnology" for="selectedIT">Information Technology</label>
                 <p-autoComplete  [(ngModel)]="selectedIT" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedIT" name="selectedIT" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -104,7 +104,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedSupply">Supply</label>
+                <label i18n="@@Supply" for="selectedSupply">Supply</label>
                 <p-autoComplete  [(ngModel)]="selectedSupply" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedSupply" name="selectedSupply" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -115,7 +115,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedPress">Press</label>
+                <label i18n="@@Press" for="selectedPress">Press</label>
                 <p-autoComplete  [(ngModel)]="selectedPress" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedPress" name="selectedPress" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -126,7 +126,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedAssocRel">Relations with Organisations</label>
+                <label i18n="@@AssocRelations" for="selectedAssocRel">Relations with Organisations</label>
                 <p-autoComplete  [(ngModel)]="selectedAssocRel" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedAssocRel" name="selectedAssocRel" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -137,7 +137,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedPubRel">Public Relations</label>
+                <label i18n="@@PublicRelations" for="selectedPubRel">Public Relations</label>
                 <p-autoComplete  [(ngModel)]="selectedPubRel" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedPubRel" name="selectedPubRel" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -148,7 +148,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedFEAD">FEAD Relation</label>
+                <label i18n="@@FeadRelations" for="selectedFEAD">FEAD Relation</label>
                 <p-autoComplete  [(ngModel)]="selectedFEAD" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedFEAD" name="selectedFEAD" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -159,7 +159,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedQuality">Quality</label>
+                <label i18n="@@Quality" for="selectedQuality">Quality</label>
                 <p-autoComplete  [(ngModel)]="selectedQuality" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedQuality" name="selectedQuality" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -170,71 +170,71 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="bankName">Name *</label>
+                <label i18n="@@NameMandatory" for="bankName">Name *</label>
                 <input #nom="ngModel" pInputText id="bankName" name="bankName" required minlength="10" maxLength="100" [ngModel]="banque.bankName" />
-                <p-message *ngIf="nom.invalid && banqueForm.touched" severity="error" text="Bank Name is required and must be minimum 10 chars long"></p-message>
+                <p-message i18n.text="@@BankNameMandatory" *ngIf="nom.invalid && banqueForm.touched" severity="error" text="Bank Name is required and must be minimum 10 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="nrEntr">Entr Number *</label>
+                <label i18n="@@EntrNumberMandatory" for="nrEntr">Entr Number *</label>
                 <input #nrentr="ngModel" pInputText id="nrEntr" name="nrEntr" required minlength="9" maxLength="20" [ngModel]="banque.nrEntr" />
-                <p-message *ngIf="nrentr.invalid && banqueForm.touched" severity="error" text="Enterprise Number is required and must be minimum 9 chars long"></p-message>
+                <p-message i18n.text="@@EntrNumberIsMandatory" *ngIf="nrentr.invalid && banqueForm.touched" severity="error" text="Enterprise Number is required and must be minimum 9 chars long"></p-message>
             </div>
              <div class="p-field p-col-12 p-md-2">
-                <label for="bankTel">Tel</label>
+                <label i18n="@@Tel" for="bankTel">Tel</label>
                 <input  pInputText id="bankTel" name="bankTel"  maxLength="20" [ngModel]="banque.bankTel" />
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="bankGsm">Mobile</label>
+                <label i18n="@@Mobile" for="bankGsm">Mobile</label>
                 <input pInputText id="bankGsm" name="bankGsm"  maxLength="20" [ngModel]="banque.bankGsm" />
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="bankMail">E-mail *</label>
+                <label i18n="@@EMailMandatory" for="bankMail">E-mail *</label>
                 <input #bankmail="ngModel" pInputText id="bankMail" name="bankMail"  required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxLength="50" [ngModel]="banque.bankMail" />
-                <p-message *ngIf="bankmail.invalid && banqueForm.touched" severity="error" text="Bank mail is required and must be a valid e-mail"></p-message>
+                <p-message i18n.text="@@EMailIsMandatory" *ngIf="bankmail.invalid && banqueForm.touched" severity="error" text="E-mail is required and must be valid"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-6">
-                <label for="adresse">Address *</label>
+                <label i18n="@@AddressMandatory" for="adresse">Address *</label>
                 <input #adresse="ngModel" pInputText id="adresse" name="adresse" required minlength="4" maxLength="50" [ngModel]="banque.adresse" />
-                <p-message *ngIf="adresse.invalid && banqueForm.touched" severity="error" text="Address is required and must be minimum 9 chars long"></p-message>
+                <p-message i18n.text="@@AddressIsMandatory" *ngIf="adresse.invalid && banqueForm.touched" severity="error" text="Address is required and must be minimum 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="cp">Zip Code *</label>
+                <label  i18n="@@ZipCodeMandatory" for="cp">Zip Code *</label>
                 <input #zipcode="ngModel" pInputText id="cp" name="cp"  required minlength="4" maxLength="10" [ngModel]="banque.cp" />
-                <p-message *ngIf="zipcode.invalid && banqueForm.touched" severity="error" text="Zip Code is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n.text="@@ZipCodeIsMandatory" *ngIf="zipcode.invalid && banqueForm.touched" severity="error" text="Zip Code is required and must be minimum 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="localite">City *</label>
+                <label i18n="@@CityMandatory"  for="localite">City *</label>
                 <input #localite="ngModel" pInputText id="localite" name="localite"  required minlength="4" maxLength="30" [ngModel]="banque.localite" />
-                <p-message *ngIf="localite.invalid && banqueForm.touched" severity="error" text="City is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n.text="@@CityIsMandatory" *ngIf="localite.invalid && banqueForm.touched" severity="error" text="City is required and must be minimum 4 chars long"></p-message>
             </div>
 
 
             <div class="p-field p-col-12 p-md-6">
-                <label for="adresseDepotPrinc">Depot Address *</label>
+                <label i18n="@@DepotAddressMandatory" for="adresseDepotPrinc">Depot Address *</label>
                 <input #adressedepot="ngModel" pInputText id="adresseDepotPrinc" name="adresseDepotPrinc" required minlength="4" maxLength="50" [ngModel]="banque.adresseDepotPrinc" />
-                <p-message *ngIf="adressedepot.invalid && banqueForm.touched" severity="error" text="Depot Address is required and must be minimum 9 chars long"></p-message>
+                <p-message i18n.text="@@DepotAddressIsMandatory" *ngIf="adressedepot.invalid && banqueForm.touched" severity="error" text="Depot Address is required and must be minimum 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label for="cpDepotPrinc">Depot Zip Code *</label>
+                <label i18n="@@DepotZipCodeMandatory" for="cpDepotPrinc">Depot Zip Code *</label>
                 <input #zipcodedepot="ngModel" pInputText id="cpDepotPrinc" name="cpDepotPrinc"  required minlength="4" maxLength="10" [ngModel]="banque.cpDepotPrinc" />
-                <p-message *ngIf="zipcodedepot.invalid && banqueForm.touched" severity="error" text="Depot Zip Code is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n.text="@@DepotZipCodeIsMandatory" *ngIf="zipcodedepot.invalid && banqueForm.touched" severity="error" text="Depot Zip Code is required and must be minimum 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="cityDepotPrinc">Depot City *</label>
+                <label i18n="@@DepotCityMandatory" for="cityDepotPrinc">Depot City *</label>
                 <input #localitedepot="ngModel" pInputText id="cityDepotPrinc" name="cityDepotPrinc"  required minlength="4" maxLength="30" [ngModel]="banque.cityDepotPrinc" />
-                <p-message *ngIf="localitedepot.invalid && banqueForm.touched" severity="error" text="Depot City is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n.text="@@DepotCityIsMandatory" *ngIf="localitedepot.invalid && banqueForm.touched" severity="error" text="Depot City is required and must be minimum 4 chars long"></p-message>
             </div>
         </div>
         <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
         <div class="p-formgroup-inline">
-            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, banque)" label="Delete"></button>
-            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(banque, banqueForm.value)" label="Save" [disabled] = "banqueForm.invalid"></button>
-            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, banque, banqueForm,banqueForm.dirty)" label="Return" ></button>
+            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, banque)" i18n-label="@@Delete" label="Delete"></button>
+            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(banque, banqueForm.value)" i18n-label="@@Save" label="Save" [disabled] = "banqueForm.invalid"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, banque, banqueForm,banqueForm.dirty)" i18n-label="@@Return" label="Return" ></button>
         </div>
     </form>
 

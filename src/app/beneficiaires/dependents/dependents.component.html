@@ -8,9 +8,10 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th *ngFor="let col of cols">
-                {{col.header}}
-            </th>
+            <th i18n="@@Gender">Gender</th>
+            <th i18n="@@Name">Name</th>
+            <th i18n="@@NameFirst">First Name</th>
+            <th i18n="@@BirthDate">Birth Date</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-dependent>
@@ -30,7 +31,7 @@
          </tr>
     </ng-template>
 </p-table>
-<p-dialog header="Dependent Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+<p-dialog i18n-header="@@DependentDetails" header="Dependent Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
     <app-dependent *ngIf="selectedIdDep$" [idDep$]="selectedIdDep$" [masterId$]="masterId$" (onDependentUpdate)="handleDependentUpdate($event)"
                    (onDependentCreate)="handleDependentCreate($event)"  (onDependentDelete)="handleDependentDeleted($event)" (onDependentQuit)="handleDependentQuit()"></app-dependent>
 </p-dialog>
