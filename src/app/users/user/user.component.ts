@@ -90,7 +90,7 @@ export class UserComponent implements OnInit {
                     this.membresService.getByKey(user.lienBat)
                         .subscribe(
                             membre => {
-                                if (membre !== null) {
+                                if (membre != null) {
                                     this.selectedMembre = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
                                     console.log('our users membre:', this.selectedMembre);
                                 } else {
@@ -159,7 +159,11 @@ export class UserComponent implements OnInit {
           message: 'Confirm Deletion?',
           icon: 'pi pi-exclamation-triangle',
           accept: () => {
-              const  myMessage = {severity: 'success', summary: 'Delete', detail: `The user ${user.idUser} ${user.userName}  was deleted`};
+              const  myMessage = {
+                  severity: 'success',
+                  summary: 'Delete',
+                  detail: $localize`:@@messageUserDeleted:The user ${user.idUser} ${user.userName}  was deleted`
+              };
               this.usersService.delete(user)
                   .subscribe( () => {
                       this.messageService.add(myMessage);
@@ -169,7 +173,7 @@ export class UserComponent implements OnInit {
                           console.log('Error deleting user', dataserviceerror.message);
                           const  errMessage = {severity: 'error', summary: 'Delete',
                               // tslint:disable-next-line:max-line-length
-                              detail: `The user ${user.idUser} ${user.userName} could not be deleted: error: ${dataserviceerror.message}`,
+                              detail: $localize`:@@messageUserDeleteError:The user ${user.idUser} ${user.userName} could not be deleted: error: ${dataserviceerror.message}`,
                               life: 6000 };
                           this.messageService.add(errMessage) ;
                       });
@@ -187,14 +191,17 @@ export class UserComponent implements OnInit {
           console.log('Updating User with content:', modifiedUser);
           this.usersService.update(modifiedUser)
         .subscribe(updatedUser  => {
-            this.messageService.add({severity: 'success', summary: 'Update', detail: `User  ${modifiedUser.idUser} ${modifiedUser.userName} was updated`});
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Update',
+                detail: $localize`:@@messageUserUpdated:User  ${modifiedUser.idUser} ${modifiedUser.userName} was updated`});
             this.onUserUpdate.emit(updatedUser);
         } ,
             (dataserviceerror: DataServiceError) => {
                 console.log('Error updating user', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                     // tslint:disable-next-line:max-line-length
-                    detail: `The employee ${modifiedUser.idUser} ${modifiedUser.userName} could not be updated: error: ${dataserviceerror.message}`,
+                    detail: $localize`:@@messageUserUpdateError:The user ${modifiedUser.idUser} ${modifiedUser.userName} could not be updated: error: ${dataserviceerror.message}`,
                     life: 6000 };
                 this.messageService.add(errMessage) ;
             }
@@ -233,7 +240,7 @@ export class UserComponent implements OnInit {
                                       this.messageService.add({
                                           severity: 'success',
                                           summary: 'Creation',
-                                          detail: `User  ${modifiedUser.idUser} ${modifiedUser.userName} has been created`
+                                          detail: $localize`:@@messageUserCreated:User  ${modifiedUser.idUser} ${modifiedUser.userName} has been created`
                                       });
                                       this.onUserCreate.emit(modifiedUser);
                                   },
@@ -241,7 +248,7 @@ export class UserComponent implements OnInit {
                                       console.log('Error creating user', dataserviceerror.message);
                                       const  errMessage = {severity: 'error', summary: 'Create',
                                           // tslint:disable-next-line:max-line-length
-                                          detail: `The user ${modifiedUser.idUser} ${modifiedUser.userName} could not be created: error: ${dataserviceerror.message}`,
+                                          detail: $localize`:@@messageUserCreateError:The user ${modifiedUser.idUser} ${modifiedUser.userName} could not be created: error: ${dataserviceerror.message}`,
                                           life: 6000 };
                                       this.messageService.add(errMessage) ;
                                   }
@@ -250,7 +257,7 @@ export class UserComponent implements OnInit {
                           console.log('Error creating user: no employee was selected');
                           const  errMessage = {severity: 'error', summary: 'Create',
                               // tslint:disable-next-line:max-line-length
-                              detail: `The user ${modifiedUser.idUser}  could not be created: no employee was selected`,
+                              detail: $localize`:@@messageUserCreateErrorNoEmployee:The user ${modifiedUser.idUser}  could not be created: no employee was selected`,
                               life: 6000 };
                           this.messageService.add(errMessage) ;
                       }
@@ -263,7 +270,7 @@ export class UserComponent implements OnInit {
         if (formDirty) {
             this.confirmationService.confirm({
                 target: event.target,
-                message: 'Your changes may be lost. Are you sure that you want to proceed?',
+                message: $localize`:@@messageChangesMayBeLost:Your changes may be lost. Are you sure that you want to proceed?`,
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     userForm.reset(oldUser); // reset in-memory object for next open

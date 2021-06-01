@@ -2,6 +2,105 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="menuProfile" datatype="html">
+        <source>My Profile</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">174</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">185</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuBank" datatype="html">
+        <source>Bank</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">140</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuOrganisations" datatype="html">
+        <source>Organisations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuEmployees" datatype="html">
+        <source>Employees</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">142</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">156</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuUsers" datatype="html">
+        <source>Users</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuBeneficiaries" datatype="html">
+        <source>Beneficiaries</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">144</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">162</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuLogout" datatype="html">
+        <source>Logout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">166</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">178</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">186</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuOrganisation" datatype="html">
+        <source>Organisation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">155</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuBanks" datatype="html">
+        <source>Banks</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">175</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="President" datatype="html">
         <source>President</source>
         <context-group purpose="location">
@@ -300,6 +399,87 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
           <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBankUpdated" datatype="html">
+        <source>Bank <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/>  was updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
+          <context context-type="linenumber">320</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBankUpdateError" datatype="html">
+        <source>The bank <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/> could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
+          <context context-type="linenumber">328</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBankCreated" datatype="html">
+        <source>Bank <x id="PH" equiv-text="newBanque.bankName"/> was created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
+          <context context-type="linenumber">339</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBankCreateError" datatype="html">
+        <source>The bank <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/> could not be created: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
+          <context context-type="linenumber">347</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBankDeleted" datatype="html">
+        <source>Bank <x id="PH" equiv-text="banque.bankName"/> was deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
+          <context context-type="linenumber">362</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBankDeleteError" datatype="html">
+        <source>The bank <x id="PH" equiv-text="banque.bankId"/> <x id="PH_1" equiv-text="banque.bankShortName"/> <x id="PH_2" equiv-text="banque.bankName"/> could not be deleted: error: <x id="PH_3" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
+          <context context-type="linenumber">373</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageChangesMayBeLost" datatype="html">
+        <source>Your changes may be lost. Are you sure that you want to proceed?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
+          <context context-type="linenumber">388</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
+          <context context-type="linenumber">232</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
+          <context context-type="linenumber">176</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/cpas/cpas.component.ts</context>
+          <context context-type="linenumber">143</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">216</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
+          <context context-type="linenumber">219</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgcontacts/orgcontact/orgcontact.component.ts</context>
+          <context context-type="linenumber">166</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
+          <context context-type="linenumber">273</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReport" datatype="html">
@@ -632,6 +812,48 @@
           <context context-type="linenumber">416</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="messageBeneficiaryDeleted" datatype="html">
+        <source>The beneficiary <x id="PH" equiv-text="beneficiaire.nom"/> <x id="PH_1" equiv-text="beneficiaire.prenom"/> was deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBeneficiaryDeleteError" datatype="html">
+        <source>The beneficiary  <x id="PH" equiv-text="beneficiaire.nom"/> <x id="PH_1" equiv-text="beneficiaire.prenom"/> could not be deleted: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
+          <context context-type="linenumber">171</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBeneficiaryUpdated" datatype="html">
+        <source>The beneficiary <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/>  was updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
+          <context context-type="linenumber">193</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBeneficiaryUpdateError" datatype="html">
+        <source>The beneficiary  <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/> could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
+          <context context-type="linenumber">200</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBeneficiaryCreated" datatype="html">
+        <source>The beneficiary <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/>  was created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
+          <context context-type="linenumber">213</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageBeneficiaryCreateError" datatype="html">
+        <source>The beneficiary  <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/> could not be created: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
+          <context context-type="linenumber">221</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="CurrentPageReportbyPage" datatype="html">
         <source>&apos;Page {currentPage} of {totalPages}&apos;</source>
         <context-group purpose="location">
@@ -651,11 +873,25 @@
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="BeneficiariesHeader" datatype="html">
+        <source> Beneficiaries of <x id="INTERPOLATION" equiv-text="{{bankName}}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="AddBeneficiary" datatype="html">
         <source>Add Beneficiary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
           <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BeneficiariesShowArchived" datatype="html">
+        <source>Show Archived?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="NameSorted" datatype="html">
@@ -750,6 +986,48 @@
           <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="messageDependentDeleted" datatype="html">
+        <source>The dependent <x id="PH" equiv-text="dependent.nom"/> <x id="PH_1" equiv-text="dependent.prenom"/> has been deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageDependentDeleteError" datatype="html">
+        <source>The dependent  <x id="PH" equiv-text="dependent.nom"/> <x id="PH_1" equiv-text="dependent.prenom"/> could not be deleted: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageDependentUpdated" datatype="html">
+        <source>The dependent <x id="PH" equiv-text="modifiedDependent.nom"/> <x id="PH_1" equiv-text="modifiedDependent.prenom"/>  was updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
+          <context context-type="linenumber">134</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageDependentUpdateError" datatype="html">
+        <source>The dependent  <x id="PH" equiv-text="modifiedDependent.nom"/> <x id="PH_1" equiv-text="modifiedDependent.prenom"/> could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
+          <context context-type="linenumber">142</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageDependentCreated" datatype="html">
+        <source>The dependent <x id="PH" equiv-text="newDependent.nom"/> <x id="PH_1" equiv-text="newDependent.prenom"/>  has been created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
+          <context context-type="linenumber">156</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageDependentCreateError" datatype="html">
+        <source>The dependent  <x id="PH" equiv-text="modifiedDependent.nom"/> <x id="PH_1" equiv-text="modifiedDependent.prenom"/> could not be created: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
+          <context context-type="linenumber">164</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="Name" datatype="html">
         <source>Name</source>
         <context-group purpose="location">
@@ -819,6 +1097,48 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
           <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageEmployeeDeleted" datatype="html">
+        <source>The employee <x id="PH" equiv-text="membre.prenom"/> <x id="PH_1" equiv-text="membre.nom"/> was deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">142</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageEmployeeDeleteError" datatype="html">
+        <source>The employee <x id="PH" equiv-text="membre.prenom"/> <x id="PH_1" equiv-text="membre.nom"/> could not be deleted: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageEmployeeUpdated" datatype="html">
+        <source>The employee <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/>  was updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">174</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageEmployeeUpdateError" datatype="html">
+        <source>The employee <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">182</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageEmployeeCreated" datatype="html">
+        <source>The employee <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/>  was created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">196</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageEmployeeCreateError" datatype="html">
+        <source>The employee <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> could not be created: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
       <trans-unit id="EmployeesHeader" datatype="html">
@@ -1461,6 +1781,48 @@
           <context context-type="linenumber">424</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="messageOrganisationUpdated" datatype="html">
+        <source>Organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> was updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageOrganisationUpdateError" datatype="html">
+        <source>The organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> could not be updated: error: <x id="PH_1" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
+          <context context-type="linenumber">159</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageOrganisationCreated" datatype="html">
+        <source>Organisation <x id="PH" equiv-text="newOrganisation.societe"/> was created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
+          <context context-type="linenumber">171</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageOrganisationCreateError" datatype="html">
+        <source>The organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> could not be created: error: <x id="PH_1" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
+          <context context-type="linenumber">179</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageOrganisationDeleted" datatype="html">
+        <source>Organisation <x id="PH" equiv-text="organisation.societe"/> was deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
+          <context context-type="linenumber">194</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageOrganisationDeleteError" datatype="html">
+        <source>The organisation <x id="PH" equiv-text="organisation.idDis"/> <x id="PH_1" equiv-text="organisation.societe"/> could not be deleted: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
+          <context context-type="linenumber">204</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="AddOrganisation" datatype="html">
         <source>Add Organisation</source>
         <context-group purpose="location">
@@ -1652,6 +2014,55 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
           <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageUserDeleted" datatype="html">
+        <source>The user <x id="PH" equiv-text="user.idUser"/> <x id="PH_1" equiv-text="user.userName"/>  was deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
+          <context context-type="linenumber">165</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageUserDeleteError" datatype="html">
+        <source>The user <x id="PH" equiv-text="user.idUser"/> <x id="PH_1" equiv-text="user.userName"/> could not be deleted: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
+          <context context-type="linenumber">176</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageUserUpdated" datatype="html">
+        <source>User  <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> was updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
+          <context context-type="linenumber">197</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageUserUpdateError" datatype="html">
+        <source>The user <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
+          <context context-type="linenumber">204</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageUserCreated" datatype="html">
+        <source>User  <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> has been created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
+          <context context-type="linenumber">243</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageUserCreateError" datatype="html">
+        <source>The user <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> could not be created: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
+          <context context-type="linenumber">251</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageUserCreateErrorNoEmployee" datatype="html">
+        <source>The user <x id="PH" equiv-text="modifiedUser.idUser"/>  could not be created: no employee was selected</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
+          <context context-type="linenumber">260</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UsersHeader" datatype="html">

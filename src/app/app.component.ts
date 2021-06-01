@@ -135,13 +135,14 @@ export class AppComponent implements OnInit {
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
                     this.menuLoggedInItems = [
-                        {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                        {label: 'Bank', icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
-                        {label: 'Organisations', icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
-                        {label: 'Employees', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
-                        {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                        {label: 'Beneficiaries', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
-                        {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                        {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                        // tslint:disable-next-line:max-line-length
+                        {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
+                        {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
+                        {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
+                        {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
 
                     break;
@@ -150,19 +151,19 @@ export class AppComponent implements OnInit {
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = authState.organisation.societe;
                     this.menuLoggedInItems = [
-                        {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                        {label: 'Organisation', icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/${authState.organisation.idDis}` ]},
-                        {label: 'Employees', icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
-                        {label: 'Users', icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                        {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                        {label: $localize`:@@menuOrganisation:Organisation`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/${authState.organisation.idDis}` ]},
+                        {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                         {label: 'Contacts', icon: 'pi pi-fw pi-users',  routerLink: [`/organisations/contacts/${authState.organisation.idDis}` ]}
                     ];
                     if (authState.organisation && authState.organisation.gestBen) {
                         this.menuLoggedInItems.push(
-                            {label: 'Beneficiaries', icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']}
+                            {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']}
                         );
                     }
                     this.menuLoggedInItems.push(
-                        {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                        {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     );
 
                     break;
@@ -170,19 +171,19 @@ export class AppComponent implements OnInit {
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
                     this.menuLoggedInItems = [
-                        {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                        {label: 'Banks', icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
+                        {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                        {label: $localize`:@@menuBanks:Banks`, icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
                         {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
                         {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
-                        {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                        {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
                     break;
                 default:
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
                     this.menuLoggedInItems = [
-                        {label: 'My Profile', icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                        {label: 'Logout', icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                        {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                        {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
                     ];
             }
         }

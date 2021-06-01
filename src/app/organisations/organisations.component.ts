@@ -175,12 +175,6 @@ export class OrganisationsComponent implements OnInit {
         }
         return 'Unknown Status';
     }
-    getYNLabel(isTrue: boolean) {
-       if (isTrue) {
-           return 'true';
-       } else {
-           return 'false';
-       }
-    }
+
 }
 

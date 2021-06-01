@@ -5,7 +5,7 @@
     <ng-template pTemplate="caption">
         <div class="table-header">
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-4">
+                <div i18n="@@BeneficiariesHeader" class="p-field p-col-12 p-md-4">
                     Beneficiaries of {{bankName}}
                 </div>
                 <div *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-field p-col-12 p-md-4">
@@ -18,7 +18,7 @@
                     <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddBeneficiary" label="Add Beneficiary"></button>
                 </div>
                 <div class="p-field p-col-12 p-md-2">
-                    <label for="archived">Show Archived?</label>
+                    <label i18n="@@BeneficiariesShowArchived" for="archived">Show Archived?</label>
                     <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="refreshTable($event)"></p-checkbox>
                 </div>
             </div>

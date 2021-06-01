@@ -171,7 +171,7 @@
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label i18n="@@NameMandatory" for="bankName">Name *</label>
-                <input #nom="ngModel" pInputText id="bankName" name="bankName" required minlength="10" maxLength="100" [ngModel]="banque.bankName" />
+                <input #nom="ngModel" pInputText id="bankName" name="bankName" required [disabled] ="!booIsCreate" minlength="10" maxLength="100" [ngModel]="banque.bankName" />
                 <p-message i18n.text="@@BankNameMandatory" *ngIf="nom.invalid && banqueForm.touched" severity="error" text="Bank Name is required and must be minimum 10 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">

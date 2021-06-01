@@ -1,6 +1,6 @@
 import {combineLatest, Observable} from 'rxjs';
 import {DataServiceError, QueryParams} from '@ngrx/data';
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
 import {DefaultDependent, Dependent} from '../../model/dependent';
 import {DependentEntityService} from '../../services/dependent-entity.service';
 import {select, Store} from '@ngrx/store';
@@ -17,6 +17,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./dependent.component.css']
 })
 export class DependentComponent implements OnInit {
+  @ViewChild('dependentForm') myform: NgForm;
   @Input() idDep$: Observable<number>;
   @Input() masterId$: Observable<number>;
   masterId: number;
@@ -59,6 +60,9 @@ export class DependentComponent implements OnInit {
         console.log('our dependent:', this.dependent);
       } else {
         this.dependent = new DefaultDependent();
+        if (this.myform) {
+          this.myform.reset(this.dependent);
+        }
         console.log('we have a new default dependent');
       }
     });
@@ -96,7 +100,7 @@ export class DependentComponent implements OnInit {
         const myMessage = {
           severity: 'success',
           summary: 'Delete',
-          detail: `The dependent ${dependent.nom} ${dependent.prenom} has been deleted`
+          detail: $localize`:@@messageDependentDeleted:The dependent ${dependent.nom} ${dependent.prenom} has been deleted`
         };
         this.dependentsService.delete(dependent)
             .subscribe(() => {
@@ -104,10 +108,10 @@ export class DependentComponent implements OnInit {
               this.onDependentDelete.emit(dependent);
             },
                 (dataserviceerror: DataServiceError) => {
-                  console.log('Error deleting beneficiary', dataserviceerror.message);
+                  console.log('Error deleting dependent', dataserviceerror.message);
                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
-                    detail: `The dependent  ${dependent.nom} ${dependent.prenom} could not be deleted: error: ${dataserviceerror.message}`,
+                    detail: $localize`:@@messageDependentDeleteError:The dependent  ${dependent.nom} ${dependent.prenom} could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
                 });
@@ -127,7 +131,7 @@ export class DependentComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Update',
-              detail: `The dependent ${modifiedDependent.nom} ${modifiedDependent.prenom}  was updated`
+              detail: $localize`:@@messageDependentUpdated:The dependent ${modifiedDependent.nom} ${modifiedDependent.prenom}  was updated`
             });
             this.onDependentUpdate.emit(modifiedDependent);
           },
@@ -135,7 +139,7 @@ export class DependentComponent implements OnInit {
                 console.log('Error updating dependent', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
-                  detail: `The beneficiary  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be updated: error: ${dataserviceerror.message}`,
+                  detail: $localize`:@@messageDependentUpdateError:The dependent  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be updated: error: ${dataserviceerror.message}`,
                   life: 6000 };
                 this.messageService.add(errMessage) ;
           });
@@ -149,15 +153,15 @@ export class DependentComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Creation',
-              detail: `The dependent ${newDependent.nom} ${newDependent.prenom}  has been created`
+              detail: $localize`:@@messageDependentCreated:The dependent ${newDependent.nom} ${newDependent.prenom}  has been created`
             });
             this.onDependentCreate.emit(newDependent);
           },
               (dataserviceerror: DataServiceError) => {
-                console.log('Error creating beneficiary', dataserviceerror.message);
+                console.log('Error creating dependent', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
-                  detail: `The beneficiary  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be created: error: ${dataserviceerror.message}`,
+                  detail: $localize`:@@messageDependentCreateError:The dependent  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be created: error: ${dataserviceerror.message}`,
                   life: 6000 };
                 this.messageService.add(errMessage) ;
               });
@@ -169,7 +173,7 @@ export class DependentComponent implements OnInit {
     if (formDirty) {
       this.confirmationService.confirm({
         target: event.target,
-        message: 'Your changes may be lost. Are you sure that you want to proceed?',
+        message: $localize`:@@messageChangesMayBeLost:Your changes may be lost. Are you sure that you want to proceed?`,
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           dependentForm.reset(oldDependent); // reset in-memory object for next open

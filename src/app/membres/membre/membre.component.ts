@@ -139,7 +139,7 @@ export class MembreComponent implements OnInit {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 const  myMessage = {severity: 'success', summary: 'Delete',
-                    detail: `The employee ${membre.prenom} ${membre.nom} was deleted`};
+                    detail: $localize`:@@messageEmployeeDeleted:The employee ${membre.prenom} ${membre.nom} was deleted`};
                 this.membresService.delete(membre)
                     .subscribe( () => {
                         console.log('successfully deleted employee');
@@ -150,7 +150,7 @@ export class MembreComponent implements OnInit {
                             console.log('Error deleting employee', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
-                                detail: `The employee ${membre.prenom} ${membre.nom} could not be deleted: error: ${dataserviceerror.message}`,
+                                detail: $localize`:@@messageEmployeeDeleteError:The employee ${membre.prenom} ${membre.nom} could not be deleted: error: ${dataserviceerror.message}`,
                                 life: 6000 };
                                 this.messageService.add(errMessage) ;
                         }
@@ -171,7 +171,7 @@ export class MembreComponent implements OnInit {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Update',
-                      detail: `The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was updated`
+                      detail: $localize`:@@messageEmployeeUpdated:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was updated`
                   });
                   this.onMembreUpdate.emit(modifiedMembre);
               },
@@ -179,7 +179,7 @@ export class MembreComponent implements OnInit {
                       console.log('Error updating membre', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Update',
                           // tslint:disable-next-line:max-line-length
-                          detail: `The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be updated: error: ${dataserviceerror.message}`,
+                          detail: $localize`:@@messageEmployeeUpdateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be updated: error: ${dataserviceerror.message}`,
                           life: 6000 };
                       this.messageService.add(errMessage) ;
                   }
@@ -193,7 +193,7 @@ export class MembreComponent implements OnInit {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: `The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was created`
+                      detail: $localize`:@@messageEmployeeCreated:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was created`
                   });
                   this.onMembreCreate.emit(modifiedMembre);
               },
@@ -201,7 +201,7 @@ export class MembreComponent implements OnInit {
                       console.log('Error creating membre', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length
-                          detail: `The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${dataserviceerror.message}`,
+                          detail: $localize`:@@messageEmployeeCreateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${dataserviceerror.message}`,
                           life: 6000 };
                       this.messageService.add(errMessage) ;
                   }
@@ -213,7 +213,7 @@ export class MembreComponent implements OnInit {
         if (formDirty) {
             this.confirmationService.confirm({
                 target: event.target,
-                message: 'Your changes may be lost. Are you sure that you want to proceed?',
+                message: $localize`:@@messageChangesMayBeLost:Your changes may be lost. Are you sure that you want to proceed?` ,
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     membreForm.reset(oldMembre); // reset in-memory object for next open

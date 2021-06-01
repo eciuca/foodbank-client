@@ -1,6 +1,6 @@
 import {combineLatest, Observable} from 'rxjs';
 import {DataServiceError, QueryParams} from '@ngrx/data';
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
 import {DefaultOrgcontact, Orgcontact} from '../../model/orgcontact';
 import {OrgcontactEntityService} from '../../services/orgcontact-entity.service';
 import {select, Store} from '@ngrx/store';
@@ -17,6 +17,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./orgcontact.component.css']
 })
 export class OrgcontactComponent implements OnInit {
+  @ViewChild('orgcontactForm') myform: NgForm;
   @Input() orgPersId$: Observable<number>;
   @Input() lienAsso$: Observable<number>;
   lienAsso: number;
@@ -55,6 +56,9 @@ export class OrgcontactComponent implements OnInit {
         console.log('our orgcontact:', this.orgcontact);
       } else {
         this.orgcontact = new DefaultOrgcontact();
+          if (this.myform) {
+              this.myform.reset(this.orgcontact);
+          }
         console.log('we have a new default orgcontact');
       }
     });
@@ -159,7 +163,7 @@ export class OrgcontactComponent implements OnInit {
     if (formDirty) {
       this.confirmationService.confirm({
         target: event.target,
-        message: 'Your changes may be lost. Are you sure that you want to proceed?',
+        message: $localize`:@@messageChangesMayBeLost:Your changes may be lost. Are you sure that you want to proceed?`,
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           orgcontactForm.reset(oldOrgcontact); // reset in-memory object for next open

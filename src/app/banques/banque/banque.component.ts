@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
 import {BanqueEntityService} from '../services/banque-entity.service';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -22,7 +22,7 @@ import {AppState} from '../../reducers';
   styleUrls: ['./banque.component.css']
 })
 export class BanqueComponent implements OnInit {
-
+    @ViewChild('membreForm') myform: NgForm;
     @Input() bankId$: Observable<number>;
     @Output() onBanqueCreate = new EventEmitter<Banque>();
     @Output() onBanqueUpdate = new EventEmitter<Banque>();
@@ -32,7 +32,8 @@ export class BanqueComponent implements OnInit {
     booCanSave: boolean;
     booCanDelete: boolean;
     booCanQuit: boolean;
-  banque: Banque;
+    booIsCreate: boolean;
+    banque: Banque;
     selectedPresident: Membre;
     selectedVicePresident: Membre;
     selectedCEO: Membre;
@@ -64,6 +65,7 @@ export class BanqueComponent implements OnInit {
       this.booCanDelete = false;
       this.booCanSave = false;
       this.booCanQuit = true;
+      this.booIsCreate = false;
     }
 
   ngOnInit(): void {
@@ -74,6 +76,7 @@ export class BanqueComponent implements OnInit {
          // console.log('We initialize a new banque object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
+          this.booIsCreate = false;
           this.bankId$ = this.route.paramMap
             .pipe(
               map(paramMap => paramMap.get('bankId')),
@@ -89,6 +92,7 @@ export class BanqueComponent implements OnInit {
       bank$.subscribe(banque => {
           if (banque) {
               this.banque = banque;
+              this.booIsCreate = false;
               // console.log('Banque : ', banque);
               this.membresService.getByKey(banque.idMemberPres)
                   .subscribe(
@@ -244,6 +248,10 @@ export class BanqueComponent implements OnInit {
 
       } else {
           this.banque = new DefaultBanque();
+          if (this.myform) {
+              this.myform.reset(this.banque);
+          }
+          this.booIsCreate = true;
           console.log('we have a new default banque');
       }
       }); // End of Subscribe
@@ -309,10 +317,18 @@ export class BanqueComponent implements OnInit {
                  this.messageService.add({
                      severity: 'success',
                      summary: 'Update',
-                     detail: `Bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  was updated`
+                     detail: $localize`:@@messageBankUpdated:Bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  was updated`
                  });
                  this.onBanqueUpdate.emit(modifiedBanque);
-             });
+             },
+                 (dataserviceerror: DataServiceError) => {
+                     console.log('Error creating bank', dataserviceerror.message);
+                     const  errMessage = {severity: 'error', summary: 'Update',
+                         // tslint:disable-next-line:max-line-length
+                         detail: $localize`:@@messageBankUpdateError:The bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName} could not be updated: error: ${dataserviceerror.message}`,
+                         life: 6000 };
+                     this.messageService.add(errMessage) ;
+                 });
      } else {
          console.log('Creating Banque with content:', modifiedBanque);
          this.banquesService.add(modifiedBanque)
@@ -320,10 +336,18 @@ export class BanqueComponent implements OnInit {
                  this.messageService.add({
                      severity: 'success',
                      summary: 'Creation',
-                     detail: `Bank ${newBanque.bankName} was created`
+                     detail: $localize`:@@messageBankCreated:Bank ${newBanque.bankName} was created`
                  });
                  this.onBanqueCreate.emit(newBanque);
-             });
+             },
+                 (dataserviceerror: DataServiceError) => {
+                     console.log('Error creating bank', dataserviceerror.message);
+                     const  errMessage = {severity: 'error', summary: 'Create',
+                         // tslint:disable-next-line:max-line-length
+                         detail: $localize`:@@messageBankCreateError:The bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName} could not be created: error: ${dataserviceerror.message}`,
+                         life: 6000 };
+                     this.messageService.add(errMessage) ;
+                 });
      }
   }
     delete(event: Event, banque: Banque) {
@@ -332,7 +356,11 @@ export class BanqueComponent implements OnInit {
             message: 'Confirm Deletion?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                const  myMessage = {severity: 'success', summary: 'Delete', detail: `Bank ${banque.bankName} was deleted`};
+                const  myMessage = {
+                    severity: 'success',
+                    summary: 'Delete',
+                    detail: $localize`:@@messageBankDeleted:Bank ${banque.bankName} was deleted`
+                };
                 this.banquesService.delete(banque)
                     .subscribe( () => {
                         this.messageService.add(myMessage);
@@ -342,7 +370,7 @@ export class BanqueComponent implements OnInit {
                             console.log('Error deleting bank', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
-                                detail: `The bank ${banque.bankId} ${banque.bankShortName} ${banque.bankName} could not be deleted: error: ${dataserviceerror.message}`,
+                                detail: $localize`:@@messageBankDeleteError:The bank ${banque.bankId} ${banque.bankShortName} ${banque.bankName} could not be deleted: error: ${dataserviceerror.message}`,
                                 life: 6000 };
                             this.messageService.add(errMessage) ;
                         }
@@ -357,7 +385,7 @@ export class BanqueComponent implements OnInit {
         if (formDirty) {
             this.confirmationService.confirm({
                 target: event.target,
-                message: 'Your changes may be lost. Are you sure that you want to proceed?',
+                message: $localize`:@@messageChangesMayBeLost:Your changes may be lost. Are you sure that you want to proceed?`,
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     banqueForm.reset( oldBanque); // reset in-memory object for next open

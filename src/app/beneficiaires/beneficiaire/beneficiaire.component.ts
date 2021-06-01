@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, ViewChild} from '@angular/core';
 import {BeneficiaireEntityService} from '../services/beneficiaire-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
@@ -20,6 +20,7 @@ import {DataServiceError, QueryParams} from '@ngrx/data';
   styleUrls: ['./beneficiaire.component.css']
 })
 export class BeneficiaireComponent implements OnInit {
+    @ViewChild('beneficiaireForm') myform: NgForm;
     @Input() idClient$: Observable<number>;
     @Input() currentFilteredOrgId: number;
     @Output() onBeneficiaireUpdate = new EventEmitter<Beneficiaire>();
@@ -98,6 +99,9 @@ export class BeneficiaireComponent implements OnInit {
               }
           } else {
               this.beneficiaire = new DefaultBeneficiaire();
+              if (this.myform) {
+                  this.myform.reset(this.beneficiaire);
+              }
               console.log('we have a new default beneficiaire');
               if (this.booIsOrganisation === false) { // a bank can create beneficiaries of its own or beneficiaries for its organisations
                   if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
@@ -151,7 +155,10 @@ export class BeneficiaireComponent implements OnInit {
             message: 'Confirm Deletion?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                const  myMessage = {severity: 'success', summary: 'Delete', detail: `The beneficiary ${beneficiaire.nom} ${beneficiaire.prenom} was deleted`};
+                const  myMessage = {severity: 'success',
+                    summary: 'Delete',
+                    detail: $localize`:@@messageBeneficiaryDeleted:The beneficiary ${beneficiaire.nom} ${beneficiaire.prenom} was deleted`
+                };
                 this.beneficiairesService.delete(beneficiaire)
                     .subscribe( () => {
                         this.messageService.add(myMessage);
@@ -161,7 +168,7 @@ export class BeneficiaireComponent implements OnInit {
                             console.log('Error deleting beneficiary', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
-                                detail: `The beneficiary  ${beneficiaire.nom} ${beneficiaire.prenom} could not be deleted: error: ${dataserviceerror.message}`,
+                                detail: $localize`:@@messageBeneficiaryDeleteError:The beneficiary  ${beneficiaire.nom} ${beneficiaire.prenom} could not be deleted: error: ${dataserviceerror.message}`,
                                 life: 6000 };
                             this.messageService.add(errMessage) ;
                         });
@@ -180,14 +187,17 @@ export class BeneficiaireComponent implements OnInit {
       if (modifiedBeneficiaire.hasOwnProperty('idClient')) {
     this.beneficiairesService.update(modifiedBeneficiaire)
         .subscribe( ()  => {
-          this.messageService.add({severity: 'success', summary: 'Update', detail: `The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was updated`});
+          this.messageService.add({
+              severity: 'success',
+              summary: 'Update',
+              detail: $localize`:@@messageBeneficiaryUpdated:The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was updated`});
             this.onBeneficiaireUpdate.emit(modifiedBeneficiaire);
         },
             (dataserviceerror: DataServiceError) => {
                 console.log('Error updating beneficiary', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                     // tslint:disable-next-line:max-line-length
-                    detail: `The beneficiary  ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} could not be updated: error: ${dataserviceerror.message}`,
+                    detail: $localize`:@@messageBeneficiaryUpdateError:The beneficiary  ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} could not be updated: error: ${dataserviceerror.message}`,
                     life: 6000 };
                 this.messageService.add(errMessage) ;
         });
@@ -200,7 +210,7 @@ export class BeneficiaireComponent implements OnInit {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: `The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was created`
+                      detail: $localize`:@@messageBeneficiaryCreated:The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was created`
                   });
                   this.onBeneficiaireCreate.emit(modifiedBeneficiaire);
               },
@@ -208,7 +218,7 @@ export class BeneficiaireComponent implements OnInit {
                       console.log('Error updating beneficiary', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length
-                          detail: `The beneficiary  ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} could not be created: error: ${dataserviceerror.message}`,
+                          detail: $localize`:@@messageBeneficiaryCreateError:The beneficiary  ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} could not be created: error: ${dataserviceerror.message}`,
                           life: 6000 };
                       this.messageService.add(errMessage) ;
                   });
@@ -219,7 +229,7 @@ export class BeneficiaireComponent implements OnInit {
         if (formDirty) {
             this.confirmationService.confirm({
                 target: event.target,
-                message: 'Your changes may be lost. Are you sure that you want to proceed?',
+                message: $localize`:@@messageChangesMayBeLost:Your changes may be lost. Are you sure that you want to proceed?`,
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     beneficiaireForm.reset(oldBeneficiaire); // reset in-memory object for next open

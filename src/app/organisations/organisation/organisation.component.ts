@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, ViewChild} from '@angular/core';
 import {OrganisationEntityService} from '../services/organisation-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map, switchMap} from 'rxjs/operators';
@@ -20,7 +20,7 @@ import {globalAuthState} from '../../auth/auth.selectors';
   styleUrls: ['./organisation.component.css']
 })
 export class OrganisationComponent implements OnInit {
-
+    @ViewChild('organisationForm') myform: NgForm;
   @Input() idDis$: Observable<number>;
     @Output() onOrganisationUpdate = new EventEmitter<Organisation>();
     @Output() onOrganisationCreate = new EventEmitter<Organisation>();
@@ -101,6 +101,9 @@ export class OrganisationComponent implements OnInit {
               }
           } else {
               this.organisation = new DefaultOrganisation();
+              if (this.myform) {
+                  this.myform.reset(this.organisation);
+              }
               this.selectedCpas = null;
               console.log('we have a new default organisation');
           }
@@ -142,14 +145,18 @@ export class OrganisationComponent implements OnInit {
           console.log('Modifying Organisation with content:', modifiedOrganisation);
           this.organisationsService.update(modifiedOrganisation)
               .subscribe( ()  => {
-                  this.messageService.add({severity: 'success', summary: 'Update', detail: `Organisation ${modifiedOrganisation.societe} was updated`});
+                  this.messageService.add({
+                      severity: 'success',
+                      summary: 'Update',
+                      detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.societe} was updated`
+                  });
                   this.onOrganisationUpdate.emit(modifiedOrganisation);
               },
                   (dataserviceerror: DataServiceError) => {
                       console.log('Error updating organisation', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Update',
                           // tslint:disable-next-line:max-line-length
-                          detail: `The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
+                          detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
                           life: 6000 };
                       this.messageService.add(errMessage) ;
               });
@@ -161,7 +168,7 @@ export class OrganisationComponent implements OnInit {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: `Organisation ${newOrganisation.societe} was created`
+                      detail: $localize`:@@messageOrganisationCreated:Organisation ${newOrganisation.societe} was created`
                   });
                   this.onOrganisationCreate.emit(newOrganisation);
               },
@@ -169,7 +176,7 @@ export class OrganisationComponent implements OnInit {
                       console.log('Error creating organisation', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Creation',
                           // tslint:disable-next-line:max-line-length
-                          detail: `The organisation ${modifiedOrganisation.societe} could not be created: error: ${dataserviceerror.message}`,
+                          detail: $localize`:@@messageOrganisationCreateError:The organisation ${modifiedOrganisation.societe} could not be created: error: ${dataserviceerror.message}`,
                           life: 6000 };
                       this.messageService.add(errMessage) ;
                   });
@@ -181,7 +188,10 @@ export class OrganisationComponent implements OnInit {
             message: 'Confirm Deletion?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                const  myMessage = {severity: 'success', summary: 'Delete', detail: `Organisation ${organisation.societe} was deleted`};
+                const  myMessage = {
+                    severity: 'success',
+                    summary: 'Delete',
+                    detail: $localize`:@@messageOrganisationDeleted:Organisation ${organisation.societe} was deleted`};
                 this.organisationsService.delete(organisation)
                     .subscribe( () => {
                         this.messageService.add(myMessage);
@@ -191,7 +201,7 @@ export class OrganisationComponent implements OnInit {
                             console.log('Error deleting organisation', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
-                                detail: `The organisation ${organisation.idDis} ${organisation.societe} could not be deleted: error: ${dataserviceerror.message}`,
+                                detail: $localize`:@@messageOrganisationDeleteError:The organisation ${organisation.idDis} ${organisation.societe} could not be deleted: error: ${dataserviceerror.message}`,
                                 life: 6000 };
                             this.messageService.add(errMessage) ;
                         }
@@ -206,7 +216,7 @@ export class OrganisationComponent implements OnInit {
         if (formDirty) {
             this.confirmationService.confirm({
                 target: event.target,
-                message: 'Your changes may be lost. Are you sure that you want to proceed?',
+                message: $localize`:@@messageChangesMayBeLost:Your changes may be lost. Are you sure that you want to proceed?`,
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     organisationForm.reset( oldOrganisation); // reset in-memory object for next open

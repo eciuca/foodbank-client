@@ -140,7 +140,7 @@ export class CpasComponent implements OnInit {
         if (formDirty) {
             this.confirmationService.confirm({
                 target: event.target,
-                message: 'Your changes may be lost. Are you sure that you want to proceed?',
+                message: $localize`:@@messageChangesMayBeLost:Your changes may be lost. Are you sure that you want to proceed?`,
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     cpasForm.reset(oldCpas); // reset in-memory object for next open
