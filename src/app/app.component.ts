@@ -145,7 +145,7 @@ export class AppComponent implements OnInit {
     }
 
     private processAuthState(authState: AuthState) {
-        console.log('User lienbat is:', authState.user.lienBat);
+        console.log('User lienbat is:', authState.user?.lienBat);
         const groups: string[] = authState.groups;
         this.loggedInUserName = authState.user?.idUser;
 
@@ -162,7 +162,7 @@ export class AppComponent implements OnInit {
                     {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
                     {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
                     {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
-                    {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                    {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
                 ];
             } else if (groups.indexOf('asso') > -1 || groups.indexOf('admin_asso') > -1) {
                 this.loggedInBankName = authState.banque.bankName;
@@ -180,7 +180,7 @@ export class AppComponent implements OnInit {
                     );
                 }
                 this.menuLoggedInItems.push(
-                    {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                    {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
                 );
             } else if (groups.indexOf('admin') > -1) {
                     this.loggedInBankName = authState.banque.bankName;
@@ -190,7 +190,7 @@ export class AppComponent implements OnInit {
                         {label: $localize`:@@menuBanks:Banks`, icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
                         {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
                         {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
-                        {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.logout(); }}
+                        {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
                     ];
             } else {
                 this.loggedInBankName = authState.banque.bankName;
