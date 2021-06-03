@@ -11,6 +11,7 @@ import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
 import {DataServiceError} from '@ngrx/data';
+import {Organisation} from '../../organisations/model/organisation';
 
 @Component({
   selector: 'app-membre',
@@ -20,7 +21,7 @@ import {DataServiceError} from '@ngrx/data';
 export class MembreComponent implements OnInit {
     @ViewChild('membreForm') myform: NgForm;
     @Input() batId$: Observable<number>;
-    @Input() currentFilteredOrgId: number;
+    @Input() currentFilteredOrg: Organisation;
     @Output() onMembreUpdate = new EventEmitter<Membre>();
     @Output() onMembreCreate = new EventEmitter<Membre>();
     @Output() onMembreDelete = new EventEmitter<Membre>();
@@ -88,8 +89,8 @@ export class MembreComponent implements OnInit {
                           this.myform.reset(this.membre);
                       }
                       if (this.booIsOrganisation === false) { // a bank can create employees of its own or employees for its organisations
-                          if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
-                              this.lienDis = this.currentFilteredOrgId;
+                          if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
+                              this.lienDis = this.currentFilteredOrg.idDis;
                           } else {
                               this.lienDis = 0;
                           }

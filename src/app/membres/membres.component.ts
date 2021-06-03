@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {Membre} from './model/membre';
 import {MembreEntityService} from './services/membre-entity.service';
 import {Router} from '@angular/router';
@@ -30,14 +30,14 @@ export class MembresComponent implements OnInit {
     loading: boolean;
     filterBase: any;
     booCanCreate: boolean;
-    filteredOrganisations: Organisation[];
+    filteredOrganisation: any;
+    filteredOrganisations: any[];
+    filteredOrganisationsPrepend: any[];
     booShowOrganisations: boolean;
-    currentFilteredOrgId: number;
-    currentFilteredOrg$: Observable<Organisation> ;
     bankid: number;
     bankName: string;
     orgName: string; // if logging in with asso role we need to display the organisation
-
+    first: number;
   constructor(private membreService: MembreEntityService,
               private organisationService: OrganisationEntityService,
               private router: Router,
@@ -46,9 +46,14 @@ export class MembresComponent implements OnInit {
       this.booCanCreate = false;
       this.bankid = 0;
       this.booShowOrganisations = false;
-      this.currentFilteredOrgId = 0;
+      this.first = 0;
       this.bankName = '';
       this.orgName = '';
+      this.filteredOrganisationsPrepend = [
+          {idDis: null, societe: 'ALL Organisations' },
+          {idDis: 0, societe: 'Bank' }
+      ];
+      this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
   }
 
   ngOnInit() {
@@ -128,20 +133,16 @@ export class MembresComponent implements OnInit {
       } else {
           queryParms['sortField'] =  'nom';
       }
+      console.log('Filtered Organisation', this.filteredOrganisation);
+      if (this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
+          queryParms['lienDis'] = this.filteredOrganisation.idDis;
+      }
       if (event.filters) {
           if (event.filters.nom && event.filters.nom.value) {
                 queryParms['nom'] = event.filters.nom.value;
           }
           if (event.filters.prenom && event.filters.prenom.value) {
                queryParms['prenom'] = event.filters.prenom.value;
-          }
-          if (event.filters.lienDis && event.filters.lienDis.value) {
-              queryParms['lienDis'] = event.filters.lienDis.value;
-              this.currentFilteredOrgId = event.filters.lienDis.value;
-              this.currentFilteredOrg$ = this.organisationService.getByKey(this.currentFilteredOrgId);
-          }  else {
-              this.currentFilteredOrgId = 0;
-              this.currentFilteredOrg$ = null;
           }
           if (event.filters.address && event.filters.address.value) {
                queryParms['address'] = event.filters.address.value;
@@ -192,10 +193,26 @@ export class MembresComponent implements OnInit {
         queryOrganisationParms['societe'] = event.query.toLowerCase();
         this.organisationService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
-                this.filteredOrganisations = filteredOrganisations.map((organisation) =>
+                this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
                     Object.assign({}, organisation, {fullname: organisation.societe})
-                );
+                ));
+                console.log('Proposed Organisations', this.filteredOrganisations);
             });
+    }
+
+    filterOrganisationMembers(idDis: number) {
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest Query Parms and new lienDis', latestQueryParams, idDis);
+        // when we switch from active to archived list and vice versa , we need to restart from first page
+           if (idDis != null) {
+               latestQueryParams['lienDis'] = idDis;
+           } else {
+                 if (latestQueryParams.hasOwnProperty('lienDis')) {
+                   delete latestQueryParams['lienDis'];
+               }
+           }
+           this.loadPageSubject$.next(latestQueryParams);
     }
 }
 

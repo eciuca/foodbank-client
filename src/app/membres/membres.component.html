@@ -1,5 +1,5 @@
     <p-table #dt [value]="membres" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
-             [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
+             [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
              [globalFilterFields]="['nom','prenom', 'lienDis', 'address', 'zip', 'city']"
              [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
             >
@@ -9,8 +9,16 @@
                     <div i18n="@@EmployeesHeader" class="p-field p-col-12 p-md-4">
                         Employees of {{bankName}}
                     </div>
-                    <div *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-field p-col-12 p-md-4">
-                        {{currentFilteredOrg.societe}}
+                    <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
+                            <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
+                                         (onSelect)="filterOrganisationMembers($event.idDis);"
+                                         [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="societe" [dropdown]="true">
+                            <ng-template let-organisation pTemplate="item">
+                                <div class="organisation-item">
+                                    <div> {{organisation.societe}} </div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
                     </div>
                     <div   *ngIf="orgName != ''" class="p-field p-col-12 p-md-4">
                         {{orgName}}
@@ -25,7 +33,7 @@
             <tr>
                 <th i18n="@@NameSorted" pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
                 <th i18n="@@NameFirstSorted" pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
-                <th i18n="@@Organisation" *ngIf="booShowOrganisations">Organisation</th>
+                <th i18n="@@OrganisationSorted"  *ngIf="booShowOrganisations" pSortableColumn="societe">Organisation<p-sortIcon field="societe"></p-sortIcon></th>
                 <th i18n="@@AddressSorted" pSortableColumn="address">Address<p-sortIcon field="address"></p-sortIcon></th>
                 <th i18n="@@ZipCodeSorted" pSortableColumn="zip">Zip Code<p-sortIcon field="zip"></p-sortIcon></th>
                 <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
@@ -37,13 +45,8 @@
                 <th>
                     <p-columnFilter type="text" field="prenom" ></p-columnFilter>
                 </th>
-                <p-columnFilter *ngIf="booShowOrganisations" field="lienDis" matchMode="equals" [showMenu]="false">
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-autoComplete [ngModel]="value" [suggestions]="filteredOrganisations"  (onSelect)="filter($event.idDis);" (completeMethod)="filterOrganisation($event)"
-                                        [type]="'search'"  (onClear)="filter($event.idDis)"  field="societe" [dropdown]="true">
-                        </p-autoComplete>
-                    </ng-template>
-                </p-columnFilter>
+                <th *ngIf="booShowOrganisations">
+                </th>
                 <th>
                     <p-columnFilter type="text" field="address" ></p-columnFilter>
                 </th>
@@ -84,7 +87,7 @@
         </ng-template>
     </p-table>
     <p-dialog i18n-header="@@EmployeeDetails" header="Employee Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
-        <app-membre *ngIf="selectedBatid$" [batId$]="selectedBatid$"  [currentFilteredOrgId] ="currentFilteredOrgId" (onMembreUpdate)="handleMembreUpdate($event)" (onMembreCreate)="handleMembreCreate($event)"
+        <app-membre *ngIf="selectedBatid$" [batId$]="selectedBatid$"  [currentFilteredOrg] ="filteredOrganisation" (onMembreUpdate)="handleMembreUpdate($event)" (onMembreCreate)="handleMembreCreate($event)"
                     (onMembreDelete)="handleMembreDeleted($event)" (onMembreQuit)="handleMembreQuit()"></app-membre>
     </p-dialog>
 
