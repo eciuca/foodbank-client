@@ -1,11 +1,9 @@
 import {NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { Banque } from './model/banque';
 import { BanquesComponent } from './banques.component';
 import { BanquesResolver} from './banques.resolver';
 import { BanqueComponent } from './banque/banque.component';
-import {HttpClientModule} from '@angular/common/http';
 
 import {BanquesDataService} from './services/banques-data.service';
 import {BanqueEntityService} from './services/banque-entity.service';
@@ -47,7 +45,6 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         TableModule,
-        HttpClientModule,
         PaginatorModule,
         InputTextModule,
         ButtonModule,

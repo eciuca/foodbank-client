@@ -1,7 +1,7 @@
-<div class="spinner-container" *ngIf="loading">
+<div class="spinner-container" *ngIf="!(isDoneLoading | async)">
    <p-progressSpinner ></p-progressSpinner>
 </div>
-<div  *ngIf="isLoggedIn$ | async">
+<div *ngIf="isLoggedIn$ | async">
     <p-button [label]="loggedInUserName" icon="pi pi-user" (click)="op.toggle($event)"></p-button>
     <p-overlayPanel #op [showCloseIcon]="false" [style]="{width: '450px'}">
         <ng-template pTemplate>

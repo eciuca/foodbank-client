@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import {Beneficiaire} from './model/beneficiaire';
 import { BeneficiairesComponent } from './beneficiaires.component';
 import { BeneficiaireComponent } from './beneficiaire/beneficiaire.component';
 
@@ -9,7 +8,6 @@ import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
 import {CpassDataService} from '../cpass/services/cpass-data.service';
 import {BeneficiairesDataService} from './services/beneficiaires-data.service';
-import {HttpClientModule} from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
@@ -60,7 +58,6 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         TableModule,
-        HttpClientModule,
         PaginatorModule,
         InputTextModule,
         ButtonModule,

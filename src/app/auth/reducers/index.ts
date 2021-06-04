@@ -11,18 +11,18 @@ import {User} from '../../users/model/user';
 import {Banque} from '../../banques/model/banque';
 import {Organisation} from '../../organisations/model/organisation';
 
-
-
 export interface AuthState {
     user: User;
-    banque: Banque,
-    organisation: Organisation
+    banque: Banque;
+    organisation: Organisation;
+    groups: string[]
 }
 
 export const initialAuthState: AuthState = {
     user: undefined,
     banque: undefined,
-    organisation: undefined
+    organisation: undefined,
+    groups: []
 };
 
 export const authReducer = createReducer(
@@ -33,7 +33,8 @@ export const authReducer = createReducer(
         return {
             user: action.user,
             banque: action.banque,
-            organisation: action.organisation
+            organisation: action.organisation,
+            groups: action.groups
         };
     }),
 
@@ -41,7 +42,8 @@ export const authReducer = createReducer(
         return {
             user: undefined,
             banque: undefined,
-            organisation: undefined
+            organisation: undefined,
+            groups: []
         };
     })
 
