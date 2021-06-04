@@ -50,8 +50,8 @@ export class MembresComponent implements OnInit {
       this.bankName = '';
       this.orgName = '';
       this.filteredOrganisationsPrepend = [
-          {idDis: null, societe: 'ALL Organisations' },
-          {idDis: 0, societe: 'Bank' }
+          {idDis: 0, societe: $localize`:@@bank:Bank` },
+          {idDis: null, societe: $localize`:@@organisations:Organisations` },
       ];
       this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
   }
