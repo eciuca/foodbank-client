@@ -70,8 +70,8 @@ export class AppComponent implements OnInit {
 
         this.isLoggedIn$ = this.isAuthenticated;
         this.isLoggedOut$ = this.isAuthenticated.pipe(map(authenticated => !authenticated));
-        
-        this.store.pipe(select(globalAuthState)).subscribe(authState => this.processAuthState(authState))
+
+        this.store.pipe(select(globalAuthState)).subscribe(authState => this.processAuthState(authState));
 
         this.primengConfig.ripple = true;
         this.primengConfig.filterMatchModeOptions = {
@@ -151,7 +151,7 @@ export class AppComponent implements OnInit {
 
         if (this.loggedInUserName) {
             if (groups.indexOf('bank') > -1 || groups.indexOf('admin_banq') > -1) {
-                this.loggedInUserRole = 'Bank'
+                this.loggedInUserRole = 'Bank';
                 this.loggedInBankName = authState.banque.bankName;
                 this.loggedInOrganisationName = '';
                 this.menuLoggedInItems = [

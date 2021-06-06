@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Beneficiaire} from './model/beneficiaire';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
 import {filter, map, mergeMap} from 'rxjs/operators';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {Router} from '@angular/router';
@@ -31,10 +31,10 @@ export class BeneficiairesComponent implements OnInit {
   filterBase: any;
   booCanCreate: boolean;
   booShowArchived: boolean;
-  filteredOrganisations: Organisation[];
+  filteredOrganisation: any;
+  filteredOrganisations: any[];
+  filteredOrganisationsPrepend: any[];
   booShowOrganisations: boolean;
-  currentFilteredOrgId: number;
-  currentFilteredOrg$: Observable<Organisation> ;
   first: number;
   bankid: number;
   bankName: string;
@@ -48,10 +48,13 @@ export class BeneficiairesComponent implements OnInit {
     this.booShowArchived = false;
     this.bankid = 0;
     this.booShowOrganisations = false;
-    this.currentFilteredOrgId = 0;
     this.first = 0;
     this.bankName = '';
     this.orgName = '';
+    this.filteredOrganisationsPrepend = [
+          {idDis: null, societe: $localize`:@@organisations:Organisations` },
+    ];
+    this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
   }
 
   ngOnInit() {
@@ -131,21 +134,7 @@ export class BeneficiairesComponent implements OnInit {
     this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
-  refreshTable($event) {
-    console.log('Archive is now:', $event);
-    this.booShowArchived = $event.checked;
-    this.first = 0;
-    const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Query Parms', latestQueryParams);
-    // when we switch from active to archived list and vice versa , we need to restart from first page
-    latestQueryParams['offset'] = '0';
-    if (this.booShowArchived ) {
-      latestQueryParams['archived'] = '1';
-    } else {
-      latestQueryParams['archived'] = '0';
-    }
-    this.loadPageSubject$.next(latestQueryParams);
-  }
+
   nextPage(event: LazyLoadEvent) {
     console.log('Lazy Loaded Event', event);
     this.loading = true;
@@ -168,6 +157,9 @@ export class BeneficiairesComponent implements OnInit {
     }  else {
       queryParms['archived'] = '0';
     }
+    if (this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
+      queryParms['lienDis'] = this.filteredOrganisation.idDis;
+    }
     if (event.filters) {
       if (event.filters.nom && event.filters.nom.value) {
         queryParms['nom'] = event.filters.nom.value;
@@ -175,21 +167,13 @@ export class BeneficiairesComponent implements OnInit {
       if (event.filters.prenom && event.filters.prenom.value) {
         queryParms['prenom'] = event.filters.prenom.value;
       }
-      if (event.filters.lienDis && event.filters.lienDis.value) {
-        queryParms['lienDis'] = event.filters.lienDis.value;
-        this.currentFilteredOrgId = event.filters.lienDis.value;
-        this.currentFilteredOrg$ = this.organisationService.getByKey(this.currentFilteredOrgId);
-      }  else {
-        this.currentFilteredOrgId = 0;
-        this.currentFilteredOrg$ = null;
-      }
-       if (event.filters.adresse && event.filters.adresse.value) {
+      if (event.filters.adresse && event.filters.adresse.value) {
         queryParms['adresse'] = event.filters.adresse.value;
       }
-       if (event.filters.cp && event.filters.cp.value) {
+      if (event.filters.cp && event.filters.cp.value) {
          queryParms['cp'] = event.filters.cp.value;
       }
-       if (event.filters.localite && event.filters.localite.value) {
+      if (event.filters.localite && event.filters.localite.value) {
          queryParms['localite'] = event.filters.localite.value;
       }
     }
@@ -219,19 +203,48 @@ export class BeneficiairesComponent implements OnInit {
     }
   }
   filterOrganisation(event ) {
-    console.log('Got Query with value:', event, 'bankid:', this.bankid);
     const  queryOrganisationParms: QueryParams = {};
     queryOrganisationParms['offset'] = '0';
-    queryOrganisationParms['rows'] = '10';
+    queryOrganisationParms['rows'] = '200';
     queryOrganisationParms['sortField'] = 'societe';
     queryOrganisationParms['sortOrder'] = '1';
     queryOrganisationParms['lienBanque'] = this.bankid.toString();
     queryOrganisationParms['societe'] = event.query.toLowerCase();
     this.organisationService.getWithQuery(queryOrganisationParms)
         .subscribe(filteredOrganisations => {
-          this.filteredOrganisations = filteredOrganisations.map((organisation) =>
+          this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
               Object.assign({}, organisation, {fullname: organisation.societe})
-          );
+          ));
+          console.log('Proposed Organisations', this.filteredOrganisations);
         });
+  }
+  filterOrganisationBeneficiaries(idDis: number) {
+    this.first = 0;
+    const latestQueryParams = {...this.loadPageSubject$.getValue()};
+    console.log('Latest Query Parms and new idOrg', latestQueryParams, idDis);
+    // when we switch from active to archived list and vice versa , we need to restart from first page
+    if (idDis != null) {
+      latestQueryParams['lienDis'] = idDis;
+    } else {
+      if (latestQueryParams.hasOwnProperty('lienDis')) {
+        delete latestQueryParams['lienDis'];
+      }
+    }
+    this.loadPageSubject$.next(latestQueryParams);
+  }
+  changeArchiveFilter($event) {
+    console.log('Archive is now:', $event);
+    this.booShowArchived = $event.checked;
+    this.first = 0;
+    const latestQueryParams = {...this.loadPageSubject$.getValue()};
+    console.log('Latest Query Parms', latestQueryParams);
+    // when we switch from active to archived list and vice versa , we need to restart from first page
+    latestQueryParams['offset'] = '0';
+    if (this.booShowArchived ) {
+      latestQueryParams['archived'] = '1';
+    } else {
+      latestQueryParams['archived'] = '0';
+    }
+    this.loadPageSubject$.next(latestQueryParams);
   }
 }

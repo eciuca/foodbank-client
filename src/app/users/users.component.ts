@@ -32,14 +32,14 @@ export class UsersComponent implements OnInit {
   booCanCreate: boolean;
   rightOptions: any[];
   languageOptions: any[];
-  filteredOrganisations: Organisation[];
+  filteredOrganisation: any;
+  filteredOrganisations: any[];
+  filteredOrganisationsPrepend: any[];
   bankid: number;
     bankName: string;
     orgName: string; // if logging in with asso role we need to display the organisation
+    first: number;
   booShowOrganisations: boolean;
-  currentFilteredOrgId: number;
-  currentFilteredOrg$: Observable<Organisation> ;
-
   constructor(private userService: UserEntityService,
               private organisationService: OrganisationEntityService,
               private router: Router,
@@ -51,8 +51,13 @@ export class UsersComponent implements OnInit {
       this.bankid = 0;
       this.bankName = '';
       this.orgName = '';
+      this.first = 0;
       this.booShowOrganisations = false;
-      this.currentFilteredOrgId = 0;
+      this.filteredOrganisationsPrepend = [
+          {idDis: 0, societe: $localize`:@@bank:Bank` },
+          {idDis: null, societe: $localize`:@@organisations:Organisations` },
+      ];
+      this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
   }
 
   ngOnInit() {
@@ -158,20 +163,16 @@ export class UsersComponent implements OnInit {
       } else {
           queryParms['sortField'] =  'idUser';
       }
+     console.log('Filtered Organisation', this.filteredOrganisation);
+     if (this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
+         queryParms['idOrg'] = this.filteredOrganisation.idDis;
+     }
       if (event.filters) {
           if (event.filters.idUser && event.filters.idUser.value) {
               queryParms['idUser'] =  event.filters.idUser.value;
           }
           if (event.filters.userName && event.filters.userName.value) {
               queryParms['userName'] = event.filters.userName.value;
-          }
-          if (event.filters.idOrg && event.filters.idOrg.value) {
-              queryParms['idOrg'] = event.filters.idOrg.value;
-              this.currentFilteredOrgId = event.filters.idOrg.value;
-              this.currentFilteredOrg$ = this.organisationService.getByKey(this.currentFilteredOrgId);
-          }  else {
-              this.currentFilteredOrgId = 0;
-              this.currentFilteredOrg$ = null;
           }
           if (event.filters.idLanguage && event.filters.idLanguage.value) {
                 queryParms['idLanguage'] = event.filters.idLanguage.value;
@@ -187,19 +188,32 @@ export class UsersComponent implements OnInit {
   }
 
     filterOrganisation(event ) {
-      console.log('Got Query with value:', event, 'bankid:', this.bankid);
         const  queryOrganisationParms: QueryParams = {};
         queryOrganisationParms['offset'] = '0';
-        queryOrganisationParms['rows'] = '10';
+        queryOrganisationParms['rows'] = '200';
         queryOrganisationParms['sortField'] = 'societe';
         queryOrganisationParms['sortOrder'] = '1';
         queryOrganisationParms['lienBanque'] = this.bankid.toString();
         queryOrganisationParms['societe'] = event.query.toLowerCase();
         this.organisationService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
-                this.filteredOrganisations = filteredOrganisations.map((organisation) =>
+                this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
                     Object.assign({}, organisation, {fullname: organisation.societe})
-                );
+                ));
             });
+    }
+    filterOrganisationUsers(idDis: number) {
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest Query Parms and new IdOrg', latestQueryParams, idDis);
+        // when we switch from active to archived list and vice versa , we need to restart from first page
+        if (idDis != null) {
+            latestQueryParams['idOrg'] = idDis;
+        } else {
+            if (latestQueryParams.hasOwnProperty('idOrg')) {
+                delete latestQueryParams['idOrg'];
+            }
+        }
+        this.loadPageSubject$.next(latestQueryParams);
     }
 }

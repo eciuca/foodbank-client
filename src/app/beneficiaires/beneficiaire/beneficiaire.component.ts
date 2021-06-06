@@ -13,6 +13,7 @@ import {combineLatest, Observable} from 'rxjs';
 import {Cpas} from '../../cpass/model/cpas';
 import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
 import {DataServiceError, QueryParams} from '@ngrx/data';
+import {Organisation} from '../../organisations/model/organisation';
 
 @Component({
   selector: 'app-beneficiaire',
@@ -22,7 +23,7 @@ import {DataServiceError, QueryParams} from '@ngrx/data';
 export class BeneficiaireComponent implements OnInit {
     @ViewChild('beneficiaireForm') myform: NgForm;
     @Input() idClient$: Observable<number>;
-    @Input() currentFilteredOrgId: number;
+    @Input() currentFilteredOrg: Organisation;
     @Output() onBeneficiaireUpdate = new EventEmitter<Beneficiaire>();
     @Output() onBeneficiaireCreate = new EventEmitter<Beneficiaire>();
     @Output() onBeneficiaireDelete = new EventEmitter<Beneficiaire>();
@@ -104,8 +105,8 @@ export class BeneficiaireComponent implements OnInit {
               }
               console.log('we have a new default beneficiaire');
               if (this.booIsOrganisation === false) { // a bank can create beneficiaries of its own or beneficiaries for its organisations
-                  if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
-                      this.lienDis = this.currentFilteredOrgId;
+                  if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
+                      this.lienDis = this.currentFilteredOrg.idDis;
                   } else {
                       this.lienDis = 0;
                   }

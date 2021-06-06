@@ -14,6 +14,7 @@ import {MembreEntityService} from '../../membres/services/membre-entity.service'
 import {Membre} from '../../membres/model/membre';
 import {DataServiceError} from '@ngrx/data';
 import {Observable, combineLatest} from 'rxjs';
+import {Organisation} from '../../organisations/model/organisation';
 
 @Component({
   selector: 'app-user',
@@ -23,7 +24,7 @@ import {Observable, combineLatest} from 'rxjs';
 export class UserComponent implements OnInit {
     @ViewChild('userForm') myform: NgForm;
     @Input() idUser$: Observable<string>;
-    @Input() currentFilteredOrgId: number;
+    @Input() currentFilteredOrg: Organisation;
     user: User;
     selectedMembre: Membre;
     filteredMembres: Membre[];
@@ -104,8 +105,8 @@ export class UserComponent implements OnInit {
                         this.myform.reset(this.user);
                     }
                     if (this.booIsOrganisation === false) { // a bank can create employees of its own or employees for its organisations
-                        if (this.currentFilteredOrgId != null && this.currentFilteredOrgId > 0) {
-                            this.idOrg = this.currentFilteredOrgId;
+                        if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
+                            this.idOrg = this.currentFilteredOrg.idDis;
                         } else {
                             this.idOrg = 0;
                         }

@@ -8,8 +8,16 @@
                 <div i18n="@@BeneficiariesHeader" class="p-field p-col-12 p-md-4">
                     Beneficiaries of {{bankName}}
                 </div>
-                <div *ngIf="currentFilteredOrg$ | async as currentFilteredOrg" class="p-field p-col-12 p-md-4">
-                    {{currentFilteredOrg.societe}}
+                <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
+                    <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
+                                     (onSelect)="filterOrganisationBeneficiaries($event.idDis);"
+                                     [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="societe" [dropdown]="true">
+                        <ng-template let-organisation pTemplate="item">
+                            <div class="organisation-item">
+                                <div> {{organisation.societe}} </div>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
                 </div>
                 <div   *ngIf="orgName != ''" class="p-field p-col-12 p-md-4">
                     {{orgName}}
@@ -19,7 +27,7 @@
                 </div>
                 <div class="p-field p-col-12 p-md-2">
                     <label i18n="@@BeneficiariesShowArchived" for="archived">Show Archived?</label>
-                    <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="refreshTable($event)"></p-checkbox>
+                    <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                 </div>
             </div>
         </div>
@@ -28,7 +36,7 @@
          <tr>
              <th i18n="@@NameSorted" pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
              <th i18n="@@NameFirstSorted" pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
-             <th *ngIf="booShowOrganisations">Organisation</th>
+             <th i18n="@@Organisation"  *ngIf="booShowOrganisations" >Organisation</th>
              <th i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
              <th i18n="@@ZipCodeSorted" pSortableColumn="cp">Zip Code<p-sortIcon field="cp"></p-sortIcon></th>
              <th i18n="@@CitySorted" pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
@@ -41,13 +49,8 @@
              <th>
                  <p-columnFilter type="text" field="prenom" ></p-columnFilter>
              </th>
-             <p-columnFilter *ngIf="booShowOrganisations" field="lienDis" matchMode="equals" [showMenu]="false">
-                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                     <p-autoComplete [ngModel]="value" [suggestions]="filteredOrganisations"  (onSelect)="filter($event.idDis);" (completeMethod)="filterOrganisation($event)"
-                                     [type]="'search'"  (onClear)="filter($event.idDis)"  field="societe" [dropdown]="true">
-                     </p-autoComplete>
-                 </ng-template>
-             </p-columnFilter>
+             <th *ngIf="booShowOrganisations">
+             </th>
              <th>
                  <p-columnFilter type="text" field="adresse" ></p-columnFilter>
              </th>
@@ -95,7 +98,7 @@
     </ng-template>
 </p-table>
  <p-dialog i18n-header="@@BeneficiaryDetails"header="Beneficiary Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
-     <app-beneficiaire *ngIf="selectedIdClient$" [idClient$]="selectedIdClient$" [currentFilteredOrgId] ="currentFilteredOrgId" (onBeneficiaireUpdate)="handleBeneficiaireUpdate($event)"
+     <app-beneficiaire *ngIf="selectedIdClient$" [idClient$]="selectedIdClient$"  [currentFilteredOrg] ="filteredOrganisation" (onBeneficiaireUpdate)="handleBeneficiaireUpdate($event)"
                        (onBeneficiaireCreate)="handleBeneficiaireCreate($event)"  (onBeneficiaireDelete)="handleBeneficiaireDeleted($event)" (onBeneficiaireQuit)="handleBeneficiaireQuit()"></app-beneficiaire>
  </p-dialog>
 

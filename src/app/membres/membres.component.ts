@@ -183,10 +183,9 @@ export class MembresComponent implements OnInit {
         this.displayDialog = true;
     }
     filterOrganisation(event ) {
-        console.log('Got Query with value:', event, 'bankid:', this.bankid);
         const  queryOrganisationParms: QueryParams = {};
         queryOrganisationParms['offset'] = '0';
-        queryOrganisationParms['rows'] = '10';
+        queryOrganisationParms['rows'] = '200';
         queryOrganisationParms['sortField'] = 'societe';
         queryOrganisationParms['sortOrder'] = '1';
         queryOrganisationParms['lienBanque'] = this.bankid.toString();
@@ -201,11 +200,10 @@ export class MembresComponent implements OnInit {
     }
 
     filterOrganisationMembers(idDis: number) {
+        // when we switch we need to restart from first page
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Query Parms and new lienDis', latestQueryParams, idDis);
-        // when we switch from active to archived list and vice versa , we need to restart from first page
-           if (idDis != null) {
+        if (idDis != null) {
                latestQueryParams['lienDis'] = idDis;
            } else {
                  if (latestQueryParams.hasOwnProperty('lienDis')) {
