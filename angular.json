@@ -55,9 +55,36 @@
                 }
               ]
             },
-            "fr": {
+            "prod-fr": {
               "aot": true,
-               "outputPath": "dist/foodbank-it-client-fr/",
+              "outputPath": "dist/foodbank-it-client-fr/",
+              "i18nFile": "src/locale/messages.fr.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "fr-FR",
+              "i18nMissingTranslation": "error",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod-fr.ts"
+                }
+              ]
+            },
+            "prod-nl": {
+              "aot": true,
+              "outputPath": "dist/foodbank-it-client-nl/",
+              "i18nFile": "src/locale/messages.nl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "nl-NL",
+              "i18nMissingTranslation": "error",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod-nl.ts"
+                }
+              ]
+            },
+            "fr": {
+              "outputPath": "dist/foodbank-it-client-fr/",
               "i18nFile": "src/locale/messages.fr.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "fr-FR",
@@ -70,7 +97,6 @@
               ]
             },
             "nl": {
-              "aot": true,
               "outputPath": "dist/foodbank-it-client-nl/",
               "i18nFile": "src/locale/messages.nl.xlf",
               "i18nFormat": "xlf",
