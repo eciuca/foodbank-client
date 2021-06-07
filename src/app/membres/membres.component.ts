@@ -133,8 +133,7 @@ export class MembresComponent implements OnInit {
       } else {
           queryParms['sortField'] =  'nom';
       }
-      console.log('Filtered Organisation', this.filteredOrganisation);
-      if (this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
+      if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
           queryParms['lienDis'] = this.filteredOrganisation.idDis;
       }
       if (event.filters) {

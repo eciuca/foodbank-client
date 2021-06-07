@@ -163,8 +163,7 @@ export class UsersComponent implements OnInit {
       } else {
           queryParms['sortField'] =  'idUser';
       }
-     console.log('Filtered Organisation', this.filteredOrganisation);
-     if (this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
+          if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
          queryParms['idOrg'] = this.filteredOrganisation.idDis;
      }
       if (event.filters) {

@@ -157,7 +157,8 @@ export class BeneficiairesComponent implements OnInit {
     }  else {
       queryParms['archived'] = '0';
     }
-    if (this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
+    
+    if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
       queryParms['lienDis'] = this.filteredOrganisation.idDis;
     }
     if (event.filters) {
