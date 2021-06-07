@@ -88,6 +88,7 @@ export class UsersComponent implements OnInit {
         .pipe(
             select(globalAuthState),
             map((authState) => {
+                console.log('Entering Users component with authState:',authState);
               if (authState.banque) {
                   this.bankid = authState.banque.bankId;
                   this.bankName = authState.banque.bankName;
@@ -111,8 +112,10 @@ export class UsersComponent implements OnInit {
                           }
                           break;
                       default:
+                          console.log('Entering Users component with unsupported user rights, see complete authstate:', authState);
                   }
               }
+                console.log('Users FilterBase is: ', this.filterBase );
              })
     ).subscribe();
   }
