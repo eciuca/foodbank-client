@@ -1,10 +1,4 @@
-import {
-    ActionReducer,
-    ActionReducerMap,
-    createFeatureSelector, createReducer,
-    createSelector,
-    MetaReducer, on
-} from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import {AuthActions} from '../action-types';
 import {User} from '../../users/model/user';
@@ -15,14 +9,16 @@ export interface AuthState {
     user: User;
     banque: Banque;
     organisation: Organisation;
-    groups: string[]
+    groups: string[],
+    isLoggedIn: boolean
 }
 
 export const initialAuthState: AuthState = {
     user: undefined,
     banque: undefined,
     organisation: undefined,
-    groups: []
+    groups: [],
+    isLoggedIn: false
 };
 
 export const authReducer = createReducer(
@@ -34,7 +30,8 @@ export const authReducer = createReducer(
             user: action.user,
             banque: action.banque,
             organisation: action.organisation,
-            groups: action.groups
+            groups: action.groups,
+            isLoggedIn: true
         };
     }),
 
@@ -43,11 +40,9 @@ export const authReducer = createReducer(
             user: undefined,
             banque: undefined,
             organisation: undefined,
-            groups: []
+            groups: [],
+            isLoggedIn: false
         };
     })
-
-
-
 );
 
