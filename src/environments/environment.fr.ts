@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:8081/api/',
-    authServerIssuer: 'https://auth.dev.foodbankit.org/auth/realms/FoodBank'
+    apiUrl: 'http://localhost:4200/api/',
+    authServerIssuer: 'http://localhost:8083/auth/realms/FoodBank'
 };
