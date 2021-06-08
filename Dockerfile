@@ -1,10 +1,15 @@
 FROM node:14-alpine as dist-build
 RUN mkdir -p /dist-build && chown -R node:node /dist-build
 WORKDIR /dist-build
-COPY ./ /dist-build
 USER node
 ARG ENV=prod
-RUN npm install && npm run build-${ENV} && rm -rf node_modules
+COPY package.json /dist-build/package.json
+RUN npm install
+COPY ./ /dist-build
+RUN npm run build-${ENV} && \
+    npm run build-${ENV}-fr && \
+    npm run build-${ENV}-nl && \
+    rm -rf node_modules
 
 FROM httpd:alpine
 # https://blog.neoprime.it/ng-in-httpd/
@@ -44,7 +49,9 @@ RUN rm -r /usr/local/apache2/htdocs/*
 #   /usr/local/apache2/conf/httpd.conf
 
 # Copy all the files from the docker build context into the public htdocs of the apache container.
-COPY --from=dist-build /dist-build/dist /usr/local/apache2/htdocs/
+COPY --from=dist-build /dist-build/dist/foodbank-it-client-en /usr/local/apache2/htdocs/en/
+COPY --from=dist-build /dist-build/dist/foodbank-it-client-fr /usr/local/apache2/htdocs/fr/
+COPY --from=dist-build /dist-build/dist/foodbank-it-client-nl /usr/local/apache2/htdocs/nl/
 COPY --from=dist-build /dist-build/docker/httpd-vhosts.conf /usr/local/apache2/conf/extra
 COPY --from=dist-build /dist-build/docker/httpd.conf /usr/local/apache2/conf/
 

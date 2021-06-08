@@ -7,12 +7,14 @@
     "start": "ng serve  --proxy-config ./proxy.json",
     "server": "ts-node -P ./server/server.tsconfig.json ./server/server.ts",
     "build": "ng build",
-    "build-nl": "ng build --nl",
-    "build-fr": "ng build --fr",
+    "build-nl": "ng build --configuration=nl",
+    "build-fr": "ng build --configuration=fr",
     "build-prod": "ng build --prod",
-    "build-prod-nl": "ng build --prod-nl",
-    "build-prod-fr": "ng build --prod-fr",
+    "build-prod-nl": "ng build --configuration=prod-nl",
+    "build-prod-fr": "ng build --configuration=prod-fr",
     "build-docker-local": "ng build --configuration=production,docker-local",
+    "build-docker-local-nl": "ng build --configuration=production,docker-local-nl",
+    "build-docker-local-fr": "ng build --configuration=production,docker-local-fr",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -74,6 +76,6 @@
     "protractor": "~7.0.0",
     "ts-node": "~3.2.0",
     "tslint": "^6.1.3",
-    "typescript": "^4.0.7"
+    "typescript": "~4.1.0"
   }
 }
