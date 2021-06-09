@@ -6,7 +6,7 @@ export const authConfig: AuthConfig = {
     issuer: environment.authServerIssuer,
 
     // URL of the SPA to redirect the user to after login
-    redirectUri: window.location.origin + '/',
+    redirectUri: window.location.origin + '/en',
 
     silentRefreshRedirectUri: window.location.origin + '/silent-refresh.html',
 
