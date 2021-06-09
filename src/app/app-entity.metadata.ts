@@ -8,6 +8,7 @@ import {compareOrganisations, Organisation} from './organisations/model/organisa
 import {compareUsers, User} from './users/model/user';
 import {compareDependents, Dependent} from './beneficiaires/model/dependent';
 import {compareOrgcontacts, Orgcontact} from './organisations/model/orgcontact';
+import {compareOrgSummaries, OrgSummary} from './organisations/model/orgsummary';
 
 export const appEntityMetadata: EntityMetadataMap = {
     Membre: {
@@ -43,6 +44,11 @@ export const appEntityMetadata: EntityMetadataMap = {
     Organisation: {
         sortComparer: compareOrganisations,
         selectId: (organisation: Organisation) => organisation.idDis,
+        entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
+    },
+    OrgSummary: {
+        sortComparer: compareOrgSummaries,
+        selectId: (orgSummary: OrgSummary) => orgSummary.idDis,
         entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
     },
     Orgcontact: {

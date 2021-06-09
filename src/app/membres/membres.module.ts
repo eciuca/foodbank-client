@@ -20,8 +20,8 @@ import {ConfirmationService} from 'primeng/api';
 import {CalendarModule} from 'primeng/calendar';
 import {ToastModule} from 'primeng/toast';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
-import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
+import {OrgSummariesDataService} from '../organisations/services/orgsummaries-data.service';
+import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 
 const routes: Routes = [
   { path: '',
@@ -53,8 +53,8 @@ const routes: Routes = [
   providers: [
     MembresDataService,
     MembreEntityService,
-      OrganisationsDataService,
-      OrganisationEntityService,
+      OrgSummariesDataService,
+      OrgSummaryEntityService,
     ConfirmationService
   ],
 })
@@ -63,11 +63,11 @@ export class MembresModule {
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
       private membresDataService: MembresDataService,
-      private organisationsDataService: OrganisationsDataService
+      private orgSummariesDataService: OrgSummariesDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Membre', membresDataService);
-    entityDataService.registerService('Organisation', organisationsDataService);
+    entityDataService.registerService('OrgSummary', orgSummariesDataService);
   }
 
 }

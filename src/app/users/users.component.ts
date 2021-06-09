@@ -9,8 +9,8 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
 import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguageLegacy } from '../shared/enums';
-import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
 import {QueryParams} from '@ngrx/data';
+import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 
 
 @Component({
@@ -40,7 +40,7 @@ export class UsersComponent implements OnInit {
     first: number;
   booShowOrganisations: boolean;
   constructor(private userService: UserEntityService,
-              private organisationService: OrganisationEntityService,
+              private orgsummaryService: OrgSummaryEntityService,
               private router: Router,
               private store: Store<AppState>
   ) {
@@ -200,13 +200,9 @@ export class UsersComponent implements OnInit {
 
     filterOrganisation(event ) {
         const  queryOrganisationParms: QueryParams = {};
-        queryOrganisationParms['offset'] = '0';
-        queryOrganisationParms['rows'] = '200';
-        queryOrganisationParms['sortField'] = 'societe';
-        queryOrganisationParms['sortOrder'] = '1';
         queryOrganisationParms['lienBanque'] = this.bankid.toString();
         queryOrganisationParms['societe'] = event.query.toLowerCase();
-        this.organisationService.getWithQuery(queryOrganisationParms)
+        this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
                 this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
                     Object.assign({}, organisation, {fullname: organisation.societe})

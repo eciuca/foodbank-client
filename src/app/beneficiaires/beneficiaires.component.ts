@@ -11,6 +11,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {Organisation} from '../organisations/model/organisation';
 import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
 import {QueryParams} from '@ngrx/data';
+import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 
 
 @Component({
@@ -40,7 +41,7 @@ export class BeneficiairesComponent implements OnInit {
   bankName: string;
   orgName: string; // if logging in with asso role we need to display the organisation
   constructor(private beneficiaireService: BeneficiaireEntityService,
-              private organisationService: OrganisationEntityService,
+              private orgsummaryService: OrgSummaryEntityService,
               private router: Router,
               private store: Store
   ) {
@@ -157,7 +158,7 @@ export class BeneficiairesComponent implements OnInit {
     }  else {
       queryParms['archived'] = '0';
     }
-    
+    console.log('Filtered Organisation', this.filteredOrganisation);
     if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
       queryParms['lienDis'] = this.filteredOrganisation.idDis;
     }
@@ -205,13 +206,9 @@ export class BeneficiairesComponent implements OnInit {
   }
   filterOrganisation(event ) {
     const  queryOrganisationParms: QueryParams = {};
-    queryOrganisationParms['offset'] = '0';
-    queryOrganisationParms['rows'] = '200';
-    queryOrganisationParms['sortField'] = 'societe';
-    queryOrganisationParms['sortOrder'] = '1';
     queryOrganisationParms['lienBanque'] = this.bankid.toString();
     queryOrganisationParms['societe'] = event.query.toLowerCase();
-    this.organisationService.getWithQuery(queryOrganisationParms)
+    this.orgsummaryService.getWithQuery(queryOrganisationParms)
         .subscribe(filteredOrganisations => {
           this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
               Object.assign({}, organisation, {fullname: organisation.societe})
