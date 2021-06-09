@@ -12,6 +12,7 @@ import { AuthState } from './auth/reducers';
 import { PrimeNGConfig } from 'primeng/api';
 import { OAuthService, UserInfo } from 'angular-oauth2-oidc';
 import { AuthService } from './auth/auth.service';
+import { environment } from '../environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -150,7 +151,7 @@ export class AppComponent implements OnInit {
         
         const idLanguage = authState.user?.idLanguage;
         const localeLanguage = this.locale.split('-')[0];
-        if (idLanguage && idLanguage !== localeLanguage) {
+        if (idLanguage && environment.availableLocales.includes(idLanguage) && idLanguage !== localeLanguage) {
             const url = window.location.href;
             const newLocaleUrl = url.replace(localeLanguage, idLanguage);
             window.location.replace(newLocaleUrl);
