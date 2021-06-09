@@ -15,7 +15,6 @@ import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {EffectsModule} from '@ngrx/effects';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {metaReducers, reducers} from './reducers';
-import {AuthGuard} from './auth/auth.guard';
 import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
 import {MenubarModule} from 'primeng/menubar';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
