@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { AuthState } from './auth/reducers';
 import { PrimeNGConfig } from 'primeng/api';
 import { OAuthService, UserInfo } from 'angular-oauth2-oidc';
 import { AuthService } from './auth/auth.service';
+import { environment } from '../environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -56,7 +57,8 @@ export class AppComponent implements OnInit {
         private route: ActivatedRoute,
         private store: Store<AppState>,
         private primengConfig: PrimeNGConfig,
-        private authService: AuthService
+        private authService: AuthService,
+        @Inject(LOCALE_ID) public locale: string
     ) {
 
     }
@@ -146,6 +148,15 @@ export class AppComponent implements OnInit {
 
     private processAuthState(authState: AuthState) {
         console.log('User lienbat is:', authState.user?.lienBat);
+        
+        const idLanguage = authState.user?.idLanguage;
+        const localeLanguage = this.locale.split('-')[0];
+        if (idLanguage && environment.availableLocales.includes(idLanguage) && idLanguage !== localeLanguage) {
+            const url = window.location.href;
+            const newLocaleUrl = url.replace(localeLanguage, idLanguage);
+            window.location.replace(newLocaleUrl);
+        }
+
         const groups: string[] = authState.groups;
         this.loggedInUserName = authState.user?.idUser;
 
