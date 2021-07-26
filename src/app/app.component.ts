@@ -149,7 +149,7 @@ export class AppComponent implements OnInit {
     private processAuthState(authState: AuthState) {
         console.log('User lienbat is:', authState.user?.lienBat, 'Membre Langue is', authState.user?.membreLangue);
        // const idLanguage = authState.user?.idLanguage;
-        let idLanguage = 'en';
+        let idLanguage = null;
         if (authState.user?.membreLangue === 1) {
             idLanguage = 'fr';
         }
