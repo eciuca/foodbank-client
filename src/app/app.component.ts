@@ -147,9 +147,15 @@ export class AppComponent implements OnInit {
     }
 
     private processAuthState(authState: AuthState) {
-        console.log('User lienbat is:', authState.user?.lienBat);
-        
-        const idLanguage = authState.user?.idLanguage;
+        console.log('User lienbat is:', authState.user?.lienBat, 'Membre Langue is', authState.user?.membreLangue);
+       // const idLanguage = authState.user?.idLanguage;
+        let idLanguage = 'en';
+        if (authState.user?.membreLangue === 1) {
+            idLanguage = 'fr';
+        }
+        if (authState.user?.membreLangue === 2) {
+            idLanguage = 'nl';
+        }
         const localeLanguage = this.locale.split('-')[0];
         if (idLanguage && environment.availableLocales.includes(idLanguage) && idLanguage !== localeLanguage) {
             const url = window.location.href;

@@ -42,6 +42,10 @@ export interface User {
     lienCpas: number;
 
     societe: string;
+    membreNom: string;
+    membrePrenom: string;
+    membreEmail: string;
+    membreLangue: number;
 
     totalRecords: number;
 
@@ -80,6 +84,10 @@ export class DefaultUser implements User {
     password: string;
     rights: string;
     societe: string;
+    membreNom: string;
+    membrePrenom: string;
+    membreEmail: string;
+    membreLangue: number;
     totalRecords: number;
     userName: string;
     isNew: boolean; // calculated property to indicate we are creating a new employee
@@ -105,6 +113,10 @@ export class DefaultUser implements User {
         this.password = '';
         this.rights = '';
         this.societe = '';
+        this.membreNom = '';
+        this.membrePrenom = '';
+        this.membreEmail = '';
+        this.membreLangue = 0;
         this.isNew = true;
     }
 }

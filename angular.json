@@ -35,6 +35,14 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "production": {
               "baseHref": "/en/",
               "budgets": [
@@ -95,6 +103,12 @@
               "i18nFormat": "xlf",
               "i18nLocale": "fr-FR",
               "i18nMissingTranslation": "error",
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -109,6 +123,12 @@
               "i18nFormat": "xlf",
               "i18nLocale": "nl-NL",
               "i18nMissingTranslation": "error",
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -161,6 +181,9 @@
             "browserTarget": "foodbank-it-client:build"
           },
           "configurations": {
+            "development": {
+              "browserTarget": "foodbank-it-client:build:development"
+            },
             "production": {
               "browserTarget": "foodbank-it-client:build:production"
             },
@@ -170,7 +193,8 @@
             "nl": {
               "browserTarget": "foodbank-it-client:build:nl"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
