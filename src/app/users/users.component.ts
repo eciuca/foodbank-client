@@ -8,7 +8,7 @@ import {globalAuthState, isLoggedIn} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
-import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguageLegacy } from '../shared/enums';
+import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguage } from '../shared/enums';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 
@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
   ) {
       this.booCanCreate = false;
       this.rightOptions = enmUserRolesBankAsso;
-      this.languageOptions = enmLanguageLegacy;
+      this.languageOptions = enmLanguage;
       this.bankid = 0;
       this.bankName = '';
       this.orgName = '';
@@ -179,14 +179,17 @@ export class UsersComponent implements OnInit {
                 if (event.filters.idUser && event.filters.idUser.value) {
                     queryParms['idUser'] =  event.filters.idUser.value;
                 }
-                if (event.filters.userName && event.filters.userName.value) {
-                    queryParms['userName'] = event.filters.userName.value;
+                if (event.filters.membreNom && event.filters.membreNom.value) {
+                    queryParms['membreNom'] = event.filters.membreNom.value;
                 }
-                if (event.filters.idLanguage && event.filters.idLanguage.value) {
-                        queryParms['idLanguage'] = event.filters.idLanguage.value;
+                if (event.filters.membrePrenom && event.filters.membrePrenom.value) {
+                    queryParms['membrePrenom'] = event.filters.membrePrenom.value;
                 }
-                if (event.filters.email && event.filters.email.value) {
-                        queryParms['email'] = event.filters.email.value;
+                if (event.filters.membreLangue && event.filters.membreLangue.value) {
+                        queryParms['membreLangue'] = event.filters.membreLangue.value;
+                }
+                if (event.filters.membreEmail && event.filters.membreEmail.value) {
+                        queryParms['membreEmail'] = event.filters.membreEmail.value;
                 }
                 if (event.filters.rights && event.filters.rights.value) {
                         queryParms['rights'] = event.filters.rights.value;
@@ -223,4 +226,19 @@ export class UsersComponent implements OnInit {
         }
         this.loadPageSubject$.next(latestQueryParams);
     }
+
+    labelLanguage(membreLangue: number) {
+            switch (membreLangue) {
+                case 1:
+                    return 'Fr';
+                case 2:
+                    return 'Nl';
+                case 3:
+                    return 'En';
+                default:
+                    return '?';
+            }
+
+
+        }
 }
