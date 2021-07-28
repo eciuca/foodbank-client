@@ -219,6 +219,7 @@ export class BeneficiairesComponent implements OnInit {
   filterOrganisationBeneficiaries(idDis: number) {
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
+    latestQueryParams['offset'] = '0';
     console.log('Latest Query Parms and new idOrg', latestQueryParams, idDis);
     // when we switch from active to archived list and vice versa , we need to restart from first page
     if (idDis != null) {

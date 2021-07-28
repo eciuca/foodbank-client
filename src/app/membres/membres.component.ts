@@ -197,6 +197,7 @@ export class MembresComponent implements OnInit {
         // when we switch we need to restart from first page
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        latestQueryParams['offset'] = '0';
         if (idDis != null) {
                latestQueryParams['lienDis'] = idDis;
            } else {
