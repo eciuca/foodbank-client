@@ -234,6 +234,7 @@ export class UserComponent implements OnInit {
                           }
                           modifiedUser.lienBanque = this.lienBanque;
                           modifiedUser.idOrg = this.idOrg;
+                          if (  modifiedUser.idOrg == null) { modifiedUser.idOrg = 0;}
                           modifiedUser.idCompany = this.idCompany;
                           console.log('Creating User with content:', modifiedUser);
                           this.usersService.add(modifiedUser)

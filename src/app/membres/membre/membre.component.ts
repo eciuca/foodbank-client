@@ -188,6 +188,7 @@ export class MembreComponent implements OnInit {
       } else {
           modifiedMembre.lienBanque = this.lienBanque;
           modifiedMembre.lienDis = this.lienDis;
+          if (modifiedMembre.lienDis == null) {modifiedMembre.lienDis = 0; }
           console.log('Creating Membre with content:', modifiedMembre);
           this.membresService.add(modifiedMembre)
               .subscribe(() => {
