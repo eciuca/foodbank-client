@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {DefaultDataService, DefaultDataServiceConfig, HttpUrlGenerator} from '@ngrx/data';
 import {HttpClient} from '@angular/common/http';
-import {User} from '../model/user';
+import {Mailing} from '../../mailings/model/mailing';
 
 @Injectable({providedIn: 'root'})
-export class UsersDataService extends DefaultDataService<User> {
+export class MailingsDataService extends DefaultDataService<Mailing> {
     constructor(http: HttpClient, httpUrlGenerator: HttpUrlGenerator, config: DefaultDataServiceConfig) {
-         super('User', http, httpUrlGenerator, config);
+        super('Mailing', http, httpUrlGenerator, config);
     }
 }

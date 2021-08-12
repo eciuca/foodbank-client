@@ -9,11 +9,23 @@ import {compareUsers, User} from './users/model/user';
 import {compareDependents, Dependent} from './beneficiaires/model/dependent';
 import {compareOrgcontacts, Orgcontact} from './organisations/model/orgcontact';
 import {compareOrgSummaries, OrgSummary} from './organisations/model/orgsummary';
+import {compareMembreMails, MembreMail} from './membres/model/membreMail';
+import {compareMailings, Mailing} from './mailings/model/mailing';
 
 export const appEntityMetadata: EntityMetadataMap = {
     Membre: {
         sortComparer: compareMembres,
         selectId: (membre: Membre) => membre.batId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
+    },
+    MembreMail: {
+        sortComparer: compareMembreMails,
+        selectId: (membreMail: MembreMail) => membreMail.batId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
+    },
+    Mailing: {
+        sortComparer: compareMailings,
+        selectId: (mailing: Mailing) => mailing.sentDate,
         entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
     },
     Banque: {

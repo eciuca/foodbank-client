@@ -11,15 +11,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">189</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">208</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">216</context>
+          <context context-type="linenumber">219</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBank" datatype="html">
@@ -47,7 +47,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">191</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuUsers" datatype="html">
@@ -59,7 +59,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">191</context>
+          <context context-type="linenumber">192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBeneficiaries" datatype="html">
@@ -71,7 +71,23 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">198</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuMailings" datatype="html">
+        <source>Mailings</source>
+        <target>Mailings</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">182</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">194</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
@@ -79,19 +95,19 @@
         <target>Déconnecter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">182</context>
+          <context context-type="linenumber">183</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">200</context>
+          <context context-type="linenumber">202</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">210</context>
+          <context context-type="linenumber">213</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">220</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOrganisation" datatype="html">
@@ -99,7 +115,7 @@
         <target>Organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBanks" datatype="html">
@@ -107,7 +123,7 @@
         <target>Banques</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">207</context>
+          <context context-type="linenumber">209</context>
         </context-group>
       </trans-unit>
       <trans-unit id="President" datatype="html">
@@ -511,7 +527,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">218</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
@@ -523,7 +539,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">274</context>
+          <context context-type="linenumber">275</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReport" datatype="html">
@@ -1106,6 +1122,10 @@
           <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
@@ -1202,6 +1222,106 @@
           <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="Mailing List" datatype="html">
+        <source>Mailing List</source>
+        <target>Liste des Destinataires</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="EmployeesHeader" datatype="html">
+        <source> Employees of <x id="INTERPOLATION" equiv-text="{{bankName}}"/> </source>
+        <target> Collaborateurs de <x id="INTERPOLATION" equiv-text="{{bankName}}"/> </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">9,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membres.component.html</context>
+          <context context-type="linenumber">9,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Mail Content" datatype="html">
+        <source>Mail Content</source>
+        <target>Contenu du Mail</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MailingTextIsMandatory" datatype="html">
+        <source>Mail text is required</source>
+        <target>Le texte du mail est obligatoire</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MailSubject" datatype="html">
+        <source>Subject</source>
+        <target>Sujet</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MailSubjectIsMandatory" datatype="html">
+        <source>Mail subject is required and must be minimum 6 chars long</source>
+        <target>Le sujet du mail est obligatoire</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="SendEmail" datatype="html">
+        <source>Send Email</source>
+        <target>Envoyer le Mail</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bank" datatype="html">
+        <source>Bank</source>
+        <target>Banque</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="confirmSendMessage" datatype="html">
+        <source>Do you want to send this message?</source>
+        <target>Voulez vous envoyer ce message?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
+          <context context-type="linenumber">150</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageSent" datatype="html">
+        <source>Message has been sent</source>
+        <target>Le message a été envoyé</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
+          <context context-type="linenumber">164</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageSendError" datatype="html">
+        <source>The message could not be sent: error: <x id="PH" equiv-text="dataserviceerror.message"/></source>
+        <target>The message n'a pu être envoyé: erreur: <x id="PH" equiv-text="dataserviceerror.message"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
+          <context context-type="linenumber">171</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="EmployeeHeader" datatype="html">
         <source> Employee <x id="INTERPOLATION" equiv-text="{{ membre.nom}}"/> <x id="INTERPOLATION_1" equiv-text="{{ membre.prenom}}"/> Updated On <x id="INTERPOLATION_2" equiv-text="{{ membre.lastVisit}}"/> </source>
         <target>Collaborateur <x id="INTERPOLATION" equiv-text="{{ membre.nom}}"/> <x id="INTERPOLATION_1" equiv-text="{{ membre.prenom}}"/> mis à jour le <x id="INTERPOLATION_2" equiv-text="{{ membre.lastVisit}}"/> </target>
@@ -1279,7 +1399,7 @@
         <target>Le collaborateur <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> a été créé</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">197</context>
+          <context context-type="linenumber">198</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeCreateError" datatype="html">
@@ -1287,15 +1407,7 @@
         <target>Le collaborateur <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> n'a pas pu être créé: erreur: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">205</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="EmployeesHeader" datatype="html">
-        <source> Employees of <x id="INTERPOLATION" equiv-text="{{bankName}}"/> </source>
-        <target> Collaborateurs de <x id="INTERPOLATION" equiv-text="{{bankName}}"/> </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/membres/membres.component.html</context>
-          <context context-type="linenumber">9,11</context>
+          <context context-type="linenumber">206</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddEmployee" datatype="html">
@@ -1320,18 +1432,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.html</context>
           <context context-type="linenumber">89</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="bank" datatype="html">
-        <source>Bank</source>
-        <target>Banque</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">52</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrganisationHeader" datatype="html">
@@ -2311,7 +2411,7 @@
         <target>L'utilisateur <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> a été créé</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">244</context>
+          <context context-type="linenumber">245</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreateError" datatype="html">
@@ -2319,7 +2419,7 @@
         <target>L'utilisateur <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> n'a pas pu être créé: erreur: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">252</context>
+          <context context-type="linenumber">253</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreateErrorNoEmployee" datatype="html">
@@ -2327,7 +2427,7 @@
         <target>L'utilisateur <x id="PH" equiv-text="modifiedUser.idUser"/> n'a pas pu être créé: aucun collaborateur n'a été sélectionné</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">261</context>
+          <context context-type="linenumber">262</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UsersHeader" datatype="html">

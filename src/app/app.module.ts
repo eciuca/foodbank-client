@@ -57,6 +57,10 @@ const routes: Routes = [
         loadChildren: () => import('./depots/depots.module').then(m => m.DepotsModule),
         canActivate: [AuthGuardWithForcedLogin]
     },
+    { path: 'mailings',
+        loadChildren: () => import('./mailings/mailings.module').then(m => m.MailingsModule),
+        canActivate: [AuthGuardWithForcedLogin]
+    },
     { path: '', redirectTo: '/users', pathMatch: 'full' },
     {
         path: '**',
@@ -83,10 +87,10 @@ const routes: Routes = [
         StoreModule.forRoot(reducers, {
             metaReducers,
             runtimeChecks: {
-                strictStateImmutability: true,
-                strictActionImmutability: true,
-                strictActionSerializability: true,
-                strictStateSerializability: true
+                strictStateImmutability: false,
+                strictActionImmutability: false,
+                strictActionSerializability: false,
+                strictStateSerializability: false
             }
         }),
         StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),

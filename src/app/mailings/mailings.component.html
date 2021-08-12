@@ -1,0 +1,123 @@
+<p-panel *ngIf="membres">
+    <p-accordion>
+        <p-accordionTab i18n-header="@@Mailing List" header="Mailing List" [selected]="true">
+            <p-table [value]="membres" [(selection)]="selectedMembres" dataKey="batId" [loading]="loading"
+                     [(first)]="first">
+                <ng-template pTemplate="caption">
+                    <div class="table-header">
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div i18n="@@EmployeesHeader" class="p-field p-col-12 p-md-4">
+                                Employees of {{bankName}}
+                            </div>
+                            <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
+                                <p-autoComplete [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations"
+                                                (completeMethod)="filterOrganisation($event)"
+                                                (onSelect)="filterOrganisationMembers($event.idDis);"
+                                                [forceSelection]="true" id="filteredOrganisation"
+                                                name="filteredOrganisation" field="societe" [dropdown]="true">
+                                    <ng-template let-organisation pTemplate="item">
+                                        <div class="organisation-item">
+                                            <div> {{organisation.societe}} </div>
+                                        </div>
+                                    </ng-template>
+                                </p-autoComplete>
+                            </div>
+                            <div *ngIf="orgName != ''" class="p-field p-col-12 p-md-4">
+                                {{orgName}}
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th>Name</th>
+                        <th>First Name</th>
+                        <th *ngIf="booShowOrganisations">Organisation</th>
+                        <th>Email</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-membre>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="membre"></p-tableCheckbox>
+                        </td>
+                        <td>{{membre.nom}}</td>
+                        <td>{{membre.prenom}}</td>
+                        <td *ngIf="booShowOrganisations">{{membre.societe}}</td>
+                        <td>{{membre.batmail}}</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </p-accordionTab>
+        <p-accordionTab i18n-header="@@Mail Content" header="Mail Content">
+            <form  #sendForm="ngForm">
+                <div class="p-field p-col-12 p-md-12">
+                    <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" required placeholder="Enter your message" name="mailingText" [style]="{'height':'320px'}">
+                        <p-header>
+                             <span class="ql-formats">
+                                <select class="ql-header" tabindex="-1">
+                                    <option value="1" tabindex="-1">Heading</option>
+                                    <option value="2" tabindex="-1">Subheading</option>
+                                    <option selected tabindex="-1">Normal</option>
+                                </select>
+                             <select class="ql-font" tabindex="-1">
+                                    <option selected tabindex="-1">Sans Serif</option>
+                                    <option value="serif" tabindex="-1">Serif</option>
+                                    <option value="monospace" tabindex="-1">Monospace</option>
+                                </select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-bold" aria-label="Bold" tabindex="-1"></button>
+                                <button class="ql-italic" aria-label="Italic" tabindex="-1"></button>
+                                <button class="ql-underline" aria-label="Underline" tabindex="-1"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <select class="ql-color" tabindex="-1"></select>
+                                <select class="ql-background" tabindex="-1"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-list" value="ordered" aria-label="Ordered List" tabindex="-1"></button>
+                                <button class="ql-list" value="bullet" aria-label="Unordered List" tabindex="-1"></button>
+                                <select class="ql-align" tabindex="-1">
+                                    <option selected tabindex="-1"></option>
+                                    <option value="center" tabindex="-1"></option>
+                                    <option value="right" tabindex="-1"></option>
+                                    <option value="justify" tabindex="-1"></option>
+                                </select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-link" aria-label="Insert Link" tabindex="-1"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-clean" aria-label="Remove Styles" tabindex="-1"></button>
+                            </span>
+                        </p-header>
+                    </p-editor>
+                    <p-message i18n-text="@@MailingTextIsMandatory" *ngIf="idmailingtext.invalid && idmailingtext.touched" severity="error" text="Mail text is required"></p-message>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-9">
+                        <label i18n="@@MailSubject" for="idSubject">Subject</label>
+                        <input #idsubject="ngModel" pInputText id="idSubject" name="idSubject" required  minlength="6"  [(ngModel)]="mailingSubject" />
+                        <p-message i18n-text="@@MailSubjectIsMandatory" *ngIf="idsubject.invalid && idsubject.touched" severity="error" text="Mail subject is required and must be minimum 6 chars long"></p-message>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)" [disabled] = "sendForm.invalid" label="Send Email"></button>
+                    </div>
+            </div>
+            </form>
+        </p-accordionTab>
+    </p-accordion>
+    <p-toast></p-toast>
+    <p-confirmPopup></p-confirmPopup>
+</p-panel>
+
+
+
+
+
