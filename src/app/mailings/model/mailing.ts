@@ -4,6 +4,7 @@ export interface Mailing {
     subject: string;
     bodyText: string;
     sentDate: string;
+    attachmentFileNames: string;
 }
 export function compareMailings(c1: Mailing, c2: Mailing) {
 
@@ -21,11 +22,13 @@ export class DefaultMailing implements Mailing {
     subject: string;
     to: string;
     sentDate: string;
+    attachmentFileNames: string;
     constructor() {
         this.to = '';
         this.from = '';
         this.subject = '';
         this.bodyText = '';
+        this.attachmentFileNames = '';
         this.sentDate = new Date().toISOString();
     }
 }

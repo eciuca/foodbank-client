@@ -102,6 +102,16 @@
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-9">
+                        Attachments: {{attachmentFileNames.toString() }}
+                    </div>
+                    <div class="p-field p-col-12 p-md-9">
+                        <p-fileUpload name="myFile[]"  [auto]="true"  customUpload="true" (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event)">
+                            <ng-template pTemplate="toolbar">
+                                <div>Attach Files to your mail</div>
+                            </ng-template>
+                        </p-fileUpload>
+                    </div>
+                    <div class="p-field p-col-12 p-md-9">
                         <label i18n="@@MailSubject" for="idSubject">Subject</label>
                         <input #idsubject="ngModel" pInputText id="idSubject" name="idSubject" required  minlength="6"  [(ngModel)]="mailingSubject" />
                         <p-message i18n-text="@@MailSubjectIsMandatory" *ngIf="idsubject.invalid && idsubject.touched" severity="error" text="Mail subject is required and must be minimum 6 chars long"></p-message>

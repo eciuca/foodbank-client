@@ -22,6 +22,8 @@ import {MailingEntityService} from './services/mailing-entity.service';
 import {ButtonModule} from 'primeng/button';
 import {MessageModule} from 'primeng/message';
 import {InputTextModule} from 'primeng/inputtext';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -48,7 +50,8 @@ const routes: Routes = [
         EditorModule,
         ButtonModule,
         MessageModule,
-        InputTextModule
+        InputTextModule,
+        FileUploadModule
     ],
     providers: [
         MailingsDataService,

@@ -5,14 +5,19 @@ import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {AuthState} from '../auth/reducers';
+import { AuthService } from '../auth/auth.service';
 import {globalAuthState} from '../auth/auth.selectors';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {MailingEntityService} from './services/mailing-entity.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {DefaultMailing, Mailing} from './model/mailing';
+import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
+import {FileUploadService} from './services/file-upload.service';
+import {forEach} from '@angular-devkit/schematics';
+
 
 @Component({
   selector: 'app-mailings',
@@ -39,12 +44,20 @@ export class MailingsComponent implements OnInit {
   mailing: Mailing;
   mailingSubject: string;
   mailingText: string;
+  // variables for file upload
+  attachmentFileNames: string[];
+  currentFile?: File;
+  uploadMessage: string;
+
   constructor(private membreMailService: MembreMailEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private mailingService: MailingEntityService,
+              private uploadService: FileUploadService,
               private messageService: MessageService,
               private confirmationService: ConfirmationService,
               private router: Router,
+              private authService: AuthService,
+              private http: HttpClient,
               private store: Store<AppState>) {
     this.bankid = 0;
     this.booShowOrganisations = false;
@@ -53,13 +66,16 @@ export class MailingsComponent implements OnInit {
     this.orgName = '';
     this.membreEmail = '';
     this.filteredOrganisationsPrepend = [
-      {idDis: 0, societe: $localize`:@@bank:Bank` },
-      {idDis: null, societe: $localize`:@@organisations:Organisations` },
+      {idDis: 0, societe: $localize`:@@bank:Bank`},
+      {idDis: null, societe: $localize`:@@organisations:Organisations`},
     ];
     this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
     this.mailingText = '';
     this.mailingSubject = '';
     this.mailing = new DefaultMailing();
+    this.uploadMessage = '';
+    this.attachmentFileNames = [];
+
   }
 
   ngOnInit(): void {
@@ -80,12 +96,14 @@ export class MailingsComponent implements OnInit {
         .subscribe(loadedMembres => {
           console.log('Nb of Loaded membres ' + loadedMembres.length);
           this.totalRecords = loadedMembres.length;
-          this.membres  = loadedMembres;
+          this.membres = loadedMembres;
           this.loading = false;
           this.membreMailService.setLoaded(true);
         });
     this.loadMembers();
+
   }
+
   loadMembers() {
     console.log('Entering loadmembers');
     this.loading = true;
@@ -96,6 +114,7 @@ export class MailingsComponent implements OnInit {
     }
     this.loadMemberSubject$.next(queryParms);
   }
+
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.banque) {
       this.bankid = authState.banque.bankId;
@@ -105,19 +124,20 @@ export class MailingsComponent implements OnInit {
         case 'Bank':
         case 'Admin_Banq':
           this.booShowOrganisations = true;
-          this.filterBase = { 'lienBanque': authState.banque.bankId};
+          this.filterBase = {'lienBanque': authState.banque.bankId};
           break;
         case 'Asso':
         case 'Admin_Asso':
-          this.filterBase = { 'lienDis': authState.organisation.idDis};
+          this.filterBase = {'lienDis': authState.organisation.idDis};
           this.orgName = authState.organisation.societe;
           break;
         default:
       }
     }
   }
-  filterOrganisation(event ) {
-    const  queryOrganisationParms: QueryParams = {};
+
+  filterOrganisation(event) {
+    const queryOrganisationParms: QueryParams = {};
     queryOrganisationParms['lienBanque'] = this.bankid.toString();
     queryOrganisationParms['societe'] = event.query.toLowerCase();
     this.orgsummaryService.getWithQuery(queryOrganisationParms)
@@ -150,27 +170,30 @@ export class MailingsComponent implements OnInit {
       message: $localize`:@@confirmSendMessage:Do you want to send this message?`,
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-       this.mailing.subject = this.mailingSubject;
-       this.mailing.from = this.membreEmail;
-       this.mailing.to = 'clairevdm@gmail.com';
-       // this.mailing.bodyText = 'Hello World';
-       this.mailing.bodyText = this.mailingText;
-       this.mailingService.add(this.mailing)
+        this.mailing.subject = this.mailingSubject;
+        this.mailing.from = this.membreEmail;
+        this.mailing.to = 'clairevdm@gmail.com';
+        // this.mailing.bodyText = 'Hello World';
+        this.mailing.bodyText = this.mailingText;
+        this.mailing.attachmentFileNames = this.attachmentFileNames.toString();
+        this.mailingService.add(this.mailing)
             .subscribe((myMail: Mailing) => {
-                  console.log('Returned mailing',  myMail);
+                  console.log('Returned mailing', myMail);
                   this.messageService.add({
                     severity: 'success',
                     summary: 'Creation',
                     detail: $localize`:@@messageSent:Message has been sent`
                   });
-                 },
+                },
                 (dataserviceerror: DataServiceError) => {
                   console.log('Error Sending Message', dataserviceerror);
-                  const  errMessage = {severity: 'error', summary: 'Send',
+                  const errMessage = {
+                    severity: 'error', summary: 'Send',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageSendError:The message could not be sent: error: ${dataserviceerror.message}`,
-                    life: 6000 };
-                  this.messageService.add(errMessage) ;
+                    life: 6000
+                  };
+                  this.messageService.add(errMessage);
                 }
             );
       },
@@ -179,4 +202,51 @@ export class MailingsComponent implements OnInit {
       }
     });
   }
+
+  storeMailAttachment(event: any) {
+    console.log('Entering storeMailAttachment', event );
+    console.log('Current Files Selection', this.attachmentFileNames);
+    const file: File | null = event.files[0];
+
+      if (file) {
+        this.currentFile = file;
+
+        this.uploadService.upload(this.currentFile, this.authService.accessToken).subscribe(
+            (response: any) => {
+              console.log(response);
+              this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
+              this.attachmentFileNames.push(file.name);
+                this.uploadMessage = response.message;
+                this.messageService.add({
+                  severity: 'success',
+                  summary: 'Upload Mail Attachment',
+                  detail: this.uploadMessage,
+                  life: 6000
+                });
+            },
+            (err: any) => {
+              console.log(err);
+              if (err.error && err.error.message) {
+                this.uploadMessage = err.error.message;
+              } else {
+                this.uploadMessage = 'Could not upload the file!';
+              }
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Upload Mail Attachment',
+                detail: this.uploadMessage,
+                life: 6000
+              });
+              this.currentFile = undefined;
+            });
+
+      }
+  }
+
+  removeMailAttachment(event: any) {
+    console.log('Entering removeMailAttachment', event );
+    const file: File | null = event.file;
+    this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
+  }
 }
+
