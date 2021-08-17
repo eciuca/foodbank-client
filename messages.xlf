@@ -1028,7 +1028,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
@@ -1153,28 +1153,28 @@
         <source>Subject</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MailSubjectIsMandatory" datatype="html">
         <source>Mail subject is required and must be minimum 6 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SendEmail" datatype="html">
         <source>Send Email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bank" datatype="html">
         <source>Bank</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
@@ -1189,21 +1189,21 @@
         <source>Do you want to send this message?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSent" datatype="html">
         <source>Message has been sent</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSendError" datatype="html">
         <source>The message could not be sent: error: <x id="PH" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">193</context>
         </context-group>
       </trans-unit>
       <trans-unit id="EmployeeHeader" datatype="html">
