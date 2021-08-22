@@ -1123,7 +1123,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
@@ -1250,6 +1250,14 @@
           <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="EnterYourMessage" datatype="html">
+        <source>Enter your message</source>
+        <target>Voeg je mail tekst hier in</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="MailingTextIsMandatory" datatype="html">
         <source>Mail text is required</source>
         <target>U moet de inhoud van de mail opstellen</target>
@@ -1258,12 +1266,28 @@
           <context context-type="linenumber">101</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="SelectFile" datatype="html">
+        <source>Select File</source>
+        <target>Kies een bestand</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AttachFilesToMail" datatype="html">
+        <source>Attach Files to your mail</source>
+        <target>Voeg bestanden toe aan uw e-mail</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="MailSubject" datatype="html">
         <source>Subject</source>
         <target>Onderwerp</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">119</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MailSubjectIsMandatory" datatype="html">
@@ -1271,7 +1295,7 @@
         <target>U moet het onderwerp van de mail invullen( minimum 6 tekens)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SendEmail" datatype="html">
@@ -1279,7 +1303,7 @@
         <target>Verstuur de Email</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bank" datatype="html">
@@ -1287,7 +1311,7 @@
         <target>Bank</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">70</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
@@ -1298,12 +1322,28 @@
           <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="messageSendMaxListError" datatype="html">
+        <source>You have <x id="PH" equiv-text="mailListArray.length"/> recipients. The maximum is 3.</source>
+        <target>U hebt <x id="PH" equiv-text="mailListArray.length"/> bestemmelingen. Het maximum is 3.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
+          <context context-type="linenumber">177</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageSendNoListError" datatype="html">
+        <source>You have no recipients. Please select the recipients for your email.</source>
+        <target>U hebt geen bestemmelingen gespecifieerd. Selecteer ze eerst.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
+          <context context-type="linenumber">186</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="confirmSendMessage" datatype="html">
         <source>Do you want to send this message?</source>
         <target>Wenst  u deze boodschap te versturen?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">194</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSent" datatype="html">
@@ -1311,7 +1351,7 @@
         <target>De boodschap werd verstuurd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">209</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSendError" datatype="html">
@@ -1319,7 +1359,7 @@
         <target>De boodschap werd niet verstuurd: foutmelding: <x id="PH" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">193</context>
+          <context context-type="linenumber">217</context>
         </context-group>
       </trans-unit>
       <trans-unit id="EmployeeHeader" datatype="html">

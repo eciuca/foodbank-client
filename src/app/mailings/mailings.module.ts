@@ -23,7 +23,7 @@ import {ButtonModule} from 'primeng/button';
 import {MessageModule} from 'primeng/message';
 import {InputTextModule} from 'primeng/inputtext';
 import {FileUploadModule} from 'primeng/fileupload';
-import {HttpClientModule} from '@angular/common/http';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 
@@ -51,7 +51,8 @@ const routes: Routes = [
         ButtonModule,
         MessageModule,
         InputTextModule,
-        FileUploadModule
+        FileUploadModule,
+        InputTextareaModule
     ],
     providers: [
         MailingsDataService,

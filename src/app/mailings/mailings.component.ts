@@ -44,6 +44,7 @@ export class MailingsComponent implements OnInit {
   mailing: Mailing;
   mailingSubject: string;
   mailingText: string;
+  mailingToList: string;
   // variables for file upload
   attachmentFileNames: string[];
   currentFile?: File;
@@ -165,6 +166,29 @@ export class MailingsComponent implements OnInit {
   }
 
   sendmail(event: Event) {
+    let mailListArray = [];
+    if ( this.mailingToList) {
+      mailListArray = this.mailingToList.split('\n');
+    }
+    console.log('mailListArray', mailListArray);
+    if ( mailListArray.length > 3) {
+      const errMessage = {
+        severity: 'error', summary: 'Send',
+        detail: $localize`:@@messageSendMaxListError:You have ${mailListArray.length} recipients. The maximum is 3.`,
+        life: 6000
+      };
+      this.messageService.add(errMessage);
+      return;
+    }
+    if (mailListArray.length === 0 || (mailListArray.length === 1 && mailListArray[0].trim() === '' ) ) {
+      const errMessage = {
+        severity: 'error', summary: 'Send',
+        detail: $localize`:@@messageSendNoListError:You have no recipients. Please select the recipients for your email.`,
+        life: 6000
+      };
+      this.messageService.add(errMessage);
+      return;
+    }
     this.confirmationService.confirm({
       target: event.target,
       message: $localize`:@@confirmSendMessage:Do you want to send this message?`,
@@ -172,7 +196,7 @@ export class MailingsComponent implements OnInit {
       accept: () => {
         this.mailing.subject = this.mailingSubject;
         this.mailing.from = this.membreEmail;
-        this.mailing.to = 'clairevdm@gmail.com';
+        this.mailing.to = mailListArray.join(',');
         // this.mailing.bodyText = 'Hello World';
         this.mailing.bodyText = this.mailingText;
         this.mailing.attachmentFileNames = this.attachmentFileNames.toString();
@@ -248,5 +272,18 @@ export class MailingsComponent implements OnInit {
     const file: File | null = event.file;
     this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
   }
+
+  loadTextAreaWidget(event: any) {
+    console.log('Select mail event', event, this.selectedMembres);
+    // tslint:disable-next-line:max-line-length
+    this.mailingToList = Array.prototype.map.call(this.selectedMembres, function (item) {
+      if (item.batmail.length > 0) {
+        return item.nom + ' ' + item.prenom + '<' + item.batmail + '>';
+      } else {
+        return '';
+      }
+    }).join('\n');
+  }
+
 }
 

@@ -2,7 +2,7 @@
     <p-accordion>
         <p-accordionTab i18n-header="@@Mailing List" header="Mailing List" [selected]="true">
             <p-table [value]="membres" [(selection)]="selectedMembres" dataKey="batId" [loading]="loading"
-                     [(first)]="first">
+                     [(first)]="first"  (onHeaderCheckboxToggle)="loadTextAreaWidget($event)" (onRowSelect)="loadTextAreaWidget($event)" (onRowUnselect)="loadTextAreaWidget($event)">
                 <ng-template pTemplate="caption">
                     <div class="table-header">
                         <div class="p-fluid p-formgrid p-grid">
@@ -57,7 +57,7 @@
         <p-accordionTab i18n-header="@@Mail Content" header="Mail Content">
             <form  #sendForm="ngForm">
                 <div class="p-field p-col-12 p-md-12">
-                    <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" required placeholder="Enter your message" name="mailingText" [style]="{'height':'320px'}">
+                    <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" required i18n-placeholder="@@EnterYourMessage" placeholder="Enter your message" name="mailingText" [style]="{'height':'320px'}">
                         <p-header>
                              <span class="ql-formats">
                                 <select class="ql-header" tabindex="-1">
@@ -101,22 +101,26 @@
                     <p-message i18n-text="@@MailingTextIsMandatory" *ngIf="idmailingtext.invalid && idmailingtext.touched" severity="error" text="Mail text is required"></p-message>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-9">
+                    <div class="p-field p-col-12 p-md-4">
+                       To: <textarea [rows]="5" [cols]="30" pInputTextarea name="mailingList" [(ngModel)]="mailingToList"></textarea>
+                    </div>
+                        <div class="p-field p-col-12 p-md-8">
                         Attachments: {{attachmentFileNames.toString() }}
                     </div>
-                    <div class="p-field p-col-12 p-md-9">
-                        <p-fileUpload name="myFile[]"  [auto]="true"  customUpload="true" (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event)">
+                    <div class="p-field p-col-12 p-md-4">
+                        <p-fileUpload i18n-chooseLabel="@@SelectFile" name="myFile[]"  [auto]="true"  customUpload="true"  chooseLabel="Select File"
+                                      (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event)">
                             <ng-template pTemplate="toolbar">
-                                <div>Attach Files to your mail</div>
+                                <div i18n="@@AttachFilesToMail">Attach Files to your mail</div>
                             </ng-template>
                         </p-fileUpload>
                     </div>
-                    <div class="p-field p-col-12 p-md-9">
+                    <div class="p-field p-col-12 p-md-6">
                         <label i18n="@@MailSubject" for="idSubject">Subject</label>
                         <input #idsubject="ngModel" pInputText id="idSubject" name="idSubject" required  minlength="6"  [(ngModel)]="mailingSubject" />
                         <p-message i18n-text="@@MailSubjectIsMandatory" *ngIf="idsubject.invalid && idsubject.touched" severity="error" text="Mail subject is required and must be minimum 6 chars long"></p-message>
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
+                    <div class="p-field p-col-12 p-md-2">
                         <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)" [disabled] = "sendForm.invalid" label="Send Email"></button>
                     </div>
             </div>
