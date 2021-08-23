@@ -9,14 +9,14 @@ import { AuthService } from '../auth/auth.service';
 import {globalAuthState} from '../auth/auth.selectors';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {MailingEntityService} from './services/mailing-entity.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {DefaultMailing, Mailing} from './model/mailing';
-import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {FileUploadService} from './services/file-upload.service';
-import {forEach} from '@angular-devkit/schematics';
+
 
 
 @Component({
@@ -46,7 +46,6 @@ export class MailingsComponent implements OnInit {
   mailingToList: string;
   // variables for file upload
   attachmentFileNames: string[];
-  uploadMessage: string;
 
   constructor(private membreMailService: MembreMailEntityService,
               private orgsummaryService: OrgSummaryEntityService,
@@ -66,7 +65,6 @@ export class MailingsComponent implements OnInit {
     this.mailingText = '';
     this.mailingSubject = '';
     this.mailing = new DefaultMailing();
-    this.uploadMessage = '';
     this.attachmentFileNames = [];
 
   }
@@ -239,24 +237,23 @@ export class MailingsComponent implements OnInit {
               console.log(response);
               this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
               this.attachmentFileNames.push(file.name);
-                this.uploadMessage = $localize`:@@fileUploadOk:File ${file.name} was uploaded`;
-                this.messageService.add({
+              this.messageService.add({
                   severity: 'success',
                   summary: $localize`:@@fileUpload:Upload Mail Attachment`,
-                  detail: this.uploadMessage,
+                  detail: $localize`:@@fileUploadOk:File ${file.name} was uploaded`,
                   life: 6000
                 });
             },
             (err: any) => {
               console.log(err);
-              this.uploadMessage = $localize`:@@fileUploadFailed:Could not upload file ${file.name}. `;
+              let errorMsg = '';
               if (err.error && err.error.message) {
-                this.uploadMessage += err.error.message;
+                errorMsg = err.error.message;
               }
               this.messageService.add({
                 severity: 'error',
                 summary: $localize`:@@fileUpload:Upload Mail Attachment`,
-                detail: this.uploadMessage,
+                detail: $localize`:@@fileUploadFailed:Could not upload file ${file.name}. ${errorMsg} `,
                 life: 6000
               });
             });

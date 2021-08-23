@@ -1004,27 +1004,6 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>EmailSorted</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>fr-FR</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>nl-NL</language>
-                        <approved>true</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
                 <name>Employee</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -1471,27 +1450,6 @@
             </concept_node>
             <concept_node>
                 <name>Language</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>fr-FR</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>nl-NL</language>
-                        <approved>true</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>LanguageSorted</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -2227,27 +2185,6 @@
             </concept_node>
             <concept_node>
                 <name>OrganisationDetails</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>fr-FR</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>nl-NL</language>
-                        <approved>true</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>OrganisationDisCenter</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -3886,27 +3823,6 @@
             </concept_node>
             <concept_node>
                 <name>UserLoginSorted</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>fr-FR</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>nl-NL</language>
-                        <approved>true</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>UserNameSorted</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -5623,7 +5539,7 @@
                     </translation>
                     <translation>
                         <language>nl-NL</language>
-                        <approved>false</approved>
+                        <approved>true</approved>
                     </translation>
                 </translations>
             </concept_node>
