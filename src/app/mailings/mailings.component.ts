@@ -37,7 +37,6 @@ export class MailingsComponent implements OnInit {
   totalRecords: number;
   first: number;
   filterBase: any;
-  booShowOrganisations: boolean;
   filteredOrganisation: any;
   filteredOrganisations: any[];
   filteredOrganisationsPrepend: any[];
@@ -47,7 +46,6 @@ export class MailingsComponent implements OnInit {
   mailingToList: string;
   // variables for file upload
   attachmentFileNames: string[];
-  currentFile?: File;
   uploadMessage: string;
 
   constructor(private membreMailService: MembreMailEntityService,
@@ -61,16 +59,10 @@ export class MailingsComponent implements OnInit {
               private http: HttpClient,
               private store: Store<AppState>) {
     this.bankid = 0;
-    this.booShowOrganisations = false;
     this.first = 0;
     this.bankName = '';
     this.orgName = '';
     this.membreEmail = '';
-    this.filteredOrganisationsPrepend = [
-      {idDis: 0, societe: $localize`:@@bank:Bank`},
-      {idDis: null, societe: $localize`:@@organisations:Organisations`},
-    ];
-    this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
     this.mailingText = '';
     this.mailingSubject = '';
     this.mailing = new DefaultMailing();
@@ -110,7 +102,7 @@ export class MailingsComponent implements OnInit {
     this.loading = true;
     const queryParms = {...this.filterBase};
 
-    if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
+    if (this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
       queryParms['lienDis'] = this.filteredOrganisation.idDis;
     }
     this.loadMemberSubject$.next(queryParms);
@@ -121,16 +113,25 @@ export class MailingsComponent implements OnInit {
       this.bankid = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
       this.membreEmail = authState.user.membreEmail;
+      this.filterBase = {'lienBanque': authState.banque.bankId};
       switch (authState.user.rights) {
         case 'Bank':
         case 'Admin_Banq':
-          this.booShowOrganisations = true;
-          this.filterBase = {'lienBanque': authState.banque.bankId};
+          this.filteredOrganisationsPrepend = [
+            {idDis: 0, societe: $localize`:@@bank:Bank`},
+            {idDis: null, societe: $localize`:@@organisations:Organisations`},
+          ];
+          this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
           break;
         case 'Asso':
         case 'Admin_Asso':
-          this.filterBase = {'lienDis': authState.organisation.idDis};
           this.orgName = authState.organisation.societe;
+          this.filteredOrganisationsPrepend = [
+            {idDis: authState.organisation.idDis, societe: $localize`:@@organisationMine:My Organisation`},
+            {idDis: 0, societe: $localize`:@@bank:Bank`},
+            {idDis: null, societe: $localize`:@@organisations:Organisations`},
+          ];
+          this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
           break;
         default:
       }
@@ -154,7 +155,6 @@ export class MailingsComponent implements OnInit {
     // when we switch we need to restart from first page
     this.first = 0;
     const latestQueryParams = {...this.loadMemberSubject$.getValue()};
-    latestQueryParams['offset'] = '0';
     if (idDis != null) {
       latestQueryParams['lienDis'] = idDis;
     } else {
@@ -162,6 +162,7 @@ export class MailingsComponent implements OnInit {
         delete latestQueryParams['lienDis'];
       }
     }
+    // console.log('IdDis:', idDis, 'My latest Query parms are:', latestQueryParams);
     this.loadMemberSubject$.next(latestQueryParams);
   }
 
@@ -233,35 +234,31 @@ export class MailingsComponent implements OnInit {
     const file: File | null = event.files[0];
 
       if (file) {
-        this.currentFile = file;
-
-        this.uploadService.upload(this.currentFile, this.authService.accessToken).subscribe(
+        this.uploadService.upload(file, this.authService.accessToken).subscribe(
             (response: any) => {
               console.log(response);
               this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
               this.attachmentFileNames.push(file.name);
-                this.uploadMessage = response.message;
+                this.uploadMessage = $localize`:@@fileUploadOk:File ${file.name} was uploaded`;
                 this.messageService.add({
                   severity: 'success',
-                  summary: 'Upload Mail Attachment',
+                  summary: $localize`:@@fileUpload:Upload Mail Attachment`,
                   detail: this.uploadMessage,
                   life: 6000
                 });
             },
             (err: any) => {
               console.log(err);
+              this.uploadMessage = $localize`:@@fileUploadFailed:Could not upload file ${file.name}. `;
               if (err.error && err.error.message) {
-                this.uploadMessage = err.error.message;
-              } else {
-                this.uploadMessage = 'Could not upload the file!';
+                this.uploadMessage += err.error.message;
               }
               this.messageService.add({
                 severity: 'error',
-                summary: 'Upload Mail Attachment',
+                summary: $localize`:@@fileUpload:Upload Mail Attachment`,
                 detail: this.uploadMessage,
                 life: 6000
               });
-              this.currentFile = undefined;
             });
 
       }

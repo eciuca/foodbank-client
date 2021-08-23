@@ -9,7 +9,7 @@
                             <div i18n="@@EmployeesHeader" class="p-field p-col-12 p-md-4">
                                 Employees of {{bankName}}
                             </div>
-                            <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
+                            <div class="p-field p-col-12 p-md-4">
                                 <p-autoComplete [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations"
                                                 (completeMethod)="filterOrganisation($event)"
                                                 (onSelect)="filterOrganisationMembers($event.idDis);"
@@ -36,7 +36,7 @@
                         </th>
                         <th>Name</th>
                         <th>First Name</th>
-                        <th *ngIf="booShowOrganisations">Organisation</th>
+                        <th>Organisation</th>
                         <th>Email</th>
                     </tr>
                 </ng-template>
@@ -47,7 +47,7 @@
                         </td>
                         <td>{{membre.nom}}</td>
                         <td>{{membre.prenom}}</td>
-                        <td *ngIf="booShowOrganisations">{{membre.societe}}</td>
+                        <td>{{membre.societe}}</td>
                         <td>{{membre.batmail}}</td>
                     </tr>
                 </ng-template>
