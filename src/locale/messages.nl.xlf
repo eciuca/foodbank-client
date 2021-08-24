@@ -1378,29 +1378,33 @@
           <context context-type="linenumber">216</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="fileUpload" datatype="html">
-        <source>Upload Mail Attachment</source>
-        <target>Bestand aan mail toevoegen</target>
+      <trans-unit id="fileUploadSuccess" datatype="html">
+        <source>Upload Mail Attachment Succeeded</source>
+        <target>Upload Mail bestand is gelukt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
           <context context-type="linenumber">242</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">255</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="fileUploadOk" datatype="html">
+      <trans-unit id="fileUploadSuccessDetail" datatype="html">
         <source>File <x id="PH" equiv-text="file.name"/> was uploaded</source>
-        <target>Bestand <x id="PH" equiv-text="file.name"/> was toegevoegd</target>
+        <target>Het bestand <x id="PH" equiv-text="file.name"/> werd opgeladen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
           <context context-type="linenumber">243</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="fileUploadFailed" datatype="html">
+      <trans-unit id="fileUploadError" datatype="html">
+        <source>Upload Mail Attachment Failed</source>
+        <target>Upload Mail bestand is mislukt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
+          <context context-type="linenumber">255</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fileUploadErrorDetail" datatype="html">
         <source>Could not upload file <x id="PH" equiv-text="file.name"/>. <x id="PH_1" equiv-text="errorMsg"/> </source>
-        <target>Fout in opladen bestand <x id="PH" equiv-text="file.name"/>. <x id="PH_1" equiv-text="errorMsg"/> </target>
+        <target>Fout upload bestand <x id="PH" equiv-text="file.name"/>. <x id="PH_1" equiv-text="errorMsg"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
           <context context-type="linenumber">256</context>

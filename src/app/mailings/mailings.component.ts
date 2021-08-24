@@ -227,8 +227,8 @@ export class MailingsComponent implements OnInit {
   }
 
   storeMailAttachment(event: any) {
-    console.log('Entering storeMailAttachment', event );
-    console.log('Current Files Selection', this.attachmentFileNames);
+   // console.log('Entering storeMailAttachment', event );
+   // console.log('Current Files Selection', this.attachmentFileNames);
     const file: File | null = event.files[0];
 
       if (file) {
@@ -239,8 +239,8 @@ export class MailingsComponent implements OnInit {
               this.attachmentFileNames.push(file.name);
               this.messageService.add({
                   severity: 'success',
-                  summary: $localize`:@@fileUpload:Upload Mail Attachment`,
-                  detail: $localize`:@@fileUploadOk:File ${file.name} was uploaded`,
+                  summary: $localize`:@@fileUploadSuccess:Upload Mail Attachment Succeeded`,
+                  detail: $localize`:@@fileUploadSuccessDetail:File ${file.name} was uploaded`,
                   life: 6000
                 });
             },
@@ -252,8 +252,8 @@ export class MailingsComponent implements OnInit {
               }
               this.messageService.add({
                 severity: 'error',
-                summary: $localize`:@@fileUpload:Upload Mail Attachment`,
-                detail: $localize`:@@fileUploadFailed:Could not upload file ${file.name}. ${errorMsg} `,
+                summary: $localize`:@@fileUploadError:Upload Mail Attachment Failed`,
+                detail: $localize`:@@fileUploadErrorDetail:Could not upload file ${file.name}. ${errorMsg} `,
                 life: 6000
               });
             });

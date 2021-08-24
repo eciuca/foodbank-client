@@ -4368,7 +4368,7 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>fileUpload</name>
+                <name>fileUploadError</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -4389,7 +4389,7 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>fileUploadFailed</name>
+                <name>fileUploadErrorDetail</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -4410,7 +4410,28 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>fileUploadOk</name>
+                <name>fileUploadSuccess</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>fileUploadSuccessDetail</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
