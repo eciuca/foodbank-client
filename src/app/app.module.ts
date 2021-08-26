@@ -27,7 +27,12 @@ import { FallbackComponent } from './fallback.component';
 import { ShouldLoginComponent } from './should-login.component';
 import { AuthGuardWithForcedLogin } from './auth/auth-guard-with-forced-login.guard';
 
+
 const routes: Routes = [
+    { path: 'home',
+        loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+        canActivate: [AuthGuardWithForcedLogin]
+    },
     { path: 'banques',
         loadChildren: () => import('./banques/banques.module').then(m => m.BanquesModule),
         canActivate: [AuthGuardWithForcedLogin]
@@ -61,10 +66,10 @@ const routes: Routes = [
         loadChildren: () => import('./mailings/mailings.module').then(m => m.MailingsModule),
         canActivate: [AuthGuardWithForcedLogin]
     },
-    { path: '', redirectTo: '/users', pathMatch: 'full' },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     {
         path: '**',
-        redirectTo: '/users'
+        redirectTo: '/home'
     }
 ];
 
