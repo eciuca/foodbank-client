@@ -32,6 +32,9 @@ import {OrgcontactEntityService} from './services/orgcontact-entity.service';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {CheckboxModule} from 'primeng/checkbox';
+import {ChartModule} from 'primeng/chart';
+import {OrgReportComponent} from './orgreport/orgreport.component';
+import {OrgReportService} from './services/org-report.service';
 
 const routes: Routes = [
     { path: '',
@@ -44,11 +47,15 @@ const routes: Routes = [
     {
         path: 'contacts/:idDis',
         component: OrgcontactsComponent
+    },
+    {
+        path: 'orgreports/:bankId',
+        component: OrgReportComponent
     }
 ];
 
 @NgModule({
-  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent],
+  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -65,13 +72,15 @@ const routes: Routes = [
         InputSwitchModule,
         MessageModule,
         ToastModule,
-        CheckboxModule
+        CheckboxModule,
+        ChartModule
     ],
   providers: [
         OrganisationsDataService,
         OrganisationEntityService,
         OrgcontactsDataService,
         OrgcontactEntityService,
+        OrgReportService,
         CpassDataService,
         CpasEntityService,
         DepotsDataService,

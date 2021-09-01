@@ -25,13 +25,4 @@ export class FileUploadService {
         return this.http.post(`${this.baseUrl}/upload/`, formData, requestOptions );
     }
 
-    getFiles(accesstoken: string): Observable<any> {
-        const requestOptions = {
-            headers: new HttpHeaders( {
-                responseType: 'json',
-                Authorization: accesstoken
-            }),
-        };
-        return this.http.get(`${this.baseUrl}/files`, requestOptions);
-    }
 }
