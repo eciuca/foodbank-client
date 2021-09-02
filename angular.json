@@ -23,6 +23,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
+            "aot": true,
+            "i18nMissingTranslation": "error",
             "baseHref": "/en/",
             "outputPath": "dist/foodbank-it-client-en/",
             "index": "src/index.html",
@@ -76,9 +79,7 @@
             "prod-fr": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-fr/",
-              "i18nFile": "src/locale/messages.fr.xlf",
-              "i18nLocale": "fr-FR",
-              "i18nMissingTranslation": "error",
+              "localize": ["fr-FR"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -89,9 +90,7 @@
             "prod-nl": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-nl/",
-              "i18nFile": "src/locale/messages.nl.xlf",
-              "i18nLocale": "nl-NL",
-              "i18nMissingTranslation": "error",
+              "localize": ["nl-NL"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -102,9 +101,7 @@
             "fr": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-fr/",
-              "i18nFile": "src/locale/messages.fr.xlf",
-              "i18nLocale": "fr-FR",
-              "i18nMissingTranslation": "error",
+              "localize": ["fr-FR"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -115,9 +112,7 @@
             "nl": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-nl/",
-              "i18nFile": "src/locale/messages.nl.xlf",
-              "i18nLocale": "nl-NL",
-              "i18nMissingTranslation": "error",
+              "localize": ["nl-NL"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -137,9 +132,7 @@
             "docker-local-fr": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-fr/",
-              "i18nFile": "src/locale/messages.fr.xlf",
-              "i18nLocale": "fr-FR",
-              "i18nMissingTranslation": "error",
+              "localize": ["fr-FR"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -150,9 +143,7 @@
             "docker-local-nl": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-nl/",
-              "i18nFile": "src/locale/messages.nl.xlf",
-              "i18nLocale": "nl-NL",
-              "i18nMissingTranslation": "error",
+              "localize": ["nl-NL"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
