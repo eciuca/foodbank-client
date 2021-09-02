@@ -8,10 +8,15 @@
       "sourceRoot": "src",
       "projectType": "application",
       "i18n": {
-        "sourceLocale": "en-US",
         "locales": {
-          "fr": "src/locale/messages.fr.xlf",
-          "nl": "src/locale/messages.nl.xlf"
+          "fr-FR": {
+            "translation": "src/locale/messages.fr.xlf",
+            "baseHref": "/fr/"
+          },
+          "nl-NL": {
+            "translation": "src/locale/messages.nl.xlf",
+            "baseHref": "/nl/"
+          }
         }
       },
       "architect": {
@@ -19,7 +24,6 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "baseHref": "/en/",
-            "aot": true,
             "outputPath": "dist/foodbank-it-client-en/",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -36,16 +40,16 @@
             ],
             "scripts": [
               "node_modules/quill/dist/quill.min.js",
-              "node_modules/chart.js/dist/Chart.min.js"]
+              "node_modules/chart.js/dist/Chart.min.js"],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
             },
             "production": {
               "baseHref": "/en/",
@@ -59,7 +63,6 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -71,11 +74,9 @@
               ]
             },
             "prod-fr": {
-              "baseHref": "/fr/",
-              "aot": true,
+              "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-fr/",
               "i18nFile": "src/locale/messages.fr.xlf",
-              "i18nFormat": "xlf",
               "i18nLocale": "fr-FR",
               "i18nMissingTranslation": "error",
               "fileReplacements": [
@@ -86,11 +87,9 @@
               ]
             },
             "prod-nl": {
-              "baseHref": "/nl/",
-              "aot": true,
+              "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-nl/",
               "i18nFile": "src/locale/messages.nl.xlf",
-              "i18nFormat": "xlf",
               "i18nLocale": "nl-NL",
               "i18nMissingTranslation": "error",
               "fileReplacements": [
@@ -101,18 +100,11 @@
               ]
             },
             "fr": {
-              "baseHref": "/fr/",
+              "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-fr/",
               "i18nFile": "src/locale/messages.fr.xlf",
-              "i18nFormat": "xlf",
               "i18nLocale": "fr-FR",
               "i18nMissingTranslation": "error",
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -121,18 +113,11 @@
               ]
             },
             "nl": {
-              "baseHref": "/nl/",
+              "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-nl/",
               "i18nFile": "src/locale/messages.nl.xlf",
-              "i18nFormat": "xlf",
               "i18nLocale": "nl-NL",
               "i18nMissingTranslation": "error",
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -150,10 +135,9 @@
               ]
             },
             "docker-local-fr": {
-              "baseHref": "/fr/",
+              "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-fr/",
               "i18nFile": "src/locale/messages.fr.xlf",
-              "i18nFormat": "xlf",
               "i18nLocale": "fr-FR",
               "i18nMissingTranslation": "error",
               "fileReplacements": [
@@ -164,10 +148,9 @@
               ]
             },
             "docker-local-nl": {
-              "baseHref": "/nl/",
+              "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-nl/",
               "i18nFile": "src/locale/messages.nl.xlf",
-              "i18nFormat": "xlf",
               "i18nLocale": "nl-NL",
               "i18nMissingTranslation": "error",
               "fileReplacements": [
@@ -177,7 +160,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
