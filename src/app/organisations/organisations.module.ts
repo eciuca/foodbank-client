@@ -35,6 +35,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {ChartModule} from 'primeng/chart';
 import {OrgReportComponent} from './orgreport/orgreport.component';
 import {OrgReportService} from './services/org-report.service';
+import {OrgOneReportComponent} from './orgonereport/orgonereport.component';
 
 const routes: Routes = [
     { path: '',
@@ -51,11 +52,16 @@ const routes: Routes = [
     {
         path: 'orgreports/:bankId',
         component: OrgReportComponent
+    },
+    {
+        path: 'orgreport/:idDis',
+        component: OrgOneReportComponent
     }
 ];
 
 @NgModule({
-  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent],
+    // tslint:disable-next-line:max-line-length
+  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),

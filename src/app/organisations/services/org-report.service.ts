@@ -29,4 +29,13 @@ export class OrgReportService {
         };
         return this.http.get<OrgBeneficiaryReport[]>(`${this.baseUrl}/clients/?lienBanque=${lienBanque.toString()}`, requestOptions);
     }
+    getBeneficiaryReportForOrg(accesstoken: string, idDis: number): Observable<OrgBeneficiaryReport> {
+        const requestOptions = {
+            headers: new HttpHeaders( {
+                responseType: 'json',
+                Authorization:  'Bearer ' + accesstoken
+            }),
+        };
+        return this.http.get<OrgBeneficiaryReport>(`${this.baseUrl}/orgclients/?idDis=${idDis.toString()}`, requestOptions);
+    }
 }

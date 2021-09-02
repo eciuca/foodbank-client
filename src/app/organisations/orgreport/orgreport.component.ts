@@ -22,7 +22,6 @@ export class OrgReportComponent implements OnInit {
     beneficiaryData: any;
     orgMemberReports: OrgMemberReport[];
     orgBeneficiaryReports: OrgBeneficiaryReport[];
-    basicData: any;
     horizontalOptions: any;
     stackedOptions: any;
   constructor(private messageService: MessageService,
@@ -141,6 +140,12 @@ export class OrgReportComponent implements OnInit {
                       },
                       {
                           type: 'bar',
+                          label: 'Babies',
+                          backgroundColor: '#FF7F00', // Orange
+                          data: nBabyValues
+                      },
+                      {
+                          type: 'bar',
                           label: 'Children',
                           backgroundColor: '#FFF101', // yellow
                           data: nChildrenValues
@@ -170,7 +175,6 @@ export class OrgReportComponent implements OnInit {
                       }
                   ]
               };
-              console.log('Benificiary data', this.beneficiaryData);
 
               this.stackedOptions = {
                   tooltips: {
