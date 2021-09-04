@@ -10,12 +10,10 @@
       "i18n": {
         "locales": {
           "fr-FR": {
-            "translation": "src/locale/messages.fr.xlf",
-            "baseHref": "/fr/"
+            "translation": "src/locale/messages.fr.xlf"
           },
           "nl-NL": {
-            "translation": "src/locale/messages.nl.xlf",
-            "baseHref": "/nl/"
+            "translation": "src/locale/messages.nl.xlf"
           }
         }
       },
@@ -26,7 +24,7 @@
             "localize": true,
             "aot": true,
             "i18nMissingTranslation": "error",
-            "baseHref": "/en/",
+            "baseHref": "/",
             "outputPath": "dist/foodbank-it-client/",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -55,7 +53,7 @@
             "development": {
             },
             "production": {
-              "baseHref": "/en/",
+              "baseHref": "/",
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -121,7 +119,7 @@
               ]
             },
             "docker-local": {
-              "baseHref": "/en/",
+              "baseHref": "/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
