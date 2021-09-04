@@ -147,14 +147,14 @@ export class AppComponent implements OnInit {
     }
 
     private processAuthState(authState: AuthState) {
-        console.log('User lienbat is:', authState.user?.lienBat, 'Membre Langue is', authState.user?.membreLangue);
+        console.log('User lienbat is:', authState.user?.lienBat, 'Membre Langue is ', authState.user?.membreLangue);
        // const idLanguage = authState.user?.idLanguage;
         let idLanguage = null;
         if (authState.user?.membreLangue === 1) {
-            idLanguage = 'fr';
+            idLanguage = 'fr-Fr';
         }
         if (authState.user?.membreLangue === 2) {
-            idLanguage = 'nl';
+            idLanguage = 'nl-NL';
         }
         const localeLanguage = this.locale.split('-')[0];
         if (idLanguage && environment.availableLocales.includes(idLanguage) && idLanguage !== localeLanguage) {
