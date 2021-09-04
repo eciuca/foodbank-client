@@ -156,10 +156,10 @@ export class AppComponent implements OnInit {
         if (authState.user?.membreLangue === 2) {
             idLanguage = 'nl-NL';
         }
-        const localeLanguage = this.locale.split('-')[0];
-        if (idLanguage && environment.availableLocales.includes(idLanguage) && idLanguage !== localeLanguage) {
+        
+        if (idLanguage && environment.availableLocales.includes(idLanguage) && idLanguage !== this.locale) {
             const url = window.location.href;
-            const newLocaleUrl = url.replace(localeLanguage, idLanguage);
+            const newLocaleUrl = url.replace(this.locale, idLanguage);
             window.location.replace(newLocaleUrl);
         }
 
