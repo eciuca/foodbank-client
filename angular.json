@@ -10,12 +10,10 @@
       "i18n": {
         "locales": {
           "fr-FR": {
-            "translation": "src/locale/messages.fr.xlf",
-            "baseHref": "/fr/"
+            "translation": "src/locale/messages.fr.xlf"
           },
           "nl-NL": {
-            "translation": "src/locale/messages.nl.xlf",
-            "baseHref": "/nl/"
+            "translation": "src/locale/messages.nl.xlf"
           }
         }
       },
@@ -26,8 +24,8 @@
             "localize": true,
             "aot": true,
             "i18nMissingTranslation": "error",
-            "baseHref": "/en/",
-            "outputPath": "dist/foodbank-it-client-en/",
+            "baseHref": "/",
+            "outputPath": "dist/foodbank-it-client/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
@@ -55,7 +53,7 @@
             "development": {
             },
             "production": {
-              "baseHref": "/en/",
+              "baseHref": "/",
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -76,32 +74,10 @@
                 }
               ]
             },
-            "prod-fr": {
-              "baseHref": "/",
-              "outputPath": "dist/foodbank-it-client-fr/",
-              "localize": ["fr-FR"],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod-fr.ts"
-                }
-              ]
-            },
-            "prod-nl": {
-              "baseHref": "/",
-              "outputPath": "dist/foodbank-it-client-nl/",
-              "localize": ["nl-NL"],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod-nl.ts"
-                }
-              ]
-            },
             "fr": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-fr/",
-              "localize": ["fr-FR"],
+              "localize": ["fr"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -112,7 +88,7 @@
             "nl": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-nl/",
-              "localize": ["nl-NL"],
+              "localize": ["nl"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -121,33 +97,11 @@
               ]
             },
             "docker-local": {
-              "baseHref": "/en/",
+              "baseHref": "/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.docker-local.ts"
-                }
-              ]
-            },
-            "docker-local-fr": {
-              "baseHref": "/",
-              "outputPath": "dist/foodbank-it-client-fr/",
-              "localize": ["fr-FR"],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.docker-local-fr.ts"
-                }
-              ]
-            },
-            "docker-local-nl": {
-              "baseHref": "/",
-              "outputPath": "dist/foodbank-it-client-nl/",
-              "localize": ["nl-NL"],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.docker-local-nl.ts"
                 }
               ]
             }

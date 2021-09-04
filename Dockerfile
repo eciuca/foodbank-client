@@ -7,8 +7,6 @@ COPY package.json /dist-build/package.json
 RUN npm install
 COPY ./ /dist-build
 RUN npm run build-${ENV} && \
-    npm run build-${ENV}-fr && \
-    npm run build-${ENV}-nl && \
     rm -rf node_modules
 
 FROM httpd:alpine
@@ -49,9 +47,7 @@ RUN rm -r /usr/local/apache2/htdocs/*
 #   /usr/local/apache2/conf/httpd.conf
 
 # Copy all the files from the docker build context into the public htdocs of the apache container.
-COPY --from=dist-build /dist-build/dist/foodbank-it-client-en /usr/local/apache2/htdocs/en/
-COPY --from=dist-build /dist-build/dist/foodbank-it-client-fr /usr/local/apache2/htdocs/fr/
-COPY --from=dist-build /dist-build/dist/foodbank-it-client-nl /usr/local/apache2/htdocs/nl/
+COPY --from=dist-build /dist-build/dist/foodbank-it-client/ /usr/local/apache2/htdocs/
 COPY --from=dist-build /dist-build/docker/httpd-vhosts.conf /usr/local/apache2/conf/extra
 COPY --from=dist-build /dist-build/docker/httpd.conf /usr/local/apache2/conf/
 
