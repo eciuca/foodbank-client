@@ -27,7 +27,7 @@
             "aot": true,
             "i18nMissingTranslation": "error",
             "baseHref": "/en/",
-            "outputPath": "dist/foodbank-it-client-en/",
+            "outputPath": "dist/foodbank-it-client/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
@@ -79,7 +79,7 @@
             "prod-fr": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-fr/",
-              "localize": ["fr-FR"],
+              "localize": ["fr"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -90,7 +90,7 @@
             "prod-nl": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-nl/",
-              "localize": ["nl-NL"],
+              "localize": ["nl"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -101,7 +101,7 @@
             "fr": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-fr/",
-              "localize": ["fr-FR"],
+              "localize": ["fr"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -112,7 +112,7 @@
             "nl": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-nl/",
-              "localize": ["nl-NL"],
+              "localize": ["nl"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -132,7 +132,7 @@
             "docker-local-fr": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-fr/",
-              "localize": ["fr-FR"],
+              "localize": ["fr"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -143,7 +143,7 @@
             "docker-local-nl": {
               "baseHref": "/",
               "outputPath": "dist/foodbank-it-client-nl/",
-              "localize": ["nl-NL"],
+              "localize": ["nl"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
