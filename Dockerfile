@@ -7,8 +7,6 @@ COPY package.json /dist-build/package.json
 RUN npm install
 COPY ./ /dist-build
 RUN npm run build-${ENV} && \
-    npm run build-${ENV}-fr && \
-    npm run build-${ENV}-nl && \
     rm -rf node_modules
 
 FROM httpd:alpine
