@@ -151,7 +151,7 @@ export class AppComponent implements OnInit {
        // const idLanguage = authState.user?.idLanguage;
         let idLanguage = null;
         if (authState.user?.membreLangue === 1) {
-            idLanguage = 'fr-Fr';
+            idLanguage = 'fr-FR';
         }
         if (authState.user?.membreLangue === 2) {
             idLanguage = 'nl-NL';
