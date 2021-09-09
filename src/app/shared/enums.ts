@@ -71,6 +71,12 @@ export let enmOrgActivities = [
     {label: 'Social Restaurant', value: 5},
     {label: 'Community kitchen', value: 6}
 ];
+export let enmMailAudience = [
+    {label: 'Organisation Members', value: 0},
+    {label: 'Organisation Admins', value: 1},
+    {label: 'Bank Members', value: 2}
+];
+
 
 
 

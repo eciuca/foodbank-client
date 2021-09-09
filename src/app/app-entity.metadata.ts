@@ -11,6 +11,7 @@ import {compareOrgcontacts, Orgcontact} from './organisations/model/orgcontact';
 import {compareOrgSummaries, OrgSummary} from './organisations/model/orgsummary';
 import {compareMembreMails, MembreMail} from './membres/model/membreMail';
 import {compareMailings, Mailing} from './mailings/model/mailing';
+import {Notification, compareNotifications} from './home/notifications/model/notification';
 
 export const appEntityMetadata: EntityMetadataMap = {
     Membre: {
@@ -73,6 +74,11 @@ export const appEntityMetadata: EntityMetadataMap = {
         sortComparer: compareUsers,
         selectId: (user: User) => user.idUser,
         entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
+    },
+    Notification: {
+        sortComparer: compareNotifications,
+        selectId: (notification: Notification) => notification.notificationId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
     },
 };
 

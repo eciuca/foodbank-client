@@ -3,6 +3,23 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import {PanelModule} from 'primeng/panel';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationComponent } from './notifications/notification/notification.component';
+import {EntityDataService, EntityDefinitionService } from '@ngrx/data';
+import {appEntityMetadata} from '../app-entity.metadata';
+import {NotificationsDataService} from './services/notifications-data.service';
+import {NotificationEntityService} from './services/notification-entity.service';
+import {TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
+import {MessageModule} from 'primeng/message';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {ToastModule} from 'primeng/toast';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
+import {FormsModule} from '@angular/forms';
+import {ConfirmationService} from 'primeng/api';
 
 
 const routes: Routes = [
@@ -11,12 +28,40 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    NotificationsComponent,
+    NotificationComponent
   ],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        PanelModule
+        PanelModule,
+        TableModule,
+        InputTextModule,
+        ButtonModule,
+        DialogModule,
+        SelectButtonModule,
+        ConfirmPopupModule,
+        ToastModule,
+        MessageModule,
+        DropdownModule,
+        FormsModule
+    ],
+    providers: [
+        NotificationsDataService,
+        NotificationEntityService,
+        ConfirmationService
     ]
 })
-export class HomeModule { }
+export class HomeModule {
+    constructor(
+        private eds: EntityDefinitionService,
+        private entityDataService: EntityDataService,
+        private notificationsDataService: NotificationsDataService
+
+    ) {
+        eds.registerMetadataMap(appEntityMetadata);
+        entityDataService.registerService('Notification', notificationsDataService);
+
+    }
+}
