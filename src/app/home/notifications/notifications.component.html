@@ -1,0 +1,55 @@
+<p-table #dt [value]="notifications" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
+         [rows]="3" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
+         [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
+>
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <div class="p-fluid p-formgrid p-grid">
+                <div i18n="@@NotificationsHeader" class="p-field p-col-12 p-md-4">
+                   Food Banks Notifications
+                </div>
+                <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
+                    <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddNotification" label="Add Notification"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="body" let-notification>
+        <tr (click)="handleSelect(notification)">
+            <td>
+                {{ notification.creationdate }}
+            </td>
+            <td>
+                {{notification.author}}
+            </td>
+            <td>
+                {{notification.importance}}
+            </td>
+            <td>
+                {{notification.audience}}
+            </td>
+
+            <td>
+                {{notification.language}}
+            </td>
+
+            <td>
+                {{notification.subject}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                {{notification.content}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div i18n="@@EmployeesSelected" class="p-d-flex p-ai-center p-jc-between">
+            There are {{totalRecords}} notifications.
+        </div>
+    </ng-template>
+</p-table>
+<p-dialog i18n-header="@@NotificationDetails" header="Notification Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+    <app-notification *ngIf="selectedNotificationid$" [notificationId$]="selectedNotificationid$"   (onNotificationUpdate)="handleNotificationUpdate($event)" (onNotificationCreate)="handleNotificationCreate($event)"
+                      (onNotificationDelete)="handleNotificationDeleted($event)" (onNotificationQuit)="handleNotificationQuit()"></app-notification>
+</p-dialog>

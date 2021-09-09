@@ -1,0 +1,36 @@
+<p-panel *ngIf="notification">
+
+    <form   #notificationForm="ngForm" style="padding: 1em">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-8">
+                <label i18n="@@SubjectMandatory" for="subject">Subject *</label>
+                <input  #subject="ngModel" pInputText id="subject" name="subject" required minlength="10" maxlength="255" [ngModel]="notification.subject" />
+                <p-message i18n-text="@@SubjectIsMandatory" *ngIf="subject.invalid && notificationForm.touched" severity="error" text="Subject is required and must be minimum 2 chars long"></p-message>
+            </div>
+
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@Language" for="language">Language</label>
+                <p-dropdown [options]="languages" id="language" name="language" [ngModel]="notification.language"></p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@Audience" for="audience">Audience</label>
+                <p-dropdown [options]="audiences" id="audience" name="audience" [ngModel]="notification.audience"></p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-12">
+                <label i18n="@@ContentMandatory" for="content">Content *</label>
+                <input  #content="ngModel" pInputText id="content" name="content" required  [ngModel]="notification.content" />
+                <p-message i18n-text="@@ContentIsMandatory" *ngIf="content.invalid && notificationForm.touched" severity="error" text="content is required"></p-message>
+            </div>
+
+        </div>
+        <p-toast></p-toast>
+        <p-confirmPopup></p-confirmPopup>
+        <div class="p-formgroup-inline">
+            <button type="button" pButton icon="pi pi-times" (click)="delete($event,notification)" i18n-label="@@Delete" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(notification, notificationForm.value)" i18n-label="@@Save" label="Save" [disabled] = "notificationForm.invalid"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="quit($event, notification, notificationForm,notificationForm.dirty)" i18n-label="@@Return" label="Return" ></button>
+        </div>
+    </form>
+
+
+</p-panel>
