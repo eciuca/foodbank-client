@@ -395,7 +395,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">71</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
@@ -431,7 +431,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
@@ -467,7 +467,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">73</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
@@ -1338,12 +1338,16 @@
           <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ContentMandatory" datatype="html">
-        <source>Content *</source>
-        <target>Texte *</target>
+      <trans-unit id="EnterYourMessage" datatype="html">
+        <source>Enter your message</source>
+        <target>Entrez votre texte ici</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
           <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ContentIsMandatory" datatype="html">
@@ -1351,7 +1355,43 @@
         <target>le contenu est obligatoire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="low" datatype="html">
+        <source>Low</source>
+        <target>Petite</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="medium" datatype="html">
+        <source>Medium</source>
+        <target>Moyenne</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
+          <context context-type="linenumber">150</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="high" datatype="html">
+        <source>High</source>
+        <target>Haute</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
+          <context context-type="linenumber">152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageNotificationDeleted" datatype="html">
@@ -1447,7 +1487,7 @@
         <target>Il y a <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> notifications. </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
-          <context context-type="linenumber">58,60</context>
+          <context context-type="linenumber">62,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="NotificationDetails" datatype="html">
@@ -1455,31 +1495,7 @@
         <target>Détails Notification</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
-          <context context-type="linenumber">63</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="low" datatype="html">
-        <source>Low</source>
-        <target>Petite</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">148</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="medium" datatype="html">
-        <source>Medium</source>
-        <target>Moyenne</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">150</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="high" datatype="html">
-        <source>High</source>
-        <target>Haute</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Mailing List" datatype="html">
@@ -1508,14 +1524,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
           <context context-type="linenumber">57</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="EnterYourMessage" datatype="html">
-        <source>Enter your message</source>
-        <target>Entrez votre texte ici</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MailingTextIsMandatory" datatype="html">
@@ -2869,6 +2877,10 @@
           <context context-type="sourcefile">src/app/users/users.component.html</context>
           <context context-type="linenumber">113</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="ContentMandatory">
+        <source/>
+        <target>Texte *</target>
       </trans-unit>
     </body>
   </file>

@@ -50,7 +50,11 @@
         </tr>
         <tr>
             <td colspan="6">
-                {{notification.content}}
+                <p-editor  [(ngModel)]="notification.content" [readonly]="true" [style]="{'height':'120px'}">
+                    <p-header hidden>
+                        <span class="ql-formats"> </span>
+                    </p-header>
+                </p-editor>
             </td>
         </tr>
     </ng-template>

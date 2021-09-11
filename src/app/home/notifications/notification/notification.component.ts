@@ -42,9 +42,9 @@ export class NotificationComponent implements OnInit {
         {label: 'Nederlands', value: 'nl' }
     ];
     this.importances =  [
-        {label: 'Low', value: 1},
-        {label: 'Medium', value: 2},
-        {label: 'High', value: 3},
+        {label: $localize`:@@low:Low`, value: 1},
+        {label: $localize`:@@medium:Medium`, value: 2},
+        {label: $localize`:@@high:High`, value: 3},
     ];
     this.author = 'unknown';
   }

@@ -20,6 +20,7 @@ import {ButtonModule} from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
 import {FormsModule} from '@angular/forms';
 import {ConfirmationService} from 'primeng/api';
+import {EditorModule} from 'primeng/editor';
 
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
         ToastModule,
         MessageModule,
         DropdownModule,
-        FormsModule
+        FormsModule,
+        EditorModule
     ],
     providers: [
         NotificationsDataService,
