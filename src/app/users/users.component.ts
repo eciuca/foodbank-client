@@ -116,8 +116,7 @@ export class UsersComponent implements OnInit {
                         console.log('Entering Users component with unsupported user rights, see complete authstate:', authState);
                 }
             }
-            
-            console.log('Users FilterBase is: ', this.filterBase);
+             console.log('Users FilterBase is: ', this.filterBase);
         });
   }
   handleSelect(user) {

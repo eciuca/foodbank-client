@@ -6,25 +6,6 @@
         <source>Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">175</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">191</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">212</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">224</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="menuProfile" datatype="html">
-        <source>My Profile</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">176</context>
         </context-group>
         <context-group purpose="location">
@@ -40,33 +21,41 @@
           <context context-type="linenumber">225</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="menuProfile" datatype="html">
+        <source>My Profile</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">177</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">193</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">214</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">226</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="menuBank" datatype="html">
         <source>Bank</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">178</context>
+          <context context-type="linenumber">179</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOrganisations" datatype="html">
         <source>Organisations</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">180</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuEmployees" datatype="html">
         <source>Employees</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">180</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">194</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="menuUsers" datatype="html">
-        <source>Users</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">181</context>
@@ -76,63 +65,74 @@
           <context context-type="linenumber">195</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="menuBeneficiaries" datatype="html">
-        <source>Beneficiaries</source>
+      <trans-unit id="menuUsers" datatype="html">
+        <source>Users</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">182</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">201</context>
+          <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="menuMailings" datatype="html">
-        <source>Mailings</source>
+      <trans-unit id="menuBeneficiaries" datatype="html">
+        <source>Beneficiaries</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">183</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">197</context>
+          <context context-type="linenumber">202</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuMailings" datatype="html">
+        <source>Mailings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">184</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">198</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">218</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Logout</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">186</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">207</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">219</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">227</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOrganisation" datatype="html">
         <source>Organisation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">193</context>
+          <context context-type="linenumber">194</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBanks" datatype="html">
         <source>Banks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">215</context>
         </context-group>
       </trans-unit>
       <trans-unit id="President" datatype="html">
@@ -357,6 +357,10 @@
           <context context-type="linenumber">26</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
           <context context-type="linenumber">72</context>
         </context-group>
@@ -388,6 +392,10 @@
           <context context-type="linenumber">27</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
           <context context-type="linenumber">73</context>
         </context-group>
@@ -417,6 +425,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.html</context>
           <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
@@ -498,6 +510,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
           <context context-type="linenumber">136</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
+          <context context-type="linenumber">201</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
@@ -895,6 +911,10 @@
           <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
@@ -1154,6 +1174,183 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="SubjectMandatory" datatype="html">
+        <source>Subject *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="SubjectIsMandatory" datatype="html">
+        <source>Subject is required and must be minimum 10 chars long</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Language" datatype="html">
+        <source>Language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Importance" datatype="html">
+        <source>Importance</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Audience" datatype="html">
+        <source>Audience</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ContentMandatory" datatype="html">
+        <source>Content *</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ContentIsMandatory" datatype="html">
+        <source>content is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageNotificationDeleted" datatype="html">
+        <source>The notification was deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageNotificationDeleteError" datatype="html">
+        <source>The notification  could not be deleted: error: <x id="PH" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageNotificationUpdated" datatype="html">
+        <source>The notification  was updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageNotificationUpdateError" datatype="html">
+        <source>The notification could not be updated: error: <x id="PH" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
+          <context context-type="linenumber">162</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageNotificationCreated" datatype="html">
+        <source>The notification  was created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
+          <context context-type="linenumber">181</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageNotificationCreateError" datatype="html">
+        <source>The notification could not be created: error: <x id="PH" equiv-text="dataserviceerror.message"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
+          <context context-type="linenumber">189</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="NotificationsHeader" datatype="html">
+        <source> Food Banks Notifications </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AddNotification" datatype="html">
+        <source>Add Notification</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Creation Date" datatype="html">
+        <source>Creation Date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Author" datatype="html">
+        <source>Author</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Subject" datatype="html">
+        <source>Subject</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="NotificationsSelected" datatype="html">
+        <source> There are <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> notifications. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">58,60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="NotificationDetails" datatype="html">
+        <source>Notification Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="low" datatype="html">
+        <source>Low</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="medium" datatype="html">
+        <source>Medium</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
+          <context context-type="linenumber">150</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="high" datatype="html">
+        <source>High</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="Mailing List" datatype="html">
         <source>Mailing List</source>
         <context-group purpose="location">
@@ -1329,13 +1526,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
           <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="Language" datatype="html">
-        <source>Language</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
-          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Car" datatype="html">

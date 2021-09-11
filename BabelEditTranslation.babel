@@ -122,6 +122,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>AddNotification</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>AddOrganisation</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -270,6 +291,48 @@
             </concept_node>
             <concept_node>
                 <name>AttachFilesToMail</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Audience</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Author</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -752,6 +815,48 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>ContentIsMandatory</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>ContentMandatory</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>Country</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -774,6 +879,27 @@
             </concept_node>
             <concept_node>
                 <name>Cpas</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Creation Date</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -1387,6 +1513,27 @@
             </concept_node>
             <concept_node>
                 <name>HumanResources</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Importance</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -2059,6 +2206,69 @@
             </concept_node>
             <concept_node>
                 <name>NbDependentsSorted</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>NotificationDetails</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>NotificationsHeader</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>NotificationsSelected</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -3633,6 +3843,69 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>Subject</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>SubjectIsMandatory</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>SubjectMandatory</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>SundayAfternoon</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -4536,6 +4809,69 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>high</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>low</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>medium</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>menuBank</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -5272,6 +5608,132 @@
             </concept_node>
             <concept_node>
                 <name>messageEmployeeUpdated</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>messageNotificationCreateError</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>messageNotificationCreated</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>messageNotificationDeleteError</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>messageNotificationDeleted</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>messageNotificationUpdateError</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>messageNotificationUpdated</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>

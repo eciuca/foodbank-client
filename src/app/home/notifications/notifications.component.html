@@ -14,7 +14,18 @@
             </div>
         </div>
     </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th i18n="@@Creation Date">Creation Date</th>
+            <th i18n="@@Author">Author</th>
+            <th i18n="@@Importance">Importance</th>
+            <th i18n="@@Audience">Audience</th>
+            <th i18n="@@Language">Language</th>
+            <th i18n="@@Subject">Subject</th>
+        </tr>
+    </ng-template>
     <ng-template pTemplate="body" let-notification>
+
         <tr (click)="handleSelect(notification)">
             <td>
                 {{ notification.creationdate }}
@@ -23,7 +34,7 @@
                 {{notification.author}}
             </td>
             <td>
-                {{notification.importance}}
+                {{ labelImportance(notification.importance) }}
             </td>
             <td>
                 {{notification.audience}}
@@ -44,7 +55,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="summary">
-        <div i18n="@@EmployeesSelected" class="p-d-flex p-ai-center p-jc-between">
+        <div i18n="@@NotificationsSelected" class="p-d-flex p-ai-center p-jc-between">
             There are {{totalRecords}} notifications.
         </div>
     </ng-template>

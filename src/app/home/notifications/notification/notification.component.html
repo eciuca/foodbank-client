@@ -2,17 +2,20 @@
 
     <form   #notificationForm="ngForm" style="padding: 1em">
         <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col-12 p-md-8">
+            <div class="p-field p-col-12 p-md-5">
                 <label i18n="@@SubjectMandatory" for="subject">Subject *</label>
                 <input  #subject="ngModel" pInputText id="subject" name="subject" required minlength="10" maxlength="255" [ngModel]="notification.subject" />
-                <p-message i18n-text="@@SubjectIsMandatory" *ngIf="subject.invalid && notificationForm.touched" severity="error" text="Subject is required and must be minimum 2 chars long"></p-message>
+                <p-message i18n-text="@@SubjectIsMandatory" *ngIf="subject.invalid && notificationForm.touched" severity="error" text="Subject is required and must be minimum 10 chars long"></p-message>
             </div>
-
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@Language" for="language">Language</label>
                 <p-dropdown [options]="languages" id="language" name="language" [ngModel]="notification.language"></p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@Importance" for="importance">Importance</label>
+                <p-dropdown [options]="importances" id="importance" name="importance" [ngModel]="notification.importance"></p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@Audience" for="audience">Audience</label>
                 <p-dropdown [options]="audiences" id="audience" name="audience" [ngModel]="notification.audience"></p-dropdown>
             </div>

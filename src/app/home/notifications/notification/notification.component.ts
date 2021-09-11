@@ -4,9 +4,11 @@ import {map} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import {DefaultNotification, Notification} from '../model/notification';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmLanguage, enmMailAudience} from '../../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {DataServiceError} from '@ngrx/data';
+import {select, Store} from '@ngrx/store';
+import {globalAuthState} from '../../../auth/auth.selectors';
+import {AppState} from '../../../reducers';
 
 @Component({
   selector: 'app-notification',
@@ -23,20 +25,70 @@ export class NotificationComponent implements OnInit {
   notification: Notification;
   languages: any[];
   audiences: any[];
+  importances: any[];
+  author: string;
+  bankId: number;
+  orgId: number;
+
 
   constructor(
       private notificationsService: NotificationEntityService,
+      private store: Store<AppState>,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
-    this.languages =  enmLanguage;
-    this.audiences = enmMailAudience;
+    this.languages =  [
+        {label: 'Français', value: 'fr'},
+        {label: 'Nederlands', value: 'nl' }
+    ];
+    this.importances =  [
+        {label: 'Low', value: 1},
+        {label: 'Medium', value: 2},
+        {label: 'High', value: 3},
+    ];
+    this.author = 'unknown';
   }
 
   ngOnInit(): void {
-    // comment: this component is sometimes called from his parent Component with idDepot @Input Decorator,
-    // or sometimes via a router link via the Main Menu
-
+      this.store
+          .pipe(
+              select(globalAuthState),
+              map((authState) => {
+                  console.log('Notification authstate:', authState);
+                  if (authState.user) {
+                      this.author = authState.user.membrePrenom + ' ' + authState.user.membreNom;
+                      switch (authState.user.rights) {
+                          case 'Bank':
+                          case 'Admin_Banq':
+                              this.bankId = authState.banque.bankId;
+                              this.audiences = [
+                                  {label: 'Organisation Members', value: 'Organisation Members'},
+                                  {label: 'Organisation Admins', value: 'Organisation Admins'},
+                                  {label: 'Bank Members', value:  'Bank Members'},
+                                  {label: 'Bank Admins', value: 'Bank Admins' }
+                              ];
+                              break;
+                          case 'Asso':
+                          case 'Admin_Asso':
+                              this.bankId = authState.banque.bankId;
+                              this.orgId = authState.user.idOrg;
+                              this.audiences = [
+                                  {label: 'Organisation Members', value: 'Organisation Members'},
+                                  {label: 'Organisation Admins', value: 'Organisation Admins'},
+                              ];
+                              break;
+                          case 'admin':
+                                  this.audiences = [
+                                      {label: 'General', value: 'General'},
+                                      {label: 'Organisation Members', value: 'Organisation Members'},
+                                      {label: 'Organisation Admins', value: 'Organisation Admins'},
+                                      {label: 'Bank Members', value:  'Bank Members'},
+                                      {label: 'Bank Admins', value: 'Bank Admins' }
+                                  ];
+                      }
+                  }
+              })
+          ).subscribe();
     const notification$ = combineLatest([this.notificationId$, this.notificationsService.entities$])
         .pipe(
             map(([notificationId, notifications]) => notifications.find(notification => notification['notificationId'] === notificationId))
@@ -50,13 +102,13 @@ export class NotificationComponent implements OnInit {
           } else {
             console.log('New Notification ! ');
             this.notification = new DefaultNotification();
+            this.notification.author = this.author;
             if (this.myform) {
               this.myform.reset(this.notification);
             }
 
           }
         });
-
 
   }
   delete(event: Event, notification: Notification) {
@@ -90,6 +142,7 @@ export class NotificationComponent implements OnInit {
   }
 
   save(oldNotification: Notification, notificationForm: Notification) {
+      console.log('Notification form:', notificationForm);
     const modifiedNotification = Object.assign({}, oldNotification, notificationForm);
     if (modifiedNotification.hasOwnProperty('notificationId')) {
       console.log('Updating Notification with content:', modifiedNotification);
@@ -114,6 +167,12 @@ export class NotificationComponent implements OnInit {
     } else {
 
       console.log('Creating Notification with content:', modifiedNotification);
+      modifiedNotification.author = this.author;
+      modifiedNotification.bankId = this.bankId;
+      modifiedNotification.orgId = this.orgId;
+      if (!modifiedNotification.audience) {
+          modifiedNotification.audience = this.audiences[0].value;
+      }
       this.notificationsService.add(modifiedNotification)
           .subscribe(() => {
                 this.messageService.add({

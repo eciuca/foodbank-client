@@ -1,5 +1,7 @@
 export interface Notification {
     notificationId: number;
+    bankId: number;
+    orgId: number;
     creationdate: string;
     author: string;
     subject: string;
@@ -22,22 +24,23 @@ export function compareNotifications(c1: Notification, c2: Notification) {
     }
 }
 export class DefaultNotification implements Notification {
+    notificationId: number;
+    bankId: number;
+    orgId: number;
     audience: string;
     author: string;
     content: string;
     creationdate: string;
     importance: number;
     language: string;
-    notificationId: number;
     subject: string;
     totalRecords: number;
     constructor() {
-        this.audience = '';
         this.author = '';
         this.content = '';
         this.creationdate = '';
-        this.importance = 0;
-        this.language = 'en';
+        this.importance = 1;
+        this.language = 'fr';
         this.subject = '';
         this.totalRecords = 0;
     }

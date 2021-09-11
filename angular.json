@@ -21,6 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
             "aot": true,
             "i18nMissingTranslation": "error",
             "baseHref": "/",

@@ -17,7 +17,6 @@ import {LazyLoadEvent} from 'primeng/api';
 export class NotificationsComponent implements OnInit {
     loadPageSubject$ = new BehaviorSubject(null);
     selectedNotificationid$ = new BehaviorSubject(0);
-    notification: Notification = null;
     notifications: Notification[];
     displayDialog: boolean;
     totalRecords: number;
@@ -27,6 +26,7 @@ export class NotificationsComponent implements OnInit {
     orgName: string; // if logging in with asso role we need to display the organisation
     queryParams: any;
     booCanCreate: boolean;
+    author: string;
   constructor( private notificationService: NotificationEntityService,
                private router: Router,
                private store: Store<AppState>) {
@@ -69,6 +69,7 @@ export class NotificationsComponent implements OnInit {
         if (authState.banque) {
             this.bankid = authState.banque.bankId;
             this.bankName = authState.banque.bankName;
+            this.author = authState.user.membrePrenom + ' ' + authState.user.membreNom;
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
@@ -108,9 +109,12 @@ export class NotificationsComponent implements OnInit {
         this.displayDialog = true;
     }
     handleSelect(notification) {
-        console.log( 'Notification was selected', notification);
-        this.selectedNotificationid$.next(notification.notificationId);
-        this.displayDialog = true;
+        if (notification.author === this.author) {
+            this.selectedNotificationid$.next(notification.notificationId);
+            this.displayDialog = true;
+        } else {
+            console.log( 'Notification update declined - notification different from author', notification, this.author);
+        }
     }
     handleNotificationQuit() {
         this.displayDialog = false;
@@ -136,6 +140,21 @@ export class NotificationsComponent implements OnInit {
         const latestQueryParams = this.loadPageSubject$.getValue();
         this.loadPageSubject$.next(latestQueryParams);
         this.displayDialog = false;
+    }
+
+    labelImportance(importance: number) {
+        switch (importance) {
+            case 1:
+                return $localize`:@@low:Low`;
+            case 2:
+                return $localize`:@@medium:Medium`;
+            case 3:
+                return $localize`:@@high:High`;
+            default:
+                return '?';
+        }
+
+
     }
 
 }
