@@ -1,5 +1,5 @@
 <p-table #dt [value]="notifications" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
-         [rows]="3" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
+         [rows]="3" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
          [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
 >
     <ng-template pTemplate="caption">
@@ -37,7 +37,7 @@
                 {{ labelImportance(notification.importance) }}
             </td>
             <td>
-                {{notification.audience}}
+                {{labelAudience(notification.audience) }}
             </td>
 
             <td>

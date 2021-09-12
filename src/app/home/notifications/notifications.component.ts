@@ -24,9 +24,10 @@ export class NotificationsComponent implements OnInit {
     bankid: number;
     bankName: string;
     orgName: string; // if logging in with asso role we need to display the organisation
-    queryParams: any;
+    queryBase: any;
     booCanCreate: boolean;
     author: string;
+    first: number;
   constructor( private notificationService: NotificationEntityService,
                private router: Router,
                private store: Store<AppState>) {
@@ -34,20 +35,11 @@ export class NotificationsComponent implements OnInit {
       this.bankid = 0;
       this.bankName = '';
       this.orgName = '';
+      this.first = 0;
   }
 
   ngOnInit(): void {
-    this.loading = true;
-    this.totalRecords = 0;
-
-    this.store
-        .pipe(
-            select(globalAuthState),
-            map((authState) => {
-              this.initializeDependingOnUserRights(authState);
-            })
-        )
-        .subscribe();
+   this.reload();
       this.loadPageSubject$
           .pipe(
               filter(queryParams => !!queryParams),
@@ -65,7 +57,20 @@ export class NotificationsComponent implements OnInit {
               this.notificationService.setLoaded(true);
           });
   }
+    reload() {
+        this.loading = true;
+        this.totalRecords = 0;
+        this.store
+            .pipe(
+                select(globalAuthState),
+                map((authState) => {
+                    this.initializeDependingOnUserRights(authState);
+                })
+            )
+            .subscribe();
+    }
     private initializeDependingOnUserRights(authState: AuthState) {
+        console.log ('AuthState is at initialization:', authState);
         if (authState.banque) {
             this.bankid = authState.banque.bankId;
             this.bankName = authState.banque.bankName;
@@ -73,36 +78,45 @@ export class NotificationsComponent implements OnInit {
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
-                    this.queryParams = { 'audience': 'Bank' + authState.banque.bankId};
-                    if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
+                    this.queryBase = { 'bankId': authState.banque.bankId};
+                    if (authState.user.rights === 'Admin_Banq' ) {
+                        this.booCanCreate = true;
+                        this.queryBase['admin'] = 'Y';
+                    }
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
-                    this.queryParams = { 'audience': 'Org' + authState.organisation.idDis};
+                    this.queryBase = { 'orgId': authState.organisation.idDis};
                     this.orgName = authState.organisation.societe;
-                    if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
+                    if (authState.user.rights === 'Admin_Asso' ) {
+                        this.booCanCreate = true;
+                        this.queryBase['admin'] = 'Y';
+                    }
+                    break;
+                case 'admin':
+                    this.queryBase = {};
                     break;
                 default:
             }
         }
+        console.log('initialization sets query base to:', this.queryBase);
+        this.nextPage(null);
     }
     nextPage(event: LazyLoadEvent) {
-        console.log('Lazy Loaded Event', event);
-        this.loading = true;
-        const queryParms = {};
-        queryParms['offset'] = event.first.toString();
-        queryParms['rows'] = event.rows.toString();
-
-        if (event.filters) {
-            if (event.filters.language && event.filters.language.value) {
-                queryParms['language'] = event.filters.language.value;
-            }
-            if (event.filters.audience && event.filters.audience.value) {
-                queryParms['audience'] = event.filters.audience.value;
-            }
-
-        }
-        this.loadPageSubject$.next(queryParms);
+        console.log('Initial Lazy Loaded Event', event, 'Query Base:', this.queryBase);
+        // Ignore first nextpage  by testing this.queryBase - initialization not finished and double i18n load side effect
+      if (this.queryBase) {
+          this.loading = true;
+          const queryParms = {...this.queryBase};
+          if (event) {
+              queryParms['offset'] = event.first.toString();
+              queryParms['rows'] = event.rows.toString();
+          }   else {
+              queryParms['offset'] = 0;
+              queryParms['rows'] = 3;
+          }
+          this.loadPageSubject$.next(queryParms);
+      }
     }
     showDialogToAdd() {
         this.selectedNotificationid$.next(0);
@@ -153,8 +167,35 @@ export class NotificationsComponent implements OnInit {
             default:
                 return '?';
         }
-
-
     }
+    labelAudience(audience: string) {
+        switch (audience) {
+            case 'mybank_only':
+                return $localize`:@@audienceBankOnly:Bank Users Only`;
+            case 'mybank_orgadmin':
+                return $localize`:@@audienceBankOrgAdminOnly:Organisation Admins Only`;
+            case 'mybank_org':
+                return $localize`:@@audienceBankOrgOnly:Organisation Users Only`;
+            case 'mybank_all':
+                return $localize`:@@audienceBankAll:Bank and Organisation Users`;
+            case 'myorg':
+                return $localize`:@@audienceBankOrgOnly:Organisation Users Only`;
+            case 'myorgadmin':
+                return $localize`:@@audienceBankOrgAdminOnly:Organisation Admins Only`;
+            case 'bank_admins':
+                return $localize`:@@audienceBankAdmin:Bank Admins`;
+            case 'bank_users':
+                return $localize`:@@audienceBankUsers:Bank Users`;
+            case 'org_admins':
+                return $localize`:@@audienceOrgAdmin:Org Admins`;
+            case 'general':
+                return 'general';
+            default:
+                return '?';
+        }
+
+
+
+        }
 
 }

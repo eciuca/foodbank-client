@@ -62,10 +62,10 @@ export class NotificationComponent implements OnInit {
                           case 'Admin_Banq':
                               this.bankId = authState.banque.bankId;
                               this.audiences = [
-                                  {label: 'Organisation Members', value: 'Organisation Members'},
-                                  {label: 'Organisation Admins', value: 'Organisation Admins'},
-                                  {label: 'Bank Members', value:  'Bank Members'},
-                                  {label: 'Bank Admins', value: 'Bank Admins' }
+                                  {label: $localize`:@@audienceBankOnly:Bank Users Only`, value: 'mybank_only'},
+                                  {label: $localize`:@@audienceBankOrgAdminOnly:Organisation Admins Only`, value: 'mybank_orgadmin'},
+                                  {label: $localize`:@@audienceBankOrgOnly:Organisation Users Only`, value: 'mybank_org'},
+                                  {label: $localize`:@@audienceBankAll:Bank and Organisation Users`, value: 'mybank_all'}
                               ];
                               break;
                           case 'Asso':
@@ -73,17 +73,16 @@ export class NotificationComponent implements OnInit {
                               this.bankId = authState.banque.bankId;
                               this.orgId = authState.user.idOrg;
                               this.audiences = [
-                                  {label: 'Organisation Members', value: 'Organisation Members'},
-                                  {label: 'Organisation Admins', value: 'Organisation Admins'},
+                                  {label: $localize`:@@audienceBankOrgOnly:Organisation Users Only`, value: 'myorg'},
+                                  {label: $localize`:@@audienceBankOrgAdminOnly:Organisation Admins Only`, value: 'myorgadmin'},
                               ];
                               break;
                           case 'admin':
                                   this.audiences = [
-                                      {label: 'General', value: 'General'},
-                                      {label: 'Organisation Members', value: 'Organisation Members'},
-                                      {label: 'Organisation Admins', value: 'Organisation Admins'},
-                                      {label: 'Bank Members', value:  'Bank Members'},
-                                      {label: 'Bank Admins', value: 'Bank Admins' }
+                                      {label: 'general', value: 'general'},
+                                      {label: $localize`:@@audienceBankAdmin:Bank Admins`, value: 'bank_admins'},
+                                      {label: $localize`:@@audienceBankUsers:Bank Users`, value: 'bank_users'},
+                                      {label: $localize`:@@audienceOrgAdmin:Org Admins`, value: 'org_admins'},
                                   ];
                       }
                   }
