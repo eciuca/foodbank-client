@@ -58,7 +58,6 @@ export class NotificationComponent implements OnInit {
                   if (authState.user) {
                       this.author = authState.user.membrePrenom + ' ' + authState.user.membreNom;
                       switch (authState.user.rights) {
-                          case 'Bank':
                           case 'Admin_Banq':
                               this.bankId = authState.banque.bankId;
                               this.audiences = [
@@ -68,23 +67,16 @@ export class NotificationComponent implements OnInit {
                                   {label: $localize`:@@audienceBankAll:Bank and Organisation Users`, value: 'mybank_all'}
                               ];
                               break;
-                          case 'Asso':
-                          case 'Admin_Asso':
-                              this.bankId = authState.banque.bankId;
-                              this.orgId = authState.user.idOrg;
-                              this.audiences = [
-                                  {label: $localize`:@@audienceBankOrgOnly:Organisation Users Only`, value: 'myorg'},
-                                  {label: $localize`:@@audienceBankOrgAdminOnly:Organisation Admins Only`, value: 'myorgadmin'},
-                              ];
-                              break;
                           case 'admin':
                                   this.audiences = [
                                       {label: 'general', value: 'general'},
-                                      {label: $localize`:@@audienceBankAdmin:Bank Admins`, value: 'bank_admins'},
-                                      {label: $localize`:@@audienceBankUsers:Bank Users`, value: 'bank_users'},
-                                      {label: $localize`:@@audienceOrgAdmin:Org Admins`, value: 'org_admins'},
+                                      {label: $localize`:@@audienceBankAdmin:All Bank Admins`, value: 'bank_admins'},
+                                      {label: $localize`:@@audienceBankUsers:All Bank Users`, value: 'bank_users'},
+                                      {label: $localize`:@@audienceOrgAdmin:All Org Admins`, value: 'org_admins'},
                                   ];
-                      }
+                                  break;
+                          default:
+                       }
                   }
               })
           ).subscribe();

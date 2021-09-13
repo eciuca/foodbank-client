@@ -86,15 +86,15 @@ export class NotificationsComponent implements OnInit {
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
-                    this.queryBase = { 'orgId': authState.organisation.idDis};
+                    this.queryBase = { 'bankId': authState.banque.bankId, 'orgId': authState.organisation.idDis };
                     this.orgName = authState.organisation.societe;
                     if (authState.user.rights === 'Admin_Asso' ) {
-                        this.booCanCreate = true;
                         this.queryBase['admin'] = 'Y';
                     }
                     break;
                 case 'admin':
                     this.queryBase = {};
+                    this.booCanCreate = true;
                     break;
                 default:
             }
@@ -178,16 +178,12 @@ export class NotificationsComponent implements OnInit {
                 return $localize`:@@audienceBankOrgOnly:Organisation Users Only`;
             case 'mybank_all':
                 return $localize`:@@audienceBankAll:Bank and Organisation Users`;
-            case 'myorg':
-                return $localize`:@@audienceBankOrgOnly:Organisation Users Only`;
-            case 'myorgadmin':
-                return $localize`:@@audienceBankOrgAdminOnly:Organisation Admins Only`;
             case 'bank_admins':
-                return $localize`:@@audienceBankAdmin:Bank Admins`;
+                return $localize`:@@audienceBankAdmin:All Bank Admins`;
             case 'bank_users':
-                return $localize`:@@audienceBankUsers:Bank Users`;
+                return $localize`:@@audienceBankUsers:All Bank Users`;
             case 'org_admins':
-                return $localize`:@@audienceOrgAdmin:Org Admins`;
+                return $localize`:@@audienceOrgAdmin:All Org Admins`;
             case 'general':
                 return 'general';
             default:
