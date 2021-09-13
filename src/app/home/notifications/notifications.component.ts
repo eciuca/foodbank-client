@@ -28,6 +28,8 @@ export class NotificationsComponent implements OnInit {
     booCanCreate: boolean;
     author: string;
     first: number;
+    languages: any[];
+    selectedLanguage: number;
   constructor( private notificationService: NotificationEntityService,
                private router: Router,
                private store: Store<AppState>) {
@@ -36,6 +38,11 @@ export class NotificationsComponent implements OnInit {
       this.bankName = '';
       this.orgName = '';
       this.first = 0;
+      this.languages =  [
+          {label: 'Français', value: 1},
+          {label: 'Nederlands', value: 2 },
+          {label: 'All', value: 0 }
+      ];
   }
 
   ngOnInit(): void {
@@ -75,6 +82,7 @@ export class NotificationsComponent implements OnInit {
             this.bankid = authState.banque.bankId;
             this.bankName = authState.banque.bankName;
             this.author = authState.user.membrePrenom + ' ' + authState.user.membreNom;
+            this.selectedLanguage = authState.user.membreLangue;
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
@@ -111,9 +119,31 @@ export class NotificationsComponent implements OnInit {
           if (event) {
               queryParms['offset'] = event.first.toString();
               queryParms['rows'] = event.rows.toString();
+              if (event.filters) {
+                  if (event.filters.language) {
+                      switch (event.filters.language.value) {
+                          case 1:
+                              queryParms['language'] = 'fr';
+                              break;
+                          case 2:
+                              queryParms['language'] = 'nl';
+                              break;
+                          default:
+                      }
+                  }
+              }
           }   else {
               queryParms['offset'] = 0;
               queryParms['rows'] = 3;
+              switch (this.selectedLanguage) {
+                  case 1:
+                      queryParms['language'] = 'fr';
+                      break;
+                  case 2:
+                      queryParms['language'] = 'nl';
+                      break;
+                  default:
+              }
           }
           this.loadPageSubject$.next(queryParms);
       }

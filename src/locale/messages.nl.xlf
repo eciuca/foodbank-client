@@ -1276,7 +1276,7 @@
       </trans-unit>
       <trans-unit id="HomeSubtitle" datatype="html">
         <source>for Food Banks and their Associations</source>
-        <target>Voor Voedselbanks en hun Organisaties</target>
+        <target>Voor de Belgische Voedselbanken en hun Organisaties</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">5</context>
@@ -1367,7 +1367,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="medium" datatype="html">
@@ -1379,7 +1379,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">194</context>
         </context-group>
       </trans-unit>
       <trans-unit id="high" datatype="html">
@@ -1391,7 +1391,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">166</context>
+          <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankOnly" datatype="html">
@@ -1403,7 +1403,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankOrgAdminOnly" datatype="html">
@@ -1415,7 +1415,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">176</context>
+          <context context-type="linenumber">206</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankOrgOnly" datatype="html">
@@ -1427,7 +1427,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">178</context>
+          <context context-type="linenumber">208</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankAll" datatype="html">
@@ -1439,7 +1439,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankAdmin" datatype="html">
@@ -1451,7 +1451,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">182</context>
+          <context context-type="linenumber">212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankUsers" datatype="html">
@@ -1463,7 +1463,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="linenumber">214</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceOrgAdmin" datatype="html">
@@ -1475,7 +1475,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.ts</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">216</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageNotificationDeleted" datatype="html">
@@ -1571,7 +1571,7 @@
         <target>Er zijn <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> notificaties. </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
-          <context context-type="linenumber">62,64</context>
+          <context context-type="linenumber">80,82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="NotificationDetails" datatype="html">
@@ -1579,7 +1579,7 @@
         <target>Details Notificatie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notifications.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Mailing List" datatype="html">
