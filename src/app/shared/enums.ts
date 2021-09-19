@@ -1,10 +1,10 @@
 
 export let enmStatusCompany =  [
-    {label: 'A S B L', value: '1'},
-    {label: 'Association de Fait', value: '2'},
-    {label: 'CPAS/OCMW', value: '3' },
-    {label: 'Auxiliaire Publique', value: '4'},
-    {label: 'Personne Physique', value: '0'}
+    {label: $localize`:@@CompanyNonProfit:Non Profit`, value: '1'},
+    {label: $localize`:@@CompanyUnRegistered:UnRegistered`, value: '2'},
+    {label: $localize`:@@CompanyCPAS:Social`, value: '3' },
+    {label: $localize`:@@CompanyPublicAuxiliary:Public Auxiliary`, value: '4'},
+    {label: $localize`:@@CompanyOnePerson:One Person`, value: '0'}
 ];
 
 export let enmGender = [
@@ -33,43 +33,43 @@ export let enmCountry = [
     {label: 'Luxemburg', value: 5}
 ];
 export let enmUserRoles = [
-    {label: 'admin', value: 'admin'},
-    {label: 'Admin_Banq', value: 'Admin_Banq' },
-    {label: 'Admin_Asso', value: 'Admin_Asso'},
-    {label: 'Admin_CPAS', value: 'Admin_CPAS' },
-    {label: 'Admin_FEAD', value: 'Admin_FEAD'},
-    {label: 'Admin_FBBA', value: 'Admin_FBBA' },
-    {label: 'Asso', value: 'Asso'},
-    {label: 'Bank', value: 'Bank'},
-    {label: 'Bank_FBBA', value: 'Bank_FBBA'},
+    {label: $localize`:@@RoleAdmin:Global admin`, value: 'admin'},
+    {label: $localize`:@@RoleBankAdmin:Bank admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
+    {label: $localize`:@@RoleCPASAdmin:CPAS Admin`, value: 'Admin_CPAS' },
+    {label: $localize`:@@RoleFEADAdmin:FEAD Admin`, value: 'Admin_FEAD'},
+    {label: $localize`:@@RoleFBBAAdmin:FBBA Admin`, value: 'Admin_FBBA' },
+    {label: $localize`:@@RoleOrgUser:Org User`, value: 'Asso'},
+    {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
+    {label: $localize`:@@RoleFBBAUser:FBBA User`, value: 'Bank_FBBA'},
 ];
 export let enmUserRolesBankAsso = [
-    {label: 'Admin_Banq', value: 'Admin_Banq' },
-    {label: 'Bank', value: 'Bank'},
-    {label: 'Admin_Asso', value: 'Admin_Asso'},
-    {label: 'Asso', value: 'Asso'},
+    {label: $localize`:@@RoleBankAdmin:Bank admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
+    {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
+    {label: $localize`:@@RoleOrgUser:Org User`, value: 'Asso'},
 ];
 export let enmUserRolesBank = [
-    {label: 'Admin_Banq', value: 'Admin_Banq' },
-    {label: 'Bank', value: 'Bank'}
+    {label: $localize`:@@RoleBankAdmin:Bank admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
 ];
 export let enmUserRolesAsso = [
-    {label: 'Admin_Asso', value: 'Admin_Asso'},
-    {label: 'Asso', value: 'Asso'},
+    {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
+    {label: $localize`:@@RoleOrgUser:Org User`, value: 'Asso'},
 ];
 export let enmStatutFead = [
-    {label: 'Refused', value: 0},
-    {label: 'Accepted', value: 1},
-    {label: 'Under Study', value: 2},
+    {label: $localize`:@@FeadStatusRefused:Refused`, value: 0},
+    {label: $localize`:@@FeadStatusAccepted:Accepted`, value: 1},
+    {label: $localize`:@@FeadStatusUnderStudy:Under Study`, value: 2},
 ];
 export let enmOrgActivities = [
     {label: '', value: 0},
-    {label: '2nd hand Clothes Collect & Sell', value: 1},
-    {label: 'Social grocery', value: 2},
-    {label: '2nd hand Furniture Collect & Sell', value: 3},
-    {label: 'Homework club', value: 4},
-    {label: 'Social Restaurant', value: 5},
-    {label: 'Community kitchen', value: 6}
+    {label: $localize`:@@OrgActivity2ndHandClothes:2nd hand Clothes Collect & Sell`, value: 1},
+    {label: $localize`:@@OrgActivitySocialGrocery:Social Grocery`, value: 2},
+    {label: $localize`:@@OrgActivity2ndHandFurniture:2nd hand Furniture Collect & Sell`, value: 3},
+    {label: $localize`:@@OrgActivityHomeworkClub:Homework Club`, value: 4},
+    {label: $localize`:@@OrgActivitySocialRestaurant:Social Restaurant`, value: 5},
+    {label: $localize`:@@OrgActivityCommunityKitchen:Community Kitchen`, value: 6}
 ];
 
 
