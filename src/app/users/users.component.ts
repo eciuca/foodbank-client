@@ -243,7 +243,7 @@ export class UsersComponent implements OnInit {
         }
 
     labelRights(rights: string) {
-        switch (rights) {
+        switch (rights.toLowerCase()) {
             case 'admin_banq':
                 return $localize`:@@RoleBankAdmin:Bank admin`;
             case 'bank':
@@ -255,7 +255,7 @@ export class UsersComponent implements OnInit {
             case 'admin':
                 return $localize`:@@RoleAdmin:Global admin`;
             default:
-                return '?';
+                return rights;
         }
     }
 }
