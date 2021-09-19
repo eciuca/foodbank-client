@@ -150,6 +150,18 @@
           <context context-type="linenumber">228</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="menuReports" datatype="html">
+        <source>Reports</source>
+        <target>Grafieken</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">189</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">215</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Logout</source>
         <target>Uitloggen</target>
@@ -216,14 +228,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">203</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="menuReports" datatype="html">
-        <source>Reports</source>
-        <target>Grafieken</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">215</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleAdmin" datatype="html">
@@ -752,7 +756,7 @@
       </trans-unit>
       <trans-unit id="BeneficiaryHeader" datatype="html">
         <source> Beneficiary of bank <x id="INTERPOLATION" equiv-text="{{ beneficiaire.bankName}}"/> Updated On <x id="INTERPOLATION_1" equiv-text="{{beneficiaire.dateUpd}}"/> </source>
-        <target> Begunstigde van bank <x id="INTERPOLATION" equiv-text="{{ beneficiaire.bankName}}"/> geüpdatet op <x id="INTERPOLATION_1" equiv-text="{{beneficiaire.dateUpd}}"/> </target>
+        <target> Begunstigde van bank <x id="INTERPOLATION" equiv-text="{{ beneficiaire.bankName}}"/> bijgewerkt op <x id="INTERPOLATION_1" equiv-text="{{beneficiaire.dateUpd}}"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.html</context>
           <context context-type="linenumber">2,4</context>
@@ -1596,7 +1600,7 @@
       </trans-unit>
       <trans-unit id="messageNotificationUpdated" datatype="html">
         <source>The notification  was updated</source>
-        <target>De notificatie werd aangepast</target>
+        <target>De notificatie werd bijgewerkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
           <context context-type="linenumber">145</context>
@@ -1604,7 +1608,7 @@
       </trans-unit>
       <trans-unit id="messageNotificationUpdateError" datatype="html">
         <source>The notification could not be updated: error: <x id="PH" equiv-text="dataserviceerror.message"/></source>
-        <target>De notification werd niet aangepast: fout: <x id="PH" equiv-text="dataserviceerror.message"/></target>
+        <target>De notification werd niet bijgewerkt: fout: <x id="PH" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
           <context context-type="linenumber">153</context>
@@ -1860,7 +1864,7 @@
       </trans-unit>
       <trans-unit id="EmployeeHeader" datatype="html">
         <source> Employee <x id="INTERPOLATION" equiv-text="{{ membre.nom}}"/> <x id="INTERPOLATION_1" equiv-text="{{ membre.prenom}}"/> Updated On <x id="INTERPOLATION_2" equiv-text="{{ membre.lastVisit}}"/> </source>
-        <target> Medewerker <x id="INTERPOLATION" equiv-text="{{ membre.nom}}"/> <x id="INTERPOLATION_1" equiv-text="{{ membre.prenom}}"/> geüpdatet op <x id="INTERPOLATION_2" equiv-text="{{ membre.lastVisit}}"/> </target>
+        <target> Medewerker <x id="INTERPOLATION" equiv-text="{{ membre.nom}}"/> <x id="INTERPOLATION_1" equiv-text="{{ membre.prenom}}"/> bijgewerkt op <x id="INTERPOLATION_2" equiv-text="{{ membre.lastVisit}}"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
           <context context-type="linenumber">2,4</context>
@@ -1908,7 +1912,7 @@
       </trans-unit>
       <trans-unit id="messageEmployeeUpdated" datatype="html">
         <source>The employee <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/>  was updated</source>
-        <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> is geüpdatet</target>
+        <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> is bijgewerkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
           <context context-type="linenumber">175</context>

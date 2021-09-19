@@ -150,6 +150,18 @@
           <context context-type="linenumber">228</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="menuReports" datatype="html">
+        <source>Reports</source>
+        <target>Rapports</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">189</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">215</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Logout</source>
         <target>Déconnecter</target>
@@ -216,14 +228,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">203</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="menuReports" datatype="html">
-        <source>Reports</source>
-        <target>Rapports</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">215</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleAdmin" datatype="html">
