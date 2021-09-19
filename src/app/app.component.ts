@@ -169,7 +169,11 @@ export class AppComponent implements OnInit {
 
         if (this.loggedInUserName) {
             if (groups.indexOf('bank') > -1 || groups.indexOf('admin_banq') > -1) {
-                this.loggedInUserRole = 'Bank';
+                if (groups.indexOf('admin_banq') > -1) {
+                    this.loggedInUserRole = $localize`:@@RoleBankAdmin:Bank admin`;
+                } else {
+                    this.loggedInUserRole = $localize`:@@RoleBankUser:Bank User`;
+                }
                 this.loggedInBankName = authState.banque.bankName;
                 this.loggedInOrganisationName = '';
                 this.menuLoggedInItems = [
@@ -186,6 +190,11 @@ export class AppComponent implements OnInit {
                     {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
                 ];
             } else if (groups.indexOf('asso') > -1 || groups.indexOf('admin_asso') > -1) {
+                if (groups.indexOf('admin_asso') > -1) {
+                    this.loggedInUserRole = $localize`:@@RoleOrgAdmin:Org Admin`;
+                } else {
+                    this.loggedInUserRole = $localize`:@@RoleOrgUser:Org User`;
+                }
                 this.loggedInBankName = authState.banque.bankName;
                 this.loggedInOrganisationName = authState.organisation.societe;
                 this.menuLoggedInItems = [
@@ -203,10 +212,11 @@ export class AppComponent implements OnInit {
                     );
                 }
                 this.menuLoggedInItems.push(
-                    {label: 'Reports', icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreport/${authState.organisation.idDis}`]},
+                    {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreport/${authState.organisation.idDis}`]},
                     {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
                 );
             } else if (groups.indexOf('admin') > -1) {
+                    this.loggedInUserRole = $localize`:@@RoleAdmin:Global admin`;
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
                     this.menuLoggedInItems = [
