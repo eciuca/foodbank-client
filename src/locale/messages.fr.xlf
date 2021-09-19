@@ -1500,7 +1500,7 @@
       </trans-unit>
       <trans-unit id="audienceBankOnly" datatype="html">
         <source>Bank Users Only</source>
-        <target>Uniquement Utilisateurs Banque</target>
+        <target>Uniquement Utilisateurs de notre Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
           <context context-type="linenumber">64</context>
@@ -1512,7 +1512,7 @@
       </trans-unit>
       <trans-unit id="audienceBankOrgAdminOnly" datatype="html">
         <source>Organisation Admins Only</source>
-        <target>Uniquement Admins Organisations de la Banque</target>
+        <target>Uniquement Admins Organisations de notre Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
           <context context-type="linenumber">65</context>
@@ -1524,7 +1524,7 @@
       </trans-unit>
       <trans-unit id="audienceBankOrgOnly" datatype="html">
         <source>Organisation Users Only</source>
-        <target>Uniquement Utilisateurs Organisations de la Banque</target>
+        <target>Uniquement Utilisateurs Organisations de notre Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
           <context context-type="linenumber">66</context>
@@ -1536,7 +1536,7 @@
       </trans-unit>
       <trans-unit id="audienceBankAll" datatype="html">
         <source>Bank and Organisation Users</source>
-        <target>Utilisateurs de la Banque et ses Organisations</target>
+        <target>Utilisateurs de notre Banque et ses Organisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/notifications/notification/notification.component.ts</context>
           <context context-type="linenumber">67</context>
