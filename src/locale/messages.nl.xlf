@@ -21,6 +21,10 @@
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">248</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="RoleBankUser" datatype="html">
         <source>Bank User</source>
@@ -40,6 +44,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">250</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuHome" datatype="html">
@@ -201,6 +209,10 @@
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">57</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">252</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="RoleOrgUser" datatype="html">
         <source>Org User</source>
@@ -221,6 +233,10 @@
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">58</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">254</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="menuOrganisation" datatype="html">
         <source>Organisation</source>
@@ -240,6 +256,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">256</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBanks" datatype="html">

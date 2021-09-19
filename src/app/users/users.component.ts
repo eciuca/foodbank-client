@@ -241,4 +241,21 @@ export class UsersComponent implements OnInit {
 
 
         }
+
+    labelRights(rights: string) {
+        switch (rights) {
+            case 'admin_banq':
+                return $localize`:@@RoleBankAdmin:Bank admin`;
+            case 'bank':
+                return $localize`:@@RoleBankUser:Bank User`;
+            case 'admin_asso':
+                return  $localize`:@@RoleOrgAdmin:Org Admin`;
+            case 'asso':
+                return $localize`:@@RoleOrgUser:Org User`;
+            case 'admin':
+                return $localize`:@@RoleAdmin:Global admin`;
+            default:
+                return '?';
+        }
+    }
 }
