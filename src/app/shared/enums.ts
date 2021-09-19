@@ -8,9 +8,9 @@ export let enmStatusCompany =  [
 ];
 
 export let enmGender = [
-    {label: 'Mr.', value: 1},
-    {label: 'Mrs.', value: 2 },
-    {label: 'Miss', value: 3}
+    {label: $localize`:@@PersonTitleMister:Mr.` , value: 1},
+    {label: $localize`:@@PersonTitleLady:Mrs.` , value: 2 },
+    {label: $localize`:@@PersonTitleMiss:Miss` , value: 3}
 ];
 export let enmLanguage = [
     {label: 'Français', value: 1},
@@ -28,9 +28,9 @@ export let enmLanguageLegacy = [
 export let enmCountry = [
     {label: 'Belgium', value: 1},
     {label: 'France', value: 2 },
-    {label: 'Germany', value: 3},
-    {label: 'Netherlands', value: 4},
-    {label: 'Luxemburg', value: 5}
+    {label: 'Deutschland', value: 3},
+    {label: 'Nederland', value: 4},
+    {label: 'Luxembourg', value: 5}
 ];
 export let enmUserRoles = [
     {label: $localize`:@@RoleAdmin:Global admin`, value: 'admin'},
