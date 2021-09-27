@@ -195,7 +195,7 @@ export class UsersComponent implements OnInit {
                 }
             }
 
-            this.loadPageSubject$.next(queryParms)
+            this.loadPageSubject$.next(queryParms);
         })
      ;
   }
