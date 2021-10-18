@@ -6,7 +6,7 @@
         <p-accordion>
             <p-accordionTab i18n-header="@@Organisation" header="Organisation"  [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-6">
+                    <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@OrganisationName" for="societe">Name Company</label>
                         <input #societe="ngModel" pInputText id="societe" name="societe" required minlength = "10" maxlength="100" [ngModel]="organisation.societe" />
                         <p-message i18n-text="@@OrganisationIsMandatory" *ngIf="societe.invalid && organisationForm.touched" severity="error" text="Organisation Name is required and must be minimum 4 chars long"></p-message>
@@ -22,6 +22,15 @@
                     <div class="p-field p-col-12 p-md-2">
                         <label for="afsca">Code AFSCA</label>
                         <input pInputText id="afsca" name="afsca" maxlength="20" [ngModel]="organisation.afsca" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        <label for="susp">Suspended</label>
+                        <p-checkbox id="susp" name="susp" [ngModel]="organisation.susp" binary="true" inputId="binary"></p-checkbox>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@FinSusp" for="stopSusp">End Susp</label>
+                        <input #stopSusp="ngModel" pInputText id="stopSusp" name="stopSusp"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="organisation.stopSusp"/>
+                        <p-message i18n-text="@@StopSuspDateInvalid"  *ngIf="stopSusp.invalid && organisationForm.touched" severity="error" text="End of Suspension Date must in format dd/mm/yyyy"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-4">
                         <label i18n="@@OrganisationDistAddress" for="adresse">Distribution Address</label>

@@ -157,7 +157,7 @@ export class AppComponent implements OnInit {
             idLanguage = 'nl-NL';
         }
         console.log(environment.availableLocales);
-        console.log(this.locale)
+        console.log(this.locale);
         if (idLanguage && environment.availableLocales.includes(idLanguage) && idLanguage !== this.locale) {
             const url = window.location.href;
             const newLocaleUrl = url.replace(this.locale, idLanguage);
@@ -200,12 +200,24 @@ export class AppComponent implements OnInit {
                 this.menuLoggedInItems = [
                     {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
                     {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                    {label: $localize`:@@menuOrganisation:Organisation`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/${authState.organisation.idDis}` ]},
+                    {
+                        label: $localize`:@@menuOrganisation:Organisation`,
+                        icon: 'pi pi-fw pi-map',
+                        routerLink: [`/organisations/${authState.organisation.idDis}`]
+                    }
+                ];
+                if (authState.organisation && authState.organisation.depyN === true) {
+                        this.menuLoggedInItems.push(
+                        {label: $localize`:@@menuOrganisationsDepot:Orgs Depot`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']}
+                    );
+                }
+            this.menuLoggedInItems.push(
                     {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
                     {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                // tslint:disable-next-line:max-line-length
                     {label: 'Contacts', icon: 'pi pi-fw pi-users',  routerLink: [`/organisations/contacts/${authState.organisation.idDis}` ]},
                     {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']},
-                ];
+            );
                 if (authState.organisation && authState.organisation.gestBen) {
                     this.menuLoggedInItems.push(
                         {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']}

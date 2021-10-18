@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {Organisation} from './model/organisation';
 import {OrganisationEntityService} from './services/organisation-entity.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {globalAuthState} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../auth/reducers';
-import {enmStatusCompany} from '../shared/enums';
+import {enmYn, enmStatusCompany} from '../shared/enums';
 
 
 @Component({
@@ -19,6 +19,7 @@ import {enmStatusCompany} from '../shared/enums';
 })
 
 export class OrganisationsComponent implements OnInit {
+    isDepot: boolean;
     loadPageSubject$ = new BehaviorSubject(null);
     selectedIdDis$ = new BehaviorSubject(0);
     organisation: Organisation = null;
@@ -29,12 +30,16 @@ export class OrganisationsComponent implements OnInit {
     filterBase: any;
     booCanCreate: boolean;
     statutOptions: any[];
+    YNOptions:  any[];
     constructor(private organisationService: OrganisationEntityService,
                 private router: Router,
+                private route: ActivatedRoute,
                 private store: Store<AppState>
     ) {
         this.booCanCreate = false;
         this.statutOptions = enmStatusCompany;
+        this.YNOptions = enmYn;
+        this.isDepot = false;
     }
 
     ngOnInit() {
@@ -60,7 +65,6 @@ export class OrganisationsComponent implements OnInit {
     reload() {
         this.loading = true;
         this.totalRecords = 0;
-
         this.store
             .pipe(
                 select(globalAuthState),
@@ -122,13 +126,10 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.adresse && event.filters.adresse.value) {
                 queryParms['adresse'] = event.filters.adresse.value;
             }
-            if (event.filters.cp && event.filters.cp.value) {
-                queryParms['cp'] = event.filters.cp.value;
+            if (event.filters.nomDepot && event.filters.nomDepot.value) {
+                queryParms['nomDepot'] = event.filters.nomDepot.value;
             }
-            if (event.filters.localite && event.filters.localite.value) {
-                queryParms['localite'] = event.filters.localite.value;
-            }
-            if (event.filters.depyN && event.filters.depyN.value != null ) {
+            if (event.filters.depyN && event.filters.depyN.value !== null ) {
                 queryParms['isDepot'] = event.filters.depyN.value;
             }
             if (event.filters.birbyN && event.filters.birbyN.value != null) {
@@ -153,7 +154,9 @@ export class OrganisationsComponent implements OnInit {
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
-                    this.filterBase = { 'idDis': authState.organisation.idDis};
+                    // This module is only called for depots see menu
+                    this.isDepot = true;
+                    this.filterBase = {'lienDepot': authState.organisation.idDis};
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                 default:
@@ -176,5 +179,10 @@ export class OrganisationsComponent implements OnInit {
         return 'Unknown Status';
     }
 
+    labelSuspensionStatus(organisation: Organisation) {
+     if  (organisation.susp === true)  {
+         return 'Y ' + organisation.stopSusp ;
+     }   else return 'N';
+    }
 }
 

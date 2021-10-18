@@ -128,7 +128,7 @@ export interface Organisation {
 
     nrTournee: number;
 
-    susp: number;
+    susp: boolean;
 
     stopSusp: string;
 
@@ -396,7 +396,7 @@ export class DefaultOrganisation implements Organisation {
     societe: string;
     statut: string;
     stopSusp: string;
-    susp: number;
+    susp: boolean;
     tel: string;
     telPres: string;
     telSec: string;
@@ -566,7 +566,7 @@ export class DefaultOrganisation implements Organisation {
         this.societe = '';
         this.statut = '';
         this.stopSusp = '';
-        this.susp = 0;
+        this.susp = false;
         this.tel = '';
         this.telPres = '';
         this.telSec = '';

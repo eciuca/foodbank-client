@@ -12,9 +12,10 @@
         <tr>
             <th i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
             <th i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
-            <th i18n="@@ZipCodeSorted" pSortableColumn="cp">Zip Code<p-sortIcon field="cp"></p-sortIcon></th>
-            <th i18n="@@CitySorted" pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
+            <th *ngIf="isDepot === false" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
+            <th *ngIf="isDepot === true" i18n="@@OrgSuspended">Suspended</th>
             <th i18n="@@IsDepotSorted" pSortableColumn="depyN">Is Depot<p-sortIcon field="depyN"></p-sortIcon></th>
+            <th i18n="@@IsMainDepotSorted" pSortableColumn="depPrinc">Main Depot<p-sortIcon field="depPrinc"></p-sortIcon></th>
             <th i18n="@@UsesFeadSorted" pSortableColumn="birbyN">Uses FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
             <th i18n="@@WebAuthoritySorted" pSortableColumn="webauthority">Web Site<p-sortIcon field="webauthority"></p-sortIcon></th>
             <th i18n="@@StatusSorted" pSortableColumn="statut">Status<p-sortIcon field="statut"></p-sortIcon></th>
@@ -27,11 +28,11 @@
             <th>
                 <p-columnFilter type="text" field="adresse" ></p-columnFilter>
             </th>
-            <th>
-                <p-columnFilter type="text" field="cp" ></p-columnFilter>
+            <th *ngIf="isDepot === false">
+                <p-columnFilter type="text" field="nomDepot" ></p-columnFilter>
             </th>
-            <th>
-                <p-columnFilter type="text" field="localite"></p-columnFilter>
+            <th *ngIf="isDepot === true">
+
             </th>
             <th>
                 <p-columnFilter field="depyN" matchMode="equals" [showMenu]="false">
@@ -43,6 +44,8 @@
                         </p-dropdown>
                     </ng-template>
                 </p-columnFilter>
+            </th>
+            <th>
             </th>
             <th>
                 <p-columnFilter field="birbyN" matchMode="equals" [showMenu]="false">
@@ -85,16 +88,19 @@
                 {{ organisation.societe }}
             </td>
             <td>
-                {{ organisation.adresse }}
+                {{ organisation.adresse }}  {{ organisation.cp }}  {{ organisation.localite }}
             </td>
-            <td>
-                {{ organisation.cp }}
+            <td *ngIf="isDepot === false">
+                {{ organisation.nomDepot }}
             </td>
-            <td>
-                {{ organisation.localite }}
+            <td *ngIf="isDepot === true">
+                {{ labelSuspensionStatus(organisation) }}
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.depyN, 'false-icon pi-times-circle': !organisation.depyN}"></i>
+            </td>
+            <td>
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.depPrinc, 'false-icon pi-times-circle': !organisation.depPrinc}"></i>
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.birbyN, 'false-icon pi-times-circle': !organisation.birbyN}"></i>

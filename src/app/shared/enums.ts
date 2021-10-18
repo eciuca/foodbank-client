@@ -1,4 +1,8 @@
-
+export let enmYn = [
+    {label: $localize`:@@Any:Any` , value: null},
+    {label: $localize`:@@Yes:Yes` , value: 1},
+    {label: $localize`:@@No:No` , value: 0 },
+];
 export let enmStatusCompany =  [
     {label: $localize`:@@CompanyNonProfit:Non Profit`, value: '1'},
     {label: $localize`:@@CompanyUnRegistered:UnRegistered`, value: '2'},
