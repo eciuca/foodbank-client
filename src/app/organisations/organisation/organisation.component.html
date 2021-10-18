@@ -24,11 +24,11 @@
                         <input pInputText id="afsca" name="afsca" maxlength="20" [ngModel]="organisation.afsca" />
                     </div>
                     <div class="p-field p-col-12 p-md-1">
-                        <label for="susp">Suspended</label>
+                        <label i18n="@@OrgSuspended" for="susp">Suspended</label>
                         <p-checkbox id="susp" name="susp" [ngModel]="organisation.susp" binary="true" inputId="binary"></p-checkbox>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@FinSusp" for="stopSusp">End Susp</label>
+                        <label i18n="@@OrgSuspEndDate" for="stopSusp">End Susp</label>
                         <input #stopSusp="ngModel" pInputText id="stopSusp" name="stopSusp"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="organisation.stopSusp"/>
                         <p-message i18n-text="@@StopSuspDateInvalid"  *ngIf="stopSusp.invalid && organisationForm.touched" severity="error" text="End of Suspension Date must in format dd/mm/yyyy"></p-message>
                     </div>
