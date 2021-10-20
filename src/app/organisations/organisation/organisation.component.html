@@ -1,6 +1,8 @@
 <p-panel *ngIf="organisation">
-    <ng-template i18n="@@OrganisationHeader" pTemplate="header">
+    <ng-template  pTemplate="header">
+        <div i18n="@@OrganisationHeader">
        Organisation {{ organisation.societe}} Updated on {{organisation.lupdTs}} By {{organisation.lupdUserName}}
+        </div>
     </ng-template>
     <form   #organisationForm="ngForm">
         <p-accordion>
@@ -12,17 +14,22 @@
                         <p-message i18n-text="@@OrganisationIsMandatory" *ngIf="societe.invalid && organisationForm.touched" severity="error" text="Organisation Name is required and must be minimum 4 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label  i18n="@@OrganisationStatus" for="statut">Status Company</label>
-                         <p-dropdown [options]="statuts" id="statut" name="statut" [ngModel]="organisation.statut"></p-dropdown>
+                        <label i18n="@@OrgRefInt" for="refInt">Internal Reference</label>
+                        <input #refint="ngModel" pInputText id="refInt" name="refInt"  maxlength="15" [ngModel]="organisation.refint" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        <label i18n="@@OrgAgreed" for="daten">Agreed</label>
+                        <p-inputSwitch id="daten" name="daten" [ngModel]="organisation.daten"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        <label i18n="@@OrgActive" for="actif">Active</label>
+                        <p-inputSwitch id="actif" name="actif" [ngModel]="organisation.actif"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@OrganisationNumber" for="tva">Nr/Vat Enterprise</label>
                         <input pInputText id="tva" name="tva" maxlength="50" [ngModel]="organisation.tva" />
                     </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label for="afsca">Code AFSCA</label>
-                        <input pInputText id="afsca" name="afsca" maxlength="20" [ngModel]="organisation.afsca" />
-                    </div>
+
                     <div class="p-field p-col-12 p-md-1">
                         <label i18n="@@OrgSuspended" for="susp">Suspended</label>
                         <p-checkbox id="susp" name="susp" [ngModel]="organisation.susp" binary="true" inputId="binary"></p-checkbox>
@@ -32,7 +39,11 @@
                         <input #stopSusp="ngModel" pInputText id="stopSusp" name="stopSusp"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="organisation.stopSusp"/>
                         <p-message i18n-text="@@StopSuspDateInvalid"  *ngIf="stopSusp.invalid && organisationForm.touched" severity="error" text="End of Suspension Date must in format dd/mm/yyyy"></p-message>
                     </div>
-                    <div class="p-field p-col-12 p-md-4">
+                    <div class="p-field p-col-12 p-md-2">
+                        <label  i18n="@@OrganisationStatus" for="statut">Status Company</label>
+                        <p-dropdown [options]="statuts" id="statut" name="statut" [ngModel]="organisation.statut"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@OrganisationDistAddress" for="adresse">Distribution Address</label>
                         <input pInputText id="adresse" name="adresse" maxlength="100" [ngModel]="organisation.adresse" />
                     </div>
@@ -44,7 +55,7 @@
                         <label i18n="@@City" for="localite">City</label>
                         <input pInputText id="localite" name="localite" maxlength="50" [ngModel]="organisation.localite" />
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
+                    <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@Country" for="pays">Country</label>
                         <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="organisation.pays"  ></p-dropdown>
                     </div>
@@ -52,20 +63,24 @@
                         <label i18n="@@Email" for="email">E-mail</label>
                         <input pInputText id="email" name="email" maxlength="100" [ngModel]="organisation.email" />
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
+                    <div class="p-field p-col-12 p-md-2">
                         <label  i18n="@@Phone" for="tel">Telephone</label>
                         <input pInputText id="tel" name="tel" maxlength="50" [ngModel]="organisation.tel" />
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
+                    <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@Mobile" for="mobile">Mobile</label>
                         <input pInputText id="mobile" name="mobile" maxlength="50" [ngModel]="organisation.gsm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="afsca">Code AFSCA</label>
+                        <input pInputText id="afsca" name="afsca" maxlength="20" [ngModel]="organisation.afsca" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@Website" for="website">Web Site</label>
                         <input pInputText id="website" name="website"  [ngModel]="organisation.website" />
                     </div>
                     <div class="p-field p-col-12 p-md-4">
-                        <label i18n="@@OrganisationHeadQuarters"for="adresse2">Headquarters Address</label>
+                        <label i18n="@@OrganisationHeadQuarters" for="adresse2">Headquarters Address</label>
                         <input pInputText id="adresse2" name="adresse2" maxlength="100" [ngModel]="organisation.adresse2" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
@@ -119,7 +134,7 @@
                         <input pInputText id="prenom" name="prenom" maxlength="50" [ngModel]="organisation.prenom" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label i18n="@@OrganisationPresidentName"for="nom">Name President</label>
+                        <label i18n="@@OrganisationPresidentName" for="nom">Name President</label>
                         <input pInputText id="nom" name="nom" maxlength="50" [ngModel]="organisation.nom" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
@@ -197,7 +212,7 @@
                         <input pInputText id="prenomTres" name="prenomTres" maxlength="50" [ngModel]="organisation.prenomTres" />
                     </div>
                     <div class="p-field p-col-12 p-md-3">
-                        <label i18n="@@OrganisationTreasName"for="nomTres">Name Treasurer</label>
+                        <label i18n="@@OrganisationTreasName" for="nomTres">Name Treasurer</label>
                         <input pInputText id="nomTres" name="nomTres" maxlength="50" [ngModel]="organisation.nomTres" />
                     </div>
                     <div class="p-field p-col-12 p-md-2">
@@ -430,7 +445,7 @@
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
-                        <label i18n="@@OrganisationFead"for="birbyN">Does the public authority validate the access of beneficiaries to FEAD?</label>
+                        <label i18n="@@OrganisationFead" for="birbyN">Does the public authority validate the access of beneficiaries to FEAD?</label>
                         <p-inputSwitch id="birbyN" name="birbyN" [ngModel]="organisation.birbyN"></p-inputSwitch>
                     </div>
 

@@ -126,6 +126,12 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.adresse && event.filters.adresse.value) {
                 queryParms['adresse'] = event.filters.adresse.value;
             }
+            if (event.filters.daten && event.filters.daten.value != null) {
+                queryParms['daten'] = event.filters.daten.value;
+            }
+            if (event.filters.actif && event.filters.actif.value != null) {
+                queryParms['actif'] = event.filters.actif.value;
+            }
             if (event.filters.nomDepot && event.filters.nomDepot.value) {
                 queryParms['nomDepot'] = event.filters.nomDepot.value;
             }
@@ -135,11 +141,8 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.birbyN && event.filters.birbyN.value != null) {
                 queryParms['isBirb'] = event.filters.birbyN.value;
             }
-            if (event.filters.webauthority && event.filters.webauthority.value != null) {
-                queryParms['isWeb'] = event.filters.webauthority.value;
-            }
-            if (event.filters.statut && event.filters.statut.value != null ) {
-                queryParms['statut'] = event.filters.statut.value;
+            if (event.filters.refInt && event.filters.refInt.value != null ) {
+                queryParms['refint'] = event.filters.refInt.value;
             }
         }
         this.loadPageSubject$.next(queryParms);

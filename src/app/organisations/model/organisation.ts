@@ -31,7 +31,7 @@ export interface Organisation {
 
     gsm: string;
 
-    daten: number;
+    daten: boolean;
 
     banque: string;
 
@@ -328,7 +328,7 @@ export class DefaultOrganisation implements Organisation {
     cp2: string;
     cpasyN: boolean;
     dateReg: string;
-    daten: number;
+    daten: boolean;
     depPrinc: boolean;
     depotram: number;
     birbyN: boolean;
@@ -498,7 +498,7 @@ export class DefaultOrganisation implements Organisation {
         this.cp2 = '';
         this.cpasyN = false;
         this.dateReg = '';
-        this.daten = 0;
+        this.daten = true;
         this.depPrinc = false;
         this.depotram = 0;
         this.birbyN = false;

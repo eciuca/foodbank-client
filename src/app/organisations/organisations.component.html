@@ -11,22 +11,47 @@
     <ng-template pTemplate="header">
         <tr>
             <th i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
+            <th i18n="@@RefintSorted" pSortableColumn="refInt">Reference<p-sortIcon field="refInt"></p-sortIcon></th>
             <th i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
+            <th i18n="@@OrgAgreedSorted" pSortableColumn="daten">Agreed<p-sortIcon field="daten"></p-sortIcon></th>
+            <th i18n="@@ActifSorted" pSortableColumn="actif">Active<p-sortIcon field="actif"></p-sortIcon></th>
             <th *ngIf="isDepot === false" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
             <th *ngIf="isDepot === true" i18n="@@OrgSuspended">Suspended</th>
             <th i18n="@@IsDepotSorted" pSortableColumn="depyN">Is Depot<p-sortIcon field="depyN"></p-sortIcon></th>
             <th i18n="@@IsMainDepotSorted" pSortableColumn="depPrinc">Main Depot<p-sortIcon field="depPrinc"></p-sortIcon></th>
             <th i18n="@@UsesFeadSorted" pSortableColumn="birbyN">Uses FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
-            <th i18n="@@WebAuthoritySorted" pSortableColumn="webauthority">Web Site<p-sortIcon field="webauthority"></p-sortIcon></th>
-            <th i18n="@@StatusSorted" pSortableColumn="statut">Status<p-sortIcon field="statut"></p-sortIcon></th>
-
         </tr>
         <tr>
             <th>
                 <p-columnFilter type="text" field="societe" ></p-columnFilter>
             </th>
             <th>
+                <p-columnFilter type="text" field="refInt" ></p-columnFilter>
+            </th>
+            <th>
                 <p-columnFilter type="text" field="adresse" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="daten" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="actif" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
             </th>
             <th *ngIf="isDepot === false">
                 <p-columnFilter type="text" field="nomDepot" ></p-columnFilter>
@@ -58,28 +83,7 @@
                     </ng-template>
                 </p-columnFilter>
             </th>
-            <th>
-                <p-columnFilter field="webauthority" matchMode="equals" [showMenu]="false">
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                            <ng-template let-option pTemplate="item">
-                                <span>{{option.label}}</span>
-                            </ng-template>
-                        </p-dropdown>
-                    </ng-template>
-                </p-columnFilter>
-            </th>
-            <th>
-                <p-columnFilter field="statut" matchMode="equals" [showMenu]="false">
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown [ngModel]="value" [options]="statutOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                            <ng-template let-option pTemplate="item">
-                                <span>{{option.label}}</span>
-                            </ng-template>
-                        </p-dropdown>
-                    </ng-template>
-                </p-columnFilter>
-            </th>
+
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-organisation>
@@ -88,7 +92,16 @@
                 {{ organisation.societe }}
             </td>
             <td>
+                {{ organisation.refInt }}
+            </td>
+            <td>
                 {{ organisation.adresse }}  {{ organisation.cp }}  {{ organisation.localite }}
+            </td>
+            <td>
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.daten, 'false-icon pi-times-circle': !organisation.daten}"></i>
+            </td>
+            <td>
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.actif, 'false-icon pi-times-circle': !organisation.actif}"></i>
             </td>
             <td *ngIf="isDepot === false">
                 {{ organisation.nomDepot }}
@@ -104,12 +117,6 @@
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.birbyN, 'false-icon pi-times-circle': !organisation.birbyN}"></i>
-            </td>
-            <td>
-                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.webauthority, 'false-icon pi-times-circle': !organisation.webauthority}"></i>
-            </td>
-            <td>
-                {{ getStatutLabel(organisation.statut) }}
             </td>
 
         </tr>
