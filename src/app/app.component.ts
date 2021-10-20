@@ -179,6 +179,7 @@ export class AppComponent implements OnInit {
                 this.menuLoggedInItems = [
                     {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
                     {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                    {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-users',  routerLink: ['/trips']},
                     // tslint:disable-next-line:max-line-length
                     {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
                     {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
@@ -200,6 +201,7 @@ export class AppComponent implements OnInit {
                 this.menuLoggedInItems = [
                     {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
                     {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                    {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-users',  routerLink: ['/trips']},
                     {
                         label: $localize`:@@menuOrganisation:Organisation`,
                         icon: 'pi pi-fw pi-map',
@@ -246,6 +248,7 @@ export class AppComponent implements OnInit {
                 this.menuLoggedInItems = [
                     {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
                     {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                    {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-users',  routerLink: ['/trips']},
                     {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
                 ];
             }

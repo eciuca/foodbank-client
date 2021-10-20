@@ -59,15 +59,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">201</context>
+          <context context-type="linenumber">202</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">235</context>
+          <context context-type="linenumber">237</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">247</context>
+          <context context-type="linenumber">249</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuProfile" datatype="html">
@@ -79,15 +79,31 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">202</context>
+          <context context-type="linenumber">203</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">238</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">248</context>
+          <context context-type="linenumber">250</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuTrips" datatype="html">
+        <source>Trips</source>
+        <target>Déplacements</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">182</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">204</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">251</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBank" datatype="html">
@@ -95,7 +111,7 @@
         <target>Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">183</context>
+          <context context-type="linenumber">184</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOrganisations" datatype="html">
@@ -103,7 +119,7 @@
         <target>Organisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuEmployees" datatype="html">
@@ -111,11 +127,11 @@
         <target>Collaborateurs</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">186</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">215</context>
+          <context context-type="linenumber">217</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuUsers" datatype="html">
@@ -123,11 +139,11 @@
         <target>Utilisateurs</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">187</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">216</context>
+          <context context-type="linenumber">218</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBeneficiaries" datatype="html">
@@ -135,11 +151,11 @@
         <target>Bénéficiaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">188</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">223</context>
+          <context context-type="linenumber">225</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuMailings" datatype="html">
@@ -147,15 +163,15 @@
         <target>Mailings</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">189</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">219</context>
+          <context context-type="linenumber">221</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">242</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReports" datatype="html">
@@ -163,11 +179,11 @@
         <target>Rapports</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">190</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">227</context>
+          <context context-type="linenumber">229</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
@@ -175,19 +191,19 @@
         <target>Déconnecter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">191</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">228</context>
+          <context context-type="linenumber">230</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">241</context>
+          <context context-type="linenumber">243</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">249</context>
+          <context context-type="linenumber">252</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleOrgAdmin" datatype="html">
@@ -195,7 +211,7 @@
         <target>Gestion Association</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">195</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
@@ -219,7 +235,7 @@
         <target>Utilisateur Association</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">196</context>
+          <context context-type="linenumber">197</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
@@ -243,7 +259,7 @@
         <target>Organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">204</context>
+          <context context-type="linenumber">206</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOrganisationsDepot" datatype="html">
@@ -251,7 +267,7 @@
         <target>Organisations Agréees</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">213</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleAdmin" datatype="html">
@@ -259,7 +275,7 @@
         <target>Gestion Globale</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">233</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
@@ -275,7 +291,7 @@
         <target>Banques</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">237</context>
+          <context context-type="linenumber">239</context>
         </context-group>
       </trans-unit>
       <trans-unit id="President" datatype="html">
@@ -542,6 +558,10 @@
           <context context-type="linenumber">42</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
           <context context-type="linenumber">73</context>
         </context-group>
@@ -578,6 +598,10 @@
           <context context-type="linenumber">43</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
           <context context-type="linenumber">74</context>
         </context-group>
@@ -612,6 +636,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgcontacts/orgcontact/orgcontact.component.html</context>
           <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
@@ -704,6 +732,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgcontacts/orgcontact/orgcontact.component.ts</context>
           <context context-type="linenumber">166</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.ts</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
@@ -1136,6 +1168,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
           <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trips.component.html</context>
+          <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.html</context>
@@ -3048,6 +3084,190 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripDateMandatory" datatype="html">
+        <source>Trip Date *</source>
+        <target>Date du déplacement *</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripDateIsMandatory" datatype="html">
+        <source>Trip date is required and must in format dd/mm/yyyy</source>
+        <target>La date du déplacement est requise et doit être au format jj/mm/aaaa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripStartMandatory" datatype="html">
+        <source>Trip Start *</source>
+        <target>Début du déplacement *</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripStartIsMandatory" datatype="html">
+        <source>Trip Start is required and must be in format hh:mm</source>
+        <target>Heure départ est requis et doit être au format hh:mm</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripArrivalMandatory" datatype="html">
+        <source>Trip Arrival *</source>
+        <target>Arrivée du déplacement *</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripArrivalIsMandatory" datatype="html">
+        <source>Trip Arrival is required  and must be in format hh:mm</source>
+        <target>L’arrivée du déplacement est obligatoire et doit être au format hh:mm</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripKmMandatory" datatype="html">
+        <source>Trip Km *</source>
+        <target>Km de déplacement *</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripKmIsMandatory" datatype="html">
+        <source>Trip Km is required</source>
+        <target>Le kilomètrage du déplacement est requis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageTripDeleted" datatype="html">
+        <source>The trip for <x id="PH" equiv-text="trip.membreNom"/>  has been deleted</source>
+        <target>Le déplacement pour <x id="PH" equiv-text="trip.membreNom"/> a été supprimé</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageTripDeleteError" datatype="html">
+        <source>The trip  for <x id="PH" equiv-text="trip.membreNom"/> could not be deleted: error: <x id="PH_1" equiv-text="dataserviceerror.message"/></source>
+        <target>Le déplacement pour <x id="PH" equiv-text="trip.membreNom"/> n’a pas pu être supprimé : erreur : <x id="PH_1" equiv-text="dataserviceerror.message"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.ts</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageTripUpdated" datatype="html">
+        <source>The trip for <x id="PH" equiv-text="modifiedTrip.membreNom"/>  was updated</source>
+        <target>Le déplacement pour <x id="PH" equiv-text="modifiedTrip.membreNom"/> a été mis à jour</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.ts</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageTripUpdateError" datatype="html">
+        <source>The trip  for <x id="PH" equiv-text="modifiedTrip.membreNom"/> could not be updated: error: <x id="PH_1" equiv-text="dataserviceerror.message"/></source>
+        <target>Le déplacement pour <x id="PH" equiv-text="modifiedTrip.membreNom"/> n’a pas pu être mis à jour: erreur: <x id="PH_1" equiv-text="dataserviceerror.message"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageTripCreated" datatype="html">
+        <source>The trip for <x id="PH" equiv-text="newTrip.membreNom"/>   has been created</source>
+        <target>Le déplacement pour <x id="PH" equiv-text="newTrip.membreNom"/>  a été créé</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.ts</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageTripCreateError" datatype="html">
+        <source>The trip for <x id="PH" equiv-text="modifiedTrip.membreNom"/> could not be created: error: <x id="PH_1" equiv-text="dataserviceerror.message"/></source>
+        <target>Le déplacement pour <x id="PH" equiv-text="modifiedTrip.membreNom"/> n'a pu être créé: erreur: <x id="PH_1" equiv-text="dataserviceerror.message"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.ts</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripsHeader" datatype="html">
+        <source> Trips covered By Food Banks Insurance </source>
+        <target> Déplacements couverts par l’assurance des banques alimentaires </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trips.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AddTrip" datatype="html">
+        <source>Add Trip</source>
+        <target>Ajouter Déplacement</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trips.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MemberName" datatype="html">
+        <source>Member</source>
+        <target>Collaborateur</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trips.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Date" datatype="html">
+        <source>Date</source>
+        <target>Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trips.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Departure" datatype="html">
+        <source>Depart</source>
+        <target>Départ</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trips.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Arrival" datatype="html">
+        <source>Arrival</source>
+        <target>Arrivée</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trips.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Request Date" datatype="html">
+        <source>Request Date</source>
+        <target>Date Demande</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trips.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripsSelected" datatype="html">
+        <source> There are <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> trips. </source>
+        <target> Il y a <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> déplacements. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trips.component.html</context>
+          <context context-type="linenumber">53,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TripDetails" datatype="html">
+        <source>Trip Details</source>
+        <target>Détails du déplacement</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trips.component.html</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserHeader" datatype="html">

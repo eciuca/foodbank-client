@@ -66,6 +66,10 @@ const routes: Routes = [
         loadChildren: () => import('./mailings/mailings.module').then(m => m.MailingsModule),
         canActivate: [AuthGuardWithForcedLogin]
     },
+    { path: 'trips',
+        loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule),
+        canActivate: [AuthGuardWithForcedLogin]
+    },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     {
         path: '**',
