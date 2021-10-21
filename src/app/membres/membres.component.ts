@@ -167,7 +167,12 @@ export class MembresComponent implements OnInit {
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
-                    this.filterBase = { 'lienDis': authState.organisation.idDis};
+                    if (authState.organisation && authState.organisation.depyN === true) {
+                        this.filterBase = { 'lienDepot': authState.organisation.idDis};
+                        // this.booShowOrganisations = true;
+                    } else {
+                        this.filterBase = { 'lienDis': authState.organisation.idDis};
+                    }
                     this.orgName = authState.organisation.societe;
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;

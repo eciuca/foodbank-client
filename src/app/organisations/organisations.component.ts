@@ -126,8 +126,8 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.adresse && event.filters.adresse.value) {
                 queryParms['adresse'] = event.filters.adresse.value;
             }
-            if (event.filters.daten && event.filters.daten.value != null) {
-                queryParms['daten'] = event.filters.daten.value;
+            if (event.filters.agreed && event.filters.agreed.value != null) {
+                queryParms['agreed'] = event.filters.agreed.value;
             }
             if (event.filters.actif && event.filters.actif.value != null) {
                 queryParms['actif'] = event.filters.actif.value;
