@@ -14,9 +14,9 @@ import {OrgSummaryEntityService} from '../organisations/services/orgsummary-enti
 
 
 @Component({
-  selector: 'app-membres',
-  templateUrl: './membres.component.html',
-  styleUrls: ['./membres.component.css']
+    selector: 'app-membres',
+    templateUrl: './membres.component.html',
+    styleUrls: ['./membres.component.css']
 })
 
 export class MembresComponent implements OnInit {
@@ -36,64 +36,62 @@ export class MembresComponent implements OnInit {
     bankid: number;
     bankName: string;
     orgName: string; // if logging in with asso role we need to display the organisation
+    lienDepot: number;
     first: number;
-  constructor(private membreService: MembreEntityService,
-              private orgsummaryService: OrgSummaryEntityService,
-              private router: Router,
-              private store: Store<AppState>
-  ) {
-      this.booCanCreate = false;
-      this.bankid = 0;
-      this.booShowOrganisations = false;
-      this.first = 0;
-      this.bankName = '';
-      this.orgName = '';
-      this.filteredOrganisationsPrepend = [
-          {idDis: 0, societe: $localize`:@@bank:Bank` },
-          {idDis: null, societe: $localize`:@@organisations:Organisations` },
-      ];
-      this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
-  }
+    constructor(private membreService: MembreEntityService,
+                private orgsummaryService: OrgSummaryEntityService,
+                private router: Router,
+                private store: Store<AppState>
+    ) {
+        this.booCanCreate = false;
+        this.bankid = 0;
+        this.booShowOrganisations = false;
+        this.first = 0;
+        this.bankName = '';
+        this.orgName = '';
+        this.lienDepot = 0;
 
-  ngOnInit() {
-    this.reload();
-      this.loadPageSubject$
-          .pipe(
-              filter(queryParams => !!queryParams),
-              mergeMap(queryParams => this.membreService.getWithQuery(queryParams))
-          )
-          .subscribe(loadedMembres => {
-              console.log('Loaded membres from nextpage: ' + loadedMembres.length);
-              if (loadedMembres.length > 0) {
-                  this.totalRecords = loadedMembres[0].totalRecords;
-              }  else {
-                  this.totalRecords = 0;
-              }
-              this.membres  = loadedMembres;
-              this.loading = false;
-              this.membreService.setLoaded(true);
-          });
-  }
+    }
 
-  reload() {
-      this.loading = true;
-      this.totalRecords = 0;
+    ngOnInit() {
+        this.reload();
+        this.loadPageSubject$
+            .pipe(
+                filter(queryParams => !!queryParams),
+                mergeMap(queryParams => this.membreService.getWithQuery(queryParams))
+            )
+            .subscribe(loadedMembres => {
+                console.log('Loaded membres from nextpage: ' + loadedMembres.length);
+                if (loadedMembres.length > 0) {
+                    this.totalRecords = loadedMembres[0].totalRecords;
+                }  else {
+                    this.totalRecords = 0;
+                }
+                this.membres  = loadedMembres;
+                this.loading = false;
+                this.membreService.setLoaded(true);
+            });
+    }
 
-      this.store
-        .pipe(
-            select(globalAuthState),
-            map((authState) => {
-             this.initializeDependingOnUserRights(authState);
-            })
-        )
-        .subscribe();
-  }
+    reload() {
+        this.loading = true;
+        this.totalRecords = 0;
 
-  handleSelect(membre) {
-    console.log( 'Membre was selected', membre);
-      this.selectedBatid$.next(membre.batId);
-      this.displayDialog = true;
-  }
+        this.store
+            .pipe(
+                select(globalAuthState),
+                map((authState) => {
+                    this.initializeDependingOnUserRights(authState);
+                })
+            )
+            .subscribe();
+    }
+
+    handleSelect(membre) {
+        console.log( 'Membre was selected', membre);
+        this.selectedBatid$.next(membre.batId);
+        this.displayDialog = true;
+    }
     handleMembreQuit() {
         this.displayDialog = false;
     }
@@ -120,40 +118,44 @@ export class MembresComponent implements OnInit {
         this.displayDialog = false;
     }
 
-  nextPage(event: LazyLoadEvent) {
-     console.log('Lazy Loaded Event', event);
-      this.loading = true;
-      const queryParms = {...this.filterBase};
-      queryParms['offset'] = event.first.toString();
-      queryParms['rows'] = event.rows.toString();
-      queryParms['sortOrder'] = event.sortOrder.toString();
-      if (event.sortField) {
-          queryParms['sortField'] = event.sortField.toString();
-      } else {
-          queryParms['sortField'] =  'nom';
-      }
-      if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
-          queryParms['lienDis'] = this.filteredOrganisation.idDis;
-      }
-      if (event.filters) {
-          if (event.filters.nom && event.filters.nom.value) {
+    nextPage(event: LazyLoadEvent) {
+        console.log('Lazy Loaded Event', event);
+        this.loading = true;
+        const queryParms = {...this.filterBase};
+        queryParms['offset'] = event.first.toString();
+        queryParms['rows'] = event.rows.toString();
+        queryParms['sortOrder'] = event.sortOrder.toString();
+        if (event.sortField) {
+            queryParms['sortField'] = event.sortField.toString();
+        } else {
+            queryParms['sortField'] =  'nom';
+        }
+        if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
+            queryParms['lienDis'] = this.filteredOrganisation.idDis;
+        }  else {
+            if ( this.lienDepot !== 0) {
+                queryParms['lienDepot'] = this.lienDepot;
+            }
+        }
+        if (event.filters) {
+            if (event.filters.nom && event.filters.nom.value) {
                 queryParms['nom'] = event.filters.nom.value;
-          }
-          if (event.filters.prenom && event.filters.prenom.value) {
-               queryParms['prenom'] = event.filters.prenom.value;
-          }
-          if (event.filters.address && event.filters.address.value) {
-               queryParms['address'] = event.filters.address.value;
-          }
-          if (event.filters.zip && event.filters.zip.value) {
-              queryParms['zip'] = event.filters.zip.value;
-          }
-          if (event.filters.city && event.filters.city.value) {
-              queryParms['city'] = event.filters.city.value;
-          }
-      }
-      this.loadPageSubject$.next(queryParms);
-  }
+            }
+            if (event.filters.prenom && event.filters.prenom.value) {
+                queryParms['prenom'] = event.filters.prenom.value;
+            }
+            if (event.filters.address && event.filters.address.value) {
+                queryParms['address'] = event.filters.address.value;
+            }
+            if (event.filters.zip && event.filters.zip.value) {
+                queryParms['zip'] = event.filters.zip.value;
+            }
+            if (event.filters.city && event.filters.city.value) {
+                queryParms['city'] = event.filters.city.value;
+            }
+        }
+        this.loadPageSubject$.next(queryParms);
+    }
     private initializeDependingOnUserRights(authState: AuthState) {
         if (authState.banque) {
             this.bankid = authState.banque.bankId;
@@ -164,12 +166,22 @@ export class MembresComponent implements OnInit {
                     this.booShowOrganisations = true;
                     this.filterBase = { 'lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
+                    this.filteredOrganisationsPrepend = [
+                        {idDis: 0, societe: $localize`:@@bank:Bank` },
+                        {idDis: null, societe: $localize`:@@organisations:Organisations` },
+                    ];
+                    this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
                     if (authState.organisation && authState.organisation.depyN === true) {
-                        this.filterBase = { 'lienDepot': authState.organisation.idDis};
-                        // this.booShowOrganisations = true;
+                        this.booShowOrganisations = true;
+                        this.lienDepot = authState.organisation.idDis;
+                        this.filteredOrganisationsPrepend = [
+                            {idDis: this.lienDepot, societe: $localize`:@@depot:Depot` },
+                            {idDis: null, societe: $localize`:@@organisations:Organisations` },
+                        ];
+                        this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                     } else {
                         this.filterBase = { 'lienDis': authState.organisation.idDis};
                     }
@@ -177,7 +189,7 @@ export class MembresComponent implements OnInit {
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                 default:
-              }
+            }
         }
     }
 
@@ -187,7 +199,11 @@ export class MembresComponent implements OnInit {
     }
     filterOrganisation(event ) {
         const  queryOrganisationParms: QueryParams = {};
-        queryOrganisationParms['lienBanque'] = this.bankid.toString();
+        if (this.lienDepot === 0) {
+            queryOrganisationParms['lienBanque'] = this.bankid.toString();
+        }  else {
+            queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
+        }
         queryOrganisationParms['societe'] = event.query.toLowerCase();
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
@@ -204,13 +220,19 @@ export class MembresComponent implements OnInit {
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
         latestQueryParams['offset'] = '0';
         if (idDis != null) {
-               latestQueryParams['lienDis'] = idDis;
-           } else {
-                 if (latestQueryParams.hasOwnProperty('lienDis')) {
-                   delete latestQueryParams['lienDis'];
-               }
-           }
-           this.loadPageSubject$.next(latestQueryParams);
+            if (latestQueryParams.hasOwnProperty('lienDepot')) {
+                delete latestQueryParams['lienDepot'];
+            }
+            latestQueryParams['lienDis'] = idDis;
+        } else {
+            if (latestQueryParams.hasOwnProperty('lienDis')) {
+                delete latestQueryParams['lienDis'];
+            }
+            if ( this.lienDepot !== 0) {
+                latestQueryParams['lienDepot'] = this.lienDepot;
+            }
+        }
+        this.loadPageSubject$.next(latestQueryParams);
     }
 }
 
