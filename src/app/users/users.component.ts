@@ -39,6 +39,7 @@ export class UsersComponent implements OnInit {
     orgName: string; // if logging in with asso role we need to display the organisation
     first: number;
   booShowOrganisations: boolean;
+    lienDepot: number;
   constructor(private userService: UserEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private router: Router,
@@ -50,14 +51,9 @@ export class UsersComponent implements OnInit {
       this.bankid = 0;
       this.bankName = '';
       this.orgName = '';
+      this.lienDepot = 0;
       this.first = 0;
-      this.booShowOrganisations = false;
-      this.filteredOrganisationsPrepend = [
-          {idDis: 0, societe: $localize`:@@bank:Bank` },
-          {idDis: null, societe: $localize`:@@organisations:Organisations` },
-      ];
-      this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
-  }
+      this.booShowOrganisations = false;}
 
   ngOnInit() {
       this.reload();
@@ -102,10 +98,25 @@ export class UsersComponent implements OnInit {
                         if (authState.user.rights === 'Admin_Banq') {
                             this.booCanCreate = true;
                         }
+                        this.filteredOrganisationsPrepend = [
+                            {idDis: 0, societe: $localize`:@@bank:Bank` },
+                            {idDis: null, societe: $localize`:@@organisations:Organisations` },
+                        ];
+                        this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                         break;
                     case 'Asso':
                     case 'Admin_Asso':
-                        this.filterBase = {'idOrg': authState.organisation.idDis};
+                        if (authState.organisation && authState.organisation.depyN === true) {
+                            this.booShowOrganisations = true;
+                            this.lienDepot = authState.organisation.idDis;
+                            this.filteredOrganisationsPrepend = [
+                                {idDis: this.lienDepot, societe: $localize`:@@depot:Depot` },
+                                {idDis: null, societe: $localize`:@@organisations:Organisations` },
+                            ];
+                            this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
+                        } else {
+                            this.filterBase = {'idOrg': authState.organisation.idDis};
+                        }
                         this.orgName = authState.organisation.societe;
                         this.rightOptions = enmUserRolesAsso;
                         if (authState.user.rights === 'Admin_Asso') {
@@ -203,7 +214,11 @@ export class UsersComponent implements OnInit {
     filterOrganisation(event ) {
         const  queryOrganisationParms: QueryParams = {};
         queryOrganisationParms['lienBanque'] = this.bankid.toString();
-        queryOrganisationParms['societe'] = event.query.toLowerCase();
+        if (this.lienDepot === 0) {
+            queryOrganisationParms['lienBanque'] = this.bankid.toString();
+        }  else {
+            queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
+        }
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
                 this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
@@ -218,10 +233,16 @@ export class UsersComponent implements OnInit {
         console.log('Latest Query Parms and new IdOrg', latestQueryParams, idDis);
         // when we switch from active to archived list and vice versa , we need to restart from first page
         if (idDis != null) {
+            if (latestQueryParams.hasOwnProperty('lienDepot')) {
+                delete latestQueryParams['lienDepot'];
+            }
             latestQueryParams['idOrg'] = idDis;
         } else {
             if (latestQueryParams.hasOwnProperty('idOrg')) {
                 delete latestQueryParams['idOrg'];
+            }
+            if ( this.lienDepot !== 0) {
+                latestQueryParams['lienDepot'] = this.lienDepot;
             }
         }
         this.loadPageSubject$.next(latestQueryParams);
