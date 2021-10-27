@@ -125,7 +125,7 @@ export class UserComponent implements OnInit {
                         if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
                             // create user from bank admin user or depot admin user
                             this.user.idOrg = this.currentFilteredOrg.idDis;
-                            this.title$.next($localize`:@@OrgUserNew:New User for organisation  ${this.currentFilteredOrg.societe}`);
+                            this.title$.next($localize`:@@OrgUserNewA:New User for organisation  ${this.currentFilteredOrg.societe}`);
                         }  else {
                             if (this.lienDepot > 0) {
                                 this.rights = enmUserRolesAsso;
