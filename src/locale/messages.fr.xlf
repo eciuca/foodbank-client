@@ -3466,9 +3466,9 @@
           <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrgUserNew" datatype="html">
-        <source>New User for organisation  <x id="PH" equiv-text="this.orgName"/></source>
-        <target>Nouvel utilisateur <x id="PH" equiv-text="user.idUser"/> pour l'organisation <x id="PH_1" equiv-text="this.orgName"/></target>
+      <trans-unit id="OrgUserNew1" datatype="html">
+        <source>New User for organisation <x id="PH" equiv-text="this.orgName"/> </source>
+        <target>Nouvel utilisateur pour l'organisation <x id="PH" equiv-text="this.orgName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
           <context context-type="linenumber">126</context>
@@ -3490,9 +3490,9 @@
           <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="BankUserNew" datatype="html">
-        <source>New User for bank <x id="PH" equiv-text="this.idCompany"/></source>
-        <target>Nouvel utilisateur <x id="PH" equiv-text="user.idUser"/> pour la banque <x id="PH_1" equiv-text="user.idCompany"/></target>
+      <trans-unit id="BankUserNew1" datatype="html">
+        <source>New User for bank <x id="PH" equiv-text="this.idCompany"/> </source>
+        <target>Nouvel utilisateur pour la banque <x id="PH" equiv-text="this.idCompany"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
           <context context-type="linenumber">142</context>

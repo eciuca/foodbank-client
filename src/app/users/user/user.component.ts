@@ -123,7 +123,7 @@ export class UserComponent implements OnInit {
                         // handle organisation users
                         this.user.idOrg = this.idOrg;
                         this.rights = enmUserRolesAsso;
-                        title = $localize`:@@OrgUserNew:New User for organisation  ${this.orgName}`;
+                        title = $localize`:@@OrgUserNew1:New User for organisation ${this.orgName} `;
                         this.title$.next(title);
                     } else {
                         if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
@@ -139,7 +139,7 @@ export class UserComponent implements OnInit {
                                 this.title$.next(title);
                             } else { // must be bank
                                 this.rights = enmUserRolesBank;
-                                title =  $localize`:@@BankUserNew:New User for bank ${this.idCompany}`;
+                                title =  $localize`:@@BankUserNew1:New User for bank ${this.idCompany} `;
                                 this.title$.next(title);
                             }
                         }
