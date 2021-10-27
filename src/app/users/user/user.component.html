@@ -1,6 +1,6 @@
 <p-panel  *ngIf="user">
-    <ng-template i18n="@@UserHeader" pTemplate="header">
-       User {{ user.idUser}} for bank {{ user.idCompany}}
+    <ng-template pTemplate="header">
+       {{ getUserTitle() }}
     </ng-template>
     <form  #userForm="ngForm">
         <p-accordion >

@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {DefaultUser, User} from '../model/user';
 import {MessageService} from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
-import {enmLanguageLegacy, enmUserRolesAsso, enmUserRolesBankAsso} from '../../shared/enums';
+import {enmLanguageLegacy, enmUserRolesAsso, enmUserRolesBank, enmUserRolesBankAsso} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
@@ -13,7 +13,7 @@ import {AppState} from '../../reducers';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {Membre} from '../../membres/model/membre';
 import {DataServiceError} from '@ngrx/data';
-import {Observable, combineLatest} from 'rxjs';
+import {Observable, combineLatest, BehaviorSubject, of} from 'rxjs';
 import {Organisation} from '../../organisations/model/organisation';
 
 @Component({
@@ -44,6 +44,9 @@ export class UserComponent implements OnInit {
   languages: any[];
   rights: any[];
     filterMemberBase: any;
+    lienDepot: number;
+    title$ = new BehaviorSubject(null);
+    orgName: string;
   constructor(
       private usersService: UserEntityService,
       private membresService: MembreEntityService,
@@ -62,11 +65,13 @@ export class UserComponent implements OnInit {
       this.lienBanque = 0;
       this.idOrg = 0;
       this.idCompany = '';
+      this.lienDepot = 0;
       this.booIsOrganisation = false;
       this.booIsCreate = false;
   }
 
   ngOnInit(): void {
+
       if (!this.idUser$) {
           // we must come from the menu
           console.log('We initialize a new user object from the router!');
@@ -87,6 +92,13 @@ export class UserComponent implements OnInit {
             user => {
                 if (user) {
                     this.user = user;
+                    if (user.societe) {
+                        this.rights = enmUserRolesAsso;
+                        this.title$.next($localize`:@@OrgUserExisting:User ${user.idUser} for organisation  ${user.societe}`);
+                    } else {
+                        this.rights = enmUserRolesBank;
+                        this.title$.next($localize`:@@BankUserExisting:User ${user.idUser} for bank ${this.user.idCompany}`);
+                    }
                     this.booIsCreate = false;
                     this.membresService.getByKey(user.lienBat)
                         .subscribe(
@@ -100,16 +112,34 @@ export class UserComponent implements OnInit {
                             });
                 } else {
                     this.user = new DefaultUser();
+                    this.user.lienBanque = this.lienBanque;
+                    this.user.idCompany = this.idCompany;
+                    console.log('CurrentFilteredOrg', this.currentFilteredOrg);
+
+                    if (this.idOrg > 0 && this.lienDepot === 0) {
+                        // handle organisation users
+                        this.user.idOrg = this.idOrg;
+                        this.rights = enmUserRolesAsso;
+                        this.title$.next( $localize`:@@OrgUserNew:New User for organisation  ${this.orgName}`);
+                    } else {
+                        if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
+                            // create user from bank admin user or depot admin user
+                            this.user.idOrg = this.currentFilteredOrg.idDis;
+                            this.title$.next($localize`:@@OrgUserNew:New User for organisation  ${this.currentFilteredOrg.societe}`);
+                        }  else {
+                            if (this.lienDepot > 0) {
+                                this.rights = enmUserRolesAsso;
+                                this.user.idOrg = this.lienDepot;
+                                this.title$.next( $localize`:@@OrgUserNew:New User for organisation  ${this.orgName}`);
+                            } else { // must be bank
+                                this.rights = enmUserRolesBank;
+                                this.title$.next($localize`:@@BankUserNew:New User for bank ${this.idCompany}`);
+                            }
+                        }
+                    }
                     this.booIsCreate = true;
                     if (this.myform) {
                         this.myform.reset(this.user);
-                    }
-                    if (this.booIsOrganisation === false) { // a bank can create employees of its own or employees for its organisations
-                        if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
-                            this.idOrg = this.currentFilteredOrg.idDis;
-                        } else {
-                            this.idOrg = 0;
-                        }
                     }
                 }
             });
@@ -121,23 +151,28 @@ export class UserComponent implements OnInit {
                   if (authState.user) {
                       this.lienBanque = authState.banque.bankId;
                       this.idCompany = authState.banque.bankShortName;
+                      this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
                       switch (authState.user.rights) {
                           case 'Bank':
-                              this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
-                              this.rights = enmUserRolesBankAsso;
-                              break;
                           case 'Admin_Banq':
-                              this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
                               this.rights = enmUserRolesBankAsso;
-                              this.booCanSave = true;
-                              if (this.booCalledFromTable) {
-                                  this.booCanDelete = true;
+                              if (authState.user.rights === 'Admin_Banq') {
+                                  this.booCanSave = true;
+                                  if (this.booCalledFromTable) {
+                                      this.booCanDelete = true;
+                                  }
                               }
                               break;
                           case 'Asso':
                           case 'Admin_Asso':
                               this.idOrg = authState.organisation.idDis;
-                              this.filterMemberBase = { 'lienDis': authState.organisation.idDis};
+                              this.orgName = authState.organisation.societe;
+                              if (authState.organisation.depyN === true) {
+                                  this.lienDepot = authState.organisation.idDis;
+                                  this.filterMemberBase = { 'lienDepot': this.lienDepot};
+                              } else {
+                                  this.filterMemberBase = { 'lienDis': this.idOrg};
+                              }
                               this.booIsOrganisation = true;
                               this.rights = enmUserRolesAsso;
                               if  (authState.user.rights === 'Admin_Asso') {
@@ -232,11 +267,8 @@ export class UserComponent implements OnInit {
                               default:
                                   modifiedUser.idLanguage = '??';
                           }
-                          modifiedUser.lienBanque = this.lienBanque;
-                          modifiedUser.idOrg = this.idOrg;
-                          if (  modifiedUser.idOrg == null) { modifiedUser.idOrg = 0; }
                           if (  modifiedUser.rights === '') { modifiedUser.rights = this.rights[0].value; } // dropdown box was not touched
-                          modifiedUser.idCompany = this.idCompany;
+
                           console.log('Creating User with content:', modifiedUser);
                           this.usersService.add(modifiedUser)
                               .subscribe(() => {
@@ -291,6 +323,16 @@ export class UserComponent implements OnInit {
     }
     filterMembre(event ) {
         const  queryMemberParms = {...this.filterMemberBase};
+        if ( this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
+            queryMemberParms['lienDis'] = this.currentFilteredOrg.idDis;
+        }  else {
+            if (  this.idOrg === 0) { // bank members
+                queryMemberParms['lienDis'] = 0;
+            }
+            if (this.lienDepot > 0) {
+                queryMemberParms['lienDis'] = this.lienDepot;
+            }
+        }
         const query = event.query;
         queryMemberParms['offset'] = '0';
         queryMemberParms['rows'] = '10';
@@ -304,4 +346,9 @@ export class UserComponent implements OnInit {
                 );
             });
     }
+
+    getUserTitle(): string {
+      return this.title$.getValue();
+    }
+
 }
