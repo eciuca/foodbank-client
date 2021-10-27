@@ -130,7 +130,7 @@ export class UserComponent implements OnInit {
                             if (this.lienDepot > 0) {
                                 this.rights = enmUserRolesAsso;
                                 this.user.idOrg = this.lienDepot;
-                                this.title$.next( $localize`:@@OrgUserNew:New User for organisation  ${this.orgName}`);
+                                this.title$.next( $localize`:@@OrgUserNewB:New User for organisation  ${this.orgName}`);
                             } else { // must be bank
                                 this.rights = enmUserRolesBank;
                                 this.title$.next($localize`:@@BankUserNew:New User for bank ${this.idCompany}`);
