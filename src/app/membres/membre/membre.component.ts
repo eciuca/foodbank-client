@@ -36,6 +36,10 @@ export class MembreComponent implements OnInit {
   languages: any[];
   lienBanque: number;
   lienDis: number;
+    lienDepot: number;
+    title: string;
+    idCompany: string;
+    orgName: string;
    constructor(
       private membresService: MembreEntityService,
       private route: ActivatedRoute,
@@ -51,8 +55,11 @@ export class MembreComponent implements OnInit {
       this.booCanSave = false;
       this.booCanQuit = true;
       this.lienBanque = 0 ;
+      this.idCompany = '';
       this.lienDis = 0;
+      this.lienDepot = 0;
       this.booIsOrganisation = false;
+      this.title = '';
   }
 
   ngOnInit(): void {
@@ -83,17 +90,38 @@ export class MembreComponent implements OnInit {
                   if (membre) {
                       console.log('Existing Membre : ', membre);
                       this.membre = membre;
+                      if (membre.societe) {
+                          this.title = $localize`:@@OrgMemberExisting:Member for organisation ${membre.societe} Updated On ${ membre.lastVisit}`;
+                      } else {
+
+                          this.title = $localize`:@@BankMemberExisting:Member for bank ${this.idCompany} Updated On ${ membre.lastVisit}`;
+                      }
                   } else {
                       this.membre = new DefaultMembre();
+                      this.membre.lienBanque = this.lienBanque;
+                      console.log('CurrentFilteredOrg', this.currentFilteredOrg);
+
+                      if (this.lienDis > 0 && this.lienDepot === 0) {
+                          // handle organisation membres
+                          this.membre.lienDis = this.lienDis;
+                          this.title = $localize`:@@OrgMemberNew1:New Member for organisation ${this.orgName} `;
+                      } else {
+                          if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
+                              // create membre from bank admin membre or depot admin membre
+                              this.membre.lienDis = this.currentFilteredOrg.idDis;
+                              this.title = $localize`:@@OrgMemberNewA:New Member for organisation  ${this.currentFilteredOrg.societe}`;
+                          }  else {
+                              if (this.lienDepot > 0) {
+                                  this.membre.lienDis = this.lienDepot;
+                                  this.title =  $localize`:@@OrgMemberNewB:New Member for organisation  ${this.orgName}`;
+                              } else {
+                                  // must be bank
+                                  this.title =  $localize`:@@BankMemberNew1:New Member for bank ${this.idCompany} `;
+                              }
+                          }
+                      }
                       if (this.myform) {
                           this.myform.reset(this.membre);
-                      }
-                      if (this.booIsOrganisation === false) { // a bank can create employees of its own or employees for its organisations
-                          if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
-                              this.lienDis = this.currentFilteredOrg.idDis;
-                          } else {
-                              this.lienDis = 0;
-                          }
                       }
                   }
               });
@@ -107,6 +135,7 @@ export class MembreComponent implements OnInit {
                       case 'Bank':
                       case 'Admin_Banq':
                           this.lienBanque = authState.banque.bankId;
+                          this.idCompany = authState.banque.bankShortName;
                           if (authState.user.rights === 'Admin_Banq' ) {
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
@@ -117,7 +146,12 @@ export class MembreComponent implements OnInit {
                       case 'Asso':
                       case 'Admin_Asso':
                           this.lienBanque = authState.banque.bankId;
+                          this.idCompany = authState.banque.bankShortName;
                           this.lienDis = authState.user.idOrg;
+                          this.orgName = authState.organisation.societe;
+                          if (authState.organisation.depyN === true) {
+                              this.lienDepot = authState.organisation.idDis;
+                          }
                           this.booIsOrganisation = true;
                          if  (authState.user.rights === 'Admin_Asso') {
                              this.booCanSave = true;
@@ -186,9 +220,6 @@ export class MembreComponent implements OnInit {
                   }
               );
       } else {
-          modifiedMembre.lienBanque = this.lienBanque;
-          modifiedMembre.lienDis = this.lienDis;
-          if (modifiedMembre.lienDis == null) {modifiedMembre.lienDis = 0; }
           console.log('Creating Membre with content:', modifiedMembre);
           this.membresService.add(modifiedMembre)
               .subscribe(() => {
@@ -230,6 +261,10 @@ export class MembreComponent implements OnInit {
             console.log('Form is not dirty, closing');
             this.onMembreQuit.emit();
         }
+    }
+
+    getMemberTitle(): string {
+        return this.title;
     }
 }
 

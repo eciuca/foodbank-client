@@ -13,7 +13,7 @@ import {AppState} from '../../reducers';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {Membre} from '../../membres/model/membre';
 import {DataServiceError} from '@ngrx/data';
-import {Observable, combineLatest, BehaviorSubject, of} from 'rxjs';
+import {Observable, combineLatest} from 'rxjs';
 import {Organisation} from '../../organisations/model/organisation';
 
 @Component({
@@ -45,8 +45,8 @@ export class UserComponent implements OnInit {
   rights: any[];
     filterMemberBase: any;
     lienDepot: number;
-    title$ = new BehaviorSubject(null);
     orgName: string;
+    title: string;
   constructor(
       private usersService: UserEntityService,
       private membresService: MembreEntityService,
@@ -68,6 +68,7 @@ export class UserComponent implements OnInit {
       this.lienDepot = 0;
       this.booIsOrganisation = false;
       this.booIsCreate = false;
+      this.title = '';
   }
 
   ngOnInit(): void {
@@ -92,15 +93,12 @@ export class UserComponent implements OnInit {
             user => {
                 if (user) {
                     this.user = user;
-                    let title = '';
                     if (user.societe) {
                         this.rights = enmUserRolesAsso;
-                        title = $localize`:@@OrgUserExisting:User ${user.idUser} for organisation  ${user.societe}`;
-                        this.title$.next(title);
+                        this.title = $localize`:@@OrgUserExisting:User ${user.idUser} for organisation  ${user.societe}`;
                     } else {
                         this.rights = enmUserRolesBank;
-                        title = $localize`:@@BankUserExisting:User ${user.idUser} for bank ${this.user.idCompany}`;
-                        this.title$.next(title);
+                        this.title = $localize`:@@BankUserExisting:User ${user.idUser} for bank ${this.user.idCompany}`;
                     }
                     this.booIsCreate = false;
                     this.membresService.getByKey(user.lienBat)
@@ -118,29 +116,25 @@ export class UserComponent implements OnInit {
                     this.user.lienBanque = this.lienBanque;
                     this.user.idCompany = this.idCompany;
                     console.log('CurrentFilteredOrg', this.currentFilteredOrg);
-                    let title = '';
+
                     if (this.idOrg > 0 && this.lienDepot === 0) {
                         // handle organisation users
                         this.user.idOrg = this.idOrg;
                         this.rights = enmUserRolesAsso;
-                        title = $localize`:@@OrgUserNew1:New User for organisation ${this.orgName} `;
-                        this.title$.next(title);
+                        this.title = $localize`:@@OrgUserNew1:New User for organisation ${this.orgName} `;
                     } else {
                         if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
                             // create user from bank admin user or depot admin user
                             this.user.idOrg = this.currentFilteredOrg.idDis;
-                            title = $localize`:@@OrgUserNewA:New User for organisation  ${this.currentFilteredOrg.societe}`;
-                            this.title$.next(title);
+                            this.title = $localize`:@@OrgUserNewA:New User for organisation  ${this.currentFilteredOrg.societe}`;
                         }  else {
                             if (this.lienDepot > 0) {
                                 this.rights = enmUserRolesAsso;
                                 this.user.idOrg = this.lienDepot;
-                                title =  $localize`:@@OrgUserNewB:New User for organisation  ${this.orgName}`;
-                                this.title$.next(title);
+                                this.title =  $localize`:@@OrgUserNewB:New User for organisation  ${this.orgName}`;
                             } else { // must be bank
                                 this.rights = enmUserRolesBank;
-                                title =  $localize`:@@BankUserNew1:New User for bank ${this.idCompany} `;
-                                this.title$.next(title);
+                                this.title =  $localize`:@@BankUserNew1:New User for bank ${this.idCompany} `;
                             }
                         }
                     }
@@ -355,7 +349,7 @@ export class UserComponent implements OnInit {
     }
 
     getUserTitle(): string {
-      return this.title$.getValue();
+      return this.title;
     }
 
 }

@@ -202,15 +202,15 @@ export class AppComponent implements OnInit {
                     {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
                     {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
                     {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-users',  routerLink: ['/trips']},
-                    {
-                        label: $localize`:@@menuOrganisation:Organisation`,
-                        icon: 'pi pi-fw pi-map',
-                        routerLink: [`/organisations/${authState.organisation.idDis}`]
-                    }
                 ];
                 if (authState.organisation && authState.organisation.depyN === true) {
-                        this.menuLoggedInItems.push(
+                    this.menuLoggedInItems.push(
+                        {label: $localize`:@@menuDepot:Depot`, icon: 'pi pi-fw pi-map', routerLink: [`/organisations/${authState.organisation.idDis}`]},
                         {label: $localize`:@@menuOrganisationsDepot:Orgs Depot`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']}
+                    );
+                } else {
+                    this.menuLoggedInItems.push(
+                    {label: $localize`:@@menuOrganisation:Organisation`, icon: 'pi pi-fw pi-map', routerLink: [`/organisations/${authState.organisation.idDis}`]}
                     );
                 }
             this.menuLoggedInItems.push(

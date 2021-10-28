@@ -1,7 +1,7 @@
 <p-panel *ngIf="organisation">
     <ng-template  pTemplate="header">
         <div i18n="@@OrganisationHeader">
-       Organisation {{ organisation.societe}} Updated on {{organisation.lupdTs}} By {{organisation.lupdUserName}}
+       Organisation {{ organisation.idDis}} {{ organisation.societe}} Updated on {{organisation.lupdTs}} By {{organisation.lupdUserName}}
         </div>
     </ng-template>
     <form   #organisationForm="ngForm">

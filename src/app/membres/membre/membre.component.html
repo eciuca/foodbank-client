@@ -1,6 +1,6 @@
 <p-panel *ngIf="membre">
-    <ng-template i18n="@@EmployeeHeader" pTemplate="header">
-        Employee {{ membre.nom}} {{ membre.prenom}} Updated On {{ membre.lastVisit}}
+    <ng-template pTemplate="header">
+        {{ getMemberTitle() }}
     </ng-template>
     <form   #membreForm="ngForm" style="padding: 1em">
         <div class="p-fluid p-formgrid p-grid">
@@ -68,7 +68,7 @@
         </div>
         <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
-        <div *ngIf="booCanSave" class="p-formgroup-inline">
+        <div class="p-formgroup-inline">
             <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,membre)" i18n-label="@@Delete" label="Delete"></button>
             <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(membre, membreForm.value)" i18n-label="@@Save" label="Save" [disabled] = "membreForm.invalid"></button>
             <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, membre, membreForm,membreForm.dirty)" i18n-label="@@Return" label="Return" ></button>

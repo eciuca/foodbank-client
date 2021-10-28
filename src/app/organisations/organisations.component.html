@@ -10,26 +10,31 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
+            <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
             <th i18n="@@RefintSorted" pSortableColumn="refInt">Reference<p-sortIcon field="refInt"></p-sortIcon></th>
-            <th i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
+            <th  colspan="2" i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
+            <th *ngIf="isDepot === false"  colspan="2" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
+            <th *ngIf="isDepot === true"  colspan="2"  i18n="@@OrgSuspended">Suspended</th>
             <th i18n="@@OrgAgreedSorted" pSortableColumn="agreed">Agreed<p-sortIcon field="agreed"></p-sortIcon></th>
             <th i18n="@@ActifSorted" pSortableColumn="actif">Active<p-sortIcon field="actif"></p-sortIcon></th>
-            <th *ngIf="isDepot === false" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
-            <th *ngIf="isDepot === true" i18n="@@OrgSuspended">Suspended</th>
             <th i18n="@@IsDepotSorted" pSortableColumn="depyN">Is Depot<p-sortIcon field="depyN"></p-sortIcon></th>
-            <th i18n="@@IsMainDepotSorted" pSortableColumn="depPrinc">Main Depot<p-sortIcon field="depPrinc"></p-sortIcon></th>
             <th i18n="@@UsesFeadSorted" pSortableColumn="birbyN">Uses FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
         </tr>
         <tr>
-            <th>
+            <th colspan="2">
                 <p-columnFilter type="text" field="societe" ></p-columnFilter>
             </th>
             <th>
                 <p-columnFilter type="text" field="refInt" ></p-columnFilter>
             </th>
-            <th>
+            <th colspan="2">
                 <p-columnFilter type="text" field="adresse" ></p-columnFilter>
+            </th>
+            <th *ngIf="isDepot === false" colspan="2">
+                <p-columnFilter type="text" field="nomDepot" ></p-columnFilter>
+            </th>
+            <th *ngIf="isDepot === true" colspan="2">
+
             </th>
             <th>
                 <p-columnFilter field="agreed" matchMode="equals" [showMenu]="false">
@@ -53,12 +58,7 @@
                     </ng-template>
                 </p-columnFilter>
             </th>
-            <th *ngIf="isDepot === false">
-                <p-columnFilter type="text" field="nomDepot" ></p-columnFilter>
-            </th>
-            <th *ngIf="isDepot === true">
 
-            </th>
             <th>
                 <p-columnFilter field="depyN" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
@@ -69,8 +69,6 @@
                         </p-dropdown>
                     </ng-template>
                 </p-columnFilter>
-            </th>
-            <th>
             </th>
             <th>
                 <p-columnFilter field="birbyN" matchMode="equals" [showMenu]="false">
@@ -88,14 +86,20 @@
     </ng-template>
     <ng-template pTemplate="body" let-organisation>
         <tr (click)="handleSelect(organisation)">
-            <td>
-                {{ organisation.societe }}
+            <td colspan="2">
+                {{ organisation.idDis }} {{ organisation.societe }}
             </td>
             <td>
                 {{ organisation.refInt }}
             </td>
-            <td>
+            <td  colspan="2">
                 {{ organisation.adresse }}  {{ organisation.cp }}  {{ organisation.localite }}
+            </td>
+            <td *ngIf="isDepot === false" colspan="2">
+                {{ organisation.nomDepot }}
+            </td>
+            <td *ngIf="isDepot === true" colspan="2">
+                {{ labelSuspensionStatus(organisation) }}
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.agreed, 'false-icon pi-times-circle': !organisation.agreed}"></i>
@@ -103,17 +107,10 @@
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.actif, 'false-icon pi-times-circle': !organisation.actif}"></i>
             </td>
-            <td *ngIf="isDepot === false">
-                {{ organisation.nomDepot }}
-            </td>
-            <td *ngIf="isDepot === true">
-                {{ labelSuspensionStatus(organisation) }}
-            </td>
+
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.depyN, 'false-icon pi-times-circle': !organisation.depyN}"></i>
-            </td>
-            <td>
-                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.depPrinc, 'false-icon pi-times-circle': !organisation.depPrinc}"></i>
+                <div *ngIf="organisation.depPrinc=== true">P</div>
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.birbyN, 'false-icon pi-times-circle': !organisation.birbyN}"></i>

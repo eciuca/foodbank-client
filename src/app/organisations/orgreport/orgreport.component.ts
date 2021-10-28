@@ -18,7 +18,7 @@ import {OrgBeneficiaryReport} from '../model/orgbeneficiaryreport';
 })
 export class OrgReportComponent implements OnInit {
     bankid: number;
-    memberData: any;
+   // memberData: any;  Report to be revisited
     beneficiaryData: any;
     orgMemberReports: OrgMemberReport[];
     orgBeneficiaryReports: OrgBeneficiaryReport[];
@@ -75,6 +75,7 @@ export class OrgReportComponent implements OnInit {
       this.report(null);
   }
   report(event: any) {
+      /* Report to be revisited
     console.log('Entering Organisation Report', event );
     this.orgReportService.getMemberReport(this.authService.accessToken, this.bankid).subscribe(
           (response: OrgMemberReport[]) => {
@@ -107,6 +108,7 @@ export class OrgReportComponent implements OnInit {
               life: 6000
             });
           });
+    */
       this.orgReportService.getBeneficiaryReport(this.authService.accessToken, this.bankid).subscribe(
           (response: OrgBeneficiaryReport[]) => {
               this.orgBeneficiaryReports = response;

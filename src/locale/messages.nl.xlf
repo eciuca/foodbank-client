@@ -254,17 +254,25 @@
           <context context-type="linenumber">275</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="menuOrganisation" datatype="html">
-        <source>Organisation</source>
-        <target>Organisatie</target>
+      <trans-unit id="menuDepot" datatype="html">
+        <source>Depot</source>
+        <target>Depot</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">208</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOrganisationsDepot" datatype="html">
         <source>Orgs Depot</source>
         <target>Erkende Verenigingen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">209</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuOrganisation" datatype="html">
+        <source>Organisation</source>
+        <target>Organisatie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">213</context>
@@ -723,7 +731,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">249</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
@@ -739,7 +747,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">315</context>
+          <context context-type="linenumber">309</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReport" datatype="html">
@@ -1926,14 +1934,6 @@
           <context context-type="linenumber">256</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="EmployeeHeader" datatype="html">
-        <source> Employee <x id="INTERPOLATION" equiv-text="{{ membre.nom}}"/> <x id="INTERPOLATION_1" equiv-text="{{ membre.prenom}}"/> Updated On <x id="INTERPOLATION_2" equiv-text="{{ membre.lastVisit}}"/> </source>
-        <target> Medewerker <x id="INTERPOLATION" equiv-text="{{ membre.nom}}"/> <x id="INTERPOLATION_1" equiv-text="{{ membre.prenom}}"/> bijgewerkt op <x id="INTERPOLATION_2" equiv-text="{{ membre.lastVisit}}"/> </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="EmailIsMandatory" datatype="html">
         <source>E-mail is required and must be valid</source>
         <target>E-mail is verplicht en moet geldig zijn</target>
@@ -1958,12 +1958,60 @@
           <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="OrgMemberExisting" datatype="html">
+        <source>Member for organisation <x id="PH" equiv-text="membre.societe"/> Updated On <x id="PH_1" equiv-text="membre.lastVisit"/></source>
+        <target>Medewerker voor organisatie <x id="PH" equiv-text="membre.societe"/> bijgewerkt op <x id="PH_1" equiv-text="membre.lastVisit"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BankMemberExisting" datatype="html">
+        <source>Member for bank <x id="PH" equiv-text="this.idCompany"/> Updated On <x id="PH_1" equiv-text="membre.lastVisit"/></source>
+        <target>Medewerker voor bank <x id="PH" equiv-text="this.idCompany"/> bijgewerkt op <x id="PH_1" equiv-text="membre.lastVisit"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberNew1" datatype="html">
+        <source>New Member for organisation <x id="PH" equiv-text="this.orgName"/> </source>
+        <target>Nieuwe medewerker voor organisatie <x id="PH" equiv-text="this.orgName"/> </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberNewA" datatype="html">
+        <source>New Member for organisation  <x id="PH" equiv-text="this.currentFilteredOrg.societe"/></source>
+        <target>Nieuwe medewerker voor organisatie <x id="PH" equiv-text="this.currentFilteredOrg.societe"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberNewB" datatype="html">
+        <source>New Member for organisation  <x id="PH" equiv-text="this.orgName"/></source>
+        <target>Nieuwe medewerker voor organisatie <x id="PH" equiv-text="this.orgName"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BankMemberNew1" datatype="html">
+        <source>New Member for bank <x id="PH" equiv-text="this.idCompany"/> </source>
+        <target>Nieuwe medewerker voor bank <x id="PH" equiv-text="this.idCompany"/> </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="messageEmployeeDeleted" datatype="html">
         <source>The employee <x id="PH" equiv-text="membre.prenom"/> <x id="PH_1" equiv-text="membre.nom"/> was deleted</source>
         <target>De medewerker <x id="PH" equiv-text="membre.prenom"/> <x id="PH_1" equiv-text="membre.nom"/> is verwijderd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">177</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeDeleteError" datatype="html">
@@ -1971,7 +2019,7 @@
         <target>De medewerker <x id="PH" equiv-text="membre.prenom"/> <x id="PH_1" equiv-text="membre.nom"/> kan niet worden verwijderd: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">154</context>
+          <context context-type="linenumber">188</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeUpdated" datatype="html">
@@ -1979,7 +2027,7 @@
         <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> is bijgewerkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">209</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeUpdateError" datatype="html">
@@ -1987,7 +2035,7 @@
         <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> kan niet worden bijgewerkt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">183</context>
+          <context context-type="linenumber">217</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeCreated" datatype="html">
@@ -1995,7 +2043,7 @@
         <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> is aangemaakt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">229</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeCreateError" datatype="html">
@@ -2003,7 +2051,7 @@
         <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> kan niet worden aangemaakt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">237</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddEmployee" datatype="html">
@@ -2043,7 +2091,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="OrganisationHeader" datatype="html">
-        <source> Organisation <x id="INTERPOLATION" equiv-text="{{ organisation.societe}}"/> Updated on <x id="INTERPOLATION_1" equiv-text="{{organisation.lupdTs}}"/> By <x id="INTERPOLATION_2" equiv-text="{{organisation.lupdUserName}}"/> </source>
+        <source> Organisation <x id="INTERPOLATION" equiv-text="{{ organisation.idDis}}"/> <x id="INTERPOLATION_1" equiv-text="{{ organisation.societe}}"/> Updated on <x id="INTERPOLATION_2" equiv-text="{{organisation.lupdTs}}"/> By <x id="INTERPOLATION_3" equiv-text="{{organisation.lupdUserName}}"/> </source>
         <target> Organisatie <x id="INTERPOLATION" equiv-text="{{ organisation.societe}}"/> bijgewerkt op <x id="INTERPOLATION_1" equiv-text="{{organisation.lupdTs}}"/> door <x id="INTERPOLATION_2" equiv-text="{{organisation.lupdUserName}}"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -2107,7 +2155,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgSuspEndDate" datatype="html">
@@ -2830,12 +2878,20 @@
           <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="NomDepotSorted" datatype="html">
+        <source>Depot<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nomDepot&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Depot<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nomDepot&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="OrgAgreedSorted" datatype="html">
         <source>Agreed<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;agreed&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
         <target>Erkend<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;daten&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ActifSorted" datatype="html">
@@ -2843,15 +2899,7 @@
         <target>Actief<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;actif&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="NomDepotSorted" datatype="html">
-        <source>Depot<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nomDepot&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
-        <target>Depot<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nomDepot&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="IsDepotSorted" datatype="html">
@@ -2862,20 +2910,12 @@
           <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="IsMainDepotSorted" datatype="html">
-        <source>Main Depot<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;depPrinc&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
-        <target>Centraal Depot<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;depPrinc&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="UsesFeadSorted" datatype="html">
         <source>Uses FEAD<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;birbyN&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
         <target>Gebruik FEAD<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;birbyN&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrganisationsSelected" datatype="html">
@@ -2883,7 +2923,7 @@
         <target> Er zijn <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> organisaties in de selectie.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">125,127</context>
+          <context context-type="linenumber">122,124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrganisationDetails" datatype="html">
@@ -2891,7 +2931,7 @@
         <target>Organisatiegegevens</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Function" datatype="html">
@@ -2927,11 +2967,7 @@
         <target>Het rapport over de medewerkers van de Organisaties is mislukt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgreport/orgreport.component.ts</context>
-          <context context-type="linenumber">105</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/orgreport/orgreport.component.ts</context>
-          <context context-type="linenumber">204</context>
+          <context context-type="linenumber">206</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberReportErrorDetail" datatype="html">
@@ -2939,11 +2975,7 @@
         <target>Rapport medewerkers van de Organisaties. <x id="PH" equiv-text="errorMsg"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgreport/orgreport.component.ts</context>
-          <context context-type="linenumber">106</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/orgreport/orgreport.component.ts</context>
-          <context context-type="linenumber">205</context>
+          <context context-type="linenumber">207</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Any" datatype="html">
@@ -3162,8 +3194,16 @@
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="TripStartCity" datatype="html">
+        <source>Start City</source>
+        <target>Stad vertrek</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="TripStartIsMandatory" datatype="html">
-        <source>Trip Start is required and must be in format hh:mm</source>
+        <source>Trip Start City is required</source>
         <target>Start uur is vereist en moet in formaat zijn hh:mm</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
@@ -3178,8 +3218,16 @@
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="TripArrivalCity" datatype="html">
+        <source>Arrival City</source>
+        <target>Aankomststad</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="TripArrivalIsMandatory" datatype="html">
-        <source>Trip Arrival is required  and must be in format hh:mm</source>
+        <source>Trip Arrival City is required</source>
         <target>Aankomst van de verplaatsing is vereist en moet in formaat  hh:mm zijn</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trips/trip/trip.component.html</context>
@@ -3463,7 +3511,7 @@
         <target>Gebruiker <x id="PH" equiv-text="user.idUser"/> voor bank <x id="PH_1" equiv-text="user.idCompany"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="linenumber">101</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgUserNew1" datatype="html">
@@ -3471,7 +3519,7 @@
         <target>Nieuwe gebruiker voor organisatie <x id="PH" equiv-text="this.orgName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgUserNewA" datatype="html">
@@ -3479,7 +3527,7 @@
         <target>Nieuwe gebruiker voor organisatie <x id="PH" equiv-text="this.currentFilteredOrg.societe"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgUserNewB" datatype="html">
@@ -3487,7 +3535,7 @@
         <target>Nieuwe gebruiker voor organisatie <x id="PH" equiv-text="this.orgName"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankUserNew1" datatype="html">
@@ -3495,7 +3543,7 @@
         <target>Nieuwe gebruiker voor bank <x id="PH" equiv-text="this.idCompany"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserDeleted" datatype="html">
@@ -3503,7 +3551,7 @@
         <target>De gebruiker <x id="PH" equiv-text="user.idUser"/> <x id="PH_1" equiv-text="user.userName"/> is verwijderd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">208</context>
+          <context context-type="linenumber">202</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserDeleteError" datatype="html">
@@ -3511,7 +3559,7 @@
         <target>De gebruiker <x id="PH" equiv-text="user.idUser"/> <x id="PH_1" equiv-text="user.userName"/> kan niet worden verwijderd: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">219</context>
+          <context context-type="linenumber">213</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserUpdated" datatype="html">
@@ -3519,7 +3567,7 @@
         <target>Gebruiker <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> is bijgewerkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">234</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserUpdateError" datatype="html">
@@ -3527,7 +3575,7 @@
         <target>De gebruiker <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> kan niet worden bijgewerkt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">247</context>
+          <context context-type="linenumber">241</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreated" datatype="html">
@@ -3535,7 +3583,7 @@
         <target>Gebruiker <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> is aangemaakt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">285</context>
+          <context context-type="linenumber">279</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreateError" datatype="html">
@@ -3543,7 +3591,7 @@
         <target>De gebruiker <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> kan niet worden aangemaakt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">293</context>
+          <context context-type="linenumber">287</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreateErrorNoEmployee" datatype="html">
@@ -3551,7 +3599,7 @@
         <target>De gebruiker <x id="PH" equiv-text="modifiedUser.idUser"/> kan niet worden aangemaakt: er is geen medewerker geselecteerd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">302</context>
+          <context context-type="linenumber">296</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UsersHeader" datatype="html">
@@ -3633,6 +3681,14 @@
           <context context-type="sourcefile">src/app/users/users.component.html</context>
           <context context-type="linenumber">113</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="EmployeeHeader">
+        <source/>
+        <target> Medewerker <x id="INTERPOLATION" equiv-text="{{ membre.nom}}"/> <x id="INTERPOLATION_1" equiv-text="{{ membre.prenom}}"/> bijgewerkt op <x id="INTERPOLATION_2" equiv-text="{{ membre.lastVisit}}"/> </target>
+      </trans-unit>
+      <trans-unit id="IsMainDepotSorted">
+        <source/>
+        <target>Centraal Depot<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;depPrinc&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
       </trans-unit>
     </body>
   </file>
