@@ -32,6 +32,10 @@
                         <label i18n="@@UserRole" for="rights">Role</label>
                         <p-dropdown [options]="rights" id="rights" name="rights" [ngModel]="user.rights"  ></p-dropdown>
                     </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        <label i18n="@@Active" for="actif">Active</label>
+                        <p-inputSwitch id="actif" name="actif" [ngModel]="user.actif"></p-inputSwitch>
+                    </div>
                 </div>
             </p-accordionTab>
             <p-accordionTab i18n-header="@@UserRights" header="User Rights">

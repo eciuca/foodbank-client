@@ -28,18 +28,26 @@ export class OrganisationsComponent implements OnInit {
     totalRecords: number;
     loading: boolean;
     filterBase: any;
+    booShowArchived: boolean;
     booCanCreate: boolean;
     statutOptions: any[];
     YNOptions:  any[];
+    bankName: string;
+    depotName: string;
+    first: number;
     constructor(private organisationService: OrganisationEntityService,
                 private router: Router,
                 private route: ActivatedRoute,
                 private store: Store<AppState>
     ) {
         this.booCanCreate = false;
+        this.booShowArchived = false;
         this.statutOptions = enmStatusCompany;
         this.YNOptions = enmYn;
         this.isDepot = false;
+        this.bankName = '';
+        this.depotName = '';
+        this.first = 0;
     }
 
     ngOnInit() {
@@ -119,6 +127,11 @@ export class OrganisationsComponent implements OnInit {
         } else {
             queryParms['sortField'] =  'societe';
         }
+        if (this.booShowArchived ) {
+            queryParms['actif'] = '0';
+        }  else {
+            queryParms['actif'] = '1';
+        }
         if (event.filters) {
             if (event.filters.societe && event.filters.societe.value) {
                 queryParms['societe'] = event.filters.societe.value;
@@ -128,9 +141,6 @@ export class OrganisationsComponent implements OnInit {
             }
             if (event.filters.agreed && event.filters.agreed.value != null) {
                 queryParms['agreed'] = event.filters.agreed.value;
-            }
-            if (event.filters.actif && event.filters.actif.value != null) {
-                queryParms['actif'] = event.filters.actif.value;
             }
             if (event.filters.nomDepot && event.filters.nomDepot.value) {
                 queryParms['nomDepot'] = event.filters.nomDepot.value;
@@ -149,17 +159,19 @@ export class OrganisationsComponent implements OnInit {
     }
     private initializeDependingOnUserRights(authState: AuthState) {
         if (authState.banque) {
+            this.filterBase = { 'lienBanque': authState.banque.bankId};
+            this.bankName = authState.banque.bankName;
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
-                    this.filterBase = { 'lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
                     // This module is only called for depots see menu
+                    this.depotName = authState.organisation.societe;
                     this.isDepot = true;
-                    this.filterBase = {'lienDepot': authState.organisation.idDis};
+                    this.filterBase['lienDepot'] = authState.organisation.idDis;
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                 default:
@@ -185,7 +197,40 @@ export class OrganisationsComponent implements OnInit {
     labelSuspensionStatus(organisation: Organisation) {
      if  (organisation.susp === true)  {
          return 'Y ' + organisation.stopSusp ;
-     }   else return 'N';
+     }   else {
+         return 'N';
+     }
+    }
+
+    getTitle(): string {
+        if ( this.depotName) {
+            if (this.booShowArchived) {
+                return $localize`:@@DepotOrgsTitleArchive:Archived Organisations of depot ${this.depotName} `;
+            } else {
+                return $localize`:@@DepotOrgsTitleActive:Active Organisations of depot ${this.depotName} `;
+            }
+        } else {
+            if (this.booShowArchived) {
+                    return $localize`:@@BankOrgsTitleArchive:Archived Organisations of bank ${this.bankName} `;
+            } else {
+                return $localize`:@@BankOrgsTitleActive:Active Organisations of bank ${this.bankName} `;
+            }
+        }
+    }
+    changeArchiveFilter($event) {
+        console.log('Archive is now:', $event);
+        this.booShowArchived = $event.checked;
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest Query Parms', latestQueryParams);
+        // when we switch from active to archived list and vice versa , we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if (this.booShowArchived ) {
+            latestQueryParams['actif'] = '0';
+        } else {
+            latestQueryParams['actif'] = '1';
+        }
+        this.loadPageSubject$.next(latestQueryParams);
     }
 }
 

@@ -26,6 +26,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {ToastModule} from 'primeng/toast';
 import {OrgSummariesDataService} from '../organisations/services/orgsummaries-data.service';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
+import {CheckboxModule} from 'primeng/checkbox';
 
 const routes: Routes = [
   { path: '',
@@ -54,6 +55,7 @@ const routes: Routes = [
         MessageModule,
         AutoCompleteModule,
         ToastModule,
+        CheckboxModule,
     ],
   providers: [
         UsersDataService,

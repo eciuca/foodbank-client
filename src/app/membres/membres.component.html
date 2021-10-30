@@ -6,8 +6,12 @@
     <ng-template pTemplate="caption">
         <div class="table-header">
             <div class="p-fluid p-formgrid p-grid">
-                <div i18n="@@EmployeesHeader" class="p-field p-col-12 p-md-4">
-                    Employees of {{bankName}}
+                <div class="p-field p-col-12 p-md-6">
+                    {{ getTitle() }}
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@ShowArchived" for="archived">Show Archived?</label>
+                    <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                 </div>
                 <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
                     <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
@@ -19,9 +23,6 @@
                             </div>
                         </ng-template>
                     </p-autoComplete>
-                </div>
-                <div   *ngIf="orgName != ''" class="p-field p-col-12 p-md-4">
-                    {{orgName}}
                 </div>
                 <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
                     <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddEmployee" label="Add Employee"></button>

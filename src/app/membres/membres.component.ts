@@ -28,6 +28,7 @@ export class MembresComponent implements OnInit {
     totalRecords: number;
     loading: boolean;
     filterBase: any;
+    booShowArchived: boolean;
     booCanCreate: boolean;
     filteredOrganisation: any;
     filteredOrganisations: any[];
@@ -35,8 +36,8 @@ export class MembresComponent implements OnInit {
     booShowOrganisations: boolean;
     bankid: number;
     bankName: string;
-    orgName: string; // if logging in with asso role we need to display the organisation
     lienDepot: number;
+    depotName: string;
     first: number;
     constructor(private membreService: MembreEntityService,
                 private orgsummaryService: OrgSummaryEntityService,
@@ -44,13 +45,13 @@ export class MembresComponent implements OnInit {
                 private store: Store<AppState>
     ) {
         this.booCanCreate = false;
+        this.booShowArchived = false;
         this.bankid = 0;
         this.booShowOrganisations = false;
         this.first = 0;
         this.bankName = '';
-        this.orgName = '';
+        this.depotName = '';
         this.lienDepot = 0;
-
     }
 
     ngOnInit() {
@@ -137,6 +138,11 @@ export class MembresComponent implements OnInit {
                 queryParms['lienDepot'] = this.lienDepot;
             }
         }
+        if (this.booShowArchived ) {
+            queryParms['actif'] = '0';
+        }  else {
+            queryParms['actif'] = '1';
+        }
         if (event.filters) {
             if (event.filters.nom && event.filters.nom.value) {
                 queryParms['nom'] = event.filters.nom.value;
@@ -177,6 +183,7 @@ export class MembresComponent implements OnInit {
                     if (authState.organisation && authState.organisation.depyN === true) {
                         this.booShowOrganisations = true;
                         this.lienDepot = authState.organisation.idDis;
+                        this.depotName = authState.organisation.societe;
                         this.filteredOrganisationsPrepend = [
                             {idDis: this.lienDepot, societe: $localize`:@@depot:Depot` },
                             {idDis: null, societe: $localize`:@@organisations:Organisations` },
@@ -185,7 +192,6 @@ export class MembresComponent implements OnInit {
                     } else {
                         this.filterBase = { 'lienDis': authState.organisation.idDis};
                     }
-                    this.orgName = authState.organisation.societe;
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                 default:
@@ -199,6 +205,7 @@ export class MembresComponent implements OnInit {
     }
     filterOrganisation(event ) {
         const  queryOrganisationParms: QueryParams = {};
+        queryOrganisationParms['actif'] = '1';
         if (this.lienDepot === 0) {
             queryOrganisationParms['lienBanque'] = this.bankid.toString();
         }  else {
@@ -233,6 +240,36 @@ export class MembresComponent implements OnInit {
             }
         }
         this.loadPageSubject$.next(latestQueryParams);
+    }
+    changeArchiveFilter($event) {
+        console.log('Archive is now:', $event);
+        this.booShowArchived = $event.checked;
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest Query Parms', latestQueryParams);
+        // when we switch from active to archived list and vice versa , we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if (this.booShowArchived ) {
+            latestQueryParams['actif'] = '0';
+        } else {
+            latestQueryParams['actif'] = '1';
+        }
+        this.loadPageSubject$.next(latestQueryParams);
+    }
+    getTitle(): string {
+        if ( this.depotName) {
+            if (this.booShowArchived) {
+                return $localize`:@@DepotMembersTitleArchive:Archived Members of depot ${this.depotName} `;
+            } else {
+                return $localize`:@@DepotMembersTitleActive:Active Members of depot ${this.depotName} `;
+            }
+        } else {
+            if (this.booShowArchived) {
+                return $localize`:@@BankMembersTitleArchive:Archived Members of bank ${this.bankName} `;
+            } else {
+                return $localize`:@@BankMembersTitleActive:Active Members of bank ${this.bankName} `;
+            }
+        }
     }
 }
 

@@ -1,11 +1,24 @@
 <p-table #dt [value]="organisations" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
-         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading"
+         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
          [globalFilterFields]="['societe','adresse', 'cp', 'localite']"
          [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
 >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Organisation" i18n-label="@@AddOrganisation" ></button>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-6">
+                    {{ getTitle() }}
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@ShowArchived" for="archived">Show Archived?</label>
+                    <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="changeArchiveFilter($event)"></p-checkbox>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Organisation" i18n-label="@@AddOrganisation" ></button>
+                </div>
+            </div>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -16,7 +29,6 @@
             <th *ngIf="isDepot === false"  colspan="2" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
             <th *ngIf="isDepot === true"  colspan="2"  i18n="@@OrgSuspended">Suspended</th>
             <th i18n="@@OrgAgreedSorted" pSortableColumn="agreed">Agreed<p-sortIcon field="agreed"></p-sortIcon></th>
-            <th i18n="@@ActifSorted" pSortableColumn="actif">Active<p-sortIcon field="actif"></p-sortIcon></th>
             <th i18n="@@IsDepotSorted" pSortableColumn="depyN">Is Depot<p-sortIcon field="depyN"></p-sortIcon></th>
             <th i18n="@@UsesFeadSorted" pSortableColumn="birbyN">Uses FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
         </tr>
@@ -47,18 +59,6 @@
                     </ng-template>
                 </p-columnFilter>
             </th>
-            <th>
-                <p-columnFilter field="actif" matchMode="equals" [showMenu]="false">
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                            <ng-template let-option pTemplate="item">
-                                <span>{{option.label}}</span>
-                            </ng-template>
-                        </p-dropdown>
-                    </ng-template>
-                </p-columnFilter>
-            </th>
-
             <th>
                 <p-columnFilter field="depyN" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
@@ -104,10 +104,6 @@
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.agreed, 'false-icon pi-times-circle': !organisation.agreed}"></i>
             </td>
-            <td>
-                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.actif, 'false-icon pi-times-circle': !organisation.actif}"></i>
-            </td>
-
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.depyN, 'false-icon pi-times-circle': !organisation.depyN}"></i>
                 <div *ngIf="organisation.depPrinc=== true">P</div>

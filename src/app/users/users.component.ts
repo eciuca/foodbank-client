@@ -27,6 +27,7 @@ export class UsersComponent implements OnInit {
   totalRecords: number;
   loading: boolean;
   filterBase: any;
+  booShowArchived: boolean;
   displayDialog: boolean;
   booCanCreate: boolean;
   rightOptions: any[];
@@ -35,25 +36,27 @@ export class UsersComponent implements OnInit {
   filteredOrganisations: any[];
   filteredOrganisationsPrepend: any[];
   bankid: number;
-    bankName: string;
-    orgName: string; // if logging in with asso role we need to display the organisation
-    first: number;
+  bankName: string;
+  first: number;
   booShowOrganisations: boolean;
     lienDepot: number;
+    depotName: string;
   constructor(private userService: UserEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private router: Router,
               private store: Store<AppState>
   ) {
       this.booCanCreate = false;
+      this.booShowArchived = false;
       this.rightOptions = enmUserRolesBankAsso;
       this.languageOptions = enmLanguage;
       this.bankid = 0;
       this.bankName = '';
-      this.orgName = '';
       this.lienDepot = 0;
+      this.depotName = '';
       this.first = 0;
-      this.booShowOrganisations = false;}
+      this.booShowOrganisations = false;
+  }
 
   ngOnInit() {
       this.reload();
@@ -109,6 +112,7 @@ export class UsersComponent implements OnInit {
                         if (authState.organisation && authState.organisation.depyN === true) {
                             this.booShowOrganisations = true;
                             this.lienDepot = authState.organisation.idDis;
+                            this.depotName = authState.organisation.societe;
                             this.filteredOrganisationsPrepend = [
                                 {idDis: this.lienDepot, societe: $localize`:@@depot:Depot` },
                                 {idDis: null, societe: $localize`:@@organisations:Organisations` },
@@ -117,7 +121,6 @@ export class UsersComponent implements OnInit {
                         } else {
                             this.filterBase = {'idOrg': authState.organisation.idDis};
                         }
-                        this.orgName = authState.organisation.societe;
                         this.rightOptions = enmUserRolesAsso;
                         if (authState.user.rights === 'Admin_Asso') {
                             this.booCanCreate = true;
@@ -182,8 +185,17 @@ export class UsersComponent implements OnInit {
             } else {
                 queryParms['sortField'] =  'idUser';
             }
-                if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
+            if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
                 queryParms['idOrg'] = this.filteredOrganisation.idDis;
+            } else {
+                    if ( this.lienDepot !== 0) {
+                        queryParms['lienDepot'] = this.lienDepot;
+                    }
+            }
+            if (this.booShowArchived ) {
+                queryParms['actif'] = '0';
+            }  else {
+                queryParms['actif'] = '1';
             }
             if (event.filters) {
                 if (event.filters.idUser && event.filters.idUser.value) {
@@ -277,6 +289,36 @@ export class UsersComponent implements OnInit {
                 return $localize`:@@RoleAdmin:Global admin`;
             default:
                 return rights;
+        }
+    }
+    changeArchiveFilter($event) {
+        console.log('Archive is now:', $event);
+        this.booShowArchived = $event.checked;
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest Query Parms', latestQueryParams);
+        // when we switch from active to archived list and vice versa , we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if (this.booShowArchived ) {
+            latestQueryParams['actif'] = '0';
+        } else {
+            latestQueryParams['actif'] = '1';
+        }
+        this.loadPageSubject$.next(latestQueryParams);
+    }
+    getTitle(): string {
+        if ( this.depotName) {
+            if (this.booShowArchived) {
+                return $localize`:@@DepotUsersTitleArchive:Archived Users of depot ${this.depotName} `;
+            } else {
+                return $localize`:@@DepotUsersTitleActive:Active Users of depot ${this.depotName} `;
+            }
+        } else {
+            if (this.booShowArchived) {
+                return $localize`:@@BankUsersTitleArchive:Archived Users of bank ${this.bankName} `;
+            } else {
+                return $localize`:@@BankUsersTitleActive:Active Users of bank ${this.bankName} `;
+            }
         }
     }
 }

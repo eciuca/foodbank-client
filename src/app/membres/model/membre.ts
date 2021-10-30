@@ -39,7 +39,7 @@ export interface Membre {
 
     pays: number;
 
-    actif: number;
+    actif: boolean;
 
     authority: number;
 
@@ -87,7 +87,7 @@ export function compareMembres(c1: Membre, c2: Membre) {
 }
 export class DefaultMembre implements Membre {
 
-    actif: number;
+    actif: boolean;
     address: string;
     ag: number;
     authority: number;
@@ -128,7 +128,7 @@ export class DefaultMembre implements Membre {
     zip: string;
     lastVisit: string;
     constructor() {
-        this.actif = 1;
+        this.actif = true;
         this.address = '';
         this.ag = 0;
         this.authority = 0;
