@@ -45,6 +45,7 @@ export class UserComponent implements OnInit {
   rights: any[];
     filterMemberBase: any;
     lienDepot: number;
+    depotName: string;
     orgName: string;
     title: string;
   constructor(
@@ -66,6 +67,7 @@ export class UserComponent implements OnInit {
       this.idOrg = 0;
       this.idCompany = '';
       this.lienDepot = 0;
+      this.depotName = '';
       this.booIsOrganisation = false;
       this.booIsCreate = false;
       this.title = '';
@@ -118,24 +120,30 @@ export class UserComponent implements OnInit {
                     console.log('CurrentFilteredOrg', this.currentFilteredOrg);
 
                     if (this.idOrg > 0 && this.lienDepot === 0) {
-                        // handle organisation users
+                        // handle  users from single organisation ( logged in as organisation admin
                         this.user.idOrg = this.idOrg;
                         this.rights = enmUserRolesAsso;
                         this.title = $localize`:@@OrgUserNew1:New User for organisation ${this.orgName} `;
                     } else {
-                        if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
-                            // create user from bank admin user or depot admin user
+                        if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis != null && this.currentFilteredOrg.idDis > 0) {
+                            // create user for org from bank or depot admin user
+                            this.rights = enmUserRolesAsso;
                             this.user.idOrg = this.currentFilteredOrg.idDis;
-                            this.title = $localize`:@@OrgUserNewA:New User for organisation  ${this.currentFilteredOrg.societe}`;
-                        }  else {
-                            if (this.lienDepot > 0) {
-                                this.rights = enmUserRolesAsso;
-                                this.user.idOrg = this.lienDepot;
-                                this.title =  $localize`:@@OrgUserNewB:New User for organisation  ${this.orgName}`;
-                            } else { // must be bank
-                                this.rights = enmUserRolesBank;
-                                this.title =  $localize`:@@BankUserNew1:New User for bank ${this.idCompany} `;
+                            if (this.currentFilteredOrg.societe === 'Depot') {
+                                this.title = $localize`:@@OrgUserNewC:New User for organisation  ${this.depotName}`;
+                            } else {
+                                this.title = $localize`:@@OrgUserNewA:New User for organisation  ${this.currentFilteredOrg.societe}`;
                             }
+                        }  else {
+                           // must be bank or depot
+                                if (this.lienDepot > 0) {
+                                    this.rights = enmUserRolesAsso;
+                                    this.user.idOrg = this.lienDepot;
+                                    this.title = $localize`:@@OrgUserNewB:New User for depot  ${this.depotName}`;
+                                }  else {
+                                    this.rights = enmUserRolesBank;
+                                    this.title = $localize`:@@BankUserNew1:New User for bank ${this.idCompany} `;
+                                }
                         }
                     }
                     this.booIsCreate = true;
@@ -170,6 +178,7 @@ export class UserComponent implements OnInit {
                               this.orgName = authState.organisation.societe;
                               if (authState.organisation.depyN === true) {
                                   this.lienDepot = authState.organisation.idDis;
+                                  this.depotName = authState.organisation.societe;
                                   this.filterMemberBase = { 'lienDepot': this.lienDepot};
                               } else {
                                   this.filterMemberBase = { 'lienDis': this.idOrg};

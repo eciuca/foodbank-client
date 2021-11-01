@@ -692,7 +692,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">309</context>
+          <context context-type="linenumber">318</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReport" datatype="html">
@@ -3218,91 +3218,98 @@
         <source>User <x id="PH" equiv-text="user.idUser"/> for organisation  <x id="PH_1" equiv-text="user.societe"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankUserExisting" datatype="html">
         <source>User <x id="PH" equiv-text="user.idUser"/> for bank <x id="PH_1" equiv-text="this.user.idCompany"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgUserNew1" datatype="html">
         <source>New User for organisation <x id="PH" equiv-text="this.orgName"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgUserNewC" datatype="html">
+        <source>New User for organisation  <x id="PH" equiv-text="this.depotName"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgUserNewA" datatype="html">
         <source>New User for organisation  <x id="PH" equiv-text="this.currentFilteredOrg.societe"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgUserNewB" datatype="html">
-        <source>New User for organisation  <x id="PH" equiv-text="this.orgName"/></source>
+        <source>New User for depot  <x id="PH" equiv-text="this.depotName"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankUserNew1" datatype="html">
         <source>New User for bank <x id="PH" equiv-text="this.idCompany"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserDeleted" datatype="html">
         <source>The user <x id="PH" equiv-text="user.idUser"/> <x id="PH_1" equiv-text="user.userName"/>  was deleted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">202</context>
+          <context context-type="linenumber">211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserDeleteError" datatype="html">
         <source>The user <x id="PH" equiv-text="user.idUser"/> <x id="PH_1" equiv-text="user.userName"/> could not be deleted: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">213</context>
+          <context context-type="linenumber">222</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserUpdated" datatype="html">
         <source>User  <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> was updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">234</context>
+          <context context-type="linenumber">243</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserUpdateError" datatype="html">
         <source>The user <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">241</context>
+          <context context-type="linenumber">250</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreated" datatype="html">
         <source>User  <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> has been created</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">279</context>
+          <context context-type="linenumber">288</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreateError" datatype="html">
         <source>The user <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> could not be created: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">287</context>
+          <context context-type="linenumber">296</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreateErrorNoEmployee" datatype="html">
         <source>The user <x id="PH" equiv-text="modifiedUser.idUser"/>  could not be created: no employee was selected</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">296</context>
+          <context context-type="linenumber">305</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddUser" datatype="html">

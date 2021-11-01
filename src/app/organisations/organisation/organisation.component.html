@@ -10,12 +10,12 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@OrganisationName" for="societe">Name Company</label>
-                        <input #societe="ngModel" pInputText id="societe" name="societe" required minlength = "10" maxlength="100" [ngModel]="organisation.societe" />
+                        <input #societe="ngModel" pInputText id="societe" name="societe" required minlength = "4" maxlength="100" [ngModel]="organisation.societe" />
                         <p-message i18n-text="@@OrganisationIsMandatory" *ngIf="societe.invalid && organisationForm.touched" severity="error" text="Organisation Name is required and must be minimum 4 chars long"></p-message>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@OrgRefInt" for="refInt">Internal Reference</label>
-                        <input #refint="ngModel" pInputText id="refInt" name="refInt"  maxlength="15" [ngModel]="organisation.refint" />
+                        <input #refint="ngModel" pInputText id="refInt" name="refInt"  maxlength="15" [ngModel]="organisation.refInt" />
                     </div>
                     <div class="p-field p-col-12 p-md-1">
                         <label i18n="@@OrgAgreed" for="agreed">Agreed</label>
