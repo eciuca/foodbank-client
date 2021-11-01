@@ -2152,7 +2152,7 @@
       </trans-unit>
       <trans-unit id="OrganisationHeader" datatype="html">
         <source> Organisation <x id="INTERPOLATION" equiv-text="{{ organisation.idDis}}"/> <x id="INTERPOLATION_1" equiv-text="{{ organisation.societe}}"/> Updated on <x id="INTERPOLATION_2" equiv-text="{{organisation.lupdTs}}"/> By <x id="INTERPOLATION_3" equiv-text="{{organisation.lupdUserName}}"/> </source>
-        <target> Organisatie <x id="INTERPOLATION" equiv-text="{{ organisation.societe}}"/> bijgewerkt op <x id="INTERPOLATION_1" equiv-text="{{organisation.lupdTs}}"/> door <x id="INTERPOLATION_2" equiv-text="{{organisation.lupdUserName}}"/> </target>
+        <target> Organisatie <x id="INTERPOLATION" equiv-text="{{ organisation.idDis}}"/> <x id="INTERPOLATION_1" equiv-text="{{ organisation.societe}}"/> Bijgewerkt op <x id="INTERPOLATION_2" equiv-text="{{organisation.lupdTs}}"/> Door <x id="INTERPOLATION_3" equiv-text="{{organisation.lupdUserName}}"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
           <context context-type="linenumber">3,5</context>
@@ -2308,7 +2308,7 @@
       </trans-unit>
       <trans-unit id="OrganisationPresidentGender" datatype="html">
         <source>Gender President</source>
-        <target>Gender Voozitter</target>
+        <target>Gender Voorzitter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
           <context context-type="linenumber">129</context>
