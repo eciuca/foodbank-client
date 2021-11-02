@@ -114,7 +114,7 @@ export class UsersComponent implements OnInit {
                             this.lienDepot = authState.organisation.idDis;
                             this.depotName = authState.organisation.societe;
                             this.filteredOrganisationsPrepend = [
-                                {idDis: this.lienDepot, societe: $localize`:@@depot:Depot` },
+                                {idDis: this.lienDepot, societe: 'Depot' },
                                 {idDis: null, societe: $localize`:@@organisations:Organisations` },
                             ];
                             this.filteredOrganisation = this.filteredOrganisationsPrepend[0];

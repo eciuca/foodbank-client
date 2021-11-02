@@ -40,6 +40,7 @@ export class MembreComponent implements OnInit {
     title: string;
     idCompany: string;
     orgName: string;
+    depotName: string;
    constructor(
       private membresService: MembreEntityService,
       private route: ActivatedRoute,
@@ -58,6 +59,7 @@ export class MembreComponent implements OnInit {
       this.idCompany = '';
       this.lienDis = 0;
       this.lienDepot = 0;
+      this.depotName = '';
       this.booIsOrganisation = false;
       this.title = '';
   }
@@ -106,14 +108,19 @@ export class MembreComponent implements OnInit {
                           this.membre.lienDis = this.lienDis;
                           this.title = $localize`:@@OrgMemberNew1:New Member for organisation ${this.orgName} `;
                       } else {
-                          if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
+                          // tslint:disable-next-line:max-line-length
+                          if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis != null && this.currentFilteredOrg.idDis > 0) {
                               // create membre from bank admin membre or depot admin membre
                               this.membre.lienDis = this.currentFilteredOrg.idDis;
-                              this.title = $localize`:@@OrgMemberNewA:New Member for organisation  ${this.currentFilteredOrg.societe}`;
+                              if (this.currentFilteredOrg.societe === 'Depot') {
+                                  this.title = $localize`:@@OrgMemberNewC:New Member for organisation  ${this.depotName}`;
+                              } else {
+                                  this.title = $localize`:@@OrgMemberNewA:New Member for organisation  ${this.currentFilteredOrg.societe}`;
+                              }
                           }  else {
                               if (this.lienDepot > 0) {
                                   this.membre.lienDis = this.lienDepot;
-                                  this.title =  $localize`:@@OrgMemberNewB:New Member for organisation  ${this.orgName}`;
+                                  this.title =  $localize`:@@OrgMemberNewB:New Member for organisation  ${this.depotName}`;
                               } else {
                                   // must be bank
                                   this.title =  $localize`:@@BankMemberNew1:New Member for bank ${this.idCompany} `;
@@ -151,6 +158,7 @@ export class MembreComponent implements OnInit {
                           this.orgName = authState.organisation.societe;
                           if (authState.organisation.depyN === true) {
                               this.lienDepot = authState.organisation.idDis;
+                              this.depotName = authState.organisation.societe;
                           }
                           this.booIsOrganisation = true;
                          if  (authState.user.rights === 'Admin_Asso') {
