@@ -1,5 +1,10 @@
 <p-panel  *ngIf="trip">
     <form  #tripForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button type="button" pButton icon="pi pi-times" (click)="delete($event,trip)" i18n-label="@@Delete" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(trip, tripForm.value)" [disabled] = "tripForm.invalid" i18n-label="@@Save" label="Save"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="quit($event, trip, tripForm, tripForm.dirty)" i18n-label="@@Return" label="Return" ></button>
+        </div>
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@TripDateMandatory"  for="tripDate">Trip Date *</label>
@@ -21,14 +26,8 @@
                 <p-inputNumber #tripKm="ngModel" id="tripKm" name="tripKm" required [ngModel]="trip.tripKm" ></p-inputNumber>
                 <p-message i18n-text="@@TripKmIsMandatory"  *ngIf="tripKm.invalid && tripForm.touched" severity="error" text="Trip Km is required"></p-message>
             </div>
-
-
         </div>
         <p-confirmPopup></p-confirmPopup>
-        <div class="p-formgroup-inline">
-            <button type="button" pButton icon="pi pi-times" (click)="delete($event,trip)" i18n-label="@@Delete" label="Delete"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="save(trip, tripForm.value)" [disabled] = "tripForm.invalid" i18n-label="@@Save" label="Save"></button>
-            <button type="button" pButton icon="pi pi-check" (click)="quit($event, trip, tripForm, tripForm.dirty)" i18n-label="@@Return" label="Return" ></button>
-        </div>
+
     </form>
 </p-panel>

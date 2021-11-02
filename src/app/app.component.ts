@@ -163,35 +163,37 @@ export class AppComponent implements OnInit {
             const newLocaleUrl = url.replace(this.locale, idLanguage);
             window.location.replace(newLocaleUrl);
         }
-
-        const groups: string[] = authState.groups;
         this.loggedInUserName = authState.user?.idUser;
 
         if (this.loggedInUserName) {
-            if (groups.indexOf('bank') > -1 || groups.indexOf('admin_banq') > -1) {
-                if (groups.indexOf('admin_banq') > -1) {
+            switch (authState.user.rights) {
+                case 'Bank':
+                case 'Admin_Banq':
+                    if (authState.user.rights === 'Admin_Banq' ) {
                     this.loggedInUserRole = $localize`:@@RoleBankAdmin:Bank admin`;
-                } else {
-                    this.loggedInUserRole = $localize`:@@RoleBankUser:Bank User`;
-                }
-                this.loggedInBankName = authState.banque.bankName;
-                this.loggedInOrganisationName = '';
-                this.menuLoggedInItems = [
-                    {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
-                    {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                    {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-users',  routerLink: ['/trips']},
-                    // tslint:disable-next-line:max-line-length
-                    {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
-                    {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
-                    {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
-                    {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                    {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
-                    {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']},
-                    {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreports/${authState.banque.bankId}`]},
-                    {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
-                ];
-            } else if (groups.indexOf('asso') > -1 || groups.indexOf('admin_asso') > -1) {
-                if (groups.indexOf('admin_asso') > -1) {
+                    } else {
+                        this.loggedInUserRole = $localize`:@@RoleBankUser:Bank User`;
+                    }
+                    this.loggedInBankName = authState.banque.bankName;
+                    this.loggedInOrganisationName = '';
+                    this.menuLoggedInItems = [
+                        {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
+                        {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                        {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-users',  routerLink: ['/trips']},
+                        // tslint:disable-next-line:max-line-length
+                        {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
+                        {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
+                        {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
+                        {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']},
+                        {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreports/${authState.banque.bankId}`]},
+                        {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
+                    ];
+                break;
+            case 'Asso':
+            case 'Admin_Asso':
+                if  (authState.user.rights === 'Admin_Asso') {
                     this.loggedInUserRole = $localize`:@@RoleOrgAdmin:Org Admin`;
                 } else {
                     this.loggedInUserRole = $localize`:@@RoleOrgUser:Org User`;
@@ -229,7 +231,8 @@ export class AppComponent implements OnInit {
                     {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreport/${authState.organisation.idDis}`]},
                     {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
                 );
-            } else if (groups.indexOf('admin') > -1) {
+                break;
+                case 'admin':
                     this.loggedInUserRole = $localize`:@@RoleAdmin:Global admin`;
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
@@ -242,7 +245,8 @@ export class AppComponent implements OnInit {
                         {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']},
                         {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
                     ];
-            } else {
+                    break;
+                default:
                 this.loggedInBankName = authState.banque.bankName;
                 this.loggedInOrganisationName = '';
                 this.menuLoggedInItems = [

@@ -3,6 +3,11 @@
        {{ getUserTitle() }}
     </ng-template>
     <form  #userForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button i18n-label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
+            <button  i18n-label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save" [disabled] = "userForm.invalid"></button>
+            <button  i18n-label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
+        </div>
         <p-accordion >
             <p-accordionTab i18n-header="@@UserProfile" header="Profile" [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
@@ -71,13 +76,8 @@
                 </div>
             </p-accordionTab>
         </p-accordion>
-        <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
-        <div class="p-formgroup-inline">
-            <button i18n-label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
-            <button  i18n-label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save" [disabled] = "userForm.invalid"></button>
-            <button  i18n-label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
-        </div>
+
     </form>
 
 

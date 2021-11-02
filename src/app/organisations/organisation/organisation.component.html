@@ -5,6 +5,11 @@
         </div>
     </ng-template>
     <form   #organisationForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button i18n-label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,organisation)" label="Delete"></button>
+            <button i18n-label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save" [disabled] = "organisationForm.invalid"></button>
+            <button i18n-label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, organisationForm,organisationForm.dirty)" label="Return" ></button>
+        </div>
         <p-accordion>
             <p-accordionTab i18n-header="@@Organisation" header="Organisation"  [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
@@ -452,13 +457,7 @@
                 </div>
             </p-accordionTab>
         </p-accordion>
-        <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
-        <div class="p-formgroup-inline">
-            <button i18n-label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,organisation)" label="Delete"></button>
-            <button i18n-label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(organisation, organisationForm.value)" label="Save" [disabled] = "organisationForm.invalid"></button>
-            <button i18n-label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, organisationForm,organisationForm.dirty)" label="Return" ></button>
-        </div>
     </form>
 
 </p-panel>

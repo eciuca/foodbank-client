@@ -26,6 +26,7 @@ import {PanelModule} from 'primeng/panel';
 import { FallbackComponent } from './fallback.component';
 import { ShouldLoginComponent } from './should-login.component';
 import { AuthGuardWithForcedLogin } from './auth/auth-guard-with-forced-login.guard';
+import {ToastModule} from 'primeng/toast';
 
 
 const routes: Routes = [
@@ -112,7 +113,8 @@ const routes: Routes = [
             routerState: RouterState.Minimal
         }),
         ButtonModule,
-        PanelModule
+        PanelModule,
+        ToastModule
     ],
     providers: [ MessageService,
         { provide: DefaultDataServiceConfig,

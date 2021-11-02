@@ -86,6 +86,7 @@
             There are {{totalRecords}} employees in the selection.
         </div>
     </ng-template>
+    <p-toast></p-toast>
 </p-table>
 <p-dialog i18n-header="@@EmployeeDetails" header="Employee Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
     <app-membre *ngIf="selectedBatid$" [batId$]="selectedBatid$"  [currentFilteredOrg] ="filteredOrganisation" (onMembreUpdate)="handleMembreUpdate($event)" (onMembreCreate)="handleMembreCreate($event)"

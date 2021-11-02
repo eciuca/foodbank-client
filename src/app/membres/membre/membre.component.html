@@ -3,6 +3,11 @@
         {{ getMemberTitle() }}
     </ng-template>
     <form   #membreForm="ngForm" style="padding: 1em">
+        <div class="p-formgroup-inline">
+            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,membre)" i18n-label="@@Delete" label="Delete"></button>
+            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(membre, membreForm.value)" i18n-label="@@Save" label="Save" [disabled] = "membreForm.invalid"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, membre, membreForm,membreForm.dirty)" i18n-label="@@Return" label="Return" ></button>
+        </div>
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-1">
                 <label i18n="@@Gender" for="civilite">Gender</label>
@@ -70,13 +75,8 @@
                 <input pInputText id="vehImm" name="vehImm" maxlength="30" [ngModel]="membre.vehImm" />
             </div>
         </div>
-        <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
-        <div class="p-formgroup-inline">
-            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,membre)" i18n-label="@@Delete" label="Delete"></button>
-            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(membre, membreForm.value)" i18n-label="@@Save" label="Save" [disabled] = "membreForm.invalid"></button>
-            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, membre, membreForm,membreForm.dirty)" i18n-label="@@Return" label="Return" ></button>
-        </div>
+
     </form>
 
 

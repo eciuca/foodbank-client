@@ -3,6 +3,11 @@
         CPAS
     </ng-template>
     <form  #cpasForm="ngForm" >
+        <div class="p-formgroup-inline">
+            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, cpas)" label="Delete"></button>
+            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(cpas, cpasForm.value)" label="Save" [disabled] = "cpasForm.invalid"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, cpas, cpasForm,cpasForm.dirty)" label="Return" ></button>
+        </div>
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label for="cpasName">Name</label>
@@ -54,11 +59,7 @@
             </div>
         </div>
         <p-confirmPopup></p-confirmPopup>
-        <div class="p-formgroup-inline">
-            <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, cpas)" label="Delete"></button>
-            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(cpas, cpasForm.value)" label="Save" [disabled] = "cpasForm.invalid"></button>
-            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, cpas, cpasForm,cpasForm.dirty)" label="Return" ></button>
-        </div>
+
 
     </form>
 </p-panel>

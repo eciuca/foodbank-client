@@ -111,7 +111,7 @@
         </ng-template>
 
 </p-table>
-
+<p-toast></p-toast>
 <p-dialog i18n-header="@@UserDetails" header="User Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false" >
     <app-user *ngIf="selectedIdUser$" [idUser$]="selectedIdUser$" [currentFilteredOrg] ="filteredOrganisation" (onUserUpdate)="handleUserUpdate($event)" (onUserCreate) ="handleUserCreate($event)"
               (onUserDelete)="handleUserDeleted($event)" (onUserQuit)="handleUserQuit()"></app-user>
