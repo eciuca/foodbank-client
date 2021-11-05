@@ -173,8 +173,8 @@ export class MembresComponent implements OnInit {
                     this.filterBase = { 'lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     this.filteredOrganisationsPrepend = [
-                        {idDis: 0, societe: $localize`:@@bank:Bank` },
-                        {idDis: null, societe: $localize`:@@organisations:Organisations` },
+                        {idDis: 0, fullname: $localize`:@@bank:Bank` },
+                        {idDis: null, fullname: $localize`:@@organisations:Organisations` },
                     ];
                     this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                     break;
@@ -185,8 +185,8 @@ export class MembresComponent implements OnInit {
                         this.lienDepot = authState.organisation.idDis;
                         this.depotName = authState.organisation.societe;
                         this.filteredOrganisationsPrepend = [
-                            {idDis: this.lienDepot, societe: 'Depot' },
-                            {idDis: null, societe: $localize`:@@organisations:Organisations` },
+                            {idDis: this.lienDepot, fullname: 'Depot' },
+                            {idDis: null, fullname: $localize`:@@organisations:Organisations` },
                         ];
                         this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                     } else {
@@ -215,7 +215,7 @@ export class MembresComponent implements OnInit {
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
                 this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
-                    Object.assign({}, organisation, {fullname: organisation.societe})
+                    Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
                 ));
                 console.log('Proposed Organisations', this.filteredOrganisations);
             });

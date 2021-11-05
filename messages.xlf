@@ -1135,7 +1135,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="NameFirstSorted" datatype="html">
@@ -1180,7 +1180,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ZipCodeSorted" datatype="html">
@@ -1916,14 +1916,14 @@
         <source> There are <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> employees in the selection. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.html</context>
-          <context context-type="linenumber">85,87</context>
+          <context context-type="linenumber">89,91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="EmployeeDetails" datatype="html">
         <source>Employee Details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotMembersTitleArchive" datatype="html">
@@ -2004,7 +2004,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgSuspEndDate" datatype="html">
@@ -2643,77 +2643,77 @@
         <source>Reference<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;refInt&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="NomDepotSorted" datatype="html">
         <source>Depot<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nomDepot&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgAgreedSorted" datatype="html">
         <source>Agreed<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;agreed&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="IsDepotSorted" datatype="html">
         <source>Is Depot<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;depyN&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UsesFeadSorted" datatype="html">
         <source>Uses FEAD<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;birbyN&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrganisationsSelected" datatype="html">
         <source> There are <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> organisations in the selection. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">118,120</context>
+          <context context-type="linenumber">125,127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrganisationDetails" datatype="html">
         <source>Organisation Details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotOrgsTitleArchive" datatype="html">
         <source>Archived Organisations of depot <x id="PH" equiv-text="this.depotName"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.ts</context>
-          <context context-type="linenumber">208</context>
+          <context context-type="linenumber">211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotOrgsTitleActive" datatype="html">
         <source>Active Organisations of depot <x id="PH" equiv-text="this.depotName"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.ts</context>
-          <context context-type="linenumber">210</context>
+          <context context-type="linenumber">213</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankOrgsTitleArchive" datatype="html">
         <source>Archived Organisations of bank <x id="PH" equiv-text="this.bankName"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.ts</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">217</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankOrgsTitleActive" datatype="html">
         <source>Active Organisations of bank <x id="PH" equiv-text="this.bankName"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.ts</context>
-          <context context-type="linenumber">216</context>
+          <context context-type="linenumber">219</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Function" datatype="html">

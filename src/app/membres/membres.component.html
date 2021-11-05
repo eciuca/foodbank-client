@@ -16,10 +16,10 @@
                 <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
                     <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                      (onSelect)="filterOrganisationMembers($event.idDis);"
-                                     [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="societe" [dropdown]="true">
+                                     [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">
                         <ng-template let-organisation pTemplate="item">
                             <div class="organisation-item">
-                                <div> {{organisation.societe}} </div>
+                                <div> {{organisation.fullname}}</div>
                             </div>
                         </ng-template>
                     </p-autoComplete>
@@ -34,28 +34,30 @@
         <tr>
             <th i18n="@@NameSorted" pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
             <th i18n="@@NameFirstSorted" pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
-            <th i18n="@@Organisation"  *ngIf="booShowOrganisations" >Organisation</th>
-            <th i18n="@@AddressSorted" pSortableColumn="address">Address<p-sortIcon field="address"></p-sortIcon></th>
+            <th i18n="@@Organisation"  *ngIf="booShowOrganisations"  colspan="2" >Organisation</th>
+            <th i18n="@@AddressSorted"  colspan="2" pSortableColumn="address" >Address<p-sortIcon field="address"></p-sortIcon></th>
             <th i18n="@@ZipCodeSorted" pSortableColumn="zip">Zip Code<p-sortIcon field="zip"></p-sortIcon></th>
             <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
         </tr>
         <tr>
             <th>
-                <p-columnFilter type="text" field="nom" ></p-columnFilter>
+                <p-columnFilter type="text" field="nom" matchMode="equals" [showMenu]="false" ></p-columnFilter>
             </th>
             <th>
-                <p-columnFilter type="text" field="prenom" ></p-columnFilter>
+                <p-columnFilter type="text" field="prenom" matchMode="equals" [showMenu]="false" ></p-columnFilter>
             </th>
-            <th *ngIf="booShowOrganisations">
-            </th>
-            <th>
-                <p-columnFilter type="text" field="address" ></p-columnFilter>
+            <th *ngIf="booShowOrganisations" colspan="2" >
             </th>
             <th>
-                <p-columnFilter type="text" field="zip"></p-columnFilter>
+                <p-columnFilter type="text" field="address" matchMode="equals" [showMenu]="false" ></p-columnFilter>
             </th>
             <th>
-                <p-columnFilter type="text" field="city"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="zip" matchMode="equals" [showMenu]="false"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="city" matchMode="equals" [showMenu]="false"></p-columnFilter>
             </th>
         </tr>
     </ng-template>
@@ -67,10 +69,12 @@
             <td>
                 {{membre.prenom}}
             </td>
-            <td *ngIf="booShowOrganisations">
-                {{ membre.societe }}
+            <td *ngIf="booShowOrganisations" colspan="2" >
+                <div *ngIf="membre.lienDis > 0">
+                {{ membre.lienDis }} {{ membre.societe }}
+                </div>
             </td>
-            <td>
+            <td colspan="2" >
                 {{membre.address}}
             </td>
             <td>

@@ -133,6 +133,9 @@ export class OrganisationsComponent implements OnInit {
             queryParms['actif'] = '1';
         }
         if (event.filters) {
+            if (event.filters.idDis && event.filters.idDis.value) {
+                queryParms['idDis'] = event.filters.idDis.value;
+            }
             if (event.filters.societe && event.filters.societe.value) {
                 queryParms['societe'] = event.filters.societe.value;
             }

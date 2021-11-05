@@ -23,6 +23,7 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
+            <th pSortableColumn="idDis">Id<p-sortIcon field="idDis"></p-sortIcon></th>
             <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
             <th i18n="@@RefintSorted" pSortableColumn="refInt">Reference<p-sortIcon field="refInt"></p-sortIcon></th>
             <th  colspan="2" i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
@@ -33,17 +34,20 @@
             <th i18n="@@UsesFeadSorted" pSortableColumn="birbyN">Uses FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
         </tr>
         <tr>
+            <th>
+                <p-columnFilter type="text" matchMode="equals" [showMenu]="false" field="idDis" ></p-columnFilter>
+            </th>
             <th colspan="2">
-                <p-columnFilter type="text" field="societe" ></p-columnFilter>
+                <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="societe" ></p-columnFilter>
             </th>
             <th>
-                <p-columnFilter type="text" field="refInt" ></p-columnFilter>
+                <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="refInt" ></p-columnFilter>
             </th>
             <th colspan="2">
-                <p-columnFilter type="text" field="adresse" ></p-columnFilter>
+                <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="adresse" ></p-columnFilter>
             </th>
             <th *ngIf="isDepot === false" colspan="2">
-                <p-columnFilter type="text" field="nomDepot" ></p-columnFilter>
+                <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="nomDepot" ></p-columnFilter>
             </th>
             <th *ngIf="isDepot === true" colspan="2">
 
@@ -86,8 +90,11 @@
     </ng-template>
     <ng-template pTemplate="body" let-organisation>
         <tr (click)="handleSelect(organisation)">
+            <td>
+                {{ organisation.idDis }}
+            </td>
             <td colspan="2">
-                {{ organisation.idDis }} {{ organisation.societe }}
+                {{ organisation.societe }}
             </td>
             <td>
                 {{ organisation.refInt }}
