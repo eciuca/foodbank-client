@@ -11,10 +11,10 @@
                 <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
                     <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                      (onSelect)="filterOrganisationBeneficiaries($event.idDis);"
-                                     [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="societe" [dropdown]="true">
+                                     [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">
                         <ng-template let-organisation pTemplate="item">
                             <div class="organisation-item">
-                                <div> {{organisation.societe}} </div>
+                                <div> {{organisation.fullname}} </div>
                             </div>
                         </ng-template>
                     </p-autoComplete>
@@ -27,38 +27,38 @@
                 </div>
                 <div class="p-field p-col-12 p-md-2">
                     <label i18n="@@ShowArchived" for="archived">Show Archived?</label>
-                    <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="changeArchiveFilter($event)"></p-checkbox>
+                    <p-checkbox [value]="booShowArchived" binary="true" name="actif" id="actif" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                 </div>
             </div>
         </div>
     </ng-template>
      <ng-template pTemplate="header">
          <tr>
-             <th i18n="@@NameSorted" pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
-             <th i18n="@@NameFirstSorted" pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
-             <th i18n="@@Organisation"  *ngIf="booShowOrganisations" >Organisation</th>
-             <th i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
+             <th i18n="@@NameSorted" pSortableColumn="nom" colspan="2" >Name<p-sortIcon field="nom"></p-sortIcon></th>
+             <th i18n="@@Organisation"  *ngIf="booShowOrganisations"  colspan="2" >Organisation</th>
+             <th i18n="@@AddressSorted" pSortableColumn="adresse"  colspan="2" >Address<p-sortIcon field="adresse"></p-sortIcon></th>
              <th i18n="@@ZipCodeSorted" pSortableColumn="cp">Zip Code<p-sortIcon field="cp"></p-sortIcon></th>
              <th i18n="@@CitySorted" pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
              <th i18n="@@NbDependentsSorted" pSortableColumn="nbDep">Nb Dependents<p-sortIcon field="nbDep"></p-sortIcon></th>
          </tr>
          <tr>
              <th>
-                 <p-columnFilter type="text" field="nom" ></p-columnFilter>
+                 <p-columnFilter type="text" field="nom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
              </th>
              <th>
-                 <p-columnFilter type="text" field="prenom" ></p-columnFilter>
              </th>
-             <th *ngIf="booShowOrganisations">
-             </th>
-             <th>
-                 <p-columnFilter type="text" field="adresse" ></p-columnFilter>
+             <th *ngIf="booShowOrganisations"  colspan="2" >
              </th>
              <th>
-                 <p-columnFilter type="text" field="cp"></p-columnFilter>
+                 <p-columnFilter type="text" field="adresse" matchMode="contains" [showMenu]="false" ></p-columnFilter>
              </th>
              <th>
-                 <p-columnFilter type="text" field="localite"></p-columnFilter>
+             </th>
+             <th>
+                 <p-columnFilter type="text" field="cp" matchMode="equals" [showMenu]="false" ></p-columnFilter>
+             </th>
+             <th>
+                 <p-columnFilter type="text" field="localite" matchMode="contains" [showMenu]="false"></p-columnFilter>
              </th>
              <th>
 
@@ -68,16 +68,13 @@
 
     <ng-template pTemplate="body" let-beneficiaire>
         <tr (click)="handleSelect(beneficiaire)">
-            <td>
-                {{ beneficiaire.nom }}
+            <td colspan="2">
+                {{ beneficiaire.nom }}  {{beneficiaire.prenom}}
             </td>
-            <td>
-                {{beneficiaire.prenom}}
+            <td *ngIf="booShowOrganisations" colspan="2">
+                {{ beneficiaire.lienDis }} {{ beneficiaire.societe }}
             </td>
-            <td *ngIf="booShowOrganisations">
-                {{ beneficiaire.societe }}
-            </td>
-            <td>
+            <td colspan="2">
                 {{beneficiaire.adresse}}
             </td>
             <td>

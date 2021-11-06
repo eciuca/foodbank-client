@@ -102,8 +102,8 @@ export class UsersComponent implements OnInit {
                             this.booCanCreate = true;
                         }
                         this.filteredOrganisationsPrepend = [
-                            {idDis: 0, societe: $localize`:@@bank:Bank` },
-                            {idDis: null, societe: $localize`:@@organisations:Organisations` },
+                            {idDis: 0, fullname: $localize`:@@bank:Bank` },
+                            {idDis: null, fullname: $localize`:@@organisations:Organisations` },
                         ];
                         this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                         break;
@@ -114,8 +114,8 @@ export class UsersComponent implements OnInit {
                             this.lienDepot = authState.organisation.idDis;
                             this.depotName = authState.organisation.societe;
                             this.filteredOrganisationsPrepend = [
-                                {idDis: this.lienDepot, societe: 'Depot' },
-                                {idDis: null, societe: $localize`:@@organisations:Organisations` },
+                                {idDis: this.lienDepot, fullname: 'Depot' },
+                                {idDis: null, fullname: $localize`:@@organisations:Organisations` },
                             ];
                             this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                         } else {
@@ -204,9 +204,6 @@ export class UsersComponent implements OnInit {
                 if (event.filters.membreNom && event.filters.membreNom.value) {
                     queryParms['membreNom'] = event.filters.membreNom.value;
                 }
-                if (event.filters.membrePrenom && event.filters.membrePrenom.value) {
-                    queryParms['membrePrenom'] = event.filters.membrePrenom.value;
-                }
                 if (event.filters.membreLangue && event.filters.membreLangue.value) {
                         queryParms['membreLangue'] = event.filters.membreLangue.value;
                 }
@@ -234,7 +231,7 @@ export class UsersComponent implements OnInit {
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
                 this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
-                    Object.assign({}, organisation, {fullname: organisation.societe})
+                    Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
                 ));
             });
     }

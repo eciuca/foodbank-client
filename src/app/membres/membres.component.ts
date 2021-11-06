@@ -147,9 +147,6 @@ export class MembresComponent implements OnInit {
             if (event.filters.nom && event.filters.nom.value) {
                 queryParms['nom'] = event.filters.nom.value;
             }
-            if (event.filters.prenom && event.filters.prenom.value) {
-                queryParms['prenom'] = event.filters.prenom.value;
-            }
             if (event.filters.address && event.filters.address.value) {
                 queryParms['address'] = event.filters.address.value;
             }

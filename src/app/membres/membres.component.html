@@ -32,24 +32,20 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th i18n="@@NameSorted" pSortableColumn="nom">Name<p-sortIcon field="nom"></p-sortIcon></th>
-            <th i18n="@@NameFirstSorted" pSortableColumn="prenom">First Name<p-sortIcon field="prenom"></p-sortIcon></th>
+            <th i18n="@@NameSorted" pSortableColumn="nom" colspan="2">Name<p-sortIcon field="nom"></p-sortIcon></th>
             <th i18n="@@Organisation"  *ngIf="booShowOrganisations"  colspan="2" >Organisation</th>
             <th i18n="@@AddressSorted"  colspan="2" pSortableColumn="address" >Address<p-sortIcon field="address"></p-sortIcon></th>
             <th i18n="@@ZipCodeSorted" pSortableColumn="zip">Zip Code<p-sortIcon field="zip"></p-sortIcon></th>
             <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
         </tr>
         <tr>
-            <th>
-                <p-columnFilter type="text" field="nom" matchMode="equals" [showMenu]="false" ></p-columnFilter>
-            </th>
-            <th>
-                <p-columnFilter type="text" field="prenom" matchMode="equals" [showMenu]="false" ></p-columnFilter>
+            <th colspan="2">
+                <p-columnFilter type="text" field="nom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
             </th>
             <th *ngIf="booShowOrganisations" colspan="2" >
             </th>
             <th>
-                <p-columnFilter type="text" field="address" matchMode="equals" [showMenu]="false" ></p-columnFilter>
+                <p-columnFilter type="text" field="address" matchMode="contains" [showMenu]="false" ></p-columnFilter>
             </th>
             <th>
             </th>
@@ -57,17 +53,14 @@
                 <p-columnFilter type="text" field="zip" matchMode="equals" [showMenu]="false"></p-columnFilter>
             </th>
             <th>
-                <p-columnFilter type="text" field="city" matchMode="equals" [showMenu]="false"></p-columnFilter>
+                <p-columnFilter type="text" field="city" matchMode="contains" [showMenu]="false"></p-columnFilter>
             </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-membre>
         <tr (click)="handleSelect(membre)">
-            <td>
-                {{ membre.nom }}
-            </td>
-            <td>
-                {{membre.prenom}}
+            <td colspan="2">
+                {{ membre.nom }} {{membre.prenom}}
             </td>
             <td *ngIf="booShowOrganisations" colspan="2" >
                 <div *ngIf="membre.lienDis > 0">
