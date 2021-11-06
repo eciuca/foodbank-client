@@ -5,7 +5,7 @@
 >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Dependent"></button>
+            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddDependent" label="Add Dependent"></button>
             <label i18n="@@ShowArchived" for="actif">Show Archived?</label>
             <p-checkbox [value]="booShowArchived" binary="true" name="actif" id="actif" (onChange)="changeArchiveFilter($event)"></p-checkbox>
         </div>

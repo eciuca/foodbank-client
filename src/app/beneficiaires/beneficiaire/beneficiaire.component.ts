@@ -119,6 +119,7 @@ export class BeneficiaireComponent implements OnInit {
                   // tslint:disable-next-line:max-line-length
                   if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis != null && this.currentFilteredOrg.idDis > 0) {
                       // create beneficiaire from bank admin beneficiaire or depot admin beneficiaire
+                      console.log ('Our CurrentFilteredOrg from Bank Or Depot:', this.currentFilteredOrg)
                       this.beneficiaire.lienDis = this.currentFilteredOrg.idDis;
                       if (this.currentFilteredOrg.societe === 'Depot') {
                           this.title = $localize`:@@OrgBeneficiaryNewC:New Beneficiary for organisation  ${this.depotName}`;
@@ -139,14 +140,7 @@ export class BeneficiaireComponent implements OnInit {
               if (this.myform) {
                   this.myform.reset(this.beneficiaire);
               }
-              console.log('we have a new default beneficiaire');
-              if (this.booIsOrganisation === false) { // a bank can create beneficiaries of its own or beneficiaries for its organisations
-                  if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis > 0) {
-                      this.lienDis = this.currentFilteredOrg.idDis;
-                  } else {
-                      this.lienDis = 0;
-                  }
-              }
+
           }
           });
 
