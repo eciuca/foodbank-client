@@ -822,14 +822,6 @@
           <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="BeneficiaryHeader" datatype="html">
-        <source> <x id="INTERPOLATION" equiv-text="{{ getBeneficiaryTitle() }}"/> </source>
-        <target> Begunstigde van bank <x id="INTERPOLATION" equiv-text="{{ beneficiaire.bankName}}"/> bijgewerkt op <x id="INTERPOLATION_1" equiv-text="{{beneficiaire.dateUpd}}"/> </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.html</context>
-          <context context-type="linenumber">2,4</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="Gender" datatype="html">
         <source>Gender</source>
         <target>Gender</target>
@@ -3825,22 +3817,6 @@
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">317</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="IsArchived">
-        <source/>
-        <target>Gearchiveerd?</target>
-      </trans-unit>
-      <trans-unit id="MemberFirstNameSorted">
-        <source/>
-        <target>Voornaam<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;membrePrenom&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
-      </trans-unit>
-      <trans-unit id="NameFirstSorted">
-        <source/>
-        <target>Voornaam<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;prenom&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
-      </trans-unit>
-      <trans-unit id="depot">
-        <source/>
-        <target>Depot</target>
       </trans-unit>
     </body>
   </file>
