@@ -59,6 +59,7 @@ export interface  Beneficiaire {
     lbanque: number;
     bankName: string;
     bankShortName: string;
+    societe: string; // calculated field
     totalRecords: number;
 }
 export function compareBeneficiaires(c1: Beneficiaire, c2: Beneficiaire) {
@@ -108,6 +109,7 @@ export class DefaultBeneficiaire implements Beneficiaire {
     prenomsav: string;
     regio: string;
     tel: string;
+    societe: string; // calculated field
     totalRecords: number;
     constructor() {
         this.pays = '1';
@@ -145,5 +147,6 @@ export class DefaultBeneficiaire implements Beneficiaire {
         this.prenomconj = '';
         this.prenomsav = '';
         this.tel = '';
+        this.societe = ''; // calculated field
     }
 }

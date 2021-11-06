@@ -60,6 +60,9 @@ export class DependentComponent implements OnInit {
         console.log('our dependent:', this.dependent);
       } else {
         this.dependent = new DefaultDependent();
+        this.dependent.lienBanque = this.lienBanque;
+        this.dependent.lienDis = this.lienDis;
+        this.dependent.lienMast = this.masterId;
         if (this.myform) {
           this.myform.reset(this.dependent);
         }
@@ -73,6 +76,14 @@ export class DependentComponent implements OnInit {
             map((authState) => {
               if (authState.user) {
                 switch (authState.user.rights) {
+                  case 'Bank':
+                    this.lienBanque = authState.banque.bankId;
+                    break;
+                  case 'Admin_Banq':
+                    this.lienBanque = authState.banque.bankId;
+                    this.booCanSave = true;
+                    this.booCanDelete = true;
+                    break;
                   case 'Asso':
                     this.lienBanque = authState.banque.bankId;
                     this.lienDis = authState.user.idOrg;
@@ -144,9 +155,6 @@ export class DependentComponent implements OnInit {
                 this.messageService.add(errMessage) ;
           });
     } else {
-      modifiedDependent.lienBanque = this.lienBanque;
-      modifiedDependent.lienDis = this.lienDis;
-      modifiedDependent.lienMast = this.masterId;
       console.log('Creating Dependent with content:', modifiedDependent);
       this.dependentsService.add(modifiedDependent)
           .subscribe((newDependent) => {

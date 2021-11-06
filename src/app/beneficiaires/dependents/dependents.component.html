@@ -1,9 +1,13 @@
 <p-table #dt [value]="dependents" selectionMode="single" [rowHover]="true"
           [loading]="loading"
+         [rows]="3" [showCurrentPageReport]="true"  [loading]="loading" [(first)]="first"
+         [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
 >
     <ng-template pTemplate="caption">
         <div class="table-header">
             <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Dependent"></button>
+            <label i18n="@@ShowArchived" for="actif">Show Archived?</label>
+            <p-checkbox [value]="booShowArchived" binary="true" name="actif" id="actif" (onChange)="changeArchiveFilter($event)"></p-checkbox>
         </div>
     </ng-template>
     <ng-template pTemplate="header">

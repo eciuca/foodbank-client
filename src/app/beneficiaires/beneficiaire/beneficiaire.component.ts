@@ -40,7 +40,12 @@ export class BeneficiaireComponent implements OnInit {
     countries: any[];
     feadStatuses: any[];
     lienBanque: number;
+    idCompany: string;
     lienDis: number;
+    lienDepot: number;
+    orgName: string;
+    depotName: string;
+    title: string;
   constructor(
       private beneficiairesService: BeneficiaireEntityService,
       private cpassService: CpasEntityService,
@@ -59,7 +64,11 @@ export class BeneficiaireComponent implements OnInit {
       this.booCanQuit = true;
       this.lienDis = 0;
       this.lienBanque = 0;
+      this.idCompany = '';
       this.booIsOrganisation = false;
+      this.lienDepot = 0;
+      this.depotName = '';
+      this.title = '';
   }
 
   ngOnInit(): void {
@@ -82,6 +91,7 @@ export class BeneficiaireComponent implements OnInit {
       beneficiaire$.subscribe(beneficiaire => {
           if (beneficiaire) {
               this.beneficiaire = beneficiaire;
+              this.title = $localize`:@@OrgBeneficiaryExisting:Beneficiary for organisation ${beneficiaire.societe} Updated On ${ beneficiaire.dateUpd}`;
               console.log('our beneficiaire:',  this.beneficiaire);
               if (beneficiaire.lcpas && beneficiaire.lcpas !== 0) {
                   this.cpassService.getByKey(beneficiaire.lcpas)
@@ -100,6 +110,32 @@ export class BeneficiaireComponent implements OnInit {
               }
           } else {
               this.beneficiaire = new DefaultBeneficiaire();
+              this.beneficiaire.lbanque = this.lienBanque;
+              if (this.lienDis > 0 && this.lienDepot === 0) {
+                  // handle organisation beneficiaires
+                  this.beneficiaire.lienDis = this.lienDis;
+                  this.title = $localize`:@@OrgBeneficiaryNew1:New Beneficiary for organisation ${this.orgName} `;
+              } else {
+                  // tslint:disable-next-line:max-line-length
+                  if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis != null && this.currentFilteredOrg.idDis > 0) {
+                      // create beneficiaire from bank admin beneficiaire or depot admin beneficiaire
+                      this.beneficiaire.lienDis = this.currentFilteredOrg.idDis;
+                      if (this.currentFilteredOrg.societe === 'Depot') {
+                          this.title = $localize`:@@OrgBeneficiaryNewC:New Beneficiary for organisation  ${this.depotName}`;
+                      } else {
+                          // tslint:disable-next-line:max-line-length
+                          this.title = $localize`:@@OrgBeneficiaryNewA:New Beneficiary for organisation  ${this.currentFilteredOrg.societe}`;
+                      }
+                  }  else {
+                      if (this.lienDepot > 0) {
+                          this.beneficiaire.lienDis = this.lienDepot;
+                          this.title =  $localize`:@@OrgBeneficiaryNewB:New Beneficiary for organisation  ${this.depotName}`;
+                      } else {
+                          // must be bank
+                          this.title =  $localize`:@@BankBeneficiaryNew1:New Beneficiary for bank ${this.idCompany} `;
+                      }
+                  }
+              }
               if (this.myform) {
                   this.myform.reset(this.beneficiaire);
               }
@@ -122,9 +158,11 @@ export class BeneficiaireComponent implements OnInit {
                       switch (authState.user.rights) {
                           case 'Bank':
                               this.lienBanque = authState.banque.bankId;
+                              this.idCompany = authState.banque.bankShortName;
                                break;
                           case 'Admin_Banq':
                               this.lienBanque = authState.banque.bankId;
+                              this.idCompany = authState.banque.bankShortName;
                               this.booCanSave = true;
                               if (this.booCalledFromTable && this.beneficiaire.hasOwnProperty('idClient')) {
                                   this.booCanDelete = true;
@@ -134,6 +172,11 @@ export class BeneficiaireComponent implements OnInit {
                           case 'Asso':
                               this.lienBanque = authState.banque.bankId;
                               this.lienDis = authState.user.idOrg;
+                              this.orgName = authState.organisation.societe;
+                              if (authState.organisation.depyN === true) {
+                                  this.lienDepot = authState.organisation.idDis;
+                                  this.depotName = authState.organisation.societe;
+                              }
                               this.booIsOrganisation = true;
                               if  (authState.user.rights === 'Admin_Asso') {
                                   this.booCanSave = true;
@@ -203,8 +246,6 @@ export class BeneficiaireComponent implements OnInit {
                 this.messageService.add(errMessage) ;
         });
       } else {
-          modifiedBeneficiaire.lbanque = this.lienBanque;
-          modifiedBeneficiaire.lienDis = this.lienDis;
           console.log('Creating Beneficiaire with content:', modifiedBeneficiaire);
           this.beneficiairesService.add(modifiedBeneficiaire)
               .subscribe(() => {
@@ -260,4 +301,7 @@ export class BeneficiaireComponent implements OnInit {
         }
 
 
+    getBeneficiaryTitle(): string {
+        return this.title;
+    }
 }

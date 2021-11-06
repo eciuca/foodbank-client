@@ -23,18 +23,24 @@ export class DependentsComponent implements OnInit {
   loading: boolean;
   booCanCreate: boolean;
   booIsAdmin: boolean;
+  dependentQuery: any;
+  booShowArchived: boolean;
+  first: number;
   constructor(private dependentService: DependentEntityService,
               private store: Store
   ) {
     this.booCanCreate = false;
     this.booIsAdmin = false;
+    this.dependentQuery = {};
+    this.booShowArchived = false;
+    this.first = 0;
   }
   ngOnInit() {
     this.store
         .pipe(
             select(globalAuthState),
             map((authState) => {
-              if (authState.user && ( authState.user.rights === 'Admin_Asso' ) ) {
+              if (authState.user && ( authState.user.rights === 'Admin_Asso' || authState.user.rights === 'Admin_Banq'  ) ) {
                  this.booIsAdmin = true;
               }
             })
@@ -44,11 +50,11 @@ export class DependentsComponent implements OnInit {
     if (masterId) {
         console.log('initializing dependents of idClient', masterId);
         this.loading = true;
-        const queryParms = {};
-        queryParms['lienMast'] = masterId;
-        this.dependentService.getWithQuery(queryParms)
+        this.dependentQuery['lienMast'] = masterId;
+        this.dependentQuery['actif'] = '1';
+        this.dependentService.getWithQuery(this.dependentQuery)
             .subscribe(loadedDependents => {
-              console.log('Loaded dependents: ' + loadedDependents.length);
+              console.log('Initial Loaded dependents: ' + loadedDependents.length);
               this.dependents = loadedDependents;
               if (this.booIsAdmin) {
                   this.booCanCreate = true;
@@ -106,4 +112,24 @@ export class DependentsComponent implements OnInit {
     }
 
   }
+    changeArchiveFilter($event) {
+        console.log('Archive is now:', $event);
+        this.first = 0;
+        this.booShowArchived = $event.checked;
+        if (this.booShowArchived ) {
+            this.dependentQuery['actif'] = '0';
+        } else {
+            this.dependentQuery['actif'] = '1';
+        }
+        this.dependentService.getWithQuery(this.dependentQuery)
+            .subscribe(loadedDependents => {
+                console.log('New Loaded dependents: ' + loadedDependents);
+                this.dependents = loadedDependents;
+                if (this.booIsAdmin) {
+                    this.booCanCreate = true;
+                }
+                this.loading = false;
+                this.dependentService.setLoaded(true);
+            });
+    }
 }
