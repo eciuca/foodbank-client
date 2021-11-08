@@ -19,7 +19,6 @@ import {NgForm} from '@angular/forms';
 export class DonateurComponent implements OnInit {
   @ViewChild('donateurForm') myform: NgForm;
   @Input() donateurId$: Observable<number>;
-  @Input() lienBanque$: Observable<number>;
   lienBanque: number;
   @Output() onDonateurUpdate = new EventEmitter<Donateur>();
   @Output() onDonateurCreate = new EventEmitter<Donateur>();
@@ -44,9 +43,7 @@ export class DonateurComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.lienBanque$.subscribe(lienBanque => this.lienBanque = lienBanque);
-
-    const donateur$ = combineLatest([this.donateurId$, this.donateursService.entities$])
+     const donateur$ = combineLatest([this.donateurId$, this.donateursService.entities$])
         .pipe(
             map(([donateurId, donateurs]) => donateurs.find(donateur => donateur['donateurId'] === donateurId))
         );
@@ -68,10 +65,11 @@ export class DonateurComponent implements OnInit {
             select(globalAuthState),
             map((authState) => {
               if (authState.user) {
+                this.lienBanque = authState.banque.bankId;
                 switch (authState.user.rights) {
-                  case 'Asso':
+                  case 'Bank':
                     break;
-                  case 'Admin_Asso':
+                  case 'Admin_Banq':
                     this.booCanSave = true;
                     this.booCanDelete = true;
                     break;

@@ -4,8 +4,9 @@ import {DonateurEntityService} from '../services/donateur-entity.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
-import {map} from 'rxjs/operators';
+import {filter, map, mergeMap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {LazyLoadEvent} from 'primeng/api';
 
 
 
@@ -17,61 +18,57 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 export class DonateursComponent implements OnInit {
   @Input() lienBanque$: Observable<number>;
+  loadPageSubject$ = new BehaviorSubject(null);
   selectedDonateurId$ = new BehaviorSubject(0);
   donateurs: Donateur[];
   donateur: Donateur = null;
   displayDialog: boolean;
   loading: boolean;
-  booCanCreate: boolean;
+  filterBase: any;
   booIsAdmin: boolean;
+  first: number;
+  totalRecords: number;
   constructor(private donateurService: DonateurEntityService,
               private route: ActivatedRoute,
               private router: Router,
               private store: Store
   ) {
-    this.booCanCreate = false;
     this.booIsAdmin = false;
+    this.first = 0;
+    this.totalRecords = 0;
+    this.filterBase = {};
   }
   ngOnInit() {
     this.store
         .pipe(
             select(globalAuthState),
             map((authState) => {
-              if (authState.user && ( authState.user.rights === 'Admin_Banq' ) ) {
-                this.booIsAdmin = true;
+              if (authState.user) {
+                this.filterBase = { 'lienBanque': authState.banque.bankId};
+                if (authState.user.rights === 'Admin_Banq') {
+                  this.booIsAdmin = true;
+                }
               }
             })
         )
         .subscribe();
-    if (!this.lienBanque$ ) {
-      this.lienBanque$ = this.route.paramMap
+
+      this.loadPageSubject$
           .pipe(
-              map(paramMap => paramMap.get('bankId')),
-              map(bankIdString => Number(bankIdString))
-          );
-    }
-    this.lienBanque$.subscribe(lienBanque => {
-      if (lienBanque) {
-        console.log('initializing donateurs of id of Banque', lienBanque);
-        this.loading = true;
-        const queryParms = {};
-        queryParms['lienBanque'] = lienBanque;
-        this.donateurService.getWithQuery(queryParms)
-            .subscribe(loadedDonateurs => {
-              console.log('Loaded donateurs: ' + loadedDonateurs.length);
-              this.donateurs = loadedDonateurs;
-              if (this.booIsAdmin) {
-                this.booCanCreate = true;
-              }
-              this.loading = false;
-              this.donateurService.setLoaded(true);
-            });
-      } else {
-        this.donateurs = [];
-        this.booCanCreate = false;
-        console.log(' not yet initializing donateurs of lienBanque');
-      }
-    });
+              filter(queryParams => !!queryParams),
+              mergeMap(queryParams => this.donateurService.getWithQuery(queryParams))
+          )
+          .subscribe(loadedDonateurs => {
+            console.log('Loaded donateurs from nextpage: ' + loadedDonateurs.length);
+            if (loadedDonateurs.length > 0) {
+              this.totalRecords = loadedDonateurs[0].totalRecords;
+            }  else {
+              this.totalRecords = 0;
+            }
+            this.donateurs  = loadedDonateurs;
+            this.loading = false;
+            this.donateurService.setLoaded(true);
+          });
   }
   handleSelect(donateur) {
     console.log( 'Donateur was selected', donateur);
@@ -101,6 +98,25 @@ export class DonateursComponent implements OnInit {
     const index = this.donateurs.findIndex(donateur => donateur.donateurId === deletedDonateur.donateurId);
     this.donateurs.splice(index, 1);
     this.displayDialog = false;
+  }
+  nextPage(event: LazyLoadEvent) {
+    console.log('Lazy Loaded Event', event);
+    this.loading = true;
+    const queryParms = {...this.filterBase};
+    queryParms['offset'] = event.first.toString();
+    queryParms['rows'] = event.rows.toString();
+    queryParms['sortOrder'] = event.sortOrder.toString();
+    if (event.sortField) {
+      queryParms['sortField'] = event.sortField.toString();
+    } else {
+      queryParms['sortField'] =  'nom';
+    }
+    if (event.filters) {
+      if (event.filters.nom && event.filters.nom.value) {
+        queryParms['nom'] = event.filters.nom.value;
+      }
+    }
+    this.loadPageSubject$.next(queryParms);
   }
 
   labelTitre(titre: number) {

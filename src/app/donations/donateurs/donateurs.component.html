@@ -1,12 +1,23 @@
-<p-table #dt [value]="donateurs" selectionMode="single" [rowHover]="true"
-         [loading]="loading"
+<p-table #dt [value]="donateurs" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
+             [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
+             [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
 >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Donateur" i18n-label="@@AddDonateur"></button>
+            <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Donateur" i18n-label="@@AddDonateur"></button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
+        <tr>
+            <th></th>
+            <th i18n="@@NameSorted" pSortableColumn="nom" colspan="2">Name<p-sortIcon field="nom"></p-sortIcon></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th></th>
+            <p-columnFilter type="text" field="nom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            <th></th>
+        </tr>
         <tr>
             <th i18n="@@Gender">Gender</th>
             <th i18n="@@Name">Name</th>
