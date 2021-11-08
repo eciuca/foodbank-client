@@ -63,6 +63,10 @@ const routes: Routes = [
         loadChildren: () => import('./depots/depots.module').then(m => m.DepotsModule),
         canActivate: [AuthGuardWithForcedLogin]
     },
+    { path: 'donations',
+        loadChildren: () => import('./donations/donations.module').then(m => m.DonationsModule),
+        canActivate: [AuthGuardWithForcedLogin]
+    },
     { path: 'mailings',
         loadChildren: () => import('./mailings/mailings.module').then(m => m.MailingsModule),
         canActivate: [AuthGuardWithForcedLogin]

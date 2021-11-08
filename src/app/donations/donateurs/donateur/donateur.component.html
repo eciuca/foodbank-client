@@ -1,0 +1,26 @@
+<p-panel  *ngIf="donateur">
+<form  #donateurForm="ngForm">
+    <div class="p-formgroup-inline">
+        <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,donateur)" i18n-label="@@Delete" label="Delete"></button>
+        <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(donateur, donateurForm.value)" [disabled] = "donateurForm.invalid" i18n-label="@@Save" label="Save"></button>
+        <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, donateur, donateurForm, donateurForm.dirty)" i18n-label="@@Return" label="Return" ></button>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-2">
+            <label i18n="@@Gender" for="titre">Gender</label>
+            <p-dropdown [options]="genders" id="titre" name="titre" [ngModel]="donateur.titre"  ></p-dropdown>
+        </div>
+        <div class="p-field p-col-12 p-md-4">
+            <label i18n="@@NameMandatory" for="nom">Name *</label>
+            <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="2" maxlength="50" [ngModel]="donateur.nom" />
+            <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator Name is required and must be minimum 2 chars long"></p-message>
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+            <label i18n="@@NameFirstMandatory" for="prenom">First Name *</label>
+            <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="2" maxlength="50" [ngModel]="donateur.prenom" />
+            <p-message *ngIf="prenom.invalid && donateurForm.touched" severity="error" text="Donator First Name is required and must be minimum 2 chars long"></p-message>
+        </div>
+    </div>
+    <p-confirmPopup></p-confirmPopup>
+</form>
+</p-panel>

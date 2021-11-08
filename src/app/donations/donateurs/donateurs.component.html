@@ -1,0 +1,34 @@
+<p-table #dt [value]="donateurs" selectionMode="single" [rowHover]="true"
+         [loading]="loading"
+>
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Donateur" i18n-label="@@AddDonateur"></button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th i18n="@@Gender">Gender</th>
+            <th i18n="@@Name">Name</th>
+            <th i18n="@@NameFirst">First Name</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-donateur>
+        <tr (click)="handleSelect(donateur)">
+            <td>
+                {{ labelTitre(donateur.titre) }}
+            </td>
+            <td>
+                {{donateur.nom}}
+            </td>
+            <td>
+                {{donateur.prenom}}
+            </td>
+
+        </tr>
+    </ng-template>
+</p-table>
+<p-dialog header="Donateur Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+    <app-donateur *ngIf="selectedDonateurId$" [donateurId$]="selectedDonateurId$" [lienBanque$]="lienBanque$" (onDonateurUpdate)="handleDonateurUpdate($event)"
+                  (onDonateurCreate)="handleDonateurCreate($event)"  (onDonateurDelete)="handleDonateurDeleted($event)" (onDonateurQuit)="handleDonateurQuit()"></app-donateur>
+</p-dialog>

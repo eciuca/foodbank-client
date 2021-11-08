@@ -13,6 +13,8 @@ import {compareMembreMails, MembreMail} from './membres/model/membreMail';
 import {compareMailings, Mailing} from './mailings/model/mailing';
 import {Notification, compareNotifications} from './home/notifications/model/notification';
 import {compareTrips, Trip} from './trips/model/trip';
+import {compareDonateurs, Donateur} from './donations/model/donateur';
+import {compareDons, Don} from './donations/model/don';
 
 export const appEntityMetadata: EntityMetadataMap = {
     Membre: {
@@ -53,6 +55,16 @@ export const appEntityMetadata: EntityMetadataMap = {
     Depot: {
         sortComparer: compareDepots,
         selectId: (depot: Depot) => depot.idDepot,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
+    },
+    Donateur: {
+        sortComparer: compareDonateurs,
+        selectId: (donateur: Donateur) => donateur.donateurId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
+    },
+    Don: {
+        sortComparer: compareDons,
+        selectId: (don: Don) => don.idDon,
         entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
     },
     Organisation: {
