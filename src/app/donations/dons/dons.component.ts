@@ -123,6 +123,9 @@ export class DonsComponent implements OnInit {
       if (event.filters.donateurNom && event.filters.donateurNom.value) {
         queryParms['donateurNom'] = event.filters.donateurNom.value;
       }
+      if (event.filters.donYear && event.filters.donYear.value) {
+        queryParms['donYear'] = event.filters.donYear.value;
+      }
     }
     this.loadPageSubject$.next(queryParms);
   }

@@ -10,18 +10,22 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th></th>
+            <th i18n="@@DonDateSorted" pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
             <th i18n="@@NameDonatorSorted" pSortableColumn="donateurNom" colspan="2">Name Donator<p-sortIcon field="donateurNom"></p-sortIcon></th>
-            <th></th>
+            <th i18n="@@DonAmountSorted" pSortableColumn="amount">Amount<p-sortIcon field="amount"></p-sortIcon></th>
         </tr>
         <tr>
-            <th></th>
-            <p-columnFilter type="text" field="donateurNom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            <th>
+                <p-columnFilter type="text" field="donYear" matchMode="equals" [showMenu]="false" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="donateurNom" matchMode="contains" [showMenu]="false" colspan="2"></p-columnFilter>
+            </th>
             <th></th>
         </tr>
         <tr>
             <th i18n="@@DonDate">Date</th>
-            <th i18n="@@DonDonateur">Donator</th>
+            <th i18n="@@DonDonateur" colspan="2">Donator</th>
             <th i18n="@@DonAmount">Amount</th>
         </tr>
     </ng-template>
@@ -30,7 +34,7 @@
             <td>
                 {{ don.date }}
             </td>
-            <td>
+            <td colspan="2">
                 {{don.donateurNom}}  {{don.donateurPrenom}}
             </td>
             <td>
