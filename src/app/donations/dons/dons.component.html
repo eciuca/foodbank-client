@@ -1,1 +1,47 @@
-<p>dons works!</p>
+<p-table #dt [value]="dons" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
+         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
+         [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
+>
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Don" i18n-label="@@AddDon"></button>
+            <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Dons" i18n-label="@@ExportDons"></button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th></th>
+            <th i18n="@@NameDonatorSorted" pSortableColumn="donateurNom" colspan="2">Name Donator<p-sortIcon field="donateurNom"></p-sortIcon></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th></th>
+            <p-columnFilter type="text" field="donateurNom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            <th></th>
+        </tr>
+        <tr>
+            <th i18n="@@DonDate">Date</th>
+            <th i18n="@@DonDonateur">Donator</th>
+            <th i18n="@@DonAmount">Amount</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-don>
+        <tr (click)="handleSelect(don)">
+            <td>
+                {{ don.date }}
+            </td>
+            <td>
+                {{don.donateurNom}}  {{don.donateurPrenom}}
+            </td>
+            <td>
+                {{ don.amount }}
+            </td>
+
+        </tr>
+    </ng-template>
+</p-table>
+<p-dialog header="Don Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+    <app-don *ngIf="selectedIdDon$" [idDon$]="selectedIdDon$"  (onDonUpdate)="handleDonUpdate($event)"
+             (onDonCreate)="handleDonCreate($event)"  (onDonDelete)="handleDonDeleted($event)" (onDonQuit)="handleDonQuit()"></app-don>
+</p-dialog>
+

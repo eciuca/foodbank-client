@@ -1,13 +1,13 @@
 export interface Donateur {
-    donateurId: number;
-    lienBanque: number;
+    titre: string;
     nom: string;
     prenom: string;
     adresse: string;
-    cp: number;
+    cp: string;
     city: string;
     pays: string;
-    titre: string;
+    donateurId: number;
+    lienBanque: number;
     totalRecords: number;
 }
 export function compareDonateurs(c1: Donateur, c2: Donateur) {
@@ -24,7 +24,7 @@ export class DefaultDonateur implements Donateur {
     nom: string;
     prenom: string;
     adresse: string;
-    cp: number;
+    cp: string;
     city: string;
     pays: string;
     titre: string;
@@ -34,7 +34,7 @@ export class DefaultDonateur implements Donateur {
         this.nom = '';
         this.prenom = '';
         this.adresse = '';
-        this.cp = 0;
+        this.cp = '';
         this.city = '';
         this.pays = '';
         this.titre = '';

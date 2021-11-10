@@ -6,7 +6,7 @@ import {DonateurEntityService} from '../../services/donateur-entity.service';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../reducers';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmGender} from '../../../shared/enums';
+import {enmCountry, enmGender} from '../../../shared/enums';
 import {map} from 'rxjs/operators';
 import {globalAuthState} from '../../../auth/auth.selectors';
 import {NgForm} from '@angular/forms';
@@ -28,14 +28,14 @@ export class DonateurComponent implements OnInit {
   booCanSave: boolean;
   booCanDelete: boolean;
   booCanQuit: boolean;
-  genders: any[];
+  countries: any[];
   constructor(
       private donateursService: DonateurEntityService,
       private store: Store<AppState>,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
-    this.genders = enmGender;
+    this.countries = enmCountry;
     this.booCanDelete = false;
     this.booCanSave = false;
     this.booCanQuit = true;

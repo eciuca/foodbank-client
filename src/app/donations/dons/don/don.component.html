@@ -1,1 +1,40 @@
-<p>don works!</p>
+<p-panel  *ngIf="don">
+    <form  #donForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,don)" i18n-label="@@Delete" label="Delete"></button>
+            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(don, donForm.value)" [disabled] = "donForm.invalid" i18n-label="@@Save" label="Save"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, don, donForm, donForm.dirty)" i18n-label="@@Return" label="Return" ></button>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@Donateur" for="selectedDonateur">Donator</label>
+                <p-autoComplete #donateur="ngModel" [(ngModel)]="selectedDonateur" [suggestions]="filteredDonateurs" required (completeMethod)="filterDonateur($event)"
+                                [forceSelection]="true"  id="selectedDonateur" name="selectedDonateur" field="fullname" [dropdown]="true">
+                    <ng-template let-donateur pTemplate="item">
+                        <div class="donateur-item">
+                            <div> {{donateur.nom}} {{donateur.prenom}}</div>
+                        </div>
+                    </ng-template>
+                    <p-message i18n-text="@@DonatorIsMandatory" *ngIf="donateur.invalid && donForm.touched" severity="error" text="A donator must be selected"></p-message>
+                </p-autoComplete>
+            </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@Amount" for="amount">Amount</label>
+                    <p-inputNumber [ngModel]="don.amount" id="amount" name="amount" mode="decimal" [showButtons]="true" inputId="amount" [min]="0">
+                    </p-inputNumber>
+                </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@DateMandatory" for="date">Gift Date *</label>
+                <input #date="ngModel" pInputText id="date" name="date"  mandatory pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="don.date"/>
+                <p-message i18n-text="@@GiftDateIsMandatory"  *ngIf="date.invalid && donForm.touched" severity="error" text="Gift date is required and must in format dd/mm/yyyy"></p-message>
+            </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <label i18n="@@DonChecked" for="checked">Gift Checked ?</label>
+                    <p-inputSwitch id="checked" name="checked" [ngModel]="don.checked"></p-inputSwitch>
+                </div>
+
+            </div>
+
+        <p-confirmPopup></p-confirmPopup>
+    </form>
+</p-panel>

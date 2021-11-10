@@ -7,6 +7,9 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LazyLoadEvent} from 'primeng/api';
+import {ExcelService} from '../../services/excel.service';
+import {AuthService} from '../../auth/auth.service';
+import {DonateurHttpService} from '../services/donateur-http.service';
 
 
 
@@ -26,12 +29,16 @@ export class DonateursComponent implements OnInit {
   loading: boolean;
   filterBase: any;
   booIsAdmin: boolean;
+  lienBanque: number;
   first: number;
   totalRecords: number;
   constructor(private donateurService: DonateurEntityService,
+              private authService: AuthService,
+              private excelService: ExcelService,
               private route: ActivatedRoute,
               private router: Router,
-              private store: Store
+              private store: Store,
+              private donateurHttpService: DonateurHttpService
   ) {
     this.booIsAdmin = false;
     this.first = 0;
@@ -44,6 +51,7 @@ export class DonateursComponent implements OnInit {
             select(globalAuthState),
             map((authState) => {
               if (authState.user) {
+                this.lienBanque = authState.banque.bankId;
                 this.filterBase = { 'lienBanque': authState.banque.bankId};
                 if (authState.user.rights === 'Admin_Banq') {
                   this.booIsAdmin = true;
@@ -119,19 +127,14 @@ export class DonateursComponent implements OnInit {
     this.loadPageSubject$.next(queryParms);
   }
 
-  labelTitre(titre: number) {
-    switch (titre) {
-      case 1:
-        return 'Mr';
-      case 2:
-        return 'Mrs.';
-      case 3:
-        return 'Miss';
-      default:
-        return 'Unspecified';
-    }
-
+  exportAsXLSX(): void {
+    this.donateurHttpService.getDonateurReport(this.authService.accessToken, this.lienBanque).subscribe(
+        (donateurs: any[] ) => {
+          const cleanedList = donateurs.map(({ donateurId, lienBanque, pays, totalRecords, ...item }) => item);
+          this.excelService.exportAsExcelFile(cleanedList, 'donateur_data');
+        });
   }
+
 }
 
 
