@@ -10,6 +10,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {ExcelService} from '../../services/excel.service';
 import {AuthService} from '../../auth/auth.service';
 import {DonateurHttpService} from '../services/donateur-http.service';
+import {AuthState} from '../../auth/reducers';
 
 
 
@@ -46,22 +47,8 @@ export class DonateursComponent implements OnInit {
     this.filterBase = {};
   }
   ngOnInit() {
-    this.store
-        .pipe(
-            select(globalAuthState),
-            map((authState) => {
-              if (authState.user) {
-                this.lienBanque = authState.banque.bankId;
-                this.filterBase = { 'lienBanque': authState.banque.bankId};
-                if (authState.user.rights === 'Admin_Banq') {
-                  this.booIsAdmin = true;
-                }
-              }
-            })
-        )
-        .subscribe();
-
-      this.loadPageSubject$
+    this.reload();
+    this.loadPageSubject$
           .pipe(
               filter(queryParams => !!queryParams),
               mergeMap(queryParams => this.donateurService.getWithQuery(queryParams))
@@ -77,6 +64,19 @@ export class DonateursComponent implements OnInit {
             this.loading = false;
             this.donateurService.setLoaded(true);
           });
+  }
+  reload() {
+    this.loading = true;
+    this.totalRecords = 0;
+
+    this.store
+        .pipe(
+            select(globalAuthState),
+            map((authState) => {
+              this.initializeDependingOnUserRights(authState);
+            })
+        )
+        .subscribe();
   }
   handleSelect(donateur) {
     console.log( 'Donateur was selected', donateur);
@@ -126,7 +126,15 @@ export class DonateursComponent implements OnInit {
     }
     this.loadPageSubject$.next(queryParms);
   }
-
+  private initializeDependingOnUserRights(authState: AuthState) {
+    if (authState.user) {
+              this.lienBanque = authState.banque.bankId;
+              this.filterBase = { 'lienBanque': authState.banque.bankId};
+              if (authState.user.rights === 'Admin_Banq') {
+                this.booIsAdmin = true;
+              }
+    }
+  }
   exportAsXLSX(): void {
     this.donateurHttpService.getDonateurReport(this.authService.accessToken, this.lienBanque).subscribe(
         (donateurs: any[] ) => {

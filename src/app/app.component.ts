@@ -217,7 +217,6 @@ export class AppComponent implements OnInit {
                 this.menuLoggedInItems = [
                     {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
                     {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                    {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-users',  routerLink: ['/trips']},
                 ];
                 if (authState.organisation && authState.organisation.depyN === true) {
                     this.menuLoggedInItems.push(
@@ -230,15 +229,19 @@ export class AppComponent implements OnInit {
                     );
                 }
             this.menuLoggedInItems.push(
-                    {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
-                    {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                // tslint:disable-next-line:max-line-length
-                    {label: 'Contacts', icon: 'pi pi-fw pi-users',  routerLink: [`/organisations/contacts/${authState.organisation.idDis}` ]},
-                    {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']},
+                {label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
+                    items: [
+                        {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                        // tslint:disable-next-line:max-line-length
+                        {label: 'Contacts', icon: 'pi pi-fw pi-users',  routerLink: [`/organisations/contacts/${authState.organisation.idDis}` ]},
+                    ]
+                },
+                {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']},
             );
                 if (authState.organisation && authState.organisation.gestBen) {
                     this.menuLoggedInItems.push(
-                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']}
+                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',  routerLink: ['/beneficiaires']}
                     );
                 }
                 this.menuLoggedInItems.push(

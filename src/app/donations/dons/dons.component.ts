@@ -10,6 +10,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {ExcelService} from '../../services/excel.service';
 import {AuthService} from '../../auth/auth.service';
 import {DonHttpService} from '../services/don-http.service';
+import {AuthState} from '../../auth/reducers';
 
 
 
@@ -65,21 +66,7 @@ export class DonsComponent implements OnInit {
       {label: (this.currentYear - 11).toString(), value: (this.currentYear - 11).toString()},
       {label: (this.currentYear - 12).toString(), value: (this.currentYear - 12).toString()}
     ];
-    this.store
-        .pipe(
-            select(globalAuthState),
-            map((authState) => {
-              if (authState.user) {
-                this.lienBanque = authState.banque.bankId;
-                this.filterBase = { 'lienBanque': authState.banque.bankId};
-                if (authState.user.rights === 'Admin_Banq') {
-                  this.booIsAdmin = true;
-                }
-              }
-            })
-        )
-        .subscribe();
-
+    this.reload();
     this.loadPageSubject$
         .pipe(
             filter(queryParams => !!queryParams),
@@ -96,6 +83,19 @@ export class DonsComponent implements OnInit {
           this.loading = false;
           this.donService.setLoaded(true);
         });
+  }
+  reload() {
+    this.loading = true;
+    this.totalRecords = 0;
+
+    this.store
+        .pipe(
+            select(globalAuthState),
+            map((authState) => {
+              this.initializeDependingOnUserRights(authState);
+            })
+        )
+        .subscribe();
   }
   handleSelect(don) {
     console.log( 'Don was selected', don);
@@ -148,7 +148,15 @@ export class DonsComponent implements OnInit {
     }
     this.loadPageSubject$.next(queryParms);
   }
-
+  private initializeDependingOnUserRights(authState: AuthState) {
+    if (authState.user) {
+      this.lienBanque = authState.banque.bankId;
+      this.filterBase = { 'lienBanque': authState.banque.bankId};
+      if (authState.user.rights === 'Admin_Banq') {
+        this.booIsAdmin = true;
+      }
+    }
+  }
   exportAsXLSX(): void {
     this.donHttpService.getDonReport(this.authService.accessToken, this.lienBanque).subscribe(
         (dons: any[] ) => {
