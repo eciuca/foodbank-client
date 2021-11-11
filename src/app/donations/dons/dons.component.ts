@@ -32,6 +32,8 @@ export class DonsComponent implements OnInit {
   lienBanque: number;
   first: number;
   totalRecords: number;
+  currentYear: number;
+  donYears: any[];
   constructor(private donService: DonEntityService,
               private authService: AuthService,
               private excelService: ExcelService,
@@ -44,8 +46,25 @@ export class DonsComponent implements OnInit {
     this.first = 0;
     this.totalRecords = 0;
     this.filterBase = {};
+    this.currentYear = (new Date()).getFullYear();
   }
   ngOnInit() {
+    this.donYears = [
+      {label: $localize`:@@All:All`, value: null},
+      {label: this.currentYear.toString(), value: this.currentYear.toString()},
+      {label: (this.currentYear - 1 ).toString(), value: (this.currentYear - 1).toString()},
+      {label: (this.currentYear - 2).toString(), value: (this.currentYear - 2).toString()},
+      {label: (this.currentYear - 3).toString(), value: (this.currentYear - 3).toString()},
+      {label: (this.currentYear - 4 ).toString(), value: (this.currentYear - 4).toString()},
+      {label: (this.currentYear - 5).toString(), value: (this.currentYear - 5).toString()},
+      {label: (this.currentYear - 6).toString(), value: (this.currentYear - 6).toString()},
+      {label: (this.currentYear - 7 ).toString(), value: (this.currentYear - 7).toString()},
+      {label: (this.currentYear - 8).toString(), value: (this.currentYear - 8).toString()},
+      {label: (this.currentYear - 9).toString(), value: (this.currentYear - 9).toString()},
+      {label: (this.currentYear - 10 ).toString(), value: (this.currentYear - 10).toString()},
+      {label: (this.currentYear - 11).toString(), value: (this.currentYear - 11).toString()},
+      {label: (this.currentYear - 12).toString(), value: (this.currentYear - 12).toString()}
+    ];
     this.store
         .pipe(
             select(globalAuthState),

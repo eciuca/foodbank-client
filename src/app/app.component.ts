@@ -178,16 +178,28 @@ export class AppComponent implements OnInit {
                     this.loggedInOrganisationName = '';
                     this.menuLoggedInItems = [
                         {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
-                        {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                        {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-users',  routerLink: ['/trips']},
+                        {label: $localize`:@@menuMyInfo:MyInfo`, icon: 'pi pi-fw pi-user',
+                            items: [
+                                {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                                {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-map',  routerLink: ['/trips']},
+                            ]
+                        },
                         // tslint:disable-next-line:max-line-length
                         {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
                         {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
-                        {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
-                        {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                        {label: $localize`:@@menuDonators:Donators`, icon: 'pi pi-fw pi-users',  routerLink: [`/donations/donateurs/${authState.banque.bankId}`]},
-                        {label: $localize`:@@menuGifts:Gifts`, icon: 'pi pi-fw pi-envelope',  routerLink: [`/donations/dons/${authState.banque.bankId}`]},
-                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-map',  routerLink: ['/beneficiaires']},
+                        {label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
+                           items: [
+                            {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                            {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                           ]
+                        },
+                        {label: $localize`:@@menuDonations:Donations`, icon: 'pi pi-fw pi-heart',
+                            items: [
+                                {label: $localize`:@@menuDonators:Donators`, icon: 'pi pi-fw pi-users',  routerLink: [`/donations/donateurs/${authState.banque.bankId}`]},
+                                {label: $localize`:@@menuGifts:Gifts`, icon: 'pi pi-fw pi-heart',  routerLink: [`/donations/dons/${authState.banque.bankId}`]},
+                            ]
+                        },
+                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',  routerLink: ['/beneficiaires']},
                         {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']},
                         {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreports/${authState.banque.bankId}`]},
                         {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}

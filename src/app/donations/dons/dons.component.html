@@ -16,7 +16,15 @@
         </tr>
         <tr>
             <th>
-                <p-columnFilter type="text" field="donYear" matchMode="equals" [showMenu]="false" ></p-columnFilter>
+                <p-columnFilter field="donYear" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="donYears" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
             </th>
             <th>
                 <p-columnFilter type="text" field="donateurNom" matchMode="contains" [showMenu]="false" colspan="2"></p-columnFilter>
