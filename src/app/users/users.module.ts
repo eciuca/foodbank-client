@@ -27,10 +27,15 @@ import {ToastModule} from 'primeng/toast';
 import {OrgSummariesDataService} from '../organisations/services/orgsummaries-data.service';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {CheckboxModule} from 'primeng/checkbox';
+import { UsersRightsComponent } from './users-rights/users-rights.component';
 
 const routes: Routes = [
   { path: '',
     component: UsersComponent
+  },
+  {
+        path: 'rights',
+        component: UsersRightsComponent
   },
   {
     path: ':idUser',
@@ -39,7 +44,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UsersComponent, UserComponent],
+  declarations: [UsersComponent, UserComponent, UsersRightsComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),

@@ -191,6 +191,7 @@ export class AppComponent implements OnInit {
                            items: [
                             {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
                             {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                            {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users',  routerLink: ['/users/rights/']},
                            ]
                         },
                         {label: $localize`:@@menuDonations:Donations`, icon: 'pi pi-fw pi-heart',
@@ -228,17 +229,43 @@ export class AppComponent implements OnInit {
                     {label: $localize`:@@menuOrganisation:Organisation`, icon: 'pi pi-fw pi-map', routerLink: [`/organisations/${authState.organisation.idDis}`]}
                     );
                 }
-            this.menuLoggedInItems.push(
-                {label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
-                    items: [
-                        {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
-                        {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                        // tslint:disable-next-line:max-line-length
-                        {label: 'Contacts', icon: 'pi pi-fw pi-users',  routerLink: [`/organisations/contacts/${authState.organisation.idDis}` ]},
-                    ]
-                },
-                {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']},
-            );
+              if (authState.organisation && authState.organisation.depyN === true) {
+                  this.menuLoggedInItems.push(
+                      {
+                          label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
+                          items: [
+                              {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
+                              {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
+                              {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users',  routerLink: ['/users/rights/']},
+                              // tslint:disable-next-line:max-line-length
+                              {
+                                  label: 'Contacts',
+                                  icon: 'pi pi-fw pi-users',
+                                  routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]
+                              },
+                          ]
+                      },
+                  );
+              } else {
+                  this.menuLoggedInItems.push(
+                      {
+                          label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
+                          items: [
+                              {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
+                              {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
+                              // tslint:disable-next-line:max-line-length
+                              {
+                                  label: 'Contacts',
+                                  icon: 'pi pi-fw pi-users',
+                                  routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]
+                              },
+                          ]
+                      }
+                  );
+              }
+                this.menuLoggedInItems.push(
+                    {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope', routerLink: ['/mailings']},
+                );
                 if (authState.organisation && authState.organisation.gestBen) {
                     this.menuLoggedInItems.push(
                         {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',  routerLink: ['/beneficiaires']}
