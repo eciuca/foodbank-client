@@ -29,7 +29,7 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th i18n="@@UserLoginSorted" pSortableColumn="idUser">Login<p-sortIcon field="idUser"></p-sortIcon></th>
+            <th colspan="2" i18n="@@UserLoginSorted" pSortableColumn="idUser">Login<p-sortIcon field="idUser"></p-sortIcon></th>
             <th colspan="2" i18n="@@MemberNameSorted" pSortableColumn="membreNom">Name<p-sortIcon field="membreNom"></p-sortIcon></th>
             <th colspan="2" i18n="@@Organisation"  *ngIf="booShowOrganisations" >Organisation</th>
             <th i18n="@@RightsSorted" pSortableColumn="rights" >Role<p-sortIcon field="rights"></p-sortIcon></th>
@@ -41,7 +41,7 @@
 
         </tr>
         <tr>
-            <th>
+            <th colspan="2">
                 <p-columnFilter type="text" field="idUser" matchMode="contains" [showMenu]="false" ></p-columnFilter>
             </th>
             <th colspan="2">
@@ -120,7 +120,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-user>
         <tr (click)="handleSelect(user)">
-            <td>
+            <td colspan="2">
                 {{ user.idUser }}
             </td>
             <td colspan="2">

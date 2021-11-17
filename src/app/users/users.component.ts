@@ -221,12 +221,16 @@ export class UsersComponent implements OnInit {
   }
 
     filterOrganisation(event ) {
+        console.log('Filter Organisation', event);
         const  queryOrganisationParms: QueryParams = {};
         queryOrganisationParms['lienBanque'] = this.bankid.toString();
         if (this.lienDepot === 0) {
             queryOrganisationParms['lienBanque'] = this.bankid.toString();
         }  else {
             queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
+        }
+        if (event.query.length > 0) {
+            queryOrganisationParms['societe'] = event.query.toLowerCase();
         }
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {

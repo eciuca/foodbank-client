@@ -208,7 +208,9 @@ export class MembresComponent implements OnInit {
         }  else {
             queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
         }
-        queryOrganisationParms['societe'] = event.query.toLowerCase();
+        if (event.query.length > 0) {
+            queryOrganisationParms['societe'] = event.query.toLowerCase();
+        }
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
                 this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
