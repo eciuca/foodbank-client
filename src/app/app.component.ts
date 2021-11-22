@@ -269,9 +269,13 @@ export class AppComponent implements OnInit {
                         items: [
                             {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
                             {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
-                            {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users',  routerLink: ['/users/rights/']},
+                            {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users', routerLink: ['/users/rights/']},
                             // tslint:disable-next-line:max-line-length
-                            { label: 'Contacts', icon: 'pi pi-fw pi-users', routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]}
+                            {
+                                label: 'Contacts',
+                                icon: 'pi pi-fw pi-users',
+                                routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]
+                            }
                         ]
                     },
                 );
@@ -283,11 +287,16 @@ export class AppComponent implements OnInit {
                             {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
                             {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
                             // tslint:disable-next-line:max-line-length
-                            { label: 'Contacts', icon: 'pi pi-fw pi-users', routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]}
+                            {
+                                label: 'Contacts',
+                                icon: 'pi pi-fw pi-users',
+                                routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]
+                            }
                         ]
                     }
                 );
             }
+        }
             // Add Beneficiaries
             if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
                 if (authState.user.gestBen) {
@@ -344,7 +353,5 @@ export class AppComponent implements OnInit {
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
             );
-        }
-
     }
 }
