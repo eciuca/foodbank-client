@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
     isAuthenticated: Observable<boolean>;
     isDoneLoading: Observable<boolean>;
     canActivateProtectedRoutes: Observable<boolean>;
+    baseurl: string;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -60,7 +61,7 @@ export class AppComponent implements OnInit {
         private authService: AuthService,
         @Inject(LOCALE_ID) public locale: string
     ) {
-
+        this.baseurl = window.location.href;
     }
 
     ngOnInit() {
@@ -145,6 +146,12 @@ export class AppComponent implements OnInit {
         this.store.dispatch(logout());
 
     }
+    openFEAD() {
+       const feadUrl = `${this.baseurl}isis/general/portal/access.jsp` ;
+       console.log('Opening FEAD Tab', feadUrl);
+        window.open(feadUrl, '_blank');
+    }
+
 
     private processAuthState(authState: AuthState) {
         console.log('User lienbat is:', authState.user?.lienBat, 'Membre Langue is ', authState.user?.membreLangue);
@@ -166,140 +173,178 @@ export class AppComponent implements OnInit {
         this.loggedInUserName = authState.user?.idUser;
 
         if (this.loggedInUserName) {
+            this.loggedInBankName = authState.banque.bankName;
+            this.loggedInOrganisationName = '';
             switch (authState.user.rights) {
                 case 'Bank':
+                    this.loggedInUserRole = $localize`:@@RoleBankUser:Bank User`;
+                    break;
                 case 'Admin_Banq':
-                    if (authState.user.rights === 'Admin_Banq' ) {
                     this.loggedInUserRole = $localize`:@@RoleBankAdmin:Bank admin`;
-                    } else {
-                        this.loggedInUserRole = $localize`:@@RoleBankUser:Bank User`;
-                    }
-                    this.loggedInBankName = authState.banque.bankName;
-                    this.loggedInOrganisationName = '';
-                    this.menuLoggedInItems = [
-                        {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
-                        {label: $localize`:@@menuMyInfo:MyInfo`, icon: 'pi pi-fw pi-user',
-                            items: [
-                                {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                                {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-map',  routerLink: ['/trips']},
-                            ]
-                        },
-                        // tslint:disable-next-line:max-line-length
-                        {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
-                        {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
-                        {label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
-                           items: [
-                            {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
-                            {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                            {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users',  routerLink: ['/users/rights/']},
-                           ]
-                        },
-                        {label: $localize`:@@menuDonations:Donations`, icon: 'pi pi-fw pi-heart',
-                            items: [
-                                {label: $localize`:@@menuDonators:Donators`, icon: 'pi pi-fw pi-users',  routerLink: [`/donations/donateurs/${authState.banque.bankId}`]},
-                                {label: $localize`:@@menuGifts:Gifts`, icon: 'pi pi-fw pi-heart',  routerLink: [`/donations/dons/${authState.banque.bankId}`]},
-                            ]
-                        },
-                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',  routerLink: ['/beneficiaires']},
-                        {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']},
-                        {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreports/${authState.banque.bankId}`]},
-                        {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
-                    ];
-                break;
-            case 'Asso':
-            case 'Admin_Asso':
-                if  (authState.user.rights === 'Admin_Asso') {
-                    this.loggedInUserRole = $localize`:@@RoleOrgAdmin:Org Admin`;
-                } else {
+                    break;
+                case 'Asso':
                     this.loggedInUserRole = $localize`:@@RoleOrgUser:Org User`;
-                }
-                this.loggedInBankName = authState.banque.bankName;
-                this.loggedInOrganisationName = authState.organisation.societe;
-                this.menuLoggedInItems = [
-                    {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
-                    {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                ];
-                if (authState.organisation && authState.organisation.depyN === true) {
-                    this.menuLoggedInItems.push(
-                        {label: $localize`:@@menuDepot:Depot`, icon: 'pi pi-fw pi-map', routerLink: [`/organisations/${authState.organisation.idDis}`]},
-                        {label: $localize`:@@menuOrganisationsDepot:Orgs Depot`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']}
-                    );
-                } else {
-                    this.menuLoggedInItems.push(
-                    {label: $localize`:@@menuOrganisation:Organisation`, icon: 'pi pi-fw pi-map', routerLink: [`/organisations/${authState.organisation.idDis}`]}
-                    );
-                }
-              if (authState.organisation && authState.organisation.depyN === true) {
-                  this.menuLoggedInItems.push(
-                      {
-                          label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
-                          items: [
-                              {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
-                              {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
-                              {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users',  routerLink: ['/users/rights/']},
-                              // tslint:disable-next-line:max-line-length
-                              {
-                                  label: 'Contacts',
-                                  icon: 'pi pi-fw pi-users',
-                                  routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]
-                              },
-                          ]
-                      },
-                  );
-              } else {
-                  this.menuLoggedInItems.push(
-                      {
-                          label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
-                          items: [
-                              {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
-                              {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
-                              // tslint:disable-next-line:max-line-length
-                              {
-                                  label: 'Contacts',
-                                  icon: 'pi pi-fw pi-users',
-                                  routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]
-                              },
-                          ]
-                      }
-                  );
-              }
-                this.menuLoggedInItems.push(
-                    {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope', routerLink: ['/mailings']},
-                );
-                if (authState.organisation && authState.organisation.gestBen) {
-                    this.menuLoggedInItems.push(
-                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',  routerLink: ['/beneficiaires']}
-                    );
-                }
-                this.menuLoggedInItems.push(
-                    {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreport/${authState.organisation.idDis}`]},
-                    {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
-                );
-                break;
+                    this.loggedInOrganisationName = authState.organisation.societe;
+                    break;
+                case 'Admin_Asso':
+                    this.loggedInUserRole = $localize`:@@RoleOrgAdmin:Org Admin`;
+                    this.loggedInOrganisationName = authState.organisation.societe;
+                  break;
+
                 case 'admin':
                     this.loggedInUserRole = $localize`:@@RoleAdmin:Global admin`;
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
-                    this.menuLoggedInItems = [
-                        {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
-                        {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                        {label: $localize`:@@menuBanks:Banks`, icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
-                        {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
-                        {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
-                        {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']},
-                        {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
-                    ];
                     break;
                 default:
-                this.loggedInBankName = authState.banque.bankName;
-                this.loggedInOrganisationName = '';
-                this.menuLoggedInItems = [
-                    {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]},
-                    {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
-                    {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-users',  routerLink: ['/trips']},
-                    {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
-                ];
+                    this.loggedInBankName = authState.banque.bankName;
+                    this.loggedInOrganisationName = '';
             }
+            this.buildMenu(authState);
+
         }
+    }
+    private buildMenu(authState: AuthState): void {
+        // home for everyone
+        this.menuLoggedInItems = [
+            {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]}
+        ];
+        // handle Personal Info Items
+        if (['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+            this.menuLoggedInItems.push(
+                {label: $localize`:@@menuMyInfo:MyInfo`, icon: 'pi pi-fw pi-user',
+                    items: [
+                        {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]},
+                        {label: $localize`:@@menuTrips:Trips`, icon: 'pi pi-fw pi-map',  routerLink: ['/trips']},
+                    ]
+                }
+            );
+        } else if (['Asso', 'Admin_Asso', 'admin'].includes(authState.user.rights)) {
+            this.menuLoggedInItems.push(
+                // tslint:disable-next-line:max-line-length
+                {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]}
+            );
+        }
+        // handle own bank or own organisation(s) items
+        if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+            this.menuLoggedInItems.push(
+                {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
+                {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
+            );
+        } else if ( ['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+            if (authState.organisation && authState.organisation.depyN === true) {
+                // organisation is depot
+                this.menuLoggedInItems.push(
+                    {label: $localize`:@@menuDepot:Depot`, icon: 'pi pi-fw pi-map', routerLink: [`/organisations/${authState.organisation.idDis}`]},
+                    {label: $localize`:@@menuOrganisationsDepot:Orgs Depot`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']}
+                );
+            } else {
+                // classic organisation
+                this.menuLoggedInItems.push(
+                    {label: $localize`:@@menuOrganisation:Organisation`, icon: 'pi pi-fw pi-map', routerLink: [`/organisations/${authState.organisation.idDis}`]}
+                );
+            }
+        } else if ( authState.user.rights === 'admin') {
+            this.menuLoggedInItems.push(
+                {label: $localize`:@@menuBanks:Banks`, icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
+            );
+        }
+        // handle members
+        if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+            this.menuLoggedInItems.push(
+                {label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
+                    items: [
+                        {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
+                        {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
+                        {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users',  routerLink: ['/users/rights/']},
+                    ]
+                }
+            );
+        } else if (['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+            if (authState.organisation && authState.organisation.depyN === true) {
+                // items for depot
+                this.menuLoggedInItems.push(
+                    {
+                        label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
+                        items: [
+                            {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
+                            {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
+                            {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users',  routerLink: ['/users/rights/']},
+                            // tslint:disable-next-line:max-line-length
+                            { label: 'Contacts', icon: 'pi pi-fw pi-users', routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]}
+                        ]
+                    },
+                );
+            } else {
+                this.menuLoggedInItems.push(
+                    {
+                        label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
+                        items: [
+                            {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
+                            {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
+                            // tslint:disable-next-line:max-line-length
+                            { label: 'Contacts', icon: 'pi pi-fw pi-users', routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]}
+                        ]
+                    }
+                );
+            }
+            // Add Beneficiaries
+            if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+                if (authState.user.gestBen) {
+                    this.menuLoggedInItems.push(
+                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart', routerLink: ['/beneficiaires']}
+                    );
+                }
+            } else if (['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+                if (authState.organisation && authState.organisation.gestBen && authState.user.gestBen) {
+                    this.menuLoggedInItems.push(
+                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',  routerLink: ['/beneficiaires']}
+                    );
+                }
+            }
+            // Add Donateurs
+            if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights) && authState.user.gestDon) {
+                this.menuLoggedInItems.push(
+                    {label: $localize`:@@menuDonations:Donations`, icon: 'pi pi-fw pi-heart',
+                        items: [
+                            {label: $localize`:@@menuDonators:Donators`, icon: 'pi pi-fw pi-users',  routerLink: [`/donations/donateurs/${authState.banque.bankId}`]},
+                            {label: $localize`:@@menuGifts:Gifts`, icon: 'pi pi-fw pi-heart',  routerLink: [`/donations/dons/${authState.banque.bankId}`]},
+                        ]
+                    }
+                );
+            }
+            // add cpass and depots for admin
+            if ( authState.user.rights === 'admin') {
+                this.menuLoggedInItems.push(
+                    {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
+                    {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
+                );
+            }
+            // add mailings for everyone
+            this.menuLoggedInItems.push(
+                {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']}
+            );
+            // add reports
+            if (['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+                this.menuLoggedInItems.push(
+                    {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreports/${authState.banque.bankId}`]}
+                );
+            } else if (['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+                this.menuLoggedInItems.push(
+                    {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreport/${authState.organisation.idDis}`]}
+                );
+            }
+            // add fead
+            if ( authState.user.gestFead) {
+                this.menuLoggedInItems.push(
+                    {label: 'FEAD', icon: 'pi pi-fw pi-apple',   command: (event) => { this.openFEAD(); }}
+                );
+            }
+            // add logout
+            this.menuLoggedInItems.push(
+                {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
+            );
+        }
+
     }
 }
