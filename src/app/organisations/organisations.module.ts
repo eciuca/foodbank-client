@@ -36,6 +36,8 @@ import {ChartModule} from 'primeng/chart';
 import {OrgReportComponent} from './orgreport/orgreport.component';
 import {OrgReportService} from './services/org-report.service';
 import {OrgOneReportComponent} from './orgonereport/orgonereport.component';
+import {OrgSummariesDataService} from './services/orgsummaries-data.service';
+import {OrgSummaryEntityService} from './services/orgsummary-entity.service';
 
 const routes: Routes = [
     { path: '',
@@ -84,6 +86,8 @@ const routes: Routes = [
   providers: [
         OrganisationsDataService,
         OrganisationEntityService,
+        OrgSummariesDataService,
+        OrgSummaryEntityService,
         OrgcontactsDataService,
         OrgcontactEntityService,
         OrgReportService,
@@ -99,12 +103,14 @@ export class OrganisationsModule {
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
       private organisationsDataService: OrganisationsDataService,
+      private orgSummariesDataService: OrgSummariesDataService,
       private orgcontactsDataService: OrgcontactsDataService,
       private cpassDataService: CpassDataService,
       private depotsDataService: DepotsDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Organisation', organisationsDataService);
+    entityDataService.registerService('OrgSummary', orgSummariesDataService);
     entityDataService.registerService('Orgcontact', orgcontactsDataService);
     entityDataService.registerService('Cpas', cpassDataService);
     entityDataService.registerService('Depot', depotsDataService);

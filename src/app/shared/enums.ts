@@ -75,6 +75,24 @@ export let enmOrgActivities = [
     {label: $localize`:@@OrgActivitySocialRestaurant:Social Restaurant`, value: 5},
     {label: $localize`:@@OrgActivityCommunityKitchen:Community Kitchen`, value: 6}
 ];
+export let enmOrgCategories = [
+    {label: '', value: 0},
+    {label: $localize`:@@OrgCategoryShelterYoung:Shelter for Youngsters and Children` , value: 1 },
+    {label: $localize`:@@OrgCategoryShelterHandicapped:Shelter for Handicapped People` , value: 2 },
+    {label: $localize`:@@OrgCategoryShelterWomen:Shelter for Women` , value: 3 },
+    {label: $localize`:@@OrgCategoryShelterMen:Shelter for Men` , value: 4 },
+    {label: $localize`:@@OrgCategorySocialCenter:Approved Social Center` , value: 5 },
+    {label: $localize`:@@OrgCategoryCommunity:Community` , value: 6 },
+    {label: $localize`:@@OrgCategoryNeighbourhood:Neighbourhood Mutual Help` , value: 7 },
+    {label: $localize`:@@OrgCategoryUrban:Urban Mutual Help` , value: 8 },
+    {label: $localize`:@@OrgCategoryRural:Rural Mutual Help` , value: 9 },
+    {label: $localize`:@@OrgCategoryRegional:Regional Mutual Help` , value: 10 },
+    {label: $localize`:@@OrgCategoryHoliday:Holiday Center for Needy` , value: 11 },
+    {label: $localize`:@@OrgCategoryRestaurant:Restaurant for Needy` , value: 12 },
+    {label: $localize`:@@OrgCategoryElderly:Elderly Help` , value: 13 },
+    {label: $localize`:@@OrgCategoryPrison:Prisoner Support` , value: 14 },
+    {label: $localize`:@@OrgCategoryRefugee:Shelter for Refugees` , value: 15 },
+];
 
 
 

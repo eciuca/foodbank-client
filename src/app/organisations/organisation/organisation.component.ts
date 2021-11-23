@@ -5,7 +5,7 @@ import {map, switchMap} from 'rxjs/operators';
 import {Observable, combineLatest} from 'rxjs';
 import {DefaultOrganisation, Organisation} from '../model/organisation';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmStatusCompany, enmGender, enmCountry, enmOrgActivities} from '../../shared/enums';
+import {enmStatusCompany, enmGender, enmCountry, enmOrgActivities, enmOrgCategories} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {Cpas} from '../../cpass/model/cpas';
 import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
@@ -13,6 +13,8 @@ import {DataServiceError, QueryParams} from '@ngrx/data';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {globalAuthState} from '../../auth/auth.selectors';
+import {OrgSummaryEntityService} from '../services/orgsummary-entity.service';
+import {OrgSummary} from '../model/orgsummary';
 
 @Component({
   selector: 'app-organisation',
@@ -33,16 +35,20 @@ export class OrganisationComponent implements OnInit {
   organisation: Organisation;
     selectedCpas: Cpas;
     filteredCpass: Cpas[];
+    filteredDepots: OrgSummary[];
+    selectedDepot: OrgSummary;
     genders: any[];
     statuts: any[];
     countries: any[];
     orgActivities: any[];
+    orgCategories: any[];
    lienBanque: number;
     userName: string;
     gestBen: boolean;
 
   constructor(
       private organisationsService: OrganisationEntityService,
+      private orgsummaryService: OrgSummaryEntityService,
       private cpassService: CpasEntityService,
       private route: ActivatedRoute,
       private router: Router,
@@ -54,6 +60,7 @@ export class OrganisationComponent implements OnInit {
       this.genders = enmGender;
       this.countries = enmCountry;
       this.orgActivities = enmOrgActivities;
+      this.orgCategories = enmOrgCategories;
       this.booCalledFromTable = true;
       this.booCanDelete = false;
       this.booCanSave = false;
@@ -99,12 +106,25 @@ export class OrganisationComponent implements OnInit {
                               }
                           });
               }
+              if (this.organisation.lienDepot != null && this.organisation.lienDepot !== 0  ) {
+                  this.orgsummaryService.getByKey(this.organisation.lienDepot)
+                      .subscribe(
+                          orgsummary => {
+                              if (orgsummary !== null) {
+                                  this.selectedDepot = {...orgsummary};
+                                  console.log('our organisation depot:', this.selectedDepot);
+                              } else {
+                                  console.log('There is no depot for this organisation!');
+                              }
+                          });
+              }
           } else {
               this.organisation = new DefaultOrganisation();
               if (this.myform) {
                   this.myform.reset(this.organisation);
               }
               this.selectedCpas = null;
+              this.selectedDepot = null;
               console.log('we have a new default organisation');
           }
       });
@@ -140,6 +160,9 @@ export class OrganisationComponent implements OnInit {
     if (this.selectedCpas) {
         modifiedOrganisation.lienCpas = this.selectedCpas.cpasId;
     }
+      if (this.selectedDepot) {
+          modifiedOrganisation.lienDepot = this.selectedDepot.idDis;
+      }
     modifiedOrganisation.lupdUserName = this.userName;
       if (modifiedOrganisation.hasOwnProperty('idDis')) {
           console.log('Modifying Organisation with content:', modifiedOrganisation);
@@ -244,4 +267,18 @@ export class OrganisationComponent implements OnInit {
         this.cpassService.getWithQuery(queryCpasParms)
             .subscribe(filteredCpass =>  this.filteredCpass = filteredCpass);
     }
+    filterDepot(event ) {
+        const  queryDepotParms = {};
+        const query = event.query;
+        queryDepotParms['offset'] = '0';
+        queryDepotParms['rows'] = '10';
+        queryDepotParms['sortField'] = 'Societe';
+        queryDepotParms['sortOrder'] = '1';
+        queryDepotParms['lienBanque'] = this.lienBanque.toString();
+        queryDepotParms['isDepot'] = true;
+        queryDepotParms['societe'] = query.toLowerCase();
+        this.orgsummaryService.getWithQuery(queryDepotParms)
+            .subscribe(filteredDepots =>  this.filteredDepots = filteredDepots);
+    }
 }
+

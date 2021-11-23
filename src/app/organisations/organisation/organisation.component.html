@@ -22,6 +22,12 @@
                         <label i18n="@@OrgRefInt" for="refInt">Internal Reference</label>
                         <input #refint="ngModel" pInputText id="refInt" name="refInt"  maxlength="15" [ngModel]="organisation.refInt" />
                     </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label i18n="@@Depot" for="selectedDepot">Depot</label>
+                        <p-autoComplete  [(ngModel)]="selectedDepot" [suggestions]="filteredDepots"  (completeMethod)="filterDepot($event)"
+                                         [forceSelection]="true"  id="selectedDepot" name="selectedDepot" field="societe" [dropdown]="true">
+                        </p-autoComplete>
+                    </div>
                     <div class="p-field p-col-12 p-md-1">
                         <label i18n="@@OrgAgreed" for="agreed">Agreed</label>
                         <p-inputSwitch id="agreed" name="agreed" [ngModel]="organisation.agreed"></p-inputSwitch>
@@ -44,6 +50,18 @@
                         <input #stopSusp="ngModel" pInputText id="stopSusp" name="stopSusp"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="organisation.stopSusp"/>
                         <p-message i18n-text="@@StopSuspDateInvalid"  *ngIf="stopSusp.invalid && organisationForm.touched" severity="error" text="End of Suspension Date must in format dd/mm/yyyy"></p-message>
                     </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label i18n="@@OrgCategory" for="classeFbba1">Category</label>
+                        <p-dropdown [options]="orgCategories" id="classeFbba1" name="classeFbba1" [ngModel]="organisation.classeFbba1"  ></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label i18n="@@OrgCategory" for="classeFbba2">Category</label>
+                        <p-dropdown [options]="orgCategories" id="classeFbba2" name="classeFbba2" [ngModel]="organisation.classeFbba2"  ></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label i18n="@@OrgCategory" for="classeFbba3">Category</label>
+                        <p-dropdown [options]="orgCategories" id="classeFbba3" name="classeFbba3" [ngModel]="organisation.classeFbba3"  ></p-dropdown>
+                    </div>
                     <div class="p-field p-col-12 p-md-2">
                         <label  i18n="@@OrganisationStatus" for="statut">Status Company</label>
                         <p-dropdown [options]="statuts" id="statut" name="statut" [ngModel]="organisation.statut"></p-dropdown>
@@ -64,6 +82,7 @@
                         <label i18n="@@Country" for="pays">Country</label>
                         <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="organisation.pays"  ></p-dropdown>
                     </div>
+
                     <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@Email" for="email">E-mail</label>
                         <input pInputText id="email" name="email" maxlength="100" [ngModel]="organisation.email" />
@@ -84,6 +103,7 @@
                         <label i18n="@@Website" for="website">Web Site</label>
                         <input pInputText id="website" name="website"  [ngModel]="organisation.website" />
                     </div>
+
                     <div class="p-field p-col-12 p-md-4">
                         <label i18n="@@OrganisationHeadQuarters" for="adresse2">Headquarters Address</label>
                         <input pInputText id="adresse2" name="adresse2" maxlength="100" [ngModel]="organisation.adresse2" />
