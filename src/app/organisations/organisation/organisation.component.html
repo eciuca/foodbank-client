@@ -37,6 +37,10 @@
                         <p-inputSwitch id="actif" name="actif" [ngModel]="organisation.actif"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
+                        <label  i18n="@@OrganisationRegion" for="statut">Region</label>
+                        <p-dropdown [options]="regions" id="region" name="region" [ngModel]="organisation.region"></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@OrganisationNumber" for="tva">Nr/Vat Enterprise</label>
                         <input pInputText id="tva" name="tva" maxlength="50" [ngModel]="organisation.tva" />
                     </div>
@@ -50,15 +54,15 @@
                         <input #stopSusp="ngModel" pInputText id="stopSusp" name="stopSusp"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="organisation.stopSusp"/>
                         <p-message i18n-text="@@StopSuspDateInvalid"  *ngIf="stopSusp.invalid && organisationForm.touched" severity="error" text="End of Suspension Date must in format dd/mm/yyyy"></p-message>
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
+                    <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@OrgCategory" for="classeFbba1">Category</label>
                         <p-dropdown [options]="orgCategories" id="classeFbba1" name="classeFbba1" [ngModel]="organisation.classeFbba1"  ></p-dropdown>
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
+                    <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@OrgCategory" for="classeFbba2">Category</label>
                         <p-dropdown [options]="orgCategories" id="classeFbba2" name="classeFbba2" [ngModel]="organisation.classeFbba2"  ></p-dropdown>
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
+                    <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@OrgCategory" for="classeFbba3">Category</label>
                         <p-dropdown [options]="orgCategories" id="classeFbba3" name="classeFbba3" [ngModel]="organisation.classeFbba3"  ></p-dropdown>
                     </div>

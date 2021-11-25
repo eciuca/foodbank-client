@@ -15,6 +15,7 @@ import {AppState} from '../../reducers';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {OrgSummaryEntityService} from '../services/orgsummary-entity.service';
 import {OrgSummary} from '../model/orgsummary';
+import {RegionEntityService} from '../services/region-entity.service';
 
 @Component({
   selector: 'app-organisation',
@@ -39,6 +40,7 @@ export class OrganisationComponent implements OnInit {
     selectedDepot: OrgSummary;
     genders: any[];
     statuts: any[];
+    regions: any[];
     countries: any[];
     orgActivities: any[];
     orgCategories: any[];
@@ -50,6 +52,7 @@ export class OrganisationComponent implements OnInit {
       private organisationsService: OrganisationEntityService,
       private orgsummaryService: OrgSummaryEntityService,
       private cpassService: CpasEntityService,
+      private regionService: RegionEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
@@ -134,12 +137,9 @@ export class OrganisationComponent implements OnInit {
               map((authState) => {
                   if (authState.user) {
                       this.userName = authState.user.userName;
+                      this.lienBanque = authState.banque.bankId;
                       switch (authState.user.rights) {
-                          case 'Bank':
-                              this.lienBanque = authState.banque.bankId;
-                              break;
                           case 'Admin_Banq':
-                              this.lienBanque = authState.banque.bankId;
                               this.booCanSave = true;
                               if (this.booCalledFromTable ) {
                                   this.booCanDelete = true;
@@ -150,10 +150,17 @@ export class OrganisationComponent implements OnInit {
                               break;
                           default:
                       }
+                      this.regionService.getWithQuery({'lienBanque': this.lienBanque.toString()})
+                          .subscribe(regions => {
+                              this.regions = regions.map((region) =>
+                                  Object.assign({}, region, {value: region.regId, label: region.regName})
+                              );
+                          });
                   }
               })
           )
           .subscribe();
+
   }
   save(oldOrganisation: Organisation, organisationForm: Organisation) {
     const modifiedOrganisation = Object.assign({}, oldOrganisation, organisationForm);

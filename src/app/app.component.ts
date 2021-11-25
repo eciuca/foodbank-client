@@ -229,7 +229,12 @@ export class AppComponent implements OnInit {
         if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
-                {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
+                {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',
+                    items: [
+                        {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
+                        {label: $localize`:@@menuRegions:Regions`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/regions/${authState.user.lienBat}`]}
+                    ]
+                }
             );
         } else if ( ['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
             if (authState.organisation && authState.organisation.depyN === true) {

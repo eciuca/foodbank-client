@@ -15,6 +15,7 @@ import {Notification, compareNotifications} from './home/notifications/model/not
 import {compareTrips, Trip} from './trips/model/trip';
 import {compareDonateurs, Donateur} from './donations/model/donateur';
 import {compareDons, Don} from './donations/model/don';
+import {compareRegions, Region} from './organisations/model/region';
 
 export const appEntityMetadata: EntityMetadataMap = {
     Membre: {
@@ -80,6 +81,11 @@ export const appEntityMetadata: EntityMetadataMap = {
     Orgcontact: {
         sortComparer: compareOrgcontacts,
         selectId: (orgcontact: Orgcontact) => orgcontact.orgPersId,
+        entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
+    },
+    Region: {
+        sortComparer: compareRegions,
+        selectId: (region: Region) => region.regId,
         entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
     },
 

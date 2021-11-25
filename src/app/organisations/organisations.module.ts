@@ -38,15 +38,12 @@ import {OrgReportService} from './services/org-report.service';
 import {OrgOneReportComponent} from './orgonereport/orgonereport.component';
 import {OrgSummariesDataService} from './services/orgsummaries-data.service';
 import {OrgSummaryEntityService} from './services/orgsummary-entity.service';
+import { RegionsComponent } from './regions/regions.component';
+import { RegionComponent } from './regions/region/region.component';
+import {RegionsDataService} from './services/regions-data.service';
+import {RegionEntityService} from './services/region-entity.service';
 
 const routes: Routes = [
-    { path: '',
-        component: OrganisationsComponent
-    },
-    {
-        path: ':idDis',
-        component: OrganisationComponent
-   },
     {
         path: 'contacts/:idDis',
         component: OrgcontactsComponent
@@ -58,12 +55,27 @@ const routes: Routes = [
     {
         path: 'orgreport/:idDis',
         component: OrgOneReportComponent
+    },
+    {
+        path: 'regions/:bankId',
+        component: RegionsComponent
+    },
+    {
+        path: 'region/:regId',
+        component: RegionComponent
+    },
+    { path: '',
+        component: OrganisationsComponent
+    },
+    {
+        path: ':idDis',
+        component: OrganisationComponent
     }
 ];
 
 @NgModule({
     // tslint:disable-next-line:max-line-length
-  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent],
+  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent, RegionsComponent, RegionComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -90,6 +102,8 @@ const routes: Routes = [
         OrgSummaryEntityService,
         OrgcontactsDataService,
         OrgcontactEntityService,
+        RegionsDataService,
+        RegionEntityService,
         OrgReportService,
         CpassDataService,
         CpasEntityService,
@@ -105,6 +119,7 @@ export class OrganisationsModule {
       private organisationsDataService: OrganisationsDataService,
       private orgSummariesDataService: OrgSummariesDataService,
       private orgcontactsDataService: OrgcontactsDataService,
+      private regionsDataService: RegionsDataService,
       private cpassDataService: CpassDataService,
       private depotsDataService: DepotsDataService
   ) {
@@ -112,6 +127,7 @@ export class OrganisationsModule {
     entityDataService.registerService('Organisation', organisationsDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
     entityDataService.registerService('Orgcontact', orgcontactsDataService);
+    entityDataService.registerService('Region', regionsDataService);
     entityDataService.registerService('Cpas', cpassDataService);
     entityDataService.registerService('Depot', depotsDataService);
   }

@@ -1,0 +1,18 @@
+<p-panel  *ngIf="region">
+    <form  #regionForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,region)" i18n-label="@@Delete" label="Delete"></button>
+            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(region, regionForm.value)" [disabled] = "regionForm.invalid" i18n-label="@@Save" label="Save"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, region, regionForm, regionForm.dirty)" i18n-label="@@Return" label="Return" ></button>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-12">
+                <label i18n="@@RegionNameMandatory" for="regName">Name *</label>
+                <input #regName="ngModel" pInputText id="regName" name="regName" required minlength="2" maxlength="50" [ngModel]="region.regName" />
+                <p-message *ngIf="regName.invalid && regionForm.touched" severity="error" text="Region Name is required and must be minimum 2 chars long"></p-message>
+            </div>
+
+        </div>
+        <p-confirmPopup></p-confirmPopup>
+    </form>
+</p-panel>
