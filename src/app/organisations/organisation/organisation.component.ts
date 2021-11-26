@@ -63,7 +63,8 @@ export class OrganisationComponent implements OnInit {
       this.genders = enmGender;
       this.countries = enmCountry;
       this.orgActivities = enmOrgActivities;
-      this.orgCategories = enmOrgCategories;
+      this.orgCategories = [...enmOrgCategories];
+      this.orgCategories.splice(0,1); // get rid of all option
       this.booCalledFromTable = true;
       this.booCanDelete = false;
       this.booCanSave = false;
@@ -152,8 +153,9 @@ export class OrganisationComponent implements OnInit {
                       }
                       this.regionService.getWithQuery({'lienBanque': this.lienBanque.toString()})
                           .subscribe(regions => {
-                              this.regions = regions.map((region) =>
-                                  Object.assign({}, region, {value: region.regId, label: region.regName})
+                              this.regions = [{ value: null, label: ' '}];
+                              regions.map((region) =>
+                                  this.regions.push({value: region.regId, label: region.regName})
                               );
                           });
                   }

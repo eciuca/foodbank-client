@@ -9,7 +9,8 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../auth/reducers';
-import {enmYn, enmStatusCompany} from '../shared/enums';
+import {enmYn, enmStatusCompany, enmOrgCategories} from '../shared/enums';
+import {RegionEntityService} from './services/region-entity.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class OrganisationsComponent implements OnInit {
     selectedIdDis$ = new BehaviorSubject(0);
     organisation: Organisation = null;
     organisations: Organisation[];
+    orgCategories: any[];
     displayDialog: boolean;
     totalRecords: number;
     loading: boolean;
@@ -31,11 +33,15 @@ export class OrganisationsComponent implements OnInit {
     booShowArchived: boolean;
     booCanCreate: boolean;
     statutOptions: any[];
+    regions: any[];
     YNOptions:  any[];
     bankName: string;
+    lienBanque: number;
     depotName: string;
     first: number;
+    regionSelected: number;
     constructor(private organisationService: OrganisationEntityService,
+                private regionService: RegionEntityService,
                 private router: Router,
                 private route: ActivatedRoute,
                 private store: Store<AppState>
@@ -43,8 +49,10 @@ export class OrganisationsComponent implements OnInit {
         this.booCanCreate = false;
         this.booShowArchived = false;
         this.statutOptions = enmStatusCompany;
+        this.orgCategories = enmOrgCategories;
         this.YNOptions = enmYn;
         this.isDepot = false;
+        this.lienBanque = 0;
         this.bankName = '';
         this.depotName = '';
         this.first = 0;
@@ -162,6 +170,7 @@ export class OrganisationsComponent implements OnInit {
     }
     private initializeDependingOnUserRights(authState: AuthState) {
         if (authState.banque) {
+            this.lienBanque = authState.banque.bankId;
             this.filterBase = { 'lienBanque': authState.banque.bankId};
             this.bankName = authState.banque.bankName;
             switch (authState.user.rights) {
@@ -179,6 +188,13 @@ export class OrganisationsComponent implements OnInit {
                     break;
                 default:
             }
+        this.regionService.getWithQuery({'lienBanque': this.lienBanque.toString()})
+            .subscribe(regions => {
+                this.regions = [{ value: null, label: 'All'}];
+                regions.map((region) =>
+                    this.regions.push({value: region.regId, label: region.regName})
+                );
+            });
         }
     }
 
@@ -232,6 +248,41 @@ export class OrganisationsComponent implements OnInit {
             latestQueryParams['actif'] = '0';
         } else {
             latestQueryParams['actif'] = '1';
+        }
+        this.loadPageSubject$.next(latestQueryParams);
+    }
+
+    filterRegion(regId) {
+        console.log('Region filter is now:', regId);
+        this.regionSelected = regId;
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest Region Query Parms', latestQueryParams);
+        // when we switch from active to archived list and vice versa , we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if (this.regionSelected) {
+            latestQueryParams['regId'] = regId;
+        } else {
+            // delete regId entry
+            if (latestQueryParams.hasOwnProperty('regId')) {
+                delete latestQueryParams['regId'];
+            }
+        }
+        this.loadPageSubject$.next(latestQueryParams);
+    }
+    filterClasseFBBA(classeFBBA) {
+        console.log('ClasseFBBA filter is now:', classeFBBA);
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest ClasseFBBA Query Parms', latestQueryParams);
+        // when we switch from active to archived list and vice versa , we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if ((classeFBBA >= 0)  && (classeFBBA != 999 )) {
+            latestQueryParams['classeFBBA'] = classeFBBA;
+        } else {
+            if (latestQueryParams.hasOwnProperty('classeFBBA')) {
+                delete latestQueryParams['classeFBBA'];
+            }
         }
         this.loadPageSubject$.next(latestQueryParams);
     }

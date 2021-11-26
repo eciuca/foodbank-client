@@ -76,7 +76,8 @@ export let enmOrgActivities = [
     {label: $localize`:@@OrgActivityCommunityKitchen:Community Kitchen`, value: 6}
 ];
 export let enmOrgCategories = [
-    {label: '', value: 0},
+    {label: 'All', value: 999 },
+    {label: $localize`:@@OrgCategoryUnassigned:Unassigned`, value: 0 },
     {label: $localize`:@@OrgCategoryShelterYoung:Shelter for Youngsters and Children` , value: 1 },
     {label: $localize`:@@OrgCategoryShelterHandicapped:Shelter for Handicapped People` , value: 2 },
     {label: $localize`:@@OrgCategoryShelterWomen:Shelter for Women` , value: 3 },
