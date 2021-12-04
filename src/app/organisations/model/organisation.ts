@@ -212,11 +212,11 @@ export interface Organisation {
 
     remLivr: string;
 
-    cotAnnuelle: number;
+    cotAnnuelle: boolean;
 
     cotMonths: number;
 
-    cotSup: number;
+    cotSup: boolean;
 
     cotMonthsSup: number;
 
@@ -320,10 +320,10 @@ export class DefaultOrganisation implements Organisation {
     classeFbba3: number;
     classique: string;
     coldis: number;
-    cotAnnuelle: number;
+    cotAnnuelle: boolean;
     cotMonths: number;
     cotMonthsSup: number;
-    cotSup: number;
+    cotSup: boolean;
     cp: string;
     cp2: string;
     cpasyN: boolean;
@@ -490,10 +490,10 @@ export class DefaultOrganisation implements Organisation {
         this.classeFbba3 = 0;
         this.classique = '';
         this.coldis = 0;
-        this.cotAnnuelle = 0;
+        this.cotAnnuelle = false;
         this.cotMonths = 0;
         this.cotMonthsSup = 0;
-        this.cotSup = 0;
+        this.cotSup = false;
         this.cp = '';
         this.cp2 = '';
         this.cpasyN = false;

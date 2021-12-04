@@ -1,6 +1,7 @@
 import {EntityMetadataMap} from '@ngrx/data';
 import {compareMembres, Membre} from './membres/model/membre';
 import {Banque, compareBanques} from './banques/model/banque';
+import {BanqProg, compareBanqProgs} from './banques/model/banqprog';
 import {Beneficiaire, compareBeneficiaires} from './beneficiaires/model/beneficiaire';
 import {compareCpass, Cpas} from './cpass/model/cpas';
 import {compareDepots, Depot} from './depots/model/depot';
@@ -16,6 +17,7 @@ import {compareTrips, Trip} from './trips/model/trip';
 import {compareDonateurs, Donateur} from './donations/model/donateur';
 import {compareDons, Don} from './donations/model/don';
 import {compareRegions, Region} from './organisations/model/region';
+
 
 export const appEntityMetadata: EntityMetadataMap = {
     Membre: {
@@ -36,6 +38,11 @@ export const appEntityMetadata: EntityMetadataMap = {
     Banque: {
         sortComparer: compareBanques,
         selectId: (banque: Banque) => banque.bankId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
+    },
+    BanqProg: {
+        sortComparer: compareBanqProgs,
+        selectId: (banqProg: BanqProg) => banqProg.lienBanque,
         entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
     },
     Beneficiaire: {

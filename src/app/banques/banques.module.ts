@@ -23,7 +23,17 @@ import {ConfirmationService} from 'primeng/api';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {ToastModule} from 'primeng/toast';
+import { BanqprogComponent } from './banqprogs/banqprog/banqprog.component';
+import { BanqprogsComponent } from './banqprogs/banqprogs.component';
 const routes: Routes = [
+    {
+        path: 'banqprogs/',
+        component: BanqprogsComponent
+    },
+    {
+        path: 'banqprog/:lienBanque',
+        component: BanqprogComponent
+    },
     {   path: '',
         component: BanquesComponent,
         resolve: {
@@ -40,7 +50,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [BanquesComponent, BanqueComponent],
+  declarations: [BanquesComponent, BanqueComponent, BanqprogComponent, BanqprogsComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),

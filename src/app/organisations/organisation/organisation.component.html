@@ -480,6 +480,33 @@
 
                 </div>
             </p-accordionTab>
+            <p-accordionTab i18n-header="@@OrgMemberShipFees"  *ngIf="organisation.lienBanque < 11" header="MemberShip Fees">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@OrgMemberShipAmount" for="memberShipAmount">MemberShip Amount</label>
+                        <p-inputNumber [ngModel]="organisation.montCot" id="memberShipAmount" name="memberShipAmount" mode="decimal" [showButtons]="true" inputId="memberShipAmount" [min]="0">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@OrgMemberShipYearly?" for="cotAnnuelle">Yearly MemberShip?</label>
+                        <p-inputSwitch id="cotAnnuelle" name="cotAnnuelle" [ngModel]="organisation.cotAnnuelle"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label i18n="@@OrgMemberShipYearlyMonths" for="cotMonths">Yearly MemberShip Months</label>
+                        <p-inputNumber [ngModel]="organisation.cotMonths" id="cotMonths" name="cotMonths" mode="decimal" [showButtons]="true" inputId="cotMonths" [min]="0" [max]="12">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@OrgMemberShipExtra?" for="cotSup">Extra MemberShip?</label>
+                        <p-inputSwitch id="cotSup" name="cotSup" [ngModel]="organisation.cotSup"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        <label i18n="@@OrgMemberShipExtraMonths" for="cotMonthsSup">Extra MemberShip Months</label>
+                        <p-inputNumber [ngModel]="organisation.cotMonthsSup" id="cotMonthsSup" name="cotMonthsSup" mode="decimal" [showButtons]="true" inputId="cotMonthsSup" [min]="0" [max]="12">
+                        </p-inputNumber>
+                    </div>
+                </div>
+            </p-accordionTab>
         </p-accordion>
         <p-confirmPopup></p-confirmPopup>
     </form>

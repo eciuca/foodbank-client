@@ -42,6 +42,7 @@ import { RegionsComponent } from './regions/regions.component';
 import { RegionComponent } from './regions/region/region.component';
 import {RegionsDataService} from './services/regions-data.service';
 import {RegionEntityService} from './services/region-entity.service';
+import { OrgMembershipsComponent } from './org-memberships/org-memberships.component';
 
 const routes: Routes = [
     {
@@ -64,6 +65,10 @@ const routes: Routes = [
         path: 'region/:regId',
         component: RegionComponent
     },
+    {
+        path: 'memberships/:bankId',
+        component: OrgMembershipsComponent
+    },
     { path: '',
         component: OrganisationsComponent
     },
@@ -75,7 +80,7 @@ const routes: Routes = [
 
 @NgModule({
     // tslint:disable-next-line:max-line-length
-  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent, RegionsComponent, RegionComponent],
+  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent, RegionsComponent, RegionComponent, OrgMembershipsComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
