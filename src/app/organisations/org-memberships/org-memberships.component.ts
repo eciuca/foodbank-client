@@ -127,7 +127,7 @@ export class OrgMembershipsComponent implements OnInit {
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.banque) {
       this.lienBanque = authState.banque.bankId;
-      this.filterBase = {'lienBanque': authState.banque.bankId, 'actif': '1'};
+      this.filterBase = {'lienBanque': authState.banque.bankId, 'actif': '1', 'isDepot': '0', 'agreed': '1'};
       this.bankName = authState.banque.bankName;
     }
 

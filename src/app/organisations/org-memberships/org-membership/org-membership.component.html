@@ -1,0 +1,40 @@
+<p-panel *ngIf="organisation">
+    <ng-template  pTemplate="header">
+        <div i18n="@@OrganisationHeader">
+            Organisation {{ organisation.idDis}} {{ organisation.societe}} Updated on {{organisation.lupdTs}} By {{organisation.lupdUserName}}
+        </div>
+    </ng-template>
+    <form   #orgMembershipForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button i18n-label="@@Save"  type="button" pButton icon="pi pi-check" (click)="save(organisation, orgMembershipForm.value)" label="Save" [disabled] = "orgMembershipForm.invalid"></button>
+            <button i18n-label="@@Return"  type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, orgMembershipForm,orgMembershipForm.dirty)" label="Return" ></button>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@OrgMemberShipAmount" for="memberShipAmount">MemberShip Amount</label>
+                <p-inputNumber [ngModel]="organisation.montCot" id="memberShipAmount" name="memberShipAmount" mode="decimal" [showButtons]="true" inputId="memberShipAmount" [min]="0">
+                </p-inputNumber>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@OrgMemberShipYearly?" for="cotAnnuelle">Yearly MemberShip?</label>
+                <p-inputSwitch id="cotAnnuelle" name="cotAnnuelle" [ngModel]="organisation.cotAnnuelle"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@OrgMemberShipYearlyMonths" for="cotMonths">Yearly MemberShip Months</label>
+                <p-inputNumber [ngModel]="organisation.cotMonths" id="cotMonths" name="cotMonths" mode="decimal" [showButtons]="true" inputId="cotMonths" [min]="0" [max]="12">
+                </p-inputNumber>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@OrgMemberShipExtra?" for="cotSup">Extra MemberShip?</label>
+                <p-inputSwitch id="cotSup" name="cotSup" [ngModel]="organisation.cotSup"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@OrgMemberShipExtraMonths" for="cotMonthsSup">Extra MemberShip Months</label>
+                <p-inputNumber [ngModel]="organisation.cotMonthsSup" id="cotMonthsSup" name="cotMonthsSup" mode="decimal" [showButtons]="true" inputId="cotMonthsSup" [min]="0" [max]="12">
+                </p-inputNumber>
+            </div>
+        </div>
+        <p-confirmPopup></p-confirmPopup>
+    </form>
+
+</p-panel>

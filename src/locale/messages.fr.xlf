@@ -446,6 +446,10 @@
           <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
@@ -496,6 +500,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
           <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -848,6 +856,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
           <context context-type="linenumber">257</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.ts</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
@@ -2538,6 +2550,102 @@
           <context context-type="linenumber">269</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="OrganisationHeader" datatype="html">
+        <source> Organisation <x id="INTERPOLATION" equiv-text="{{ organisation.idDis}}"/> <x id="INTERPOLATION_1" equiv-text="{{ organisation.societe}}"/> Updated on <x id="INTERPOLATION_2" equiv-text="{{organisation.lupdTs}}"/> By <x id="INTERPOLATION_3" equiv-text="{{organisation.lupdUserName}}"/> </source>
+        <target> Organisation <x id="INTERPOLATION" equiv-text="{{ organisation.idDis}}"/> <x id="INTERPOLATION_1" equiv-text="{{ organisation.societe}}"/> Mis à jour le <x id="INTERPOLATION_2" equiv-text="{{organisation.lupdTs}}"/> par <x id="INTERPOLATION_3" equiv-text="{{organisation.lupdUserName}}"/> </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">3,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberShipAmount" datatype="html">
+        <source>MemberShip Amount</source>
+        <target>Montant de la cotisation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">486</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberShipYearly?" datatype="html">
+        <source>Yearly MemberShip?</source>
+        <target>Cotisation annuelle ?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">491</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberShipYearlyMonths" datatype="html">
+        <source>Yearly MemberShip Months</source>
+        <target>Mois de cotisation annuels</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">495</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberShipExtra?" datatype="html">
+        <source>Extra MemberShip?</source>
+        <target>Cotisation supplémentaire ?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">500</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberShipExtraMonths" datatype="html">
+        <source>Extra MemberShip Months</source>
+        <target>Mois de cotisation supplémentaires</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">504</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageOrganisationUpdated" datatype="html">
+        <source>Organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> was updated</source>
+        <target>L'organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> a été mise à jour</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
+          <context context-type="linenumber">183</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageOrganisationUpdateError" datatype="html">
+        <source>The organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> could not be updated: error: <x id="PH_1" equiv-text="dataserviceerror.message"/></source>
+        <target>L'organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> n'a pas pu être mise à jour: erreur: <x id="PH_1" equiv-text="dataserviceerror.message"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
+          <context context-type="linenumber">191</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="OrgIsMembershipSorted" datatype="html">
         <source>Membership<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotAnnuelle&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
         <target>Cotisation?<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotAnnuelle&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
@@ -2582,16 +2690,12 @@
           <context context-type="linenumber">141,143</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrganisationDetails" datatype="html">
-        <source>Organisation Details</source>
-        <target>Détails de l'organisation</target>
+      <trans-unit id="OrgMembershipMailing" datatype="html">
+        <source>Membership Mailing</source>
+        <target>Mailing des Cotisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-memberships.component.html</context>
           <context context-type="linenumber">93</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankOrgsTitleMembershipActive" datatype="html">
@@ -2600,14 +2704,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-memberships.component.ts</context>
           <context context-type="linenumber">136</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="OrganisationHeader" datatype="html">
-        <source> Organisation <x id="INTERPOLATION" equiv-text="{{ organisation.idDis}}"/> <x id="INTERPOLATION_1" equiv-text="{{ organisation.societe}}"/> Updated on <x id="INTERPOLATION_2" equiv-text="{{organisation.lupdTs}}"/> By <x id="INTERPOLATION_3" equiv-text="{{organisation.lupdUserName}}"/> </source>
-        <target> Organisation <x id="INTERPOLATION" equiv-text="{{ organisation.idDis}}"/> <x id="INTERPOLATION_1" equiv-text="{{ organisation.societe}}"/> Mis à jour le <x id="INTERPOLATION_2" equiv-text="{{organisation.lupdTs}}"/> par <x id="INTERPOLATION_3" equiv-text="{{organisation.lupdUserName}}"/> </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">3,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrganisationName" datatype="html">
@@ -3358,62 +3454,6 @@
           <context context-type="linenumber">483</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrgMemberShipAmount" datatype="html">
-        <source>MemberShip Amount</source>
-        <target>Montant de la cotisation</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">486</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="OrgMemberShipYearly?" datatype="html">
-        <source>Yearly MemberShip?</source>
-        <target>Cotisation annuelle ?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">491</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="OrgMemberShipYearlyMonths" datatype="html">
-        <source>Yearly MemberShip Months</source>
-        <target>Mois de cotisation annuels</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">495</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="OrgMemberShipExtra?" datatype="html">
-        <source>Extra MemberShip?</source>
-        <target>Cotisation supplémentaire ?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">500</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="OrgMemberShipExtraMonths" datatype="html">
-        <source>Extra MemberShip Months</source>
-        <target>Mois de cotisation supplémentaires</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">504</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="messageOrganisationUpdated" datatype="html">
-        <source>Organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> was updated</source>
-        <target>L'organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> a été mise à jour</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
-          <context context-type="linenumber">183</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="messageOrganisationUpdateError" datatype="html">
-        <source>The organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> could not be updated: error: <x id="PH_1" equiv-text="dataserviceerror.message"/></source>
-        <target>L'organisation <x id="PH" equiv-text="modifiedOrganisation.societe"/> n'a pas pu être mise à jour: erreur: <x id="PH_1" equiv-text="dataserviceerror.message"/></target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
-          <context context-type="linenumber">191</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="messageOrganisationCreated" datatype="html">
         <source>Organisation <x id="PH" equiv-text="newOrganisation.societe"/> was created</source>
         <target>L'organisation <x id="PH" equiv-text="newOrganisation.societe"/> a été créée</target>
@@ -3508,6 +3548,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
           <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrganisationDetails" datatype="html">
+        <source>Organisation Details</source>
+        <target>Détails de l'organisation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotOrgsTitleArchive" datatype="html">

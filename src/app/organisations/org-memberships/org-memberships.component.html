@@ -90,8 +90,8 @@
         </div>
     </ng-template>
 </p-table>
-<p-dialog i18n-header="@@OrganisationDetails" header="Organisation Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
-    <app-organisation *ngIf="selectedIdDis$" [idDis$]="selectedIdDis$" (onOrganisationUpdate)="handleOrganisationUpdate($event)"
-                       (onOrganisationQuit)="handleOrganisationQuit()"></app-organisation>
+<p-dialog i18n-header="@@OrgMembershipMailing" header="Membership Mailing" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+    <app-org-membership *ngIf="selectedIdDis$" [idDis$]="selectedIdDis$" (onOrganisationUpdate)="handleOrganisationUpdate($event)"
+                       (onOrganisationQuit)="handleOrganisationQuit()"></app-org-membership>
 </p-dialog>
 
