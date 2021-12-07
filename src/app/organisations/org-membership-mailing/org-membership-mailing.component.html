@@ -1,0 +1,106 @@
+<p-panel *ngIf="organisation">
+    <ng-template  pTemplate="header">
+        <div>
+            {{ getTitle()}}
+        </div>
+    </ng-template>
+    <form   #orgMembershipForm="ngForm">
+         <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@OrgMemberShipAmount" for="memberShipAmount">MemberShip Amount</label>
+                <p-inputNumber [ngModel]="organisation.montCot" id="memberShipAmount" name="memberShipAmount" mode="decimal" [showButtons]="true" inputId="memberShipAmount" [min]="0">
+                </p-inputNumber>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@OrgMemberShipYearly?" for="cotAnnuelle">Yearly MemberShip?</label>
+                <p-inputSwitch id="cotAnnuelle" name="cotAnnuelle" [ngModel]="organisation.cotAnnuelle"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@OrgMemberShipYearlyMonths" for="cotMonths">Yearly MemberShip Months</label>
+                <p-inputNumber [ngModel]="organisation.cotMonths" id="cotMonths" name="cotMonths" mode="decimal" [showButtons]="true" inputId="cotMonths" [min]="0" [max]="12">
+                </p-inputNumber>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@OrgMemberShipExtra?" for="cotSup">Extra MemberShip?</label>
+                <p-inputSwitch id="cotSup" name="cotSup" [ngModel]="organisation.cotSup"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@OrgMemberShipExtraMonths" for="cotMonthsSup">Extra MemberShip Months</label>
+                <p-inputNumber [ngModel]="organisation.cotMonthsSup" id="cotMonthsSup" name="cotMonthsSup" mode="decimal" [showButtons]="true" inputId="cotMonthsSup" [min]="0" [max]="12">
+                </p-inputNumber>
+            </div>
+        </div>
+        <div class="p-field p-col-12 p-md-12">
+            <div class="p-field p-col-12 p-md-12">
+                From: {{ bankName}}<{{bankMail}}>
+            </div>
+        </div>
+        <div class="p-field p-col-12 p-md-12">
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@OrgMembershipSendYearly?" for="sendyearly">Send Yearly Mail?</label>
+                <p-inputSwitch id="sendyearly" name="sendyearly" [(ngModel)]="isYearlyMail"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                To: {{ organisation.nom}} {{ organisation.prenom}}<{{organisation.email}}>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@OrgMemberSendToOrg?" for="sendtoorg">Send Mail To Main Contact?</label>
+                <p-inputSwitch id="sendtoorg" name="sendtoorg" [(ngModel)]="sendMailToOrgContact"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                Cc: {{ organisation.nomTres}} {{ organisation.prenomTres}}<{{organisation.emailTres}}>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@OrgMemberSendToOrgtreasurer?" for="sendtoorgtreasurer">Send Mail to Treasurer?</label>
+                <p-inputSwitch id="sendtoorgtreasurer" name="sendtoorgtreasurer" [(ngModel)]="sendMailToOrgTreasurer"></p-inputSwitch>
+            </div>
+
+        </div>
+        <div class="p-field p-col-12 p-md-12">
+            <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" required i18n-placeholder="@@EnterYourMessage" placeholder="Enter your message" name="mailingText" [style]="{'height':'320px'}">
+                <p-header>
+                             <span class="ql-formats">
+                                <select class="ql-header" tabindex="-1">
+                                    <option value="1" tabindex="-1">Heading</option>
+                                    <option value="2" tabindex="-1">Subheading</option>
+                                    <option selected tabindex="-1">Normal</option>
+                                </select>
+                             <select class="ql-font" tabindex="-1">
+                                    <option selected tabindex="-1">Sans Serif</option>
+                                    <option value="serif" tabindex="-1">Serif</option>
+                                    <option value="monospace" tabindex="-1">Monospace</option>
+                                </select>
+                            </span>
+                    <span class="ql-formats">
+                                <button class="ql-bold" aria-label="Bold" tabindex="-1"></button>
+                                <button class="ql-italic" aria-label="Italic" tabindex="-1"></button>
+                                <button class="ql-underline" aria-label="Underline" tabindex="-1"></button>
+                            </span>
+                    <span class="ql-formats">
+                                <select class="ql-color" tabindex="-1"></select>
+                                <select class="ql-background" tabindex="-1"></select>
+                            </span>
+                    <span class="ql-formats">
+                                <button class="ql-list" value="ordered" aria-label="Ordered List" tabindex="-1"></button>
+                                <button class="ql-list" value="bullet" aria-label="Unordered List" tabindex="-1"></button>
+                                <select class="ql-align" tabindex="-1">
+                                    <option selected tabindex="-1"></option>
+                                    <option value="center" tabindex="-1"></option>
+                                    <option value="right" tabindex="-1"></option>
+                                    <option value="justify" tabindex="-1"></option>
+                                </select>
+                            </span>
+                    <span class="ql-formats">
+                                <button class="ql-link" aria-label="Insert Link" tabindex="-1"></button>
+                            </span>
+                    <span class="ql-formats">
+                                <button class="ql-clean" aria-label="Remove Styles" tabindex="-1"></button>
+                            </span>
+                </p-header>
+            </p-editor>
+            <p-message i18n-text="@@MailingTextIsMandatory" *ngIf="idmailingtext.invalid && idmailingtext.touched" severity="error" text="Mail text is required"></p-message>
+        </div>
+        <p-confirmPopup></p-confirmPopup>
+    </form>
+
+</p-panel>

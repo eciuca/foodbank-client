@@ -44,7 +44,14 @@ import {RegionsDataService} from './services/regions-data.service';
 import {RegionEntityService} from './services/region-entity.service';
 import { OrgMembershipsComponent } from './org-memberships/org-memberships.component';
 import { OrgMembershipComponent } from './org-memberships/org-membership/org-membership.component';
-
+import {EditorModule} from 'primeng/editor';
+import {MailingsDataService} from '../mailings/services/mailings-data.service';
+import {MailingEntityService} from '../mailings/services/mailing-entity.service';
+import {BanquesDataService} from '../banques/services/banques-data.service';
+import {BanqueEntityService} from '../banques/services/banque-entity.service';
+import {BanqProgEntityService} from '../banques/services/banqprog-entity.service';
+import {BanqProgsDataService} from '../banques/services/banqprogs-data.service';
+import { OrgMembershipMailingComponent } from './org-membership-mailing/org-membership-mailing.component';
 const routes: Routes = [
     {
         path: 'contacts/:idDis',
@@ -70,6 +77,10 @@ const routes: Routes = [
         path: 'memberships/:bankId',
         component: OrgMembershipsComponent
     },
+    {
+        path: 'membershipmailing/:bankId',
+        component: OrgMembershipMailingComponent
+    },
     { path: '',
         component: OrganisationsComponent
     },
@@ -81,7 +92,7 @@ const routes: Routes = [
 
 @NgModule({
     // tslint:disable-next-line:max-line-length
-  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent, RegionsComponent, RegionComponent, OrgMembershipsComponent, OrgMembershipComponent],
+  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent, RegionsComponent, RegionComponent, OrgMembershipsComponent, OrgMembershipComponent, OrgMembershipMailingComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -99,7 +110,8 @@ const routes: Routes = [
         MessageModule,
         ToastModule,
         CheckboxModule,
-        ChartModule
+        ChartModule,
+        EditorModule
     ],
   providers: [
         OrganisationsDataService,
@@ -115,6 +127,12 @@ const routes: Routes = [
         CpasEntityService,
         DepotsDataService,
         DepotEntityService,
+        MailingsDataService,
+        MailingEntityService,
+      BanquesDataService,
+      BanqueEntityService,
+      BanqProgsDataService,
+      BanqProgEntityService,
         ConfirmationService
   ]
 })
@@ -127,7 +145,9 @@ export class OrganisationsModule {
       private orgcontactsDataService: OrgcontactsDataService,
       private regionsDataService: RegionsDataService,
       private cpassDataService: CpassDataService,
-      private depotsDataService: DepotsDataService
+      private depotsDataService: DepotsDataService,
+      private banquesDataService: BanquesDataService,
+      private banqProgsDataService: BanqProgsDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Organisation', organisationsDataService);
@@ -136,5 +156,7 @@ export class OrganisationsModule {
     entityDataService.registerService('Region', regionsDataService);
     entityDataService.registerService('Cpas', cpassDataService);
     entityDataService.registerService('Depot', depotsDataService);
+    entityDataService.registerService('Banque', banquesDataService);
+    entityDataService.registerService('BanqProg', banqProgsDataService);
   }
 }

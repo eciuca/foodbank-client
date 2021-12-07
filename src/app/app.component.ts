@@ -233,7 +233,21 @@ export class AppComponent implements OnInit {
                     items: [
                         {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
                         {label: $localize`:@@menuRegions:Regions`, icon: 'pi pi-fw pi-globe',  routerLink: [`/organisations/regions/${authState.user.lienBat}`]},
-                        {label: $localize`:@@menuMemberships:Memberships`, icon: 'pi pi-fw pi-euro',  routerLink: [`/organisations/memberships/${authState.user.lienBat}`]}
+                        {
+                            label: $localize`:@@menuMemberships:Memberships`, icon: 'pi pi-fw pi-euro',
+                            items: [
+                                {
+                                    label: $localize`:@@menuMembershipMgt:Membership Management`,
+                                    icon: 'pi pi-fw pi-euro',
+                                    routerLink: [`/organisations/memberships/${authState.user.lienBat}`]
+                                },
+                                {
+                                    label: $localize`:@@menuMembershipMailing:Membership Mailing`,
+                                    icon: 'pi pi-fw pi-euro',
+                                    routerLink: [`/organisations/membershipmailing/${authState.user.lienBat}`]
+                                }
+                            ]
+                        }
                     ]
                 }
             );
