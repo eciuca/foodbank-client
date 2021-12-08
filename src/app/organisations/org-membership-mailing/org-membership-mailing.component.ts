@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Organisation} from '../model/organisation';
 import {OrganisationEntityService} from '../services/organisation-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -15,6 +15,7 @@ import {DataServiceError} from '@ngrx/data';
 import {MailingEntityService} from '../../mailings/services/mailing-entity.service';
 import {FileUploadService} from '../../mailings/services/file-upload.service';
 import {AuthService} from '../../auth/auth.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-org-membership-mailing',
@@ -22,7 +23,7 @@ import {AuthService} from '../../auth/auth.service';
   styleUrls: ['./org-membership-mailing.component.css']
 })
 export class OrgMembershipMailingComponent implements OnInit {
-
+    @ViewChild('orgMembershipForm') myform: NgForm;
   organisation: Organisation = null;
   orgSummaries: OrgSummary[];
   orgSummaryIndex: number;
@@ -42,6 +43,7 @@ export class OrgMembershipMailingComponent implements OnInit {
     sendMailToOrgContact: boolean;
     sendMailToOrgTreasurer: boolean;
     typeMembership: string;
+    orgsummary: OrgSummary;
   constructor(private organisationService: OrganisationEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private mailingService: MailingEntityService,
@@ -81,7 +83,8 @@ export class OrgMembershipMailingComponent implements OnInit {
                     console.log('Loaded orgsummaries: ' + loadedOrgSummaries.length);
                     this.totalOrgSummaries = loadedOrgSummaries.length;
                     this.orgSummaries  = loadedOrgSummaries;
-                    this.getOrganisation(0);
+                    this.orgsummary = this.orgSummaries[0];
+                    this.getOrganisation(this.orgsummary.idDis);
 
                   });
             })
@@ -89,8 +92,8 @@ export class OrgMembershipMailingComponent implements OnInit {
         .subscribe();
 
   }
-  getOrganisation(summaryIndex: number) {
-      this.organisationService.getByKey(this.orgSummaries[summaryIndex].idDis)
+  getOrganisation(idDis: number) {
+      this.organisationService.getByKey(idDis)
         .subscribe(organisation => {
             this.organisation = organisation;
             if (organisation.langue === 2 ) {
@@ -106,6 +109,30 @@ export class OrgMembershipMailingComponent implements OnInit {
             }
     });
   }
+  getNextOrganisation() {
+      console.log('entering getNextOrganisation with orgsummary', this.orgsummary);
+      this.orgSummaryIndex = this.orgSummaries.findIndex(item => item.idDis === this.organisation.idDis);
+      console.log('Old Summary index is:', this.orgSummaryIndex);
+      if (this.orgSummaryIndex < (this.totalOrgSummaries - 1)) {
+          this.orgSummaryIndex++;
+          this.orgsummary = this.orgSummaries[this.orgSummaryIndex];
+          console.log('New index and Summary is:', this.orgSummaryIndex, this.orgsummary);
+          this.getOrganisation(this.orgsummary.idDis);
+      }
+  }
+   getPreviousOrganisation() {
+       this.orgSummaryIndex = this.orgSummaries.findIndex(item => item.idDis === this.organisation.idDis);
+        if (this.orgSummaryIndex > 0) {
+            this.orgSummaryIndex--;
+            this.orgsummary = this.orgSummaries[this.orgSummaryIndex];
+            this.getOrganisation(this.orgsummary.idDis);
+        }
+    }
+    selectOrganisation(idDis: number) {
+        this.orgSummaryIndex = this.orgSummaries.findIndex(item => item.idDis === idDis);
+        this.orgsummary = this.orgSummaries[this.orgSummaryIndex];
+        this.getOrganisation(idDis);
+    }
 
   getTitle(): string {
     return $localize`:@@BankOrgsTitleMembershipMailing:Membership Mailing to Organisation ${this.organisation.societe} `;
@@ -119,15 +146,7 @@ export class OrgMembershipMailingComponent implements OnInit {
             mailListArray.push( `${this.organisation.nomTres} ${this.organisation.prenomTres}<${this.organisation.emailTres}>  ` );
         }
         console.log('mailListArray', mailListArray);
-        if ( mailListArray.length > 3) {
-            const errMessage = {
-                severity: 'error', summary: 'Send',
-                detail: $localize`:@@messageSendMaxListError:You have ${mailListArray.length} recipients. The maximum is 3.`,
-                life: 6000
-            };
-            this.messageService.add(errMessage);
-            return;
-        }
+
         if (mailListArray.length === 0 || (mailListArray.length === 1 && mailListArray[0].trim() === '' ) ) {
             const errMessage = {
                 severity: 'error', summary: 'Send',
@@ -208,4 +227,6 @@ export class OrgMembershipMailingComponent implements OnInit {
 
         }
     }
+
+
 }
