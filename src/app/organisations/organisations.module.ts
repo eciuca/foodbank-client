@@ -52,6 +52,8 @@ import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {BanqProgEntityService} from '../banques/services/banqprog-entity.service';
 import {BanqProgsDataService} from '../banques/services/banqprogs-data.service';
 import { OrgMembershipMailingComponent } from './org-membership-mailing/org-membership-mailing.component';
+import {MembresDataService} from '../membres/services/membres-data.service';
+import {MembreEntityService} from '../membres/services/membre-entity.service';
 const routes: Routes = [
     {
         path: 'contacts/:idDis',
@@ -122,6 +124,8 @@ const routes: Routes = [
         OrgcontactEntityService,
         RegionsDataService,
         RegionEntityService,
+      MembresDataService,
+      MembreEntityService,
         OrgReportService,
         CpassDataService,
         CpasEntityService,
@@ -144,6 +148,7 @@ export class OrganisationsModule {
       private orgSummariesDataService: OrgSummariesDataService,
       private orgcontactsDataService: OrgcontactsDataService,
       private regionsDataService: RegionsDataService,
+      private membresDataService: MembresDataService,
       private cpassDataService: CpassDataService,
       private depotsDataService: DepotsDataService,
       private banquesDataService: BanquesDataService,
@@ -154,6 +159,7 @@ export class OrganisationsModule {
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
     entityDataService.registerService('Orgcontact', orgcontactsDataService);
     entityDataService.registerService('Region', regionsDataService);
+    entityDataService.registerService('Membre', membresDataService);
     entityDataService.registerService('Cpas', cpassDataService);
     entityDataService.registerService('Depot', depotsDataService);
     entityDataService.registerService('Banque', banquesDataService);
