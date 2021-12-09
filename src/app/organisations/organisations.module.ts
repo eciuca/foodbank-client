@@ -54,6 +54,8 @@ import {BanqProgsDataService} from '../banques/services/banqprogs-data.service';
 import { OrgMembershipMailingComponent } from './org-membership-mailing/org-membership-mailing.component';
 import {MembresDataService} from '../membres/services/membres-data.service';
 import {MembreEntityService} from '../membres/services/membre-entity.service';
+import {FileUploadModule} from 'primeng/fileupload';
+import {RadioButtonModule} from 'primeng/radiobutton';
 const routes: Routes = [
     {
         path: 'contacts/:idDis',
@@ -113,7 +115,9 @@ const routes: Routes = [
         ToastModule,
         CheckboxModule,
         ChartModule,
-        EditorModule
+        EditorModule,
+        FileUploadModule,
+        RadioButtonModule
     ],
   providers: [
         OrganisationsDataService,

@@ -1,18 +1,20 @@
 <p-panel *ngIf="organisation">
     <ng-template  pTemplate="header">
         <div>
-            {{ getTitle()}}<br> {{getSubTitle()}}
+            {{ getTitle()}}
+            <br><br> {{getSubTitle()}}
         </div>
     </ng-template>
     <form   #orgMembershipForm="ngForm">
          <div class="p-fluid p-formgrid p-grid">
              <div class="p-field p-col-12 p-md-2">
-              <button type="button" pButton icon="pi pi-caret-left" (click)=" getPreviousOrganisation()" i18n-label="@@prev" label="previous"></button>
+              <button type="button" pButton icon="pi pi-caret-left" (click)="getPreviousOrganisation()" i18n-label="@@prev" label="previous"></button>
              </div>
              <div class="p-field p-col-12 p-md-2">
                  <button type="button" pButton icon="pi pi-caret-right" (click)=" getNextOrganisation()" i18n-label="@@next" label="next"></button>
              </div>
              <div class="p-field p-col-12 p-md-2">
+                 <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)" [disabled] = "orgMembershipForm.invalid" label="Send Email"></button>
              </div>
              <div class="p-field p-col-12 p-md-2">
              </div>
@@ -27,33 +29,53 @@
                  </p-dropdown>
              </div>
          </div>
-         <div class="p-field p-col-12 p-md-12">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@MembershipDueDate" for="dueDate">Due Date</label>
+                <input #dueDatem="ngModel" pInputText id="dueDate" name="dueDate"   pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [(ngModel)]="dueDate"/>
+                <p-message i18n-text="@@DueDateIsMandatory"  *ngIf="dueDatem.invalid && orgMembershipForm.touched" severity="error" text="Due date is required and must in format dd/mm/yyyy"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <p-radioButton  i18n.label="@@OrgMembershipMailSendYearly?" name="groupyearly" value="1" label="Yearly Membership?" [(ngModel)]="isYearlyMail" (click)="loadOrgSummaries(true)"></p-radioButton>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <p-radioButton  i18n.label="@@OrgMembershipMailSendExtra?" name="groupyearly"   label="Extra Yearly Membership?" [(ngModel)]="isYearlyMail" (click)="loadOrgSummaries(false)"></p-radioButton>
+            </div>
+        </div>
+         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-12">
                 From: {{ bankName}}<{{bankMail}}>
             </div>
+             <div class="p-field p-col-12 p-md-12">
+                Subject: {{ mailingSubject }}
+             </div>
+              <div class="p-field p-col-12 p-md-4">
+                 <label i18n="@@ToMandatory" for="tocontact">To *</label>
+                <input #tocontact="ngModel" pInputText id="tocontact" name="tocontact" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [(ngModel)]="orgcontact" />
+                 <p-message i18n-text="@@EmailIsMandatory" *ngIf="tocontact.invalid && orgMembershipForm.touched" severity="error" text="E-mail is required and must be valid"></p-message>
+             </div>
+             <div class="p-field p-col-12 p-md-4">
+                 {{ organisation.nomTres}} {{this.organisation.prenomTres}}
+             </div>
+             <div class="p-field p-col-12 p-md-4">
+                 <label i18n="@@OrgMemberSendToOrg?" for="sendtoorg">Send Mail To Main Contact?</label>
+                 <p-inputSwitch id="sendtoorg" name="sendtoorg" [(ngModel)]="sendMailToOrgContact"></p-inputSwitch>
+             </div>
+             <div class="p-field p-col-12 p-md-4">
+                 <label i18n="@@Cc" for="cccontact">Cc</label>
+                 <input #cccontact="ngModel" pInputText id="cccontact" name="cccontact" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [(ngModel)]="orgtreasurer" />
+                 <p-message i18n-text="@@EmailNotValid" *ngIf="cccontact.invalid && orgMembershipForm.touched" severity="error" text="E-mail must be valid"></p-message>
+             </div>
+             <div class="p-field p-col-12 p-md-4">
+                 {{ organisation.nomTres}} {{this.organisation.prenomTres}}
+             </div>
+             <div class="p-field p-col-12 p-md-4">
+                 <label i18n="@@OrgMemberSendToOrgtreasurer?" for="sendtoorgtreasurer">Send Mail to Treasurer?</label>
+                 <p-inputSwitch id="sendtoorgtreasurer" name="sendtoorgtreasurer" [(ngModel)]="sendMailToOrgTreasurer"></p-inputSwitch>
+             </div>
         </div>
-        <div class="p-field p-col-12 p-md-12">
-            <div class="p-field p-col-12 p-md-2">
-                <label i18n="@@OrgMembershipSendYearly?" for="sendyearly">Send Yearly Mail?</label>
-                <p-inputSwitch id="sendyearly" name="sendyearly" [(ngModel)]="isYearlyMail"></p-inputSwitch>
-            </div>
-            <div class="p-field p-col-12 p-md-3">
-                To: {{ organisation.nom}} {{ organisation.prenom}}<{{organisation.email}}>
-            </div>
-            <div class="p-field p-col-12 p-md-2">
-                <label i18n="@@OrgMemberSendToOrg?" for="sendtoorg">Send Mail To Main Contact?</label>
-                <p-inputSwitch id="sendtoorg" name="sendtoorg" [(ngModel)]="sendMailToOrgContact"></p-inputSwitch>
-            </div>
-            <div class="p-field p-col-12 p-md-3">
-                Cc: {{ organisation.nomTres}} {{ organisation.prenomTres}}<{{organisation.emailTres}}>
-            </div>
-            <div class="p-field p-col-12 p-md-2">
-                <label i18n="@@OrgMemberSendToOrgtreasurer?" for="sendtoorgtreasurer">Send Mail to Treasurer?</label>
-                <p-inputSwitch id="sendtoorgtreasurer" name="sendtoorgtreasurer" [(ngModel)]="sendMailToOrgTreasurer"></p-inputSwitch>
-            </div>
 
-        </div>
-        <div class="p-field p-col-12 p-md-12">
+        <div class="p-fluid p-formgrid p-grid">
             <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" required i18n-placeholder="@@EnterYourMessage" placeholder="Enter your message" name="mailingText" [style]="{'height':'320px'}">
                 <p-header>
                              <span class="ql-formats">
@@ -96,6 +118,19 @@
                 </p-header>
             </p-editor>
             <p-message i18n-text="@@MailingTextIsMandatory" *ngIf="idmailingtext.invalid && idmailingtext.touched" severity="error" text="Mail text is required"></p-message>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-8">
+                Attachments: {{attachmentFileNames.toString() }}
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <p-fileUpload i18n-chooseLabel="@@SelectFile" name="myFile[]"  [auto]="true"  customUpload="true"  chooseLabel="Select File"
+                              (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event)">
+                    <ng-template pTemplate="toolbar">
+                        <div i18n="@@AttachFilesToMail">Attach Files to your mail</div>
+                    </ng-template>
+                </p-fileUpload>
+            </div>
         </div>
         <p-confirmPopup></p-confirmPopup>
     </form>

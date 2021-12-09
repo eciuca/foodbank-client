@@ -11,7 +11,7 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {OrgSummary} from '../model/orgsummary';
 import {OrgSummaryEntityService} from '../services/orgsummary-entity.service';
 import {DefaultMailing, Mailing} from '../../mailings/model/mailing';
-import {DataServiceError} from '@ngrx/data';
+import {DataServiceError, QueryParams} from '@ngrx/data';
 import {MailingEntityService} from '../../mailings/services/mailing-entity.service';
 import {FileUploadService} from '../../mailings/services/file-upload.service';
 import {AuthService} from '../../auth/auth.service';
@@ -56,6 +56,9 @@ export class OrgMembershipMailingComponent implements OnInit {
     sendMailToOrgTreasurer: boolean;
     typeMembership: string;
     orgsummary: OrgSummary;
+    orgcontact: string;
+    orgtreasurer: string;
+    dueDate: string;
   constructor(private organisationService: OrganisationEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private membreService: MembreEntityService,
@@ -79,6 +82,8 @@ export class OrgMembershipMailingComponent implements OnInit {
       this.bankZip = '';
       this.bankCity = '';
       this.bankTel = '';
+      this.orgcontact = '';
+      this.orgtreasurer = '';
     this.bankCotAmount = 0;
     this.bankCotExtraAmount = 0;
     this.YNOptions = enmYn;
@@ -90,8 +95,9 @@ export class OrgMembershipMailingComponent implements OnInit {
       this.isYearlyMail = true;
       this.sendMailToOrgContact = true;
       this.sendMailToOrgTreasurer = true;
-      this.cotYear = new Date().getFullYear() + 1;
+      this.cotYear = new Date().getFullYear() + 1 ;
       this.mailingSubject = '';
+        this.dueDate = '';
   }
 
   ngOnInit() {
@@ -109,15 +115,8 @@ export class OrgMembershipMailingComponent implements OnInit {
                 this.bankCity = authState.banque.localite;
                 this.bankTel = authState.banque.bankTel;
               this.bankTreasurer = authState.banque.idMemberTres.toString();
-              this.orgsummaryService.getWithQuery({'lienBanque': authState.banque.bankId.toString(), 'actif': '1', 'isDepot': '0', 'agreed': '1'})
-                  .subscribe(loadedOrgSummaries => {
-                    console.log('Loaded orgsummaries: ' + loadedOrgSummaries.length);
-                    this.totalOrgSummaries = loadedOrgSummaries.length;
-                    this.orgSummaries  = loadedOrgSummaries;
-                    this.orgsummary = this.orgSummaries[0];
-                    this.getOrganisation(this.orgsummary.idDis);
+              this.loadOrgSummaries(true);
 
-                  });
                 this.membreService.getByKey(authState.banque.idMemberTres)
                     .subscribe(
                         membre => {
@@ -141,29 +140,46 @@ export class OrgMembershipMailingComponent implements OnInit {
   getOrganisation(idDis: number) {
       this.organisationService.getByKey(idDis)
         .subscribe(organisation => {
+            this.orgtreasurer =  '';
+            this.orgcontact = '';
             this.organisation = organisation;
+            if (this.organisation.email && this.organisation.email.trim() ) {
+                this.orgcontact = `${this.organisation.email}`;
+            }
+            if (this.organisation.emailTres && this.organisation.emailTres.trim() ) {
+                this.orgtreasurer = `${this.organisation.emailTres}`;
+            }
             let cotreal = 100 * this.bankCotAmount * organisation.cotMonths / 12 ;
             const due = Math.round(cotreal * this.organisation.nPers) / 100;
             cotreal = Math.round(cotreal) / 100 ;
             if (organisation.langue === 2 ) {
                 this.mailingSubject = `Bijdrage voor ${this.cotYear} te betalen aan de Voedselbank` ;
-                this.typeMembership = 'jaarlijkse ledenbijdrage';
+                if (this.isYearlyMail) {
+                    this.typeMembership = 'jaarlijkse ledenbijdrage';
+                } else {
+                    this.typeMembership = 'extra ledenbijdrage';
+                }
                 this.mailingText = `<Strong>DEBETNOTA<br>${this.organisation.societe}</strong><br>${this.organisation.adresse}<br>${this.organisation.cp}<br>${this.organisation.localite}<br><br>`;
                 this.mailingText += `Geachte mevrouw/mijnheer,<br>Hierbij vindt u het verzoek tot betaling van de ${this.typeMembership}`;
                 this.mailingText +=  ` van uw liefdadigheidsvereniging aan onze Voedselbank. De basis bijdrage bedraagt ${cotreal}  Euro voor ${organisation.cotMonths} maand per minderbedeelde` ;
                 this.mailingText += `<br>Het gemiddeld aantal begunstigden voor het voorbije jaar voor uw vereniging bedroeg ${this.organisation.nPers}`;
-                this.mailingText += `<br>Gelieve het bedrag van ${due} € te willen storten op ons  rekeningnr ${this.bankAccount} ten laatste tegen <b> 31 maart 2022 </b> met melding <b>"LEDENBIJDRAGE ${this.cotYear}"</b>.<br>`;
+                this.mailingText += `<br>Gelieve het bedrag van ${due} € te willen storten op ons  rekeningnr ${this.bankAccount} ten laatste tegen <b> ${this.dueDate} </b> met melding <b>"LEDENBIJDRAGE ${this.cotYear}"</b>.<br>`;
                 this.mailingText += `<br>Met dank bij voorbaat.<br><br>De Penningmeester,<br>${this.bankTreasurer}<br>${this.bankName}<br>Bedrijfsnummer: ${this.bankEntNr} `;
                 this.mailingText += `Adres: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
                 this.mailingText += '<br><br><i>Nota: Factuur te verkrijgen op aanvraag</i>';
             } else {
                 this.mailingSubject = `Cotisation ${this.cotYear} payable à la Banque Alimentaire - Note de débit` ;
                 this.typeMembership = 'cotisation annuelle';
+                if (this.isYearlyMail) {
+                    this.typeMembership = 'cotisation annuelle';
+                } else {
+                    this.typeMembership = 'cotisation annuelle supplémentaire';
+                }
                 this.mailingText = `<Strong>NOTE DE DEBIT<br>${this.organisation.societe}</strong><br>${this.organisation.adresse}<br>${this.organisation.cp}<br>${this.organisation.localite}<br><br>`;
                 this.mailingText += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre ${this.typeMembership}`;
                 this.mailingText +=  ` de votre association soit ${cotreal}  Euro pour ${organisation.cotMonths} mois par bénéficiaire` ;
                 this.mailingText += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de ${this.organisation.nPers} personnes`;
-                this.mailingText += `<br>Merci de verser le montant de  ${due} € sur le compte ${this.bankAccount} au plus tard le <b> 31 mars 2022 </b> avec la mention <b>"COTISATION MEMBRES ${this.cotYear}.</b><br>`;
+                this.mailingText += `<br>Merci de verser le montant de  ${due} € sur le compte ${this.bankAccount} au plus tard le <b> ${this.dueDate} </b> avec la mention <b>"COTISATION MEMBRES ${this.cotYear}.</b><br>`;
                 this.mailingText += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>${this.bankTreasurer}<br>${this.bankName}<br>N° Entreprise: ${this.bankEntNr} `;
                 this.mailingText += `Adresse: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
                 this.mailingText += '<br><br><i>>Note: Facture sur demande</i>';
@@ -204,15 +220,15 @@ export class OrgMembershipMailingComponent implements OnInit {
 
     sendmail(event: Event) {
         const mailListArray = [];
-        if (this.sendMailToOrgContact) {
-            mailListArray.push( `${this.organisation.nom} ${this.organisation.prenom}<${this.organisation.email}>  ` );
+        if (this.sendMailToOrgContact && this.orgcontact) {
+            mailListArray.push(  this.orgcontact  );
         }
-        if (this.sendMailToOrgTreasurer) {
-            mailListArray.push( `${this.organisation.nomTres} ${this.organisation.prenomTres}<${this.organisation.emailTres}>  ` );
+        if (this.sendMailToOrgTreasurer && this.orgtreasurer) {
+            mailListArray.push( this.orgtreasurer );
         }
         console.log('mailListArray', mailListArray);
 
-        if (mailListArray.length === 0 || (mailListArray.length === 1 && mailListArray[0].trim() === '' ) ) {
+        if (mailListArray.length === 0 ) {
             const errMessage = {
                 severity: 'error', summary: 'Send',
                 detail: $localize`:@@messageSendNoListError:You have no recipients. Please select the recipients for your email.`,
@@ -292,6 +308,29 @@ export class OrgMembershipMailingComponent implements OnInit {
 
         }
     }
+    removeMailAttachment(event: any) {
+        console.log('Entering removeMailAttachment', event );
+        const file: File | null = event.file;
+        this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
+    }
+    loadOrgSummaries(regular: boolean) {
 
+      console.log('Membership orgsummaries loading: event is:' , regular);
+       const queryparms: QueryParams = {'lienBanque': this.lienBanque.toString(),
+           'actif': '1', 'isDepot': '0', 'agreed': '1', 'cotType': '1'} ;
+        if (regular === false) {
+            queryparms['cotType'] = '0';
+        }
+        console.log('Membership mailing orgsummaries loading: regular option is:' , regular, 'query parms', queryparms);
+        this.orgsummaryService.getWithQuery(queryparms)
+            .subscribe(loadedOrgSummaries => {
+                console.log('Loaded orgsummaries: ' + loadedOrgSummaries.length);
+                this.totalOrgSummaries = loadedOrgSummaries.length;
+                this.orgSummaries  = loadedOrgSummaries;
+                this.orgsummary = this.orgSummaries[0];
+                this.getOrganisation(this.orgsummary.idDis);
+
+            });
+    }
 
 }
