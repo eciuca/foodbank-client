@@ -16,11 +16,10 @@
         <tr>
             <th pSortableColumn="idDis">Id<p-sortIcon field="idDis"></p-sortIcon></th>
             <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
+            <th i18n="@@OrgNbPersSorted" pSortableColumn="nPers">Beneficiaries<p-sortIcon field="nPers"></p-sortIcon></th>
             <th i18n="@@OrgIsMembershipSorted" pSortableColumn="cotAnnuelle">Membership<p-sortIcon field="cotAnnuelle"></p-sortIcon></th>
-            <th i18n="@@OrgIsMembershipMonthsSorted" pSortableColumn="cotMonths">Membership Months<p-sortIcon field="cotMonths"></p-sortIcon></th>
             <th i18n="@@OrgIsMembershipExtraSorted" pSortableColumn="cotSup"> Extra Membership<p-sortIcon field="cotSup"></p-sortIcon></th>
-            <th i18n="@@OrgIsMembershipExtraMonthsSorted" pSortableColumn="cotMonthsSup">Extra Membership Months<p-sortIcon field="cotMonthsSup"></p-sortIcon></th>
-
+            <th i18n="@@OrgIsMembershipMonthsSorted" pSortableColumn="cotMonths">Membership Months<p-sortIcon field="cotMonths"></p-sortIcon></th>
         </tr>
         <tr>
             <th>
@@ -28,6 +27,9 @@
             </th>
             <th colspan="2">
                 <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="societe" ></p-columnFilter>
+            </th>
+            <th>
+
             </th>
             <th>
                 <p-columnFilter field="cotAnnuelle" matchMode="equals" [showMenu]="false">
@@ -39,9 +41,6 @@
                         </p-dropdown>
                     </ng-template>
                 </p-columnFilter>
-            </th>
-            <th>
-
             </th>
             <th>
                 <p-columnFilter field="cotSup" matchMode="equals" [showMenu]="false">
@@ -69,18 +68,20 @@
             <td colspan="2">
                 {{ organisation.societe }}
             </td>
+            <td>
+                {{ organisation.nPers }}
+            </td>
              <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.cotAnnuelle, 'false-icon pi-times-circle': !organisation.cotAnnuelle}"></i>
             </td>
-            <td>
-                {{ organisation.cotMonths }}
-            </td>
+
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.cotSup, 'false-icon pi-times-circle': !organisation.cotSup}"></i>
              </td>
             <td>
-                {{ organisation.cotMonthsSup }}
+                {{ organisation.cotMonths }}
             </td>
+
 
         </tr>
     </ng-template>

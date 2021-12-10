@@ -16,9 +16,7 @@
              <div class="p-field p-col-12 p-md-2">
                  <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)" [disabled] = "orgMembershipForm.invalid" label="Send Email"></button>
              </div>
-             <div class="p-field p-col-12 p-md-2">
-             </div>
-             <div class="p-field p-col-12 p-md-4">
+             <div class="p-field p-col-12 p-md-6">
                  <label i18n="@@OrgSummarySelect" for="orgsummaries">Select Organisation</label>
                  <p-dropdown  id ="orgsummaries" [options]="orgSummaries" optionValue="idDis" optionLabel="societe" (onChange)="selectOrganisation($event.value)">
                      <ng-template let-orgsummary pTemplate="item">
@@ -31,17 +29,25 @@
          </div>
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
+                <p-dropdown [(ngModel)]="cotYear" [options]="cotYears" id="cotYear" name="cotYear" (onChange)="setMailContent()" >
+                    <ng-template let-option pTemplate="item">
+                        <span>{{option.label}}</span>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@MembershipDueDate" for="dueDate">Due Date</label>
-                <input #dueDatem="ngModel" pInputText id="dueDate" name="dueDate"   pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [(ngModel)]="dueDate"/>
+                <input #dueDatem="ngModel" pInputText id="dueDate" name="dueDate" required (change)="setMailContent()"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [(ngModel)]="dueDate"/>
                 <p-message i18n-text="@@DueDateIsMandatory"  *ngIf="dueDatem.invalid && orgMembershipForm.touched" severity="error" text="Due date is required and must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <p-radioButton  i18n.label="@@OrgMembershipMailSendYearly?" name="groupyearly" value="1" label="Yearly Membership?" [(ngModel)]="isYearlyMail" (click)="loadOrgSummaries(true)"></p-radioButton>
+                <p-radioButton  i18n-label="@@OrgMailSendYearly" name="groupyearly" value="1" label="Yearly Membership?" [(ngModel)]="isYearlyMail" (click)="loadOrgSummaries(true)"></p-radioButton>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <p-radioButton  i18n.label="@@OrgMembershipMailSendExtra?" name="groupyearly"   label="Extra Yearly Membership?" [(ngModel)]="isYearlyMail" (click)="loadOrgSummaries(false)"></p-radioButton>
+                <p-radioButton  i18n-label="@@OrgMailSendExtra" name="groupyearly"   label="Extra Yearly Membership?" [(ngModel)]="isYearlyMail" (click)="loadOrgSummaries(false)"></p-radioButton>
             </div>
         </div>
+        <div *ngIf="due > 0">
          <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-12">
                 From: {{ bankName}}<{{bankMail}}>
@@ -51,20 +57,20 @@
              </div>
               <div class="p-field p-col-12 p-md-4">
                  <label i18n="@@ToMandatory" for="tocontact">To *</label>
-                <input #tocontact="ngModel" pInputText id="tocontact" name="tocontact" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [(ngModel)]="orgcontact" />
+                <input #tocontact="ngModel" pInputText id="tocontact" name="tocontact" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [(ngModel)]="orgemail" />
                  <p-message i18n-text="@@EmailIsMandatory" *ngIf="tocontact.invalid && orgMembershipForm.touched" severity="error" text="E-mail is required and must be valid"></p-message>
              </div>
              <div class="p-field p-col-12 p-md-4">
-                 {{ organisation.nomTres}} {{this.organisation.prenomTres}}
+               {{  getPresident() }}
              </div>
              <div class="p-field p-col-12 p-md-4">
-                 <label i18n="@@OrgMemberSendToOrg?" for="sendtoorg">Send Mail To Main Contact?</label>
+                 <label i18n="@@OrgMemberSendToOrgEmail?" for="sendtoorg">Send Mail To Org EMail?</label>
                  <p-inputSwitch id="sendtoorg" name="sendtoorg" [(ngModel)]="sendMailToOrgContact"></p-inputSwitch>
              </div>
              <div class="p-field p-col-12 p-md-4">
-                 <label i18n="@@Cc" for="cccontact">Cc</label>
-                 <input #cccontact="ngModel" pInputText id="cccontact" name="cccontact" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [(ngModel)]="orgtreasurer" />
-                 <p-message i18n-text="@@EmailNotValid" *ngIf="cccontact.invalid && orgMembershipForm.touched" severity="error" text="E-mail must be valid"></p-message>
+                 <label i18n="@@Cc" for="cctreasurer">CC: Treasurer</label>
+                 <input #cctreas="ngModel" pInputText id="cctreasurer" name="cctreasurer" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [(ngModel)]="orgtreasurer" />
+                 <p-message i18n-text="@@EmailNotValid" *ngIf="cctreas.invalid && orgMembershipForm.touched" severity="error" text="E-mail must be valid"></p-message>
              </div>
              <div class="p-field p-col-12 p-md-4">
                  {{ organisation.nomTres}} {{this.organisation.prenomTres}}
@@ -130,6 +136,14 @@
                         <div i18n="@@AttachFilesToMail">Attach Files to your mail</div>
                     </ng-template>
                 </p-fileUpload>
+            </div>
+        </div>
+        </div> <!-- end of if due > 0 tag -->
+        <div *ngIf="due < 500">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                  {{ getNoMembershipMessage() }}
+                </div>
             </div>
         </div>
         <p-confirmPopup></p-confirmPopup>

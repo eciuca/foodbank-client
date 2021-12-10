@@ -4326,27 +4326,6 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>OrgIsMembershipExtraMonthsSorted</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>fr-FR</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>nl-NL</language>
-                        <approved>true</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
                 <name>OrgIsMembershipExtraSorted</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -4390,6 +4369,48 @@
             </concept_node>
             <concept_node>
                 <name>OrgIsMembershipSorted</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgMailSendExtra</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgMailSendYearly</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -4515,7 +4536,7 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>OrgMemberSendToOrg?</name>
+                <name>OrgMemberSendToOrgEmail?</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -4641,6 +4662,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>OrgMemberShipMonths</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>OrgMemberShipYearly?</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -4704,7 +4746,49 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>OrgMembershipSendYearly?</name>
+                <name>OrgNbPersSorted</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgNoMembership</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgPresident</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>

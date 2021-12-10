@@ -46,6 +46,7 @@ export class OrgMembershipMailingComponent implements OnInit {
   bankCotExtraAmount: number;
   lienBanque: number;
   cotYear: number;
+    cotYears: any[];
   mailing: Mailing;
     mailingSubject: string;
     mailingText: string;
@@ -56,9 +57,10 @@ export class OrgMembershipMailingComponent implements OnInit {
     sendMailToOrgTreasurer: boolean;
     typeMembership: string;
     orgsummary: OrgSummary;
-    orgcontact: string;
-    orgtreasurer: string;
+    orgemail: string;
+    orgtresemail: string;
     dueDate: string;
+    due: number;
   constructor(private organisationService: OrganisationEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private membreService: MembreEntityService,
@@ -82,8 +84,8 @@ export class OrgMembershipMailingComponent implements OnInit {
       this.bankZip = '';
       this.bankCity = '';
       this.bankTel = '';
-      this.orgcontact = '';
-      this.orgtreasurer = '';
+      this.orgemail = '';
+      this.orgtresemail = '';
     this.bankCotAmount = 0;
     this.bankCotExtraAmount = 0;
     this.YNOptions = enmYn;
@@ -97,7 +99,12 @@ export class OrgMembershipMailingComponent implements OnInit {
       this.sendMailToOrgTreasurer = true;
       this.cotYear = new Date().getFullYear() + 1 ;
       this.mailingSubject = '';
-        this.dueDate = '';
+      this.cotYears = [
+          {label: this.cotYear.toString(), value: this.cotYear.toString()},
+          {label: (this.cotYear + 1).toString(), value: (this.cotYear + 1).toString()},
+      ];
+      this.due = 0;
+      this.dueDate = '';
   }
 
   ngOnInit() {
@@ -137,53 +144,59 @@ export class OrgMembershipMailingComponent implements OnInit {
         .subscribe();
 
   }
+  setMailContent() {
+      console.log('setting mail content');
+      if (this.organisation.email && this.organisation.email.trim() ) {
+          this.orgemail = `${this.organisation.email.toLowerCase()}`;
+      }
+      if (this.organisation.emailTres && this.organisation.emailTres.trim() ) {
+          this.orgtresemail = `${this.organisation.emailTres.toLowerCase()}`;
+      }
+      let cotreal = 100 * this.bankCotAmount * this.organisation.cotMonths / 12 ;
+      this.due = Math.round(cotreal * this.organisation.nPers) / 100;
+      cotreal = Math.round(cotreal) / 100 ;
+      if (this.organisation.langue === 2 ) {
+          this.mailingSubject = `Bijdrage voor ${this.cotYear} te betalen aan de Voedselbank` ;
+          if (this.isYearlyMail) {
+              this.typeMembership = 'jaarlijkse ledenbijdrage';
+          } else {
+              this.typeMembership = 'extra ledenbijdrage';
+          }
+          this.mailingText = `<Strong>DEBETNOTA<br>${this.organisation.societe}</strong><br>${this.organisation.adresse}<br>${this.organisation.cp}<br>${this.organisation.localite}<br><br>`;
+          this.mailingText += 'Dit is een test mail - gelieve het bericht te negeren !<br><br>' ;
+          this.mailingText += `Geachte mevrouw/mijnheer,<br>Hierbij vindt u het verzoek tot betaling van de ${this.typeMembership}`;
+          this.mailingText +=  ` van uw liefdadigheidsvereniging aan onze Voedselbank. De basis bijdrage bedraagt ${cotreal}  Euro voor ${this.organisation.cotMonths} maand per minderbedeelde` ;
+          this.mailingText += `<br>Het gemiddeld aantal begunstigden voor het voorbije jaar voor uw vereniging bedroeg ${this.organisation.nPers}`;
+          this.mailingText += `<br>Gelieve het bedrag van ${this.due} € te willen storten op ons  rekeningnr ${this.bankAccount} ten laatste tegen <b> ${this.dueDate} </b> met melding <b>"LEDENBIJDRAGE ${this.cotYear}"</b>.<br>`;
+          this.mailingText += `<br>Met dank bij voorbaat.<br><br>De Penningmeester,<br>${this.bankTreasurer}<br>${this.bankName}<br>Bedrijfsnummer: ${this.bankEntNr} `;
+          this.mailingText += `Adres: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
+          this.mailingText += '<br><br><i>Nota: Factuur te verkrijgen op aanvraag</i>';
+      } else {
+          this.mailingSubject = `Cotisation ${this.cotYear} payable à la Banque Alimentaire - Note de débit` ;
+          this.typeMembership = 'cotisation annuelle';
+          if (this.isYearlyMail) {
+              this.typeMembership = 'cotisation annuelle';
+          } else {
+              this.typeMembership = 'cotisation annuelle supplémentaire';
+          }
+          this.mailingText = `<Strong>NOTE DE DEBIT<br>${this.organisation.societe}</strong><br>${this.organisation.adresse}<br>${this.organisation.cp}<br>${this.organisation.localite}<br><br>`;
+          this.mailingText += 'Ceci est un e-mail de test - veuillez ignorer le message !<br><br>' ;
+          this.mailingText += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre ${this.typeMembership}`;
+          this.mailingText +=  ` de votre association soit ${cotreal}  Euro pour ${this.organisation.cotMonths} mois par bénéficiaire` ;
+          this.mailingText += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de ${this.organisation.nPers} personnes`;
+          this.mailingText += `<br>Merci de verser le montant de  ${this.due} € sur le compte ${this.bankAccount} au plus tard le <b> ${this.dueDate} </b> avec la mention <b>"COTISATION MEMBRES ${this.cotYear}.</b><br>`;
+          this.mailingText += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>${this.bankTreasurer}<br>${this.bankName}<br>N° Entreprise: ${this.bankEntNr} `;
+          this.mailingText += `Adresse: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
+          this.mailingText += '<br><br><i>>Note: Facture sur demande</i>';
+      }
+  }
   getOrganisation(idDis: number) {
       this.organisationService.getByKey(idDis)
         .subscribe(organisation => {
-            this.orgtreasurer =  '';
-            this.orgcontact = '';
+            this.orgtresemail =  '';
+            this.orgemail = '';
             this.organisation = organisation;
-            if (this.organisation.email && this.organisation.email.trim() ) {
-                this.orgcontact = `${this.organisation.email}`;
-            }
-            if (this.organisation.emailTres && this.organisation.emailTres.trim() ) {
-                this.orgtreasurer = `${this.organisation.emailTres}`;
-            }
-            let cotreal = 100 * this.bankCotAmount * organisation.cotMonths / 12 ;
-            const due = Math.round(cotreal * this.organisation.nPers) / 100;
-            cotreal = Math.round(cotreal) / 100 ;
-            if (organisation.langue === 2 ) {
-                this.mailingSubject = `Bijdrage voor ${this.cotYear} te betalen aan de Voedselbank` ;
-                if (this.isYearlyMail) {
-                    this.typeMembership = 'jaarlijkse ledenbijdrage';
-                } else {
-                    this.typeMembership = 'extra ledenbijdrage';
-                }
-                this.mailingText = `<Strong>DEBETNOTA<br>${this.organisation.societe}</strong><br>${this.organisation.adresse}<br>${this.organisation.cp}<br>${this.organisation.localite}<br><br>`;
-                this.mailingText += `Geachte mevrouw/mijnheer,<br>Hierbij vindt u het verzoek tot betaling van de ${this.typeMembership}`;
-                this.mailingText +=  ` van uw liefdadigheidsvereniging aan onze Voedselbank. De basis bijdrage bedraagt ${cotreal}  Euro voor ${organisation.cotMonths} maand per minderbedeelde` ;
-                this.mailingText += `<br>Het gemiddeld aantal begunstigden voor het voorbije jaar voor uw vereniging bedroeg ${this.organisation.nPers}`;
-                this.mailingText += `<br>Gelieve het bedrag van ${due} € te willen storten op ons  rekeningnr ${this.bankAccount} ten laatste tegen <b> ${this.dueDate} </b> met melding <b>"LEDENBIJDRAGE ${this.cotYear}"</b>.<br>`;
-                this.mailingText += `<br>Met dank bij voorbaat.<br><br>De Penningmeester,<br>${this.bankTreasurer}<br>${this.bankName}<br>Bedrijfsnummer: ${this.bankEntNr} `;
-                this.mailingText += `Adres: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
-                this.mailingText += '<br><br><i>Nota: Factuur te verkrijgen op aanvraag</i>';
-            } else {
-                this.mailingSubject = `Cotisation ${this.cotYear} payable à la Banque Alimentaire - Note de débit` ;
-                this.typeMembership = 'cotisation annuelle';
-                if (this.isYearlyMail) {
-                    this.typeMembership = 'cotisation annuelle';
-                } else {
-                    this.typeMembership = 'cotisation annuelle supplémentaire';
-                }
-                this.mailingText = `<Strong>NOTE DE DEBIT<br>${this.organisation.societe}</strong><br>${this.organisation.adresse}<br>${this.organisation.cp}<br>${this.organisation.localite}<br><br>`;
-                this.mailingText += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre ${this.typeMembership}`;
-                this.mailingText +=  ` de votre association soit ${cotreal}  Euro pour ${organisation.cotMonths} mois par bénéficiaire` ;
-                this.mailingText += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de ${this.organisation.nPers} personnes`;
-                this.mailingText += `<br>Merci de verser le montant de  ${due} € sur le compte ${this.bankAccount} au plus tard le <b> ${this.dueDate} </b> avec la mention <b>"COTISATION MEMBRES ${this.cotYear}.</b><br>`;
-                this.mailingText += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>${this.bankTreasurer}<br>${this.bankName}<br>N° Entreprise: ${this.bankEntNr} `;
-                this.mailingText += `Adresse: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
-                this.mailingText += '<br><br><i>>Note: Facture sur demande</i>';
-            }
+            this.setMailContent();
     });
   }
   getNextOrganisation() {
@@ -217,14 +230,17 @@ export class OrgMembershipMailingComponent implements OnInit {
   getSubTitle():  string {
     return  $localize`:@@BankOrgsSubTitleMembershipMailing:Membership Fee based on bank regular fee ${this.bankCotAmount} and extra fee ${this.bankCotExtraAmount}`;
   }
+  getPresident(): string {
+    return  $localize`:@@OrgPresident:President: ${ this.organisation.nom } ${this.organisation.prenom }`;
+}
 
     sendmail(event: Event) {
         const mailListArray = [];
-        if (this.sendMailToOrgContact && this.orgcontact) {
-            mailListArray.push(  this.orgcontact  );
+        if (this.sendMailToOrgContact && this.orgemail) {
+            mailListArray.push(  this.orgemail  );
         }
-        if (this.sendMailToOrgTreasurer && this.orgtreasurer) {
-            mailListArray.push( this.orgtreasurer );
+        if (this.sendMailToOrgTreasurer && this.orgtresemail) {
+            mailListArray.push( this.orgtresemail );
         }
         console.log('mailListArray', mailListArray);
 
@@ -333,4 +349,7 @@ export class OrgMembershipMailingComponent implements OnInit {
             });
     }
 
+    getNoMembershipMessage() {
+        return  $localize`:@@OrgNoMembership:There is no membership to pay for the ${ this.organisation.nPers} beneficiaries of the organisation`;
+    }
 }

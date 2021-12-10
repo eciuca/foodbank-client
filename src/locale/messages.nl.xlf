@@ -1951,7 +1951,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ContentIsMandatory" datatype="html">
@@ -2219,7 +2219,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SelectFile" datatype="html">
@@ -2231,7 +2231,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AttachFilesToMail" datatype="html">
@@ -2243,7 +2243,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MailSubject" datatype="html">
@@ -2323,7 +2323,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
-          <context context-type="linenumber">234</context>
+          <context context-type="linenumber">250</context>
         </context-group>
       </trans-unit>
       <trans-unit id="confirmSendMessage" datatype="html">
@@ -2335,7 +2335,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
-          <context context-type="linenumber">242</context>
+          <context context-type="linenumber">258</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSent" datatype="html">
@@ -2347,7 +2347,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
-          <context context-type="linenumber">257</context>
+          <context context-type="linenumber">273</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSendError" datatype="html">
@@ -2359,7 +2359,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
-          <context context-type="linenumber">265</context>
+          <context context-type="linenumber">281</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fileUploadSuccess" datatype="html">
@@ -2371,7 +2371,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
-          <context context-type="linenumber">290</context>
+          <context context-type="linenumber">306</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fileUploadSuccessDetail" datatype="html">
@@ -2383,7 +2383,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
-          <context context-type="linenumber">291</context>
+          <context context-type="linenumber">307</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fileUploadError" datatype="html">
@@ -2395,7 +2395,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
-          <context context-type="linenumber">303</context>
+          <context context-type="linenumber">319</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fileUploadErrorDetail" datatype="html">
@@ -2407,7 +2407,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
-          <context context-type="linenumber">304</context>
+          <context context-type="linenumber">320</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Active" datatype="html">
@@ -2435,7 +2435,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberBirthDate" datatype="html">
@@ -2643,7 +2643,7 @@
         <target>Selecteer Organisatie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MembershipDueDate" datatype="html">
@@ -2651,7 +2651,7 @@
         <target>Vervaldatum</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DueDateIsMandatory" datatype="html">
@@ -2659,7 +2659,23 @@
         <target>Vervaldatum is vereist en moet in het formaat dd/mm/jjjj</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMailSendYearly" datatype="html">
+        <source>Yearly Membership?</source>
+        <target>Jaarlijkse bijdrage ?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMailSendExtra" datatype="html">
+        <source>Extra Yearly Membership?</source>
+        <target>Jaarlijkse extra bijdrage ?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToMandatory" datatype="html">
@@ -2667,23 +2683,23 @@
         <target>Naar *</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrgMemberSendToOrg?" datatype="html">
-        <source>Send Mail To Main Contact?</source>
-        <target>Verzend mail naar Verantwoordelijke?</target>
+      <trans-unit id="OrgMemberSendToOrgEmail?" datatype="html">
+        <source>Send Mail To Org EMail?</source>
+        <target>Naar organisatie e-mail verzenden?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Cc" datatype="html">
-        <source>Cc</source>
+        <source>CC: Treasurer</source>
         <target>cc</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="EmailNotValid" datatype="html">
@@ -2691,7 +2707,7 @@
         <target>Email moet geldig zijn</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberSendToOrgtreasurer?" datatype="html">
@@ -2699,7 +2715,7 @@
         <target>Mail naar penningmeester sturen?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankOrgsTitleMembershipMailing" datatype="html">
@@ -2707,7 +2723,7 @@
         <target>Bijdrage mailing naar organisatie <x id="PH" equiv-text="this.organisation.idDis"/> <x id="PH_1" equiv-text="this.organisation.societe"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
-          <context context-type="linenumber">215</context>
+          <context context-type="linenumber">228</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankOrgsSubTitleMembershipMailing" datatype="html">
@@ -2715,19 +2731,23 @@
         <target>Bijdrage gebaseerd op het standaard tarief van de bank <x id="PH" equiv-text="this.bankCotAmount"/> en het extra tarief <x id="PH_1" equiv-text="this.bankCotExtraAmount"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">231</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrgMemberShipAmount" datatype="html">
-        <source>MemberShip Amount</source>
-        <target>Bedrag bijdrage</target>
+      <trans-unit id="OrgPresident" datatype="html">
+        <source>President: <x id="PH" equiv-text="this.organisation.nom"/> <x id="PH_1" equiv-text="this.organisation.prenom"/></source>
+        <target>Voorzitter: <x id="PH" equiv-text="this.organisation.nom"/> <x id="PH_1" equiv-text="this.organisation.prenom"/></target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
+          <context context-type="linenumber">234</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="OrgNoMembership" datatype="html">
+        <source>There is no membership to pay for the <x id="PH" equiv-text="this.organisation.nPers"/> beneficiaries of the organisation</source>
+        <target>Er is geen bijdrage te betalen voor de <x id="PH" equiv-text="this.organisation.nPers"/> begunstigden van de organisatie</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">486</context>
+          <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
+          <context context-type="linenumber">353</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberShipYearly?" datatype="html">
@@ -2735,23 +2755,11 @@
         <target>Jaarlijkse bijdrage?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
           <context context-type="linenumber">491</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="OrgMemberShipYearlyMonths" datatype="html">
-        <source>Yearly MemberShip Months</source>
-        <target>Jaarlijkse bijdrage maanden</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">495</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberShipExtra?" datatype="html">
@@ -2759,23 +2767,19 @@
         <target>Extra bijdrage?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
           <context context-type="linenumber">500</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrgMemberShipExtraMonths" datatype="html">
-        <source>Extra MemberShip Months</source>
-        <target>Extra bijdrage maanden</target>
+      <trans-unit id="OrgMemberShipMonths" datatype="html">
+        <source>MemberShip Months</source>
+        <target>Maanden Bijdrage</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">504</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageOrganisationUpdated" datatype="html">
@@ -2802,17 +2806,17 @@
           <context context-type="linenumber">191</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrgIsMembershipSorted" datatype="html">
-        <source>Membership<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotAnnuelle&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
-        <target>Bijdrage?<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotAnnuelle&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+      <trans-unit id="OrgNbPersSorted" datatype="html">
+        <source>Beneficiaries<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nPers&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Begunstigden<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nPers&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-memberships.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrgIsMembershipMonthsSorted" datatype="html">
-        <source>Membership Months<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotMonths&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
-        <target>Bijdrage maanden<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotMonths&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+      <trans-unit id="OrgIsMembershipSorted" datatype="html">
+        <source>Membership<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotAnnuelle&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Bijdrage?<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotAnnuelle&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-memberships.component.html</context>
           <context context-type="linenumber">20</context>
@@ -2826,9 +2830,9 @@
           <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrgIsMembershipExtraMonthsSorted" datatype="html">
-        <source>Extra Membership Months<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotMonthsSup&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
-        <target>Extra bijdrage maanden<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotMonthsSup&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+      <trans-unit id="OrgIsMembershipMonthsSorted" datatype="html">
+        <source>Membership Months<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotMonths&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Bijdrage maanden<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cotMonths&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-memberships.component.html</context>
           <context context-type="linenumber">22</context>
@@ -2839,7 +2843,7 @@
         <target> Er zijn <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> organisaties in de selectie.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-memberships.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">89,91</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
@@ -2851,7 +2855,7 @@
         <target>Bijdrage Mailing</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-memberships.component.html</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankOrgsTitleMembershipActive" datatype="html">
@@ -3616,6 +3620,30 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
           <context context-type="linenumber">483</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberShipAmount" datatype="html">
+        <source>MemberShip Amount</source>
+        <target>Bedrag bijdrage</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">486</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberShipYearlyMonths" datatype="html">
+        <source>Yearly MemberShip Months</source>
+        <target>Jaarlijkse bijdrage maanden</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">495</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMemberShipExtraMonths" datatype="html">
+        <source>Extra MemberShip Months</source>
+        <target>Extra bijdrage maanden</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">504</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageOrganisationCreated" datatype="html">
@@ -4741,10 +4769,6 @@
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">321</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="OrgMembershipSendYearly?">
-        <source/>
-        <target>Mail voor jaarlijkse bijdrage ?</target>
       </trans-unit>
     </body>
   </file>
