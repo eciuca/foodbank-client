@@ -13,6 +13,8 @@ import {Membre} from '../../membres/model/membre';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
+import {BanqProg} from '../model/banqprog';
+import {BanqProgEntityService} from '../services/banqprog-entity.service';
 
 
 
@@ -22,7 +24,8 @@ import {AppState} from '../../reducers';
   styleUrls: ['./banque.component.css']
 })
 export class BanqueComponent implements OnInit {
-    @ViewChild('membreForm') myform: NgForm;
+    @ViewChild('banqueForm') bankform: NgForm;
+    @ViewChild('detailForm') detailform: NgForm;
     @Input() bankId$: Observable<number>;
     @Output() onBanqueCreate = new EventEmitter<Banque>();
     @Output() onBanqueUpdate = new EventEmitter<Banque>();
@@ -34,6 +37,7 @@ export class BanqueComponent implements OnInit {
     booCanQuit: boolean;
     booIsCreate: boolean;
     banque: Banque;
+    banqProg: BanqProg;
     selectedPresident: Membre;
     selectedVicePresident: Membre;
     selectedCEO: Membre;
@@ -55,6 +59,7 @@ export class BanqueComponent implements OnInit {
   constructor(
       private banquesService: BanqueEntityService,
       private membresService: MembreEntityService,
+      private banqProgService: BanqProgEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
@@ -93,7 +98,13 @@ export class BanqueComponent implements OnInit {
           if (banque) {
               this.banque = banque;
               this.booIsCreate = false;
-              // console.log('Banque : ', banque);
+              this.banqProgService.getByKey(banque.bankId)
+                  .subscribe(
+                      banqProg => {
+                          if (banqProg !== null) {
+                              this.banqProg = banqProg;
+                          }
+                      });
               this.membresService.getByKey(banque.idMemberPres)
                   .subscribe(
                       membre => {
@@ -248,8 +259,8 @@ export class BanqueComponent implements OnInit {
 
       } else {
           this.banque = new DefaultBanque();
-          if (this.myform) {
-              this.myform.reset(this.banque);
+          if (this.bankform) {
+              this.bankform.reset(this.banque);
           }
           this.booIsCreate = true;
           console.log('we have a new default banque');
@@ -319,10 +330,10 @@ export class BanqueComponent implements OnInit {
                      summary: 'Update',
                      detail: $localize`:@@messageBankUpdated:Bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  was updated`
                  });
-                 this.onBanqueUpdate.emit(modifiedBanque);
+                 this.onBanqueUpdate.emit();
              },
                  (dataserviceerror: DataServiceError) => {
-                     console.log('Error creating bank', dataserviceerror.message);
+                     console.log('Error updating bank', dataserviceerror.message);
                      const  errMessage = {severity: 'error', summary: 'Update',
                          // tslint:disable-next-line:max-line-length
                          detail: $localize`:@@messageBankUpdateError:The bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName} could not be updated: error: ${dataserviceerror.message}`,
@@ -400,6 +411,28 @@ export class BanqueComponent implements OnInit {
             console.log('Form is not dirty, closing');
             this.onBanqueQuit.emit();
         }
+    }
+    saveDetails(oldBanqProg: BanqProg, banqProgForm: BanqProg) {
+        console.log('Entering SaveDetails - BanqProg Form value', banqProgForm);
+        const modifiedBanqProg = Object.assign({}, oldBanqProg, banqProgForm);
+        console.log('Modified BanqProg', modifiedBanqProg);
+        this.banqProgService.update(modifiedBanqProg)
+            .subscribe(() => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Update',
+                        detail: $localize`:@@messageBankDetailsUpdated:Bank  ${this.banque.bankShortName} ${this.banque.bankName}  details were updated`
+                    });
+                    this.onBanqueUpdate.emit();
+                },
+                (dataserviceerror: DataServiceError) => {
+                    console.log('Error updating bank', dataserviceerror.message);
+                    const  errMessage = {severity: 'error', summary: 'Update',
+                        // tslint:disable-next-line:max-line-length
+                        detail: $localize`:@@messageBankDetailsUpdateError:The bank  ${this.banque.bankShortName} ${this.banque.bankName} details could not be updated: error: ${dataserviceerror.message}`,
+                        life: 6000 };
+                    this.messageService.add(errMessage) ;
+                });
     }
 }
 

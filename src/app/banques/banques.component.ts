@@ -77,7 +77,7 @@ export class BanquesComponent implements OnInit {
         this.displayDialog = false;
     }
 
-    handleBanqueUpdate(updatedBanque) {
+    handleBanqueUpdate() {
         // Non-paged nothing to be done
         this.displayDialog = false;
     }

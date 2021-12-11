@@ -2,12 +2,16 @@
     <ng-template pTemplate="header">
         Banque {{banque.bankName}} Updated On {{ banque.lastvisit}}
     </ng-template>
-    <form #banqueForm="ngForm">
+
+<p-accordion>
+    <p-accordionTab i18n-header="@@BankBasic" header="Bank Basic Info" [selected]="true">
+      <form #banqueForm="ngForm">
         <div class="p-formgroup-inline">
             <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, banque)" i18n-label="@@Delete" label="Delete"></button>
             <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(banque, banqueForm.value)" i18n-label="@@Save" label="Save" [disabled] = "banqueForm.invalid"></button>
             <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, banque, banqueForm,banqueForm.dirty)" i18n-label="@@Return" label="Return" ></button>
         </div>
+
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-4">
                 <label i18n="@@President" for="selectedPresident">President</label>
@@ -131,7 +135,7 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@AssocRelations" for="selectedAssocRel">Relations with Organisations</label>
+                <label i18n="@@AssocRelations" for="selectedAssocRel">Relations with Banks</label>
                 <p-autoComplete  [(ngModel)]="selectedAssocRel" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedAssocRel" name="selectedAssocRel" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -177,12 +181,12 @@
             <div class="p-field p-col-12 p-md-4">
                 <label i18n="@@NameMandatory" for="bankName">Name *</label>
                 <input #nom="ngModel" pInputText id="bankName" name="bankName" required [disabled] ="!booIsCreate" minlength="10" maxLength="100" [ngModel]="banque.bankName" />
-                <p-message i18n.text="@@BankNameMandatory" *ngIf="nom.invalid && banqueForm.touched" severity="error" text="Bank Name is required and must be minimum 10 chars long"></p-message>
+                <p-message i18n-text="@@BankNameMandatory" *ngIf="nom.invalid && banqueForm.touched" severity="error" text="Bank Name is required and must be minimum 10 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@EntrNumberMandatory" for="nrEntr">Entr Number *</label>
                 <input #nrentr="ngModel" pInputText id="nrEntr" name="nrEntr" required minlength="9" maxLength="20" [ngModel]="banque.nrEntr" />
-                <p-message i18n.text="@@EntrNumberIsMandatory" *ngIf="nrentr.invalid && banqueForm.touched" severity="error" text="Enterprise Number is required and must be minimum 9 chars long"></p-message>
+                <p-message i18n-text="@@EntrNumberIsMandatory" *ngIf="nrentr.invalid && banqueForm.touched" severity="error" text="Enterprise Number is required and must be minimum 9 chars long"></p-message>
             </div>
              <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@Tel" for="bankTel">Tel</label>
@@ -195,49 +199,180 @@
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@EMailMandatory" for="bankMail">E-mail *</label>
                 <input #bankmail="ngModel" pInputText id="bankMail" name="bankMail"  required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxLength="50" [ngModel]="banque.bankMail" />
-                <p-message i18n.text="@@EMailIsMandatory" *ngIf="bankmail.invalid && banqueForm.touched" severity="error" text="E-mail is required and must be valid"></p-message>
+                <p-message i18n-text="@@EMailIsMandatory" *ngIf="bankmail.invalid && banqueForm.touched" severity="error" text="E-mail is required and must be valid"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-6">
                 <label i18n="@@AddressMandatory" for="adresse">Address *</label>
                 <input #adresse="ngModel" pInputText id="adresse" name="adresse" required minlength="4" maxLength="50" [ngModel]="banque.adresse" />
-                <p-message i18n.text="@@AddressIsMandatory" *ngIf="adresse.invalid && banqueForm.touched" severity="error" text="Address is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n-text="@@AddressIsMandatory" *ngIf="adresse.invalid && banqueForm.touched" severity="error" text="Address is required and must be minimum 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label  i18n="@@ZipCodeMandatory" for="cp">Zip Code *</label>
                 <input #zipcode="ngModel" pInputText id="cp" name="cp"  required minlength="4" maxLength="10" [ngModel]="banque.cp" />
-                <p-message i18n.text="@@ZipCodeIsMandatory" *ngIf="zipcode.invalid && banqueForm.touched" severity="error" text="Zip Code is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n-text="@@ZipCodeIsMandatory" *ngIf="zipcode.invalid && banqueForm.touched" severity="error" text="Zip Code is required and must be minimum 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label i18n="@@CityMandatory"  for="localite">City *</label>
                 <input #localite="ngModel" pInputText id="localite" name="localite"  required minlength="4" maxLength="30" [ngModel]="banque.localite" />
-                <p-message i18n.text="@@CityIsMandatory" *ngIf="localite.invalid && banqueForm.touched" severity="error" text="City is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n-text="@@CityIsMandatory" *ngIf="localite.invalid && banqueForm.touched" severity="error" text="City is required and must be minimum 4 chars long"></p-message>
             </div>
 
 
             <div class="p-field p-col-12 p-md-6">
                 <label i18n="@@DepotAddressMandatory" for="adresseDepotPrinc">Depot Address *</label>
                 <input #adressedepot="ngModel" pInputText id="adresseDepotPrinc" name="adresseDepotPrinc" required minlength="4" maxLength="50" [ngModel]="banque.adresseDepotPrinc" />
-                <p-message i18n.text="@@DepotAddressIsMandatory" *ngIf="adressedepot.invalid && banqueForm.touched" severity="error" text="Depot Address is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n-text="@@DepotAddressIsMandatory" *ngIf="adressedepot.invalid && banqueForm.touched" severity="error" text="Depot Address is required and must be minimum 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@DepotZipCodeMandatory" for="cpDepotPrinc">Depot Zip Code *</label>
                 <input #zipcodedepot="ngModel" pInputText id="cpDepotPrinc" name="cpDepotPrinc"  required minlength="4" maxLength="10" [ngModel]="banque.cpDepotPrinc" />
-                <p-message i18n.text="@@DepotZipCodeIsMandatory" *ngIf="zipcodedepot.invalid && banqueForm.touched" severity="error" text="Depot Zip Code is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n-text="@@DepotZipCodeIsMandatory" *ngIf="zipcodedepot.invalid && banqueForm.touched" severity="error" text="Depot Zip Code is required and must be minimum 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label i18n="@@DepotCityMandatory" for="cityDepotPrinc">Depot City *</label>
                 <input #localitedepot="ngModel" pInputText id="cityDepotPrinc" name="cityDepotPrinc"  required minlength="4" maxLength="30" [ngModel]="banque.cityDepotPrinc" />
-                <p-message i18n.text="@@DepotCityIsMandatory" *ngIf="localitedepot.invalid && banqueForm.touched" severity="error" text="Depot City is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n-text="@@DepotCityIsMandatory" *ngIf="localitedepot.invalid && banqueForm.touched" severity="error" text="Depot City is required and must be minimum 4 chars long"></p-message>
             </div>
         </div>
-        <p-toast></p-toast>
-        <p-confirmPopup></p-confirmPopup>
-
     </form>
+            </p-accordionTab>
+            <p-accordionTab *ngIf="banqProg" i18n-header="@@BankDetails" header="Bank Details">
+                <form #detailForm="ngForm">
+                <div class="p-formgroup-inline">
+                    <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="saveDetails(banqProg, detailForm.value)" i18n-label="@@Save" label="Save" [disabled] = "banqueForm.invalid"></button>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@MondayMorning" for="luam">Monday Morning</label>
+                        <p-inputSwitch id="luam" name="luam" [ngModel]="banqProg.luam"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="reluam" name="reluam"  placeholder="Activity Description" [ngModel]="banqProg.reluam" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@MondayAfternoon" for="lupm">Monday Afternoon</label>
+                        <p-inputSwitch id="lupm" name="lupm" [ngModel]="banqProg.lupm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="relupm" name="relupm" placeholder="Activity Description" [ngModel]="banqProg.relupm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@TuesdayMorning" for="tuam">Tuesday Morning</label>
+                        <p-inputSwitch id="tuam" name="tuam" [ngModel]="banqProg.tuam"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="retuam" name="retuam" placeholder="Activity Description" [ngModel]="banqProg.retuam" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@TuesdayAfternoon" for="tupm">Tuesday Afternoon</label>
+                        <p-inputSwitch id="tupm" name="tupm" [ngModel]="banqProg.tupm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="retupm" name="retupm" placeholder="Activity Description" [ngModel]="banqProg.retupm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@WednesdayMorning" for="weam">Wednesday Morning</label>
+                        <p-inputSwitch id="weam" name="weam" [ngModel]="banqProg.weam"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="reweam" name="reweam" placeholder="Activity Description" [ngModel]="banqProg.reweam" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@WednesdayAfternoon" for="wepm">Wednesday Afternoon</label>
+                        <p-inputSwitch id="wepm" name="wepm" [ngModel]="banqProg.wepm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="rewepm" name="rewepm" placeholder="Activity Description" [ngModel]="banqProg.rewepm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@ThursdayMorning" for="tham">Thursday Morning</label>
+                        <p-inputSwitch id="tham" name="tham" [ngModel]="banqProg.tham"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="retham" name="retham" placeholder="Activity Description" [ngModel]="banqProg.retham" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@ThursdayAfternoon" for="thpm">Thursday Afternoon</label>
+                        <p-inputSwitch id="thpm" name="thpm" [ngModel]="banqProg.thpm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="rethpm" name="rethpm" placeholder="Activity Description" [ngModel]="banqProg.rethpm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@FridayMorning" for="fram">Friday Morning</label>
+                        <p-inputSwitch id="fram" name="fram" [ngModel]="banqProg.fram"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="refram" name="refram" placeholder="Activity Description" [ngModel]="banqProg.refram" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@FridayAfternoon" for="frpm">Friday Afternoon</label>
+                        <p-inputSwitch id="frpm" name="frpm" [ngModel]="banqProg.frpm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="refrpm" name="refrpm" placeholder="Activity Description" [ngModel]="banqProg.refrpm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@SaturdayMorning" for="saam">Saturday Morning</label>
+                        <p-inputSwitch id="saam" name="saam" [ngModel]="banqProg.saam"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="resaam" name="resaam" placeholder="Activity Description" [ngModel]="banqProg.resaam" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@SaturdayAfternoon" for="sapm">Saturday Afternoon</label>
+                        <p-inputSwitch id="sapm" name="sapm" [ngModel]="banqProg.sapm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="resapm" name="resapm" placeholder="Activity Description" [ngModel]="banqProg.resapm" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@SundayMorning" for="sunam">Sunday Morning</label>
+                        <p-inputSwitch id="sunam" name="sunam" [ngModel]="banqProg.sunam"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="resunam" name="resunam" placeholder="Activity Description" [ngModel]="banqProg.resunam" />
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@SundayAfternoon" for="sunpm">Sunday Afternoon</label>
+                        <p-inputSwitch id="sunpm" name="sunpm" [ngModel]="banqProg.sunpm"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <input i18n-placeholder="@@BankActivityDescription" pInputText id="resunpm" name="resunpm" placeholder="Activity Description" [ngModel]="banqProg.resunpm" />
+                    </div>
+                </div>
+
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@BankMemberShipYearly?" for="cotAnnuelle">Yearly MemberShip?</label>
+                        <p-inputSwitch id="cotAnnuelle" name="cotAnnuelle" [ngModel]="banqProg.cotAnnuelle"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@BankMemberShipAmount" for="cotAmount">MemberShip Amount</label>
+                        <p-inputNumber [ngModel]="banqProg.cotAmount" id="cotAmount" name="cotAmount" mode="decimal" [showButtons]="true" inputId="cotAmount" [min]="0">
+                        </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@BankMemberShipExtra?" for="cotSup">Extra MemberShip?</label>
+                        <p-inputSwitch id="cotSup" name="cotSup" [ngModel]="banqProg.cotSup"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@BankMemberShipExtraAmount" for="cotAmountSup">MemberShip Extra Amount</label>
+                        <p-inputNumber [ngModel]="banqProg.cotAmountSup" id="cotAmountSup" name="cotAmountSup" mode="decimal" [showButtons]="true" inputId="cotAmountSup" [min]="0">
+                        </p-inputNumber>
+                    </div>
+                </div>
+    </form>
+            </p-accordionTab>
+        </p-accordion>
 
 
+
+
+    <p-toast></p-toast>
+    <p-confirmPopup></p-confirmPopup>
 </p-panel>

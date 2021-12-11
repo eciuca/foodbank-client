@@ -25,6 +25,11 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {ToastModule} from 'primeng/toast';
 import { BanqprogComponent } from './banqprogs/banqprog/banqprog.component';
 import { BanqprogsComponent } from './banqprogs/banqprogs.component';
+import {BanqProgEntityService} from './services/banqprog-entity.service';
+import {BanqProgsDataService} from './services/banqprogs-data.service';
+import {AccordionModule} from 'primeng/accordion';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {InputNumberModule} from 'primeng/inputnumber';
 const routes: Routes = [
     {
         path: 'banqprogs/',
@@ -65,11 +70,16 @@ const routes: Routes = [
         MessageModule,
         ConfirmPopupModule,
         AutoCompleteModule,
-        ToastModule
+        ToastModule,
+        AccordionModule,
+        InputSwitchModule,
+        InputNumberModule
     ],
   providers: [
     BanquesDataService,
     BanqueEntityService,
+    BanqProgsDataService,
+    BanqProgEntityService,
     MembresDataService,
     MembreEntityService,
     ConfirmationService,
@@ -81,11 +91,13 @@ export class BanquesModule {
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
       private banquesDataService: BanquesDataService,
+      private banqProgsDataService: BanqProgsDataService,
       private membresDataService: MembresDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('Membre', membresDataService);
+    entityDataService.registerService('BanqProg',  banqProgsDataService);
   }
 
 }
