@@ -17,9 +17,15 @@ import {compareTrips, Trip} from './trips/model/trip';
 import {compareDonateurs, Donateur} from './donations/model/donateur';
 import {compareDons, Don} from './donations/model/don';
 import {compareRegions, Region} from './organisations/model/region';
+import {Audit, compareAudits} from './audits/model/audit';
 
 
 export const appEntityMetadata: EntityMetadataMap = {
+    Audit: {
+        sortComparer: compareAudits,
+        selectId: (audit: Audit) => audit.auditId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
+    },
     Membre: {
         sortComparer: compareMembres,
         selectId: (membre: Membre) => membre.batId,

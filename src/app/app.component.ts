@@ -347,6 +347,7 @@ export class AppComponent implements OnInit {
                 this.menuLoggedInItems.push(
                     {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
                     {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
+                    {label: 'Logins', icon: 'pi pi-fw pi-users',  routerLink: ['/audits']},
                 );
             }
             // add mailings for everyone

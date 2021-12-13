@@ -98,24 +98,35 @@ export class AuthService {
 
     this.oauthService.setupAutomaticSilentRefresh();
 
-    console.log('subscribe to user info subject');  
+    console.log('subscribe to user info subject');
     combineLatest([this.canActivateProtectedRoutes$, this.userInfoSubject$])
     .pipe(filter((_, userInfo) => !userInfo))
     .subscribe(_ => this.oauthService.loadUserProfile()
         .then(newUserInfo => this.userInfoSubject$.next(newUserInfo))
-    )
+    );
 
     this.userInfo$.pipe(
       mergeMap(userInfo => {
-        const userId = userInfo.sub.split(':')[2]
+        const userId = userInfo.sub.split(':')[2];
         const groups = userInfo['groups'];
         const header = { headers: { 'Authorization': this.oauthService.authorizationHeader()  } };
         return this.http.get<User>(`/api/user/${userId}`, header).pipe(
           mergeMap(user => this.createAuthPrincipalFromUser(user, groups, header))
-        )
+        );
       }),
       map(authState => login(authState))
-    ).subscribe(authState => this.store.dispatch(authState));
+    ).subscribe(authState => {
+        this.store.dispatch(authState);
+        const auditObj = {'user': authState.user.idUser, 'idDis': '0'};
+        if (authState.organisation) {
+            auditObj['idDis'] = authState.organisation.idDis.toString();
+        }
+        const headerlog = {headers: {Authorization:  'Bearer ' + this.accessToken}};
+        this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+          auditObj['ipAddress'] = res.ip;
+          this.http.post ('/api/audit/', auditObj, headerlog ).subscribe();
+        });
+     });
   }
 
   public runInitialLoginSequence(): Promise<void> {
@@ -216,14 +227,14 @@ export class AuthService {
           : this.http.get<Organisation>(`/api/organisation/${user.idOrg}`, header).pipe(catchError(err => this.handleNotFound(err)));
 
       return forkJoin([of(user), authBanque$, authOrganisation$])
-          .pipe(map(([user, banque, organisation]) => new AuthPrincipal(user, banque, organisation, groups)))
+          .pipe(map(([user, banque, organisation]) => new AuthPrincipal(user, banque, organisation, groups)));
   }
 
   private handleNotFound(error: any) {
     if (error.status === 404) {
         return of(undefined);
     } else {
-        //important to use the rxjs error here not the standard one
+        // important to use the rxjs error here not the standard one
         return throwError(error);
     }
   }

@@ -1,0 +1,65 @@
+<p-table #dt [value]="audits"  [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
+         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
+         [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
+>
+    <ng-template pTemplate="header">
+        <tr>
+            <th i18n="@@LoginTime"  pSortableColumn="dateIn" >Login Time<p-sortIcon field="dateIn"></p-sortIcon></th>
+            <th i18n="@@BankNameShortSorted" pSortableColumn="shortBankName">Bank<p-sortIcon field="shortBankName"></p-sortIcon></th>
+            <th i18n="@@UserNameSorted" pSortableColumn="userName" colspan="2">Name<p-sortIcon field="userName"></p-sortIcon></th>
+            <th i18n="@@UserIdSorted" pSortableColumn="user">User Id<p-sortIcon field="user"></p-sortIcon></th>
+            <th i18n="@@IdDisSorted" pSortableColumn="idDis" >Id Org<p-sortIcon field="idDis"></p-sortIcon></th>
+            <th i18n="@@SocieteSorted" pSortableColumn="societe" colspan="3">Organisation<p-sortIcon field="societe"></p-sortIcon></th>
+
+        </tr>
+        <tr>
+            <th>
+                <p-columnFilter type="text" field="dateIn" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            </th>
+
+            <th>
+                <p-columnFilter type="text" field="shortBankName" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            </th>
+            <th colspan="2">
+                <p-columnFilter type="text" field="userName" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="user" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="idDis" matchMode="equals" [showMenu]="false"></p-columnFilter>
+            </th>
+            <th colspan="3">
+                <p-columnFilter type="text" field="societe" matchMode="contains" [showMenu]="false"></p-columnFilter>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-audit>
+        <tr>
+            <td>
+                {{ audit.dateIn }}
+            </td>
+
+            <td  >
+                {{audit.shortBankName}}
+            </td>
+            <td colspan="2">
+                {{audit.userName}}
+            </td>
+            <td>
+                {{audit.user}}
+            </td>
+            <td>
+                {{audit.idDis}}
+            </td>
+            <td colspan="3">
+                {{audit.societe}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div i18n="@@AuditsSelected" class="p-d-flex p-ai-center p-jc-between">
+            There are {{totalRecords}} audits in the selection.
+        </div>
+    </ng-template>
+</p-table>
