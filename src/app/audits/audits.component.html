@@ -1,30 +1,64 @@
-<p-table #dt [value]="audits"  [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
+<p-table #dt [value]="audits"  [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)" [sortOrder]="0"
          [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
          [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
 >
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <div class="p-fluid p-formgrid p-grid">
+
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@LoginDateFilter" for="archived">Filter on Date?</label>
+                    <p-checkbox [value]="booRangeFilter" binary="true" name="archived" id="archived" (onChange)="changeDateRangeFilter($event)"></p-checkbox>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy"></p-calendar>
+                 </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy"></p-calendar>
+                </div>
+            </div>
+        </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th i18n="@@LoginTime"  pSortableColumn="dateIn" >Login Time<p-sortIcon field="dateIn"></p-sortIcon></th>
+            <th i18n="@@LoginTime"  pSortableColumn="dateIn"  >Login Time<p-sortIcon field="dateIn"></p-sortIcon></th>
             <th i18n="@@BankNameShortSorted" pSortableColumn="shortBankName">Bank<p-sortIcon field="shortBankName"></p-sortIcon></th>
             <th i18n="@@UserNameSorted" pSortableColumn="userName" colspan="2">Name<p-sortIcon field="userName"></p-sortIcon></th>
             <th i18n="@@UserIdSorted" pSortableColumn="user">User Id<p-sortIcon field="user"></p-sortIcon></th>
+            <th i18n="@@RightsSorted" pSortableColumn="rights" >Role<p-sortIcon field="rights"></p-sortIcon></th>
             <th i18n="@@IdDisSorted" pSortableColumn="idDis" >Id Org<p-sortIcon field="idDis"></p-sortIcon></th>
             <th i18n="@@SocieteSorted" pSortableColumn="societe" colspan="3">Organisation<p-sortIcon field="societe"></p-sortIcon></th>
-
         </tr>
         <tr>
             <th>
-                <p-columnFilter type="text" field="dateIn" matchMode="contains" [showMenu]="false" ></p-columnFilter>
             </th>
-
             <th>
-                <p-columnFilter type="text" field="shortBankName" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+               <p-columnFilter field="shortBankName" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="bankOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
             </th>
             <th colspan="2">
                 <p-columnFilter type="text" field="userName" matchMode="contains" [showMenu]="false" ></p-columnFilter>
             </th>
             <th>
                 <p-columnFilter type="text" field="user" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="rights" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="rightOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
             </th>
             <th>
                 <p-columnFilter type="text" field="idDis" matchMode="equals" [showMenu]="false"></p-columnFilter>
@@ -48,6 +82,9 @@
             </td>
             <td>
                 {{audit.user}}
+            </td>
+            <td>
+                {{audit.rights}}
             </td>
             <td>
                 {{audit.idDis}}

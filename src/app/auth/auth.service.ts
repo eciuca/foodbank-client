@@ -124,6 +124,7 @@ export class AuthService {
         const headerlog = {headers: {Authorization:  'Bearer ' + this.accessToken}};
         this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
           auditObj['ipAddress'] = res.ip;
+          console.log('audit object to log in', auditObj);
           this.http.post ('/api/audit/', auditObj, headerlog ).subscribe();
         });
      });

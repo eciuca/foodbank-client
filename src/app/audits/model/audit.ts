@@ -8,6 +8,7 @@ export interface Audit {
     societe: string;
     shortBankName: string;
     userName: string;
+    rights: string;
     totalRecords: number;
 }
 export function compareAudits(c1: Audit, c2: Audit) {
