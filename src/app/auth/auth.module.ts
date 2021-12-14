@@ -17,7 +17,7 @@ import { AuthGuardWithForcedLogin } from './auth-guard-with-forced-login.guard';
 import { AuthConfig, OAuthModule, OAuthModuleConfig, OAuthStorage } from 'angular-oauth2-oidc';
 import { authConfig } from './auth-config';
 import { authModuleConfig } from './auth-module-config';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
 // We need a factory since localStorage is not available at AOT build time
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
@@ -33,6 +33,7 @@ export function storageFactory(): OAuthStorage {
         StoreModule.forFeature('auth', authReducer),
         EffectsModule.forFeature([AuthEffects]),
         HttpClientModule,
+        HttpClientJsonpModule,
         OAuthModule.forRoot(),
         ButtonModule,
         FormsModule,
