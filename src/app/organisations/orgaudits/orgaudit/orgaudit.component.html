@@ -6,7 +6,42 @@
             <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, orgaudit, orgauditForm, orgauditForm.dirty)" i18n-label="@@Return" label="Return" ></button>
         </div>
         <div class="p-fluid p-formgrid p-grid">
-
+            <div class="p-field p-col-12 p-md-4">
+                <label i18n="@@OrgAuditor" for="selectedAuditor">Auditor</label>
+                <p-autoComplete  [(ngModel)]="selectedAuditor" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
+                                 [forceSelection]="true"  id="selectedAuditor" name="selectedAuditor" field="fullname" [dropdown]="true">
+                    <ng-template let-membre pTemplate="item">
+                        <div class="membre-item">
+                            <div> {{membre.nom}} {{membre.prenom}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+            <div  class="p-field p-col-12 p-md-4">
+                <label i18n="@@OrgAuditOrganisation" for="selectedOrganisation">Organisation</label>
+                <p-autoComplete  [(ngModel)]="selectedOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
+                                [forceSelection]="true"  id="selectedOrganisation" name="selectedOrganisation" field="fullname" [dropdown]="true">
+                </p-autoComplete>
+            </div>
+            <div  class="p-field p-col-12 p-md-4">
+                <label i18n="@@OrgAuditDepot" for="selectedDepot">Depot</label>
+                <p-autoComplete  [(ngModel)]="selectedDepot" [suggestions]="filteredDepots"  (completeMethod)="filterDepot($event)"
+                                 [forceSelection]="true"  id="selectedDepot" name="selectedDepot" field="fullname" [dropdown]="true">
+                </p-autoComplete>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label i18n="@@OrgAuditDate" for="auditDate">Audit Date</label>
+                <input #auditDate="ngModel" pInputText id="auditDate" name="auditDate"   pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="orgaudit.auditDate"/>
+                <p-message i18n-text="@@AuditDateIsMandatory"  *ngIf="auditDate.invalid && orgauditForm.touched" severity="error" text="Audit date is required and must in format dd/mm/yyyy"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label i18n="@@OrgAuditHygCheck" for="hygCheck">Hygiene-Dates-Cold Chain</label>
+                <input #nom="ngModel" pInputText id="hygCheck" name="hygCheck" maxlength="40" [ngModel]="orgaudit.hygCheck" />
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label i18n="@@OrgAuditBenefCheck" for="benefCheck">Number of Beneficiaries</label>
+                <p-inputSwitch id="benefCheck" name="benefCheck" [ngModel]="orgaudit.benefCheck"></p-inputSwitch>
+            </div>
             <div class="p-field p-col-12 p-md-4">
                 <label i18n="@@OrgAuditUsage" for="servUsage">Services and Products Use</label>
                 <input #nom="ngModel" pInputText id="servUsage" name="servUsage" maxlength="40" [ngModel]="orgaudit.servUsage" />

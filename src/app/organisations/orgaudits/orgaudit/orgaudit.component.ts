@@ -9,6 +9,10 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {map} from 'rxjs/operators';
 import {globalAuthState} from '../../../auth/auth.selectors';
 import {NgForm} from '@angular/forms';
+import {Membre} from '../../../membres/model/membre';
+import {MembreEntityService} from '../../../membres/services/membre-entity.service';
+import {OrgSummaryEntityService} from '../../services/orgsummary-entity.service';
+import {OrgSummary} from '../../model/orgsummary';
 
 @Component({
   selector: 'app-orgaudit',
@@ -28,8 +32,16 @@ export class OrgauditComponent implements OnInit {
   booCanSave: boolean;
   booCanDelete: boolean;
   booCanQuit: boolean;
+  selectedAuditor: Membre;
+  filteredMembres: Membre[];
+  selectedOrganisation: OrgSummary;
+  filteredOrganisations: OrgSummary[];
+  filteredDepots: any[];
+  selectedDepot: any;
   constructor(
       private orgauditsService: OrgauditEntityService,
+      private membresService: MembreEntityService,
+      private orgsummaryService: OrgSummaryEntityService,
       private store: Store<AppState>,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
@@ -51,6 +63,36 @@ export class OrgauditComponent implements OnInit {
       if (orgaudit) {
         this.orgaudit = orgaudit;
         console.log('our orgaudit:', this.orgaudit);
+        this.membresService.getByKey(orgaudit.auditorNr)
+            .subscribe(
+                membre => {
+                  if (membre !== null) {
+                    this.selectedAuditor = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                    console.log('our auditor:', this.selectedAuditor);
+                  } else {
+                    console.log('There is no auditor!');
+                  }
+                });
+        this.orgsummaryService.getByKey(orgaudit.lienDis)
+            .subscribe(
+                orgsummary => {
+                  if (orgsummary !== null) {
+                    this.selectedOrganisation = Object.assign({}, orgsummary, {fullname: orgsummary.idDis + ' ' + orgsummary.societe});
+                    console.log('audited org:', this.selectedOrganisation);
+                  } else {
+                    console.log('There is no audited org!');
+                  }
+                });
+        this.orgsummaryService.getByKey(orgaudit.lienDep)
+            .subscribe(
+                orgsummary => {
+                  if (orgsummary !== null) {
+                    this.selectedDepot = Object.assign({}, orgsummary, {fullname: orgsummary.idDis + ' ' + orgsummary.societe});
+                    console.log('audited depot:', this.selectedDepot);
+                  } else {
+                    console.log('There is no audited depot!');
+                  }
+                });
       } else {
         this.orgaudit = new DefaultOrgaudit();
         if (this.myform) {
@@ -65,6 +107,7 @@ export class OrgauditComponent implements OnInit {
             select(globalAuthState),
             map((authState) => {
               if (authState.user) {
+                this.lienBanque = authState.banque.bankId;
                 switch (authState.user.rights) {
                   case 'Admin_Banq':
                     this.booCanSave = true;
@@ -77,7 +120,55 @@ export class OrgauditComponent implements OnInit {
         )
         .subscribe();
   }
-
+  filterMembre(event ) {
+    const  queryMemberParms: QueryParams = {};
+    const query = event.query;
+    queryMemberParms['offset'] = '0';
+    queryMemberParms['rows'] = '10';
+    queryMemberParms['sortField'] = 'nom';
+    queryMemberParms['sortOrder'] = '1';
+    queryMemberParms['lienBanque'] = this.lienBanque.toString();
+    if (event.query.length > 0) {
+      queryMemberParms['nom'] = query.toLowerCase();
+    }
+    this.membresService.getWithQuery(queryMemberParms)
+        .subscribe(filteredMembres => {
+          this.filteredMembres = filteredMembres.map((membre) =>
+              Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom})
+          );
+        });
+  }
+  filterOrganisation(event ) {
+    console.log('Filter Organisation', event);
+    const  queryOrganisationParms: QueryParams = {};
+    queryOrganisationParms['lienBanque'] = this.lienBanque.toString();
+    if (event.query.length > 0) {
+      queryOrganisationParms['societe'] = event.query.toLowerCase();
+    }
+    this.orgsummaryService.getWithQuery(queryOrganisationParms)
+        .subscribe(filteredOrganisations => {
+          this.filteredOrganisations = filteredOrganisations.map((orgsummary) =>
+              Object.assign({}, orgsummary, {fullname: orgsummary.idDis + ' ' + orgsummary.societe})
+          );
+        });
+  }
+  filterDepot(event ) {
+    const  queryDepotParms = {};
+    const query = event.query;
+    queryDepotParms['offset'] = '0';
+    queryDepotParms['rows'] = '10';
+    queryDepotParms['sortField'] = 'Societe';
+    queryDepotParms['sortOrder'] = '1';
+    queryDepotParms['lienBanque'] = this.lienBanque.toString();
+    queryDepotParms['isDepot'] = true;
+    queryDepotParms['societe'] = query.toLowerCase();
+    this.orgsummaryService.getWithQuery(queryDepotParms)
+        .subscribe(filteredDepots =>   {
+          this.filteredDepots = filteredDepots.map((orgsummary) =>
+              Object.assign({}, orgsummary, {fullname: orgsummary.idDis + ' ' + orgsummary.societe})
+          );
+        });
+  }
   delete(event: Event, orgaudit: Orgaudit) {
     this.confirmationService.confirm({
       target: event.target,
@@ -111,6 +202,11 @@ export class OrgauditComponent implements OnInit {
 
   save(oldOrgaudit: Orgaudit, orgauditForm: Orgaudit) {
     const modifiedOrgaudit = Object.assign({}, oldOrgaudit, orgauditForm);
+    modifiedOrgaudit.auditorNr = this.selectedAuditor.batId;
+    modifiedOrgaudit.lienDis = this.selectedOrganisation.idDis;
+    modifiedOrgaudit.societe = this.selectedOrganisation.societe;
+    modifiedOrgaudit.lienDep = this.selectedDepot.idDis;
+    modifiedOrgaudit.depotName = this.selectedDepot.societe;
 
     if (modifiedOrgaudit.hasOwnProperty('auditId')) {
       this.orgauditsService.update(modifiedOrgaudit)
@@ -118,7 +214,7 @@ export class OrgauditComponent implements OnInit {
                 this.messageService.add({
                   severity: 'success',
                   summary: 'Update',
-                  detail: `The audit ${modifiedOrgaudit.auditId} for ${modifiedOrgaudit.societe}  was updated`
+                  detail: `The audit for ${modifiedOrgaudit.societe}  was updated`
                 });
                 this.onOrgauditUpdate.emit(modifiedOrgaudit);
               },
@@ -126,7 +222,7 @@ export class OrgauditComponent implements OnInit {
                 console.log('Error updating audit', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
-                  detail: `The audit   ${modifiedOrgaudit.auditId} for ${modifiedOrgaudit.societe} could not be updated: error: ${dataserviceerror.message}`,
+                  detail: `The audit  for ${modifiedOrgaudit.societe} could not be updated: error: ${dataserviceerror.message}`,
                   life: 6000 };
                 this.messageService.add(errMessage) ;
               });
@@ -138,7 +234,7 @@ export class OrgauditComponent implements OnInit {
                 this.messageService.add({
                   severity: 'success',
                   summary: 'Creation',
-                  detail: `The audit ${newOrgaudit.auditId} ${newOrgaudit.societe}  has been created`
+                  detail: `The audit for ${newOrgaudit.societe}  has been created`
                 });
                 this.onOrgauditCreate.emit(newOrgaudit);
               },
@@ -146,7 +242,7 @@ export class OrgauditComponent implements OnInit {
                 console.log('Error creating audit', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
-                  detail: `The audit   ${modifiedOrgaudit.auditId} ${modifiedOrgaudit.societe} could not be created: error: ${dataserviceerror.message}`,
+                  detail: `The audit  for ${modifiedOrgaudit.societe} could not be created: error: ${dataserviceerror.message}`,
                   life: 6000 };
                 this.messageService.add(errMessage) ;
               });

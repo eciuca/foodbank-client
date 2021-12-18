@@ -1395,7 +1395,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">257</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgcontacts/orgcontact/orgcontact.component.ts</context>
@@ -4146,12 +4146,68 @@
           <context context-type="linenumber">235</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="OrgAuditor" datatype="html">
+        <source>Auditor</source>
+        <target>Auditeur</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgAuditOrganisation" datatype="html">
+        <source>Organisation</source>
+        <target>Organisation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgAuditDepot" datatype="html">
+        <source>Depot</source>
+        <target>Dépôt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgAuditDate" datatype="html">
+        <source>Audit Date</source>
+        <target>Date d'audit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuditDateIsMandatory" datatype="html">
+        <source>Audit date is required and must in format dd/mm/yyyy</source>
+        <target>La date de l'audit est requise et doit être au format jj/mm/aaaa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgAuditHygCheck" datatype="html">
+        <source>Hygiene-Dates-Cold Chain</source>
+        <target>Hygiène-Dates-Chaîne du froid</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgAuditBenefCheck" datatype="html">
+        <source>Number of Beneficiaries</source>
+        <target>Nombre de bénéficiaires</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="OrgAuditUsage" datatype="html">
         <source>Services and Products Use</source>
         <target>Utilisation des services et des produits</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgAuditRemarks" datatype="html">
@@ -4159,7 +4215,7 @@
         <target>Remarques</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgAuditSug" datatype="html">
@@ -4167,7 +4223,7 @@
         <target>Problèmes ou suggestions</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddOrgaudit" datatype="html">
