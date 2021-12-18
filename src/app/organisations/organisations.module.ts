@@ -56,10 +56,18 @@ import {MembresDataService} from '../membres/services/membres-data.service';
 import {MembreEntityService} from '../membres/services/membre-entity.service';
 import {FileUploadModule} from 'primeng/fileupload';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import { OrgauditsComponent } from './orgaudits/orgaudits.component';
+import { OrgauditComponent } from './orgaudits/orgaudit/orgaudit.component';
+import {OrgauditsDataService} from './services/orgaudits-data.service';
+import {OrgauditEntityService} from './services/orgaudit-entity.service';
 const routes: Routes = [
     {
         path: 'contacts/:idDis',
         component: OrgcontactsComponent
+    },
+    {
+        path: 'orgaudits/:bankId',
+        component: OrgauditsComponent
     },
     {
         path: 'orgreports/:bankId',
@@ -96,7 +104,7 @@ const routes: Routes = [
 
 @NgModule({
     // tslint:disable-next-line:max-line-length
-  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent, RegionsComponent, RegionComponent, OrgMembershipsComponent, OrgMembershipComponent, OrgMembershipMailingComponent],
+  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent, RegionsComponent, RegionComponent, OrgMembershipsComponent, OrgMembershipComponent, OrgMembershipMailingComponent, OrgauditsComponent, OrgauditComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -126,6 +134,8 @@ const routes: Routes = [
         OrgSummaryEntityService,
         OrgcontactsDataService,
         OrgcontactEntityService,
+      OrgauditsDataService,
+      OrgauditEntityService,
         RegionsDataService,
         RegionEntityService,
       MembresDataService,
@@ -151,6 +161,7 @@ export class OrganisationsModule {
       private organisationsDataService: OrganisationsDataService,
       private orgSummariesDataService: OrgSummariesDataService,
       private orgcontactsDataService: OrgcontactsDataService,
+      private orgauditsDataService: OrgauditsDataService,
       private regionsDataService: RegionsDataService,
       private membresDataService: MembresDataService,
       private cpassDataService: CpassDataService,
@@ -162,6 +173,7 @@ export class OrganisationsModule {
     entityDataService.registerService('Organisation', organisationsDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
     entityDataService.registerService('Orgcontact', orgcontactsDataService);
+    entityDataService.registerService('Orgaudit', orgauditsDataService);
     entityDataService.registerService('Region', regionsDataService);
     entityDataService.registerService('Membre', membresDataService);
     entityDataService.registerService('Cpas', cpassDataService);

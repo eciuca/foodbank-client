@@ -232,7 +232,10 @@ export class AppComponent implements OnInit {
                 {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',
                     items: [
                         {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
-                        {label: $localize`:@@menuRegions:Regions`, icon: 'pi pi-fw pi-globe',  routerLink: [`/organisations/regions/${authState.user.lienBat}`]},
+                        {
+                            label: $localize`:@@menuRegions:Regions`, icon: 'pi pi-fw pi-globe',
+                            routerLink: [`/organisations/regions/${authState.user.lienBat}`]
+                        },
                         {
                             label: $localize`:@@menuMemberships:Memberships`, icon: 'pi pi-fw pi-euro',
                             items: [
@@ -247,7 +250,11 @@ export class AppComponent implements OnInit {
                                     routerLink: [`/organisations/membershipmailing/${authState.user.lienBat}`]
                                 }
                             ]
-                        }
+                        },
+                        {
+                            label: $localize`:@@menuOrgaudits:Audits`, icon: 'pi pi-fw pi-globe',
+                            routerLink: [`/organisations/orgaudits/${authState.user.lienBat}`]
+                        },
                     ]
                 }
             );

@@ -1,0 +1,41 @@
+<p-table #dt [value]="orgaudits" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
+         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
+         [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
+>
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Orgaudit" i18n-label="@@AddOrgaudit"></button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Date</th>
+            <th i18n="@@OrgIdSorted" pSortableColumn="lienDis" >Org Id<p-sortIcon field="lienDis"></p-sortIcon></th>
+            <th i18n="@@OrgNameSorted" pSortableColumn="societe" colspan="2">Organisation<p-sortIcon field="societe"></p-sortIcon></th>
+            <th i18n="@@OrgDepotNameSorted" pSortableColumn="depotName" colspan="2">Depot<p-sortIcon field="depotName"></p-sortIcon></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-orgaudit>
+        <tr (click)="handleSelect(orgaudit)">
+            <td>
+                {{ orgaudit.auditDate }}
+            </td>
+            <td>
+                {{orgaudit.lienDis}}
+            </td>
+            <td colspan="2">
+                {{orgaudit.societe}}
+            </td>
+            <td colspan="2">
+                {{orgaudit.depotName}}
+            </td>
+
+        </tr>
+    </ng-template>
+</p-table>
+<p-dialog header="Organisation Audit Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+    <app-orgaudit *ngIf="selectedOrgAuditId$" [auditId$]="selectedOrgAuditId$"  (onOrgauditUpdate)="handleOrgauditUpdate($event)"
+                  (onOrgauditCreate)="handleOrgauditCreate($event)"  (onOrgauditDelete)="handleOrgauditDeleted($event)" (onOrgauditQuit)="handleOrgauditQuit()"></app-orgaudit>
+</p-dialog>
+

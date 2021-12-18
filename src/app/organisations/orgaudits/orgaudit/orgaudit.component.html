@@ -1,0 +1,28 @@
+<p-panel  *ngIf="orgaudit">
+    <form  #orgauditForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,orgaudit)" i18n-label="@@Delete" label="Delete"></button>
+            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(orgaudit, orgauditForm.value)" [disabled] = "orgauditForm.invalid" i18n-label="@@Save" label="Save"></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, orgaudit, orgauditForm, orgauditForm.dirty)" i18n-label="@@Return" label="Return" ></button>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+
+            <div class="p-field p-col-12 p-md-4">
+                <label i18n="@@OrgAuditUsage" for="servUsage">Services and Products Use</label>
+                <input #nom="ngModel" pInputText id="servUsage" name="servUsage" maxlength="40" [ngModel]="orgaudit.servUsage" />
+            </div>
+
+            <div class="p-field p-col-12 p-md-4">
+                <label i18n="@@OrgAuditRemarks" for="demunisYNRem">Remarks</label>
+                <input #nom="ngModel" pInputText id="demunisYNRem" name="demunisYNRem" maxlength="40" [ngModel]="orgaudit.demunisYNRem" />
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label i18n="@@OrgAuditSug" for="probSug">Problems or Suggestions</label>
+                <input #nom="ngModel" pInputText id="probSug" name="probSug" required  maxlength="50" [ngModel]="orgaudit.probSug" />
+
+            </div>
+
+        </div>
+        <p-confirmPopup></p-confirmPopup>
+    </form>
+</p-panel>

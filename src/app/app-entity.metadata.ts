@@ -18,6 +18,7 @@ import {compareDonateurs, Donateur} from './donations/model/donateur';
 import {compareDons, Don} from './donations/model/don';
 import {compareRegions, Region} from './organisations/model/region';
 import {Audit, compareAudits} from './audits/model/audit';
+import {compareOrgaudits, Orgaudit} from './organisations/model/orgaudit';
 
 
 export const appEntityMetadata: EntityMetadataMap = {
@@ -94,6 +95,11 @@ export const appEntityMetadata: EntityMetadataMap = {
     Orgcontact: {
         sortComparer: compareOrgcontacts,
         selectId: (orgcontact: Orgcontact) => orgcontact.orgPersId,
+        entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
+    },
+    Orgaudit: {
+        sortComparer: compareOrgaudits,
+        selectId: (orgaudit: Orgaudit) => orgaudit.auditId,
         entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
     },
     Region: {
