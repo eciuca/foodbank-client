@@ -99,16 +99,22 @@ export class OrgauditsComponent implements OnInit {
   handleOrgauditUpdate(updatedOrgaudit) {
     const index = this.orgaudits.findIndex(orgaudit => orgaudit.auditId === updatedOrgaudit.auditId);
     this.orgaudits[index] = updatedOrgaudit;
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
   handleOrgauditCreate(createdOrgaudit: Orgaudit) {
     this.orgaudits.push({...createdOrgaudit});
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
 
   handleOrgauditDeleted(deletedOrgaudit) {
     const index = this.orgaudits.findIndex(orgaudit => orgaudit.auditId === deletedOrgaudit.auditId);
     this.orgaudits.splice(index, 1);
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
   nextPage(event: LazyLoadEvent) {

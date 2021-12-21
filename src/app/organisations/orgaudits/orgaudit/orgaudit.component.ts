@@ -128,6 +128,7 @@ export class OrgauditComponent implements OnInit {
     queryMemberParms['sortField'] = 'nom';
     queryMemberParms['sortOrder'] = '1';
     queryMemberParms['lienBanque'] = this.lienBanque.toString();
+    queryMemberParms['actif'] = '1';
     if (event.query.length > 0) {
       queryMemberParms['nom'] = query.toLowerCase();
     }
@@ -142,6 +143,7 @@ export class OrgauditComponent implements OnInit {
     console.log('Filter Organisation', event);
     const  queryOrganisationParms: QueryParams = {};
     queryOrganisationParms['lienBanque'] = this.lienBanque.toString();
+    queryOrganisationParms['actif'] = '1';
     if (event.query.length > 0) {
       queryOrganisationParms['societe'] = event.query.toLowerCase();
     }
@@ -160,7 +162,8 @@ export class OrgauditComponent implements OnInit {
     queryDepotParms['sortField'] = 'Societe';
     queryDepotParms['sortOrder'] = '1';
     queryDepotParms['lienBanque'] = this.lienBanque.toString();
-    queryDepotParms['isDepot'] = true;
+    queryDepotParms['actif'] = '1';
+    queryDepotParms['isDepot'] = '1';
     queryDepotParms['societe'] = query.toLowerCase();
     this.orgsummaryService.getWithQuery(queryDepotParms)
         .subscribe(filteredDepots =>   {
@@ -178,7 +181,7 @@ export class OrgauditComponent implements OnInit {
         const myMessage = {
           severity: 'success',
           summary: 'Delete',
-          detail: `The audit ${orgaudit.auditId} for ${orgaudit.societe} has been deleted`
+          detail: `The audit for ${orgaudit.societe} has been deleted`
         };
         this.orgauditsService.delete(orgaudit)
             .subscribe(() => {
@@ -189,7 +192,7 @@ export class OrgauditComponent implements OnInit {
                   console.log('Error deleting audit', dataserviceerror.message);
                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
-                    detail: `The audit  ${orgaudit.auditId} for ${orgaudit.societe} could not be deleted: error: ${dataserviceerror.message}`,
+                    detail: `The audit for ${orgaudit.societe} could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
                 });
@@ -229,18 +232,19 @@ export class OrgauditComponent implements OnInit {
               });
     } else {
       modifiedOrgaudit.lienBanque = this.lienBanque;
-      console.log('Creating Orgaudit with content:', modifiedOrgaudit);
+      // console.log('Creating Orgaudit with content:', modifiedOrgaudit);
       this.orgauditsService.add(modifiedOrgaudit)
           .subscribe((newOrgaudit) => {
+                // console.log('Created Orgaudit with content:', newOrgaudit);
                 this.messageService.add({
                   severity: 'success',
                   summary: 'Creation',
-                  detail: `The audit for ${newOrgaudit.societe}  has been created`
+                  detail: `The audit for ${modifiedOrgaudit.societe}  has been created`
                 });
                 this.onOrgauditCreate.emit(newOrgaudit);
               },
               (dataserviceerror: DataServiceError) => {
-                console.log('Error creating audit', dataserviceerror.message);
+                // console.log('Error creating audit', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: `The audit  for ${modifiedOrgaudit.societe} could not be created: error: ${dataserviceerror.message}`,
