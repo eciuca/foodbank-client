@@ -24,6 +24,7 @@ export interface Orgaudit {
     depotName: string;
 
     lienBanque: number;
+    auditorName: string;
 
     totalRecords: number;
 }
@@ -42,6 +43,7 @@ export class DefaultOrgaudit implements Orgaudit {
     auditDate: string;
     auditId: number;
     auditorNr: number;
+    auditorName: string;
     benefCheck: boolean;
     demunisYNRem: string;
     depotName: string;
@@ -78,6 +80,7 @@ export class DefaultOrgaudit implements Orgaudit {
         this.depotName = '';
 
         this.lienBanque = 0;
+        this.auditorName = '';
 
         this.totalRecords = 0;
     }

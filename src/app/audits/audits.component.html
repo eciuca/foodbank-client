@@ -7,14 +7,14 @@
             <div class="p-fluid p-formgrid p-grid">
 
                 <div class="p-field p-col-12 p-md-2">
-                    <label i18n="@@LoginDateFilter" for="archived">Filter on Date?</label>
-                    <p-checkbox [value]="booRangeFilter" binary="true" name="archived" id="archived" (onChange)="changeDateRangeFilter($event)"></p-checkbox>
+                    <label i18n="@@LoginDateFilter" for="onselect">Filter on Date?</label>
+                    <p-checkbox [(ngModel)]="booRangeFilter" binary="true" name="onselect" id="onselect" (onChange)="changeSetRangeFilter($event)"></p-checkbox>
                 </div>
                 <div class="p-field p-col-12 p-md-3">
-                    <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy"></p-calendar>
+                    <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy" (onSelect)="changeDateRangeFilter()"></p-calendar>
                  </div>
                 <div class="p-field p-col-12 p-md-3">
-                    <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy"></p-calendar>
+                    <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" (onSelect)="changeDateRangeFilter()"></p-calendar>
                 </div>
             </div>
         </div>
@@ -23,11 +23,12 @@
         <tr>
             <th i18n="@@LoginTime"  pSortableColumn="dateIn"  >Login Time<p-sortIcon field="dateIn"></p-sortIcon></th>
             <th i18n="@@BankNameShortSorted" pSortableColumn="shortBankName">Bank<p-sortIcon field="shortBankName"></p-sortIcon></th>
-            <th i18n="@@UserNameSorted" pSortableColumn="userName" colspan="2">Name<p-sortIcon field="userName"></p-sortIcon></th>
+            <th i18n="@@UserNameSorted" pSortableColumn="userName">Name<p-sortIcon field="userName"></p-sortIcon></th>
             <th i18n="@@UserIdSorted" pSortableColumn="user">User Id<p-sortIcon field="user"></p-sortIcon></th>
             <th i18n="@@RightsSorted" pSortableColumn="rights" >Role<p-sortIcon field="rights"></p-sortIcon></th>
             <th i18n="@@IdDisSorted" pSortableColumn="idDis" >Id Org<p-sortIcon field="idDis"></p-sortIcon></th>
-            <th i18n="@@SocieteSorted" pSortableColumn="societe" colspan="3">Organisation<p-sortIcon field="societe"></p-sortIcon></th>
+            <th colspan="2" i18n="@@SocieteSorted" pSortableColumn="societe">Organisation<p-sortIcon field="societe"></p-sortIcon></th>
+            <th i18n="@@AuditAppliSorted" pSortableColumn="application" >Application<p-sortIcon field="application"></p-sortIcon></th>
         </tr>
         <tr>
             <th>
@@ -43,7 +44,7 @@
                     </ng-template>
                 </p-columnFilter>
             </th>
-            <th colspan="2">
+            <th>
                 <p-columnFilter type="text" field="userName" matchMode="contains" [showMenu]="false" ></p-columnFilter>
             </th>
             <th>
@@ -63,8 +64,19 @@
             <th>
                 <p-columnFilter type="text" field="idDis" matchMode="equals" [showMenu]="false"></p-columnFilter>
             </th>
-            <th colspan="3">
+            <th colspan="2">
                 <p-columnFilter type="text" field="societe" matchMode="contains" [showMenu]="false"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="isJavaApp" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="appOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
             </th>
         </tr>
     </ng-template>
@@ -77,20 +89,23 @@
             <td  >
                 {{audit.shortBankName}}
             </td>
-            <td colspan="2">
+            <td >
                 {{audit.userName}}
             </td>
             <td>
                 {{audit.user}}
             </td>
             <td>
-                {{audit.rights}}
+                {{ labelRights(audit.rights )}}
             </td>
             <td>
                 {{audit.idDis}}
             </td>
-            <td colspan="3">
+            <td colspan="2">
                 {{audit.societe}}
+            </td>
+            <td>
+                {{audit.application}}
             </td>
         </tr>
     </ng-template>

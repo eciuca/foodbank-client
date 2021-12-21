@@ -10,6 +10,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Date</th>
+            <th i18n="@@OrgAuditorSorted" pSortableColumn="auditorName" >Auditor<p-sortIcon field="lienDis"></p-sortIcon></th>
             <th i18n="@@OrgIdSorted" pSortableColumn="lienDis" >Org Id<p-sortIcon field="lienDis"></p-sortIcon></th>
             <th i18n="@@OrgNameSorted" pSortableColumn="societe" colspan="2">Organisation<p-sortIcon field="societe"></p-sortIcon></th>
             <th i18n="@@OrgDepotNameSorted" pSortableColumn="depotName" colspan="2">Depot<p-sortIcon field="depotName"></p-sortIcon></th>
@@ -20,6 +21,9 @@
         <tr (click)="handleSelect(orgaudit)">
             <td>
                 {{ orgaudit.auditDate }}
+            </td>
+            <td>
+                {{ orgaudit.auditorName }}
             </td>
             <td>
                 {{orgaudit.lienDis}}

@@ -6,7 +6,7 @@ import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {LazyLoadEvent} from 'primeng/api';
 import {DatePipe} from '@angular/common';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
-import {enmUserRoles} from '../shared/enums';
+import {enmApp, enmUserRoles} from '../shared/enums';
 
 @Component({
   selector: 'app-audits',
@@ -26,6 +26,7 @@ export class AuditsComponent implements OnInit {
   toDate: Date;
   bankOptions: any[];
   rightOptions: any[];
+  appOptions: any[];
   constructor(
       private auditService: AuditEntityService,
       private banqueService: BanqueEntityService,
@@ -34,12 +35,14 @@ export class AuditsComponent implements OnInit {
     this.first = 0;
     this.totalRecords = 0;
     this.rightOptions = enmUserRoles;
+    this.appOptions = enmApp;
   }
   ngOnInit() {
     this.loading = true;
     this.totalRecords = 0;
     this.fromDate = new Date();
     this.fromDate.setDate(this.fromDate.getDate() - 30);
+    this.booRangeFilter = true;
     this.toDate = new Date();
     this.banqueService.getAll()
         .pipe(
@@ -97,6 +100,9 @@ export class AuditsComponent implements OnInit {
       if (event.filters.rights && event.filters.rights.value) {
         queryParms['rights'] = event.filters.rights.value;
       }
+      if (event.filters.isJavaApp && event.filters.isJavaApp.value !== null) {
+        queryParms['isJavaApp'] = event.filters.isJavaApp.value;
+      }
       if (this.booRangeFilter ) {
         queryParms['fromDate'] = this.datepipe.transform(this.fromDate, 'yyyy-MM-dd');
         queryParms['toDate'] = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
@@ -105,9 +111,12 @@ export class AuditsComponent implements OnInit {
     this.loadPageSubject$.next(queryParms);
   }
 
-  changeDateRangeFilter($event: any) {
+  changeSetRangeFilter($event: any) {
     console.log('Range Filter is now:', $event);
     this.booRangeFilter = $event.checked;
+    this.changeDateRangeFilter();
+  }
+  changeDateRangeFilter() {
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
     console.log('Latest Query Parms', latestQueryParams);
@@ -125,5 +134,21 @@ export class AuditsComponent implements OnInit {
       }
     }
     this.loadPageSubject$.next(latestQueryParams);
+  }
+  labelRights(rights: string) {
+    switch (rights.toLowerCase()) {
+      case 'admin_banq':
+        return $localize`:@@RoleBankAdmin:Bank admin`;
+      case 'bank':
+        return $localize`:@@RoleBankUser:Bank User`;
+      case 'admin_asso':
+        return  $localize`:@@RoleOrgAdmin:Org Admin`;
+      case 'asso':
+        return $localize`:@@RoleOrgUser:Org User`;
+      case 'admin':
+        return $localize`:@@RoleAdmin:Global admin`;
+      default:
+        return rights;
+    }
   }
 }

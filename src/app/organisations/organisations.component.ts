@@ -159,10 +159,10 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.depyN && event.filters.depyN.value !== null ) {
                 queryParms['isDepot'] = event.filters.depyN.value;
             }
-            if (event.filters.birbyN && event.filters.birbyN.value != null) {
+            if (event.filters.birbyN && event.filters.birbyN.value !== null) {
                 queryParms['isBirb'] = event.filters.birbyN.value;
             }
-            if (event.filters.refInt && event.filters.refInt.value != null ) {
+            if (event.filters.refInt && event.filters.refInt.value !== null ) {
                 queryParms['refint'] = event.filters.refInt.value;
             }
         }

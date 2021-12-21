@@ -203,6 +203,7 @@ export class OrgauditComponent implements OnInit {
   save(oldOrgaudit: Orgaudit, orgauditForm: Orgaudit) {
     const modifiedOrgaudit = Object.assign({}, oldOrgaudit, orgauditForm);
     modifiedOrgaudit.auditorNr = this.selectedAuditor.batId;
+    modifiedOrgaudit.auditorName = this.selectedAuditor.nom + ' ' + this.selectedAuditor.prenom;
     modifiedOrgaudit.lienDis = this.selectedOrganisation.idDis;
     modifiedOrgaudit.societe = this.selectedOrganisation.societe;
     modifiedOrgaudit.lienDep = this.selectedDepot.idDis;
