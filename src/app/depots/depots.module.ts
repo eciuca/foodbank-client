@@ -15,18 +15,16 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {MessageModule} from 'primeng/message';
 import {DialogModule} from 'primeng/dialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {DepotsResolver} from './depots.resolver';
+
 import {FormsModule} from '@angular/forms';
 import {appEntityMetadata} from '../app-entity.metadata';
 import {ConfirmationService} from 'primeng/api';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {ToastModule} from 'primeng/toast';
 
 const routes: Routes = [
   { path: '',
     component: DepotsComponent,
-    resolve: {
-      DepotsResolver
-    }
   },
   {
     path: ':idDepot',
@@ -49,13 +47,13 @@ const routes: Routes = [
         ConfirmDialogModule,
         MessageModule,
         FormsModule,
-        ConfirmPopupModule
+        ConfirmPopupModule,
+        ToastModule
     ],
   providers: [
     DepotsDataService,
     DepotEntityService,
-    ConfirmationService,
-    DepotsResolver
+    ConfirmationService
   ],
 })
 export class DepotsModule {

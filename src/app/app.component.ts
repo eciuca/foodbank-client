@@ -229,7 +229,25 @@ export class AppComponent implements OnInit {
         if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
-                {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',
+            );
+        }
+        // Add Depots
+        if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+            this.menuLoggedInItems.push(
+                {label: 'Depots', icon: 'pi pi-fw pi-map', routerLink: ['/depots']}
+            );
+        } else if (['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+            if (authState.organisation && authState.organisation.depyN === true) {
+                // items for depot
+                this.menuLoggedInItems.push(
+                    {   label: 'Depot', icon: 'pi pi-fw pi-map', routerLink: [`/depots/${authState.organisation.idDis}`]}
+                );
+            }
+        }
+        // handle  organisation(s) items
+        if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+            this.menuLoggedInItems.push(
+                    {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',
                     items: [
                         {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
                         {
@@ -262,8 +280,7 @@ export class AppComponent implements OnInit {
             if (authState.organisation && authState.organisation.depyN === true) {
                 // organisation is depot
                 this.menuLoggedInItems.push(
-                    {label: $localize`:@@menuDepot:Depot`, icon: 'pi pi-fw pi-map', routerLink: [`/organisations/${authState.organisation.idDis}`]},
-                    {label: $localize`:@@menuOrganisationsDepot:Orgs Depot`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']}
+                   {label: $localize`:@@menuOrganisationsDepot:Orgs Depot`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']}
                 );
             } else {
                 // classic organisation

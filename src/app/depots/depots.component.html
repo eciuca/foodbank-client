@@ -1,67 +1,59 @@
-<ng-container *ngIf="depots$ | async as depots">
-    <p-table #dt [value]="depots" selectionMode="single" [rowHover]="true"
-             [rows]="10" [showCurrentPageReport]="true"
-             [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-             [filterDelay]="0" [globalFilterFields]="['nom','adresse','cp','ville']">
-        <ng-template pTemplate="caption">
-            <div class="table-header">
-                <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Depot"></button>
-                <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
-            </span>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th pSortableColumn="idDepot">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Id
-                        <p-sortIcon field="idDepot"></p-sortIcon>
-                    </div>
-                </th>
-                <th pSortableColumn="nom">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Name
-                        <p-sortIcon field="nom"></p-sortIcon>
-                    </div>
-                </th>
-                <th pSortableColumn="adresse">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Address
-                        <p-sortIcon field="adresse"></p-sortIcon>
-                    </div>
-                </th>
-                <th pSortableColumn="cp">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                       Zip Code
-                        <p-sortIcon field="cp"></p-sortIcon>
-                    </div>
-                </th>
-                <th pSortableColumn="ville">
-                    <div class="p-d-flex p-jc-between p-ai-center">
-                        Localité
-                        <p-sortIcon field="ville"></p-sortIcon>
-                    </div>
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-depot>
-            <tr (click)="handleSelect(depot)">
-                <td *ngFor="let col of cols">
-                    {{depot[col.field]}}
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="summary">
-            <div class="p-d-flex p-ai-center p-jc-between">
-                Au total il y a {{depots ? depots.length : 0 }} depots.
-            </div>
-        </ng-template>
-    </p-table>
-    <p-dialog header="Depot Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false" >
-        <app-depot *ngIf="selectedIdDepot$" [idDepot$]="selectedIdDepot$" (onDepotUpdate)="handleDepotUpdate($event)"
-                   (onDepotCreate)="handleDepotCreated($event)" (onDepotDelete)="handleDepotDeleted($event)" (onDepotQuit)="handleDepotQuit()"></app-depot>
-    </p-dialog>
-</ng-container>
+<p-table #dt [value]="depots" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
+         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
+         [paginator]="true" >
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <button *ngIf="booIsAdmin" i18n="@@DepotAdd" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Depot" i18n-label="@@AddDepot"></button>
+            <button *ngIf="booIsAdmin" i18n="@@DepotExport" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Depots" i18n-label="@@ExportDepots"></button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="idDepot">
+                <div class="p-d-flex p-jc-between p-ai-center">Id<p-sortIcon field="idDepot"></p-sortIcon></div>
+            </th>
+            <th pSortableColumn="nom">
+                <div i18n="@@NameSorted" class="p-d-flex p-jc-between p-ai-center">Name<p-sortIcon field="nom"></p-sortIcon></div>
+            </th>
+            <th pSortableColumn="adresse">
+                <div i18n="@@AddressSorted" class="p-d-flex p-jc-between p-ai-center">Address<p-sortIcon field="adresse"></p-sortIcon></div>
+            </th>
+            <th pSortableColumn="cp">
+                <div i18n="@@ZipSorted" class="p-d-flex p-jc-between p-ai-center">Zip Code<p-sortIcon field="cp"></p-sortIcon></div>
+            </th>
+            <th pSortableColumn="ville">
+                <div i18n="@@CitySorted" class="p-d-flex p-jc-between p-ai-center">City<p-sortIcon field="ville"></p-sortIcon></div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-depot>
+        <tr (click)="handleSelect(depot)">
+            <td >
+                {{depot.idDepot}}
+            </td>
+            <td >
+                {{depot.nom}}
+            </td>
+            <td >
+                {{depot.adresse}}
+            </td>
+            <td >
+                {{depot.cp}}
+            </td>
+            <td >
+                {{depot.ville}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div i18n="@@DepotsSelected" class="p-d-flex p-ai-center p-jc-between">
+            There are {{totalRecords}} depots in the selection.
+        </div>
+    </ng-template>
+    <p-toast></p-toast>
+</p-table>
 
+<p-dialog header="Depot Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+    <app-depot *ngIf="selectedIdDepot$" [idDepot$]="selectedIdDepot$"  (onDepotUpdate)="handleDepotUpdate($event)"
+               (onDepotCreate)="handleDepotCreate($event)"  (onDepotDelete)="handleDepotDeleted($event)" (onDepotQuit)="handleDepotQuit()"></app-depot>
+</p-dialog>

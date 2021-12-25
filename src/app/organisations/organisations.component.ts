@@ -20,7 +20,7 @@ import {RegionEntityService} from './services/region-entity.service';
 })
 
 export class OrganisationsComponent implements OnInit {
-    isDepot: boolean;
+
     loadPageSubject$ = new BehaviorSubject(null);
     selectedIdDis$ = new BehaviorSubject(0);
     organisation: Organisation = null;
@@ -32,7 +32,6 @@ export class OrganisationsComponent implements OnInit {
     filterBase: any;
     booShowArchived: boolean;
     booCanCreate: boolean;
-    statutOptions: any[];
     regions: any[];
     YNOptions:  any[];
     bankName: string;
@@ -48,10 +47,8 @@ export class OrganisationsComponent implements OnInit {
     ) {
         this.booCanCreate = false;
         this.booShowArchived = false;
-        this.statutOptions = enmStatusCompany;
         this.orgCategories = enmOrgCategories;
         this.YNOptions = enmYn;
-        this.isDepot = false;
         this.lienBanque = 0;
         this.bankName = '';
         this.depotName = '';
@@ -156,9 +153,6 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.nomDepot && event.filters.nomDepot.value) {
                 queryParms['nomDepot'] = event.filters.nomDepot.value;
             }
-            if (event.filters.depyN && event.filters.depyN.value !== null ) {
-                queryParms['isDepot'] = event.filters.depyN.value;
-            }
             if (event.filters.birbyN && event.filters.birbyN.value !== null) {
                 queryParms['isBirb'] = event.filters.birbyN.value;
             }
@@ -169,6 +163,8 @@ export class OrganisationsComponent implements OnInit {
         this.loadPageSubject$.next(queryParms);
     }
     private initializeDependingOnUserRights(authState: AuthState) {
+        // exfilter all depots
+        this.filterBase = { 'isDepot': '0' };
         if (authState.banque) {
             this.lienBanque = authState.banque.bankId;
             this.filterBase = { 'lienBanque': authState.banque.bankId};
@@ -182,7 +178,6 @@ export class OrganisationsComponent implements OnInit {
                 case 'Admin_Asso':
                     // This module is only called for depots see menu
                     this.depotName = authState.organisation.societe;
-                    this.isDepot = true;
                     this.filterBase['lienDepot'] = authState.organisation.idDis;
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
@@ -201,24 +196,6 @@ export class OrganisationsComponent implements OnInit {
     showDialogToAdd() {
         this.selectedIdDis$.next(0);
         this.displayDialog = true;
-    }
-
-    getStatutLabel(statut) {
-        const key = statut;
-
-        const statutObject = this.statutOptions.find(i => i.value === key);
-        if (statutObject) {
-            return statutObject.label;
-        }
-        return 'Unknown Status';
-    }
-
-    labelSuspensionStatus(organisation: Organisation) {
-     if  (organisation.susp === true)  {
-         return 'Y ' + organisation.stopSusp ;
-     }   else {
-         return 'N';
-     }
     }
 
     getTitle(): string {

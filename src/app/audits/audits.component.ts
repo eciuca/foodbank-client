@@ -44,6 +44,7 @@ export class AuditsComponent implements OnInit {
     this.fromDate.setDate(this.fromDate.getDate() - 30);
     this.booRangeFilter = true;
     this.toDate = new Date();
+    this.toDate.setDate(this.toDate.getDate() + 1);
     this.banqueService.getAll()
         .pipe(
             tap( (banquesEntities) => {

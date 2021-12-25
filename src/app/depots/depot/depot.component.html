@@ -6,8 +6,8 @@
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label for="idDepot">Id</label>
-                <input #idDepot="ngModel" pInputText id="idDepot" name="idDepot" required minlength="4" maxLength="10" [ngModel]="depot.idDepot" />
-                <p-message *ngIf="idDepot.invalid && depotForm.touched" severity="error" text="Depot Id is required and must be minimum 4 chars long"></p-message>
+                <input #idDepot="ngModel" pInputText id="idDepot" name="idDepot" required maxLength="10" [ngModel]="depot.idDepot" />
+                <p-message *ngIf="idDepot.invalid && depotForm.touched" severity="error" text="Depot Id is required"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="nom">Name</label>

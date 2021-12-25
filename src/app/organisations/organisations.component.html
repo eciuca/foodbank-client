@@ -42,11 +42,9 @@
             <th pSortableColumn="idDis">Id<p-sortIcon field="idDis"></p-sortIcon></th>
             <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
             <th i18n="@@RefintSorted" pSortableColumn="refInt">Reference<p-sortIcon field="refInt"></p-sortIcon></th>
-            <th  colspan="2" i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
-            <th *ngIf="isDepot === false"  colspan="2" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
-            <th *ngIf="isDepot === true"  colspan="2"  i18n="@@OrgSuspended">Suspended</th>
+            <th colspan="2" i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
+            <th colspan="2" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
             <th i18n="@@OrgAgreedSorted" pSortableColumn="agreed">Agreed<p-sortIcon field="agreed"></p-sortIcon></th>
-            <th i18n="@@IsDepotSorted" pSortableColumn="depyN">Is Depot<p-sortIcon field="depyN"></p-sortIcon></th>
             <th i18n="@@UsesFeadSorted" pSortableColumn="birbyN">Uses FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
         </tr>
         <tr>
@@ -62,25 +60,11 @@
             <th colspan="2">
                 <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="adresse" ></p-columnFilter>
             </th>
-            <th *ngIf="isDepot === false" colspan="2">
+            <th colspan="2">
                 <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="nomDepot" ></p-columnFilter>
-            </th>
-            <th *ngIf="isDepot === true" colspan="2">
-
             </th>
             <th>
                 <p-columnFilter field="agreed" matchMode="equals" [showMenu]="false">
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                            <ng-template let-option pTemplate="item">
-                                <span>{{option.label}}</span>
-                            </ng-template>
-                        </p-dropdown>
-                    </ng-template>
-                </p-columnFilter>
-            </th>
-            <th>
-                <p-columnFilter field="depyN" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                         <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
                             <ng-template let-option pTemplate="item">
@@ -115,21 +99,15 @@
             <td>
                 {{ organisation.refInt }}
             </td>
-            <td  colspan="2">
+            <td colspan="2">
                 {{ organisation.adresse }}  {{ organisation.cp }}  {{ organisation.localite }}
             </td>
-            <td *ngIf="isDepot === false" colspan="2">
+            <td colspan="2">
                 {{ organisation.nomDepot }}
             </td>
-            <td *ngIf="isDepot === true" colspan="2">
-                {{ labelSuspensionStatus(organisation) }}
-            </td>
+
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.agreed, 'false-icon pi-times-circle': !organisation.agreed}"></i>
-            </td>
-            <td>
-                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.depyN, 'false-icon pi-times-circle': !organisation.depyN}"></i>
-                <div *ngIf="organisation.depPrinc=== true">P</div>
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.birbyN, 'false-icon pi-times-circle': !organisation.birbyN}"></i>
