@@ -9,6 +9,7 @@ export let enmApp = [
     {label: 'FBIT' , value: 1 },
 ];
 export let enmStatusCompany =  [
+    {label: '', value: ''},
     {label: $localize`:@@CompanyNonProfit:Non Profit`, value: '1'},
     {label: $localize`:@@CompanyUnRegistered:UnRegistered`, value: '2'},
     {label: $localize`:@@CompanyCPAS:Social`, value: '3' },
@@ -81,7 +82,7 @@ export let enmOrgActivities = [
     {label: $localize`:@@OrgActivityCommunityKitchen:Community Kitchen`, value: 6}
 ];
 export let enmOrgCategories = [
-    {label: 'All', value: 999 },
+    {label: '', value: 999 },
     {label: $localize`:@@OrgCategoryUnassigned:Unassigned`, value: 0 },
     {label: $localize`:@@OrgCategoryShelterYoung:Shelter for Youngsters and Children` , value: 1 },
     {label: $localize`:@@OrgCategoryShelterHandicapped:Shelter for Handicapped People` , value: 2 },

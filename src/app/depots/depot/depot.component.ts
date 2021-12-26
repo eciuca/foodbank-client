@@ -85,8 +85,10 @@ export class DepotComponent implements OnInit {
                         this.lienBanque = authState.banque.bankId;
                         switch (authState.user.rights) {
                             case 'Bank':
+                            case 'Asso':
                                 break;
                             case 'Admin_Banq':
+                            case 'Admin_Asso':
                                 this.booCanSave = true;
                                 this.booCanDelete = true;
                                 break;

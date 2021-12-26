@@ -39,6 +39,7 @@ export class OrganisationsComponent implements OnInit {
     depotName: string;
     first: number;
     regionSelected: number;
+    statuts: any[];
     constructor(private organisationService: OrganisationEntityService,
                 private regionService: RegionEntityService,
                 private router: Router,
@@ -48,6 +49,8 @@ export class OrganisationsComponent implements OnInit {
         this.booCanCreate = false;
         this.booShowArchived = false;
         this.orgCategories = enmOrgCategories;
+        this.statuts = enmStatusCompany;
+        console.log('Statuts are:', this.statuts);
         this.YNOptions = enmYn;
         this.lienBanque = 0;
         this.bankName = '';
@@ -185,7 +188,7 @@ export class OrganisationsComponent implements OnInit {
             }
         this.regionService.getWithQuery({'lienBanque': this.lienBanque.toString()})
             .subscribe(regions => {
-                this.regions = [{ value: null, label: 'All'}];
+                this.regions = [{ value: null, label: ''}];
                 regions.map((region) =>
                     this.regions.push({value: region.regId, label: region.regName})
                 );
@@ -259,6 +262,23 @@ export class OrganisationsComponent implements OnInit {
         } else {
             if (latestQueryParams.hasOwnProperty('classeFBBA')) {
                 delete latestQueryParams['classeFBBA'];
+            }
+        }
+        this.loadPageSubject$.next(latestQueryParams);
+    }
+
+    filterStatut(statut) {
+        console.log('statut filter is now:', statut);
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest statut Query Parms', latestQueryParams);
+        // when we switch f, we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if (statut !== '') {
+            latestQueryParams['statut'] = statut;
+        } else {
+            if (latestQueryParams.hasOwnProperty('statut')) {
+                delete latestQueryParams['statut'];
             }
         }
         this.loadPageSubject$.next(latestQueryParams);

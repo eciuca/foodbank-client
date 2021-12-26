@@ -17,7 +17,15 @@
                         </ng-template>
                     </p-dropdown>
                 </div>
-                <div class="p-field p-col-12 p-md-3">
+                <div class="p-field p-col-12 p-md-2">
+                    <label  i18n="@@OrganisationStatus" for="statut">Status Company</label>
+                    <p-dropdown [options]="statuts" id="statut" name="statut" (onChange)="filterStatut($event.value)" >
+                        <ng-template let-option pTemplate="item">
+                            <span>{{option.label}}</span>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
                     <label i18n="@@OrgFBBACategory" for="categories">FBBA Category</label>
                     <p-dropdown id= "categories" [options]="orgCategories" (onChange)="filterClasseFBBA($event.value)"  >
                         <ng-template let-option pTemplate="item">
