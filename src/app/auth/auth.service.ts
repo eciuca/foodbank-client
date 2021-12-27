@@ -117,16 +117,6 @@ export class AuthService {
       map(authState => login(authState))
     ).subscribe(authState => {
         this.store.dispatch(authState);
-        const auditObj = {'user': authState.user.idUser, 'idDis': '0'};
-        if (authState.organisation) {
-            auditObj['idDis'] = authState.organisation.idDis.toString();
-        }
-        const headerlog = {headers: {Authorization:  'Bearer ' + this.accessToken}};
-        this.http.jsonp('https://api.ipify.org/?format=jsonp', 'callback').subscribe((res: any)  => {
-          auditObj['ipAddress'] = res.ip;
-          console.log('audit object to log in', auditObj);
-          this.http.post ('/api/audit/', auditObj, headerlog ).subscribe();
-        })
      });
   }
 

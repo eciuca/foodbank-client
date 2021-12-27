@@ -36,6 +36,7 @@ export class UsersRightsComponent implements OnInit {
   bankName: string;
   first: number;
   booShowOrganisations: boolean;
+  booIsorganisation: boolean;
   lienDepot: number;
   depotName: string;
   isUserAdmin: boolean;
@@ -53,6 +54,7 @@ export class UsersRightsComponent implements OnInit {
     this.depotName = '';
     this.first = 0;
     this.isUserAdmin = false;
+    this.booIsorganisation = false;
     this.booShowOrganisations = false;
     this.YNOptions = enmYn;
   }
@@ -97,7 +99,7 @@ export class UsersRightsComponent implements OnInit {
             this.booShowOrganisations = true;
             this.filterBase = {'lienBanque': authState.banque.bankId};
             this.rightOptions = enmUserRolesBankAsso;
-            if (authState.user.rights === 'Admin_Banq' || authState.user.droit1 === true) {
+            if (authState.user.rights === 'Admin_Banq' || authState.user.gestMemb === true) {
               this.isUserAdmin = true;
             }
             this.filteredOrganisationsPrepend = [
@@ -108,6 +110,7 @@ export class UsersRightsComponent implements OnInit {
             break;
           case 'Asso':
           case 'Admin_Asso':
+            this.booIsorganisation = true;
             if (authState.organisation && authState.organisation.depyN === true) {
               this.booShowOrganisations = true;
               this.lienDepot = authState.organisation.idDis;
@@ -121,7 +124,7 @@ export class UsersRightsComponent implements OnInit {
               this.filterBase = {'idOrg': authState.organisation.idDis};
             }
             this.rightOptions = enmUserRolesAsso;
-            if (authState.user.rights === 'Admin_Asso' || authState.user.droit1 === true) {
+            if (authState.user.rights === 'Admin_Asso' || authState.user.gestMemb === true) {
               this.isUserAdmin = true;
             }
             break;
@@ -201,9 +204,6 @@ export class UsersRightsComponent implements OnInit {
             }
             if (event.filters.rights && event.filters.rights.value) {
               queryParms['rights'] = event.filters.rights.value;
-            }
-            if (event.filters.droit1 && event.filters.droit1.value) {
-              queryParms['droit1'] = event.filters.droit1.value;
             }
             if (event.filters.gestMemb && event.filters.gestMemb.value) {
               queryParms['gestMemb'] = event.filters.gestMemb.value;

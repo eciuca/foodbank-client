@@ -46,30 +46,22 @@
             <p-accordionTab i18n-header="@@UserRights" header="User Rights">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
-                        <label i18n="@@UserRightsManageAssociations" for="gestAsso">Manage Associations ?</label>
-                        <p-inputSwitch id="gestAsso" name="gestAsso" [ngModel]="user.gestAsso"></p-inputSwitch>
-                    </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label i18n="@@UserRightsManageAssociationsRights" for="droit1">Manage Association Rights ?</label>
-                        <p-inputSwitch id="droit1" name="droit1" [ngModel]="user.droit1"></p-inputSwitch>
+                        <label i18n="@@UserRightsManageMembers" for="gestMemb">Manage Members ?</label>
+                        <p-inputSwitch id="gestMemb" name="gestMemb" [ngModel]="user.gestMemb"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@UserRightsManageBeneficiaries" for="gestBen">Manage Beneficiaries ?</label>
                         <p-inputSwitch id="gestBen" name="gestBen" [ngModel]="user.gestBen"></p-inputSwitch>
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label i18n="@@UserRightsManageInventory" for="gestInv">Manage Inventory ?</label>
-                        <p-inputSwitch id="gestInv" name="gestInv" [ngModel]="user.gestInv"></p-inputSwitch>
-                    </div>
                     <div class="p-field p-col-12 p-md-4">
                         <label i18n="@@UserRightsManageFead" for="gestFead">Manage Fead ?</label>
                         <p-inputSwitch id="gestFead" name="gestFead" [ngModel]="user.gestFead"></p-inputSwitch>
                     </div>
-                    <div class="p-field p-col-12 p-md-4">
+                    <div *ngIf="!booIsOrganisation" class="p-field p-col-12 p-md-4">
                         <label i18n="@@UserRightsManageOCMW" for="gestCpas">Manage Cpas/OCMW ?</label>
                         <p-inputSwitch id="gestCpas" name="gestCpas" [ngModel]="user.gestCpas"></p-inputSwitch>
                     </div>
-                    <div class="p-field p-col-12 p-md-4">
+                    <div *ngIf="!booIsOrganisation" class="p-field p-col-12 p-md-4">
                         <label i18n="@@UserRightsManageGifts" for="gestDon">Manage Gifts ?</label>
                         <p-inputSwitch id="gestDon" name="gestDon" [ngModel]="user.gestDon"></p-inputSwitch>
                     </div>

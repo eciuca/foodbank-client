@@ -13,6 +13,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { OAuthService, UserInfo } from 'angular-oauth2-oidc';
 import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
     selector: 'app-root',
@@ -59,6 +60,7 @@ export class AppComponent implements OnInit {
         private store: Store<AppState>,
         private primengConfig: PrimeNGConfig,
         private authService: AuthService,
+        private http: HttpClient,
         @Inject(LOCALE_ID) public locale: string
     ) {
         this.baseurl = window.location.origin;
@@ -152,10 +154,22 @@ export class AppComponent implements OnInit {
         window.open(feadUrl, '_blank');
     }
 
-
+    private auditAccess(authState: AuthState) {
+        const auditObj = {'user': authState.user.idUser, 'idDis': '0'};
+        if (authState.organisation) {
+            auditObj['idDis'] = authState.organisation.idDis.toString();
+        }
+        const headerlog = {headers: {Authorization:  'Bearer ' + this.accessToken}};
+        this.http.jsonp('https://api.ipify.org/?format=jsonp', 'callback').subscribe((res: any)  => {
+            auditObj['ipAddress'] = res.ip;
+            console.log('audit object to log in', auditObj);
+            this.http.post ('/api/audit/', auditObj, headerlog ).subscribe();
+        });
+    }
     private processAuthState(authState: AuthState) {
         console.log('User lienbat is:', authState.user?.lienBat, 'Membre Langue is ', authState.user?.membreLangue);
        // const idLanguage = authState.user?.idLanguage;
+
         let idLanguage = null;
         if (authState.user?.membreLangue === 1) {
             idLanguage = 'fr-FR';
@@ -173,6 +187,7 @@ export class AppComponent implements OnInit {
         this.loggedInUserName = authState.user?.idUser;
 
         if (this.loggedInUserName) {
+            this.auditAccess(authState);
             this.loggedInBankName = authState.banque.bankName;
             this.loggedInOrganisationName = '';
             switch (authState.user.rights) {
@@ -294,54 +309,26 @@ export class AppComponent implements OnInit {
             );
         }
         // handle members
-        if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
-            this.menuLoggedInItems.push(
+        const commonSubItems = [
+            {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
+            {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
+        ];
+        if ( ['Admin_Banq', 'Admin_Asso'].includes(authState.user.rights)) {
+            commonSubItems.push(
+                {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users',  routerLink: ['/users/rights/']},
+            );
+        }
+        if (['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+            commonSubItems.push(
+                {label: 'Contacts', icon: 'pi pi-fw pi-users', routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]},
+            );
+        }
+        this.menuLoggedInItems.push(
                 {label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
-                    items: [
-                        {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users',  routerLink: ['/membres']},
-                        {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users',  routerLink: ['/users']},
-                        {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users',  routerLink: ['/users/rights/']},
-                    ]
+                    items: commonSubItems
                 }
             );
-        } else if (['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
-            if (authState.organisation && authState.organisation.depyN === true) {
-                // items for depot
-                this.menuLoggedInItems.push(
-                    {
-                        label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
-                        items: [
-                            {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
-                            {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
-                            {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users', routerLink: ['/users/rights/']},
-                            // tslint:disable-next-line:max-line-length
-                            {
-                                label: 'Contacts',
-                                icon: 'pi pi-fw pi-users',
-                                routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]
-                            }
-                        ]
-                    },
-                );
-            } else {
-                this.menuLoggedInItems.push(
-                    {
-                        label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
-                        items: [
-                            {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
-                            {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
-                            // tslint:disable-next-line:max-line-length
-                            {
-                                label: 'Contacts',
-                                icon: 'pi pi-fw pi-users',
-                                routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]
-                            }
-                        ]
-                    }
-                );
-            }
-        }
-            // Add Beneficiaries
+          // Add Beneficiaries
             if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
                 if (authState.user.gestBen) {
                     this.menuLoggedInItems.push(

@@ -59,7 +59,8 @@
                 <label i18n="@@City" for="city">City</label>
                 <input pInputText id="city" name="city" maxlength="20" [ngModel]="membre.city" />
             </div>
-
+        </div>
+        <div *ngIf="!booIsOrganisation" class="p-fluid p-formgrid p-grid">
 
             <div class="p-field p-col-12 p-md-4">
                 <label i18n="@@Car" for="veh">Car</label>

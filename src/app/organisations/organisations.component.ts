@@ -11,6 +11,8 @@ import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../auth/reducers';
 import {enmYn, enmStatusCompany, enmOrgCategories} from '../shared/enums';
 import {RegionEntityService} from './services/region-entity.service';
+import {DepotEntityService} from '../depots/services/depot-entity.service';
+import {QueryParams} from '@ngrx/data';
 
 
 @Component({
@@ -33,15 +35,20 @@ export class OrganisationsComponent implements OnInit {
     booShowArchived: boolean;
     booCanCreate: boolean;
     regions: any[];
+    depots: any[];
     YNOptions:  any[];
     bankName: string;
     lienBanque: number;
     depotName: string;
     first: number;
     regionSelected: number;
+    depotSelected: string;
+    classeFBBASelected: number;
+    statutSelected: string;
     statuts: any[];
     constructor(private organisationService: OrganisationEntityService,
                 private regionService: RegionEntityService,
+                private depotService: DepotEntityService,
                 private router: Router,
                 private route: ActivatedRoute,
                 private store: Store<AppState>
@@ -50,7 +57,6 @@ export class OrganisationsComponent implements OnInit {
         this.booShowArchived = false;
         this.orgCategories = enmOrgCategories;
         this.statuts = enmStatusCompany;
-        console.log('Statuts are:', this.statuts);
         this.YNOptions = enmYn;
         this.lienBanque = 0;
         this.bankName = '';
@@ -162,6 +168,18 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.refInt && event.filters.refInt.value !== null ) {
                 queryParms['refint'] = event.filters.refInt.value;
             }
+            if (this.regionSelected) {
+                queryParms['regId'] = this.regionSelected;
+            }
+            if (this.depotSelected) {
+                queryParms['lienDepot'] = this.depotSelected;
+            }
+            if (this.statutSelected && (this.statutSelected !== '')) {
+                queryParms['statut'] = this.statutSelected;
+            }
+            if (this.classeFBBASelected) {
+                queryParms['classeFBBA'] = this.classeFBBASelected;
+            }
         }
         this.loadPageSubject$.next(queryParms);
     }
@@ -170,12 +188,27 @@ export class OrganisationsComponent implements OnInit {
         this.filterBase = { 'isDepot': '0' };
         if (authState.banque) {
             this.lienBanque = authState.banque.bankId;
-            this.filterBase = { 'lienBanque': authState.banque.bankId};
+            this.filterBase['lienBanque'] = authState.banque.bankId;
             this.bankName = authState.banque.bankName;
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
+                    const  queryDepotParms: QueryParams = {};
+                    queryDepotParms['offset'] = '0';
+                    queryDepotParms['rows'] = '999';
+                    queryDepotParms['sortField'] = 'idDepot';
+                    queryDepotParms['sortOrder'] = '1';
+                    queryDepotParms['lienBanque'] = this.lienBanque.toString();
+                    queryDepotParms['actif'] = '1';
+                    this.depotService.getWithQuery(queryDepotParms)
+                        .subscribe(depots => {
+                            this.depots = [{ value: null, label: ''}];
+                            depots.map((depot) =>
+                                this.depots.push({value: depot.idDepot, label: depot.nom})
+                            );
+                        });
+
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
@@ -250,6 +283,24 @@ export class OrganisationsComponent implements OnInit {
         }
         this.loadPageSubject$.next(latestQueryParams);
     }
+    filterDepot(idDepot) {
+        console.log('Depot filter is now:', idDepot);
+        this.depotSelected = idDepot;
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest Depot Query Parms', latestQueryParams);
+        // when we switch f we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if (this.depotSelected) {
+            latestQueryParams['lienDepot'] = idDepot;
+        } else {
+            // delete idDepot entry
+            if (latestQueryParams.hasOwnProperty('lienDepot')) {
+                delete latestQueryParams['lienDepot'];
+            }
+        }
+        this.loadPageSubject$.next(latestQueryParams);
+    }
     filterClasseFBBA(classeFBBA) {
         console.log('ClasseFBBA filter is now:', classeFBBA);
         this.first = 0;
@@ -258,8 +309,10 @@ export class OrganisationsComponent implements OnInit {
         // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if ((classeFBBA >= 0)  && (classeFBBA != 999 )) {
+            this.classeFBBASelected = classeFBBA;
             latestQueryParams['classeFBBA'] = classeFBBA;
         } else {
+            this.classeFBBASelected = null;
             if (latestQueryParams.hasOwnProperty('classeFBBA')) {
                 delete latestQueryParams['classeFBBA'];
             }
@@ -269,6 +322,7 @@ export class OrganisationsComponent implements OnInit {
 
     filterStatut(statut) {
         console.log('statut filter is now:', statut);
+        this.statutSelected = statut;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
         console.log('Latest statut Query Parms', latestQueryParams);

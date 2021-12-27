@@ -143,7 +143,7 @@ export class MembreComponent implements OnInit {
                       case 'Admin_Banq':
                           this.lienBanque = authState.banque.bankId;
                           this.idCompany = authState.banque.bankShortName;
-                          if (authState.user.rights === 'Admin_Banq' ) {
+                          if (authState.user.rights === 'Admin_Banq' || authState.user.gestMemb) {
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;
@@ -161,7 +161,7 @@ export class MembreComponent implements OnInit {
                               this.depotName = authState.organisation.societe;
                           }
                           this.booIsOrganisation = true;
-                         if  (authState.user.rights === 'Admin_Asso') {
+                         if  (authState.user.rights === 'Admin_Asso' || authState.user.gestMemb) {
                              this.booCanSave = true;
                              if (this.booCalledFromTable) {
                                  this.booCanDelete = true;
