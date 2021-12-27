@@ -139,7 +139,7 @@ export class DonateursComponent implements OnInit {
     this.donateurHttpService.getDonateurReport(this.authService.accessToken, this.lienBanque).subscribe(
         (donateurs: any[] ) => {
           const cleanedList = donateurs.map(({ donateurId, lienBanque, pays, totalRecords, ...item }) => item);
-          this.excelService.exportAsExcelFile(cleanedList, 'donateur_data');
+          this.excelService.exportAsExcelFile(cleanedList, 'foodit.donateurs.' + new Date().getTime() + '.xlsx');
         });
   }
 

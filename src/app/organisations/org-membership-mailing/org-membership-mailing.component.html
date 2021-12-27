@@ -61,24 +61,15 @@
                  <p-message i18n-text="@@EmailIsMandatory" *ngIf="tocontact.invalid && orgMembershipForm.touched" severity="error" text="E-mail is required and must be valid"></p-message>
              </div>
              <div class="p-field p-col-12 p-md-4">
-               {{  getPresident() }}
+               
              </div>
+             
              <div class="p-field p-col-12 p-md-4">
-                 <label i18n="@@OrgMemberSendToOrgEmail?" for="sendtoorg">Send Mail To Org EMail?</label>
-                 <p-inputSwitch id="sendtoorg" name="sendtoorg" [(ngModel)]="sendMailToOrgContact"></p-inputSwitch>
+                 <label for="ccAdress">Cc: </label>
+                 <input #cc="ngModel" pInputText id="ccAdress" name="ccAdress" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [(ngModel)]="ccAdress" />
+                 <p-message i18n-text="@@EmailNotValid" *ngIf="cc.invalid && orgMembershipForm.touched" severity="error" text="E-mail must be valid"></p-message>
              </div>
-             <div class="p-field p-col-12 p-md-4">
-                 <label i18n="@@Cc" for="cctreasurer">CC: Treasurer</label>
-                 <input #cctreas="ngModel" pInputText id="cctreasurer" name="cctreasurer" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [(ngModel)]="orgtreasurer" />
-                 <p-message i18n-text="@@EmailNotValid" *ngIf="cctreas.invalid && orgMembershipForm.touched" severity="error" text="E-mail must be valid"></p-message>
-             </div>
-             <div class="p-field p-col-12 p-md-4">
-                 {{ organisation.nomTres}} {{this.organisation.prenomTres}}
-             </div>
-             <div class="p-field p-col-12 p-md-4">
-                 <label i18n="@@OrgMemberSendToOrgtreasurer?" for="sendtoorgtreasurer">Send Mail to Treasurer?</label>
-                 <p-inputSwitch id="sendtoorgtreasurer" name="sendtoorgtreasurer" [(ngModel)]="sendMailToOrgTreasurer"></p-inputSwitch>
-             </div>
+             
         </div>
 
         <div class="p-fluid p-formgrid p-grid">

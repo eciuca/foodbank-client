@@ -139,7 +139,7 @@ export class DepotsComponent implements OnInit {
     this.depotHttpService.getDepotReport(this.authService.accessToken, this.lienBanque).subscribe(
         (depots: any[] ) => {
           const cleanedList = depots.map(({ actif, isNew, totalRecords, ...item }) => item);
-          this.excelService.exportAsExcelFile(cleanedList, 'depot_data');
+          this.excelService.exportAsExcelFile(cleanedList, 'foodit.depots.' + new Date().getTime() + '.xlsx');
         });
   }
 

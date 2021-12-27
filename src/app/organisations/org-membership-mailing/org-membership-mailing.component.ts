@@ -36,12 +36,13 @@ export class OrgMembershipMailingComponent implements OnInit {
   bankName: string;
   bankMail: string;
   bankAccount: string;
-  bankTreasurer: string;
+  ccAdress: string;
   bankEntNr: string;
     bankAdress: string;
     bankZip: string;
     bankCity: string;
    bankTel: string;
+    bankTreas: string;
   bankCotAmount: number;
   bankCotExtraAmount: number;
   lienBanque: number;
@@ -53,12 +54,9 @@ export class OrgMembershipMailingComponent implements OnInit {
     // variables for file upload
     attachmentFileNames: string[];
     isYearlyMail: boolean;
-    sendMailToOrgContact: boolean;
-    sendMailToOrgTreasurer: boolean;
     typeMembership: string;
     orgsummary: OrgSummary;
     orgemail: string;
-    orgtresemail: string;
     dueDate: string;
     due: number;
   constructor(private organisationService: OrganisationEntityService,
@@ -78,15 +76,15 @@ export class OrgMembershipMailingComponent implements OnInit {
     this.bankName = '';
     this.bankMail = '';
     this.bankAccount = '';
-      this.bankTreasurer = '';
+      this.ccAdress = '';
       this.bankEntNr = '';
       this.bankAdress = '';
       this.bankZip = '';
       this.bankCity = '';
       this.bankTel = '';
+      this.bankTreas = '';
       this.orgemail = '';
-      this.orgtresemail = '';
-    this.bankCotAmount = 0;
+      this.bankCotAmount = 0;
     this.bankCotExtraAmount = 0;
     this.YNOptions = enmYn;
     this.totalOrgSummaries = 0;
@@ -95,9 +93,7 @@ export class OrgMembershipMailingComponent implements OnInit {
       this.mailing = new DefaultMailing();
       this.attachmentFileNames = [];
       this.isYearlyMail = true;
-      this.sendMailToOrgContact = true;
-      this.sendMailToOrgTreasurer = true;
-      this.cotYear = new Date().getFullYear() + 1 ;
+      this.cotYear = new Date().getFullYear() ;
       this.mailingSubject = '';
       this.cotYears = [
           {label: this.cotYear.toString(), value: this.cotYear.toString()},
@@ -121,14 +117,12 @@ export class OrgMembershipMailingComponent implements OnInit {
                 this.bankZip = authState.banque.cp;
                 this.bankCity = authState.banque.localite;
                 this.bankTel = authState.banque.bankTel;
-              this.bankTreasurer = authState.banque.idMemberTres.toString();
-              this.loadOrgSummaries(true);
-
+                this.loadOrgSummaries(true);
                 this.membreService.getByKey(authState.banque.idMemberTres)
                     .subscribe(
                         membre => {
                             if (membre !== null) {
-                                this.bankTreasurer = membre.prenom + ' ' + membre.nom;
+                                this.bankTreas = membre.prenom + ' ' + membre.nom;
                             }
                         });
                 this.banqProgService.getByKey(authState.banque.bankId)
@@ -149,9 +143,6 @@ export class OrgMembershipMailingComponent implements OnInit {
       if (this.organisation.email && this.organisation.email.trim() ) {
           this.orgemail = `${this.organisation.email.toLowerCase()}`;
       }
-      if (this.organisation.emailTres && this.organisation.emailTres.trim() ) {
-          this.orgtresemail = `${this.organisation.emailTres.toLowerCase()}`;
-      }
       let cotreal = 100 * this.bankCotAmount * this.organisation.cotMonths / 12 ;
       this.due = Math.round(cotreal * this.organisation.nPers) / 100;
       cotreal = Math.round(cotreal) / 100 ;
@@ -168,7 +159,7 @@ export class OrgMembershipMailingComponent implements OnInit {
           this.mailingText +=  ` van uw liefdadigheidsvereniging aan onze Voedselbank. De basis bijdrage bedraagt ${cotreal}  Euro voor ${this.organisation.cotMonths} maand per minderbedeelde` ;
           this.mailingText += `<br>Het gemiddeld aantal begunstigden voor het voorbije jaar voor uw vereniging bedroeg ${this.organisation.nPers}`;
           this.mailingText += `<br>Gelieve het bedrag van ${this.due} € te willen storten op ons  rekeningnr ${this.bankAccount} ten laatste tegen <b> ${this.dueDate} </b> met melding <b>"LEDENBIJDRAGE ${this.cotYear}"</b>.<br>`;
-          this.mailingText += `<br>Met dank bij voorbaat.<br><br>De Penningmeester,<br>${this.bankTreasurer}<br>${this.bankName}<br>Bedrijfsnummer: ${this.bankEntNr} `;
+          this.mailingText += `<br>Met dank bij voorbaat.<br><br>De Penningmeester,<br>${this.bankTreas}<br>${this.bankName}<br>Bedrijfsnummer: ${this.bankEntNr} `;
           this.mailingText += `Adres: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
           this.mailingText += '<br><br><i>Nota: Factuur te verkrijgen op aanvraag</i>';
       } else {
@@ -185,7 +176,7 @@ export class OrgMembershipMailingComponent implements OnInit {
           this.mailingText +=  ` de votre association soit ${cotreal}  Euro pour ${this.organisation.cotMonths} mois par bénéficiaire` ;
           this.mailingText += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de ${this.organisation.nPers} personnes`;
           this.mailingText += `<br>Merci de verser le montant de  ${this.due} € sur le compte ${this.bankAccount} au plus tard le <b> ${this.dueDate} </b> avec la mention <b>"COTISATION MEMBRES ${this.cotYear}.</b><br>`;
-          this.mailingText += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>${this.bankTreasurer}<br>${this.bankName}<br>N° Entreprise: ${this.bankEntNr} `;
+          this.mailingText += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>${this.bankTreas}<br>${this.bankName}<br>N° Entreprise: ${this.bankEntNr} `;
           this.mailingText += `Adresse: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
           this.mailingText += '<br><br><i>>Note: Facture sur demande</i>';
       }
@@ -193,7 +184,7 @@ export class OrgMembershipMailingComponent implements OnInit {
   getOrganisation(idDis: number) {
       this.organisationService.getByKey(idDis)
         .subscribe(organisation => {
-            this.orgtresemail =  '';
+            this.ccAdress =  '';
             this.orgemail = '';
             this.organisation = organisation;
             this.setMailContent();
@@ -225,22 +216,19 @@ export class OrgMembershipMailingComponent implements OnInit {
     }
 
   getTitle(): string {
-    return $localize`:@@BankOrgsTitleMembershipMailing:Membership Mailing to Organisation ${this.organisation.idDis} ${this.organisation.societe} `;
+    return $localize`:@@BankOrgsTitleMembershipMailing:To Organisation ${this.organisation.idDis} ${this.organisation.societe}. President: ${ this.organisation.nom } ${this.organisation.prenom } `;
   }
   getSubTitle():  string {
     return  $localize`:@@BankOrgsSubTitleMembershipMailing:Membership Fee based on bank regular fee ${this.bankCotAmount} and extra fee ${this.bankCotExtraAmount}`;
   }
-  getPresident(): string {
-    return  $localize`:@@OrgPresident:President: ${ this.organisation.nom } ${this.organisation.prenom }`;
-}
 
     sendmail(event: Event) {
         const mailListArray = [];
-        if (this.sendMailToOrgContact && this.orgemail) {
+        if (this.orgemail) {
             mailListArray.push(  this.orgemail  );
         }
-        if (this.sendMailToOrgTreasurer && this.orgtresemail) {
-            mailListArray.push( this.orgtresemail );
+        if (this.ccAdress) {
+            mailListArray.push( this.ccAdress );
         }
         console.log('mailListArray', mailListArray);
 
