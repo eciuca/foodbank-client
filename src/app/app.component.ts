@@ -328,16 +328,26 @@ export class AppComponent implements OnInit {
                 }
             );
           // Add Beneficiaries
-            if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+            if ( (['Bank', 'Admin_Banq'].includes(authState.user.rights))
+             || (authState.organisation && authState.organisation.gestBen && authState.user.gestBen)
+            ) {
                 if (authState.user.gestBen) {
                     this.menuLoggedInItems.push(
-                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart', routerLink: ['/beneficiaires']}
-                    );
-                }
-            } else if (['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
-                if (authState.organisation && authState.organisation.gestBen && authState.user.gestBen) {
-                    this.menuLoggedInItems.push(
-                        {label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',  routerLink: ['/beneficiaires']}
+                        {
+                            label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',
+                            items: [
+                                {
+                                    label: $localize`:@@menuBenefOverview:Overview`,
+                                    icon: 'pi pi-fw pi-heart',
+                                    routerLink: ['/organisations/orgbenefoverview/']
+                                },
+                                {
+                                    label: 'Details',
+                                    icon: 'pi pi-fw pi-heart',
+                                    routerLink: ['/beneficiaires']
+                                }
+                            ]
+                        }
                     );
                 }
             }

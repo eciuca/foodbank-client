@@ -428,51 +428,6 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab i18n-header="@@OrganisationBeneficiariesSummary" *ngIf="organisation.gestBen == false" header="Beneficiaries Summary">
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@OrganisationPopulation" for="nPers">Registered population</label>
-                        <p-inputNumber [ngModel]="organisation.nPers" id="nPers" name="nPers" mode="decimal" [showButtons]="true" inputId="nPers" [min]="0" >
-                        </p-inputNumber>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@OrganisationFamilies" for="nFam">Families</label>
-                        <p-inputNumber [ngModel]="organisation.nFam" id="nFam" name="nFam" mode="decimal" [showButtons]="true" inputId="nFam" [min]="0" >
-                        </p-inputNumber>
-                    </div>
-
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@OrganisationInfants" for="nNour">Infants (< 6 months)</label>
-                        <p-inputNumber [ngModel]="organisation.nNour" id="nNour" name="nNour" mode="decimal" [showButtons]="true" inputId="nNour" [min]="0" >
-                        </p-inputNumber>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@OrganisationBabies" for="nBebe">Babies (> 6 months and < 24 months)</label>
-                        <p-inputNumber [ngModel]="organisation.nBebe" id="nBebe" name="nBebe" mode="decimal" [showButtons]="true" inputId="nBebe" [min]="0"  >
-                        </p-inputNumber>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@OrganisationChildren" for="nEnf">Children (from 2 to 14 years)</label>
-                        <p-inputNumber [ngModel]="organisation.nEnf" id="nEnf" name="nEnf" mode="decimal" [showButtons]="true" inputId="nEnf" [min]="0"  >
-                        </p-inputNumber>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@OrganisationTeens" for="nAdo">Teens (from 14 to 18 years)</label>
-                        <p-inputNumber [ngModel]="organisation.nAdo" id="nAdo" name="nAdo" mode="decimal" [showButtons]="true" inputId="nAdo" [min]="0"  >
-                        </p-inputNumber>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@OrganisationYoungAdults" for="n1824">Young Adults( 18-24) </label>
-                        <p-inputNumber [ngModel]="organisation.n1824" id="n1824" name="n1824" mode="decimal" [showButtons]="true" inputId="n1824" [min]="0"  >
-                        </p-inputNumber>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@OrganisationSeniors" for="nSen">Seniors</label>
-                        <p-inputNumber [ngModel]="organisation.nSen" id="nSen" name="nSen" mode="decimal" [showButtons]="true" inputId="nSen" [min]="0"  >
-                        </p-inputNumber>
-                    </div>
-                </div>
-            </p-accordionTab>
             <p-accordionTab i18n-header="@@OrganisationPublicAuthorities"  *ngIf="organisation.lienBanque < 11" header="Relations with the Public authorities">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">

@@ -1,0 +1,124 @@
+<p-table #dt [value]="organisations" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
+         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
+         [globalFilterFields]="['societe','adresse', 'cp', 'localite']"
+         [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
+>
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                    {{ getTitle() }}
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@OrgRegion" for="regions">Region</label>
+                    <p-dropdown id ="regions" [options]="regions" (onChange)="filterRegion($event.value)"  >
+                        <ng-template let-option pTemplate="item">
+                            <span>{{option.label}}</span>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div *ngIf="!depotName" class="p-field p-col-12 p-md-2">
+                    <label i18n="@@OrgDepot" for="depots">Depot</label>
+                    <p-dropdown id ="depots" [options]="depots" (onChange)="filterDepot($event.value)"  >
+                        <ng-template let-option pTemplate="item">
+                            <span>{{option.label}}</span>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <label  i18n="@@OrganisationStatus" for="statut">Status Company</label>
+                    <p-dropdown [options]="statuts" id="statut" name="statut" (onChange)="filterStatut($event.value)" >
+                        <ng-template let-option pTemplate="item">
+                            <span>{{option.label}}</span>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="idDis">Id<p-sortIcon field="idDis"></p-sortIcon></th>
+            <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
+            <th pSortableColumn="gestBen">Managed<p-sortIcon field="gestBen"></p-sortIcon></th>
+            <th pSortableColumn="nFam">Fam<p-sortIcon field="nFam"></p-sortIcon></th>
+            <th pSortableColumn="nPers">Total<p-sortIcon field="nPers"></p-sortIcon></th>
+            <th pSortableColumn="nNour">Infants<p-sortIcon field="nNour"></p-sortIcon></th>
+            <th pSortableColumn="nBebe">Babies<p-sortIcon field="nBebe"></p-sortIcon></th>
+            <th pSortableColumn="nEnf">Children<p-sortIcon field="nEnf"></p-sortIcon></th>
+            <th pSortableColumn="nAdo">Ados<p-sortIcon field="nAdo"></p-sortIcon></th>
+            <th pSortableColumn="n1824">18-24<p-sortIcon field="n1824"></p-sortIcon></th>
+            <th pSortableColumn="nSen">Seniors<p-sortIcon field="nSen"></p-sortIcon></th>
+        </tr>
+        <tr>
+            <th>
+                <p-columnFilter type="text" matchMode="equals" [showMenu]="false" field="idDis" ></p-columnFilter>
+            </th>
+            <th colspan="2">
+                <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="societe" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="gestBen" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-organisation>
+        <tr (click)="handleSelect(organisation)">
+            <td>
+                {{ organisation.idDis }}
+            </td>
+            <td colspan="2">
+                {{ organisation.societe }}
+            </td>
+            <td>
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.gestBen, 'false-icon pi-times-circle': !organisation.gestBen}"></i>
+            </td>
+            <td>
+                {{ organisation.nFam }}
+            </td>
+            <td>
+                {{ organisation.nPers }}
+            </td>
+            <td>
+                {{ organisation.nNour }}
+            </td>
+            <td>
+                {{ organisation.nBebe }}
+            </td>
+            <td>
+                {{ organisation.nEnf }}
+            </td>
+            <td>
+                {{ organisation.nAdo }}
+            </td>
+            <td>
+                {{ organisation.n1824 }}
+            </td>
+            <td>
+                {{ organisation.nSen }}
+            </td>
+
+
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div i18n="@@OrganisationsSelected" class="p-d-flex p-ai-center p-jc-between">
+            There are {{totalRecords}} organisations in the selection.
+        </div>
+    </ng-template>
+</p-table>
+<p-dialog i18n-header="@@BeneficiaryDetails" header="Beneficiary Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+    <app-orgbenefdetail *ngIf="selectedIdDis$" [idDis$]="selectedIdDis$" (onOrganisationUpdate)="handleOrganisationUpdate($event)"
+                        (onOrganisationQuit)="handleOrganisationQuit()"></app-orgbenefdetail>
+</p-dialog>
+
