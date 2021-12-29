@@ -362,13 +362,18 @@ export class AppComponent implements OnInit {
                     }
                 );
             }
+        // handle  organisation(s) items
+        if ( ['admin', 'Admin_Banq'].includes(authState.user.rights)) {
+            this.menuLoggedInItems.push(
+                {label: 'Logins', icon: 'pi pi-fw pi-users', routerLink: ['/audits']},
+            );
+        }
             // add cpass and depots for admin
             if ( authState.user.rights === 'admin') {
                 this.menuLoggedInItems.push(
                     {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
                     {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
-                    {label: 'Logins', icon: 'pi pi-fw pi-users',  routerLink: ['/audits']},
-                );
+                 );
             }
             // add mailings for everyone
             this.menuLoggedInItems.push(

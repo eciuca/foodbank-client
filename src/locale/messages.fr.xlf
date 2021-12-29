@@ -11,7 +11,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">173</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
@@ -43,7 +43,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">171</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
@@ -75,7 +75,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.ts</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">177</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
@@ -107,7 +107,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.ts</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">175</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
@@ -139,7 +139,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">179</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
@@ -351,7 +351,7 @@
         <target>Mailings</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">375</context>
+          <context context-type="linenumber">380</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReports" datatype="html">
@@ -359,11 +359,11 @@
         <target>Rapports</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">385</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">384</context>
+          <context context-type="linenumber">389</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
@@ -371,7 +371,7 @@
         <target>Déconnecter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">395</context>
+          <context context-type="linenumber">400</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReportbyPage" datatype="html">
@@ -519,7 +519,7 @@
         <target> Il y a <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> logins dans la sélection.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
-          <context context-type="linenumber">114,116</context>
+          <context context-type="linenumber">113,115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankBasic" datatype="html">

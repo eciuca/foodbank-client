@@ -7,6 +7,9 @@ import {LazyLoadEvent} from 'primeng/api';
 import {DatePipe} from '@angular/common';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {enmApp, enmUserRoles} from '../shared/enums';
+import {select, Store} from '@ngrx/store';
+import {globalAuthState} from '../auth/auth.selectors';
+import {AuthState} from '../auth/reducers';
 
 @Component({
   selector: 'app-audits',
@@ -27,9 +30,12 @@ export class AuditsComponent implements OnInit {
   bankOptions: any[];
   rightOptions: any[];
   appOptions: any[];
+  filterBase: any;
+  lienBanque: number;
   constructor(
       private auditService: AuditEntityService,
       private banqueService: BanqueEntityService,
+      private store: Store,
       public datepipe: DatePipe
   ) {
     this.first = 0;
@@ -38,20 +44,12 @@ export class AuditsComponent implements OnInit {
     this.appOptions = enmApp;
   }
   ngOnInit() {
-    this.loading = true;
-    this.totalRecords = 0;
     this.fromDate = new Date();
     this.fromDate.setDate(this.fromDate.getDate() - 30);
     this.booRangeFilter = true;
     this.toDate = new Date();
     this.toDate.setDate(this.toDate.getDate() + 1);
-    this.banqueService.getAll()
-        .pipe(
-            tap( (banquesEntities) => {
-              console.log('Banques now loaded:', banquesEntities);
-              this.bankOptions = banquesEntities.map(({bankShortName}) => ({ 'label': bankShortName, 'value': bankShortName}));
-            })
-          ).subscribe();
+    this.reload();
     this.loadPageSubject$
         .pipe(
             filter(queryParams => !!queryParams),
@@ -69,11 +67,42 @@ export class AuditsComponent implements OnInit {
           this.auditService.setLoaded(true);
         });
   }
+  reload() {
+    this.loading = true;
+    this.totalRecords = 0;
 
+    this.store
+        .pipe(
+            select(globalAuthState),
+            map((authState) => {
+              this.initializeDependingOnUserRights(authState);
+            })
+        )
+        .subscribe();
+  }
+  private initializeDependingOnUserRights(authState: AuthState) {
+    if (authState.user && (authState.user.rights === 'Admin_Banq')) {
+      this.lienBanque = authState.banque.bankId;
+      this.filterBase = { 'shortBankName': authState.banque.bankShortName};
+    }
+
+
+    if (authState.user && (authState.user.rights === 'admin')) {
+      this.lienBanque = 0;
+      this.filterBase = {};
+      this.banqueService.getAll()
+          .pipe(
+              tap((banquesEntities) => {
+                console.log('Banques now loaded:', banquesEntities);
+                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+              })
+          ).subscribe();
+    }
+  }
   nextPage(event: LazyLoadEvent) {
     console.log('Lazy Loaded Event', event);
     this.loading = true;
-    const queryParms = {};
+    const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();
     queryParms['rows'] = event.rows.toString();
     queryParms['sortOrder'] = event.sortOrder.toString();
