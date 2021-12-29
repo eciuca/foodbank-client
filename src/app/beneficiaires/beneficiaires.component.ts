@@ -8,10 +8,9 @@ import {globalAuthState} from '../auth/auth.selectors';
 import {Router} from '@angular/router';
 import {AuthState} from '../auth/reducers';
 import {LazyLoadEvent} from 'primeng/api';
-import {Organisation} from '../organisations/model/organisation';
-import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
+import {enmYn} from '../shared/enums';
 
 
 @Component({
@@ -39,6 +38,7 @@ export class BeneficiairesComponent implements OnInit {
   bankid: number;
   bankName: string;
   orgName: string; // if logging in with asso role we need to display the organisation
+  YNOptions:  any[];
   constructor(private beneficiaireService: BeneficiaireEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private router: Router,
@@ -55,6 +55,7 @@ export class BeneficiairesComponent implements OnInit {
           {idDis: null, fullname: $localize`:@@organisations:Organisations` },
     ];
     this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
+    this.YNOptions = enmYn;
   }
 
   ngOnInit() {
@@ -167,6 +168,9 @@ export class BeneficiairesComponent implements OnInit {
       if (event.filters.localite && event.filters.localite.value) {
          queryParms['localite'] = event.filters.localite.value;
       }
+      if (event.filters.suspect && event.filters.suspect.value) {
+        queryParms['suspect'] = event.filters.suspect.value;
+      }
     }
     this.loadPageSubject$.next(queryParms);
   }
@@ -236,5 +240,13 @@ export class BeneficiairesComponent implements OnInit {
       latestQueryParams['actif'] = '1';
     }
     this.loadPageSubject$.next(latestQueryParams);
+  }
+
+  getSuspectStatus(coeff: number) {
+    if (coeff === 1) {
+      return 'N';
+    } else {
+      return 'Coeff ' + coeff;
+    }
   }
 }

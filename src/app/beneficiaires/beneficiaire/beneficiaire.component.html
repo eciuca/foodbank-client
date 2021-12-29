@@ -65,7 +65,7 @@
                 <label i18n="@@Country" for="pays">Country</label>
                 <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="beneficiaire.pays" ></p-dropdown>
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@NationalNumber" for="natnr">National Number</label>
                 <input pInputText id="natnr"  name="natnr" maxlength="50" [ngModel]="beneficiaire.natnr" />
             </div>
@@ -73,9 +73,14 @@
                 <label i18n="@@Email" for="email">E-mail</label>
                 <input pInputText id="email"  name="email" maxlength="50" [ngModel]="beneficiaire.email" />
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@FeadStatus" for="birb">Fead Status</label>
                 <p-dropdown [options]="feadStatuses" id="birb" name="birb" [ngModel]="beneficiaire.birb" ></p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@BeneficiaryCoeffSuspicion" for="coeff">Coeff Suspicion</label>
+                <p-inputNumber [ngModel]="beneficiaire.coeff" id="coeff" name="coeff" mode="decimal" [showButtons]="true" inputId="coeff" [min]="1" [max]="5">
+                </p-inputNumber>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@Cpas" for="selectedCpas">Cpas</label>

@@ -29,6 +29,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {CheckboxModule} from 'primeng/checkbox';
 import {OrgSummariesDataService} from '../organisations/services/orgsummaries-data.service';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 
 
@@ -68,7 +69,8 @@ const routes: Routes = [
         CalendarModule,
         MessageModule,
         InputSwitchModule,
-        CheckboxModule
+        CheckboxModule,
+        InputNumberModule
     ],
   providers: [
         BeneficiairesDataService,
