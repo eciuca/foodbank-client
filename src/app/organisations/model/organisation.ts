@@ -208,7 +208,7 @@ export interface Organisation {
 
     fax: string;
 
-    feadN: number;
+    feadN: boolean;
 
     remLivr: string;
 
@@ -344,7 +344,7 @@ export class DefaultOrganisation implements Organisation {
     emailTres: string;
     emailVp: string;
     fax: string;
-    feadN: number;
+    feadN: boolean;
     gestBen: boolean;
     gsm: string;
     gsmPres: string;
@@ -514,7 +514,7 @@ export class DefaultOrganisation implements Organisation {
         this.emailTres = '';
         this.emailVp = '';
         this.fax = '';
-        this.feadN = 0;
+        this.feadN = false;
         this.gestBen = false;
         this.gsm = '';
         this.gsmPres = '';

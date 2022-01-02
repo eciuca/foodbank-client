@@ -389,12 +389,38 @@ export class AppComponent implements OnInit {
                     {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreport/${authState.organisation.idDis}`]}
                 );
             }
-            // add fead
-            if ( authState.user.gestFead) {
+        // Add FEAD
+        if ( (['Bank', 'Admin_Banq'].includes(authState.user.rights))
+            && authState.user.gestFead)      {
+            this.menuLoggedInItems.push(
+                {
+                    label: 'FEAD', icon: 'pi pi-fw pi-map',
+                    items: [
+                        {
+                            label: $localize`:@@menuFEADOverview:Overview`,
+                            icon: 'pi pi-fw pi-map',
+                            routerLink: ['/organisations/orgfeadoverview/']
+                        },
+                        {
+                            label: $localize`:@@menuFEADApplication:Application` ,
+                                 icon: 'pi pi-fw pi-apple',
+                            command: (event) => { this.openFEAD(); }
+                         },
+                    ]
+                 }
+        );
+
+        } else {
+            if (authState.user.gestFead) {
                 this.menuLoggedInItems.push(
-                    {label: 'FEAD', icon: 'pi pi-fw pi-apple',   command: (event) => { this.openFEAD(); }}
+                    {
+                        label: $localize`:@@menuFEADApplication:Application` ,
+                        icon: 'pi pi-fw pi-apple',
+                        command: (event) => { this.openFEAD(); }
+                    }
                 );
             }
+        }
             // add logout
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}

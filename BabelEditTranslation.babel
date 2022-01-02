@@ -3003,6 +3003,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>FeadDetails</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>FeadRelations</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -5187,6 +5208,48 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>OrgFeadFamilies</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgFeadFromUs</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>OrgIdSorted</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -5755,6 +5818,27 @@
             </concept_node>
             <concept_node>
                 <name>OrgUserNewC</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgUsesFead</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -9493,6 +9577,48 @@
             </concept_node>
             <concept_node>
                 <name>menuEmployees</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>menuFEADApplication</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>menuFEADOverview</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>

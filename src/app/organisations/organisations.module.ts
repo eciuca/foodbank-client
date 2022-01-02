@@ -62,6 +62,8 @@ import {OrgauditsDataService} from './services/orgaudits-data.service';
 import {OrgauditEntityService} from './services/orgaudit-entity.service';
 import { OrgbenefoverviewComponent } from './orgbenefoverview/orgbenefoverview.component';
 import { OrgbenefdetailComponent } from './orgbenefoverview/orgbenefdetail/orgbenefdetail.component';
+import { OrgfeadoverviewComponent } from './orgfeadoverview/orgfeadoverview.component';
+import { OrgfeaddetailComponent } from './orgfeadoverview/orgfeaddetail/orgfeaddetail.component';
 const routes: Routes = [
     {
         path: 'contacts/:idDis',
@@ -86,6 +88,14 @@ const routes: Routes = [
     {
         path: 'orgbenefdetail/:idDis',
         component: OrgbenefdetailComponent
+    },
+    {
+        path: 'orgfeadoverview',
+        component: OrgfeadoverviewComponent
+    },
+    {
+        path: 'orgfeaddetail/:idDis',
+        component: OrgfeaddetailComponent
     },
     {
         path: 'regions/:bankId',
@@ -114,7 +124,7 @@ const routes: Routes = [
 
 @NgModule({
     // tslint:disable-next-line:max-line-length
-  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent, RegionsComponent, RegionComponent, OrgMembershipsComponent, OrgMembershipComponent, OrgMembershipMailingComponent, OrgauditsComponent, OrgauditComponent, OrgbenefoverviewComponent, OrgbenefdetailComponent],
+  declarations: [OrganisationsComponent, OrganisationComponent, OrgcontactsComponent, OrgcontactComponent, OrgReportComponent, OrgOneReportComponent, RegionsComponent, RegionComponent, OrgMembershipsComponent, OrgMembershipComponent, OrgMembershipMailingComponent, OrgauditsComponent, OrgauditComponent, OrgbenefoverviewComponent, OrgbenefdetailComponent, OrgfeadoverviewComponent, OrgfeaddetailComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
