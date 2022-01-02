@@ -1,0 +1,34 @@
+<p-panel  *ngIf="organisation">
+    <ng-template  pTemplate="header">
+        <div i18n="@@OrganisationHeader">
+            Organisation {{ organisation.idDis}} {{ organisation.societe}} Updated on {{organisation.lupdTs}} By {{organisation.lupdUserName}}
+        </div>
+    </ng-template>
+    <form  #orgForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(organisation, orgForm.value)" [disabled] = "orgForm.invalid" i18n-label="@@Save" label="Save"></button>
+            <button  type="button" pButton icon="pi pi-check" (click)="quit($event, organisation, orgForm, orgForm.dirty)" i18n-label="@@Return" label="Return" ></button>
+        </div>
+        <div class="p-fluid p-formgrid p-grid p-col-12">
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@OrgUsesFead" for="birbyN">Uses Fead ?</label>
+                <p-inputSwitch id="birbyN" name="birbyN" [ngModel]="organisation.birbyN"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@OrgFeadFamilies" for="nrFead">Fead Families</label>
+                <p-inputNumber [ngModel]="organisation.nrFead" id="nrFead" name="nrFead" mode="decimal" [showButtons]="true" inputId="nrFead" [min]="0" >
+                </p-inputNumber>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label for="birbCode">FEAD Code</label>
+                <input pInputText id="birbCode" name="birbCode" maxlength="10" [ngModel]="organisation.birbCode" />
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@OrgFeadFromUs" for="feadN">FEAD from us?</label>
+                <p-inputSwitch id="feadN" name="feadN" [ngModel]="organisation.feadN"></p-inputSwitch>
+            </div>
+
+        </div>
+        <p-confirmPopup></p-confirmPopup>
+    </form>
+</p-panel>
