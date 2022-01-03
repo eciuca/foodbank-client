@@ -6,10 +6,15 @@
                 <ng-template pTemplate="caption">
                     <div class="table-header">
                         <div class="p-fluid p-formgrid p-grid">
-                            <div i18n="@@EmployeesHeader" class="p-field p-col-12 p-md-4">
-                                Employees of {{bankName}}
+                            <div i18n="@@EmailFrom" class="p-field p-col-12 p-md-12">
+                                From  {{membreFullEmail}}
                             </div>
+                            <div class="p-field p-col-12 p-md-8">
+                                Origin: {{bankName}} {{orgName}}
+                            </div>
+
                             <div class="p-field p-col-12 p-md-4">
+                                <label for="filteredOrganisation">To:</label>
                                 <p-autoComplete [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations"
                                                 (completeMethod)="filterOrganisation($event)"
                                                 (onSelect)="filterOrganisationMembers($event.idDis);"
@@ -22,9 +27,7 @@
                                     </ng-template>
                                 </p-autoComplete>
                             </div>
-                            <div *ngIf="orgName != ''" class="p-field p-col-12 p-md-4">
-                                {{orgName}}
-                            </div>
+
 
                         </div>
                     </div>
@@ -56,6 +59,15 @@
         </p-accordionTab>
         <p-accordionTab i18n-header="@@Mail Content" header="Mail Content">
             <form  #sendForm="ngForm">
+                <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-6">
+                    <label i18n="@@MailSubject" for="idSubject">Subject</label>
+                    <input #idsubject="ngModel" pInputText id="idSubject" name="idSubject" required  minlength="6"  [(ngModel)]="mailingSubject" />
+                    <p-message i18n-text="@@MailSubjectIsMandatory" *ngIf="idsubject.invalid && idsubject.touched" severity="error" text="Mail subject is required and must be minimum 6 chars long"></p-message>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)" [disabled] = "sendForm.invalid" label="Send Email"></button>
+                </div>
                 <div class="p-field p-col-12 p-md-12">
                     <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" required i18n-placeholder="@@EnterYourMessage" placeholder="Enter your message" name="mailingText" [style]="{'height':'320px'}">
                         <p-header>
@@ -100,11 +112,9 @@
                     </p-editor>
                     <p-message i18n-text="@@MailingTextIsMandatory" *ngIf="idmailingtext.invalid && idmailingtext.touched" severity="error" text="Mail text is required"></p-message>
                 </div>
+                </div>
                 <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
-                       To: <textarea [rows]="5" [cols]="30" pInputTextarea name="mailingList" [(ngModel)]="mailingToList"></textarea>
-                    </div>
-                        <div class="p-field p-col-12 p-md-8">
+                    <div class="p-field p-col-12 p-md-8">
                         Attachments: {{attachmentFileNames.toString() }}
                     </div>
                     <div class="p-field p-col-12 p-md-4">
@@ -115,15 +125,7 @@
                             </ng-template>
                         </p-fileUpload>
                     </div>
-                    <div class="p-field p-col-12 p-md-6">
-                        <label i18n="@@MailSubject" for="idSubject">Subject</label>
-                        <input #idsubject="ngModel" pInputText id="idSubject" name="idSubject" required  minlength="6"  [(ngModel)]="mailingSubject" />
-                        <p-message i18n-text="@@MailSubjectIsMandatory" *ngIf="idsubject.invalid && idsubject.touched" severity="error" text="Mail subject is required and must be minimum 6 chars long"></p-message>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)" [disabled] = "sendForm.invalid" label="Send Email"></button>
-                    </div>
-            </div>
+                </div>
             </form>
         </p-accordionTab>
     </p-accordion>

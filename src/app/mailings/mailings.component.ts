@@ -32,6 +32,7 @@ export class MailingsComponent implements OnInit {
   bankid: number;
   bankName: string;
   membreEmail: string;
+  membreFullEmail: string;
   orgName: string;
   loading: boolean;
   totalRecords: number;
@@ -62,6 +63,7 @@ export class MailingsComponent implements OnInit {
     this.bankName = '';
     this.orgName = '';
     this.membreEmail = '';
+    this.membreFullEmail = '';
     this.mailingText = '';
     this.mailingSubject = '';
     this.mailing = new DefaultMailing();
@@ -111,6 +113,7 @@ export class MailingsComponent implements OnInit {
       this.bankid = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
       this.membreEmail = authState.user.membreEmail;
+      this.membreFullEmail = `${authState.user.membrePrenom} ${authState.user.membreNom}<${authState.user.membreEmail}>` ;
       this.filterBase = {'lienBanque': authState.banque.bankId};
       switch (authState.user.rights) {
         case 'Bank':
@@ -195,7 +198,7 @@ export class MailingsComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.mailing.subject = this.mailingSubject;
-        this.mailing.from = this.membreEmail;
+        this.mailing.from = this.membreFullEmail;
         this.mailing.to = mailListArray.join(',');
         // this.mailing.bodyText = 'Hello World';
         this.mailing.bodyText = this.mailingText;
@@ -269,10 +272,10 @@ export class MailingsComponent implements OnInit {
   }
 
   loadTextAreaWidget(event: any) {
-    console.log('Select mail event', event, this.selectedMembres);
+    // console.log('Select mail event', event, this.selectedMembres);
     // tslint:disable-next-line:max-line-length
     this.mailingToList = Array.prototype.map.call(this.selectedMembres, function (item) {
-      if (item.batmail.length > 0) {
+      if (item.batmail && item.batmail.length > 0) {
         return item.nom + ' ' + item.prenom + '<' + item.batmail + '>';
       } else {
         return '';
