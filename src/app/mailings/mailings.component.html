@@ -1,4 +1,7 @@
 <p-panel *ngIf="membres">
+    <p-dialog  *ngIf="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+        <app-mailaddress  (onMailAddressCreate)="handleMailAddressCreate($event)"  (onMailAddressQuit)="handleMailAddressQuit()"></app-mailaddress>
+    </p-dialog>
     <p-accordion>
         <p-accordionTab i18n-header="@@Mailing List" header="Mailing List" [selected]="true">
             <p-table [value]="membres" [(selection)]="selectedMembres" dataKey="batId" [loading]="loading"
@@ -12,7 +15,9 @@
                             <div class="p-field p-col-12 p-md-8">
                                 Origin: {{bankName}} {{orgName}}
                             </div>
-
+                            <div  class="p-field p-col-12 p-md-2">
+                                <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddAddressee" label="Add Addressee"></button>
+                            </div>
                             <div class="p-field p-col-12 p-md-4">
                                 <label for="filteredOrganisation">To:</label>
                                 <p-autoComplete [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations"
@@ -56,6 +61,7 @@
                 </ng-template>
 
             </p-table>
+
         </p-accordionTab>
         <p-accordionTab i18n-header="@@Mail Content" header="Mail Content">
             <form  #sendForm="ngForm">

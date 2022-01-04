@@ -24,6 +24,7 @@ import {MessageModule} from 'primeng/message';
 import {InputTextModule} from 'primeng/inputtext';
 import {FileUploadModule} from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import { MailaddressComponent } from './mailaddress/mailaddress.component';
 
 
 
@@ -35,7 +36,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    MailingsComponent
+    MailingsComponent,
+    MailaddressComponent
   ],
     imports: [
         CommonModule,

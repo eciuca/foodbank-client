@@ -1,0 +1,28 @@
+<p-panel  *ngIf="mailAddress">
+    <form  #mailAddressForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button  type="button" pButton icon="pi pi-check" (click)="save(mailAddress, mailAddressForm.value)" [disabled] = "mailAddressForm.invalid" i18n-label="@@Save" label="Save"></button>
+            <button  type="button" pButton icon="pi pi-check" (click)="quit(mailAddress, mailAddressForm.value)"  i18n-label="@@Return" label="Return"></button>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-4">
+                <label i18n="@@NameMandatory" for="name">Name *</label>
+                <input #name="ngModel" pInputText id="name" name="name" required minlength="2" maxlength="50" [ngModel]="mailAddress.name" />
+                <p-message i18n-text="@@NameIsMandatory" *ngIf="name.invalid && mailAddressForm.touched" severity="error" text="Name is required and must be minimum 2 chars long"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label i18n="@@NameFirstMandatory" for="firstname">First Name *</label>
+                <input #firstname="ngModel" pInputText id="firstname" name="firstname" required minlength="2" maxlength="50" [ngModel]="mailAddress.firstname" />
+                <p-message i18n-text="@@NameFirstIsMandatory" *ngIf="firstname.invalid && mailAddressForm.touched" severity="error" text="First Name is required and must be minimum 2 chars long"></p-message>
+            </div>
+            
+            <div class="p-field p-col-12 p-md-4">
+                <label i18n="@@EmailMandatory" for="email">E-mail *</label>
+                <input #email="ngModel" pInputText id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="100" [ngModel]="mailAddress.email" />
+                <p-message i18n-text="@@EmailIsMandatory" *ngIf="email.invalid && mailAddressForm.touched" severity="error" text="E-mail is required and must be valid"></p-message>
+            </div>
+           
+        </div>
+    </form>
+</p-panel>
+

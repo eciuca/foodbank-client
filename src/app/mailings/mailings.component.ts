@@ -16,6 +16,7 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {DefaultMailing, Mailing} from './model/mailing';
 import {HttpClient} from '@angular/common/http';
 import {FileUploadService} from './services/file-upload.service';
+import {MailAddress} from './model/mailaddress';
 
 
 
@@ -47,6 +48,7 @@ export class MailingsComponent implements OnInit {
   mailingToList: string;
   // variables for file upload
   attachmentFileNames: string[];
+  displayDialog: boolean;
 
   constructor(private membreMailService: MembreMailEntityService,
               private orgsummaryService: OrgSummaryEntityService,
@@ -90,6 +92,7 @@ export class MailingsComponent implements OnInit {
           console.log('Nb of Loaded membres ' + loadedMembres.length);
           this.totalRecords = loadedMembres.length;
           this.membres = loadedMembres;
+          this.displayDialog = false;
           this.loading = false;
           this.membreMailService.setLoaded(true);
         });
@@ -283,5 +286,17 @@ export class MailingsComponent implements OnInit {
     }).join('\n');
   }
 
+  showDialogToAdd() {
+      this.displayDialog = true;
+    }
+
+  handleMailAddressQuit() {
+    this.displayDialog = false;
+  }
+
+  handleMailAddressCreate(newMailAdress: MailAddress) {
+    this.membres.push({batId: 0,  'societe': $localize`:@@MailAddedManually:Added Manually`,'nom': newMailAdress.name,prenom:  newMailAdress.firstname, 'batmail': newMailAdress.email });
+    this.displayDialog = false;
+  }
 }
 

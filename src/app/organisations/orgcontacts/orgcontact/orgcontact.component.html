@@ -13,12 +13,12 @@
             <div class="p-field p-col-12 p-md-4">
                 <label i18n="@@NameMandatory" for="nom">Name *</label>
                 <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="2" maxlength="50" [ngModel]="orgcontact.nom" />
-                <p-message *ngIf="nom.invalid && orgcontactForm.touched" severity="error" text="Orgcontact Name is required and must be minimum 2 chars long"></p-message>
+                <p-message i18n-text="@@NameIsMandatory" *ngIf="nom.invalid && orgcontactForm.touched" severity="error" text="Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@NameFirstMandatory" for="prenom">First Name *</label>
                 <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="2" maxlength="50" [ngModel]="orgcontact.prenom" />
-                <p-message *ngIf="prenom.invalid && orgcontactForm.touched" severity="error" text="Contact First Name is required and must be minimum 2 chars long"></p-message>
+                <p-message i18n-text="@@NameFirstIsMandatory" *ngIf="prenom.invalid && orgcontactForm.touched" severity="error" text="First Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@Function" for="fonction">Function</label>
