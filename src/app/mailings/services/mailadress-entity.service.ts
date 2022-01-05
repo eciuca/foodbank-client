@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {EntityCollectionServiceBase, EntityCollectionServiceElementsFactory} from '@ngrx/data';
-import {MembreMail} from '../model/membreMail';
+import {MailAddress} from '../model/mailaddress';
 
 @Injectable()
-export class MembreMailEntityService
-    extends EntityCollectionServiceBase<MembreMail> {
+export class MailadressEntityService
+    extends EntityCollectionServiceBase<MailAddress> {
 
     constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-        super('MembreMail', serviceElementsFactory);
+        super('MailAddress', serviceElementsFactory);
     }
-
 }

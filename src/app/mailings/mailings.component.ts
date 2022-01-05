@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MembreMail} from '../membres/model/membreMail';
-import {MembreMailEntityService} from '../membres/services/membreMail-entity.service';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
@@ -17,6 +15,7 @@ import {DefaultMailing, Mailing} from './model/mailing';
 import {HttpClient} from '@angular/common/http';
 import {FileUploadService} from './services/file-upload.service';
 import {MailAddress} from './model/mailaddress';
+import {MailadressEntityService} from './services/mailadress-entity.service';
 
 
 
@@ -28,8 +27,8 @@ import {MailAddress} from './model/mailaddress';
 export class MailingsComponent implements OnInit {
 
   loadMemberSubject$ = new BehaviorSubject(null);
-  membres: MembreMail[];
-  selectedMembres: MembreMail[];
+  mailadresses: MailAddress[];
+  selectedMailadresses: MailAddress[];
   bankid: number;
   bankName: string;
   membreEmail: string;
@@ -50,8 +49,8 @@ export class MailingsComponent implements OnInit {
   attachmentFileNames: string[];
   displayDialog: boolean;
 
-  constructor(private membreMailService: MembreMailEntityService,
-              private orgsummaryService: OrgSummaryEntityService,
+  constructor(private orgsummaryService: OrgSummaryEntityService,
+              private mailAddressService: MailadressEntityService,
               private mailingService: MailingEntityService,
               private uploadService: FileUploadService,
               private messageService: MessageService,
@@ -86,15 +85,15 @@ export class MailingsComponent implements OnInit {
     this.loadMemberSubject$
         .pipe(
             filter(queryParams => !!queryParams),
-            mergeMap(queryParams => this.membreMailService.getWithQuery(queryParams))
+            mergeMap(queryParams => this.mailAddressService.getWithQuery(queryParams))
         )
-        .subscribe(loadedMembres => {
-          console.log('Nb of Loaded membres ' + loadedMembres.length);
-          this.totalRecords = loadedMembres.length;
-          this.membres = loadedMembres;
+        .subscribe(loadedMailadresses => {
+          console.log('Nb of Loaded membres ' + loadedMailadresses.length);
+          this.totalRecords = loadedMailadresses.length;
+          this.mailadresses = loadedMailadresses;
           this.displayDialog = false;
           this.loading = false;
-          this.membreMailService.setLoaded(true);
+          this.mailingService.setLoaded(true);
         });
     this.loadMembers();
 
@@ -277,9 +276,9 @@ export class MailingsComponent implements OnInit {
   loadTextAreaWidget(event: any) {
     // console.log('Select mail event', event, this.selectedMembres);
     // tslint:disable-next-line:max-line-length
-    this.mailingToList = Array.prototype.map.call(this.selectedMembres, function (item) {
-      if (item.batmail && item.batmail.length > 0) {
-        return item.nom + ' ' + item.prenom + '<' + item.batmail + '>';
+    this.mailingToList = Array.prototype.map.call(this.selectedMailadresses, function (item) {
+      if (item.email && item.email.length > 0) {
+        return item.nom + ' ' + item.prenom + '<' + item.email + '>';
       } else {
         return '';
       }
@@ -295,7 +294,7 @@ export class MailingsComponent implements OnInit {
   }
 
   handleMailAddressCreate(newMailAdress: MailAddress) {
-    this.membres.push({batId: 0,  'societe': $localize`:@@MailAddedManually:Added Manually`,'nom': newMailAdress.name,prenom:  newMailAdress.firstname, 'batmail': newMailAdress.email });
+    this.mailadresses.push({ 'societe': $localize`:@@MailAddedManually:Added Manually`,'nom': newMailAdress.nom,'prenom':  newMailAdress.prenom, 'email': newMailAdress.email });
     this.displayDialog = false;
   }
 }

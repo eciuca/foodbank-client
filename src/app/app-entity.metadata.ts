@@ -19,6 +19,7 @@ import {compareDons, Don} from './donations/model/don';
 import {compareRegions, Region} from './organisations/model/region';
 import {Audit, compareAudits} from './audits/model/audit';
 import {compareOrgaudits, Orgaudit} from './organisations/model/orgaudit';
+import {compareMailAddresses, MailAddress} from './mailings/model/mailaddress';
 
 
 export const appEntityMetadata: EntityMetadataMap = {
@@ -35,6 +36,11 @@ export const appEntityMetadata: EntityMetadataMap = {
     MembreMail: {
         sortComparer: compareMembreMails,
         selectId: (membreMail: MembreMail) => membreMail.batId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
+    },
+    MailAddress: {
+        sortComparer: compareMailAddresses,
+        selectId: (mailaddress: MailAddress) =>  mailaddress.email,
         entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
     },
     Mailing: {

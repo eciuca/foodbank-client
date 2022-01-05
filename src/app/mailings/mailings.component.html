@@ -1,11 +1,11 @@
-<p-panel *ngIf="membres">
+<p-panel *ngIf="mailadresses">
     <p-dialog  *ngIf="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
         <app-mailaddress  (onMailAddressCreate)="handleMailAddressCreate($event)"  (onMailAddressQuit)="handleMailAddressQuit()"></app-mailaddress>
     </p-dialog>
     <p-accordion>
         <p-accordionTab i18n-header="@@Mailing List" header="Mailing List" [selected]="true">
-            <p-table [value]="membres" [(selection)]="selectedMembres" dataKey="batId" [loading]="loading"
-                     [(first)]="first"  (onHeaderCheckboxToggle)="loadTextAreaWidget($event)" (onRowSelect)="loadTextAreaWidget($event)" (onRowUnselect)="loadTextAreaWidget($event)">
+            <p-table [value]="mailadresses" [(selection)]="selectedMailadresses" dataKey="batId" [loading]="loading"
+                     [(first)]="first" (onHeaderCheckboxToggle)="loadTextAreaWidget($event)" (onRowSelect)="loadTextAreaWidget($event)" (onRowUnselect)="loadTextAreaWidget($event)">
                 <ng-template pTemplate="caption">
                     <div class="table-header">
                         <div class="p-fluid p-formgrid p-grid">

@@ -8,8 +8,6 @@ import {FormsModule} from '@angular/forms';
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {OrgSummariesDataService} from '../organisations/services/orgsummaries-data.service';
 import {appEntityMetadata} from '../app-entity.metadata';
-import {MembreMailsDataService} from '../membres/services/membreMails-data.service';
-import {MembreMailEntityService} from '../membres/services/membreMail-entity.service';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {ConfirmationService} from 'primeng/api';
 import {PanelModule} from 'primeng/panel';
@@ -25,6 +23,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {FileUploadModule} from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { MailaddressComponent } from './mailaddress/mailaddress.component';
+import {MailAddressesDataService} from './services/mailaddresses-data.service';
+import {MailadressEntityService} from './services/mailadress-entity.service';
 
 
 
@@ -58,9 +58,9 @@ const routes: Routes = [
     ],
     providers: [
         MailingsDataService,
-        MembreMailsDataService,
+        MailAddressesDataService,
         MailingEntityService,
-        MembreMailEntityService,
+        MailadressEntityService,
         OrgSummariesDataService,
         OrgSummaryEntityService,
         ConfirmationService
@@ -71,12 +71,12 @@ export class MailingsModule {
         private eds: EntityDefinitionService,
         private entityDataService: EntityDataService,
         private mailingsDataService: MailingsDataService,
-        private membreMailsDataService: MembreMailsDataService,
+        private mailAddressesDataService: MailAddressesDataService,
         private orgSummariesDataService: OrgSummariesDataService
     ) {
         eds.registerMetadataMap(appEntityMetadata);
         entityDataService.registerService('Mailing', mailingsDataService);
-        entityDataService.registerService('MembreMail', membreMailsDataService);
+        entityDataService.registerService(' MailAddress', mailAddressesDataService);
         entityDataService.registerService('OrgSummary', orgSummariesDataService);
     }
 }
