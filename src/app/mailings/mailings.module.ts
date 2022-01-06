@@ -25,6 +25,10 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { MailaddressComponent } from './mailaddress/mailaddress.component';
 import {MailAddressesDataService} from './services/mailaddresses-data.service';
 import {MailadressEntityService} from './services/mailadress-entity.service';
+import {RegionsDataService} from '../organisations/services/regions-data.service';
+import {RegionEntityService} from '../organisations/services/region-entity.service';
+import {DialogModule} from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 
@@ -47,6 +51,7 @@ const routes: Routes = [
         FormsModule,
         PanelModule,
         AccordionModule,
+        DropdownModule,
         ToastModule,
         ConfirmPopupModule,
         EditorModule,
@@ -54,13 +59,16 @@ const routes: Routes = [
         MessageModule,
         InputTextModule,
         FileUploadModule,
-        InputTextareaModule
+        InputTextareaModule,
+        DialogModule
     ],
     providers: [
         MailingsDataService,
         MailAddressesDataService,
         MailingEntityService,
         MailadressEntityService,
+        RegionsDataService,
+        RegionEntityService,
         OrgSummariesDataService,
         OrgSummaryEntityService,
         ConfirmationService
@@ -72,11 +80,13 @@ export class MailingsModule {
         private entityDataService: EntityDataService,
         private mailingsDataService: MailingsDataService,
         private mailAddressesDataService: MailAddressesDataService,
+        private regionsDataService: RegionsDataService,
         private orgSummariesDataService: OrgSummariesDataService
     ) {
         eds.registerMetadataMap(appEntityMetadata);
         entityDataService.registerService('Mailing', mailingsDataService);
         entityDataService.registerService(' MailAddress', mailAddressesDataService);
+        entityDataService.registerService('Region', regionsDataService);
         entityDataService.registerService('OrgSummary', orgSummariesDataService);
     }
 }

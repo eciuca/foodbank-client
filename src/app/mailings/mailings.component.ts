@@ -16,6 +16,8 @@ import {HttpClient} from '@angular/common/http';
 import {FileUploadService} from './services/file-upload.service';
 import {MailAddress} from './model/mailaddress';
 import {MailadressEntityService} from './services/mailadress-entity.service';
+import {RegionEntityService} from '../organisations/services/region-entity.service';
+import {enmLanguageLegacy} from '../shared/enums';
 
 
 
@@ -27,6 +29,7 @@ import {MailadressEntityService} from './services/mailadress-entity.service';
 export class MailingsComponent implements OnInit {
 
   loadAddressSubject$ = new BehaviorSubject(null);
+  loadOrganisationSubject$ = new BehaviorSubject(null);
   mailadresses: MailAddress[];
   selectedMailadresses: MailAddress[];
   bankid: number;
@@ -40,6 +43,10 @@ export class MailingsComponent implements OnInit {
   selectedFilter: any;
   filterOptions: any[];
   filteredOrganisationsPrepend: any[];
+  regions: any[];
+  languages: any[];
+  regionSelected: number;
+  languageSelected: string;
   mailing: Mailing;
   mailingSubject: string;
   mailingText: string;
@@ -49,6 +56,7 @@ export class MailingsComponent implements OnInit {
   displayDialog: boolean;
 
   constructor(private orgsummaryService: OrgSummaryEntityService,
+              private regionService: RegionEntityService,
               private mailAddressService: MailadressEntityService,
               private mailingService: MailingEntityService,
               private uploadService: FileUploadService,
@@ -67,7 +75,7 @@ export class MailingsComponent implements OnInit {
     this.mailingSubject = '';
     this.mailing = new DefaultMailing();
     this.attachmentFileNames = [];
-
+    this.languages = enmLanguageLegacy;
   }
 
   ngOnInit(): void {
@@ -80,6 +88,17 @@ export class MailingsComponent implements OnInit {
             })
         )
         .subscribe();
+    this.loadOrganisationSubject$
+        .pipe(
+            filter(queryParams => !!queryParams),
+            mergeMap(queryParams => this.orgsummaryService.getWithQuery(queryParams))
+        )
+        .subscribe(loadedOrgSummaries => {
+          console.log('Nb of Loaded organisations ' + loadedOrgSummaries.length);
+          this.filterOptions = this.filteredOrganisationsPrepend.concat(loadedOrgSummaries.map((organisation) =>
+              Object.assign({}, organisation, {fullname: organisation.societe})
+              ))
+        });
     this.loadAddressSubject$
         .pipe(
             filter(queryParams => !!queryParams),
@@ -89,12 +108,18 @@ export class MailingsComponent implements OnInit {
           console.log('Nb of Loaded adresses ' + loadedMailadresses.length);
           this.totalRecords = loadedMailadresses.length;
           this.mailadresses = loadedMailadresses;
+          this.selectedMailadresses = [];
           this.displayDialog = false;
           this.loading = false;
           this.mailingService.setLoaded(true);
         });
     this.loadAddresses();
+    this.loadOrganisations();
 
+  }
+  private loadOrganisations() {
+    const queryOrganisationParms = {...this.filterBase};
+    this.loadOrganisationSubject$.next(queryOrganisationParms);
   }
 
   loadAddresses() {
@@ -113,13 +138,12 @@ export class MailingsComponent implements OnInit {
       this.bankid = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
       this.senderFullEmail = `${authState.user.membrePrenom} ${authState.user.membreNom}<${authState.user.membreEmail}>` ;
-      this.filterBase = {'lienBanque': authState.banque.bankId};
+      this.filterBase = {'lienBanque': authState.banque.bankId,'actif': '1'};
       switch (authState.user.rights) {
         case 'Bank':
         case 'Admin_Banq':
           this.filteredOrganisationsPrepend = [
-            {idDis: 0, societe: $localize`:@@bank:Bank`},
-            {idDis: null, societe: $localize`:@@organisations:Organisations`},
+              {idDis: null, societe: $localize`:@@organisations:Organisations`},
           ];
           this.selectedFilter = this.filteredOrganisationsPrepend[0];
           break;
@@ -128,28 +152,37 @@ export class MailingsComponent implements OnInit {
           this.orgName = authState.organisation.societe;
           this.filteredOrganisationsPrepend = [
             {idDis: authState.organisation.idDis, societe: $localize`:@@organisationMine:My Organisation`},
-            {idDis: 0, societe: $localize`:@@bank:Bank`},
             {idDis: null, societe: $localize`:@@organisations:Organisations`},
           ];
           this.selectedFilter = this.filteredOrganisationsPrepend[0];
           break;
         default:
       }
+      this.regionService.getWithQuery({'lienBanque': this.bankid.toString()})
+          .subscribe(regions => {
+            this.regions = [{ value: null, label: ''}];
+            regions.map((region) =>
+                this.regions.push({value: region.regId, label: region.regName})
+            );
+          });
     }
   }
 
   addOrganisationsToFilterOptions(event) {
-    const queryOrganisationParms: QueryParams = {};
+    const queryOrganisationParms = {...this.loadOrganisationSubject$.getValue()};
     queryOrganisationParms['lienBanque'] = this.bankid.toString();
     if (event.query.length > 0) {
       queryOrganisationParms['societe'] = event.query.toLowerCase();
     }
-    this.orgsummaryService.getWithQuery(queryOrganisationParms)
-        .subscribe(filteredOrganisations => {
-          this.filterOptions = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
-              Object.assign({}, organisation, {fullname: organisation.societe})
-          ));
-        });
+    if (this.regionSelected) {
+      queryOrganisationParms['regId'] = this.regionSelected;
+    }
+    if (this.languageSelected) {
+      queryOrganisationParms['language'] = this.languageSelected;
+    }
+    // console.log('IdDis:', idDis, 'My latest Query parms are:', latestQueryParams);
+    this.loadOrganisationSubject$.next(queryOrganisationParms);
+
   }
 
 
@@ -164,8 +197,56 @@ export class MailingsComponent implements OnInit {
         delete latestQueryParams['lienDis'];
       }
     }
+    if (this.regionSelected) {
+      latestQueryParams['regId'] = this.regionSelected;
+    }
+    if (this.languageSelected) {
+      latestQueryParams['language'] = this.languageSelected;
+    }
     // console.log('IdDis:', idDis, 'My latest Query parms are:', latestQueryParams);
     this.loadAddressSubject$.next(latestQueryParams);
+  }
+  filterLanguage(language) {
+    console.log('Language filter is now:', language);
+    this.languageSelected = language;
+    this.first = 0;
+    const latestQueryParams = {...this.loadAddressSubject$.getValue()};
+    console.log('Latest Region Query Parms', latestQueryParams);
+    // when we switch from active to archived list and vice versa , we need to restart from first page
+    this.first = 0;
+    if (this.languageSelected) {
+      latestQueryParams['language'] = language;
+    } else {
+      // delete regId entry
+      if (latestQueryParams.hasOwnProperty('language')) {
+        delete latestQueryParams['language'];
+      }
+    }
+    this.loadAddressSubject$.next(latestQueryParams);
+  }
+  filterRegion(regId) {
+    console.log('Region filter is now:', regId);
+    this.regionSelected = regId;
+    this.first = 0;
+    const latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
+    const latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
+    console.log('Latest Region Query Parms', latestAddressQueryParams);
+    // when we switch , we need to restart from first page
+    this.first = 0;
+    if (this.regionSelected) {
+      latestAddressQueryParams['regId'] = regId;
+      latestOrgQueryParams['regId'] = regId;
+    } else {
+      // delete regId entry
+      if (latestAddressQueryParams.hasOwnProperty('regId')) {
+        delete latestAddressQueryParams['regId'];
+      }
+      if (latestOrgQueryParams.hasOwnProperty('regId')) {
+        delete latestOrgQueryParams['regId'];
+      }
+    }
+    this.loadAddressSubject$.next(latestAddressQueryParams);
+    this.loadOrganisationSubject$.next(latestOrgQueryParams);
   }
 
   sendmail(event: Event) {
@@ -295,5 +376,8 @@ export class MailingsComponent implements OnInit {
     this.mailadresses.push({ 'societe': $localize`:@@MailAddedManually:Added Manually`,'nom': newMailAdress.nom,'prenom':  newMailAdress.prenom, 'email': newMailAdress.email });
     this.displayDialog = false;
   }
+
+
+
 }
 

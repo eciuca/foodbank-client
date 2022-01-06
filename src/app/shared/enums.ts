@@ -29,7 +29,7 @@ export let enmLanguage = [
     {label: 'Deutsch', value: 4}
 ];
 export let enmLanguageLegacy = [
-    {label: 'Unspecified', value: ''},
+    {label: '', value: ''},
     {label: 'Français', value: 'fr'},
     {label: 'Nederlands', value: 'nl' },
     {label: 'English', value: 'en'},

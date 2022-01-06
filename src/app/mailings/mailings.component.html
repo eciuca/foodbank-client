@@ -19,6 +19,24 @@
                             <div  class="p-field p-col-12 p-md-2">
                                 <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddAddressee" label="Add Addressee"></button>
                             </div>
+                            <div class="p-field p-col-12 p-md-2">
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                <label i18n="@@OrgRegion" for="regions">Region</label>
+                                <p-dropdown id ="regions" [options]="regions" (onChange)="filterRegion($event.value)"  >
+                                    <ng-template let-option pTemplate="item">
+                                        <span>{{option.label}}</span>
+                                    </ng-template>
+                                </p-dropdown>
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                <label i18n="@@MailLanguage" for="languages">Language</label>
+                                <p-dropdown id ="languages" [options]="languages" (onChange)="filterLanguage($event.value)"  >
+                                    <ng-template let-option pTemplate="item">
+                                        <span>{{option.label}}</span>
+                                    </ng-template>
+                                </p-dropdown>
+                            </div>
                             <div class="p-field p-col-12 p-md-4">
                                 <label for="filteredOrganisation">To:</label>
                                 <p-autoComplete [(ngModel)]="selectedFilter" [suggestions]="filterOptions"

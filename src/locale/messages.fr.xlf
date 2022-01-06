@@ -2259,11 +2259,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">146</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">155</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
@@ -2723,7 +2723,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">99</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
@@ -3010,12 +3010,40 @@
           <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="OrgRegion" datatype="html">
+        <source>Region</source>
+        <target>Région</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeadoverview.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MailLanguage" datatype="html">
+        <source>Language</source>
+        <target>Langue</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="EmailsSelected" datatype="html">
         <source> There are <x id="INTERPOLATION" equiv-text="{{selectedMailadresses ? selectedMailadresses.length : 0 }}"/> emails selected from <x id="INTERPOLATION_1" equiv-text="{{mailadresses ? mailadresses.length : 0 }}"/>. </source>
         <target> Il y a <x id="INTERPOLATION" equiv-text="{{selectedMailadresses ? selectedMailadresses.length : 0 }}"/> e-mails sélectionnés à partir de <x id="INTERPOLATION_1" equiv-text="{{mailadresses ? mailadresses.length : 0 }}"/>.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">62,64</context>
+          <context context-type="linenumber">80,82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Mail Content" datatype="html">
@@ -3023,7 +3051,7 @@
         <target>Contenu du Mail</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MailSubject" datatype="html">
@@ -3031,7 +3059,7 @@
         <target>Sujet</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MailSubjectIsMandatory" datatype="html">
@@ -3039,7 +3067,7 @@
         <target>Le sujet du mail est obligatoire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">75</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SendEmail" datatype="html">
@@ -3047,7 +3075,7 @@
         <target>Envoyer le Mail</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
@@ -3059,7 +3087,7 @@
         <target>Le texte du mail est obligatoire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">140</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
@@ -3071,7 +3099,7 @@
         <target>Choisissez un fichier</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">148</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
@@ -3083,35 +3111,11 @@
         <target>Ajoutez des fichiers à votre mail</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">151</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
           <context context-type="linenumber">127</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="bank" datatype="html">
-        <source>Bank</source>
-        <target>Banque</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">121</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">131</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">173</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">106</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="organisationMine" datatype="html">
@@ -3119,7 +3123,7 @@
         <target>Mon Organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSendMaxListError" datatype="html">
@@ -3127,7 +3131,7 @@
         <target>Vous avez <x id="PH" equiv-text="mailListArray.length"/> destinataires. Le maximum est 3.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">261</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSendNoListError" datatype="html">
@@ -3135,7 +3139,7 @@
         <target>Vous n'avez pas spécifié de destinataires. Sélectionnez les d'abord.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">270</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3147,7 +3151,7 @@
         <target>Voulez vous envoyer ce message?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">197</context>
+          <context context-type="linenumber">278</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3159,7 +3163,7 @@
         <target>Le message a été envoyé</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">212</context>
+          <context context-type="linenumber">293</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3171,7 +3175,7 @@
         <target>The message n'a pu être envoyé: erreur: <x id="PH" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">220</context>
+          <context context-type="linenumber">301</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3183,7 +3187,7 @@
         <target>Téléchargement Fichier Mail a Réussi</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">246</context>
+          <context context-type="linenumber">327</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3195,7 +3199,7 @@
         <target>Le fichier <x id="PH" equiv-text="file.name"/> a été téléchargé</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">247</context>
+          <context context-type="linenumber">328</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3207,7 +3211,7 @@
         <target>Téléchargement Fichier Mail a échoué</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">259</context>
+          <context context-type="linenumber">340</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3219,7 +3223,7 @@
         <target>Erreur téléchargement fichier <x id="PH" equiv-text="file.name"/>. <x id="PH_1" equiv-text="errorMsg"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">260</context>
+          <context context-type="linenumber">341</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3231,7 +3235,7 @@
         <target>Ajouté manuellement</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">295</context>
+          <context context-type="linenumber">376</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Active" datatype="html">
@@ -3400,6 +3404,22 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.html</context>
           <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bank" datatype="html">
+        <source>Bank</source>
+        <target>Banque</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
+          <context context-type="linenumber">173</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotMembersTitleArchive" datatype="html">
@@ -4284,22 +4304,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.ts</context>
           <context context-type="linenumber">236</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="OrgRegion" datatype="html">
-        <source>Region</source>
-        <target>Région</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeadoverview.component.html</context>
-          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgDepot" datatype="html">
