@@ -26,20 +26,19 @@ import {MailadressEntityService} from './services/mailadress-entity.service';
 })
 export class MailingsComponent implements OnInit {
 
-  loadMemberSubject$ = new BehaviorSubject(null);
+  loadAddressSubject$ = new BehaviorSubject(null);
   mailadresses: MailAddress[];
   selectedMailadresses: MailAddress[];
   bankid: number;
   bankName: string;
-  membreEmail: string;
-  membreFullEmail: string;
+  senderFullEmail: string;
   orgName: string;
   loading: boolean;
   totalRecords: number;
   first: number;
   filterBase: any;
-  filteredOrganisation: any;
-  filteredOrganisations: any[];
+  selectedFilter: any;
+  filterOptions: any[];
   filteredOrganisationsPrepend: any[];
   mailing: Mailing;
   mailingSubject: string;
@@ -63,8 +62,7 @@ export class MailingsComponent implements OnInit {
     this.first = 0;
     this.bankName = '';
     this.orgName = '';
-    this.membreEmail = '';
-    this.membreFullEmail = '';
+    this.senderFullEmail = '';
     this.mailingText = '';
     this.mailingSubject = '';
     this.mailing = new DefaultMailing();
@@ -82,40 +80,39 @@ export class MailingsComponent implements OnInit {
             })
         )
         .subscribe();
-    this.loadMemberSubject$
+    this.loadAddressSubject$
         .pipe(
             filter(queryParams => !!queryParams),
             mergeMap(queryParams => this.mailAddressService.getWithQuery(queryParams))
         )
         .subscribe(loadedMailadresses => {
-          console.log('Nb of Loaded membres ' + loadedMailadresses.length);
+          console.log('Nb of Loaded adresses ' + loadedMailadresses.length);
           this.totalRecords = loadedMailadresses.length;
           this.mailadresses = loadedMailadresses;
           this.displayDialog = false;
           this.loading = false;
           this.mailingService.setLoaded(true);
         });
-    this.loadMembers();
+    this.loadAddresses();
 
   }
 
-  loadMembers() {
-    console.log('Entering loadmembers');
+  loadAddresses() {
+    console.log('Entering loadAddresses');
     this.loading = true;
     const queryParms = {...this.filterBase};
 
-    if (this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
-      queryParms['lienDis'] = this.filteredOrganisation.idDis;
+    if (this.selectedFilter && this.selectedFilter.idDis != null) {
+      queryParms['lienDis'] = this.selectedFilter.idDis;
     }
-    this.loadMemberSubject$.next(queryParms);
+    this.loadAddressSubject$.next(queryParms);
   }
 
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.banque) {
       this.bankid = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
-      this.membreEmail = authState.user.membreEmail;
-      this.membreFullEmail = `${authState.user.membrePrenom} ${authState.user.membreNom}<${authState.user.membreEmail}>` ;
+      this.senderFullEmail = `${authState.user.membrePrenom} ${authState.user.membreNom}<${authState.user.membreEmail}>` ;
       this.filterBase = {'lienBanque': authState.banque.bankId};
       switch (authState.user.rights) {
         case 'Bank':
@@ -124,7 +121,7 @@ export class MailingsComponent implements OnInit {
             {idDis: 0, societe: $localize`:@@bank:Bank`},
             {idDis: null, societe: $localize`:@@organisations:Organisations`},
           ];
-          this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
+          this.selectedFilter = this.filteredOrganisationsPrepend[0];
           break;
         case 'Asso':
         case 'Admin_Asso':
@@ -134,14 +131,14 @@ export class MailingsComponent implements OnInit {
             {idDis: 0, societe: $localize`:@@bank:Bank`},
             {idDis: null, societe: $localize`:@@organisations:Organisations`},
           ];
-          this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
+          this.selectedFilter = this.filteredOrganisationsPrepend[0];
           break;
         default:
       }
     }
   }
 
-  filterOrganisation(event) {
+  addOrganisationsToFilterOptions(event) {
     const queryOrganisationParms: QueryParams = {};
     queryOrganisationParms['lienBanque'] = this.bankid.toString();
     if (event.query.length > 0) {
@@ -149,16 +146,17 @@ export class MailingsComponent implements OnInit {
     }
     this.orgsummaryService.getWithQuery(queryOrganisationParms)
         .subscribe(filteredOrganisations => {
-          this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
+          this.filterOptions = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
               Object.assign({}, organisation, {fullname: organisation.societe})
           ));
         });
   }
 
-  filterOrganisationMembers(idDis: number) {
+
+  filterAddresses(idDis: number) {
     // when we switch we need to restart from first page
     this.first = 0;
-    const latestQueryParams = {...this.loadMemberSubject$.getValue()};
+    const latestQueryParams = {...this.loadAddressSubject$.getValue()};
     if (idDis != null) {
       latestQueryParams['lienDis'] = idDis;
     } else {
@@ -167,7 +165,7 @@ export class MailingsComponent implements OnInit {
       }
     }
     // console.log('IdDis:', idDis, 'My latest Query parms are:', latestQueryParams);
-    this.loadMemberSubject$.next(latestQueryParams);
+    this.loadAddressSubject$.next(latestQueryParams);
   }
 
   sendmail(event: Event) {
@@ -200,7 +198,7 @@ export class MailingsComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.mailing.subject = this.mailingSubject;
-        this.mailing.from = this.membreFullEmail;
+        this.mailing.from = this.senderFullEmail;
         this.mailing.to = mailListArray.join(',');
         // this.mailing.bodyText = 'Hello World';
         this.mailing.bodyText = this.mailingText;
@@ -273,7 +271,7 @@ export class MailingsComponent implements OnInit {
     this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
   }
 
-  loadTextAreaWidget(event: any) {
+  loadTextAreaWidget() {
     // console.log('Select mail event', event, this.selectedMembres);
     // tslint:disable-next-line:max-line-length
     this.mailingToList = Array.prototype.map.call(this.selectedMailadresses, function (item) {

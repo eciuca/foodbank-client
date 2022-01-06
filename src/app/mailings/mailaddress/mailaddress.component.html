@@ -6,14 +6,14 @@
         </div>
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@NameMandatory" for="name">Name *</label>
-                <input #name="ngModel" pInputText id="name" name="name" required minlength="2" maxlength="50" [ngModel]="mailAddress.nom" />
-                <p-message i18n-text="@@NameIsMandatory" *ngIf="name.invalid && mailAddressForm.touched" severity="error" text="Name is required and must be minimum 2 chars long"></p-message>
+                <label i18n="@@NameMandatory" for="nom">Name *</label>
+                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="2" maxlength="50" [ngModel]="mailAddress.nom" />
+                <p-message i18n-text="@@NameIsMandatory" *ngIf="nom.invalid && mailAddressForm.touched" severity="error" text="Name is required and must be minimum 2 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@NameFirstMandatory" for="firstname">First Name *</label>
-                <input #firstname="ngModel" pInputText id="firstname" name="firstname" required minlength="2" maxlength="50" [ngModel]="mailAddress.firstname" />
-                <p-message i18n-text="@@NameFirstIsMandatory" *ngIf="firstname.invalid && mailAddressForm.touched" severity="error" text="First Name is required and must be minimum 2 chars long"></p-message>
+                <label i18n="@@NameFirstMandatory" for="prenom">First Name *</label>
+                <input #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="2" maxlength="50" [ngModel]="mailAddress.prenom" />
+                <p-message i18n-text="@@NameFirstIsMandatory" *ngIf="prenom.invalid && mailAddressForm.touched" severity="error" text="First Name is required and must be minimum 2 chars long"></p-message>
             </div>
             
             <div class="p-field p-col-12 p-md-4">

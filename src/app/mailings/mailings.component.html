@@ -4,13 +4,14 @@
     </p-dialog>
     <p-accordion>
         <p-accordionTab i18n-header="@@Mailing List" header="Mailing List" [selected]="true">
-            <p-table [value]="mailadresses" [(selection)]="selectedMailadresses" dataKey="batId" [loading]="loading"
-                     [(first)]="first" (onHeaderCheckboxToggle)="loadTextAreaWidget($event)" (onRowSelect)="loadTextAreaWidget($event)" (onRowUnselect)="loadTextAreaWidget($event)">
+            <p-table [value]="mailadresses" [(selection)]="selectedMailadresses" dataKey="email" [loading]="loading"
+                     [paginator]="true" [rows]="10"
+                     [(first)]="first" (onHeaderCheckboxToggle)="loadTextAreaWidget()" (onRowSelect)="loadTextAreaWidget()" (onRowUnselect)="loadTextAreaWidget()">
                 <ng-template pTemplate="caption">
                     <div class="table-header">
                         <div class="p-fluid p-formgrid p-grid">
                             <div i18n="@@EmailFrom" class="p-field p-col-12 p-md-12">
-                                From  {{membreFullEmail}}
+                                From  {{senderFullEmail}}
                             </div>
                             <div class="p-field p-col-12 p-md-8">
                                 Origin: {{bankName}} {{orgName}}
@@ -20,9 +21,9 @@
                             </div>
                             <div class="p-field p-col-12 p-md-4">
                                 <label for="filteredOrganisation">To:</label>
-                                <p-autoComplete [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations"
-                                                (completeMethod)="filterOrganisation($event)"
-                                                (onSelect)="filterOrganisationMembers($event.idDis);"
+                                <p-autoComplete [(ngModel)]="selectedFilter" [suggestions]="filterOptions"
+                                                (completeMethod)="addOrganisationsToFilterOptions($event)"
+                                                (onSelect)="filterAddresses($event.idDis);"
                                                 [forceSelection]="true" id="filteredOrganisation"
                                                 name="filteredOrganisation" field="societe" [dropdown]="true">
                                     <ng-template let-organisation pTemplate="item">
@@ -43,23 +44,25 @@
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
                         <th>Name</th>
-                        <th>First Name</th>
                         <th>Organisation</th>
                         <th>Email</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-membre>
+                <ng-template pTemplate="body" let-mailAddress>
                     <tr>
                         <td>
-                            <p-tableCheckbox [value]="membre"></p-tableCheckbox>
+                            <p-tableCheckbox [value]="mailAddress"></p-tableCheckbox>
                         </td>
-                        <td>{{membre.nom}}</td>
-                        <td>{{membre.prenom}}</td>
-                        <td>{{membre.societe}}</td>
-                        <td>{{membre.batmail}}</td>
+                        <td>{{mailAddress.nom}} {{mailAddress.prenom}}</td>
+                        <td>{{mailAddress.societe}}</td>
+                        <td>{{mailAddress.email}}</td>
                     </tr>
                 </ng-template>
-
+                <ng-template pTemplate="summary">
+                    <div i18n="@@EmailsSelected" class="p-d-flex p-ai-center p-jc-between">
+                        There are {{selectedMailadresses ? selectedMailadresses.length : 0 }} emails   selected from {{mailadresses ? mailadresses.length : 0 }}.
+                    </div>
+                </ng-template>
             </p-table>
 
         </p-accordionTab>
