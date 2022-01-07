@@ -29,6 +29,7 @@ import {RegionsDataService} from '../organisations/services/regions-data.service
 import {RegionEntityService} from '../organisations/services/region-entity.service';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
+import {CheckboxModule} from 'primeng/checkbox';
 
 
 
@@ -60,7 +61,8 @@ const routes: Routes = [
         InputTextModule,
         FileUploadModule,
         InputTextareaModule,
-        DialogModule
+        DialogModule,
+        CheckboxModule
     ],
     providers: [
         MailingsDataService,

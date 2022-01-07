@@ -100,6 +100,10 @@ export let enmOrgCategories = [
     {label: $localize`:@@OrgCategoryPrison:Prisoner Support` , value: 14 },
     {label: $localize`:@@OrgCategoryRefugee:Shelter for Refugees` , value: 15 },
 ];
+export let enmMailGroups = [
+    {label: $localize`:@@OrgMailGroupContacts:Org Contacts` , value: null },
+    {label: $localize`:@@OrgMailGroupOrgItMgrs:Org It Mgrs` , value: 1 },
+];
 
 
 

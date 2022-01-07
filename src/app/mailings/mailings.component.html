@@ -37,16 +37,32 @@
                                     </ng-template>
                                 </p-dropdown>
                             </div>
+                            <div class="p-field p-col-12 p-md-1">
+                                <label i18n="@@FilterAgreed" for="booOnlyAgreed">Only Agreed Orgs?</label>
+                                <p-checkbox [value]="booOnlyAgreed" binary="true" name="booOnlyAgreed" id="booOnlyAgreed" (onChange)="filterAgreed($event)"></p-checkbox>
+                            </div>
+                            <div class="p-field p-col-12 p-md-1">
+                                <label i18n="@@FilterFead" for="booOnlyFead">Only Fead by Us Orgs?</label>
+                                <p-checkbox [value]="booOnlyFead" binary="true" name="booOnlyFead" id="booOnlyFead" (onChange)="filterFead($event)"></p-checkbox>
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                <label i18n="@@MailGroup" for="mailgroup">Mail Group</label>
+                                <p-dropdown id ="mailgroup" [options]="mailgroups" (onChange)="filterMailGroup($event.value)"  >
+                                    <ng-template let-option pTemplate="item">
+                                        <span>{{option.label}}</span>
+                                    </ng-template>
+                                </p-dropdown>
+                            </div>
                             <div class="p-field p-col-12 p-md-4">
                                 <label for="filteredOrganisation">To:</label>
                                 <p-autoComplete [(ngModel)]="selectedFilter" [suggestions]="filterOptions"
                                                 (completeMethod)="addOrganisationsToFilterOptions($event)"
                                                 (onSelect)="filterAddresses($event.idDis);"
                                                 [forceSelection]="true" id="filteredOrganisation"
-                                                name="filteredOrganisation" field="societe" [dropdown]="true">
+                                                name="filteredOrganisation" field="fullname" [dropdown]="true">
                                     <ng-template let-organisation pTemplate="item">
                                         <div class="organisation-item">
-                                            <div> {{organisation.societe}} </div>
+                                            <div> {{organisation.idDis}} {{organisation.societe}} </div>
                                         </div>
                                     </ng-template>
                                 </p-autoComplete>
@@ -61,8 +77,8 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th>Name</th>
                         <th>Organisation</th>
+                        <th>Name</th>
                         <th>Email</th>
                     </tr>
                 </ng-template>
@@ -71,8 +87,8 @@
                         <td>
                             <p-tableCheckbox [value]="mailAddress"></p-tableCheckbox>
                         </td>
-                        <td>{{mailAddress.nom}} {{mailAddress.prenom}}</td>
                         <td>{{mailAddress.societe}}</td>
+                        <td>{{mailAddress.nom}} {{mailAddress.prenom}}</td>
                         <td>{{mailAddress.email}}</td>
                     </tr>
                 </ng-template>

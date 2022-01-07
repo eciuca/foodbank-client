@@ -17,7 +17,7 @@ import {FileUploadService} from './services/file-upload.service';
 import {MailAddress} from './model/mailaddress';
 import {MailadressEntityService} from './services/mailadress-entity.service';
 import {RegionEntityService} from '../organisations/services/region-entity.service';
-import {enmLanguageLegacy} from '../shared/enums';
+import {enmLanguageLegacy, enmMailGroups} from '../shared/enums';
 
 
 
@@ -30,6 +30,8 @@ export class MailingsComponent implements OnInit {
 
   loadAddressSubject$ = new BehaviorSubject(null);
   loadOrganisationSubject$ = new BehaviorSubject(null);
+  latestAddressQueryParams: any;
+  latestOrgQueryParams: any;
   mailadresses: MailAddress[];
   selectedMailadresses: MailAddress[];
   bankid: number;
@@ -43,10 +45,14 @@ export class MailingsComponent implements OnInit {
   selectedFilter: any;
   filterOptions: any[];
   filteredOrganisationsPrepend: any[];
+  booOnlyAgreed: boolean;
+  booOnlyFead: boolean;
+  mailgroups: any[];
   regions: any[];
   languages: any[];
   regionSelected: number;
   languageSelected: string;
+  mailgroupSelected: string;
   mailing: Mailing;
   mailingSubject: string;
   mailingText: string;
@@ -76,6 +82,9 @@ export class MailingsComponent implements OnInit {
     this.mailing = new DefaultMailing();
     this.attachmentFileNames = [];
     this.languages = enmLanguageLegacy;
+    this.booOnlyAgreed = false;
+    this.booOnlyFead = false;
+    this.mailgroups = enmMailGroups;
   }
 
   ngOnInit(): void {
@@ -96,7 +105,7 @@ export class MailingsComponent implements OnInit {
         .subscribe(loadedOrgSummaries => {
           console.log('Nb of Loaded organisations ' + loadedOrgSummaries.length);
           this.filterOptions = this.filteredOrganisationsPrepend.concat(loadedOrgSummaries.map((organisation) =>
-              Object.assign({}, organisation, {fullname: organisation.societe})
+              Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
               ))
         });
     this.loadAddressSubject$
@@ -118,19 +127,19 @@ export class MailingsComponent implements OnInit {
 
   }
   private loadOrganisations() {
-    const queryOrganisationParms = {...this.filterBase};
-    this.loadOrganisationSubject$.next(queryOrganisationParms);
+    this.latestOrgQueryParams = {...this.filterBase};
+    this.loadOrganisationSubject$.next(this.latestOrgQueryParams);
   }
 
   loadAddresses() {
     console.log('Entering loadAddresses');
     this.loading = true;
-    const queryParms = {...this.filterBase};
+    this.latestAddressQueryParams = {...this.filterBase};
 
     if (this.selectedFilter && this.selectedFilter.idDis != null) {
-      queryParms['lienDis'] = this.selectedFilter.idDis;
+      this.latestAddressQueryParams['lienDis'] = this.selectedFilter.idDis;
     }
-    this.loadAddressSubject$.next(queryParms);
+    this.loadAddressSubject$.next(this.latestAddressQueryParams);
   }
 
   private initializeDependingOnUserRights(authState: AuthState) {
@@ -143,7 +152,7 @@ export class MailingsComponent implements OnInit {
         case 'Bank':
         case 'Admin_Banq':
           this.filteredOrganisationsPrepend = [
-              {idDis: null, societe: $localize`:@@organisations:Organisations`},
+              {idDis: null, fullname: $localize`:@@organisations:Organisations`},
           ];
           this.selectedFilter = this.filteredOrganisationsPrepend[0];
           break;
@@ -151,8 +160,8 @@ export class MailingsComponent implements OnInit {
         case 'Admin_Asso':
           this.orgName = authState.organisation.societe;
           this.filteredOrganisationsPrepend = [
-            {idDis: authState.organisation.idDis, societe: $localize`:@@organisationMine:My Organisation`},
-            {idDis: null, societe: $localize`:@@organisations:Organisations`},
+            {idDis: authState.organisation.idDis, fullname: $localize`:@@organisationMine:My Organisation`},
+            {idDis: null, fullname: $localize`:@@organisations:Organisations`},
           ];
           this.selectedFilter = this.filteredOrganisationsPrepend[0];
           break;
@@ -169,19 +178,18 @@ export class MailingsComponent implements OnInit {
   }
 
   addOrganisationsToFilterOptions(event) {
-    const queryOrganisationParms = {...this.loadOrganisationSubject$.getValue()};
-    queryOrganisationParms['lienBanque'] = this.bankid.toString();
+    this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
     if (event.query.length > 0) {
-      queryOrganisationParms['societe'] = event.query.toLowerCase();
+      this.latestOrgQueryParams['societe'] = event.query.toLowerCase();
     }
-    if (this.regionSelected) {
-      queryOrganisationParms['regId'] = this.regionSelected;
-    }
-    if (this.languageSelected) {
-      queryOrganisationParms['language'] = this.languageSelected;
-    }
+    this.setAgreedFilter();
+    this.setFeadFilter();
+    this.setRegionFilter();
+    this.setMailGroupFilter();
+    this.setLanguageFilter();
+
     // console.log('IdDis:', idDis, 'My latest Query parms are:', latestQueryParams);
-    this.loadOrganisationSubject$.next(queryOrganisationParms);
+    this.loadOrganisationSubject$.next(this.latestOrgQueryParams);
 
   }
 
@@ -189,64 +197,68 @@ export class MailingsComponent implements OnInit {
   filterAddresses(idDis: number) {
     // when we switch we need to restart from first page
     this.first = 0;
-    const latestQueryParams = {...this.loadAddressSubject$.getValue()};
+    this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
     if (idDis != null) {
-      latestQueryParams['lienDis'] = idDis;
+      this.latestAddressQueryParams['lienDis'] = idDis;
     } else {
-      if (latestQueryParams.hasOwnProperty('lienDis')) {
-        delete latestQueryParams['lienDis'];
+      if (this.latestAddressQueryParams.hasOwnProperty('lienDis')) {
+        delete this.latestAddressQueryParams['lienDis'];
       }
     }
-    if (this.regionSelected) {
-      latestQueryParams['regId'] = this.regionSelected;
-    }
-    if (this.languageSelected) {
-      latestQueryParams['language'] = this.languageSelected;
-    }
+    this.setAgreedFilter();
+    this.setFeadFilter();
+    this.setRegionFilter();
+    this.setMailGroupFilter();
+    this.setLanguageFilter();
     // console.log('IdDis:', idDis, 'My latest Query parms are:', latestQueryParams);
-    this.loadAddressSubject$.next(latestQueryParams);
+    this.loadAddressSubject$.next(this.latestAddressQueryParams);
   }
   filterLanguage(language) {
     console.log('Language filter is now:', language);
     this.languageSelected = language;
-    this.first = 0;
-    const latestQueryParams = {...this.loadAddressSubject$.getValue()};
-    console.log('Latest Region Query Parms', latestQueryParams);
+    this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
+
     // when we switch from active to archived list and vice versa , we need to restart from first page
     this.first = 0;
+   this.setLanguageFilter()
+
+    this.loadAddressSubject$.next(this.latestAddressQueryParams);
+  }
+  setLanguageFilter() {
     if (this.languageSelected) {
-      latestQueryParams['language'] = language;
+      this.latestAddressQueryParams['language'] = this.languageSelected;
     } else {
       // delete regId entry
-      if (latestQueryParams.hasOwnProperty('language')) {
-        delete latestQueryParams['language'];
+      if (this.latestAddressQueryParams.hasOwnProperty('language')) {
+        delete this.latestAddressQueryParams['language'];
       }
     }
-    this.loadAddressSubject$.next(latestQueryParams);
   }
   filterRegion(regId) {
     console.log('Region filter is now:', regId);
     this.regionSelected = regId;
-    this.first = 0;
-    const latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
-    const latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
-    console.log('Latest Region Query Parms', latestAddressQueryParams);
+    this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
+    this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
+    console.log('Latest Region Query Parms', this.latestAddressQueryParams);
     // when we switch , we need to restart from first page
     this.first = 0;
+    this.setRegionFilter();
+    this.loadAddressSubject$.next(this.latestAddressQueryParams);
+    this.loadOrganisationSubject$.next( this.latestOrgQueryParams);
+  }
+  setRegionFilter() {
     if (this.regionSelected) {
-      latestAddressQueryParams['regId'] = regId;
-      latestOrgQueryParams['regId'] = regId;
+      this.latestAddressQueryParams['regId'] = this.regionSelected;
+      this.latestOrgQueryParams['regId'] =this.regionSelected;
     } else {
       // delete regId entry
-      if (latestAddressQueryParams.hasOwnProperty('regId')) {
-        delete latestAddressQueryParams['regId'];
+      if (this.latestAddressQueryParams.hasOwnProperty('regId')) {
+        delete this.latestAddressQueryParams['regId'];
       }
-      if (latestOrgQueryParams.hasOwnProperty('regId')) {
-        delete latestOrgQueryParams['regId'];
+      if ( this.latestOrgQueryParams.hasOwnProperty('regId')) {
+        delete  this.latestOrgQueryParams['regId'];
       }
     }
-    this.loadAddressSubject$.next(latestAddressQueryParams);
-    this.loadOrganisationSubject$.next(latestOrgQueryParams);
   }
 
   sendmail(event: Event) {
@@ -378,6 +390,78 @@ export class MailingsComponent implements OnInit {
   }
 
 
+  filterAgreed(agreed) {
+    console.log('Agreed filter is now:', agreed);
+    this.booOnlyAgreed = agreed;
+    this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
+    this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
+    console.log('Latest Agreed Query Parms', this.latestAddressQueryParams);
+    // when we switch , we need to restart from first page
+    this.first = 0;
+   this.setAgreedFilter();
+    this.loadAddressSubject$.next(this.latestAddressQueryParams);
+    this.loadOrganisationSubject$.next(this.latestOrgQueryParams);
+  }
+  setAgreedFilter() {
+    if (this.booOnlyAgreed) {
+      this.latestAddressQueryParams['agreed'] = '1';
+      this.latestOrgQueryParams['agreed'] = '1';
+    } else {
+      // delete agreed entry
+      if (this.latestAddressQueryParams.hasOwnProperty('agreed')) {
+        delete this.latestAddressQueryParams['agreed'];
+      }
+      if ( this.latestOrgQueryParams.hasOwnProperty('agreed')) {
+        delete  this.latestOrgQueryParams['agreed'];
+      }
+    }
+  }
 
+  filterFead(feadN) {
+    console.log('Agreed filter is now:', feadN);
+    this.booOnlyFead = feadN;
+    this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
+    this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
+    // when we switch , we need to restart from first page
+    this.first = 0;
+    this.setFeadFilter();
+    this.loadAddressSubject$.next(this.latestAddressQueryParams);
+    this.loadOrganisationSubject$.next( this.latestOrgQueryParams);
+
+  }
+  setFeadFilter() {
+    if (this.booOnlyFead) {
+      this.latestAddressQueryParams['feadN'] = '1';
+      this.latestOrgQueryParams['feadN'] = '1';
+    } else {
+      // delete feadN entry
+      if (this.latestAddressQueryParams.hasOwnProperty('feadN')) {
+        delete this.latestAddressQueryParams['feadN'];
+      }
+      if ( this.latestOrgQueryParams.hasOwnProperty('feadN')) {
+        delete  this.latestOrgQueryParams['feadN'];
+      }
+    }
+  }
+
+  filterMailGroup(mailgroup) {
+    console.log('Language filter is now:', mailgroup);
+    this.mailgroupSelected = mailgroup;
+    this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
+    // when we switch from active to archived list and vice versa , we need to restart from first page
+    this.first = 0;
+   this.setMailGroupFilter();
+    this.loadAddressSubject$.next(this.latestAddressQueryParams);
+  }
+  setMailGroupFilter() {
+    if (this.mailgroupSelected) {
+      this.latestAddressQueryParams['target'] = this.latestAddressQueryParams;
+    } else {
+      // delete regId entry
+      if (this.latestAddressQueryParams.hasOwnProperty('target')) {
+        delete this.latestAddressQueryParams['target'];
+      }
+    }
+  }
 }
 
