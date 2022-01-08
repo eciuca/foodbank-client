@@ -30,7 +30,7 @@
                                 </p-dropdown>
                             </div>
                             <div class="p-field p-col-12 p-md-2">
-                                <label i18n="@@MailLanguage" for="languages">Language</label>
+                                <label i18n="@@UserLanguage" for="languages">User Language</label>
                                 <p-dropdown id ="languages" [options]="languages" (onChange)="filterLanguage($event.value)"  >
                                     <ng-template let-option pTemplate="item">
                                         <span>{{option.label}}</span>

@@ -17,7 +17,7 @@ import {FileUploadService} from './services/file-upload.service';
 import {MailAddress} from './model/mailaddress';
 import {MailadressEntityService} from './services/mailadress-entity.service';
 import {RegionEntityService} from '../organisations/services/region-entity.service';
-import {enmLanguageLegacy, enmMailGroups} from '../shared/enums';
+import {enmLanguage, enmMailGroups} from '../shared/enums';
 
 
 
@@ -81,7 +81,7 @@ export class MailingsComponent implements OnInit {
     this.mailingSubject = '';
     this.mailing = new DefaultMailing();
     this.attachmentFileNames = [];
-    this.languages = enmLanguageLegacy;
+    this.languages = enmLanguage;
     this.booOnlyAgreed = false;
     this.booOnlyFead = false;
     this.mailgroups = enmMailGroups;
@@ -147,7 +147,7 @@ export class MailingsComponent implements OnInit {
       this.bankid = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
       this.senderFullEmail = `${authState.user.membrePrenom} ${authState.user.membreNom}<${authState.user.membreEmail}>` ;
-      this.filterBase = {'lienBanque': authState.banque.bankId,'actif': '1'};
+      this.filterBase = {'lienBanque': authState.banque.bankId,'actif': '1', isDepot: '0'};
       switch (authState.user.rights) {
         case 'Bank':
         case 'Admin_Banq':
@@ -218,19 +218,18 @@ export class MailingsComponent implements OnInit {
     this.languageSelected = language;
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
 
-    // when we switch from active to archived list and vice versa , we need to restart from first page
+    // when we switch, we need to restart from first page
     this.first = 0;
-   this.setLanguageFilter()
+   this.setLanguageFilter();
 
     this.loadAddressSubject$.next(this.latestAddressQueryParams);
   }
   setLanguageFilter() {
     if (this.languageSelected) {
-      this.latestAddressQueryParams['language'] = this.languageSelected;
+      this.latestAddressQueryParams['langue'] = this.languageSelected;
     } else {
-      // delete regId entry
-      if (this.latestAddressQueryParams.hasOwnProperty('language')) {
-        delete this.latestAddressQueryParams['language'];
+        if (this.latestAddressQueryParams.hasOwnProperty('langue')) {
+        delete this.latestAddressQueryParams['langue'];
       }
     }
   }
@@ -418,7 +417,6 @@ export class MailingsComponent implements OnInit {
   }
 
   filterFead(feadN) {
-    console.log('Agreed filter is now:', feadN);
     this.booOnlyFead = feadN;
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
     this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
@@ -445,7 +443,6 @@ export class MailingsComponent implements OnInit {
   }
 
   filterMailGroup(mailgroup) {
-    console.log('Language filter is now:', mailgroup);
     this.mailgroupSelected = mailgroup;
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
     // when we switch from active to archived list and vice versa , we need to restart from first page
@@ -455,7 +452,7 @@ export class MailingsComponent implements OnInit {
   }
   setMailGroupFilter() {
     if (this.mailgroupSelected) {
-      this.latestAddressQueryParams['target'] = this.latestAddressQueryParams;
+      this.latestAddressQueryParams['target'] = this.mailgroupSelected;
     } else {
       // delete regId entry
       if (this.latestAddressQueryParams.hasOwnProperty('target')) {

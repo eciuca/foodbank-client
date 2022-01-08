@@ -15,15 +15,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">65</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
@@ -47,15 +47,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">64</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
@@ -79,15 +79,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
@@ -111,15 +111,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
@@ -143,7 +143,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
@@ -3030,9 +3030,9 @@
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="MailLanguage" datatype="html">
-        <source>Language</source>
-        <target>Taal</target>
+      <trans-unit id="UserLanguage" datatype="html">
+        <source>User Language</source>
+        <target>Gebruikerstaal</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
           <context context-type="linenumber">33</context>
@@ -3155,7 +3155,7 @@
         <target>U hebt <x id="PH" equiv-text="mailListArray.length"/> bestemmelingen. Het maximum is 3.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">273</context>
+          <context context-type="linenumber">272</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSendNoListError" datatype="html">
@@ -3163,7 +3163,7 @@
         <target>U hebt geen bestemmelingen gespecifieerd. Selecteer ze eerst.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">282</context>
+          <context context-type="linenumber">281</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3175,7 +3175,7 @@
         <target>Wenst  u deze boodschap te versturen?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">290</context>
+          <context context-type="linenumber">289</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3187,7 +3187,7 @@
         <target>De boodschap werd verstuurd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">305</context>
+          <context context-type="linenumber">304</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3199,7 +3199,7 @@
         <target>De boodschap werd niet verstuurd: foutmelding: <x id="PH" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">313</context>
+          <context context-type="linenumber">312</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3211,7 +3211,7 @@
         <target>Upload Mail bestand is gelukt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">339</context>
+          <context context-type="linenumber">338</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3223,7 +3223,7 @@
         <target>Het bestand <x id="PH" equiv-text="file.name"/> werd opgeladen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">340</context>
+          <context context-type="linenumber">339</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3235,7 +3235,7 @@
         <target>Upload Mail bestand is mislukt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">352</context>
+          <context context-type="linenumber">351</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3247,7 +3247,7 @@
         <target>Fout upload bestand <x id="PH" equiv-text="file.name"/>. <x id="PH_1" equiv-text="errorMsg"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">353</context>
+          <context context-type="linenumber">352</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3259,7 +3259,7 @@
         <target>Handmatig toegevoegd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">388</context>
+          <context context-type="linenumber">387</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Active" datatype="html">
@@ -4819,7 +4819,7 @@
         <target>Beheer OCMW</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleFEADAdmin" datatype="html">
@@ -4827,7 +4827,7 @@
         <target>Beheer FEAD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleFBBAAdmin" datatype="html">
@@ -4835,7 +4835,7 @@
         <target>Beheer FBBA</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleFBBAUser" datatype="html">
@@ -4843,7 +4843,7 @@
         <target>FBBA Gebruiker</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FeadStatusRefused" datatype="html">
@@ -4851,7 +4851,7 @@
         <target>Geweigerd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FeadStatusAccepted" datatype="html">
@@ -4859,7 +4859,7 @@
         <target>Aanvaard</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FeadStatusUnderStudy" datatype="html">
@@ -4867,7 +4867,7 @@
         <target>In onderzoek</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivity2ndHandClothes" datatype="html">
@@ -4875,7 +4875,7 @@
         <target>Tweede Hands Kleren</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivitySocialGrocery" datatype="html">
@@ -4883,7 +4883,7 @@
         <target>Sociale kruidenier</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivity2ndHandFurniture" datatype="html">
@@ -4891,7 +4891,7 @@
         <target>Tweede Hands Meubels</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivityHomeworkClub" datatype="html">
@@ -4899,7 +4899,7 @@
         <target>Naschoolse bijscholing</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivitySocialRestaurant" datatype="html">
@@ -4907,7 +4907,7 @@
         <target>Sociaal restaurant</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivityCommunityKitchen" datatype="html">
@@ -4915,7 +4915,7 @@
         <target>Collectieve keuken</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryUnassigned" datatype="html">
@@ -4923,7 +4923,7 @@
         <target>Niet Toegekend</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryShelterYoung" datatype="html">
@@ -4931,7 +4931,7 @@
         <target>Opvangcentra voor jongeren en kinderen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryShelterHandicapped" datatype="html">
@@ -4939,7 +4939,7 @@
         <target>Opvangcentra voor gehandicapten</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryShelterWomen" datatype="html">
@@ -4947,7 +4947,7 @@
         <target>Opvangcentra voor vrouwen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryShelterMen" datatype="html">
@@ -4955,7 +4955,7 @@
         <target>Opvangcentra voor mannen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategorySocialCenter" datatype="html">
@@ -4963,7 +4963,7 @@
         <target>Erkende sociale centra</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryCommunity" datatype="html">
@@ -4971,7 +4971,7 @@
         <target>Gemeenschappen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryNeighbourhood" datatype="html">
@@ -4979,7 +4979,7 @@
         <target>Buurthulpcentra</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryUrban" datatype="html">
@@ -4987,7 +4987,7 @@
         <target>Stedelijke hulpcentra</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryRural" datatype="html">
@@ -4995,7 +4995,7 @@
         <target>Landelijke hulpcentra</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryRegional" datatype="html">
@@ -5003,7 +5003,7 @@
         <target>Regionale hulpcentra</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryHoliday" datatype="html">
@@ -5011,7 +5011,7 @@
         <target>Vakantiecentra voor minderbedeelden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryRestaurant" datatype="html">
@@ -5019,7 +5019,7 @@
         <target>Restaurants voor minderbedeelden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryElderly" datatype="html">
@@ -5027,7 +5027,7 @@
         <target>Bejaardenhulp</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">99</context>
+          <context context-type="linenumber">100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryPrison" datatype="html">
@@ -5035,7 +5035,7 @@
         <target>Gevangenispastorale</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">101</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryRefugee" datatype="html">
@@ -5043,7 +5043,7 @@
         <target>Opvang en begeleiding van vluchtelingen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMailGroupContacts" datatype="html">
@@ -5051,7 +5051,7 @@
         <target>E-Mail Organisatie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMailGroupOrgItMgrs" datatype="html">
@@ -5059,7 +5059,15 @@
         <target>Org IT Mgrs</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMailGroupOrgItUsers" datatype="html">
+        <source>Org Users</source>
+        <target>Org IT gebruikers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="TripDateMandatory" datatype="html">

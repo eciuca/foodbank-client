@@ -23,6 +23,7 @@ export let enmGender = [
     {label: $localize`:@@PersonTitleMiss:Miss` , value: 3}
 ];
 export let enmLanguage = [
+    {label: '', value: null},
     {label: 'Français', value: 1},
     {label: 'Nederlands', value: 2 },
     {label: 'English', value: 3},
@@ -103,6 +104,7 @@ export let enmOrgCategories = [
 export let enmMailGroups = [
     {label: $localize`:@@OrgMailGroupContacts:Org Contacts` , value: null },
     {label: $localize`:@@OrgMailGroupOrgItMgrs:Org It Mgrs` , value: 1 },
+    {label: $localize`:@@OrgMailGroupOrgItUsers:Org Users` , value: 2 },
 ];
 
 
