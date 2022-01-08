@@ -147,6 +147,7 @@ export class MailingsComponent implements OnInit {
       this.bankid = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
       this.senderFullEmail = `${authState.user.membrePrenom} ${authState.user.membreNom}<${authState.user.membreEmail}>` ;
+      this.mailgroupSelected
       this.filterBase = {'lienBanque': authState.banque.bankId,'actif': '1', isDepot: '0'};
       switch (authState.user.rights) {
         case 'Bank':
@@ -160,8 +161,7 @@ export class MailingsComponent implements OnInit {
         case 'Admin_Asso':
           this.orgName = authState.organisation.societe;
           this.filteredOrganisationsPrepend = [
-            {idDis: authState.organisation.idDis, fullname: $localize`:@@organisationMine:My Organisation`},
-            {idDis: null, fullname: $localize`:@@organisations:Organisations`},
+              {idDis: authState.organisation.idDis, fullname: $localize`:@@organisationMine:My Organisation`},
           ];
           this.selectedFilter = this.filteredOrganisationsPrepend[0];
           break;

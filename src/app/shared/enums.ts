@@ -105,6 +105,8 @@ export let enmMailGroups = [
     {label: $localize`:@@OrgMailGroupContacts:Org Contacts` , value: null },
     {label: $localize`:@@OrgMailGroupOrgItMgrs:Org It Mgrs` , value: 1 },
     {label: $localize`:@@OrgMailGroupOrgItUsers:Org Users` , value: 2 },
+    {label: $localize`:@@BankMailGroupItMgrs:Bank It Mgrs` , value: 3 },
+    {label: $localize`:@@BankMailGroupItUsers:Bank Users` , value: 4 },
 ];
 
 

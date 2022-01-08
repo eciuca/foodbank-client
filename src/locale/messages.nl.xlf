@@ -2259,11 +2259,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">155</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">156</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
@@ -3147,7 +3143,7 @@
         <target>Mijn Organisatie</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">163</context>
+          <context context-type="linenumber">164</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSendMaxListError" datatype="html">
@@ -5068,6 +5064,22 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BankMailGroupItMgrs" datatype="html">
+        <source>Bank It Mgrs</source>
+        <target>Bank IT Mgrs</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BankMailGroupItUsers" datatype="html">
+        <source>Bank Users</source>
+        <target>Bank IT gebruikers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="TripDateMandatory" datatype="html">
