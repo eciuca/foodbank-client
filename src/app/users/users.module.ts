@@ -28,6 +28,8 @@ import {OrgSummariesDataService} from '../organisations/services/orgsummaries-da
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {CheckboxModule} from 'primeng/checkbox';
 import { UsersRightsComponent } from './users-rights/users-rights.component';
+import {BanquesDataService} from '../banques/services/banques-data.service';
+import {BanqueEntityService} from '../banques/services/banque-entity.service';
 
 const routes: Routes = [
   { path: '',
@@ -67,6 +69,8 @@ const routes: Routes = [
         UserEntityService,
         MembresDataService,
         MembreEntityService,
+        BanquesDataService,
+        BanqueEntityService,
         OrgSummariesDataService,
         OrgSummaryEntityService,
         ConfirmationService
@@ -78,11 +82,13 @@ export class UsersModule {
       private entityDataService: EntityDataService,
       private usersDataService: UsersDataService,
       private membresDataService: MembresDataService,
+      private banquesDataService: BanquesDataService,
       private orgSummariesDataService: OrgSummariesDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('User', usersDataService);
     entityDataService.registerService('Membre', membresDataService);
+    entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
   }
 

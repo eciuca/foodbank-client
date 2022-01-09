@@ -14,6 +14,7 @@ import { User } from '../users/model/user';
 import { UserEntityService } from '../users/services/user-entity.service';
 import { AuthPrincipal, IAuthPrincipal } from './auth-principal';
 import { login } from './auth.actions';
+import {AuthState} from './reducers';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -116,10 +117,22 @@ export class AuthService {
       }),
       map(authState => login(authState))
     ).subscribe(authState => {
+        this.auditAccess(authState);
         this.store.dispatch(authState);
      });
   }
-
+  private auditAccess(authState: IAuthPrincipal) {
+    const auditObj = {'user': authState.user.idUser, 'idDis': '0'};
+    if (authState.organisation) {
+      auditObj['idDis'] = authState.organisation.idDis.toString();
+    }
+    const headerlog = {headers: {Authorization:  'Bearer ' + this.accessToken}};
+    this.http.jsonp('https://api.ipify.org/?format=jsonp', 'callback').subscribe((res: any)  => {
+      auditObj['ipAddress'] = res.ip;
+      console.log('audit object to log in', auditObj);
+      this.http.post ('/api/audit/', auditObj, headerlog ).subscribe();
+    });
+  }
   public runInitialLoginSequence(): Promise<void> {
     if (location.hash) {
       console.log('Encountered hash fragment, plotting as table...');

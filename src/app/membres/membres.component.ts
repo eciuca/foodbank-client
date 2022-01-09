@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {filter, map, mergeMap} from 'rxjs/operators';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {Membre} from './model/membre';
 import {MembreEntityService} from './services/membre-entity.service';
@@ -11,6 +11,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../auth/reducers';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
+import {BanqueEntityService} from '../banques/services/banque-entity.service';
 
 
 @Component({
@@ -39,7 +40,9 @@ export class MembresComponent implements OnInit {
     lienDepot: number;
     depotName: string;
     first: number;
+    bankOptions: any[];
     constructor(private membreService: MembreEntityService,
+                private banqueService: BanqueEntityService,
                 private orgsummaryService: OrgSummaryEntityService,
                 private router: Router,
                 private store: Store<AppState>
@@ -156,6 +159,9 @@ export class MembresComponent implements OnInit {
             if (event.filters.city && event.filters.city.value) {
                 queryParms['city'] = event.filters.city.value;
             }
+            if (event.filters.bankShortName && event.filters.bankShortName.value) {
+                queryParms['bankShortName'] = event.filters.bankShortName.value;
+            }
         }
         this.loadPageSubject$.next(queryParms);
     }
@@ -192,6 +198,15 @@ export class MembresComponent implements OnInit {
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                 default:
+            }
+            if (authState.user && (authState.user.rights === 'admin')) {
+                this.banqueService.getAll()
+                    .pipe(
+                        tap((banquesEntities) => {
+                            console.log('Banques now loaded:', banquesEntities);
+                            this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                        })
+                    ).subscribe();
             }
         }
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {filter, mergeMap} from 'rxjs/operators';
+import {filter, mergeMap, tap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {User} from './model/user';
 import {UserEntityService} from './services/user-entity.service';
@@ -11,6 +11,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguage } from '../shared/enums';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
+import {BanqueEntityService} from '../banques/services/banque-entity.service';
 
 
 @Component({
@@ -41,7 +42,9 @@ export class UsersComponent implements OnInit {
   booShowOrganisations: boolean;
     lienDepot: number;
     depotName: string;
+    bankOptions: any[];
   constructor(private userService: UserEntityService,
+              private banqueService: BanqueEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private router: Router,
               private store: Store<AppState>
@@ -129,9 +132,19 @@ export class UsersComponent implements OnInit {
                     default:
                         console.log('Entering Users component with unsupported user rights, see complete authstate:', authState);
                 }
+                if (authState.user && (authState.user.rights === 'admin')) {
+                    this.banqueService.getAll()
+                        .pipe(
+                            tap((banquesEntities) => {
+                                console.log('Banques now loaded:', banquesEntities);
+                                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                            })
+                        ).subscribe();
+                }
             }
              console.log('Users FilterBase is: ', this.filterBase);
         });
+
   }
   handleSelect(user) {
     console.log( 'User was selected', user);
@@ -212,6 +225,9 @@ export class UsersComponent implements OnInit {
                 }
                 if (event.filters.rights && event.filters.rights.value) {
                         queryParms['rights'] = event.filters.rights.value;
+                }
+                if (event.filters.idCompany && event.filters.idCompany.value) {
+                    queryParms['idCompany'] = event.filters.idCompany.value;
                 }
             }
 

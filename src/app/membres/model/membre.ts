@@ -70,6 +70,7 @@ export interface Membre {
     lDep: number;
     lienBanque: number;
     societe: string; // calculated field
+    bankShortName: string;
     totalRecords: number;
     lastVisit: string;
 }
@@ -119,6 +120,7 @@ export class DefaultMembre implements Membre {
     prenom: string;
     rem: string;
     societe: string; // calculated field
+    bankShortName: string; // calculated field
     tel: string;
     totalRecords: number;
     typEmploi: number;
@@ -159,6 +161,7 @@ export class DefaultMembre implements Membre {
         this.prenom = '';
         this.rem = '';
         this.societe = ''; // calculated field
+        this.bankShortName = ''; // calculated field
         this.tel = '';
         this.totalRecords = 0;
         this.typEmploi = 0;

@@ -154,18 +154,7 @@ export class AppComponent implements OnInit {
         window.open(feadUrl, '_blank');
     }
 
-    private auditAccess(authState: AuthState) {
-        const auditObj = {'user': authState.user.idUser, 'idDis': '0'};
-        if (authState.organisation) {
-            auditObj['idDis'] = authState.organisation.idDis.toString();
-        }
-        const headerlog = {headers: {Authorization:  'Bearer ' + this.accessToken}};
-        this.http.jsonp('https://api.ipify.org/?format=jsonp', 'callback').subscribe((res: any)  => {
-            auditObj['ipAddress'] = res.ip;
-            console.log('audit object to log in', auditObj);
-            this.http.post ('/api/audit/', auditObj, headerlog ).subscribe();
-        });
-    }
+
     private processAuthState(authState: AuthState) {
         console.log('User lienbat is:', authState.user?.lienBat, 'Membre Langue is ', authState.user?.membreLangue);
        // const idLanguage = authState.user?.idLanguage;
@@ -186,7 +175,6 @@ export class AppComponent implements OnInit {
         this.loggedInUserName = authState.user?.idUser;
 
         if (this.loggedInUserName) {
-            this.auditAccess(authState);
             this.loggedInBankName = authState.banque.bankName;
             this.loggedInOrganisationName = '';
             switch (authState.user.rights) {
