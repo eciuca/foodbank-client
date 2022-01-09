@@ -101,13 +101,18 @@ export let enmOrgCategories = [
     {label: $localize`:@@OrgCategoryPrison:Prisoner Support` , value: 14 },
     {label: $localize`:@@OrgCategoryRefugee:Shelter for Refugees` , value: 15 },
 ];
-export let enmMailGroups = [
+export let enmMailGroupsBank = [
     {label: $localize`:@@OrgMailGroupContacts:Org Contacts` , value: null },
     {label: $localize`:@@OrgMailGroupOrgItMgrs:Org It Mgrs` , value: 1 },
     {label: $localize`:@@OrgMailGroupOrgItUsers:Org Users` , value: 2 },
     {label: $localize`:@@BankMailGroupItMgrs:Bank It Mgrs` , value: 3 },
     {label: $localize`:@@BankMailGroupItUsers:Bank Users` , value: 4 },
 ];
+export let enmMailGroupsOrg = [
+    {label: $localize`:@@OrgMailGroupOrgItUsers:Org Users` , value: 2 },
+    {label: $localize`:@@BankMailGroupItMgrs:Bank It Mgrs` , value: 3 },
+];
+
 
 
 

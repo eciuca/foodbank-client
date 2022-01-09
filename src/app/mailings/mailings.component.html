@@ -1,5 +1,5 @@
 <p-panel *ngIf="mailadresses">
-    <p-dialog  *ngIf="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+    <p-dialog   [(visible)]="displayDialog"  [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
         <app-mailaddress  (onMailAddressCreate)="handleMailAddressCreate($event)"  (onMailAddressQuit)="handleMailAddressQuit()"></app-mailaddress>
     </p-dialog>
     <p-accordion>
@@ -17,11 +17,12 @@
                                 Origin: {{bankName}} {{orgName}}
                             </div>
                             <div  class="p-field p-col-12 p-md-2">
-                                <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddAddressee" label="Add Addressee"></button>
+                                <button type="button" pButton icon="pi pi-user-plus" (click)="showDialogToAdd()" i18n-label="@@AddAddressee" label="Add Addressee"></button>
                             </div>
-                            <div class="p-field p-col-12 p-md-2">
+                            <div  class="p-field p-col-12 p-md-2">
+                                <button type="button" pButton icon="pi pi-user-minus" (click)="saveSelection()" i18n-label="@@Save Selection" label="Save Selection"></button>
                             </div>
-                            <div class="p-field p-col-12 p-md-2">
+                            <div *ngIf="!orgName" class="p-field p-col-12 p-md-2">
                                 <label i18n="@@OrgRegion" for="regions">Region</label>
                                 <p-dropdown id ="regions" [options]="regions" (onChange)="filterRegion($event.value)"  >
                                     <ng-template let-option pTemplate="item">
@@ -29,7 +30,7 @@
                                     </ng-template>
                                 </p-dropdown>
                             </div>
-                            <div class="p-field p-col-12 p-md-2">
+                            <div *ngIf="!orgName" class="p-field p-col-12 p-md-2">
                                 <label i18n="@@UserLanguage" for="languages">User Language</label>
                                 <p-dropdown id ="languages" [options]="languages" (onChange)="filterLanguage($event.value)"  >
                                     <ng-template let-option pTemplate="item">
@@ -37,11 +38,11 @@
                                     </ng-template>
                                 </p-dropdown>
                             </div>
-                            <div class="p-field p-col-12 p-md-1">
+                            <div *ngIf="!orgName" class="p-field p-col-12 p-md-1">
                                 <label i18n="@@FilterAgreed" for="booOnlyAgreed">Only Agreed Orgs?</label>
                                 <p-checkbox [value]="booOnlyAgreed" binary="true" name="booOnlyAgreed" id="booOnlyAgreed" (onChange)="filterAgreed($event)"></p-checkbox>
                             </div>
-                            <div class="p-field p-col-12 p-md-1">
+                            <div *ngIf="!orgName" class="p-field p-col-12 p-md-1">
                                 <label i18n="@@FilterFead" for="booOnlyFead">Only Fead by Us Orgs?</label>
                                 <p-checkbox [value]="booOnlyFead" binary="true" name="booOnlyFead" id="booOnlyFead" (onChange)="filterFead($event)"></p-checkbox>
                             </div>
@@ -53,7 +54,7 @@
                                     </ng-template>
                                 </p-dropdown>
                             </div>
-                            <div class="p-field p-col-12 p-md-4">
+                            <div *ngIf="!orgName" class="p-field p-col-12 p-md-4">
                                 <label for="filteredOrganisation">To:</label>
                                 <p-autoComplete [(ngModel)]="selectedFilter" [suggestions]="filterOptions"
                                                 (completeMethod)="addOrganisationsToFilterOptions($event)"

@@ -17,7 +17,7 @@ import {FileUploadService} from './services/file-upload.service';
 import {MailAddress} from './model/mailaddress';
 import {MailadressEntityService} from './services/mailadress-entity.service';
 import {RegionEntityService} from '../organisations/services/region-entity.service';
-import {enmLanguage, enmMailGroups} from '../shared/enums';
+import {enmLanguage, enmMailGroupsBank, enmMailGroupsOrg} from '../shared/enums';
 
 
 
@@ -84,7 +84,6 @@ export class MailingsComponent implements OnInit {
     this.languages = enmLanguage;
     this.booOnlyAgreed = false;
     this.booOnlyFead = false;
-    this.mailgroups = enmMailGroups;
   }
 
   ngOnInit(): void {
@@ -156,6 +155,7 @@ export class MailingsComponent implements OnInit {
               {idDis: null, fullname: $localize`:@@organisations:Organisations`},
           ];
           this.selectedFilter = this.filteredOrganisationsPrepend[0];
+          this.mailgroups = enmMailGroupsBank;
           break;
         case 'Asso':
         case 'Admin_Asso':
@@ -164,6 +164,8 @@ export class MailingsComponent implements OnInit {
               {idDis: authState.organisation.idDis, fullname: $localize`:@@organisationMine:My Organisation`},
           ];
           this.selectedFilter = this.filteredOrganisationsPrepend[0];
+          this.mailgroups = enmMailGroupsOrg;
+          this.filterBase['target'] = "2";  // start with org users
           break;
         default:
       }
@@ -212,52 +214,6 @@ export class MailingsComponent implements OnInit {
     this.setLanguageFilter();
     // console.log('IdDis:', idDis, 'My latest Query parms are:', latestQueryParams);
     this.loadAddressSubject$.next(this.latestAddressQueryParams);
-  }
-  filterLanguage(language) {
-    console.log('Language filter is now:', language);
-    this.languageSelected = language;
-    this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
-
-    // when we switch, we need to restart from first page
-    this.first = 0;
-   this.setLanguageFilter();
-
-    this.loadAddressSubject$.next(this.latestAddressQueryParams);
-  }
-  setLanguageFilter() {
-    if (this.languageSelected) {
-      this.latestAddressQueryParams['langue'] = this.languageSelected;
-    } else {
-        if (this.latestAddressQueryParams.hasOwnProperty('langue')) {
-        delete this.latestAddressQueryParams['langue'];
-      }
-    }
-  }
-  filterRegion(regId) {
-    console.log('Region filter is now:', regId);
-    this.regionSelected = regId;
-    this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
-    this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
-    console.log('Latest Region Query Parms', this.latestAddressQueryParams);
-    // when we switch , we need to restart from first page
-    this.first = 0;
-    this.setRegionFilter();
-    this.loadAddressSubject$.next(this.latestAddressQueryParams);
-    this.loadOrganisationSubject$.next( this.latestOrgQueryParams);
-  }
-  setRegionFilter() {
-    if (this.regionSelected) {
-      this.latestAddressQueryParams['regId'] = this.regionSelected;
-      this.latestOrgQueryParams['regId'] =this.regionSelected;
-    } else {
-      // delete regId entry
-      if (this.latestAddressQueryParams.hasOwnProperty('regId')) {
-        delete this.latestAddressQueryParams['regId'];
-      }
-      if ( this.latestOrgQueryParams.hasOwnProperty('regId')) {
-        delete  this.latestOrgQueryParams['regId'];
-      }
-    }
   }
 
   sendmail(event: Event) {
@@ -384,10 +340,56 @@ export class MailingsComponent implements OnInit {
   }
 
   handleMailAddressCreate(newMailAdress: MailAddress) {
-    this.mailadresses.push({ 'societe': $localize`:@@MailAddedManually:Added Manually`,'nom': newMailAdress.nom,'prenom':  newMailAdress.prenom, 'email': newMailAdress.email });
+    this.mailadresses.unshift({ 'societe': $localize`:@@MailAddedManually:Added Manually`,'nom': newMailAdress.nom,'prenom':  newMailAdress.prenom, 'email': newMailAdress.email });
     this.displayDialog = false;
   }
 
+  filterLanguage(language) {
+    console.log('Language filter is now:', language);
+    this.languageSelected = language;
+    this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
+
+    // when we switch, we need to restart from first page
+    this.first = 0;
+    this.setLanguageFilter();
+
+    this.loadAddressSubject$.next(this.latestAddressQueryParams);
+  }
+  setLanguageFilter() {
+    if (this.languageSelected) {
+      this.latestAddressQueryParams['langue'] = this.languageSelected;
+    } else {
+      if (this.latestAddressQueryParams.hasOwnProperty('langue')) {
+        delete this.latestAddressQueryParams['langue'];
+      }
+    }
+  }
+  filterRegion(regId) {
+    console.log('Region filter is now:', regId);
+    this.regionSelected = regId;
+    this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
+    this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
+    console.log('Latest Region Query Parms', this.latestAddressQueryParams);
+    // when we switch , we need to restart from first page
+    this.first = 0;
+    this.setRegionFilter();
+    this.loadAddressSubject$.next(this.latestAddressQueryParams);
+    this.loadOrganisationSubject$.next( this.latestOrgQueryParams);
+  }
+  setRegionFilter() {
+    if (this.regionSelected) {
+      this.latestAddressQueryParams['regId'] = this.regionSelected;
+      this.latestOrgQueryParams['regId'] =this.regionSelected;
+    } else {
+      // delete regId entry
+      if (this.latestAddressQueryParams.hasOwnProperty('regId')) {
+        delete this.latestAddressQueryParams['regId'];
+      }
+      if ( this.latestOrgQueryParams.hasOwnProperty('regId')) {
+        delete  this.latestOrgQueryParams['regId'];
+      }
+    }
+  }
 
   filterAgreed(agreed) {
     console.log('Agreed filter is now:', agreed);
@@ -459,6 +461,10 @@ export class MailingsComponent implements OnInit {
         delete this.latestAddressQueryParams['target'];
       }
     }
+  }
+
+  saveSelection() {
+    this.mailadresses = this.selectedMailadresses;
   }
 }
 

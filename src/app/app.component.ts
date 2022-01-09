@@ -394,7 +394,7 @@ export class AppComponent implements OnInit {
             && authState.user.gestFead)      {
             this.menuLoggedInItems.push(
                 {
-                    label: 'FEAD', icon: 'pi pi-fw pi-map',
+                    label: 'Stock', icon: 'pi pi-fw pi-briefcase',
                     items: [
                         {
                             label: $localize`:@@menuFEADOverview:Overview`,
@@ -403,7 +403,7 @@ export class AppComponent implements OnInit {
                         },
                         {
                             label: $localize`:@@menuFEADApplication:Application` ,
-                                 icon: 'pi pi-fw pi-apple',
+                                 icon: 'pi pi-fw pi-briefcase',
                             command: (event) => { this.openFEAD(); }
                          },
                     ]
@@ -415,7 +415,7 @@ export class AppComponent implements OnInit {
                 this.menuLoggedInItems.push(
                     {
                         label: $localize`:@@menuFEADApplication:Application` ,
-                        icon: 'pi pi-fw pi-apple',
+                        icon: 'pi pi-fw pi-briefcase',
                         command: (event) => { this.openFEAD(); }
                     }
                 );
