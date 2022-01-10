@@ -4,6 +4,8 @@ export interface Organisation {
 
     lienBanque: number;
 
+    bankShortName: string; // calculated field
+
     refInt: string;
 
     birbCode: string;
@@ -356,6 +358,7 @@ export class DefaultOrganisation implements Organisation {
     langue: number;
     lastvisit: string;
     lienBanque: number;
+    bankShortName: string; // calculated field
     lienCpas: number;
     lienDepot: number;
     lienGd: number;
@@ -526,6 +529,7 @@ export class DefaultOrganisation implements Organisation {
         this.langue = 0;
         this.lastvisit = '';
         this.lienBanque = 0;
+        this.bankShortName = '';
         this.lienCpas = 0;
         this.lienDepot = 0;
         this.lienGd = 0;

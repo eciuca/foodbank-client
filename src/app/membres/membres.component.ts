@@ -37,6 +37,7 @@ export class MembresComponent implements OnInit {
     booShowOrganisations: boolean;
     bankid: number;
     bankName: string;
+    filteredBankShortName: string;
     lienDepot: number;
     depotName: string;
     first: number;
@@ -161,6 +162,9 @@ export class MembresComponent implements OnInit {
             }
             if (event.filters.bankShortName && event.filters.bankShortName.value) {
                 queryParms['bankShortName'] = event.filters.bankShortName.value;
+                this.filteredBankShortName = event.filters.bankShortName.value;
+            } else {
+                this.filteredBankShortName = null;
             }
         }
         this.loadPageSubject$.next(queryParms);
@@ -200,6 +204,11 @@ export class MembresComponent implements OnInit {
                 default:
             }
             if (authState.user && (authState.user.rights === 'admin')) {
+                this.booShowOrganisations = true;
+                this.filteredOrganisationsPrepend = [
+                    {idDis: 0, fullname: $localize`:@@banks:Banks` },
+                    {idDis: null, fullname: $localize`:@@organisations:Organisations` },
+                ];
                 this.banqueService.getAll()
                     .pipe(
                         tap((banquesEntities) => {
@@ -218,14 +227,26 @@ export class MembresComponent implements OnInit {
     filterOrganisation(event ) {
         const  queryOrganisationParms: QueryParams = {};
         queryOrganisationParms['actif'] = '1';
-        if (this.lienDepot === 0) {
-            queryOrganisationParms['lienBanque'] = this.bankid.toString();
-        }  else {
-            queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
+        if (this.bankOptions) {
+            if (this.filteredBankShortName) {
+                queryOrganisationParms['bankShortName'] = this.filteredBankShortName;
+            } else {
+                if (queryOrganisationParms.hasOwnProperty('bankShortName')) {
+                    delete queryOrganisationParms['bankShortName'];
+                }
+            }
+        }
+        else {
+            if (this.lienDepot === 0) {
+                queryOrganisationParms['lienBanque'] = this.bankid.toString();
+            } else {
+                queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
+            }
         }
         if (event.query.length > 0) {
             queryOrganisationParms['societe'] = event.query.toLowerCase();
         }
+
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
                 this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
@@ -233,6 +254,7 @@ export class MembresComponent implements OnInit {
                 ));
                 console.log('Proposed Organisations', this.filteredOrganisations);
             });
+
     }
 
     filterOrganisationMembers(idDis: number) {
@@ -240,19 +262,21 @@ export class MembresComponent implements OnInit {
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
         latestQueryParams['offset'] = '0';
-        if (idDis != null) {
-            if (latestQueryParams.hasOwnProperty('lienDepot')) {
-                delete latestQueryParams['lienDepot'];
+
+            if (idDis != null) {
+                if (latestQueryParams.hasOwnProperty('lienDepot')) {
+                    delete latestQueryParams['lienDepot'];
+                }
+                latestQueryParams['lienDis'] = idDis;
+            } else {
+                if (latestQueryParams.hasOwnProperty('lienDis')) {
+                    delete latestQueryParams['lienDis'];
+                }
+                if (this.lienDepot !== 0) {
+                    latestQueryParams['lienDepot'] = this.lienDepot;
+                }
             }
-            latestQueryParams['lienDis'] = idDis;
-        } else {
-            if (latestQueryParams.hasOwnProperty('lienDis')) {
-                delete latestQueryParams['lienDis'];
-            }
-            if ( this.lienDepot !== 0) {
-                latestQueryParams['lienDepot'] = this.lienDepot;
-            }
-        }
+
         this.loadPageSubject$.next(latestQueryParams);
     }
     changeArchiveFilter($event) {

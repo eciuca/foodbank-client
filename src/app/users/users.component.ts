@@ -38,6 +38,7 @@ export class UsersComponent implements OnInit {
   filteredOrganisationsPrepend: any[];
   bankid: number;
   bankName: string;
+  filteredBankShortName: string;
   first: number;
   booShowOrganisations: boolean;
     lienDepot: number;
@@ -133,6 +134,11 @@ export class UsersComponent implements OnInit {
                         console.log('Entering Users component with unsupported user rights, see complete authstate:', authState);
                 }
                 if (authState.user && (authState.user.rights === 'admin')) {
+                    this.booShowOrganisations = true;
+                    this.filteredOrganisationsPrepend = [
+                        {idDis: 0, fullname: $localize`:@@banks:Banks` },
+                        {idDis: null, fullname: $localize`:@@organisations:Organisations` },
+                    ];
                     this.banqueService.getAll()
                         .pipe(
                             tap((banquesEntities) => {
@@ -228,6 +234,9 @@ export class UsersComponent implements OnInit {
                 }
                 if (event.filters.idCompany && event.filters.idCompany.value) {
                     queryParms['idCompany'] = event.filters.idCompany.value;
+                    this.filteredBankShortName = event.filters.idCompany.value;
+                } else {
+                    this.filteredBankShortName = null;
                 }
             }
 
@@ -239,11 +248,22 @@ export class UsersComponent implements OnInit {
     filterOrganisation(event ) {
         console.log('Filter Organisation', event);
         const  queryOrganisationParms: QueryParams = {};
-        queryOrganisationParms['lienBanque'] = this.bankid.toString();
+        queryOrganisationParms['actif'] = '1';
+        if (this.bankOptions) {
+            if (this.filteredBankShortName) {
+                queryOrganisationParms['bankShortName'] = this.filteredBankShortName;
+            } else {
+                if (queryOrganisationParms.hasOwnProperty('bankShortName')) {
+                    delete queryOrganisationParms['bankShortName'];
+                }
+            }
+        }
+        else {
         if (this.lienDepot === 0) {
-            queryOrganisationParms['lienBanque'] = this.bankid.toString();
-        }  else {
-            queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
+                queryOrganisationParms['lienBanque'] = this.bankid.toString();
+            }  else {
+                queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
+            }
         }
         if (event.query.length > 0) {
             queryOrganisationParms['societe'] = event.query.toLowerCase();
