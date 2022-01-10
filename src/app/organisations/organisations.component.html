@@ -55,6 +55,7 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
+            <th *ngIf="bankOptions" i18n="@@BankNameShortSorted" pSortableColumn="bankShortName">Bank<p-sortIcon field="shortBankName"></p-sortIcon></th>
             <th pSortableColumn="idDis">Id<p-sortIcon field="idDis"></p-sortIcon></th>
             <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
             <th i18n="@@RefintSorted" pSortableColumn="refInt">Reference<p-sortIcon field="refInt"></p-sortIcon></th>
@@ -64,6 +65,17 @@
             <th i18n="@@UsesFeadSorted" pSortableColumn="birbyN">Uses FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
         </tr>
         <tr>
+            <th *ngIf="bankOptions">
+                <p-columnFilter field="bankShortName" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="bankOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
             <th>
                 <p-columnFilter type="text" matchMode="equals" [showMenu]="false" field="idDis" ></p-columnFilter>
             </th>
@@ -106,6 +118,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-organisation>
         <tr (click)="handleSelect(organisation)">
+            <td *ngIf="bankOptions">
+                {{organisation.bankShortName}}
+            </td>
             <td>
                 {{ organisation.idDis }}
             </td>

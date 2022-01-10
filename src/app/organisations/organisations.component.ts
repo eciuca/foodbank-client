@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {filter, map, mergeMap} from 'rxjs/operators';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {Organisation} from './model/organisation';
 import {OrganisationEntityService} from './services/organisation-entity.service';
@@ -13,6 +13,7 @@ import {enmYn, enmStatusCompany, enmOrgCategories} from '../shared/enums';
 import {RegionEntityService} from './services/region-entity.service';
 import {DepotEntityService} from '../depots/services/depot-entity.service';
 import {QueryParams} from '@ngrx/data';
+import {BanqueEntityService} from '../banques/services/banque-entity.service';
 
 
 @Component({
@@ -46,7 +47,10 @@ export class OrganisationsComponent implements OnInit {
     classeFBBASelected: number;
     statutSelected: string;
     statuts: any[];
+    bankOptions: any[]
+    filteredBankShortName: string;
     constructor(private organisationService: OrganisationEntityService,
+                private banqueService: BanqueEntityService,
                 private regionService: RegionEntityService,
                 private depotService: DepotEntityService,
                 private router: Router,
@@ -180,26 +184,39 @@ export class OrganisationsComponent implements OnInit {
             if (this.classeFBBASelected) {
                 queryParms['classeFBBA'] = this.classeFBBASelected;
             }
+            if (event.filters.bankShortName && event.filters.bankShortName.value) {
+                queryParms['bankShortName'] = event.filters.bankShortName.value;
+                this.filteredBankShortName = event.filters.bankShortName.value;
+            } else {
+                this.filteredBankShortName = null;
+            }
         }
         this.loadPageSubject$.next(queryParms);
     }
     private initializeDependingOnUserRights(authState: AuthState) {
         // exfilter all depots
         this.filterBase = { 'isDepot': '0' };
-        if (authState.banque) {
-            this.lienBanque = authState.banque.bankId;
-            this.filterBase['lienBanque'] = authState.banque.bankId;
-            this.bankName = authState.banque.bankName;
+        if (authState.user) {
+            if (authState.banque && authState.user.rights !== 'admin' ) {
+                this.lienBanque = authState.banque.bankId;
+                this.bankName = authState.banque.bankName;
+            }
+
             switch (authState.user.rights) {
+                case 'admin':
                 case 'Bank':
                 case 'Admin_Banq':
+
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     const  queryDepotParms: QueryParams = {};
                     queryDepotParms['offset'] = '0';
                     queryDepotParms['rows'] = '999';
-                    queryDepotParms['sortField'] = 'idDepot';
+                    queryDepotParms['sortField'] = 'nom';
                     queryDepotParms['sortOrder'] = '1';
-                    queryDepotParms['lienBanque'] = this.lienBanque.toString();
+                    if (this.lienBanque) {
+                        this.filterBase['lienBanque'] =this.lienBanque
+                        queryDepotParms['lienBanque'] = this.lienBanque.toString();
+                    }
                     queryDepotParms['actif'] = '1';
                     this.depotService.getWithQuery(queryDepotParms)
                         .subscribe(depots => {
@@ -208,18 +225,33 @@ export class OrganisationsComponent implements OnInit {
                                 this.depots.push({value: depot.idDepot, label: depot.nom})
                             );
                         });
+                    if (authState.user.rights === 'admin' ) {
+                        this.banqueService.getAll()
+                            .pipe(
+                                tap((banquesEntities) => {
+                                    console.log('Banques now loaded:', banquesEntities);
+                                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                                })
+                            ).subscribe();
+                    }
 
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
                     // This module is only called for depots see menu
+                    this.filterBase['lienBanque'] = authState.banque.bankId;
                     this.depotName = authState.organisation.societe;
                     this.filterBase['lienDepot'] = authState.organisation.idDis;
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
+
                 default:
             }
-        this.regionService.getWithQuery({'lienBanque': this.lienBanque.toString()})
+            const  queryRegionParms: QueryParams = {};
+            if (this.lienBanque) {
+                queryRegionParms['lienBanque'] = this.lienBanque.toString();
+            }
+           this.regionService.getWithQuery(queryRegionParms)
             .subscribe(regions => {
                 this.regions = [{ value: null, label: ''}];
                 regions.map((region) =>

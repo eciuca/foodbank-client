@@ -139,6 +139,12 @@ export class MembreComponent implements OnInit {
           map((authState) => {
               if (authState.user) {
                   switch (authState.user.rights) {
+                      case 'admin':
+                          this.booCanSave = true;
+                          if (this.booCalledFromTable) {
+                              this.booCanDelete = true;
+                          }
+                          break;
                       case 'Bank':
                       case 'Admin_Banq':
                           this.lienBanque = authState.banque.bankId;

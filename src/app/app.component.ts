@@ -233,6 +233,11 @@ export class AppComponent implements OnInit {
                 {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
             );
         }
+        if ( authState.user.rights === 'admin') {
+            this.menuLoggedInItems.push(
+                {label: $localize`:@@menuBanks:Banks`, icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
+            );
+        }
         // Add Depots
         if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
@@ -247,7 +252,12 @@ export class AppComponent implements OnInit {
             }
         }
         // handle  organisation(s) items
-        if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+        if ( authState.user.rights === 'admin') {
+            this.menuLoggedInItems.push(
+                {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
+
+            );
+        } else if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                     {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',
                     items: [
@@ -290,11 +300,8 @@ export class AppComponent implements OnInit {
                     {label: $localize`:@@menuOrganisation:Organisation`, icon: 'pi pi-fw pi-map', routerLink: [`/organisations/${authState.organisation.idDis}`]}
                 );
             }
-        } else if ( authState.user.rights === 'admin') {
-            this.menuLoggedInItems.push(
-                {label: $localize`:@@menuBanks:Banks`, icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
-            );
         }
+       
         // handle members
         const commonSubItems = [
             {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},

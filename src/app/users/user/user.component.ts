@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {DefaultUser, User} from '../model/user';
 import {MessageService} from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
-import {enmLanguageLegacy, enmUserRolesAsso, enmUserRolesBank, enmUserRolesBankAsso} from '../../shared/enums';
+import {enmLanguageLegacy, enmUserRoles, enmUserRolesAsso, enmUserRolesBank, enmUserRolesBankAsso} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
@@ -162,6 +162,13 @@ export class UserComponent implements OnInit {
                       this.idCompany = authState.banque.bankShortName;
                       this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
                       switch (authState.user.rights) {
+                          case 'admin':
+                              this.rights = enmUserRoles;
+                              this.booCanSave = true;
+                              if (this.booCalledFromTable) {
+                                  this.booCanDelete = true;
+                              }
+                              break;
                           case 'Bank':
                           case 'Admin_Banq':
                               this.rights = enmUserRolesBankAsso;
