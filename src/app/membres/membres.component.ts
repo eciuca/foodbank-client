@@ -40,6 +40,7 @@ export class MembresComponent implements OnInit {
     filteredBankShortName: string;
     lienDepot: number;
     depotName: string;
+    orgName: string;
     first: number;
     bankOptions: any[];
     constructor(private membreService: MembreEntityService,
@@ -55,6 +56,7 @@ export class MembresComponent implements OnInit {
         this.first = 0;
         this.bankName = '';
         this.depotName = '';
+        this.orgName = '';
         this.lienDepot = 0;
     }
 
@@ -139,7 +141,7 @@ export class MembresComponent implements OnInit {
             queryParms['lienDis'] = this.filteredOrganisation.idDis;
         }  else {
             if ( this.lienDepot !== 0) {
-                queryParms['lienDepot'] = this.lienDepot;
+                queryParms['lienDis'] = this.lienDepot;
             }
         }
         if (this.booShowArchived ) {
@@ -180,8 +182,9 @@ export class MembresComponent implements OnInit {
                     this.filterBase = { 'lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     this.filteredOrganisationsPrepend = [
+                        {idDis: null, fullname: $localize`:@@All:All` },
                         {idDis: 0, fullname: $localize`:@@bank:Bank` },
-                        {idDis: null, fullname: $localize`:@@organisations:Organisations` },
+                        {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
                     ];
                     this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                     break;
@@ -192,12 +195,13 @@ export class MembresComponent implements OnInit {
                         this.lienDepot = authState.organisation.idDis;
                         this.depotName = authState.organisation.societe;
                         this.filteredOrganisationsPrepend = [
-                            {idDis: this.lienDepot, fullname: 'Depot' },
-                            {idDis: null, fullname: $localize`:@@organisations:Organisations` },
+                            {idDis: null, fullname: 'Depot' },
+                            {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
                         ];
                         this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                     } else {
                         this.filterBase = { 'lienDis': authState.organisation.idDis};
+                        this.orgName = authState.organisation.societe;
                     }
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
@@ -206,8 +210,9 @@ export class MembresComponent implements OnInit {
             if (authState.user && (authState.user.rights === 'admin')) {
                 this.booShowOrganisations = true;
                 this.filteredOrganisationsPrepend = [
+                    {idDis: null, fullname: $localize`:@@All:All` },
                     {idDis: 0, fullname: $localize`:@@banks:Banks` },
-                    {idDis: null, fullname: $localize`:@@organisations:Organisations` },
+                    {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
                 ];
                 this.banqueService.getAll()
                     .pipe(
@@ -263,17 +268,31 @@ export class MembresComponent implements OnInit {
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
         latestQueryParams['offset'] = '0';
 
-            if (idDis != null) {
+            if (idDis === 999) {
+
+                if (this.lienDepot != 0) {
+                        latestQueryParams['lienDepot'] = this.lienDepot;
+                    if (latestQueryParams.hasOwnProperty('lienDis')) {
+                        delete latestQueryParams['lienDis'];
+                    }
+                }
+                else {
+                    latestQueryParams['lienDis'] = 999;
+                }
+
+            }
+            else if (idDis != null) {
+                latestQueryParams['lienDis'] = idDis;
                 if (latestQueryParams.hasOwnProperty('lienDepot')) {
                     delete latestQueryParams['lienDepot'];
                 }
-                latestQueryParams['lienDis'] = idDis;
-            } else {
-                if (latestQueryParams.hasOwnProperty('lienDis')) {
-                    delete latestQueryParams['lienDis'];
-                }
-                if (this.lienDepot !== 0) {
-                    latestQueryParams['lienDepot'] = this.lienDepot;
+            }
+            else {
+                if (this.lienDepot != 0) {
+                    latestQueryParams['lienDis'] = this.lienDepot;
+                    if (latestQueryParams.hasOwnProperty('lienDepot')) {
+                        delete latestQueryParams['lienDepot'];
+                    }
                 }
             }
 
@@ -301,11 +320,23 @@ export class MembresComponent implements OnInit {
             } else {
                 return $localize`:@@DepotMembersTitleActive:Active Members of depot ${this.depotName} `;
             }
-        } else {
+        } else if ( this.orgName) {
+            if (this.booShowArchived) {
+                return $localize`:@@OrgMembersTitleArchive:Archived Members of organisation ${this.orgName} `;
+            } else {
+                return $localize`:@@OrgMembersTitleActive:Active Members of organisation ${this.orgName} `;
+            }
+        } else if ( this.bankName) {
             if (this.booShowArchived) {
                 return $localize`:@@BankMembersTitleArchive:Archived Members of bank ${this.bankName} `;
             } else {
                 return $localize`:@@BankMembersTitleActive:Active Members of bank ${this.bankName} `;
+            }
+        } else {
+            if (this.booShowArchived) {
+                return $localize`:@@AllMembersTitleArchive:Archived Members `;
+            } else {
+                return $localize`:@@AllMembersTitleActive:Active Members  `;
             }
         }
     }
