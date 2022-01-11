@@ -27,11 +27,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">272</context>
+          <context context-type="linenumber">285</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">320</context>
+          <context context-type="linenumber">341</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleBankAdmin" datatype="html">
@@ -59,11 +59,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">270</context>
+          <context context-type="linenumber">283</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">318</context>
+          <context context-type="linenumber">339</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleOrgUser" datatype="html">
@@ -91,11 +91,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">276</context>
+          <context context-type="linenumber">289</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">324</context>
+          <context context-type="linenumber">345</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleOrgAdmin" datatype="html">
@@ -123,11 +123,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">274</context>
+          <context context-type="linenumber">287</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">322</context>
+          <context context-type="linenumber">343</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleAdmin" datatype="html">
@@ -147,11 +147,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">278</context>
+          <context context-type="linenumber">291</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">326</context>
+          <context context-type="linenumber">347</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuHome" datatype="html">
@@ -2279,35 +2279,35 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">188</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">201</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">215</context>
+          <context context-type="linenumber">217</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">108</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">114</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">127</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDependentDeleted" datatype="html">
@@ -2663,11 +2663,23 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">186</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">213</context>
+          <context context-type="linenumber">215</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="HomeHeader" datatype="html">
@@ -3471,15 +3483,15 @@
         <target>Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">187</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="banks" datatype="html">
@@ -3487,11 +3499,11 @@
         <target>Banques</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">216</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotMembersTitleArchive" datatype="html">
@@ -3499,7 +3511,7 @@
         <target>Collaborateurs archivés du dépôt <x id="PH" equiv-text="this.depotName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">319</context>
+          <context context-type="linenumber">321</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotMembersTitleActive" datatype="html">
@@ -3507,7 +3519,7 @@
         <target>Collaborateurs actifs du dépôt <x id="PH" equiv-text="this.depotName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">321</context>
+          <context context-type="linenumber">323</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMembersTitleArchive" datatype="html">
@@ -3515,7 +3527,7 @@
         <target>Collaborateurs archivés de l'organisation <x id="PH" equiv-text="this.orgName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">325</context>
+          <context context-type="linenumber">327</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMembersTitleActive" datatype="html">
@@ -3523,7 +3535,7 @@
         <target>Collaborateurs actifs de l'organisation <x id="PH" equiv-text="this.orgName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">327</context>
+          <context context-type="linenumber">329</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMembersTitleArchive" datatype="html">
@@ -3531,7 +3543,7 @@
         <target>Collaborateurs archivés de la banque <x id="PH" equiv-text="this.bankName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">331</context>
+          <context context-type="linenumber">333</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMembersTitleActive" datatype="html">
@@ -3539,7 +3551,7 @@
         <target>Collaborateurs actifs de la banque <x id="PH" equiv-text="this.bankName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">333</context>
+          <context context-type="linenumber">335</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AllMembersTitleArchive" datatype="html">
@@ -3547,7 +3559,7 @@
         <target>Collaborateurs archivés</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">337</context>
+          <context context-type="linenumber">339</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AllMembersTitleActive" datatype="html">
@@ -3555,7 +3567,7 @@
         <target>Collaborateurs Actifs</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
-          <context context-type="linenumber">339</context>
+          <context context-type="linenumber">341</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prev" datatype="html">
@@ -5687,7 +5699,7 @@
         <target>Droits des utilisateurs du dépôt <x id="PH" equiv-text="this.depotName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">285</context>
+          <context context-type="linenumber">298</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankUsersRightsTitle" datatype="html">
@@ -5695,7 +5707,7 @@
         <target>Droits des Utilisateurs de la banque <x id="PH" equiv-text="this.bankName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.ts</context>
-          <context context-type="linenumber">287</context>
+          <context context-type="linenumber">300</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberLanguageSorted" datatype="html">
@@ -5719,7 +5731,7 @@
         <target>Utilisateurs archivés du dépôt <x id="PH" equiv-text="this.depotName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">349</context>
+          <context context-type="linenumber">370</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotUsersTitleActive" datatype="html">
@@ -5727,7 +5739,23 @@
         <target>Utilisateurs actifs du dépôt <x id="PH" equiv-text="this.depotName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">351</context>
+          <context context-type="linenumber">372</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgUsersTitleArchive" datatype="html">
+        <source>Archived Users of organisation <x id="PH" equiv-text="this.orgName"/> </source>
+        <target>Utilisateurs archivés de l'organisation <x id="PH" equiv-text="this.orgName"/> </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">376</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgUsersTitleActive" datatype="html">
+        <source>Active Users of organisation <x id="PH" equiv-text="this.orgName"/> </source>
+        <target>Utilisateurs actifs de l'organisation <x id="PH" equiv-text="this.orgName"/> </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">378</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankUsersTitleArchive" datatype="html">
@@ -5735,7 +5763,7 @@
         <target>Utilisateurs archivés de la banque <x id="PH" equiv-text="this.bankName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">355</context>
+          <context context-type="linenumber">382</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankUsersTitleActive" datatype="html">
@@ -5743,7 +5771,23 @@
         <target>Utilisateurs actifs de la banque <x id="PH" equiv-text="this.bankName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">357</context>
+          <context context-type="linenumber">384</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AllUsersTitleArchive" datatype="html">
+        <source>Archived Users </source>
+        <target>Utilisateurs archivés</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">388</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AllUsersTitleActive" datatype="html">
+        <source>Active Users  </source>
+        <target>Utilisateurs actifs</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">390</context>
         </context-group>
       </trans-unit>
     </body>

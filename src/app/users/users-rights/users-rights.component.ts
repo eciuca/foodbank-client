@@ -103,8 +103,9 @@ export class UsersRightsComponent implements OnInit {
               this.isUserAdmin = true;
             }
             this.filteredOrganisationsPrepend = [
+              {idDis: null, fullname: $localize`:@@All:All` },
               {idDis: 0, fullname: $localize`:@@bank:Bank` },
-              {idDis: null, fullname: $localize`:@@organisations:Organisations` },
+              {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
             ];
             this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
             break;
@@ -116,8 +117,8 @@ export class UsersRightsComponent implements OnInit {
               this.lienDepot = authState.organisation.idDis;
               this.depotName = authState.organisation.societe;
               this.filteredOrganisationsPrepend = [
-                {idDis: this.lienDepot, fullname: 'Depot' },
-                {idDis: null, fullname: $localize`:@@organisations:Organisations` },
+                {idDis: null, fullname: 'Depot' },
+                {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
               ];
               this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
             } else {
@@ -191,7 +192,7 @@ export class UsersRightsComponent implements OnInit {
             queryParms['idOrg'] = this.filteredOrganisation.idDis;
           } else {
             if ( this.lienDepot !== 0) {
-              queryParms['lienDepot'] = this.lienDepot;
+              queryParms['idOrg'] = this.lienDepot;
             }
           }
           queryParms['actif'] = '1';
@@ -246,19 +247,31 @@ export class UsersRightsComponent implements OnInit {
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
     latestQueryParams['offset'] = '0';
-    console.log('Latest Query Parms and new IdOrg', latestQueryParams, idDis);
-    // when we switch from organisation , we need to restart from first page
-    if (idDis != null) {
+    if (idDis === 999) {
+
+      if (this.lienDepot != 0) {
+        latestQueryParams['lienDepot'] = this.lienDepot;
+        if (latestQueryParams.hasOwnProperty('idOrg')) {
+          delete latestQueryParams['idOrg'];
+        }
+      }
+      else {
+        latestQueryParams['idOrg'] = 999;
+      }
+
+    }
+    else if (idDis != null) {
+      latestQueryParams['idOrg'] = idDis;
       if (latestQueryParams.hasOwnProperty('lienDepot')) {
         delete latestQueryParams['lienDepot'];
       }
-      latestQueryParams['idOrg'] = idDis;
-    } else {
-      if (latestQueryParams.hasOwnProperty('idOrg')) {
-        delete latestQueryParams['idOrg'];
-      }
-      if ( this.lienDepot !== 0) {
-        latestQueryParams['lienDepot'] = this.lienDepot;
+    }
+    else {
+      if (this.lienDepot != 0) {
+        latestQueryParams['idOrg'] = this.lienDepot;
+        if (latestQueryParams.hasOwnProperty('lienDepot')) {
+          delete latestQueryParams['lienDepot'];
+        }
       }
     }
     this.loadPageSubject$.next(latestQueryParams);

@@ -44,6 +44,7 @@ export class UsersComponent implements OnInit {
     lienDepot: number;
     depotName: string;
     bankOptions: any[];
+    orgName: string;
   constructor(private userService: UserEntityService,
               private banqueService: BanqueEntityService,
               private orgsummaryService: OrgSummaryEntityService,
@@ -60,6 +61,7 @@ export class UsersComponent implements OnInit {
       this.depotName = '';
       this.first = 0;
       this.booShowOrganisations = false;
+      this.orgName = '';
   }
 
   ngOnInit() {
@@ -95,10 +97,11 @@ export class UsersComponent implements OnInit {
             console.log('Entering Users component with authState:', authState);
             if (authState.banque) {
                 this.bankid = authState.banque.bankId;
-                this.bankName = authState.banque.bankName;
+
                 switch (authState.user.rights) {
                     case 'Bank':
                     case 'Admin_Banq':
+                        this.bankName = authState.banque.bankName;
                         this.booShowOrganisations = true;
                         this.filterBase = {'lienBanque': authState.banque.bankId};
                         this.rightOptions = enmUserRolesBankAsso;
@@ -106,24 +109,27 @@ export class UsersComponent implements OnInit {
                             this.booCanCreate = true;
                         }
                         this.filteredOrganisationsPrepend = [
+                            {idDis: null, fullname: $localize`:@@All:All` },
                             {idDis: 0, fullname: $localize`:@@bank:Bank` },
-                            {idDis: null, fullname: $localize`:@@organisations:Organisations` },
+                            {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
                         ];
                         this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                         break;
                     case 'Asso':
                     case 'Admin_Asso':
+                        this.bankName = authState.banque.bankName;
                         if (authState.organisation && authState.organisation.depyN === true) {
                             this.booShowOrganisations = true;
                             this.lienDepot = authState.organisation.idDis;
                             this.depotName = authState.organisation.societe;
                             this.filteredOrganisationsPrepend = [
-                                {idDis: this.lienDepot, fullname: 'Depot' },
-                                {idDis: null, fullname: $localize`:@@organisations:Organisations` },
+                                {idDis: null, fullname: 'Depot' },
+                                {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
                             ];
                             this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                         } else {
                             this.filterBase = {'idOrg': authState.organisation.idDis};
+                            this.orgName = authState.organisation.societe;
                         }
                         this.rightOptions = enmUserRolesAsso;
                         if (authState.user.rights === 'Admin_Asso') {
@@ -136,8 +142,9 @@ export class UsersComponent implements OnInit {
                 if (authState.user && (authState.user.rights === 'admin')) {
                     this.booShowOrganisations = true;
                     this.filteredOrganisationsPrepend = [
+                        {idDis: null, fullname: $localize`:@@All:All` },
                         {idDis: 0, fullname: $localize`:@@banks:Banks` },
-                        {idDis: null, fullname: $localize`:@@organisations:Organisations` },
+                        {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
                     ];
                     this.banqueService.getAll()
                         .pipe(
@@ -208,7 +215,7 @@ export class UsersComponent implements OnInit {
                 queryParms['idOrg'] = this.filteredOrganisation.idDis;
             } else {
                     if ( this.lienDepot !== 0) {
-                        queryParms['lienDepot'] = this.lienDepot;
+                        queryParms['idOrg'] = this.lienDepot;
                     }
             }
             if (this.booShowArchived ) {
@@ -279,21 +286,35 @@ export class UsersComponent implements OnInit {
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
         latestQueryParams['offset'] = '0';
-        console.log('Latest Query Parms and new IdOrg', latestQueryParams, idDis);
-        // when we switch from active to archived list and vice versa , we need to restart from first page
-        if (idDis != null) {
+
+        if (idDis === 999) {
+
+            if (this.lienDepot != 0) {
+                latestQueryParams['lienDepot'] = this.lienDepot;
+                if (latestQueryParams.hasOwnProperty('idOrg')) {
+                    delete latestQueryParams['idOrg'];
+                }
+            }
+            else {
+                latestQueryParams['idOrg'] = 999;
+            }
+
+        }
+        else if (idDis != null) {
+            latestQueryParams['idOrg'] = idDis;
             if (latestQueryParams.hasOwnProperty('lienDepot')) {
                 delete latestQueryParams['lienDepot'];
             }
-            latestQueryParams['idOrg'] = idDis;
-        } else {
-            if (latestQueryParams.hasOwnProperty('idOrg')) {
-                delete latestQueryParams['idOrg'];
-            }
-            if ( this.lienDepot !== 0) {
-                latestQueryParams['lienDepot'] = this.lienDepot;
+        }
+        else {
+            if (this.lienDepot != 0) {
+                latestQueryParams['idOrg'] = this.lienDepot;
+                if (latestQueryParams.hasOwnProperty('lienDepot')) {
+                    delete latestQueryParams['lienDepot'];
+                }
             }
         }
+
         this.loadPageSubject$.next(latestQueryParams);
     }
 
@@ -350,12 +371,25 @@ export class UsersComponent implements OnInit {
             } else {
                 return $localize`:@@DepotUsersTitleActive:Active Users of depot ${this.depotName} `;
             }
-        } else {
+        } else if ( this.orgName) {
+            if (this.booShowArchived) {
+                return $localize`:@@OrgUsersTitleArchive:Archived Users of organisation ${this.orgName} `;
+            } else {
+                return $localize`:@@OrgUsersTitleActive:Active Users of organisation ${this.orgName} `;
+            }
+        } else if ( this.bankName) {
             if (this.booShowArchived) {
                 return $localize`:@@BankUsersTitleArchive:Archived Users of bank ${this.bankName} `;
             } else {
                 return $localize`:@@BankUsersTitleActive:Active Users of bank ${this.bankName} `;
             }
+        } else {
+            if (this.booShowArchived) {
+                return $localize`:@@AllUsersTitleArchive:Archived Users `;
+            } else {
+                return $localize`:@@AllUsersTitleActive:Active Users  `;
+            }
         }
     }
+  
 }

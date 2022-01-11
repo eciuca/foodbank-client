@@ -174,10 +174,11 @@ export class MembresComponent implements OnInit {
     private initializeDependingOnUserRights(authState: AuthState) {
         if (authState.banque) {
             this.bankid = authState.banque.bankId;
-            this.bankName = authState.banque.bankName;
+
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
+                    this.bankName = authState.banque.bankName;
                     this.booShowOrganisations = true;
                     this.filterBase = { 'lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
@@ -190,6 +191,7 @@ export class MembresComponent implements OnInit {
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
+                    this.bankName = authState.banque.bankName;
                     if (authState.organisation && authState.organisation.depyN === true) {
                         this.booShowOrganisations = true;
                         this.lienDepot = authState.organisation.idDis;
