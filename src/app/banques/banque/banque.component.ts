@@ -109,7 +109,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedPresident = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedPresident = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our president:', this.selectedPresident);
                           } else {
                               console.log('There is no president!');
@@ -119,7 +119,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedVicePresident = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedVicePresident = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  vice president:', this.selectedVicePresident);
                           } else {
                               console.log('There is no vice-president!');
@@ -129,7 +129,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedCEO = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedCEO = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  CEO:', this.selectedCEO);
                           } else {
                               console.log('There is no CEO!');
@@ -139,7 +139,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedSecretary = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedSecretary = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our secretary:', this.selectedSecretary);
                           } else {
                               console.log('There is no secretary!');
@@ -149,7 +149,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedTreasurer = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedTreasurer = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  Treasurer:', this.selectedTreasurer);
                           } else {
                               console.log('There is no Treasurer!');
@@ -159,7 +159,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedHR = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedHR = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  HR:', this.selectedHR);
                           } else {
                               console.log('There is no HR!');
@@ -169,7 +169,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedLogistics = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedLogistics = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our resp logistics:', this.selectedLogistics);
                           } else {
                               console.log('There is no resp logistics!');
@@ -179,7 +179,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedSecHygiene = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedSecHygiene = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  Resp Sec&Hygiene:', this.selectedSecHygiene);
                           } else {
                               console.log('There is no Resp Sec&Hygiene!');
@@ -189,7 +189,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedIT = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedIT = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  Resp IT:', this.selectedIT);
                           } else {
                               console.log('There is no Resp IT!');
@@ -199,7 +199,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedSupply = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedSupply = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our resp Supply:', this.selectedSupply);
                           } else {
                               console.log('There is no resp Supply!');
@@ -209,7 +209,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedPress = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedPress = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  Resp Press:', this.selectedPress);
                           } else {
                               console.log('There is no Resp Press!');
@@ -219,7 +219,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedAssocRel = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedAssocRel = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  Resp Assoc Rel:', this.selectedAssocRel);
                           } else {
                               console.log('There is no Resp Assoc Rel!');
@@ -229,7 +229,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedPubRel = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedPubRel = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  Resp PubRel:', this.selectedPubRel);
                           } else {
                               console.log('There is no Resp PubRel!');
@@ -239,7 +239,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedFEAD = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedFEAD = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  Resp FEAD:', this.selectedFEAD);
                           } else {
                               console.log('There is no Resp FEAD!');
@@ -250,7 +250,7 @@ export class BanqueComponent implements OnInit {
                   .subscribe(
                       membre => {
                           if (membre !== null) {
-                              this.selectedQuality =  Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                              this.selectedQuality =  Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                               console.log('our  Resp Quality:', this.selectedQuality);
                           } else {
                               console.log('There is no Resp Quality!');
@@ -287,6 +287,15 @@ export class BanqueComponent implements OnInit {
           .subscribe();
 }
 
+     setMembreFullName(membre:Membre): string  {
+      if (membre.bankShortName === this.banque.bankShortName) {
+          return membre.nom + ' ' + membre.prenom;
+      } else {
+          return membre.nom + ' ' + membre.prenom + '(' + membre.bankShortName + ')';
+      }
+      
+    }
+
     filterMembre(event ) {
       const  queryMemberParms: QueryParams = {};
         const query = event.query;
@@ -294,12 +303,16 @@ export class BanqueComponent implements OnInit {
         queryMemberParms['rows'] = '10';
         queryMemberParms['sortField'] = 'nom';
         queryMemberParms['sortOrder'] = '1';
-        queryMemberParms['lienBanque'] = this.banque.bankId.toString();
+        queryMemberParms['actif'] = '1';
+        queryMemberParms['lienDis'] = '0';
+        if (!this.booCalledFromTable ) {
+            queryMemberParms['lienBanque'] = this.banque.bankId.toString();
+        }
         queryMemberParms['nom'] = query.toLowerCase();
         this.membresService.getWithQuery(queryMemberParms)
         .subscribe(filteredMembres => {
             this.filteredMembres = filteredMembres.map((membre) =>
-                Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom})
+                Object.assign({}, membre, {fullname: this.setMembreFullName(membre)})
             );
         });
     }

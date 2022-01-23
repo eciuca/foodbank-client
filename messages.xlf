@@ -584,7 +584,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">281</context>
+          <context context-type="linenumber">212</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.html</context>
@@ -733,98 +733,98 @@
         <source>VicePresident</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Secretary" datatype="html">
         <source>Secretary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Treasurer" datatype="html">
         <source>Treasurer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="HumanResources" datatype="html">
         <source>Human Resources</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Logistics" datatype="html">
         <source>Logistics</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SecHygiene" datatype="html">
         <source>Security &amp; Hygiene</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="InformationTechnology" datatype="html">
         <source>Information Technology</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Supply" datatype="html">
         <source>Supply</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Press" datatype="html">
         <source>Press</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AssocRelations" datatype="html">
         <source>Relations with Banks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="PublicRelations" datatype="html">
         <source>Public Relations</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">95</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FeadRelations" datatype="html">
         <source>FEAD Relation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">101</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Quality" datatype="html">
         <source>Quality</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="NameMandatory" datatype="html">
         <source>Name *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">182</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.html</context>
@@ -855,49 +855,49 @@
         <source>Bank Name is required and must be minimum 10 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="EntrNumberMandatory" datatype="html">
         <source>Entr Number *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="EntrNumberIsMandatory" datatype="html">
         <source>Enterprise Number is required and must be minimum 9 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankAccountNumberMandatory" datatype="html">
         <source>Bank Account Number *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankAccountNumberIsMandatory" datatype="html">
         <source>Bank Account Number is required and must be minimum 9 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankWebSite" datatype="html">
         <source>Web Site</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">197</context>
+          <context context-type="linenumber">128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="EMailMandatory" datatype="html">
         <source>E-mail *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">201</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
@@ -908,28 +908,28 @@
         <source>E-mail is required and must be valid</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddressMandatory" datatype="html">
         <source>Address *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddressIsMandatory" datatype="html">
         <source>Address is required and must be minimum 4 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">208</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ZipCodeMandatory" datatype="html">
         <source>Zip Code *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">212</context>
+          <context context-type="linenumber">143</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateur/donateur.component.html</context>
@@ -940,14 +940,14 @@
         <source>Zip Code is required and must be minimum 4 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CityMandatory" datatype="html">
         <source>City *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">149</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateur/donateur.component.html</context>
@@ -958,14 +958,14 @@
         <source>City is required and must be minimum 4 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">220</context>
+          <context context-type="linenumber">151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Tel" datatype="html">
         <source>Tel</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">223</context>
+          <context context-type="linenumber">154</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgcontacts/orgcontact/orgcontact.component.html</context>
@@ -976,7 +976,7 @@
         <source>Mobile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">227</context>
+          <context context-type="linenumber">158</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -991,119 +991,119 @@
         <source>HQ Address *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">232</context>
+          <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SSAddressIsMandatory" datatype="html">
         <source>HQ Address is required and must be minimum 4 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">234</context>
+          <context context-type="linenumber">165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SSZipCodeMandatory" datatype="html">
         <source>HQ Zip Code *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SSZipCodeIsMandatory" datatype="html">
         <source>HQ Zip Code is required and must be minimum 4 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SSCityMandatory" datatype="html">
         <source>HQ City *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">244</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SSCityIsMandatory" datatype="html">
         <source>HQ City is required and must be minimum 4 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">246</context>
+          <context context-type="linenumber">177</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SSTelMandatory" datatype="html">
         <source>HQ Tel *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">249</context>
+          <context context-type="linenumber">180</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SSTelIsMandatory" datatype="html">
         <source>HQ Tel is required and must be minimum 7 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">251</context>
+          <context context-type="linenumber">182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotAddressMandatory" datatype="html">
         <source>Depot Address *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">255</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotAddressIsMandatory" datatype="html">
         <source>Depot Address is required and must be minimum 4 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">257</context>
+          <context context-type="linenumber">188</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotZipCodeMandatory" datatype="html">
         <source>Depot Zip Code *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">261</context>
+          <context context-type="linenumber">192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotZipCodeIsMandatory" datatype="html">
         <source>Depot Zip Code is required and must be minimum 4 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">263</context>
+          <context context-type="linenumber">194</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotCityMandatory" datatype="html">
         <source>Depot City *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">266</context>
+          <context context-type="linenumber">197</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotCityIsMandatory" datatype="html">
         <source>Depot City is required and must be minimum 4 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">268</context>
+          <context context-type="linenumber">199</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotTelMandatory" datatype="html">
         <source>Depot Tel *</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">271</context>
+          <context context-type="linenumber">202</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotTelIsMandatory" datatype="html">
         <source>Depot Tel is required and must be minimum 7 chars long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">273</context>
+          <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankDetails" datatype="html">
         <source>Bank Details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">278</context>
+          <context context-type="linenumber">209</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banques.component.html</context>
@@ -1114,7 +1114,7 @@
         <source>Monday Morning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">285</context>
+          <context context-type="linenumber">216</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1125,66 +1125,66 @@
         <source>Activity Description</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">289</context>
+          <context context-type="linenumber">220</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">298</context>
+          <context context-type="linenumber">229</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">305</context>
+          <context context-type="linenumber">236</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">314</context>
+          <context context-type="linenumber">245</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">321</context>
+          <context context-type="linenumber">252</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">330</context>
+          <context context-type="linenumber">261</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">337</context>
+          <context context-type="linenumber">268</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">346</context>
+          <context context-type="linenumber">277</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">353</context>
+          <context context-type="linenumber">284</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">362</context>
+          <context context-type="linenumber">293</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">369</context>
+          <context context-type="linenumber">300</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">309</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">316</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">394</context>
+          <context context-type="linenumber">325</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MondayAfternoon" datatype="html">
         <source>Monday Afternoon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">294</context>
+          <context context-type="linenumber">225</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1195,7 +1195,7 @@
         <source>Tuesday Morning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">301</context>
+          <context context-type="linenumber">232</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1206,7 +1206,7 @@
         <source>Tuesday Afternoon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">310</context>
+          <context context-type="linenumber">241</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1217,7 +1217,7 @@
         <source>Wednesday Morning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">317</context>
+          <context context-type="linenumber">248</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1228,7 +1228,7 @@
         <source>Wednesday Afternoon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">326</context>
+          <context context-type="linenumber">257</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1239,7 +1239,7 @@
         <source>Thursday Morning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">333</context>
+          <context context-type="linenumber">264</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1250,7 +1250,7 @@
         <source>Thursday Afternoon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">342</context>
+          <context context-type="linenumber">273</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1261,7 +1261,7 @@
         <source>Friday Morning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">349</context>
+          <context context-type="linenumber">280</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1272,7 +1272,7 @@
         <source>Friday Afternoon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">358</context>
+          <context context-type="linenumber">289</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1283,7 +1283,7 @@
         <source>Saturday Morning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">365</context>
+          <context context-type="linenumber">296</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1294,7 +1294,7 @@
         <source>Saturday Afternoon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">374</context>
+          <context context-type="linenumber">305</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1305,7 +1305,7 @@
         <source>Sunday Morning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">381</context>
+          <context context-type="linenumber">312</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1316,7 +1316,7 @@
         <source>Sunday Afternoon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">390</context>
+          <context context-type="linenumber">321</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -1327,77 +1327,77 @@
         <source>Yearly MemberShip?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">400</context>
+          <context context-type="linenumber">331</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMemberShipAmount" datatype="html">
         <source>MemberShip Amount</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">404</context>
+          <context context-type="linenumber">335</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMemberShipExtra?" datatype="html">
         <source>Extra MemberShip?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">411</context>
+          <context context-type="linenumber">342</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMemberShipExtraAmount" datatype="html">
         <source>MemberShip Extra Amount</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">415</context>
+          <context context-type="linenumber">346</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankUpdated" datatype="html">
         <source>Bank <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/>  was updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">331</context>
+          <context context-type="linenumber">344</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankUpdateError" datatype="html">
         <source>The bank <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/> could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">339</context>
+          <context context-type="linenumber">352</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankCreated" datatype="html">
         <source>Bank <x id="PH" equiv-text="newBanque.bankName"/> was created</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">350</context>
+          <context context-type="linenumber">363</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankCreateError" datatype="html">
         <source>The bank <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/> could not be created: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">358</context>
+          <context context-type="linenumber">371</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDeleted" datatype="html">
         <source>Bank <x id="PH" equiv-text="banque.bankName"/> was deleted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">373</context>
+          <context context-type="linenumber">386</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDeleteError" datatype="html">
         <source>The bank <x id="PH" equiv-text="banque.bankId"/> <x id="PH_1" equiv-text="banque.bankShortName"/> <x id="PH_2" equiv-text="banque.bankName"/> could not be deleted: error: <x id="PH_3" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">384</context>
+          <context context-type="linenumber">397</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageChangesMayBeLost" datatype="html">
         <source>Your changes may be lost. Are you sure that you want to proceed?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">399</context>
+          <context context-type="linenumber">412</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
@@ -1472,14 +1472,14 @@
         <source>Bank  <x id="PH" equiv-text="this.banque.bankShortName"/> <x id="PH_1" equiv-text="this.banque.bankName"/>  details were updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">424</context>
+          <context context-type="linenumber">437</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDetailsUpdateError" datatype="html">
         <source>The bank  <x id="PH" equiv-text="this.banque.bankShortName"/> <x id="PH_1" equiv-text="this.banque.bankName"/> details could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">432</context>
+          <context context-type="linenumber">445</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReport" datatype="html">
