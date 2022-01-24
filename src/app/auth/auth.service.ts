@@ -3,10 +3,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import { OAuthErrorEvent, OAuthService, UserInfo } from 'angular-oauth2-oidc';
 import { BehaviorSubject, combineLatest, forkJoin, Observable, of, ReplaySubject, throwError } from 'rxjs';
-import { catchError, defaultIfEmpty, filter, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import {catchError, defaultIfEmpty, distinctUntilChanged, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import { Banque } from '../banques/model/banque';
 import { Organisation } from '../organisations/model/organisation';
 import { AppState } from '../reducers';
@@ -15,6 +15,7 @@ import { UserEntityService } from '../users/services/user-entity.service';
 import { AuthPrincipal, IAuthPrincipal } from './auth-principal';
 import { login } from './auth.actions';
 import {AuthState} from './reducers';
+import {globalAuthState, isLoggedIn} from './auth.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -116,11 +117,15 @@ export class AuthService {
         );
       }),
       map(authState => login(authState))
-    ).subscribe(authState => {
-        this.auditAccess(authState);
-        this.store.dispatch(authState);
-     });
+    ).subscribe(authState => this.store.dispatch(authState));
+
+    this.store.pipe(
+            select(globalAuthState),
+            distinctUntilChanged((oldState, newState) => oldState.user === newState.user && oldState.isLoggedIn === newState.isLoggedIn),
+            filter(authState => authState.isLoggedIn))
+        .subscribe(authState => this.auditAccess(authState))
   }
+
   private auditAccess(authState: IAuthPrincipal) {
     const auditObj = {'user': authState.user.idUser, 'idDis': '0'};
     if (authState.organisation) {
