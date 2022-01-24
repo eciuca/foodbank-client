@@ -24,6 +24,7 @@ export interface Depot {
     actif: boolean;
 
     depFead: boolean;
+    idCompany: string;
     lienBanque: number;
     totalRecords: number;
 }
@@ -50,6 +51,7 @@ export class DefaultDepot implements Depot {
     email: string;
     idDepot: string;
     lienBanque: number;
+    idCompany: string;
     memo: string;
     nom: string;
     telephone: string;
@@ -67,6 +69,7 @@ export class DefaultDepot implements Depot {
         this.email = '';
         this.idDepot = '';
         this.lienBanque = 0;
+        this.idCompany = '';
         this.memo = '';
         this.nom = '';
         this.telephone = '';

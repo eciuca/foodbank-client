@@ -207,23 +207,24 @@ export class MembresComponent implements OnInit {
                     }
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
+                case 'admin':
+                    this.booShowOrganisations = true;
+                    this.filteredOrganisationsPrepend = [
+                        {idDis: null, fullname: $localize`:@@All:All` },
+                        {idDis: 0, fullname: $localize`:@@banks:Banks` },
+                        {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
+                    ];
+                    this.banqueService.getAll()
+                        .pipe(
+                            tap((banquesEntities) => {
+                                console.log('Banques now loaded:', banquesEntities);
+                                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                            })
+                        ).subscribe();
+                    break;
                 default:
             }
-            if (authState.user && (authState.user.rights === 'admin')) {
-                this.booShowOrganisations = true;
-                this.filteredOrganisationsPrepend = [
-                    {idDis: null, fullname: $localize`:@@All:All` },
-                    {idDis: 0, fullname: $localize`:@@banks:Banks` },
-                    {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
-                ];
-                this.banqueService.getAll()
-                    .pipe(
-                        tap((banquesEntities) => {
-                            console.log('Banques now loaded:', banquesEntities);
-                            this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
-                        })
-                    ).subscribe();
-            }
+
         }
     }
 

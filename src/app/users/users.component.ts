@@ -8,7 +8,7 @@ import {globalAuthState, isLoggedIn} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
-import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguage } from '../shared/enums';
+import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguage, enmUserRoles} from '../shared/enums';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
@@ -136,24 +136,26 @@ export class UsersComponent implements OnInit {
                             this.booCanCreate = true;
                         }
                         break;
+                    case 'admin':
+                        this.booShowOrganisations = true;
+                        this.rightOptions = enmUserRoles;
+                        this.filteredOrganisationsPrepend = [
+                            {idDis: null, fullname: $localize`:@@All:All` },
+                            {idDis: 0, fullname: $localize`:@@banks:Banks` },
+                            {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
+                        ];
+                        this.banqueService.getAll()
+                            .pipe(
+                                tap((banquesEntities) => {
+                                    console.log('Banques now loaded:', banquesEntities);
+                                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                                })
+                            ).subscribe();
+                        break;
                     default:
                         console.log('Entering Users component with unsupported user rights, see complete authstate:', authState);
                 }
-                if (authState.user && (authState.user.rights === 'admin')) {
-                    this.booShowOrganisations = true;
-                    this.filteredOrganisationsPrepend = [
-                        {idDis: null, fullname: $localize`:@@All:All` },
-                        {idDis: 0, fullname: $localize`:@@banks:Banks` },
-                        {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
-                    ];
-                    this.banqueService.getAll()
-                        .pipe(
-                            tap((banquesEntities) => {
-                                console.log('Banques now loaded:', banquesEntities);
-                                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
-                            })
-                        ).subscribe();
-                }
+
             }
              console.log('Users FilterBase is: ', this.filterBase);
         });

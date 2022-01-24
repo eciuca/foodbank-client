@@ -4,13 +4,14 @@ import {DepotEntityService} from './services/depot-entity.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
-import {filter, map, mergeMap} from 'rxjs/operators';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LazyLoadEvent} from 'primeng/api';
 import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {DepotHttpService} from './services/depot-http.service';
 import {AuthState} from '../auth/reducers';
+import {BanqueEntityService} from '../banques/services/banque-entity.service';
 
 
 
@@ -31,9 +32,11 @@ export class DepotsComponent implements OnInit {
   filterBase: any;
   booIsAdmin: boolean;
   lienBanque: number;
+  bankOptions: any[];
   first: number;
   totalRecords: number;
   constructor(private depotService: DepotEntityService,
+              private banqueService: BanqueEntityService,
               private authService: AuthService,
               private excelService: ExcelService,
               private route: ActivatedRoute,
@@ -123,15 +126,34 @@ export class DepotsComponent implements OnInit {
       if (event.filters.nom && event.filters.nom.value) {
         queryParms['nom'] = event.filters.nom.value;
       }
+      if (event.filters.idCompany && event.filters.idCompany.value) {
+        queryParms['idCompany'] = event.filters.idCompany.value;
+      }
     }
     this.loadPageSubject$.next(queryParms);
   }
   private initializeDependingOnUserRights(authState: AuthState) {
+    this.filterBase = { 'actif': '1'};
     if (authState.user) {
-      this.lienBanque = authState.banque.bankId;
-      this.filterBase = { 'lienBanque': authState.banque.bankId};
-      if (authState.user.rights === 'Admin_Banq') {
-        this.booIsAdmin = true;
+      switch (authState.user.rights) {
+        case 'Bank':
+          this.filterBase ['idCompany'] = authState.banque.bankShortName;
+          break;
+        case 'Admin_Banq':
+          this.filterBase ['idCompany'] = authState.banque.bankShortName;
+          this.booIsAdmin = true;
+          break;
+        case 'admin':
+          this.booIsAdmin = true;
+          this.banqueService.getAll()
+              .pipe(
+                  tap((banquesEntities) => {
+                    console.log('Banques now loaded:', banquesEntities);
+                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                  })
+              ).subscribe();
+          break;
+        default:
       }
     }
   }

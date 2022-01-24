@@ -9,6 +9,7 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
+            <th *ngIf="bankOptions" i18n="@@BankNameShortSorted" pSortableColumn="shortBankName">Bank<p-sortIcon field="shortBankName"></p-sortIcon></th>
             <th pSortableColumn="idDepot">
                 <div class="p-d-flex p-jc-between p-ai-center">Id<p-sortIcon field="idDepot"></p-sortIcon></div>
             </th>
@@ -25,9 +26,30 @@
                 <div i18n="@@CitySorted" class="p-d-flex p-jc-between p-ai-center">City<p-sortIcon field="ville"></p-sortIcon></div>
             </th>
         </tr>
+        <tr>
+            <th *ngIf="bankOptions">
+                <p-columnFilter field="idCompany" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="bankOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th >
+            </th>
+            <th>
+                <p-columnFilter type="text" field="nom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            </th>
+        </tr>
     </ng-template>
     <ng-template pTemplate="body" let-depot>
         <tr (click)="handleSelect(depot)">
+            <td *ngIf="bankOptions">
+                {{depot.idCompany}}
+            </td>
             <td >
                 {{depot.idDepot}}
             </td>
