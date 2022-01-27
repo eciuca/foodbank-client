@@ -357,10 +357,15 @@ export class AppComponent implements OnInit {
                     }
                 );
             }
-        // handle  organisation(s) items
+        // handle  login(s) items
         if ( ['admin', 'Admin_Banq'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
-                {label: 'Logins', icon: 'pi pi-fw pi-users', routerLink: ['/audits']},
+                {label: 'Logins', icon: 'pi pi-fw pi-users',
+                    items: [
+                        {label: $localize`:@@menuOverview:Overview`, icon: 'pi pi-fw pi-users',  routerLink: [`/audits/auditreports/${authState.banque.bankId}`]},
+                        {label: 'Logins', icon: 'pi pi-fw pi-users', routerLink: ['/audits']},
+                    ]
+                }
             );
         }
             // add cpass and depots for admin

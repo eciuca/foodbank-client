@@ -22,7 +22,6 @@ import {BanqueEntityService} from '../banques/services/banque-entity.service';
 })
 
 export class DepotsComponent implements OnInit {
-  @Input() lienBanque$: Observable<number>;
   loadPageSubject$ = new BehaviorSubject(null);
   selectedIdDepot$ = new BehaviorSubject(0);
   depots: Depot[];
