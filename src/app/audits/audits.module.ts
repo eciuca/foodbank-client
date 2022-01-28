@@ -14,6 +14,8 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {BanquesDataService} from '../banques/services/banques-data.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import { AuditReportComponent } from './audit-report/audit-report.component';
+import {PanelModule} from 'primeng/panel';
+import {ChartModule} from 'primeng/chart';
 
 const routes: Routes = [
     {
@@ -35,7 +37,9 @@ const routes: Routes = [
         AutoCompleteModule,
         RouterModule.forChild(routes),
         CalendarModule,
-        CheckboxModule
+        CheckboxModule,
+        PanelModule,
+        ChartModule
     ],
   providers: [
     AuditsDataService,

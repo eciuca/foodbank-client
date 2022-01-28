@@ -1,1 +1,29 @@
-<p>audit report is under construction!</p>
+<p-panel *ngIf="chartData">
+    <ng-template pTemplate="header">
+        <div class="p-fluid p-formgrid p-grid">
+            <div *ngIf="bankOptions" class="p-field p-col-12 p-md-3">
+                <label i18n="@@Bank" for="bank">Bank</label>
+                <p-dropdown [(ngModel)]="bankShortName" [options]="bankOptions" name="bank" id="bank"
+                            (onChange)="report($event.value)" placeholder="Any" [showClear]="true">
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@From" for="from">From</label>
+                <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy"  name="from" id="from"
+                            (onSelect)="changeDateRangeFilter()">
+
+                </p-calendar>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@To" for="to">To</label>
+                <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" name="to" id="to"
+                            (onSelect)="changeDateRangeFilter()"></p-calendar>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="body">
+    <div class="card">
+        <p-chart type="bar" [data]="chartData" [options]="horizontalOptions"></p-chart>
+    </div>
+    </ng-template>
+</p-panel>
