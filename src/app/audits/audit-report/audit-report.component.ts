@@ -19,7 +19,7 @@ import {QueryParams} from '@ngrx/data';
 })
 export class AuditReportComponent implements OnInit {
   auditReports : AuditReport[];
-   horizontalOptions: any;
+  horizontalOptions: any;
   stackedOptions: any;
   chartData: any;
   fromDate: any;
@@ -61,6 +61,11 @@ export class AuditReportComponent implements OnInit {
           }
         }
       },
+        layout: {
+            padding: {
+                left: 100,
+            },
+        },
       scales: {
         x: {
           ticks: {
@@ -120,16 +125,41 @@ export class AuditReportComponent implements OnInit {
         (response: AuditReport[]) => {
           this.auditReports = response;
           const reportLabels = [];
-          const reportDataSets= [{
-              label: 'Logins',
-              backgroundColor: '#42A5F5',
-              data: []
-          }];
+          const reportDataSets= [
+              {
+                label: 'PHP',
+                backgroundColor: '#42A5F5',
+                data: []
+              },
+              {
+                  label: 'FBIT',
+                  backgroundColor: '#FFA726',
+                  data: []
+              },
+          ];
           // initialize first chart arrays
           this.auditReports.map((item ) => {
-
-              reportLabels.push(item.key);
-              reportDataSets[0].data.push(item.loginCount);
+              if (item.key) {
+                  // reportLabels.push(item.key);
+                  // reportDataSets[0].data.push(item.loginCount);
+                  if (!reportLabels.includes(item.key)) {
+                      reportLabels.push(item.key);
+                      if (item.application === "FBIT") {
+                          reportDataSets[1].data.push(item.loginCount);
+                          reportDataSets[0].data.push(0);
+                      } else {
+                          reportDataSets[0].data.push(item.loginCount);
+                          reportDataSets[1].data.push(0);
+                      }
+                  } else {
+                      const indexItem = reportLabels.indexOf(item.key);
+                      if (item.application === "FBIT") {
+                          reportDataSets[1].data[indexItem] = item.loginCount;
+                      } else {
+                          reportDataSets[0].data[indexItem] = item.loginCount;
+                      }
+                  }
+              }
            });
             console.log('Loaded labels & report dataset is',reportLabels, reportDataSets);
           // now initialize to zero data in reports dataset
@@ -138,7 +168,7 @@ export class AuditReportComponent implements OnInit {
             labels: reportLabels,
             datasets: reportDataSets
           }
-          console.log('Final Chart Data is',this.chartData);
+
         });
   }
 
