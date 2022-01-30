@@ -27,6 +27,7 @@ export class AuditReportComponent implements OnInit {
   filterParams: QueryParams;
   bankOptions: any[];
   bankShortName: string;
+  booShowByDate: boolean
   constructor(
       private authService: AuthService,
       private http: HttpClient,
@@ -35,7 +36,7 @@ export class AuditReportComponent implements OnInit {
       private banqueService: BanqueEntityService,
       public datepipe: DatePipe
   ) {
-
+     this.booShowByDate = false;
   }
 
   ngOnInit(): void {
@@ -111,6 +112,19 @@ export class AuditReportComponent implements OnInit {
         this.filterParams['toDate'] = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
         this.report(null);
     }
+    changeByDateFilter($event: any) {
+        this.booShowByDate = $event.checked;
+        if (this.booShowByDate) {
+            this.filterParams['byDate'] = '1';
+        }
+        else {
+            if (this.filterParams.hasOwnProperty('byDate')) {
+                delete this.filterParams['byDate'];
+            }
+        }
+        this.report(null);
+
+    }
   report(event: any) {
       console.log('Audit Report Started', event);
     if (event)  {
@@ -139,30 +153,30 @@ export class AuditReportComponent implements OnInit {
           ];
           // initialize first chart arrays
           this.auditReports.map((item ) => {
-              if (item.key) {
-                  // reportLabels.push(item.key);
-                  // reportDataSets[0].data.push(item.loginCount);
-                  if (!reportLabels.includes(item.key)) {
-                      reportLabels.push(item.key);
-                      if (item.application === "FBIT") {
-                          reportDataSets[1].data.push(item.loginCount);
-                          reportDataSets[0].data.push(0);
-                      } else {
-                          reportDataSets[0].data.push(item.loginCount);
-                          reportDataSets[1].data.push(0);
-                      }
+              if ((item.key === null ) || (item.key === "0")) {
+                  item.key = "Bank";
+              }
+              // reportLabels.push(item.key);
+              // reportDataSets[0].data.push(item.loginCount);
+              if (!reportLabels.includes(item.key)) {
+                  reportLabels.push(item.key);
+                  if (item.application === "FBIT") {
+                      reportDataSets[1].data.push(item.loginCount);
+                      reportDataSets[0].data.push(0);
                   } else {
-                      const indexItem = reportLabels.indexOf(item.key);
-                      if (item.application === "FBIT") {
-                          reportDataSets[1].data[indexItem] = item.loginCount;
-                      } else {
-                          reportDataSets[0].data[indexItem] = item.loginCount;
-                      }
+                      reportDataSets[0].data.push(item.loginCount);
+                      reportDataSets[1].data.push(0);
+                  }
+              } else {
+                  const indexItem = reportLabels.indexOf(item.key);
+                  if (item.application === "FBIT") {
+                      reportDataSets[1].data[indexItem] = item.loginCount;
+                  } else {
+                      reportDataSets[0].data[indexItem] = item.loginCount;
                   }
               }
+
            });
-            console.log('Loaded labels & report dataset is',reportLabels, reportDataSets);
-          // now initialize to zero data in reports dataset
 
           this.chartData = {
             labels: reportLabels,
@@ -171,5 +185,6 @@ export class AuditReportComponent implements OnInit {
 
         });
   }
+
 
 }

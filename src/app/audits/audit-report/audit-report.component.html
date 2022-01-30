@@ -19,6 +19,10 @@
                 <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" name="to" id="to"
                             (onSelect)="changeDateRangeFilter()"></p-calendar>
             </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@ShowByDate" for="evolution">Show By Date ?</label>
+                <p-checkbox [value]="booShowByDate" binary="true" name="evolution" id="evolution" (onChange)="changeByDateFilter($event)"></p-checkbox>
+            </div>
         </div>
     </ng-template>
     <ng-template pTemplate="body">
