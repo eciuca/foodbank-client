@@ -1,7 +1,7 @@
 <p-panel *ngIf="chartData">
     <ng-template pTemplate="header">
         <div class="p-fluid p-formgrid p-grid">
-            <div *ngIf="bankOptions" class="p-field p-col-12 p-md-3">
+            <div *ngIf="bankOptions" class="p-field p-col-12 p-md-2">
                 <label i18n="@@Bank" for="bank">Bank</label>
                 <p-dropdown [(ngModel)]="bankShortName" [options]="bankOptions" name="bank" id="bank"
                             (onChange)="report($event.value)" placeholder="Any" [showClear]="true">
@@ -19,13 +19,20 @@
                 <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" name="to" id="to"
                             (onSelect)="changeDateRangeFilter()"></p-calendar>
             </div>
-            <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@ShowByDate" for="evolution">Show By Date ?</label>
-                <p-checkbox [value]="booShowByDate" binary="true" name="evolution" id="evolution" (onChange)="changeByDateFilter($event)"></p-checkbox>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@AuditView" for="auditview">View ?</label>
+                <p-dropdown [(ngModel)]="viewOption" name="auditview" id="auditview" [options]="viewOptions"
+                            (onChange)="changeFilter()" >
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@FeadOrgs" for="feadview">Fead Orgs ?</label>
+                <p-checkbox [(ngModel)]="feadOption" binary="true" name="feadview" id="feadview" (onChange)="changeFilter()"></p-checkbox>
             </div>
         </div>
     </ng-template>
     <ng-template pTemplate="body">
+        <h5>{{ title }}</h5>
     <div class="card">
         <p-chart type="bar" [data]="chartData" [options]="horizontalOptions"></p-chart>
     </div>

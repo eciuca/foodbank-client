@@ -8,9 +8,12 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {map, tap} from 'rxjs/operators';
 import {AuditReportService} from '../services/audit-report.service';
 import {AuthState} from '../../auth/reducers';
-import {BanqueEntityService} from '../../banques/services/banque-entity.service';
 import {DatePipe} from '@angular/common';
 import {QueryParams} from '@ngrx/data';
+import {BanqueEntityService} from '../../banques/services/banque-entity.service';
+import {BanqueOrgCountService} from '../../banques/services/banque-orgcount.service';
+import {BanqueOrgCount} from '../../banques/model/banqueOrgCount';
+import {enmYn} from '../../shared/enums';
 
 @Component({
   selector: 'app-audit-report',
@@ -26,17 +29,29 @@ export class AuditReportComponent implements OnInit {
   toDate: Date;
   filterParams: QueryParams;
   bankOptions: any[];
+  banqueOrgCounts: BanqueOrgCount[];
+  banqueOrgFeadCounts: BanqueOrgCount[];
   bankShortName: string;
-  booShowByDate: boolean
+  viewOptions: any[];
+  viewOption: any;
+  feadOption: any;
+  YNOptions:  any[];
+  nbOfSelectedOrganisations: number;
+  nbOfSelectedLogins: number;
+  nbOfSelectedFBITLogins: number;
+  nbOfSelectedPHPLogins: number;
+  title: string;
   constructor(
       private authService: AuthService,
       private http: HttpClient,
       private store: Store<AppState>,
       private auditReportService: AuditReportService,
       private banqueService: BanqueEntityService,
+      private banqueOrgCountService: BanqueOrgCountService,
       public datepipe: DatePipe
   ) {
-     this.booShowByDate = false;
+     this.viewOption = 'general';
+     this.YNOptions = enmYn;
   }
 
   ngOnInit(): void {
@@ -91,18 +106,43 @@ export class AuditReportComponent implements OnInit {
         if (authState.user && (authState.user.rights === 'Admin_Banq')) {
             this.bankShortName = authState.banque.bankShortName;
             this.filterParams = { 'bankShortName': authState.banque.bankShortName};
+            this.viewOptions =  [
+                {label: $localize`:@@General:General` , value:'general'},
+                {label: $localize`:@@History:History` , value: 'history'},
+            ];
             this.changeDateRangeFilter();
         }
 
 
         if (authState.user && (authState.user.rights === 'admin')) {
             this.filterParams = {};
+            this.viewOptions =  [
+                {label: $localize`:@@General:General` , value: 'general'},
+                {label: $localize`:@@History:History` , value: 'history'},
+                {label: $localize`:@@Usage:Usage` , value: 'usage' },
+            ];
             this.banqueService.getAll()
                 .pipe(
                     tap((banquesEntities) => {
-                        console.log('Banques now loaded:', banquesEntities);
-                        this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                    console.log('Banques now loaded:', banquesEntities);
+                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
                         this.changeDateRangeFilter();
+                    })
+                ).subscribe();
+            this.banqueOrgCountService.getOrgCountReport(this.authService.accessToken,false)
+                .pipe(
+                    tap((banqueOrgCounts) => {
+                        console.log('BanqueOrgCounts now loaded:', banqueOrgCounts);
+                        this.banqueOrgCounts = banqueOrgCounts;
+
+                    })
+                ).subscribe();
+            this.banqueOrgCountService.getOrgCountReport(this.authService.accessToken,true)
+                .pipe(
+                    tap((banqueOrgCounts) => {
+                        console.log('BanqueOrgFeadCounts now loaded:', banqueOrgCounts);
+                        this.banqueOrgFeadCounts = banqueOrgCounts;
+
                     })
                 ).subscribe();
         }
@@ -112,15 +152,23 @@ export class AuditReportComponent implements OnInit {
         this.filterParams['toDate'] = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
         this.report(null);
     }
-    changeByDateFilter($event: any) {
-        this.booShowByDate = $event.checked;
-        if (this.booShowByDate) {
+    changeFilter() {
+      console.log('Audit Option Selected:',this.viewOption)
+        // remove previous filters
+        if (this.filterParams.hasOwnProperty('byDate')) {
+            delete this.filterParams['byDate'];
+        }
+        if (this.filterParams.hasOwnProperty('byUsage')) {
+            delete this.filterParams['byUsage'];
+        }
+
+       if (this.viewOption === 'history')
+        {
             this.filterParams['byDate'] = '1';
         }
-        else {
-            if (this.filterParams.hasOwnProperty('byDate')) {
-                delete this.filterParams['byDate'];
-            }
+        if (this.viewOption === 'usage')
+        {
+            this.filterParams['byUsage'] = '1';
         }
         this.report(null);
 
@@ -138,49 +186,101 @@ export class AuditReportComponent implements OnInit {
     this.auditReportService.getAuditReport(this.authService.accessToken, this.filterParams).subscribe(
         (response: AuditReport[]) => {
           this.auditReports = response;
-          const reportLabels = [];
-          const reportDataSets= [
-              {
-                label: 'PHP',
-                backgroundColor: '#42A5F5',
-                data: []
-              },
-              {
-                  label: 'FBIT',
-                  backgroundColor: '#FFA726',
-                  data: []
-              },
-          ];
-          // initialize first chart arrays
-          this.auditReports.map((item ) => {
-              if ((item.key === null ) || (item.key === "0")) {
-                  item.key = "Bank";
+          if (this.viewOption === 'usage') {
+              this.nbOfSelectedLogins = 0;
+              this.nbOfSelectedOrganisations = 0;
+              const reportLabels = [];
+              const reportDataSets = [
+                  {
+                      label: 'NB Organisations',
+                      backgroundColor: '#42A5F5',
+                      data: []
+                  },
+                  {
+                      label: 'NB Organisations Using Foodbanks IT',
+                      backgroundColor: '#FFA726',
+                      data: []
+                  },
+              ];
+              console.log('Fead Option',this.feadOption);
+              let selectedBanqueOrgCounts = this.banqueOrgCounts;
+              if (this.feadOption) {
+                  selectedBanqueOrgCounts = this.banqueOrgFeadCounts;
               }
-              // reportLabels.push(item.key);
-              // reportDataSets[0].data.push(item.loginCount);
-              if (!reportLabels.includes(item.key)) {
-                  reportLabels.push(item.key);
-                  if (item.application === "FBIT") {
-                      reportDataSets[1].data.push(item.loginCount);
-                      reportDataSets[0].data.push(0);
-                  } else {
-                      reportDataSets[0].data.push(item.loginCount);
-                      reportDataSets[1].data.push(0);
-                  }
-              } else {
+              selectedBanqueOrgCounts.map((item) => {
+                  reportLabels.push(item.bankShortName);
+                  reportDataSets[0].data.push(item.orgCount);
+                  reportDataSets[1].data.push(0);
+                  this.nbOfSelectedOrganisations += item.orgCount ;
+
+              })
+              this.auditReports.map((item) => {
+
                   const indexItem = reportLabels.indexOf(item.key);
-                  if (item.application === "FBIT") {
-                      reportDataSets[1].data[indexItem] = item.loginCount;
-                  } else {
-                      reportDataSets[0].data[indexItem] = item.loginCount;
+                  if (indexItem >= 0) {
+                      reportDataSets[1].data[indexItem]++;
+                      this.nbOfSelectedLogins += item.loginCount;
                   }
+
+              })
+              this.title = `There are ${this.nbOfSelectedLogins} logins for ${this.nbOfSelectedOrganisations} organisations`;
+              this.chartData = {
+                  labels: reportLabels,
+                  datasets: reportDataSets
               }
+          }
+          else {
+              this.nbOfSelectedFBITLogins = 0;
+              this.nbOfSelectedPHPLogins = 0;
 
-           });
+              const reportLabels = [];
+              const reportDataSets = [
+                  {
+                      label: 'PHP',
+                      backgroundColor: '#42A5F5',
+                      data: []
+                  },
+                  {
+                      label: 'FBIT',
+                      backgroundColor: '#FFA726',
+                      data: []
+                  },
+              ];
+              // initialize first chart arrays
+              this.auditReports.map((item) => {
+                  if ((item.key === null) || (item.key === "0")) {
+                      item.key = "Bank";
+                  }
+                  // reportLabels.push(item.key);
+                  // reportDataSets[0].data.push(item.loginCount);
+                  if (!reportLabels.includes(item.key)) {
+                      reportLabels.push(item.key);
+                      if (item.application === "FBIT") {
+                          reportDataSets[1].data.push(item.loginCount);
+                          reportDataSets[0].data.push(0);
+                          this.nbOfSelectedFBITLogins += item.loginCount;
+                      } else {
+                          reportDataSets[0].data.push(item.loginCount);
+                          reportDataSets[1].data.push(0);
+                          this.nbOfSelectedPHPLogins += item.loginCount;
+                      }
+                  } else {
+                      const indexItem = reportLabels.indexOf(item.key);
+                      if (item.application === "FBIT") {
+                          reportDataSets[1].data[indexItem] = item.loginCount;
+                          this.nbOfSelectedFBITLogins += item.loginCount;;
+                      } else {
+                          reportDataSets[0].data[indexItem] = item.loginCount;
+                          this.nbOfSelectedPHPLogins += item.loginCount;
+                      }
+                  }
 
-          this.chartData = {
-            labels: reportLabels,
-            datasets: reportDataSets
+              });
+              this.title = `There are ${this.nbOfSelectedPHPLogins} PHP logins and ${this.nbOfSelectedFBITLogins} FBIT logins`;
+              this.chartData = {
+                  labels: reportLabels,
+                  datasets: reportDataSets
+              }
           }
 
         });
