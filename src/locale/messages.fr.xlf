@@ -315,7 +315,11 @@
         <target>Bénéficiaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">332</context>
+          <context context-type="linenumber">331</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">354</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBenefOverview" datatype="html">
@@ -323,7 +327,7 @@
         <target>Sommaire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">335</context>
+          <context context-type="linenumber">334</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuDonations" datatype="html">
@@ -331,7 +335,7 @@
         <target>Donations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">352</context>
+          <context context-type="linenumber">361</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuDonators" datatype="html">
@@ -339,7 +343,7 @@
         <target>Donateurs</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">354</context>
+          <context context-type="linenumber">363</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuGifts" datatype="html">
@@ -347,7 +351,7 @@
         <target>Dons</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">355</context>
+          <context context-type="linenumber">364</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOverview" datatype="html">
@@ -355,7 +359,7 @@
         <target>Sommaire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">365</context>
+          <context context-type="linenumber">374</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuMailings" datatype="html">
@@ -363,7 +367,7 @@
         <target>Mailings</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">389</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReports" datatype="html">
@@ -371,11 +375,11 @@
         <target>Rapports</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">394</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">398</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuFEADOverview" datatype="html">
@@ -383,7 +387,7 @@
         <target>Sommaire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">400</context>
+          <context context-type="linenumber">409</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuFEADApplication" datatype="html">
@@ -391,11 +395,11 @@
         <target>Vers la Gestion du Stock</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">405</context>
+          <context context-type="linenumber">414</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">417</context>
+          <context context-type="linenumber">426</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
@@ -403,7 +407,7 @@
         <target>Déconnecter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">426</context>
+          <context context-type="linenumber">435</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Bank" datatype="html">
@@ -455,11 +459,11 @@
         <target>Général</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">114</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="History" datatype="html">
@@ -467,11 +471,11 @@
         <target>Evolution</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Usage" datatype="html">
@@ -479,7 +483,7 @@
         <target>Usage</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReportbyPage" datatype="html">

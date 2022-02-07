@@ -1,7 +1,7 @@
 <p-panel *ngIf="chartData">
-    <ng-template pTemplate="header">
+
         <div class="p-fluid p-formgrid p-grid">
-            <div *ngIf="bankOptions" class="p-field p-col-12 p-md-2">
+            <div *ngIf="bankOptions && viewOption !== 'usage'" class="p-field p-col-12 p-md-2">
                 <label i18n="@@Bank" for="bank">Bank</label>
                 <p-dropdown [(ngModel)]="bankShortName" [options]="bankOptions" name="bank" id="bank"
                             (onChange)="report($event.value)" placeholder="Any" [showClear]="true">
@@ -25,12 +25,12 @@
                             (onChange)="changeFilter()" >
                 </p-dropdown>
             </div>
-            <div class="p-field p-col-12 p-md-2">
+            <div *ngIf="viewOption === 'usage'" class="p-field p-col-12 p-md-2">
                 <label i18n="@@FeadOrgs" for="feadview">Fead Orgs ?</label>
                 <p-checkbox [(ngModel)]="feadOption" binary="true" name="feadview" id="feadview" (onChange)="changeFilter()"></p-checkbox>
             </div>
         </div>
-    </ng-template>
+
     <ng-template pTemplate="body">
         <h5>{{ title }}</h5>
     <div class="card">

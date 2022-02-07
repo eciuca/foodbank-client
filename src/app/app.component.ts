@@ -323,9 +323,8 @@ export class AppComponent implements OnInit {
                 }
             );
           // Add Beneficiaries
-            if ( (['Bank', 'Admin_Banq'].includes(authState.user.rights))
-             || (authState.organisation && authState.organisation.gestBen && authState.user.gestBen)
-            ) {
+            if (['Bank', 'Admin_Banq'].includes(authState.user.rights))
+            {
                 if (authState.user.gestBen) {
                     this.menuLoggedInItems.push(
                         {
@@ -346,6 +345,16 @@ export class AppComponent implements OnInit {
                     );
                 }
             }
+        if (( authState.user.rights === 'Admin_Asso' && authState.organisation.gestBen)
+            || (authState.user.rights === 'Asso' && authState.organisation.gestBen && authState.user.gestBen)
+        )
+        {
+            this.menuLoggedInItems.push(
+                {
+                    label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart', routerLink: ['/beneficiaires']
+                })
+
+        }
             // Add Donateurs
             if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights) && authState.user.gestDon) {
                 this.menuLoggedInItems.push(

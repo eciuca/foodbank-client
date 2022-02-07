@@ -40,6 +40,8 @@ export class AuditReportComponent implements OnInit {
   nbOfSelectedLogins: number;
   nbOfSelectedFBITLogins: number;
   nbOfSelectedPHPLogins: number;
+    nbOfOrganisations : number;
+    nbOfFeadOrganisations: number;
   title: string;
   constructor(
       private authService: AuthService,
@@ -52,6 +54,8 @@ export class AuditReportComponent implements OnInit {
   ) {
      this.viewOption = 'general';
      this.YNOptions = enmYn;
+     this.nbOfOrganisations = 0;
+      this.nbOfFeadOrganisations = 0;
   }
 
   ngOnInit(): void {
@@ -134,7 +138,7 @@ export class AuditReportComponent implements OnInit {
                     tap((banqueOrgCounts) => {
                         console.log('BanqueOrgCounts now loaded:', banqueOrgCounts);
                         this.banqueOrgCounts = banqueOrgCounts;
-
+                        this.banqueOrgCounts.forEach(item => this.nbOfOrganisations += item.orgCount);
                     })
                 ).subscribe();
             this.banqueOrgCountService.getOrgCountReport(this.authService.accessToken,true)
@@ -142,6 +146,7 @@ export class AuditReportComponent implements OnInit {
                     tap((banqueOrgCounts) => {
                         console.log('BanqueOrgFeadCounts now loaded:', banqueOrgCounts);
                         this.banqueOrgFeadCounts = banqueOrgCounts;
+                        this.banqueOrgFeadCounts.forEach(item => this.nbOfFeadOrganisations += item.orgCount);
 
                     })
                 ).subscribe();
@@ -169,6 +174,9 @@ export class AuditReportComponent implements OnInit {
         if (this.viewOption === 'usage')
         {
             this.filterParams['byUsage'] = '1';
+            if ((!this.bankShortName) && ( this.filterParams.hasOwnProperty('bankShortName'))) {
+                delete this.filterParams['bankShortName'];
+            }
         }
         this.report(null);
 
@@ -211,7 +219,7 @@ export class AuditReportComponent implements OnInit {
                   reportLabels.push(item.bankShortName);
                   reportDataSets[0].data.push(item.orgCount);
                   reportDataSets[1].data.push(0);
-                  this.nbOfSelectedOrganisations += item.orgCount ;
+
 
               })
               this.auditReports.map((item) => {
@@ -220,10 +228,15 @@ export class AuditReportComponent implements OnInit {
                   if (indexItem >= 0) {
                       reportDataSets[1].data[indexItem]++;
                       this.nbOfSelectedLogins += item.loginCount;
+                      this.nbOfSelectedOrganisations ++ ;
                   }
 
               })
-              this.title = `There are ${this.nbOfSelectedLogins} logins for ${this.nbOfSelectedOrganisations} organisations`;
+              let nbOrgs = this.nbOfOrganisations;
+              if (this.feadOption) {
+                  nbOrgs = this.nbOfFeadOrganisations;
+              }
+              this.title = `There are ${this.nbOfSelectedLogins} logins for ${this.nbOfSelectedOrganisations} organisations out of ${nbOrgs}`;
               this.chartData = {
                   labels: reportLabels,
                   datasets: reportDataSets
