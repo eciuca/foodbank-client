@@ -36,12 +36,8 @@ export class AuditReportComponent implements OnInit {
   viewOption: any;
   feadOption: any;
   YNOptions:  any[];
-  nbOfSelectedOrganisations: number;
-  nbOfSelectedLogins: number;
-  nbOfSelectedFBITLogins: number;
-  nbOfSelectedPHPLogins: number;
-    nbOfOrganisations : number;
-    nbOfFeadOrganisations: number;
+  nbOfOrganisations : number;
+  nbOfFeadOrganisations: number;
   title: string;
   constructor(
       private authService: AuthService,
@@ -52,10 +48,7 @@ export class AuditReportComponent implements OnInit {
       private banqueOrgCountService: BanqueOrgCountService,
       public datepipe: DatePipe
   ) {
-     this.viewOption = 'general';
-     this.YNOptions = enmYn;
-     this.nbOfOrganisations = 0;
-      this.nbOfFeadOrganisations = 0;
+      this.YNOptions = enmYn;
   }
 
   ngOnInit(): void {
@@ -107,6 +100,7 @@ export class AuditReportComponent implements OnInit {
     };
   }
     private initializeDependingOnUserRights(authState: AuthState) {
+        this.viewOption = 'general';
         if (authState.user && (authState.user.rights === 'Admin_Banq')) {
             this.bankShortName = authState.banque.bankShortName;
             this.filterParams = { 'bankShortName': authState.banque.bankShortName};
@@ -133,6 +127,8 @@ export class AuditReportComponent implements OnInit {
                         this.changeDateRangeFilter();
                     })
                 ).subscribe();
+            this.nbOfOrganisations = 0;
+            this.nbOfFeadOrganisations = 0;
             this.banqueOrgCountService.getOrgCountReport(this.authService.accessToken,false)
                 .pipe(
                     tap((banqueOrgCounts) => {
@@ -195,8 +191,8 @@ export class AuditReportComponent implements OnInit {
         (response: AuditReport[]) => {
           this.auditReports = response;
           if (this.viewOption === 'usage') {
-              this.nbOfSelectedLogins = 0;
-              this.nbOfSelectedOrganisations = 0;
+              let nbOfSelectedLogins = 0;
+              let nbOfSelectedOrganisations = 0;
               const reportLabels = [];
               const reportDataSets = [
                   {
@@ -227,8 +223,8 @@ export class AuditReportComponent implements OnInit {
                   const indexItem = reportLabels.indexOf(item.key);
                   if (indexItem >= 0) {
                       reportDataSets[1].data[indexItem]++;
-                      this.nbOfSelectedLogins += item.loginCount;
-                      this.nbOfSelectedOrganisations ++ ;
+                      nbOfSelectedLogins += item.loginCount;
+                      nbOfSelectedOrganisations ++ ;
                   }
 
               })
@@ -236,15 +232,15 @@ export class AuditReportComponent implements OnInit {
               if (this.feadOption) {
                   nbOrgs = this.nbOfFeadOrganisations;
               }
-              this.title = `There are ${this.nbOfSelectedLogins} logins for ${this.nbOfSelectedOrganisations} organisations out of ${nbOrgs}`;
+              this.title = `There are ${nbOfSelectedLogins} logins for ${nbOfSelectedOrganisations} organisations out of ${nbOrgs}`;
               this.chartData = {
                   labels: reportLabels,
                   datasets: reportDataSets
               }
           }
           else {
-              this.nbOfSelectedFBITLogins = 0;
-              this.nbOfSelectedPHPLogins = 0;
+              let nbOfSelectedFBITLogins = 0;
+              let nbOfSelectedPHPLogins = 0;
 
               const reportLabels = [];
               const reportDataSets = [
@@ -271,25 +267,25 @@ export class AuditReportComponent implements OnInit {
                       if (item.application === "FBIT") {
                           reportDataSets[1].data.push(item.loginCount);
                           reportDataSets[0].data.push(0);
-                          this.nbOfSelectedFBITLogins += item.loginCount;
+                          nbOfSelectedFBITLogins += item.loginCount;
                       } else {
                           reportDataSets[0].data.push(item.loginCount);
                           reportDataSets[1].data.push(0);
-                          this.nbOfSelectedPHPLogins += item.loginCount;
+                          nbOfSelectedPHPLogins += item.loginCount;
                       }
                   } else {
                       const indexItem = reportLabels.indexOf(item.key);
                       if (item.application === "FBIT") {
                           reportDataSets[1].data[indexItem] = item.loginCount;
-                          this.nbOfSelectedFBITLogins += item.loginCount;;
+                          nbOfSelectedFBITLogins += item.loginCount;
                       } else {
                           reportDataSets[0].data[indexItem] = item.loginCount;
-                          this.nbOfSelectedPHPLogins += item.loginCount;
+                          nbOfSelectedPHPLogins += item.loginCount;
                       }
                   }
 
               });
-              this.title = `There are ${this.nbOfSelectedPHPLogins} PHP logins and ${this.nbOfSelectedFBITLogins} FBIT logins`;
+              this.title = `There are ${nbOfSelectedPHPLogins} PHP logins and ${nbOfSelectedFBITLogins} FBIT logins`;
               this.chartData = {
                   labels: reportLabels,
                   datasets: reportDataSets
