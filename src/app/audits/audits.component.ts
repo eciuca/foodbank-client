@@ -83,7 +83,7 @@ export class AuditsComponent implements OnInit {
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.user && (authState.user.rights === 'Admin_Banq')) {
       this.lienBanque = authState.banque.bankId;
-      this.filterBase = { 'shortBankName': authState.banque.bankShortName};
+      this.filterBase = { 'bankShortName': authState.banque.bankShortName};
     }
 
 
@@ -118,8 +118,8 @@ export class AuditsComponent implements OnInit {
       if (event.filters.user && event.filters.user.value) {
           queryParms['user'] = event.filters.user.value;
       }
-      if (event.filters.shortBankName && event.filters.shortBankName.value) {
-        queryParms['shortBankName'] = event.filters.shortBankName.value;
+      if (event.filters.bankShortName && event.filters.bankShortName.value) {
+        queryParms['bankShortName'] = event.filters.bankShortName.value;
       }
       if (event.filters.idDis && event.filters.idDis.value) {
         queryParms['idDis'] = event.filters.idDis.value;

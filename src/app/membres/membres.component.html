@@ -32,7 +32,7 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th *ngIf="bankOptions" i18n="@@BankNameShortSorted" pSortableColumn="bankShortName">Bank<p-sortIcon field="shortBankName"></p-sortIcon></th>
+            <th *ngIf="bankOptions" i18n="@@BankNameShortSorted" pSortableColumn="bankShortName">Bank<p-sortIcon field="bankShortName"></p-sortIcon></th>
             <th i18n="@@NameSorted" pSortableColumn="nom" colspan="2">Name<p-sortIcon field="nom"></p-sortIcon></th>
             <th i18n="@@Organisation"  *ngIf="booShowOrganisations"  colspan="2" >Organisation</th>
             <th i18n="@@AddressSorted"  colspan="2" pSortableColumn="address" >Address<p-sortIcon field="address"></p-sortIcon></th>

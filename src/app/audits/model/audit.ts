@@ -6,7 +6,7 @@ export interface Audit {
     idDis: number;
     application: string;
     societe: string;
-    shortBankName: string;
+    bankShortName: string;
     userName: string;
     rights: string;
     totalRecords: number;

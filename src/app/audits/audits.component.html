@@ -22,7 +22,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th i18n="@@LoginTime"  pSortableColumn="dateIn"  >Login Time<p-sortIcon field="dateIn"></p-sortIcon></th>
-            <th *ngIf="bankOptions" i18n="@@BankNameShortSorted" pSortableColumn="shortBankName">Bank<p-sortIcon field="shortBankName"></p-sortIcon></th>
+            <th *ngIf="bankOptions" i18n="@@BankNameShortSorted" pSortableColumn="bankShortName">Bank<p-sortIcon field="bankShortName"></p-sortIcon></th>
             <th i18n="@@UserNameSorted" pSortableColumn="userName">Name<p-sortIcon field="userName"></p-sortIcon></th>
             <th i18n="@@UserIdSorted" pSortableColumn="user">User Id<p-sortIcon field="user"></p-sortIcon></th>
             <th i18n="@@RightsSorted" pSortableColumn="rights" >Role<p-sortIcon field="rights"></p-sortIcon></th>
@@ -34,7 +34,7 @@
             <th>
             </th>
             <th *ngIf="bankOptions">
-               <p-columnFilter field="shortBankName" matchMode="equals" [showMenu]="false">
+               <p-columnFilter field="bankShortName" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                         <p-dropdown [ngModel]="value" [options]="bankOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
                             <ng-template let-option pTemplate="item">
@@ -87,7 +87,7 @@
                 {{ audit.dateIn }}
             </td>
             <td *ngIf="bankOptions" >
-                {{audit.shortBankName}}
+                {{audit.bankShortName}}
             </td>
             <td >
                 {{audit.userName}}
