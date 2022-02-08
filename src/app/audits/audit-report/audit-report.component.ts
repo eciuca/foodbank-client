@@ -332,6 +332,12 @@ export class AuditReportComponent implements OnInit {
                      {
                          type: 'bar',
                          label: 'Admin_FEAD',
+                         backgroundColor: '#90EE90', // light green
+                         data: []
+                     },
+                     {
+                         type: 'bar',
+                         label: 'ADMIN_EXT',
                          backgroundColor: 'Yellow',
                          data: []
                      },
@@ -372,7 +378,8 @@ export class AuditReportComponent implements OnInit {
                  for (let i=0; i < this.auditReports.length; i++ ) {
                      if (this.auditReports[i].key === null ) continue;
                      const indexLabel = reportLabels.indexOf(this.auditReports[i].key);
-                     const indexDataset = reportDataSets.findIndex(item => item.label === this.auditReports[i].application);
+                     let indexDataset = reportDataSets.findIndex(item => item.label.toUpperCase() === this.auditReports[i].application.toUpperCase());
+                     if( indexDataset === -1) { indexDataset = reportDataSets.length - 1 }; // Assign to Other
                      console.log(this.auditReports[i],'indexLabel', indexLabel, 'indexDataset',indexDataset);
                      if (indexLabel >= 0 && indexDataset >= 0 && indexLabel < reportLabels.length && indexDataset < reportDataSets.length) {
                          reportDataSets[indexDataset].data[indexLabel] += this.auditReports[i].loginCount;
