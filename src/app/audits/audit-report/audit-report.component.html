@@ -1,7 +1,7 @@
 <p-panel *ngIf="chartData">
 
         <div class="p-fluid p-formgrid p-grid">
-            <div *ngIf="bankOptions && viewOption !== 'usage'" class="p-field p-col-12 p-md-2">
+            <div *ngIf="bankOptions && (viewOption === 'general' || viewOption === 'history')" class="p-field p-col-12 p-md-2">
                 <label i18n="@@Bank" for="bank">Bank</label>
                 <p-dropdown [(ngModel)]="bankShortName" [options]="bankOptions" name="bank" id="bank"
                             (onChange)="report($event.value)" placeholder="Any" [showClear]="true">
@@ -33,8 +33,12 @@
 
     <ng-template pTemplate="body">
         <h5>{{ title }}</h5>
-    <div class="card">
+    <div  *ngIf="viewOption !== 'rights'"class="card">
         <p-chart type="bar" [data]="chartData" [options]="horizontalOptions"></p-chart>
+
     </div>
+        <div  *ngIf="viewOption === 'rights'" class="card">
+            <p-chart type="bar" [data]="chartData" [options]="stackedOptions"></p-chart>
+        </div>
     </ng-template>
 </p-panel>

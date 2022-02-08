@@ -49,6 +49,8 @@ export class AuditReportComponent implements OnInit {
       public datepipe: DatePipe
   ) {
       this.YNOptions = enmYn;
+      this.viewOption = 'general';
+      this.filterParams = {'reportType':'general'};
   }
 
   ngOnInit(): void {
@@ -98,12 +100,28 @@ export class AuditReportComponent implements OnInit {
         }
       }
     };
+      this.stackedOptions = {
+          tooltips: {
+              mode: 'index',
+              intersect: false
+          },
+          responsive: true,
+
+          scales: {
+              xAxes: {
+                  stacked: true,
+              },
+              yAxes: {
+                  stacked: true
+              }
+          }
+      };
   }
     private initializeDependingOnUserRights(authState: AuthState) {
-        this.viewOption = 'general';
+
         if (authState.user && (authState.user.rights === 'Admin_Banq')) {
             this.bankShortName = authState.banque.bankShortName;
-            this.filterParams = { 'bankShortName': authState.banque.bankShortName};
+            this.filterParams[ 'bankShortName'] = authState.banque.bankShortName;
             this.viewOptions =  [
                 {label: $localize`:@@General:General` , value:'general'},
                 {label: $localize`:@@History:History` , value: 'history'},
@@ -113,11 +131,12 @@ export class AuditReportComponent implements OnInit {
 
 
         if (authState.user && (authState.user.rights === 'admin')) {
-            this.filterParams = {};
+
             this.viewOptions =  [
                 {label: $localize`:@@General:General` , value: 'general'},
                 {label: $localize`:@@History:History` , value: 'history'},
                 {label: $localize`:@@Usage:Usage` , value: 'usage' },
+                {label: $localize`:@@Rights:Rights` , value: 'rights' },
             ];
             this.banqueService.getAll()
                 .pipe(
@@ -156,24 +175,9 @@ export class AuditReportComponent implements OnInit {
     changeFilter() {
       console.log('Audit Option Selected:',this.viewOption)
         // remove previous filters
-        if (this.filterParams.hasOwnProperty('byDate')) {
-            delete this.filterParams['byDate'];
-        }
-        if (this.filterParams.hasOwnProperty('byUsage')) {
-            delete this.filterParams['byUsage'];
-        }
 
-       if (this.viewOption === 'history')
-        {
-            this.filterParams['byDate'] = '1';
-        }
-        if (this.viewOption === 'usage')
-        {
-            this.filterParams['byUsage'] = '1';
-            if ((!this.bankShortName) && ( this.filterParams.hasOwnProperty('bankShortName'))) {
-                delete this.filterParams['bankShortName'];
-            }
-        }
+        this.filterParams['reportType'] = this.viewOption;
+
         this.report(null);
 
     }
@@ -190,107 +194,203 @@ export class AuditReportComponent implements OnInit {
     this.auditReportService.getAuditReport(this.authService.accessToken, this.filterParams).subscribe(
         (response: AuditReport[]) => {
           this.auditReports = response;
-          if (this.viewOption === 'usage') {
-              let nbOfSelectedLogins = 0;
-              let nbOfSelectedOrganisations = 0;
-              const reportLabels = [];
-              const reportDataSets = [
-                  {
-                      label: 'NB Organisations',
-                      backgroundColor: '#42A5F5',
-                      data: []
-                  },
-                  {
-                      label: 'NB Organisations Using Foodbanks IT',
-                      backgroundColor: '#FFA726',
-                      data: []
-                  },
-              ];
-              console.log('Fead Option',this.feadOption);
-              let selectedBanqueOrgCounts = this.banqueOrgCounts;
-              if (this.feadOption) {
-                  selectedBanqueOrgCounts = this.banqueOrgFeadCounts;
-              }
-              selectedBanqueOrgCounts.map((item) => {
-                  reportLabels.push(item.bankShortName);
-                  reportDataSets[0].data.push(item.orgCount);
-                  reportDataSets[1].data.push(0);
+            let reportLabels = [];
+            let reportDataSets = [];
+         switch(this.viewOption) {
+             case 'usage':
+                 let nbOfSelectedLogins = 0;
+                 let nbOfSelectedOrganisations = 0;
+                 reportDataSets = [
+                     {
+                         label: 'NB Organisations',
+                         backgroundColor: '#42A5F5',
+                         data: []
+                     },
+                     {
+                         label: 'NB Organisations Using Foodbanks IT',
+                         backgroundColor: '#FFA726',
+                         data: []
+                     },
+                 ];
+                 console.log('Fead Option', this.feadOption);
+                 let selectedBanqueOrgCounts = this.banqueOrgCounts;
+                 if (this.feadOption) {
+                     selectedBanqueOrgCounts = this.banqueOrgFeadCounts;
+                 }
+                 selectedBanqueOrgCounts.map((item) => {
+                     reportLabels.push(item.bankShortName);
+                     reportDataSets[0].data.push(item.orgCount);
+                     reportDataSets[1].data.push(0);
 
 
-              })
-              this.auditReports.map((item) => {
+                 })
+                 this.auditReports.map((item) => {
 
-                  const indexItem = reportLabels.indexOf(item.key);
-                  if (indexItem >= 0) {
-                      reportDataSets[1].data[indexItem]++;
-                      nbOfSelectedLogins += item.loginCount;
-                      nbOfSelectedOrganisations ++ ;
-                  }
+                     const indexItem = reportLabels.indexOf(item.key);
+                     if (indexItem >= 0) {
+                         reportDataSets[1].data[indexItem]++;
+                         nbOfSelectedLogins += item.loginCount;
+                         nbOfSelectedOrganisations++;
+                     }
 
-              })
-              let nbOrgs = this.nbOfOrganisations;
-              if (this.feadOption) {
-                  nbOrgs = this.nbOfFeadOrganisations;
-              }
-              this.title = `There are ${nbOfSelectedLogins} logins for ${nbOfSelectedOrganisations} organisations out of ${nbOrgs}`;
-              this.chartData = {
-                  labels: reportLabels,
-                  datasets: reportDataSets
-              }
-          }
-          else {
-              let nbOfSelectedFBITLogins = 0;
-              let nbOfSelectedPHPLogins = 0;
+                 })
+                 let nbOrgs = this.nbOfOrganisations;
+                 if (this.feadOption) {
+                     nbOrgs = this.nbOfFeadOrganisations;
+                 }
+                 this.title = `There are ${nbOfSelectedLogins} logins for ${nbOfSelectedOrganisations} organisations out of ${nbOrgs}`;
+                 this.chartData = {
+                     labels: reportLabels,
+                     datasets: reportDataSets
+                 }
+                 break;
+             case 'general':
+             case 'history':
+                 let nbOfSelectedFBITLogins = 0;
+                 let nbOfSelectedPHPLogins = 0;
 
-              const reportLabels = [];
-              const reportDataSets = [
-                  {
-                      label: 'PHP',
-                      backgroundColor: '#42A5F5',
-                      data: []
-                  },
-                  {
-                      label: 'FBIT',
-                      backgroundColor: '#FFA726',
-                      data: []
-                  },
-              ];
-              // initialize first chart arrays
-              this.auditReports.map((item) => {
-                  if ((item.key === null) || (item.key === "0")) {
-                      item.key = "Bank";
-                  }
-                  // reportLabels.push(item.key);
-                  // reportDataSets[0].data.push(item.loginCount);
-                  if (!reportLabels.includes(item.key)) {
-                      reportLabels.push(item.key);
-                      if (item.application === "FBIT") {
-                          reportDataSets[1].data.push(item.loginCount);
-                          reportDataSets[0].data.push(0);
-                          nbOfSelectedFBITLogins += item.loginCount;
-                      } else {
-                          reportDataSets[0].data.push(item.loginCount);
-                          reportDataSets[1].data.push(0);
-                          nbOfSelectedPHPLogins += item.loginCount;
-                      }
-                  } else {
-                      const indexItem = reportLabels.indexOf(item.key);
-                      if (item.application === "FBIT") {
-                          reportDataSets[1].data[indexItem] = item.loginCount;
-                          nbOfSelectedFBITLogins += item.loginCount;
-                      } else {
-                          reportDataSets[0].data[indexItem] = item.loginCount;
-                          nbOfSelectedPHPLogins += item.loginCount;
-                      }
-                  }
+                 reportDataSets = [
+                     {
+                         label: 'PHP',
+                         backgroundColor: '#42A5F5',
+                         data: []
+                     },
+                     {
+                         label: 'FBIT',
+                         backgroundColor: '#FFA726',
+                         data: []
+                     },
+                 ];
+                 // initialize first chart arrays
+                 this.auditReports.map((item) => {
+                     if ((item.key === null) || (item.key === "0")) {
+                         item.key = "Bank";
+                     }
+                     // reportLabels.push(item.key);
+                     // reportDataSets[0].data.push(item.loginCount);
+                     if (!reportLabels.includes(item.key)) {
+                         reportLabels.push(item.key);
+                         if (item.application === "FBIT") {
+                             reportDataSets[1].data.push(item.loginCount);
+                             reportDataSets[0].data.push(0);
+                             nbOfSelectedFBITLogins += item.loginCount;
+                         } else {
+                             reportDataSets[0].data.push(item.loginCount);
+                             reportDataSets[1].data.push(0);
+                             nbOfSelectedPHPLogins += item.loginCount;
+                         }
+                     } else {
+                         const indexItem = reportLabels.indexOf(item.key);
+                         if (item.application === "FBIT") {
+                             reportDataSets[1].data[indexItem] = item.loginCount;
+                             nbOfSelectedFBITLogins += item.loginCount;
+                         } else {
+                             reportDataSets[0].data[indexItem] = item.loginCount;
+                             nbOfSelectedPHPLogins += item.loginCount;
+                         }
+                     }
 
-              });
-              this.title = `There are ${nbOfSelectedPHPLogins} PHP logins and ${nbOfSelectedFBITLogins} FBIT logins`;
-              this.chartData = {
-                  labels: reportLabels,
-                  datasets: reportDataSets
-              }
-          }
+                 });
+                 this.title = `There are ${nbOfSelectedPHPLogins} PHP logins and ${nbOfSelectedFBITLogins} FBIT logins`;
+                 this.chartData = {
+                     labels: reportLabels,
+                     datasets: reportDataSets
+                 }
+                 break;
+             case 'rights':
+                 reportDataSets = [
+                     {
+                         type: 'bar',
+                         label: 'Admin_Banq',
+                         backgroundColor: 'Red',
+                         data: []
+                     },
+                     {
+                         type: 'bar',
+                         label: 'Bank',
+                         backgroundColor: 'Orange',
+                         data: []
+                     },
+                     {
+                         type: 'bar',
+                         label: 'Admin_Asso',
+                         backgroundColor: 'Blue',
+                         data: []
+                     },
+                     {
+                         type: 'bar',
+                         label: 'Asso',
+                         backgroundColor: '#ADD8E6', // light blue
+                         data: []
+                     },
+                     {
+                         type: 'bar',
+                         label: 'admin',
+                         backgroundColor: 'Green',
+                         data: []
+                     },
+                     {
+                         type: 'bar',
+                         label: 'Admin_FEAD',
+                         backgroundColor: 'Yellow',
+                         data: []
+                     },
+                     {
+                         type: 'bar',
+                         label: 'Admin_CPAS',
+                         backgroundColor: 'Indigo',
+                         data: []
+                     },
+                     {
+                         type: 'bar',
+                         label: 'Admin_FBBA',
+                         backgroundColor: 'Black',
+                         data: []
+                     },
+                     {
+                         label: 'Bank_FBBA',
+                         backgroundColor: 'Grey',
+                         data: []
+                     },
+                     {
+                         type: 'bar',
+                         label: 'Other',
+                         backgroundColor: 'Brown',
+                         data: []
+                     },
+                 ];
+
+                 this.banqueOrgCounts.map((orgitem) => {
+                     reportLabels.push(orgitem.bankShortName);
+                 })
+                 reportDataSets.map((dataSetitem) => {
+                     for (let i=0; i < this.banqueOrgCounts.length; i++ ) {
+                         dataSetitem.data.push(0);
+                     }
+                 })
+                 console.log( 'initialized chart data', reportLabels,  reportDataSets);
+                 for (let i=0; i < this.auditReports.length; i++ ) {
+                     if (this.auditReports[i].key === null ) continue;
+                     const indexLabel = reportLabels.indexOf(this.auditReports[i].key);
+                     const indexDataset = reportDataSets.findIndex(item => item.label === this.auditReports[i].application);
+                     console.log(this.auditReports[i],'indexLabel', indexLabel, 'indexDataset',indexDataset);
+                     if (indexLabel >= 0 && indexDataset >= 0 && indexLabel < reportLabels.length && indexDataset < reportDataSets.length) {
+                         reportDataSets[indexDataset].data[indexLabel] += this.auditReports[i].loginCount;
+                     }
+                     else {
+                         console.log('can not create a audit report entry for item', this.auditReports[i],indexLabel,indexDataset);
+                     }
+                 }
+                 this.title = `Breakdown by User Rights`;
+                 this.chartData = {
+                     labels: reportLabels,
+                     datasets: reportDataSets
+                 }
+                 break;
+             default:
+                 console.log('Unknown audit report option:', this.viewOption);
+         }
+
 
         });
   }

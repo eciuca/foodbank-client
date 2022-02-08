@@ -459,11 +459,11 @@
         <target>Général</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">126</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="History" datatype="html">
@@ -471,11 +471,11 @@
         <target>Evolution</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">127</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Usage" datatype="html">
@@ -483,7 +483,15 @@
         <target>Usage</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Rights" datatype="html">
+        <source>Rights</source>
+        <target>Droits</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/audits/audit-report/audit-report.component.ts</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReportbyPage" datatype="html">
@@ -2788,7 +2796,7 @@
       </trans-unit>
       <trans-unit id="HomeSubtitle" datatype="html">
         <source>for Food Banks and their Associations</source>
-        <target>Pour les Banques Alimentaires Belges et leurs Associations</target>
+        <target>Pour les Banques Alimentaires Belges et leurs Partenaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/home/home.component.html</context>
           <context context-type="linenumber">5</context>
