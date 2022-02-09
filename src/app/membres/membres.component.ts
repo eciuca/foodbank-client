@@ -12,6 +12,9 @@ import {AuthState} from '../auth/reducers';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
+import {ExcelService} from '../services/excel.service';
+import {AuthService} from '../auth/auth.service';
+import {MembreHttpService} from './services/membre-http.service';
 
 
 @Component({
@@ -46,8 +49,11 @@ export class MembresComponent implements OnInit {
     constructor(private membreService: MembreEntityService,
                 private banqueService: BanqueEntityService,
                 private orgsummaryService: OrgSummaryEntityService,
+                private authService: AuthService,
+                private excelService: ExcelService,
                 private router: Router,
-                private store: Store<AppState>
+                private store: Store<AppState>,
+                private membreHttpService: MembreHttpService
     ) {
         this.booCanCreate = false;
         this.booShowArchived = false;
@@ -342,6 +348,30 @@ export class MembresComponent implements OnInit {
                 return $localize`:@@AllMembersTitleActive:Active Members  `;
             }
         }
+    }
+    exportAsXLSX(): void {
+        this.membreHttpService.getMembreReport(this.authService.accessToken, this.bankid).subscribe(
+            (membres: any[] ) => {
+                const cleanedList = [];
+                membres.map((item) => {
+                    cleanedList.push({  gender: this.labelCivilite(item.civilite), name: item.nom ,firstname: item.prenom, address: item.address, city: item.city,
+                        zip: item.zip, tel: item.tel, gsm: item.gsm, email: item.batmail })
+                });
+                this.excelService.exportAsExcelFile(cleanedList,  'foodit.' + this.bankid +'.membres.' + new Date().getTime() + '.xlsx');
+            });
+    }
+    labelCivilite(civilite: number) {
+        switch (civilite) {
+            case 1:
+                return 'Mr';
+            case 2:
+                return 'Mrs.';
+            case 3:
+                return 'Miss';
+            default:
+                return 'Unspecified';
+        }
+
     }
 }
 

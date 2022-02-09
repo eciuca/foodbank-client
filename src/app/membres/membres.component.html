@@ -6,7 +6,7 @@
     <ng-template pTemplate="caption">
         <div class="table-header">
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-6">
+                <div class="p-field p-col-12 p-md-12">
                     {{ getTitle() }}
                 </div>
                 <div class="p-field p-col-12 p-md-2">
@@ -23,6 +23,9 @@
                             </div>
                         </ng-template>
                     </p-autoComplete>
+                </div>
+                <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
+                <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Membres" i18n-label="@@ExportMembres"></button>
                 </div>
                 <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
                     <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddEmployee" label="Add Employee"></button>

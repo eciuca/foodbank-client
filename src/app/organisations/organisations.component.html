@@ -45,12 +45,13 @@
                     <label i18n="@@ShowArchived" for="archived">Show Archived?</label>
                     <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                 </div>
-                <div class="p-field p-col-12 p-md-3">
+                <div class="p-field p-col-12 p-md-2">
+                    <button  i18n="@@OrganisationExport" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Organisations" i18n-label="@@ExportOrganisations"></button>
+                </div>
                 </div>
                 <div class="p-field p-col-12 p-md-2">
                     <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Organisation" i18n-label="@@AddOrganisation" ></button>
                 </div>
-            </div>
         </div>
     </ng-template>
     <ng-template pTemplate="header">

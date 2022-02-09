@@ -14,6 +14,9 @@ import {RegionEntityService} from './services/region-entity.service';
 import {DepotEntityService} from '../depots/services/depot-entity.service';
 import {QueryParams} from '@ngrx/data';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
+import {ExcelService} from '../services/excel.service';
+import {AuthService} from '../auth/auth.service';
+import {OrganisationHttpService} from './services/organisation-http.service';
 
 
 @Component({
@@ -53,9 +56,12 @@ export class OrganisationsComponent implements OnInit {
                 private banqueService: BanqueEntityService,
                 private regionService: RegionEntityService,
                 private depotService: DepotEntityService,
+                private authService: AuthService,
+                private excelService: ExcelService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private store: Store<AppState>
+                private store: Store<AppState>,
+                private organisationHttpService: OrganisationHttpService
     ) {
         this.booCanCreate = false;
         this.booShowArchived = false;
@@ -368,6 +374,17 @@ export class OrganisationsComponent implements OnInit {
             }
         }
         this.loadPageSubject$.next(latestQueryParams);
+    }
+    exportAsXLSX(): void {
+        this.organisationHttpService.getOrganisationReport(this.authService.accessToken, this.lienBanque).subscribe(
+            (organisations: any[] ) => {
+                const cleanedList = [];
+                organisations.map((item) => {
+                    cleanedList.push({ id: item.idDis, company: item.societe, address: item.adresse, zip: item.cp, city: item.localite,
+                        email: item.email })
+                });
+                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.lienBanque + '.organisations.' + new Date().getTime() + '.xlsx');
+            });
     }
 }
 

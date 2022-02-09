@@ -12,6 +12,9 @@ import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguage, enmUserRoles} from 
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
+import {ExcelService} from '../services/excel.service';
+import {AuthService} from '../auth/auth.service';
+import {UserHttpService} from './services/user-http.service';
 
 
 @Component({
@@ -48,8 +51,11 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UserEntityService,
               private banqueService: BanqueEntityService,
               private orgsummaryService: OrgSummaryEntityService,
+              private authService: AuthService,
+              private excelService: ExcelService,
               private router: Router,
-              private store: Store<AppState>
+              private store: Store<AppState>,
+              private userHttpService: UserHttpService
   ) {
       this.booCanCreate = false;
       this.booShowArchived = false;
@@ -392,6 +398,17 @@ export class UsersComponent implements OnInit {
                 return $localize`:@@AllUsersTitleActive:Active Users  `;
             }
         }
+    }
+    exportAsXLSX(): void {
+        this.userHttpService.getUserReport(this.authService.accessToken, this.bankid).subscribe(
+            (users: any[] ) => {
+                const cleanedList = [];
+                users.map((item) => {
+                    cleanedList.push({ idUser: item.idUser, name: item.membreNom , firstName: item.membrePrenom,  language: item.idLanguage, company: item.societe,
+                       email: item.email })
+                });
+                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankid +'.users.' + new Date().getTime() + '.xlsx');
+            });
     }
   
 }

@@ -23,12 +23,17 @@
                             </ng-template>
                         </p-autoComplete>
                     </div>
-
+                </div>
+                    <div class="p-fluid p-formgrid p-grid">
                     <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-2">
                         <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddUser" label="Add User"></button>
                     </div>
+                    <div  class="p-field p-col-12 p-md-2">
+                        <button i18n="@@UserExport" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Users" i18n-label="@@ExportUsers"></button>
+                    </div>
                 </div>
             </div>
+
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
