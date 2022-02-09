@@ -366,8 +366,8 @@ export class AuditReportComponent implements OnInit {
                      },
                  ];
 
-                 this.banqueOrgCounts.map((orgitem) => {
-                     reportLabels.push(orgitem.bankShortName);
+                 this.bankOptions.map((option) => {
+                     reportLabels.push(option.value);
                  })
                  reportDataSets.map((dataSetitem) => {
                      for (let i=0; i < this.banqueOrgCounts.length; i++ ) {
@@ -379,7 +379,7 @@ export class AuditReportComponent implements OnInit {
                      if (this.auditReports[i].key === null ) continue;
                      const indexLabel = reportLabels.indexOf(this.auditReports[i].key);
                      let indexDataset = reportDataSets.findIndex(item => item.label.toUpperCase() === this.auditReports[i].application.toUpperCase());
-                     if( indexDataset === -1) { indexDataset = reportDataSets.length - 1 }; // Assign to Other
+                     if( indexDataset === -1) { indexDataset = reportDataSets.length - 1 } // Assign to Other
                      console.log(this.auditReports[i],'indexLabel', indexLabel, 'indexDataset',indexDataset);
                      if (indexLabel >= 0 && indexDataset >= 0 && indexLabel < reportLabels.length && indexDataset < reportDataSets.length) {
                          reportDataSets[indexDataset].data[indexLabel] += this.auditReports[i].loginCount;
