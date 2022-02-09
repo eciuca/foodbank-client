@@ -370,7 +370,7 @@ export class AuditReportComponent implements OnInit {
                      reportLabels.push(option.value);
                  })
                  reportDataSets.map((dataSetitem) => {
-                     for (let i=0; i < this.banqueOrgCounts.length; i++ ) {
+                     for (let i=0; i < this.bankOptions.length; i++ ) {
                          dataSetitem.data.push(0);
                      }
                  })
