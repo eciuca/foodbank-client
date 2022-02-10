@@ -12,6 +12,7 @@ import {AuthService} from '../auth/auth.service';
 import {DepotHttpService} from './services/depot-http.service';
 import {AuthState} from '../auth/reducers';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
+import {formatDate} from '@angular/common';
 
 
 
@@ -31,6 +32,7 @@ export class DepotsComponent implements OnInit {
   filterBase: any;
   booIsAdmin: boolean;
   lienBanque: number;
+  bankShortName: string;
   bankOptions: any[];
   first: number;
   totalRecords: number;
@@ -46,6 +48,7 @@ export class DepotsComponent implements OnInit {
     this.booIsAdmin = false;
     this.first = 0;
     this.totalRecords = 0;
+    this.bankShortName = '';
     this.filterBase = {};
   }
   ngOnInit() {
@@ -137,9 +140,11 @@ export class DepotsComponent implements OnInit {
       switch (authState.user.rights) {
         case 'Bank':
           this.filterBase ['idCompany'] = authState.banque.bankShortName;
+          this.bankShortName = authState.banque.bankShortName;
           break;
         case 'Admin_Banq':
           this.filterBase ['idCompany'] = authState.banque.bankShortName;
+          this.bankShortName = authState.banque.bankShortName;
           this.booIsAdmin = true;
           break;
         case 'admin':
@@ -160,7 +165,7 @@ export class DepotsComponent implements OnInit {
     this.depotHttpService.getDepotReport(this.authService.accessToken, this.lienBanque).subscribe(
         (depots: any[] ) => {
           const cleanedList = depots.map(({ actif, isNew, totalRecords, ...item }) => item);
-          this.excelService.exportAsExcelFile(cleanedList, 'foodit.depots.' + new Date().getTime() + '.xlsx');
+          this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.depots.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
         });
   }
 

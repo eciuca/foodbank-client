@@ -18,6 +18,6 @@ export class MembreHttpService {
             }),
         };
         // tslint:disable-next-line:max-line-length
-        return this.http.get<Membre[]>(`${this.baseUrl}/?lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=nom`, requestOptions);
+        return this.http.get<Membre[]>(`${this.baseUrl}/?actif=1&lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=nom`, requestOptions);
     }
 }

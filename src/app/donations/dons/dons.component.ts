@@ -11,6 +11,7 @@ import {ExcelService} from '../../services/excel.service';
 import {AuthService} from '../../auth/auth.service';
 import {DonHttpService} from '../services/don-http.service';
 import {AuthState} from '../../auth/reducers';
+import {formatDate} from '@angular/common';
 
 
 
@@ -31,6 +32,7 @@ export class DonsComponent implements OnInit {
   filterBase: any;
   booIsAdmin: boolean;
   lienBanque: number;
+  bankShortName: string;
   first: number;
   totalRecords: number;
   currentYear: number;
@@ -47,6 +49,7 @@ export class DonsComponent implements OnInit {
     this.first = 0;
     this.totalRecords = 0;
     this.filterBase = {};
+    this.bankShortName = '';
     this.currentYear = (new Date()).getFullYear();
   }
   ngOnInit() {
@@ -151,6 +154,7 @@ export class DonsComponent implements OnInit {
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.user) {
       this.lienBanque = authState.banque.bankId;
+      this.bankShortName = authState.banque.bankShortName;
       this.filterBase = { 'lienBanque': authState.banque.bankId};
       if (authState.user.rights === 'Admin_Banq') {
         this.booIsAdmin = true;
@@ -161,7 +165,7 @@ export class DonsComponent implements OnInit {
     this.donHttpService.getDonReport(this.authService.accessToken, this.lienBanque).subscribe(
         (dons: any[] ) => {
           const cleanedList = dons.map(({ idDon, lienBanque, donateurId, appended, checked, totalRecords, ...item }) => item);
-          this.excelService.exportAsExcelFile(cleanedList, 'don_data');
+          this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.gifts.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
         });
   }
 

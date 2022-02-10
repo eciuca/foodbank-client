@@ -11,6 +11,10 @@ import {LazyLoadEvent} from 'primeng/api';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {enmYn} from '../shared/enums';
+import {AuthService} from '../auth/auth.service';
+import {ExcelService} from '../services/excel.service';
+import {BeneficiaireHttpService} from './services/beneficiaire-http.service';
+import {formatDate} from '@angular/common';
 
 
 @Component({
@@ -37,10 +41,14 @@ export class BeneficiairesComponent implements OnInit {
   first: number;
   bankid: number;
   bankName: string;
+  bankShortName: string;
   orgName: string; // if logging in with asso role we need to display the organisation
   YNOptions:  any[];
   constructor(private beneficiaireService: BeneficiaireEntityService,
               private orgsummaryService: OrgSummaryEntityService,
+              private authService: AuthService,
+              private excelService: ExcelService,
+              private beneficiaireHttpService: BeneficiaireHttpService,
               private router: Router,
               private store: Store
   ) {
@@ -50,6 +58,7 @@ export class BeneficiairesComponent implements OnInit {
     this.booShowOrganisations = false;
     this.first = 0;
     this.bankName = '';
+    this.bankShortName = '';
     this.orgName = '';
     this.filteredOrganisationsPrepend = [
           {idDis: null, fullname: $localize`:@@organisations:Organisations` },
@@ -179,6 +188,7 @@ export class BeneficiairesComponent implements OnInit {
     if (authState.user) {
       this.bankid = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
+      this.bankShortName = authState.banque.bankShortName;
       switch (authState.user.rights) {
         case 'Bank':
         case 'Admin_Banq':
@@ -248,5 +258,29 @@ export class BeneficiairesComponent implements OnInit {
     } else {
       return 'Coeff ' + coeff;
     }
+  }
+  exportAsXLSX(): void {
+    this.beneficiaireHttpService.getBeneficiaireReport(this.authService.accessToken, this.bankid).subscribe(
+        (beneficiaires: any[] ) => {
+          const cleanedList = [];
+          beneficiaires.map((item) => {
+            cleanedList.push({  gender: this.labelCivilite(item.civilite), name: item.nom ,firstname: item.prenom, address: item.adresse, city: item.localite,
+              zip: item.cp, tel: item.tel, gsm: item.gsm, email: item.email })
+          });
+          this.excelService.exportAsExcelFile(cleanedList,  'foodit.' + this.bankShortName +'.beneficiaries.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
+        });
+  }
+  labelCivilite(civilite: number) {
+    switch (civilite) {
+      case 1:
+        return 'Mr';
+      case 2:
+        return 'Mrs.';
+      case 3:
+        return 'Miss';
+      default:
+        return 'Unspecified';
+    }
+
   }
 }

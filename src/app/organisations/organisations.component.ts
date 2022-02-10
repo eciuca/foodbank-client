@@ -17,6 +17,7 @@ import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {OrganisationHttpService} from './services/organisation-http.service';
+import {formatDate} from '@angular/common';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class OrganisationsComponent implements OnInit {
     depots: any[];
     YNOptions:  any[];
     bankName: string;
+    bankShortName: string;
     lienBanque: number;
     depotName: string;
     first: number;
@@ -70,6 +72,7 @@ export class OrganisationsComponent implements OnInit {
         this.YNOptions = enmYn;
         this.lienBanque = 0;
         this.bankName = '';
+        this.bankShortName = '';
         this.depotName = '';
         this.first = 0;
     }
@@ -206,6 +209,7 @@ export class OrganisationsComponent implements OnInit {
             if (authState.banque && authState.user.rights !== 'admin' ) {
                 this.lienBanque = authState.banque.bankId;
                 this.bankName = authState.banque.bankName;
+                this.bankShortName = authState.banque.bankShortName;
             }
 
             switch (authState.user.rights) {
@@ -383,7 +387,7 @@ export class OrganisationsComponent implements OnInit {
                     cleanedList.push({ id: item.idDis, company: item.societe, address: item.adresse, zip: item.cp, city: item.localite,
                         email: item.email })
                 });
-                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.lienBanque + '.organisations.' + new Date().getTime() + '.xlsx');
+                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
             });
     }
 }

@@ -15,6 +15,7 @@ import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {UserHttpService} from './services/user-http.service';
+import {formatDate} from '@angular/common';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class UsersComponent implements OnInit {
   filteredOrganisationsPrepend: any[];
   bankid: number;
   bankName: string;
+  bankShortName: string;
   filteredBankShortName: string;
   first: number;
   booShowOrganisations: boolean;
@@ -63,6 +65,7 @@ export class UsersComponent implements OnInit {
       this.languageOptions = enmLanguage;
       this.bankid = 0;
       this.bankName = '';
+      this.bankShortName = '';
       this.lienDepot = 0;
       this.depotName = '';
       this.first = 0;
@@ -108,6 +111,7 @@ export class UsersComponent implements OnInit {
                     case 'Bank':
                     case 'Admin_Banq':
                         this.bankName = authState.banque.bankName;
+                        this.bankShortName = authState.banque.bankShortName;
                         this.booShowOrganisations = true;
                         this.filterBase = {'lienBanque': authState.banque.bankId};
                         this.rightOptions = enmUserRolesBankAsso;
@@ -124,6 +128,7 @@ export class UsersComponent implements OnInit {
                     case 'Asso':
                     case 'Admin_Asso':
                         this.bankName = authState.banque.bankName;
+                        this.bankShortName = authState.banque.bankShortName;
                         if (authState.organisation && authState.organisation.depyN === true) {
                             this.booShowOrganisations = true;
                             this.lienDepot = authState.organisation.idDis;
@@ -407,7 +412,7 @@ export class UsersComponent implements OnInit {
                     cleanedList.push({ idUser: item.idUser, name: item.membreNom , firstName: item.membrePrenom,  language: item.idLanguage, company: item.societe,
                        email: item.email })
                 });
-                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankid +'.users.' + new Date().getTime() + '.xlsx');
+                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName +'.users.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
             });
     }
   

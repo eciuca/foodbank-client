@@ -18,6 +18,6 @@ export class OrganisationHttpService {
             }),
         };
         // tslint:disable-next-line:max-line-length
-        return this.http.get<Organisation[]>(`${this.baseUrl}/?lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=idDis`, requestOptions);
+        return this.http.get<Organisation[]>(`${this.baseUrl}/?actif=1&lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=idDis`, requestOptions);
     }
 }

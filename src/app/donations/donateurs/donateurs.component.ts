@@ -11,6 +11,7 @@ import {ExcelService} from '../../services/excel.service';
 import {AuthService} from '../../auth/auth.service';
 import {DonateurHttpService} from '../services/donateur-http.service';
 import {AuthState} from '../../auth/reducers';
+import {formatDate} from '@angular/common';
 
 
 
@@ -31,6 +32,7 @@ export class DonateursComponent implements OnInit {
   filterBase: any;
   booIsAdmin: boolean;
   lienBanque: number;
+  bankShortName: string;
   first: number;
   totalRecords: number;
   constructor(private donateurService: DonateurEntityService,
@@ -44,6 +46,7 @@ export class DonateursComponent implements OnInit {
     this.booIsAdmin = false;
     this.first = 0;
     this.totalRecords = 0;
+    this.bankShortName = '';
     this.filterBase = {};
   }
   ngOnInit() {
@@ -129,6 +132,7 @@ export class DonateursComponent implements OnInit {
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.user) {
               this.lienBanque = authState.banque.bankId;
+              this.bankShortName = authState.banque.bankShortName;
               this.filterBase = { 'lienBanque': authState.banque.bankId};
               if (authState.user.rights === 'Admin_Banq') {
                 this.booIsAdmin = true;
@@ -139,7 +143,7 @@ export class DonateursComponent implements OnInit {
     this.donateurHttpService.getDonateurReport(this.authService.accessToken, this.lienBanque).subscribe(
         (donateurs: any[] ) => {
           const cleanedList = donateurs.map(({ donateurId, lienBanque, pays, totalRecords, ...item }) => item);
-          this.excelService.exportAsExcelFile(cleanedList, 'foodit.donateurs.' + new Date().getTime() + '.xlsx');
+          this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.donateurs.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
         });
   }
 

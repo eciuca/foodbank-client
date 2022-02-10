@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpRequest, HttpEvent, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {User} from '../model/user';
+import {Beneficiaire} from '../model/beneficiaire';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserHttpService {
-    private baseUrl = '/api/users';
+export class BeneficiaireHttpService {
+    private baseUrl = '/api/beneficiaires';
     constructor(private http: HttpClient) {
     }
-    getUserReport(accesstoken: string, lienBanque: number): Observable<User[]> {
+    getBeneficiaireReport(accesstoken: string, lienBanque: number): Observable<Beneficiaire[]> {
         const requestOptions = {
             headers: new HttpHeaders( {
                 responseType: 'json',
@@ -18,6 +18,6 @@ export class UserHttpService {
             }),
         };
         // tslint:disable-next-line:max-line-length
-        return this.http.get<User[]>(`${this.baseUrl}/?actif=1&lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=idUser`, requestOptions);
+        return this.http.get<Beneficiaire[]>(`${this.baseUrl}/?actif=1&lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=nom`, requestOptions);
     }
 }

@@ -15,6 +15,7 @@ import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {MembreHttpService} from './services/membre-http.service';
+import {formatDate} from '@angular/common';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class MembresComponent implements OnInit {
     booShowOrganisations: boolean;
     bankid: number;
     bankName: string;
+    bankShortName: string;
     filteredBankShortName: string;
     lienDepot: number;
     depotName: string;
@@ -61,6 +63,7 @@ export class MembresComponent implements OnInit {
         this.booShowOrganisations = false;
         this.first = 0;
         this.bankName = '';
+        this.bankShortName = '';
         this.depotName = '';
         this.orgName = '';
         this.lienDepot = 0;
@@ -185,6 +188,7 @@ export class MembresComponent implements OnInit {
                 case 'Bank':
                 case 'Admin_Banq':
                     this.bankName = authState.banque.bankName;
+                    this.bankShortName = authState.banque.bankShortName;
                     this.booShowOrganisations = true;
                     this.filterBase = { 'lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
@@ -198,6 +202,7 @@ export class MembresComponent implements OnInit {
                 case 'Asso':
                 case 'Admin_Asso':
                     this.bankName = authState.banque.bankName;
+                    this.bankShortName = authState.banque.bankShortName;
                     if (authState.organisation && authState.organisation.depyN === true) {
                         this.booShowOrganisations = true;
                         this.lienDepot = authState.organisation.idDis;
@@ -357,7 +362,7 @@ export class MembresComponent implements OnInit {
                     cleanedList.push({  gender: this.labelCivilite(item.civilite), name: item.nom ,firstname: item.prenom, address: item.address, city: item.city,
                         zip: item.zip, tel: item.tel, gsm: item.gsm, email: item.batmail })
                 });
-                this.excelService.exportAsExcelFile(cleanedList,  'foodit.' + this.bankid +'.membres.' + new Date().getTime() + '.xlsx');
+                this.excelService.exportAsExcelFile(cleanedList,  'foodit.' + this.bankShortName +'.members.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
             });
     }
     labelCivilite(civilite: number) {
