@@ -6,7 +6,7 @@ import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {map} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
-
+import {labelCivilite} from '../../shared/functions';
 
 
 @Component({
@@ -102,18 +102,8 @@ export class OrgcontactsComponent implements OnInit {
     this.orgcontacts.splice(index, 1);
     this.displayDialog = false;
   }
-
   labelCivilite(civilite: number) {
-    switch (civilite) {
-      case 1:
-        return 'Mr';
-      case 2:
-        return 'Mrs.';
-      case 3:
-        return 'Miss';
-      default:
-        return 'Unspecified';
-    }
+    return labelCivilite(civilite);
 
   }
 }

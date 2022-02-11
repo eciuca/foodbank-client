@@ -380,15 +380,32 @@ export class OrganisationsComponent implements OnInit {
         this.loadPageSubject$.next(latestQueryParams);
     }
     exportAsXLSX(): void {
-        this.organisationHttpService.getOrganisationReport(this.authService.accessToken, this.lienBanque).subscribe(
-            (organisations: any[] ) => {
-                const cleanedList = [];
-                organisations.map((item) => {
-                    cleanedList.push({ id: item.idDis, company: item.societe, address: item.adresse, zip: item.cp, city: item.localite,
-                        email: item.email })
+        if (this.bankOptions) {
+            this.organisationHttpService.getOrganisationReport(this.authService.accessToken, null).subscribe(
+                (organisations: any[]) => {
+                    const cleanedList = [];
+                    organisations.map((item) => {
+                        cleanedList.push({
+                            id: item.idDis, bank: item.bankShortName, company: item.societe, address: item.adresse, zip: item.cp, city: item.localite,
+                            email: item.email
+                        })
+                    });
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 });
-                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
-            });
+        }
+        else {
+            this.organisationHttpService.getOrganisationReport(this.authService.accessToken, this.lienBanque).subscribe(
+                (organisations: any[]) => {
+                    const cleanedList = [];
+                    organisations.map((item) => {
+                        cleanedList.push({
+                            id: item.idDis, company: item.societe, address: item.adresse, zip: item.cp, city: item.localite,
+                            email: item.email
+                        })
+                    });
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                });
+        }
     }
 }
 

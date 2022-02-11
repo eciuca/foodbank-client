@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {map} from 'rxjs/operators';
+import {labelCivilite} from '../../shared/functions';
 
 
 
@@ -100,16 +101,7 @@ export class DependentsComponent implements OnInit {
   }
 
   labelCivilite(civilite: number) {
-    switch (civilite) {
-      case 1:
-        return 'Mr';
-      case 2:
-        return 'Mrs.';
-      case 3:
-        return 'Miss';
-      default:
-        return 'Unspecified';
-    }
+    return labelCivilite(civilite);
 
   }
     changeArchiveFilter($event) {

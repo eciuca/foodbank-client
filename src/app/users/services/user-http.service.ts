@@ -12,12 +12,18 @@ export class UserHttpService {
     }
     getUserReport(accesstoken: string, lienBanque: number): Observable<User[]> {
         const requestOptions = {
-            headers: new HttpHeaders( {
+            headers: new HttpHeaders({
                 responseType: 'json',
-                Authorization:  'Bearer ' + accesstoken
+                Authorization: 'Bearer ' + accesstoken
             }),
         };
         // tslint:disable-next-line:max-line-length
-        return this.http.get<User[]>(`${this.baseUrl}/?actif=1&lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=idUser`, requestOptions);
+        if (lienBanque) {
+            return this.http.get<User[]>(`${this.baseUrl}/?actif=1&lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=idUser`, requestOptions);
+        }
+        else {
+            return this.http.get<User[]>(`${this.baseUrl}/?actif=1&offset=0&rows=999&sortOrder=1&sortField=idUser`, requestOptions);
+
+        }
     }
 }

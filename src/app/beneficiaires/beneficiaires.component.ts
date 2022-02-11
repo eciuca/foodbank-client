@@ -15,6 +15,7 @@ import {AuthService} from '../auth/auth.service';
 import {ExcelService} from '../services/excel.service';
 import {BeneficiaireHttpService} from './services/beneficiaire-http.service';
 import {formatDate} from '@angular/common';
+import {labelCivilite} from '../shared/functions';
 
 
 @Component({
@@ -264,23 +265,11 @@ export class BeneficiairesComponent implements OnInit {
         (beneficiaires: any[] ) => {
           const cleanedList = [];
           beneficiaires.map((item) => {
-            cleanedList.push({  gender: this.labelCivilite(item.civilite), name: item.nom ,firstname: item.prenom, address: item.adresse, city: item.localite,
+            cleanedList.push({  gender: labelCivilite(item.civilite), name: item.nom ,firstname: item.prenom, address: item.adresse, city: item.localite,
               zip: item.cp, tel: item.tel, gsm: item.gsm, email: item.email })
           });
           this.excelService.exportAsExcelFile(cleanedList,  'foodit.' + this.bankShortName +'.beneficiaries.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
         });
   }
-  labelCivilite(civilite: number) {
-    switch (civilite) {
-      case 1:
-        return 'Mr';
-      case 2:
-        return 'Mrs.';
-      case 3:
-        return 'Miss';
-      default:
-        return 'Unspecified';
-    }
 
-  }
 }

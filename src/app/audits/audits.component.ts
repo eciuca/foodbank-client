@@ -10,6 +10,7 @@ import {enmApp, enmUserRoles} from '../shared/enums';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {AuthState} from '../auth/reducers';
+import {labelRights} from '../shared/functions';
 
 @Component({
   selector: 'app-audits',
@@ -166,19 +167,8 @@ export class AuditsComponent implements OnInit {
     this.loadPageSubject$.next(latestQueryParams);
   }
   labelRights(rights: string) {
-    switch (rights.toLowerCase()) {
-      case 'admin_banq':
-        return $localize`:@@RoleBankAdmin:Bank admin`;
-      case 'bank':
-        return $localize`:@@RoleBankUser:Bank User`;
-      case 'admin_asso':
-        return  $localize`:@@RoleOrgAdmin:Org Admin`;
-      case 'asso':
-        return $localize`:@@RoleOrgUser:Org User`;
-      case 'admin':
-        return $localize`:@@RoleAdmin:Global admin`;
-      default:
-        return rights;
-    }
+    return labelRights(rights);
+
   }
+
 }

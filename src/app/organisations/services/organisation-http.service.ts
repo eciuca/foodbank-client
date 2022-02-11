@@ -12,12 +12,18 @@ export class OrganisationHttpService {
     }
     getOrganisationReport(accesstoken: string, lienBanque: number): Observable<Organisation[]> {
         const requestOptions = {
-            headers: new HttpHeaders( {
+            headers: new HttpHeaders({
                 responseType: 'json',
-                Authorization:  'Bearer ' + accesstoken
+                Authorization: 'Bearer ' + accesstoken
             }),
         };
-        // tslint:disable-next-line:max-line-length
-        return this.http.get<Organisation[]>(`${this.baseUrl}/?actif=1&lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=idDis`, requestOptions);
+        if (lienBanque) {
+            // tslint:disable-next-line:max-line-length
+            return this.http.get<Organisation[]>(`${this.baseUrl}/?actif=1&lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=idDis`, requestOptions);
+        }
+        else {
+            return this.http.get<Organisation[]>(`${this.baseUrl}/?actif=1&offset=0&rows=999&sortOrder=1&sortField=idDis`, requestOptions);
+
+        }
     }
 }

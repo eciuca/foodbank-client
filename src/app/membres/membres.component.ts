@@ -16,6 +16,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {MembreHttpService} from './services/membre-http.service';
 import {formatDate} from '@angular/common';
+import {labelCivilite} from '../shared/functions';
 
 
 @Component({
@@ -355,28 +356,50 @@ export class MembresComponent implements OnInit {
         }
     }
     exportAsXLSX(): void {
-        this.membreHttpService.getMembreReport(this.authService.accessToken, this.bankid).subscribe(
-            (membres: any[] ) => {
-                const cleanedList = [];
-                membres.map((item) => {
-                    cleanedList.push({  gender: this.labelCivilite(item.civilite), name: item.nom ,firstname: item.prenom, address: item.address, city: item.city,
-                        zip: item.zip, tel: item.tel, gsm: item.gsm, email: item.batmail })
+        if (this.bankOptions) {
+            this.membreHttpService.getMembreReport(this.authService.accessToken, null).subscribe(
+                (membres: any[]) => {
+                    const cleanedList = [];
+                    membres.map((item) => {
+                        cleanedList.push({
+                            gender: labelCivilite(item.civilite),
+                            name: item.nom,
+                            firstname: item.prenom,
+                            bank: item.bankShortName,
+                            address: item.address,
+                            city: item.city,
+                            zip: item.zip,
+                            tel: item.tel,
+                            gsm: item.gsm,
+                            email: item.batmail
+                        })
+                    });
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 });
-                this.excelService.exportAsExcelFile(cleanedList,  'foodit.' + this.bankShortName +'.members.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
-            });
-    }
-    labelCivilite(civilite: number) {
-        switch (civilite) {
-            case 1:
-                return 'Mr';
-            case 2:
-                return 'Mrs.';
-            case 3:
-                return 'Miss';
-            default:
-                return 'Unspecified';
         }
-
+        else {
+            this.membreHttpService.getMembreReport(this.authService.accessToken, this.bankid).subscribe(
+                (membres: any[]) => {
+                    const cleanedList = [];
+                    membres.map((item) => {
+                        cleanedList.push({
+                            gender: labelCivilite(item.civilite),
+                            name: item.nom,
+                            firstname: item.prenom,
+                            address: item.address,
+                            city: item.city,
+                            zip: item.zip,
+                            tel: item.tel,
+                            gsm: item.gsm,
+                            email: item.batmail
+                        })
+                    });
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                });
+        }
     }
+
+
+
 }
 

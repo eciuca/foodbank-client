@@ -16,6 +16,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {UserHttpService} from './services/user-http.service';
 import {formatDate} from '@angular/common';
+import {labelLanguage, labelRights} from '../shared/functions';
 
 
 @Component({
@@ -332,35 +333,12 @@ export class UsersComponent implements OnInit {
     }
 
     labelLanguage(membreLangue: number) {
-            switch (membreLangue) {
-                case 1:
-                    return 'Fr';
-                case 2:
-                    return 'Nl';
-                case 3:
-                    return 'En';
-                default:
-                    return '?';
-            }
-
-
+          return labelLanguage(membreLangue);
         }
 
     labelRights(rights: string) {
-        switch (rights.toLowerCase()) {
-            case 'admin_banq':
-                return $localize`:@@RoleBankAdmin:Bank admin`;
-            case 'bank':
-                return $localize`:@@RoleBankUser:Bank User`;
-            case 'admin_asso':
-                return  $localize`:@@RoleOrgAdmin:Org Admin`;
-            case 'asso':
-                return $localize`:@@RoleOrgUser:Org User`;
-            case 'admin':
-                return $localize`:@@RoleAdmin:Global admin`;
-            default:
-                return rights;
-        }
+        return labelRights(rights);
+
     }
     changeArchiveFilter($event) {
         console.log('Archive is now:', $event);
@@ -405,15 +383,43 @@ export class UsersComponent implements OnInit {
         }
     }
     exportAsXLSX(): void {
-        this.userHttpService.getUserReport(this.authService.accessToken, this.bankid).subscribe(
-            (users: any[] ) => {
-                const cleanedList = [];
-                users.map((item) => {
-                    cleanedList.push({ idUser: item.idUser, name: item.membreNom , firstName: item.membrePrenom,  language: item.idLanguage, company: item.societe,
-                       email: item.email })
+        if (this.bankOptions) {
+            this.userHttpService.getUserReport(this.authService.accessToken, null).subscribe(
+                (users: any[]) => {
+                    const cleanedList = [];
+                    users.map((item) => {
+                        cleanedList.push({
+                            idUser: item.idUser,
+                            name: item.membreNom,
+                            firstName: item.membrePrenom,
+                            bank: item.idCompany,
+                            language: item.idLanguage,
+                            rights: labelRights(item.rights),
+                            company: item.societe,
+                            email: item.email
+                        })
+                    });
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 });
-                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName +'.users.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
-            });
+        }
+        else {
+            this.userHttpService.getUserReport(this.authService.accessToken, this.bankid).subscribe(
+                (users: any[]) => {
+                    const cleanedList = [];
+                    users.map((item) => {
+                        cleanedList.push({
+                            idUser: item.idUser,
+                            name: item.membreNom,
+                            firstName: item.membrePrenom,
+                            language: item.idLanguage,
+                            rights: labelRights(item.rights),
+                            company: item.societe,
+                            email: item.email
+                        })
+                    });
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                });
+        }
     }
   
 }

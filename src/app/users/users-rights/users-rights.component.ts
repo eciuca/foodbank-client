@@ -11,6 +11,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguage, enmYn } from '../../shared/enums';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
+import {labelRights} from '../../shared/functions';
 
 
 @Component({
@@ -278,20 +279,8 @@ export class UsersRightsComponent implements OnInit {
   }
 
   labelRights(rights: string) {
-    switch (rights.toLowerCase()) {
-      case 'admin_banq':
-        return $localize`:@@RoleBankAdmin:Bank admin`;
-      case 'bank':
-        return $localize`:@@RoleBankUser:Bank User`;
-      case 'admin_asso':
-        return  $localize`:@@RoleOrgAdmin:Org Admin`;
-      case 'asso':
-        return $localize`:@@RoleOrgUser:Org User`;
-      case 'admin':
-        return $localize`:@@RoleAdmin:Global admin`;
-      default:
-        return rights;
-    }
+    return labelRights(rights);
+
   }
   getTitle(): string {
     if ( this.depotName) {
