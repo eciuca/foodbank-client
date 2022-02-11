@@ -50,3 +50,19 @@ export function  labelLanguage(membreLangue: number) {
 
 
 }
+export function labelAgreed(agreed: boolean) {
+    if (agreed) {
+        return $localize`:@@Yes:Yes`;
+    }
+    else {
+        return $localize`:@@No:No`;
+    }
+}
+export function labelActive(active: boolean) {
+    if (active) {
+        return $localize`:@@Yes:Yes`;
+    }
+    else {
+        return $localize`:@@No:No`;
+    }
+}

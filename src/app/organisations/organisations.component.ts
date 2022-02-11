@@ -18,6 +18,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {OrganisationHttpService} from './services/organisation-http.service';
 import {formatDate} from '@angular/common';
+import {labelActive, labelAgreed} from '../shared/functions';
 
 
 @Component({
@@ -386,8 +387,19 @@ export class OrganisationsComponent implements OnInit {
                     const cleanedList = [];
                     organisations.map((item) => {
                         cleanedList.push({
-                            id: item.idDis, bank: item.bankShortName, company: item.societe, address: item.adresse, zip: item.cp, city: item.localite,
-                            email: item.email
+                            id: item.idDis,
+                            internal_ref: item.refInt,
+                            bank: item.bankShortName,
+                            company: item.societe,
+                            active: labelActive(item.actif),
+                            address: item.adresse,
+                            zip: item.cp,
+                            city: item.localite,
+                            email: item.email,
+                            tel: item.tel,
+                            gsm: item.gsm,
+                            agreed: labelAgreed(item.agreed),
+                            fead_code: item.birbCode
                         })
                     });
                     this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
@@ -399,8 +411,18 @@ export class OrganisationsComponent implements OnInit {
                     const cleanedList = [];
                     organisations.map((item) => {
                         cleanedList.push({
-                            id: item.idDis, company: item.societe, address: item.adresse, zip: item.cp, city: item.localite,
-                            email: item.email
+                            id: item.idDis,
+                            internal_ref: item.refInt,
+                            company: item.societe,
+                            active: labelActive(item.actif),
+                            address: item.adresse,
+                            zip: item.cp,
+                            city: item.localite,
+                            email: item.email,
+                            tel: item.tel,
+                            gsm: item.gsm,
+                            agreed: labelAgreed(item.agreed),
+                            fead_code: item.birbCode
                         })
                     });
                     this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');

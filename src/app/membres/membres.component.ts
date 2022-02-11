@@ -16,7 +16,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {MembreHttpService} from './services/membre-http.service';
 import {formatDate} from '@angular/common';
-import {labelCivilite} from '../shared/functions';
+import {labelActive, labelCivilite, labelLanguage} from '../shared/functions';
 
 
 @Component({
@@ -362,16 +362,20 @@ export class MembresComponent implements OnInit {
                     const cleanedList = [];
                     membres.map((item) => {
                         cleanedList.push({
-                            gender: labelCivilite(item.civilite),
+                            title: labelCivilite(item.civilite),
                             name: item.nom,
                             firstname: item.prenom,
                             bank: item.bankShortName,
+                            active: labelActive(item.actif),
                             address: item.address,
                             city: item.city,
                             zip: item.zip,
                             tel: item.tel,
                             gsm: item.gsm,
-                            email: item.batmail
+                            email: item.batmail,
+                            birthdate: item.dateNaissance,
+                            language: labelLanguage(item.langue),
+                            national_number: item.nnat
                         })
                     });
                     this.excelService.exportAsExcelFile(cleanedList, 'foodit.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
@@ -383,15 +387,19 @@ export class MembresComponent implements OnInit {
                     const cleanedList = [];
                     membres.map((item) => {
                         cleanedList.push({
-                            gender: labelCivilite(item.civilite),
+                            title: labelCivilite(item.civilite),
                             name: item.nom,
                             firstname: item.prenom,
+                            active: labelActive(item.actif),
                             address: item.address,
                             city: item.city,
                             zip: item.zip,
                             tel: item.tel,
                             gsm: item.gsm,
-                            email: item.batmail
+                            email: item.batmail,
+                            birthdate: item.dateNaissance,
+                            language: labelLanguage(item.langue),
+                            national_number: item.nnat
                         })
                     });
                     this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');

@@ -19,10 +19,10 @@ export class MembreHttpService {
         };
         // tslint:disable-next-line:max-line-length
         if (lienBanque) {
-            return this.http.get<Membre[]>(`${this.baseUrl}/?actif=1&lienBanque=${lienBanque.toString()}`, requestOptions);
+            return this.http.get<Membre[]>(`${this.baseUrl}/?lienBanque=${lienBanque.toString()}`, requestOptions);
         }
         else {
-            return this.http.get<Membre[]>(`${this.baseUrl}/?actif=1`, requestOptions);
+            return this.http.get<Membre[]>(`${this.baseUrl}/`, requestOptions);
 
         }
     }

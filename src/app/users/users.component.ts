@@ -16,7 +16,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {UserHttpService} from './services/user-http.service';
 import {formatDate} from '@angular/common';
-import {labelLanguage, labelRights} from '../shared/functions';
+import {labelActive, labelLanguage, labelRights} from '../shared/functions';
 
 
 @Component({
@@ -393,6 +393,7 @@ export class UsersComponent implements OnInit {
                             name: item.membreNom,
                             firstName: item.membrePrenom,
                             bank: item.idCompany,
+                            active: labelActive(item.actif),
                             language: item.idLanguage,
                             rights: labelRights(item.rights),
                             company: item.societe,
@@ -411,6 +412,7 @@ export class UsersComponent implements OnInit {
                             idUser: item.idUser,
                             name: item.membreNom,
                             firstName: item.membrePrenom,
+                            active: labelActive(item.actif),
                             language: item.idLanguage,
                             rights: labelRights(item.rights),
                             company: item.societe,

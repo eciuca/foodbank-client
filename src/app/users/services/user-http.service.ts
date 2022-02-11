@@ -7,7 +7,7 @@ import {User} from '../model/user';
     providedIn: 'root'
 })
 export class UserHttpService {
-    private baseUrl = '/api/users';
+    private baseUrl = '/api/usersall';
     constructor(private http: HttpClient) {
     }
     getUserReport(accesstoken: string, lienBanque: number): Observable<User[]> {
@@ -19,10 +19,10 @@ export class UserHttpService {
         };
         // tslint:disable-next-line:max-line-length
         if (lienBanque) {
-            return this.http.get<User[]>(`${this.baseUrl}/?actif=1&lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=idUser`, requestOptions);
+            return this.http.get<User[]>(`${this.baseUrl}/?lienBanque=${lienBanque.toString()}`, requestOptions);
         }
         else {
-            return this.http.get<User[]>(`${this.baseUrl}/?actif=1&offset=0&rows=999&sortOrder=1&sortField=idUser`, requestOptions);
+            return this.http.get<User[]>(`${this.baseUrl}/`, requestOptions);
 
         }
     }
