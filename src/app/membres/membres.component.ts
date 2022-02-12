@@ -356,57 +356,42 @@ export class MembresComponent implements OnInit {
         }
     }
     exportAsXLSX(): void {
-        if (this.bankOptions) {
-            this.membreHttpService.getMembreReport(this.authService.accessToken, null).subscribe(
-                (membres: any[]) => {
-                    const cleanedList = [];
-                    membres.map((item) => {
-                        cleanedList.push({
-                            title: labelCivilite(item.civilite),
-                            name: item.nom,
-                            firstname: item.prenom,
-                            bank: item.bankShortName,
-                            active: labelActive(item.actif),
-                            address: item.address,
-                            city: item.city,
-                            zip: item.zip,
-                            tel: item.tel,
-                            gsm: item.gsm,
-                            email: item.batmail,
-                            birthdate: item.dateNaissance,
-                            language: labelLanguage(item.langue),
-                            national_number: item.nnat
-                        })
-                    });
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
-                });
+        let reportOption = null;
+        if (!this.bankOptions) {
+            reportOption = this.bankid;
         }
-        else {
-            this.membreHttpService.getMembreReport(this.authService.accessToken, this.bankid).subscribe(
-                (membres: any[]) => {
-                    const cleanedList = [];
-                    membres.map((item) => {
-                        cleanedList.push({
-                            title: labelCivilite(item.civilite),
-                            name: item.nom,
-                            firstname: item.prenom,
-                            active: labelActive(item.actif),
-                            address: item.address,
-                            city: item.city,
-                            zip: item.zip,
-                            tel: item.tel,
-                            gsm: item.gsm,
-                            email: item.batmail,
-                            birthdate: item.dateNaissance,
-                            language: labelLanguage(item.langue),
-                            national_number: item.nnat
-                        })
-                    });
+        this.membreHttpService.getMembreReport(this.authService.accessToken, reportOption).subscribe(
+            (membres: any[]) => {
+                const cleanedList = [];
+                membres.map((item) => {
+                    const cleanedItem = {};
+                    if (this.bankOptions) {
+                        cleanedItem[$localize`:@@Bank:Bank`] = item.bankShortName;
+                    }
+                    cleanedItem[$localize`:@@MemberTitle:Title`] = labelCivilite(item.civilite);
+                    cleanedItem[$localize`:@@Name:Name`] = item.nom;
+                    cleanedItem[$localize`:@@FirstName:First Name`] =item.prenom;
+                    cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
+                    cleanedItem[$localize`:@@Active:Active`] = labelActive(item.actif);
+                    cleanedItem[$localize`:@@Language:Language`] = labelLanguage(item.langue)
+                    cleanedItem[$localize`:@@Address:Address`] = item.address;
+                    cleanedItem[$localize`:@@ZipCode:Zip Code`] =item.zip;
+                    cleanedItem[$localize`:@@City:City`] =item.city;
+                    cleanedItem['Tel'] =item.tel;
+                    cleanedItem['Gsm'] =item.gsm;
+                    cleanedItem['email'] =item.batmail;
+                    cleanedItem[$localize`:@@BirthDate:Birth Date`] =item.dateNaissance;
+                    cleanedItem[$localize`:@@Nat Number:National Number`] =item.nnat;
+                    cleanedList.push( cleanedItem);
+                });
+                if (!this.bankOptions) {
                     this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
-                });
-        }
+                }
+                else {
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                }
+            });
     }
-
 
 
 }

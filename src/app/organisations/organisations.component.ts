@@ -18,7 +18,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {OrganisationHttpService} from './services/organisation-http.service';
 import {formatDate} from '@angular/common';
-import {labelActive, labelAgreed} from '../shared/functions';
+import {labelActive, labelAgreed, labelLanguage} from '../shared/functions';
 
 
 @Component({
@@ -381,53 +381,43 @@ export class OrganisationsComponent implements OnInit {
         this.loadPageSubject$.next(latestQueryParams);
     }
     exportAsXLSX(): void {
-        if (this.bankOptions) {
-            this.organisationHttpService.getOrganisationReport(this.authService.accessToken, null).subscribe(
-                (organisations: any[]) => {
-                    const cleanedList = [];
-                    organisations.map((item) => {
-                        cleanedList.push({
-                            id: item.idDis,
-                            internal_ref: item.refInt,
-                            bank: item.bankShortName,
-                            company: item.societe,
-                            active: labelActive(item.actif),
-                            address: item.adresse,
-                            zip: item.cp,
-                            city: item.localite,
-                            email: item.email,
-                            tel: item.tel,
-                            gsm: item.gsm,
-                            agreed: labelAgreed(item.agreed),
-                            fead_code: item.birbCode
-                        })
-                    });
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
-                });
+        let reportOption = null;
+        if (!this.bankOptions) {
+            reportOption = this.lienBanque;
         }
-        else {
-            this.organisationHttpService.getOrganisationReport(this.authService.accessToken, this.lienBanque).subscribe(
-                (organisations: any[]) => {
-                    const cleanedList = [];
-                    organisations.map((item) => {
-                        cleanedList.push({
-                            id: item.idDis,
-                            internal_ref: item.refInt,
-                            company: item.societe,
-                            active: labelActive(item.actif),
-                            address: item.adresse,
-                            zip: item.cp,
-                            city: item.localite,
-                            email: item.email,
-                            tel: item.tel,
-                            gsm: item.gsm,
-                            agreed: labelAgreed(item.agreed),
-                            fead_code: item.birbCode
-                        })
-                    });
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+        this.organisationHttpService.getOrganisationReport(this.authService.accessToken, reportOption).subscribe(
+            (organisations: any[]) => {
+                const cleanedList = [];
+                organisations.map((item) => {
+                    const cleanedItem = {};
+                    if (this.bankOptions) {
+                        cleanedItem[$localize`:@@Bank:Bank`] = item.bankShortName;
+                    }
+                    cleanedItem['Id'] = item.idDis;
+                    cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
+                    cleanedItem[$localize`:@@InternalRef:Internal Ref`] = item.refInt;
+                    cleanedItem[$localize`:@@Active:Active`] = labelActive(item.actif);
+                    cleanedItem[$localize`:@@Language:Language`] = labelLanguage(item.langue)
+                    cleanedItem[$localize`:@@Address:Address`] = item.address;
+                    cleanedItem[$localize`:@@ZipCode:Zip Code`] =item.cp;
+                    cleanedItem[$localize`:@@City:City`] =item.localite;
+                    const regionObject = this.regions.find(obj => obj.value == item.region);
+                    cleanedItem[$localize`:@@Region:Region`] =(typeof regionObject !== "undefined") ? regionObject.label : '';
+                    cleanedItem['Tel'] =item.tel;
+                    cleanedItem['Gsm'] =item.gsm;
+                    cleanedItem['email'] =item.email;
+                    cleanedItem[$localize`:@@Agreed:Agreed`] = labelAgreed(item.agreed);
+                    cleanedItem[$localize`:@@FeadCode:Fead Code`] =item.birbCode;
+                    cleanedList.push( cleanedItem);
                 });
-        }
+                if (!this.bankOptions) {
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                }
+                else {
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.organisations.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                }
+            });
     }
+
 }
 

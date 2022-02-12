@@ -398,14 +398,14 @@ export class UsersComponent implements OnInit {
                 cleanedItem['idUser'] =item.idUser;
                 cleanedItem[$localize`:@@Name:Name`] =item.membreNom;
                 cleanedItem[$localize`:@@FirstName:First Name`] =item.membrePrenom;
+                cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
                 cleanedItem[$localize`:@@Active:Active`] =labelActive(item.actif);
                 cleanedItem[$localize`:@@Language:Language`] =item.idLanguage;
                 cleanedItem[$localize`:@@Rights:Rights`] = labelRights(item.rights);
-                cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
                 cleanedItem['email'] =item.email;
                 cleanedList.push( cleanedItem);
             });
-            if (this.bankOptions) {
+            if (!this.bankOptions) {
                 this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
             }
             else {
