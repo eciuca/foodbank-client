@@ -398,7 +398,7 @@ export class OrganisationsComponent implements OnInit {
                     cleanedItem[$localize`:@@InternalRef:Internal Ref`] = item.refInt;
                     cleanedItem[$localize`:@@Active:Active`] = labelActive(item.actif);
                     cleanedItem[$localize`:@@Language:Language`] = labelLanguage(item.langue)
-                    cleanedItem[$localize`:@@Address:Address`] = item.address;
+                    cleanedItem[$localize`:@@Address:Address`] = item.adresse;
                     cleanedItem[$localize`:@@ZipCode:Zip Code`] =item.cp;
                     cleanedItem[$localize`:@@City:City`] =item.localite;
                     const regionObject = this.regions.find(obj => obj.value == item.region);
