@@ -383,45 +383,35 @@ export class UsersComponent implements OnInit {
         }
     }
     exportAsXLSX(): void {
-        if (this.bankOptions) {
-            this.userHttpService.getUserReport(this.authService.accessToken, null).subscribe(
-                (users: any[]) => {
-                    const cleanedList = [];
-                    users.map((item) => {
-                        cleanedList.push({
-                            idUser: item.idUser,
-                            name: item.membreNom,
-                            firstName: item.membrePrenom,
-                            bank: item.idCompany,
-                            active: labelActive(item.actif),
-                            language: item.idLanguage,
-                            rights: labelRights(item.rights),
-                            company: item.societe,
-                            email: item.email
-                        })
-                    });
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
-                });
+        let reportOption = null;
+        if (!this.bankOptions) {
+           reportOption = this.bankid;
         }
-        else {
-            this.userHttpService.getUserReport(this.authService.accessToken, this.bankid).subscribe(
-                (users: any[]) => {
-                    const cleanedList = [];
-                    users.map((item) => {
-                        cleanedList.push({
-                            idUser: item.idUser,
-                            name: item.membreNom,
-                            firstName: item.membrePrenom,
-                            active: labelActive(item.actif),
-                            language: item.idLanguage,
-                            rights: labelRights(item.rights),
-                            company: item.societe,
-                            email: item.email
-                        })
-                    });
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
-                });
-        }
+        this.userHttpService.getUserReport(this.authService.accessToken, reportOption).subscribe(
+        (users: any[]) => {
+            const cleanedList = [];
+            users.map((item) => {
+                const cleanedItem = {};
+                if (this.bankOptions) {
+                    cleanedItem[$localize`:@@Bank:Bank`] =item.idCompany;
+                }
+                cleanedItem['idUser'] =item.idUser;
+                cleanedItem[$localize`:@@Name:Name`] =item.membreNom;
+                cleanedItem[$localize`:@@FirstName:First Name`] =item.membrePrenom;
+                cleanedItem[$localize`:@@Active:Active`] =labelActive(item.actif);
+                cleanedItem[$localize`:@@Language:Language`] =item.idLanguage;
+                cleanedItem[$localize`:@@Rights:Rights`] = labelRights(item.rights);
+                cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
+                cleanedItem['email'] =item.email;
+                cleanedList.push( cleanedItem);
+            });
+            if (this.bankOptions) {
+                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+            }
+            else {
+                this.excelService.exportAsExcelFile(cleanedList, 'foodit.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+            }
+        });
     }
   
 }

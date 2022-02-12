@@ -2,13 +2,13 @@ export function labelCivilite(civilite: number) {
 
     switch (civilite) {
         case 1:
-            return 'Mr';
+            return $localize`:@@TitleMr:Mr`;
         case 2:
-            return 'Mrs.';
+            return $localize`:@@TitleMrs:Mrs`;
         case 3:
-            return 'Miss';
+            return $localize`:@@TitleMiss:Miss`;
         default:
-            return 'Unspecified';
+            return ' ';
     }
 
 }
