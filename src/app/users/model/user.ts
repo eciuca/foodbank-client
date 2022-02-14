@@ -46,7 +46,7 @@ export interface User {
     membrePrenom: string;
     membreEmail: string;
     membreLangue: number;
-
+    nbLogins: number;
     totalRecords: number;
 
 }
@@ -88,6 +88,7 @@ export class DefaultUser implements User {
     membrePrenom: string;
     membreEmail: string;
     membreLangue: number;
+    nbLogins: number;
     totalRecords: number;
     userName: string;
     isNew: boolean; // calculated property to indicate we are creating a new employee
@@ -117,6 +118,7 @@ export class DefaultUser implements User {
         this.membrePrenom = '';
         this.membreEmail = '';
         this.membreLangue = 0;
+        this.nbLogins = 0;
         this.isNew = true;
     }
 }

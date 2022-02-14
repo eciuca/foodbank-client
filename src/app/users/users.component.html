@@ -1,7 +1,7 @@
     <p-table #dt [value]="users" selectionMode="single" [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)"
              [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
-             [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
-             [globalFilterFields]="['idUser','userName', 'idOrg','idLanguage', 'email', 'rights']">
+             [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'">
+
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <div class="p-fluid p-formgrid p-grid">
@@ -44,6 +44,7 @@
                 <th i18n="@@MemberLanguageSorted" pSortableColumn="membreLangue">Language<p-sortIcon field="membreLangue"></p-sortIcon></th>
                 <th colspan="2" i18n="@@MemberEmailSorted" pSortableColumn="membreEmail">E-Mail<p-sortIcon field="membreEmail"></p-sortIcon></th>
                 <th i18n="@@RightsSorted" pSortableColumn="rights" >Role<p-sortIcon field="rights"></p-sortIcon></th>
+                <th i18n="@@NbLoginsSorted" pSortableColumn="nbLogins" >Logins<p-sortIcon field="nbLogins"></p-sortIcon></th>
             </tr>
             <tr>
                 <th *ngIf="bankOptions">
@@ -90,6 +91,8 @@
                         </ng-template>
                     </p-columnFilter>
                 </th>
+                <th>
+                </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>
@@ -116,6 +119,9 @@
                 </td>
                 <td>
                     {{ labelRights(user.rights )}}
+                </td>
+                <td>
+                    {{ user.nbLogins }}
                 </td>
             </tr>
         </ng-template>

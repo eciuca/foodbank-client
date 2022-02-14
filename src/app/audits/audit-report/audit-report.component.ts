@@ -270,7 +270,7 @@ export class AuditReportComponent implements OnInit {
                      // reportDataSets[0].data.push(item.loginCount);
                      if (!reportLabels.includes(item.key)) {
                          reportLabels.push(item.key);
-                         if (item.application === "FBIT") {
+                         if (item.category === "FBIT") {
                              reportDataSets[1].data.push(item.loginCount);
                              reportDataSets[0].data.push(0);
                              nbOfSelectedFBITLogins += item.loginCount;
@@ -281,7 +281,7 @@ export class AuditReportComponent implements OnInit {
                          }
                      } else {
                          const indexItem = reportLabels.indexOf(item.key);
-                         if (item.application === "FBIT") {
+                         if (item.category === "FBIT") {
                              reportDataSets[1].data[indexItem] = item.loginCount;
                              nbOfSelectedFBITLogins += item.loginCount;
                          } else {
@@ -378,7 +378,7 @@ export class AuditReportComponent implements OnInit {
                  for (let i=0; i < this.auditReports.length; i++ ) {
                      if (this.auditReports[i].key === null ) continue;
                      const indexLabel = reportLabels.indexOf(this.auditReports[i].key);
-                     let indexDataset = reportDataSets.findIndex(item => item.label.toUpperCase() === this.auditReports[i].application.toUpperCase());
+                     let indexDataset = reportDataSets.findIndex(item => item.label.toUpperCase() === this.auditReports[i].category.toUpperCase());
                      if( indexDataset === -1) { indexDataset = reportDataSets.length - 1 } // Assign to Other
                      console.log(this.auditReports[i],'indexLabel', indexLabel, 'indexDataset',indexDataset);
                      if (indexLabel >= 0 && indexDataset >= 0 && indexLabel < reportLabels.length && indexDataset < reportDataSets.length) {

@@ -1,5 +1,5 @@
 export interface AuditReport {
     key: string;
-    application: string;
+    category: string;
     loginCount: number;
 }
