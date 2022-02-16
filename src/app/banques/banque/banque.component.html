@@ -208,8 +208,8 @@
             </p-accordionTab>
             <p-accordionTab *ngIf="banqProg" i18n-header="@@BankDetails" header="Bank Details">
                 <form #detailForm="ngForm">
-                <div class="p-formgroup-inline">
-                    <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="saveDetails(banqProg, detailForm.value)" i18n-label="@@Save" label="Save" [disabled] = "banqueForm.invalid"></button>
+                <div *ngIf="booCanSave" class="p-formgroup-inline">
+                    <button  type="button" pButton icon="pi pi-check" (click)="saveDetails(banqProg, detailForm.value)" i18n-label="@@Save" label="Save" [disabled] = "detailForm.invalid"></button>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">

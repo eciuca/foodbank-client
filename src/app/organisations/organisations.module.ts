@@ -64,6 +64,8 @@ import { OrgbenefoverviewComponent } from './orgbenefoverview/orgbenefoverview.c
 import { OrgbenefdetailComponent } from './orgbenefoverview/orgbenefdetail/orgbenefdetail.component';
 import { OrgfeadoverviewComponent } from './orgfeadoverview/orgfeadoverview.component';
 import { OrgfeaddetailComponent } from './orgfeadoverview/orgfeaddetail/orgfeaddetail.component';
+import {OrgProgramsDataService} from './services/orgprograms-data.service';
+import {OrgProgramEntityService} from './services/orgprogram-entity.service';
 const routes: Routes = [
     {
         path: 'contacts/:idDis',
@@ -154,6 +156,8 @@ const routes: Routes = [
         OrgSummaryEntityService,
         OrgcontactsDataService,
         OrgcontactEntityService,
+      OrgProgramsDataService,
+      OrgProgramEntityService,
       OrgauditsDataService,
       OrgauditEntityService,
         RegionsDataService,
@@ -181,6 +185,7 @@ export class OrganisationsModule {
       private organisationsDataService: OrganisationsDataService,
       private orgSummariesDataService: OrgSummariesDataService,
       private orgcontactsDataService: OrgcontactsDataService,
+      private orgProgramsDataService: OrgProgramsDataService,
       private orgauditsDataService: OrgauditsDataService,
       private regionsDataService: RegionsDataService,
       private membresDataService: MembresDataService,
@@ -193,6 +198,7 @@ export class OrganisationsModule {
     entityDataService.registerService('Organisation', organisationsDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
     entityDataService.registerService('Orgcontact', orgcontactsDataService);
+    entityDataService.registerService('OrgProgram', orgProgramsDataService);
     entityDataService.registerService('Orgaudit', orgauditsDataService);
     entityDataService.registerService('Region', regionsDataService);
     entityDataService.registerService('Membre', membresDataService);

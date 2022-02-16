@@ -16,6 +16,8 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {OrgSummaryEntityService} from '../services/orgsummary-entity.service';
 import {OrgSummary} from '../model/orgsummary';
 import {RegionEntityService} from '../services/region-entity.service';
+import {OrgProgramEntityService} from '../services/orgprogram-entity.service';
+import {OrgProgram} from '../model/orgprogram';
 
 @Component({
   selector: 'app-organisation',
@@ -33,7 +35,8 @@ export class OrganisationComponent implements OnInit {
     booCanSave: boolean;
     booCanDelete: boolean;
     booCanQuit: boolean;
-  organisation: Organisation;
+    organisation: Organisation;
+    orgProg:OrgProgram;
     selectedCpas: Cpas;
     filteredCpass: Cpas[];
     filteredDepots: OrgSummary[];
@@ -50,6 +53,7 @@ export class OrganisationComponent implements OnInit {
 
   constructor(
       private organisationsService: OrganisationEntityService,
+      private orgProgramService: OrgProgramEntityService,
       private orgsummaryService: OrgSummaryEntityService,
       private cpassService: CpasEntityService,
       private regionService: RegionEntityService,
@@ -98,6 +102,13 @@ export class OrganisationComponent implements OnInit {
       organisation$.subscribe(organisation => {
           if (organisation) {
               this.organisation = organisation;
+              this.orgProgramService.getByKey(organisation.idDis)
+                  .subscribe(
+                      orgProg => {
+                          if (orgProg !== null) {
+                              this.orgProg = orgProg;
+                          }
+                      });
               if (this.organisation.lienCpas != null && this.organisation.lienCpas !== 0  ) {
                   this.cpassService.getByKey(this.organisation.lienCpas)
                       .subscribe(
@@ -214,6 +225,28 @@ export class OrganisationComponent implements OnInit {
                   });
       }
   }
+    saveDetails(oldOrgProgram: OrgProgram, banqProgForm: OrgProgram) {
+        console.log('Entering SaveDetails - OrgProgram Form value', banqProgForm);
+        const modifiedOrgProgram = Object.assign({}, oldOrgProgram, banqProgForm);
+        console.log('Modified OrgProgram', modifiedOrgProgram);
+        this.orgProgramService.update(modifiedOrgProgram)
+            .subscribe(() => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Update',
+                        detail: $localize`:@@messageOrgDetailsUpdated:Org  ${this.organisation.idDis} ${this.organisation.societe}  details were updated`
+                    });
+                    this.onOrganisationUpdate.emit();
+                },
+                (dataserviceerror: DataServiceError) => {
+                    console.log('Error updating organisation', dataserviceerror.message);
+                    const  errMessage = {severity: 'error', summary: 'Update',
+                        // tslint:disable-next-line:max-line-length
+                        detail: $localize`:@@messageOrgDetailsUpdateError:The Org  ${this.organisation.idDis} ${this.organisation.societe}  details could not be updated: error: ${dataserviceerror.message}`,
+                        life: 6000 };
+                    this.messageService.add(errMessage) ;
+                });
+    }
     delete(event: Event, organisation: Organisation) {
         this.confirmationService.confirm({
             target: event.target,

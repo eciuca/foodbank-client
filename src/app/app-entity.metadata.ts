@@ -20,6 +20,7 @@ import {compareRegions, Region} from './organisations/model/region';
 import {Audit, compareAudits} from './audits/model/audit';
 import {compareOrgaudits, Orgaudit} from './organisations/model/orgaudit';
 import {compareMailAddresses, MailAddress} from './mailings/model/mailaddress';
+import {compareOrgPrograms, OrgProgram} from './organisations/model/orgprogram';
 
 
 export const appEntityMetadata: EntityMetadataMap = {
@@ -101,6 +102,11 @@ export const appEntityMetadata: EntityMetadataMap = {
     Orgcontact: {
         sortComparer: compareOrgcontacts,
         selectId: (orgcontact: Orgcontact) => orgcontact.orgPersId,
+        entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
+    },
+    OrgProgram: {
+        sortComparer: compareOrgPrograms,
+        selectId: (orgProgram: OrgProgram) => orgProgram.lienDis,
         entityDispatcherOptions: { optimisticUpdate: false, optimisticDelete: false}
     },
     Orgaudit: {

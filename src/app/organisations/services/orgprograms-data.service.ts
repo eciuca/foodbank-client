@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {DefaultDataService, DefaultDataServiceConfig, HttpUrlGenerator} from '@ngrx/data';
-import {Orgcontact} from '../model/orgcontact';
+import {OrgProgram} from '../model/orgprogram';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable()
-export class OrgcontactsDataService extends DefaultDataService<Orgcontact> {
+export class OrgProgramsDataService extends DefaultDataService<OrgProgram> {
     constructor( http: HttpClient, httpUrlGenerator: HttpUrlGenerator, config: DefaultDataServiceConfig) {
-        super('Orgcontact', http, httpUrlGenerator, config);
+        super('OrgProgram', http, httpUrlGenerator, config);
     }
 }
