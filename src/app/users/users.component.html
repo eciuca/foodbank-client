@@ -92,6 +92,12 @@
                     </p-columnFilter>
                 </th>
                 <th>
+                    <p-columnFilter field="hasLogins" matchMode="equals" [showMenu]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            </p-dropdown>
+                        </ng-template>
+                    </p-columnFilter>
                 </th>
             </tr>
         </ng-template>

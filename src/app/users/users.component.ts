@@ -8,7 +8,7 @@ import {globalAuthState, isLoggedIn} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
-import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguage, enmUserRoles} from '../shared/enums';
+import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguage, enmUserRoles, enmYn} from '../shared/enums';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
@@ -50,6 +50,7 @@ export class UsersComponent implements OnInit {
     lienDepot: number;
     depotName: string;
     bankOptions: any[];
+    YNOptions:  any[];
     orgName: string;
   constructor(private userService: UserEntityService,
               private banqueService: BanqueEntityService,
@@ -72,6 +73,7 @@ export class UsersComponent implements OnInit {
       this.first = 0;
       this.booShowOrganisations = false;
       this.orgName = '';
+      this.YNOptions = enmYn;
   }
 
   ngOnInit() {
@@ -252,6 +254,9 @@ export class UsersComponent implements OnInit {
                 }
                 if (event.filters.rights && event.filters.rights.value) {
                         queryParms['rights'] = event.filters.rights.value;
+                }
+                if (event.filters.hasLogins && event.filters.hasLogins.value !== null ) {
+                    queryParms['hasLogins'] = event.filters.hasLogins.value;
                 }
                 if (event.filters.idCompany && event.filters.idCompany.value) {
                     queryParms['idCompany'] = event.filters.idCompany.value;

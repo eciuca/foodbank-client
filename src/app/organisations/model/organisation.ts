@@ -279,6 +279,7 @@ export interface Organisation {
     auditor: number;
     dateAudit: string;
     lastAudit: number;
+    nbLogins: number;
     totalRecords: number;
 
 }
@@ -463,6 +464,7 @@ export class DefaultOrganisation implements Organisation {
     auditor: number;
     dateAudit: string;
     lastAudit: number;
+    nbLogins: number;
     totalRecords: number;
 
     constructor() {
@@ -582,6 +584,7 @@ export class DefaultOrganisation implements Organisation {
         this.tva = '';
         this.webauthority = true;
         this.website = '';
+        this.nbLogins = 0;
         // OrgProgram Fields
         this.luam = false;
 

@@ -182,6 +182,9 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.refInt && event.filters.refInt.value !== null ) {
                 queryParms['refint'] = event.filters.refInt.value;
             }
+            if (event.filters.hasLogins && event.filters.hasLogins.value !== null ) {
+                queryParms['hasLogins'] = event.filters.hasLogins.value;
+            }
             if (this.regionSelected) {
                 queryParms['regId'] = this.regionSelected;
             }

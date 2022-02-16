@@ -66,6 +66,7 @@
             <th colspan="2" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
             <th i18n="@@OrgAgreedSorted" pSortableColumn="agreed">Agreed<p-sortIcon field="agreed"></p-sortIcon></th>
             <th i18n="@@UsesFeadSorted" pSortableColumn="birbyN">Uses FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
+            <th i18n="@@NbLoginsSorted" pSortableColumn="nbLogins" >Logins<p-sortIcon field="nbLogins"></p-sortIcon></th>
         </tr>
         <tr>
             <th *ngIf="bankOptions">
@@ -116,7 +117,14 @@
                     </ng-template>
                 </p-columnFilter>
             </th>
-
+            <th>
+                <p-columnFilter field="hasLogins" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-organisation>
@@ -145,6 +153,9 @@
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.birbyN, 'false-icon pi-times-circle': !organisation.birbyN}"></i>
+            </td>
+            <td>
+                {{ organisation.nbLogins }}
             </td>
 
         </tr>
