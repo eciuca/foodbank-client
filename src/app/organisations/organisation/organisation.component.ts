@@ -17,7 +17,7 @@ import {OrgSummaryEntityService} from '../services/orgsummary-entity.service';
 import {OrgSummary} from '../model/orgsummary';
 import {RegionEntityService} from '../services/region-entity.service';
 import {OrgProgramEntityService} from '../services/orgprogram-entity.service';
-import {OrgProgram} from '../model/orgprogram';
+import {DefaultOrgProgram, OrgProgram} from '../model/orgprogram';
 
 @Component({
   selector: 'app-organisation',
@@ -26,7 +26,8 @@ import {OrgProgram} from '../model/orgprogram';
 })
 export class OrganisationComponent implements OnInit {
     @ViewChild('organisationForm') myform: NgForm;
-  @Input() idDis$: Observable<number>;
+    @ViewChild('orgProgForm') progform: NgForm;
+    @Input() idDis$: Observable<number>;
     @Output() onOrganisationUpdate = new EventEmitter<Organisation>();
     @Output() onOrganisationCreate = new EventEmitter<Organisation>();
     @Output() onOrganisationDelete = new EventEmitter<Organisation>();
@@ -225,24 +226,24 @@ export class OrganisationComponent implements OnInit {
                   });
       }
   }
-    saveDetails(oldOrgProgram: OrgProgram, banqProgForm: OrgProgram) {
-        console.log('Entering SaveDetails - OrgProgram Form value', banqProgForm);
-        const modifiedOrgProgram = Object.assign({}, oldOrgProgram, banqProgForm);
+    saveOrgProgram(progForm: OrgProgram) {
+
+        const modifiedOrgProgram = Object.assign({}, this.orgProg, progForm);
         console.log('Modified OrgProgram', modifiedOrgProgram);
         this.orgProgramService.update(modifiedOrgProgram)
             .subscribe(() => {
                     this.messageService.add({
                         severity: 'success',
                         summary: 'Update',
-                        detail: $localize`:@@messageOrgDetailsUpdated:Org  ${this.organisation.idDis} ${this.organisation.societe}  details were updated`
+                        detail: $localize`:@@messageOrgDetailsUpdated:Org Program for organisation  ${this.organisation.idDis} ${this.organisation.societe} was updated`
                     });
-                    this.onOrganisationUpdate.emit();
+
                 },
                 (dataserviceerror: DataServiceError) => {
                     console.log('Error updating organisation', dataserviceerror.message);
                     const  errMessage = {severity: 'error', summary: 'Update',
                         // tslint:disable-next-line:max-line-length
-                        detail: $localize`:@@messageOrgDetailsUpdateError:The Org  ${this.organisation.idDis} ${this.organisation.societe}  details could not be updated: error: ${dataserviceerror.message}`,
+                        detail: $localize`:@@messageOrgDetailsUpdateError:Org Program for organisation  ${this.organisation.idDis} ${this.organisation.societe} could not be updated: error: ${dataserviceerror.message}`,
                         life: 6000 };
                     this.messageService.add(errMessage) ;
                 });
@@ -321,6 +322,47 @@ export class OrganisationComponent implements OnInit {
         queryDepotParms['societe'] = query.toLowerCase();
         this.orgsummaryService.getWithQuery(queryDepotParms)
             .subscribe(filteredDepots =>  this.filteredDepots = filteredDepots);
+    }
+
+    createOrgProgram() {
+        this.orgProg = new DefaultOrgProgram();
+        /* if (this.progform) {
+            this.progform.reset(this.orgProg);
+        } */
+        this.orgProg.lienBanque = this.organisation.lienBanque;
+        this.orgProg.lienDis = this.organisation.idDis;
+        this.orgProg.lienDepot = this.organisation.lienDepot;
+    }
+
+    deleteOrgProgram(event: Event,myOrgProgram:OrgProgram) {
+        this.confirmationService.confirm({
+            target: event.target,
+            message: 'Confirm Deletion?',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                const  myMessage = {
+                    severity: 'success',
+                    summary: 'Delete',
+                    detail: $localize`:@@messageOrgProgramDeleted:Org Program was deleted for organisation  ${this.organisation.idDis}  ${this.organisation.societe} was deleted`};
+                this.orgProgramService.delete(myOrgProgram)
+                    .subscribe( () => {
+                            this.messageService.add(myMessage);
+                            this.orgProg = null;
+                        },
+                        (dataserviceerror: DataServiceError) => {
+                            console.log('Error deleting organisation', dataserviceerror.message);
+                            const  errMessage = {severity: 'error', summary: 'Delete',
+                                // tslint:disable-next-line:max-line-length
+                                detail: $localize`:@@messageOrgProgramDeleteError:The org program for organisation  ${this.organisation.idDis} ${this.organisation.societe} could not be deleted: error: ${dataserviceerror.message}`,
+                                life: 6000 };
+                            this.messageService.add(errMessage) ;
+                        }
+                    );
+            },
+            reject: () => {
+                console.log('We do nothing');
+            }
+        });
     }
 }
 

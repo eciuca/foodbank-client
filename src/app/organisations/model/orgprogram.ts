@@ -133,7 +133,7 @@ export class DefaultOrgProgram implements OrgProgram {
 
     constructor() {
 
-        // this.lienDis = 0; no Id in default constructor
+        this.lienDis = 0;
 
         this.lienBanque = 0;
 

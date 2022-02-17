@@ -328,12 +328,16 @@
 
         </p-accordion>
     </form>
-    <form #detailForm="ngForm">
-        <p-accordion>
-            <p-accordionTab *ngIf="orgProg" i18n-header="@@OrganisationActivities" header="Detailed Activities">
+    <div class="p-formgroup-inline">
+        <button i18n-label="@@CreateProgram" *ngIf="!orgProg && booCanSave" type="button" pButton icon="pi pi-times" (click)="createOrgProgram()" label="Create Org Detail Activities"></button>
+    </div>
+        <form #orgProgForm="ngForm">
+        <p-accordion  *ngIf="orgProg">
+            <p-accordionTab  i18n-header="@@OrganisationActivities" header="Detailed Activities">
 
                     <div *ngIf="booCanSave" class="p-formgroup-inline">
-                        <button  type="button" pButton icon="pi pi-check" (click)="saveDetails(orgProg, detailForm.value)" i18n-label="@@Save" label="Save" [disabled] = "detailForm.invalid"></button>
+                        <button  type="button" pButton icon="pi pi-check" (click)="saveOrgProgram(orgProgForm.value)" i18n-label="@@SaveOrgProgram" label="Save Org Program" [disabled] = "orgProgForm.invalid"></button>
+                        <button  type="button" pButton icon="pi pi-check" (click)="deleteOrgProgram($event,orgProg)" i18n-label="@@DeleteOrgProgram" label="Delete Org Program" ></button>
                     </div>
                     <div class="p-fluid p-formgrid p-grid">
                         <div class="p-field p-col-12 p-md-2">
