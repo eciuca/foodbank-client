@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpRequest, HttpEvent, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Membre} from '../model/membre';
 
@@ -10,14 +10,16 @@ export class MembreHttpService {
     private baseUrl = '/api/membresall';
     constructor(private http: HttpClient) {
     }
-    getMembreReport(accesstoken: string, lienBanque: number): Observable<Membre[]> {
+    getMembreReport(accesstoken: string, lienBanque: number, lienDis: number ): Observable<Membre[]> {
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
                 Authorization: 'Bearer ' + accesstoken
             }),
         };
-        // tslint:disable-next-line:max-line-length
+        if(lienDis > 0) {
+            return this.http.get<Membre[]>(`${this.baseUrl}/?lienDis=${lienDis.toString()}`, requestOptions);
+        }
         if (lienBanque) {
             return this.http.get<Membre[]>(`${this.baseUrl}/?lienBanque=${lienBanque.toString()}`, requestOptions);
         }

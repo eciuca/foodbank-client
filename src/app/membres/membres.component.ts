@@ -46,6 +46,7 @@ export class MembresComponent implements OnInit {
     filteredBankShortName: string;
     lienDepot: number;
     depotName: string;
+    idOrg: number;
     orgName: string;
     first: number;
     bankOptions: any[];
@@ -66,6 +67,7 @@ export class MembresComponent implements OnInit {
         this.bankName = '';
         this.bankShortName = '';
         this.depotName = '';
+        this.idOrg = 0;
         this.orgName = '';
         this.lienDepot = 0;
     }
@@ -215,6 +217,7 @@ export class MembresComponent implements OnInit {
                         this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                     } else {
                         this.filterBase = { 'lienDis': authState.organisation.idDis};
+                        this.idOrg = authState.organisation.idDis;
                         this.orgName = authState.organisation.societe;
                     }
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
@@ -356,11 +359,11 @@ export class MembresComponent implements OnInit {
         }
     }
     exportAsXLSX(): void {
-        let reportOption = null;
+        let lienBanque = null;
         if (!this.bankOptions) {
-            reportOption = this.bankid;
+            lienBanque = this.bankid;
         }
-        this.membreHttpService.getMembreReport(this.authService.accessToken, reportOption).subscribe(
+        this.membreHttpService.getMembreReport(this.authService.accessToken, lienBanque,this.idOrg).subscribe(
             (membres: any[]) => {
                 const cleanedList = [];
                 membres.map((item) => {

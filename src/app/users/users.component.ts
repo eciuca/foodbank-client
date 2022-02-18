@@ -52,6 +52,7 @@ export class UsersComponent implements OnInit {
     depotName: string;
     bankOptions: any[];
     YNOptions:  any[];
+    idOrg: number;
     orgName: string;
   constructor(private userService: UserEntityService,
               private membreService: MembreEntityService,
@@ -75,6 +76,7 @@ export class UsersComponent implements OnInit {
       this.first = 0;
       this.booShowOrganisations = false;
       this.orgName = '';
+      this.idOrg = 0;
       this.YNOptions = enmYn;
   }
 
@@ -146,6 +148,7 @@ export class UsersComponent implements OnInit {
                         } else {
                             this.filterBase = {'idOrg': authState.organisation.idDis};
                             this.orgName = authState.organisation.societe;
+                            this.idOrg = authState.organisation.idDis;
                         }
                         this.rightOptions = enmUserRolesAsso;
                         if (authState.user.rights === 'Admin_Asso') {
@@ -153,6 +156,7 @@ export class UsersComponent implements OnInit {
                         }
                         break;
                     case 'admin':
+                        this.booCanCreate = true;
                         this.booShowOrganisations = true;
                         this.rightOptions = enmUserRoles;
                         this.filteredOrganisationsPrepend = [
@@ -390,11 +394,11 @@ export class UsersComponent implements OnInit {
         }
     }
     exportAsXLSX(): void {
-        let reportOption = null;
+        let lienBanque = null;
         if (!this.bankOptions) {
-           reportOption = this.bankid;
+            lienBanque = this.bankid;
         }
-        this.userHttpService.getUserReport(this.authService.accessToken, reportOption).subscribe(
+        this.userHttpService.getUserReport(this.authService.accessToken, lienBanque,this.idOrg).subscribe(
         (users: any[]) => {
             const cleanedList = [];
             users.map((item) => {
