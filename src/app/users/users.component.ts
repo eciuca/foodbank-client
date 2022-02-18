@@ -17,6 +17,7 @@ import {AuthService} from '../auth/auth.service';
 import {UserHttpService} from './services/user-http.service';
 import {formatDate} from '@angular/common';
 import {labelActive, labelLanguage, labelRights} from '../shared/functions';
+import {MembreEntityService} from '../membres/services/membre-entity.service';
 
 
 @Component({
@@ -53,6 +54,7 @@ export class UsersComponent implements OnInit {
     YNOptions:  any[];
     orgName: string;
   constructor(private userService: UserEntityService,
+              private membreService: MembreEntityService,
               private banqueService: BanqueEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private authService: AuthService,
@@ -418,5 +420,14 @@ export class UsersComponent implements OnInit {
             }
         });
     }
-  
+
+
+    getuserFullName(user: User) {
+        if (user.idCompany === user.membreBankShortname) {
+            return user.membreNom + ' ' + user.membrePrenom;
+        } else {
+            return user.membreNom + ' ' + user.membrePrenom + ' ' + user.membreBankShortname;
+
+        }
+    }
 }

@@ -343,7 +343,7 @@ export class OrganisationComponent implements OnInit {
                 const  myMessage = {
                     severity: 'success',
                     summary: 'Delete',
-                    detail: $localize`:@@messageOrgProgramDeleted:Org Program was deleted for organisation  ${this.organisation.idDis}  ${this.organisation.societe} was deleted`};
+                    detail: $localize`:@@messageOrgProgramDeleted:Org Program was deleted for organisation  ${this.organisation.idDis}  ${this.organisation.societe} `};
                 this.orgProgramService.delete(myOrgProgram)
                     .subscribe( () => {
                             this.messageService.add(myMessage);

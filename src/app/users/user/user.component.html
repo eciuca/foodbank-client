@@ -15,11 +15,6 @@
                         <label i18n="@@Employee" for="selectedMembre">Employee</label>
                         <p-autoComplete #membre="ngModel" [(ngModel)]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
                                          [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">
-                            <ng-template let-membre pTemplate="item">
-                                <div class="membre-item">
-                                    <div> {{membre.nom}} {{membre.prenom}}</div>
-                                </div>
-                            </ng-template>
                         </p-autoComplete>
                         <p-message i18n-text="@@EmployeeIsMandatory" *ngIf="membre.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
                     </div>

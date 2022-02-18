@@ -107,7 +107,7 @@ export class UserComponent implements OnInit {
                         .subscribe(
                             membre => {
                                 if (membre != null) {
-                                    this.selectedMembre = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
+                                    this.selectedMembre = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                                     console.log('our users membre:', this.selectedMembre);
                                 } else {
                                     console.log('There is no membre for this user!');
@@ -160,7 +160,7 @@ export class UserComponent implements OnInit {
                   if (authState.user) {
                       this.lienBanque = authState.banque.bankId;
                       this.idCompany = authState.banque.bankShortName;
-                      this.filterMemberBase = { 'lienBanque': authState.banque.bankId};
+                      this.filterMemberBase = {};
                       switch (authState.user.rights) {
                           case 'admin':
                               this.rights = enmUserRoles;
@@ -171,6 +171,7 @@ export class UserComponent implements OnInit {
                               break;
                           case 'Bank':
                           case 'Admin_Banq':
+                              this.filterMemberBase['lienBanque'] = authState.banque.bankId;
                               this.rights = enmUserRolesBankAsso;
                               if (authState.user.rights === 'Admin_Banq') {
                                   this.booCanSave = true;
@@ -181,6 +182,7 @@ export class UserComponent implements OnInit {
                               break;
                           case 'Asso':
                           case 'Admin_Asso':
+                              this.filterMemberBase['lienBanque'] = authState.banque.bankId;
                               this.idOrg = authState.organisation.idDis;
                               this.orgName = authState.organisation.societe;
                               if (authState.organisation.depyN === true) {
@@ -359,13 +361,21 @@ export class UserComponent implements OnInit {
         this.membresService.getWithQuery(queryMemberParms)
             .subscribe(filteredMembres => {
                 this.filteredMembres = filteredMembres.map((membre) =>
-                    Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom})
+                    Object.assign({}, membre, {fullname: this.setMembreFullName(membre)})
                 );
             });
     }
 
     getUserTitle(): string {
       return this.title;
+    }
+    setMembreFullName(membre:Membre): string  {
+        if (membre.bankShortName === this.idCompany) {
+            return membre.nom + ' ' + membre.prenom;
+        } else {
+            return membre.nom + ' ' + membre.prenom + '(' + membre.bankShortName + ')';
+        }
+
     }
 
 }

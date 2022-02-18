@@ -110,7 +110,7 @@
                     {{ user.idUser }}
                 </td>
                 <td colspan="2">
-                    {{user.membreNom}}  {{user.membrePrenom}}
+                   {{ getuserFullName(user)}}
                 </td>
                 <td colspan="2" *ngIf="booShowOrganisations">
                     <div *ngIf="user.idOrg > 0">

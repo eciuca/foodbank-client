@@ -1,3 +1,6 @@
+import {User} from '../users/model/user';
+import {MembreEntityService} from '../membres/services/membre-entity.service';
+
 export function labelCivilite(civilite: number) {
 
     switch (civilite) {
