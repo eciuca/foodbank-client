@@ -25,6 +25,8 @@ export class UserComponent implements OnInit {
     @ViewChild('userForm') myform: NgForm;
     @Input() idUser$: Observable<string>;
     @Input() currentFilteredOrg: Organisation;
+    @Input() currentFilteredBankId: number;
+    @Input() currentFilteredBankShortName: string;
     user: User;
     selectedMembre: Membre;
     filteredMembres: Membre[];
@@ -46,8 +48,9 @@ export class UserComponent implements OnInit {
     filterMemberBase: any;
     lienDepot: number;
     depotName: string;
-    orgName: string;
+    isAdmin: boolean;
     title: string;
+    orgName: string;
   constructor(
       private usersService: UserEntityService,
       private membresService: MembreEntityService,
@@ -63,6 +66,7 @@ export class UserComponent implements OnInit {
       this.booCanDelete = false;
       this.booCanSave = false;
       this.booCanQuit = true;
+      this.isAdmin = false;
       this.lienBanque = 0;
       this.idOrg = 0;
       this.idCompany = '';
@@ -115,35 +119,52 @@ export class UserComponent implements OnInit {
                             });
                 } else {
                     this.user = new DefaultUser();
-                    this.user.lienBanque = this.lienBanque;
-                    this.user.idCompany = this.idCompany;
-                    console.log('CurrentFilteredOrg', this.currentFilteredOrg);
-
-                    if (this.idOrg > 0 && this.lienDepot === 0) {
-                        // handle  users from single organisation ( logged in as organisation admin
-                        this.user.idOrg = this.idOrg;
-                        this.rights = enmUserRolesAsso;
-                        this.title = $localize`:@@OrgUserNew1:New User for organisation ${this.orgName} `;
-                    } else {
-                        if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis != null && this.currentFilteredOrg.idDis > 0) {
-                            // create user for org from bank or depot admin user
-                            this.rights = enmUserRolesAsso;
+                    console.log('CurrentFilteredBankAndOrg', this.currentFilteredBankShortName,this.currentFilteredOrg);
+                    if (this.isAdmin) {
+                        // currentFilteredBankId should always be filled in cfr GUI
+                        this.user.lienBanque = this.currentFilteredBankId;
+                        this.user.idCompany = this.currentFilteredBankShortName;
+                        if ( this.currentFilteredOrg && this.currentFilteredOrg.idDis != 999 && this.currentFilteredOrg.idDis != 0 ) {
+                            // must be org
                             this.user.idOrg = this.currentFilteredOrg.idDis;
-                            if (this.currentFilteredOrg.societe === 'Depot') {
-                                this.title = $localize`:@@OrgUserNewC:New User for organisation  ${this.depotName}`;
+                            this.title = $localize`:@@OrgUserNew2:New User for organisation ${this.currentFilteredOrg.societe} `;
+                        }
+                        else {
+                            this.user.idOrg = 0;
+                            this.title =  $localize`:@@BankUserNew1:New User for bank ${this.currentFilteredBankShortName} `;
+                        }
+                    }
+                    else {
+                        this.user.lienBanque = this.lienBanque;
+                        this.user.idCompany = this.idCompany;
+                        console.log('CurrentFilteredOrg', this.currentFilteredOrg);
+
+                        if (this.idOrg > 0 && this.lienDepot === 0) {
+                            // handle  users from single organisation ( logged in as organisation admin
+                            this.user.idOrg = this.idOrg;
+                            this.rights = enmUserRolesAsso;
+                            this.title = $localize`:@@OrgUserNew1:New User for organisation ${this.orgName} `;
+                        } else {
+                            if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis != null && this.currentFilteredOrg.idDis >0 && this.currentFilteredOrg.idDis != 999) {
+                                // create user for org from bank or depot admin user
+                                this.rights = enmUserRolesAsso;
+                                this.user.idOrg = this.currentFilteredOrg.idDis;
+                                if (this.currentFilteredOrg.societe === 'Depot') {
+                                    this.title = $localize`:@@OrgUserNewC:New User for organisation  ${this.depotName}`;
+                                } else {
+                                    this.title = $localize`:@@OrgUserNewA:New User for organisation  ${this.currentFilteredOrg.societe}`;
+                                }
                             } else {
-                                this.title = $localize`:@@OrgUserNewA:New User for organisation  ${this.currentFilteredOrg.societe}`;
-                            }
-                        }  else {
-                           // must be bank or depot
+                                // must be bank or depot
                                 if (this.lienDepot > 0) {
                                     this.rights = enmUserRolesAsso;
                                     this.user.idOrg = this.lienDepot;
                                     this.title = $localize`:@@OrgUserNewB:New User for depot  ${this.depotName}`;
-                                }  else {
+                                } else {
                                     this.rights = enmUserRolesBank;
                                     this.title = $localize`:@@BankUserNew1:New User for bank ${this.idCompany} `;
                                 }
+                            }
                         }
                     }
                     this.booIsCreate = true;
@@ -164,6 +185,7 @@ export class UserComponent implements OnInit {
                       switch (authState.user.rights) {
                           case 'admin':
                               this.rights = enmUserRoles;
+                              this.isAdmin = true;
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;

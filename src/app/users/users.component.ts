@@ -45,6 +45,7 @@ export class UsersComponent implements OnInit {
   bankid: number;
   bankName: string;
   bankShortName: string;
+  filteredBankId: number;
   filteredBankShortName: string;
   first: number;
   booShowOrganisations: boolean;
@@ -170,7 +171,7 @@ export class UsersComponent implements OnInit {
                             .pipe(
                                 tap((banquesEntities) => {
                                     console.log('Banques now loaded:', banquesEntities);
-                                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                                    this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId}));
                                 })
                             ).subscribe();
                         break;
@@ -266,10 +267,13 @@ export class UsersComponent implements OnInit {
                 if (event.filters.hasLogins && event.filters.hasLogins.value !== null ) {
                     queryParms['hasLogins'] = event.filters.hasLogins.value;
                 }
-                if (event.filters.idCompany && event.filters.idCompany.value) {
-                    queryParms['idCompany'] = event.filters.idCompany.value;
-                    this.filteredBankShortName = event.filters.idCompany.value;
+                if (event.filters.bankId && event.filters.bankId.value) {
+                    queryParms['lienBanque'] = event.filters.bankId.value;
+                    this.filteredBankId= event.filters.bankId.value;
+                    this.filteredBankShortName = this.bankOptions.find(obj => obj.value === this.filteredBankId).label;
+                    console.log('CurrentFilteredBankIdAndShortName',  this.filteredBankId,this.filteredBankShortName,this.bankOptions);
                 } else {
+                    this.filteredBankId = null;
                     this.filteredBankShortName = null;
                 }
             }
