@@ -40,9 +40,11 @@ export class MembresComponent implements OnInit {
     filteredOrganisations: any[];
     filteredOrganisationsPrepend: any[];
     booShowOrganisations: boolean;
+    booIsAdmin: boolean;
     bankid: number;
     bankName: string;
     bankShortName: string;
+    filteredBankId: number;
     filteredBankShortName: string;
     lienDepot: number;
     depotName: string;
@@ -60,6 +62,7 @@ export class MembresComponent implements OnInit {
                 private membreHttpService: MembreHttpService
     ) {
         this.booCanCreate = false;
+        this.booIsAdmin = false;
         this.booShowArchived = false;
         this.bankid = 0;
         this.booShowOrganisations = false;
@@ -174,10 +177,13 @@ export class MembresComponent implements OnInit {
             if (event.filters.city && event.filters.city.value) {
                 queryParms['city'] = event.filters.city.value;
             }
-            if (event.filters.bankShortName && event.filters.bankShortName.value) {
-                queryParms['bankShortName'] = event.filters.bankShortName.value;
-                this.filteredBankShortName = event.filters.bankShortName.value;
+            if (event.filters.bankId && event.filters.bankId.value) {
+                queryParms['lienBanque'] = event.filters.bankId.value;
+                this.filteredBankId= event.filters.bankId.value;
+                this.filteredBankShortName = this.bankOptions.find(obj => obj.value === this.filteredBankId).label;
+                console.log('CurrentFilteredBankIdAndShortName',  this.filteredBankId,this.filteredBankShortName,this.bankOptions);
             } else {
+                this.filteredBankId = null;
                 this.filteredBankShortName = null;
             }
         }
@@ -223,6 +229,7 @@ export class MembresComponent implements OnInit {
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                 case 'admin':
+                    this.booIsAdmin = true;
                     this.booShowOrganisations = true;
                     this.filteredOrganisationsPrepend = [
                         {idDis: null, fullname: $localize`:@@All:All` },
@@ -233,7 +240,8 @@ export class MembresComponent implements OnInit {
                         .pipe(
                             tap((banquesEntities) => {
                                 console.log('Banques now loaded:', banquesEntities);
-                                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                                this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId}));
+                                console.log('Bank Options are:', this.bankOptions);
                             })
                         ).subscribe();
                     break;
@@ -251,11 +259,11 @@ export class MembresComponent implements OnInit {
         const  queryOrganisationParms: QueryParams = {};
         queryOrganisationParms['actif'] = '1';
         if (this.bankOptions) {
-            if (this.filteredBankShortName) {
-                queryOrganisationParms['bankShortName'] = this.filteredBankShortName;
+            if (this.filteredBankId) {
+                queryOrganisationParms['lienBanque'] = this.filteredBankId.toString();
             } else {
-                if (queryOrganisationParms.hasOwnProperty('bankShortName')) {
-                    delete queryOrganisationParms['bankShortName'];
+                if (queryOrganisationParms.hasOwnProperty('lienBanque')) {
+                    delete queryOrganisationParms['lienBanque'];
                 }
             }
         }
@@ -310,6 +318,11 @@ export class MembresComponent implements OnInit {
                     latestQueryParams['lienDis'] = this.lienDepot;
                     if (latestQueryParams.hasOwnProperty('lienDepot')) {
                         delete latestQueryParams['lienDepot'];
+                    }
+                }
+                else {
+                    if (latestQueryParams.hasOwnProperty('lienDis')) {
+                        delete latestQueryParams['lienDis'];
                     }
                 }
             }
@@ -387,11 +400,15 @@ export class MembresComponent implements OnInit {
                     cleanedItem[$localize`:@@Nat Number:National Number`] =item.nnat;
                     cleanedList.push( cleanedItem);
                 });
-                if (!this.bankOptions) {
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                if (this.idOrg > 0) {
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 }
                 else {
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                    if (!this.bankOptions) {
+                        this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                    } else {
+                        this.excelService.exportAsExcelFile(cleanedList, 'foodit.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                    }
                 }
             });
     }

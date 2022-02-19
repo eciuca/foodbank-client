@@ -22,6 +22,8 @@ export class MembreComponent implements OnInit {
     @ViewChild('membreForm') myform: NgForm;
     @Input() batId$: Observable<number>;
     @Input() currentFilteredOrg: Organisation;
+    @Input() currentFilteredBankId: number;
+    @Input() currentFilteredBankShortName: number;
     @Output() onMembreUpdate = new EventEmitter<Membre>();
     @Output() onMembreCreate = new EventEmitter<Membre>();
     @Output() onMembreDelete = new EventEmitter<Membre>();
@@ -41,7 +43,8 @@ export class MembreComponent implements OnInit {
     idCompany: string;
     orgName: string;
     depotName: string;
-   constructor(
+    isAdmin: boolean;
+    constructor(
       private membresService: MembreEntityService,
       private route: ActivatedRoute,
       private router: Router,
@@ -55,6 +58,7 @@ export class MembreComponent implements OnInit {
       this.booCanDelete = false;
       this.booCanSave = false;
       this.booCanQuit = true;
+      this.isAdmin = false;
       this.lienBanque = 0 ;
       this.idCompany = '';
       this.lienDis = 0;
@@ -96,34 +100,50 @@ export class MembreComponent implements OnInit {
                           this.title = $localize`:@@OrgMemberExisting:Member for organisation ${membre.societe} Updated On ${ membre.lastVisit}`;
                       } else {
 
-                          this.title = $localize`:@@BankMemberExisting:Member for bank ${this.idCompany} Updated On ${ membre.lastVisit}`;
+                          this.title = $localize`:@@BankMemberExisting:Member for bank ${membre.bankShortName} Updated On ${ membre.lastVisit}`;
                       }
                   } else {
                       this.membre = new DefaultMembre();
-                      this.membre.lienBanque = this.lienBanque;
-                      console.log('CurrentFilteredOrg', this.currentFilteredOrg);
+                      console.log('CurrentFilteredBankAndOrg', this.currentFilteredBankShortName,this.currentFilteredOrg);
+                      if (this.isAdmin) {
+                          // currentFilteredBankId should always be filled in cfr GUI
+                            this.membre.lienBanque = this.currentFilteredBankId;
+                            if ( this.currentFilteredOrg && this.currentFilteredOrg.idDis != 999 && this.currentFilteredOrg.idDis != 0 ) {
+                                // must be org
+                                this.membre.lienDis = this.currentFilteredOrg.idDis;
+                                this.title = $localize`:@@OrgMemberNew2:New Member for organisation ${this.currentFilteredOrg.societe} `;
+                            }
+                            else {
+                                this.membre.lienDis = 0;
+                                this.title =  $localize`:@@BankMemberNew1:New Member for bank ${this.currentFilteredBankShortName} `;
+                            }
+                      }
+                      else {
+                          this.membre.lienBanque = this.lienBanque;
 
-                      if (this.lienDis > 0 && this.lienDepot === 0) {
-                          // handle organisation membres
-                          this.membre.lienDis = this.lienDis;
-                          this.title = $localize`:@@OrgMemberNew1:New Member for organisation ${this.orgName} `;
-                      } else {
-                          // tslint:disable-next-line:max-line-length
-                          if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis != null && this.currentFilteredOrg.idDis > 0) {
-                              // create membre from bank admin membre or depot admin membre
-                              this.membre.lienDis = this.currentFilteredOrg.idDis;
-                              if (this.currentFilteredOrg.societe === 'Depot') {
-                                  this.title = $localize`:@@OrgMemberNewC:New Member for organisation  ${this.depotName}`;
+                          if (this.lienDis > 0 && this.lienDepot === 0) {
+                              // handle organisation membres
+                              this.membre.lienDis = this.lienDis;
+                              this.title = $localize`:@@OrgMemberNew1:New Member for organisation ${this.orgName} `;
+                          } else {
+                              // tslint:disable-next-line:max-line-length
+                              if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis != null && this.currentFilteredOrg.idDis > 0 && this.currentFilteredOrg.idDis != 999) {
+                                  // create membre from bank admin membre or depot admin membre
+                                  this.membre.lienDis = this.currentFilteredOrg.idDis;
+                                  if (this.currentFilteredOrg.societe === 'Depot') {
+                                      this.title = $localize`:@@OrgMemberNewC:New Member for organisation  ${this.depotName}`;
+                                  } else {
+                                      this.title = $localize`:@@OrgMemberNewA:New Member for organisation  ${this.currentFilteredOrg.societe}`;
+                                  }
                               } else {
-                                  this.title = $localize`:@@OrgMemberNewA:New Member for organisation  ${this.currentFilteredOrg.societe}`;
-                              }
-                          }  else {
-                              if (this.lienDepot > 0) {
-                                  this.membre.lienDis = this.lienDepot;
-                                  this.title =  $localize`:@@OrgMemberNewB:New Member for organisation  ${this.depotName}`;
-                              } else {
-                                  // must be bank
-                                  this.title =  $localize`:@@BankMemberNew1:New Member for bank ${this.idCompany} `;
+                                  if (this.lienDepot > 0) {
+                                      this.membre.lienDis = this.lienDepot;
+                                      this.title = $localize`:@@OrgMemberNewB:New Member for depot  ${this.depotName}`;
+                                  } else {
+                                      // must be bank
+                                      this.title = $localize`:@@BankMemberNew1:New Member for bank ${this.idCompany} `;
+
+                                  }
                               }
                           }
                       }
@@ -140,6 +160,7 @@ export class MembreComponent implements OnInit {
               if (authState.user) {
                   switch (authState.user.rights) {
                       case 'admin':
+                          this.isAdmin = true;
                           this.booCanSave = true;
                           if (this.booCalledFromTable) {
                               this.booCanDelete = true;

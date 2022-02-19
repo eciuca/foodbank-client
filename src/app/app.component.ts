@@ -388,7 +388,7 @@ export class AppComponent implements OnInit {
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']}
             );
-            // add reports
+            /* add reports
             if (['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
                 this.menuLoggedInItems.push(
                     {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreports/${authState.banque.bankId}`]}
@@ -398,6 +398,8 @@ export class AppComponent implements OnInit {
                     {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreport/${authState.organisation.idDis}`]}
                 );
             }
+            */
+
         // Add FEAD
         if ( (['Bank', 'Admin_Banq'].includes(authState.user.rights))
             && authState.user.gestFead)      {

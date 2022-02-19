@@ -48,6 +48,7 @@ export class UsersComponent implements OnInit {
   filteredBankShortName: string;
   first: number;
   booShowOrganisations: boolean;
+  booIsAdmin: boolean;
     lienDepot: number;
     depotName: string;
     bankOptions: any[];
@@ -75,6 +76,7 @@ export class UsersComponent implements OnInit {
       this.depotName = '';
       this.first = 0;
       this.booShowOrganisations = false;
+      this.booIsAdmin = false;
       this.orgName = '';
       this.idOrg = 0;
       this.YNOptions = enmYn;
@@ -156,7 +158,7 @@ export class UsersComponent implements OnInit {
                         }
                         break;
                     case 'admin':
-                        this.booCanCreate = true;
+                        this.booIsAdmin = true;
                         this.booShowOrganisations = true;
                         this.rightOptions = enmUserRoles;
                         this.filteredOrganisationsPrepend = [
@@ -338,6 +340,11 @@ export class UsersComponent implements OnInit {
                     delete latestQueryParams['lienDepot'];
                 }
             }
+            else {
+                if (latestQueryParams.hasOwnProperty('idOrg')) {
+                    delete latestQueryParams['idOrg'];
+                }
+            }
         }
 
         this.loadPageSubject$.next(latestQueryParams);
@@ -416,11 +423,15 @@ export class UsersComponent implements OnInit {
                 cleanedItem['email'] =item.email;
                 cleanedList.push( cleanedItem);
             });
-            if (!this.bankOptions) {
-                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+            if (this.idOrg > 0) {
+                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
             }
             else {
-                this.excelService.exportAsExcelFile(cleanedList, 'foodit.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                if (!this.bankOptions) {
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                } else {
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                }
             }
         });
     }
