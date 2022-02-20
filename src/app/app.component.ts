@@ -302,26 +302,29 @@ export class AppComponent implements OnInit {
             }
         }
        
-        // handle members
-        const commonSubItems = [
-            {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
-            {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
-        ];
-        if ( ['Admin_Banq', 'Admin_Asso'].includes(authState.user.rights)) {
-            commonSubItems.push(
-                {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users',  routerLink: ['/users/rights/']},
-            );
-        }
-        if (['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
-            commonSubItems.push(
-                {label: 'Contacts', icon: 'pi pi-fw pi-users', routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]},
-            );
-        }
-        this.menuLoggedInItems.push(
-                {label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
+        // handle members and users
+        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+            const commonSubItems = [
+                {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
+                {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
+            ];
+            if (['Admin_Banq', 'Bank'].includes(authState.user.rights)) {
+                commonSubItems.push(
+                    {label: $localize`:@@menuUserRights:User Rights`, icon: 'pi pi-fw pi-users', routerLink: ['/users/rights/']},
+                );
+            }
+            if (['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+                commonSubItems.push(
+                    {label: 'Contacts', icon: 'pi pi-fw pi-users', routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]},
+                );
+            }
+            this.menuLoggedInItems.push(
+                {
+                    label: $localize`:@@menuMembers:Members`, icon: 'pi pi-fw pi-users',
                     items: commonSubItems
                 }
             );
+        }
           // Add Beneficiaries
             if (['Bank', 'Admin_Banq'].includes(authState.user.rights))
             {
