@@ -128,10 +128,12 @@ export class UserComponent implements OnInit {
                             // must be org
                             this.user.idOrg = this.currentFilteredOrg.idDis;
                             this.title = $localize`:@@OrgUserNew2:New User for organisation ${this.currentFilteredOrg.societe} `;
+                            this.rights = enmUserRolesAsso;
                         }
                         else {
                             this.user.idOrg = 0;
                             this.title =  $localize`:@@BankUserNew1:New User for bank ${this.currentFilteredBankShortName} `;
+                            this.rights = enmUserRolesBank;
                         }
                     }
                     else {

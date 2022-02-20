@@ -288,11 +288,11 @@ export class UsersComponent implements OnInit {
         const  queryOrganisationParms: QueryParams = {};
         queryOrganisationParms['actif'] = '1';
         if (this.bankOptions) {
-            if (this.filteredBankShortName) {
-                queryOrganisationParms['bankShortName'] = this.filteredBankShortName;
+            if (this.filteredBankId) {
+                queryOrganisationParms['lienBanque'] = this.filteredBankId.toString();
             } else {
-                if (queryOrganisationParms.hasOwnProperty('bankShortName')) {
-                    delete queryOrganisationParms['bankShortName'];
+                if (queryOrganisationParms.hasOwnProperty('lienBanque')) {
+                    delete queryOrganisationParms['lienBanque'];
                 }
             }
         }
