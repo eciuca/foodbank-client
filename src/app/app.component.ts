@@ -252,7 +252,7 @@ export class AppComponent implements OnInit {
             }
         }
         // handle  organisation(s) items
-        if ( authState.user.rights === 'admin') {
+        if (  ['admin', 'Admin_FEAD'].includes(authState.user.rights))  {
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
 
@@ -401,8 +401,7 @@ export class AppComponent implements OnInit {
             */
 
         // Add FEAD
-        if ( (['Bank', 'Admin_Banq'].includes(authState.user.rights))
-            && authState.user.gestFead)      {
+        if ( authState.user.rights === 'Admin_Banq')  {
             this.menuLoggedInItems.push(
                 {
                     label: 'Stock', icon: 'pi pi-fw pi-briefcase',
@@ -422,7 +421,7 @@ export class AppComponent implements OnInit {
         );
 
         } else {
-            if (authState.user.gestFead) {
+            if (authState.user.rights === 'Admin_FEAD' || authState.user.rights === 'Admin_EXT' ||authState.user.gestFead) {
                 this.menuLoggedInItems.push(
                     {
                         label: $localize`:@@menuFEADApplication:Application` ,

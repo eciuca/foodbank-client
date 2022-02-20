@@ -133,7 +133,13 @@ export class UserComponent implements OnInit {
                         else {
                             this.user.idOrg = 0;
                             this.title =  $localize`:@@BankUserNew1:New User for bank ${this.currentFilteredBankShortName} `;
-                            this.rights = enmUserRolesBank;
+                            if (this.currentFilteredBankShortName == 'SPP') {
+                                this.rights = [{label: $localize`:@@RoleFEADAdmin:FEAD Admin`, value: 'Admin_FEAD'}]
+                            }
+                            else {
+                                this.rights = enmUserRolesBank;
+                                this.rights.push([ {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'}])
+                            }
                         }
                     }
                     else {

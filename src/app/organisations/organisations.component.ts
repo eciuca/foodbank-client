@@ -210,7 +210,7 @@ export class OrganisationsComponent implements OnInit {
         // exfilter all depots
         this.filterBase = { 'isDepot': '0' };
         if (authState.user) {
-            if (authState.banque && authState.user.rights !== 'admin' ) {
+            if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD' ) {
                 this.lienBanque = authState.banque.bankId;
                 this.bankName = authState.banque.bankName;
                 this.bankShortName = authState.banque.bankShortName;
@@ -220,7 +220,7 @@ export class OrganisationsComponent implements OnInit {
                 case 'admin':
                 case 'Bank':
                 case 'Admin_Banq':
-
+                case 'Admin_FEAD':
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     const  queryDepotParms: QueryParams = {};
                     queryDepotParms['offset'] = '0';
