@@ -48,8 +48,20 @@
         </ng-template>
         <ng-template pTemplate="body" let-banque>
             <tr (click)="handleSelect(banque)">
-                <td *ngFor="let col of cols">
-                    {{banque[col.field]}}
+                <td >
+                    {{banque.bankId }}
+                </td>
+                <td >
+                    {{banque.bankShortName }}
+                </td>
+                <td >
+                    {{banque.bankName }}
+                </td>
+                <td >
+                    {{banque.nrEntr }}
+                </td>
+                <td >
+                    {{banque.bankMail }}
                 </td>
             </tr>
         </ng-template>

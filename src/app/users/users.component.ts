@@ -114,14 +114,16 @@ export class UsersComponent implements OnInit {
             filter(authState => authState.isLoggedIn)
         ).subscribe((authState) => {
             console.log('Entering Users component with authState:', authState);
-            if (authState.banque) {
-                this.bankid = authState.banque.bankId;
+          if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'
+              && authState.user.rights !== 'Admin_FBBA' && authState.user.rights !== 'Bank_FBBA' ) {
+              this.bankid = authState.banque.bankId;
+              this.bankName = authState.banque.bankName;
+              this.bankShortName = authState.banque.bankShortName;
+          }
 
                 switch (authState.user.rights) {
                     case 'Bank':
                     case 'Admin_Banq':
-                        this.bankName = authState.banque.bankName;
-                        this.bankShortName = authState.banque.bankShortName;
                         this.booShowOrganisations = true;
                         this.filterBase = {'lienBanque': authState.banque.bankId};
                         this.rightOptions = enmUserRolesBankAsso;
@@ -137,8 +139,6 @@ export class UsersComponent implements OnInit {
                         break;
                     case 'Asso':
                     case 'Admin_Asso':
-                        this.bankName = authState.banque.bankName;
-                        this.bankShortName = authState.banque.bankShortName;
                         if (authState.organisation && authState.organisation.depyN === true) {
                             this.booShowOrganisations = true;
                             this.lienDepot = authState.organisation.idDis;
@@ -159,7 +159,11 @@ export class UsersComponent implements OnInit {
                         }
                         break;
                     case 'admin':
-                        this.booIsAdmin = true;
+                    case 'Admin_FBBA':
+                    case 'Bank_FBBA':
+                        if (authState.user.rights != 'Bank_FBBA' ) {
+                            this.booIsAdmin = true;
+                        }
                         this.booShowOrganisations = true;
                         this.rightOptions = enmUserRoles;
                         this.filteredOrganisationsPrepend = [
@@ -179,7 +183,7 @@ export class UsersComponent implements OnInit {
                         console.log('Entering Users component with unsupported user rights, see complete authstate:', authState);
                 }
 
-            }
+
              console.log('Users FilterBase is: ', this.filterBase);
         });
 

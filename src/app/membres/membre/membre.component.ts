@@ -160,7 +160,7 @@ export class MembreComponent implements OnInit {
               if (authState.user) {
                   switch (authState.user.rights) {
                       case 'admin':
-                          this.isAdmin = true;
+                      case 'Admin_FBBA':
                           this.booCanSave = true;
                           if (this.booCalledFromTable) {
                               this.booCanDelete = true;

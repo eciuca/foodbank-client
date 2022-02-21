@@ -17,7 +17,6 @@ import {globalAuthState} from '../auth/auth.selectors';
 export class BanquesComponent implements OnInit {
   selectedBankid$ = new BehaviorSubject(0);
   banques: Banque[];
-  cols: any[];
   displayDialog: boolean;
   booCanCreate: boolean;
 
@@ -35,13 +34,6 @@ export class BanquesComponent implements OnInit {
 
   reload() {
 
-    this.cols = [
-      { field: 'bankId', header: 'Identifiant' },
-      { field: 'bankShortName', header: 'Abbréviation' },
-      { field: 'bankName', header: 'Nom' },
-      { field: 'nrEntr', header: 'NrEntreprise' },
-      { field: 'bankMail', header: 'E-mail' }
-    ];
       this.store
           .pipe(
               select(globalAuthState),

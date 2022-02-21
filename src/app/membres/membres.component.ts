@@ -190,14 +190,15 @@ export class MembresComponent implements OnInit {
         this.loadPageSubject$.next(queryParms);
     }
     private initializeDependingOnUserRights(authState: AuthState) {
-        if (authState.banque) {
+        if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'
+            && authState.user.rights !== 'Admin_FBBA' && authState.user.rights !== 'Bank_FBBA' ) {
             this.bankid = authState.banque.bankId;
-
+            this.bankName = authState.banque.bankName;
+            this.bankShortName = authState.banque.bankShortName;
+        }
             switch (authState.user.rights) {
                 case 'Bank':
                 case 'Admin_Banq':
-                    this.bankName = authState.banque.bankName;
-                    this.bankShortName = authState.banque.bankShortName;
                     this.booShowOrganisations = true;
                     this.filterBase = { 'lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
@@ -210,8 +211,6 @@ export class MembresComponent implements OnInit {
                     break;
                 case 'Asso':
                 case 'Admin_Asso':
-                    this.bankName = authState.banque.bankName;
-                    this.bankShortName = authState.banque.bankShortName;
                     if (authState.organisation && authState.organisation.depyN === true) {
                         this.booShowOrganisations = true;
                         this.lienDepot = authState.organisation.idDis;
@@ -229,7 +228,11 @@ export class MembresComponent implements OnInit {
                     if (authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
                     break;
                 case 'admin':
-                    this.booIsAdmin = true;
+                case 'Admin_FBBA':
+                case 'Bank_FBBA':
+                    if (authState.user.rights != 'Bank_FBBA' ) {
+                        this.booIsAdmin = true;
+                    }
                     this.booShowOrganisations = true;
                     this.filteredOrganisationsPrepend = [
                         {idDis: null, fullname: $localize`:@@All:All` },
@@ -249,7 +252,7 @@ export class MembresComponent implements OnInit {
             }
 
         }
-    }
+
 
     showDialogToAdd() {
         this.selectedBatid$.next(0);

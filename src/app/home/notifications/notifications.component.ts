@@ -107,6 +107,7 @@ export class NotificationsComponent implements OnInit {
                     this.booCanCreate = true;
                     break;
                 default:
+                    this.queryBase = {};
             }
         }
         console.log('initialization sets query base to:', this.queryBase);

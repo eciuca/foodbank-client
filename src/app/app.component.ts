@@ -314,7 +314,7 @@ export class AppComponent implements OnInit {
         }
        
         // handle members and users
-        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso','admin'].includes(authState.user.rights)) {
+        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso','admin','Admin_FBBA','Bank_FBBA'].includes(authState.user.rights)) {
             const commonSubItems = [
                 {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
                 {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},

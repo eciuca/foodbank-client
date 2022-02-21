@@ -192,12 +192,16 @@ export class UserComponent implements OnInit {
                       this.filterMemberBase = {};
                       switch (authState.user.rights) {
                           case 'admin':
+                          case 'Admin_FBBA':
                               this.rights = enmUserRoles;
                               this.isAdmin = true;
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
                                   this.booCanDelete = true;
                               }
+                              break;
+                          case 'Bank_FBBA':
+                              this.rights = enmUserRoles;
                               break;
                           case 'Bank':
                           case 'Admin_Banq':
