@@ -198,7 +198,18 @@ export class AppComponent implements OnInit {
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
                     break;
+                case 'Admin_FBBA':
+                    this.loggedInUserRole = $localize`:@@RoleAdminFBBA:FBBA admin`;
+                    this.loggedInBankName = authState.banque.bankName;
+                    this.loggedInOrganisationName = '';
+                    break;
+                case 'Bank_FBBA':
+                    this.loggedInUserRole = $localize`:@@RoleBankFBBA:FBBA User`;
+                    this.loggedInBankName = authState.banque.bankName;
+                    this.loggedInOrganisationName = '';
+                    break;
                 default:
+                    this.loggedInUserRole = authState.user.rights;
                     this.loggedInBankName = authState.banque.bankName;
                     this.loggedInOrganisationName = '';
             }
@@ -212,7 +223,7 @@ export class AppComponent implements OnInit {
             {label: $localize`:@@menuHome:Home`, icon: 'pi pi-fw pi-home',  routerLink: ['/home' ]}
         ];
         // handle Personal Info Items
-        if (['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+        if (['Bank', 'Admin_Banq','Admin_FBBA','Bank_FBBA'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuMyInfo:MyInfo`, icon: 'pi pi-fw pi-user',
                     items: [
@@ -233,7 +244,7 @@ export class AppComponent implements OnInit {
                 {label: $localize`:@@menuBank:Bank`, icon: 'pi pi-fw pi-globe',  routerLink: [`/banques/${authState.banque.bankId}` ]},
             );
         }
-        if ( authState.user.rights === 'admin') {
+        if (['admin', 'Admin_FBBA','Bank_FBBA'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuBanks:Banks`, icon: 'pi pi-fw pi-globe',  routerLink: ['/banques']},
             );
@@ -252,7 +263,7 @@ export class AppComponent implements OnInit {
             }
         }
         // handle  organisation(s) items
-        if (  ['admin', 'Admin_FEAD'].includes(authState.user.rights))  {
+        if (  ['admin', 'Admin_FEAD', 'Admin_FBBA','Bank_FBBA'].includes(authState.user.rights))  {
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
 
@@ -303,7 +314,7 @@ export class AppComponent implements OnInit {
         }
        
         // handle members and users
-        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso','admin'].includes(authState.user.rights)) {
             const commonSubItems = [
                 {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
                 {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
@@ -387,10 +398,12 @@ export class AppComponent implements OnInit {
                     {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
                  );
             }
-            // add mailings for everyone
+            // add mailings
+        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
-                {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope',  routerLink: ['/mailings']}
+                {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope', routerLink: ['/mailings']}
             );
+        }
             /* add reports
             if (['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
                 this.menuLoggedInItems.push(

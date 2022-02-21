@@ -273,6 +273,7 @@ export class BanqueComponent implements OnInit {
                   if (authState.user) {
                       switch (authState.user.rights) {
                         case 'admin':
+                        case 'Admin_FBBA':
                         case 'Admin_Banq':
                            this.booCanSave = true;
                           if (this.booCalledFromTable ) {

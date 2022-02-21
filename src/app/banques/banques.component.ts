@@ -2,7 +2,7 @@ import {Component, OnInit } from '@angular/core';
 import {Banque } from './model/banque';
 import {BanqueEntityService} from './services/banque-entity.service';
 import {map, tap} from 'rxjs/operators';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
@@ -16,7 +16,7 @@ import {globalAuthState} from '../auth/auth.selectors';
 
 export class BanquesComponent implements OnInit {
   selectedBankid$ = new BehaviorSubject(0);
-  banques$: Observable<Banque[]>;
+  banques: Banque[];
   cols: any[];
   displayDialog: boolean;
   booCanCreate: boolean;
@@ -34,12 +34,7 @@ export class BanquesComponent implements OnInit {
     }
 
   reload() {
-      this.banques$  = this.banqueService.entities$
-        .pipe(
-            tap( (banquesEntities) => {
-                console.log('Banques now loaded:', banquesEntities); }),
-  )
-   ;
+
     this.cols = [
       { field: 'bankId', header: 'Identifiant' },
       { field: 'bankShortName', header: 'Abbréviation' },
@@ -59,7 +54,13 @@ export class BanquesComponent implements OnInit {
                           default:
                       }
                   }
+                  this.banqueService.getAll()
+                      .subscribe(
+                          banquesEntities => {
+                              this.banques = banquesEntities;
+                          });
               })
+
           )
           .subscribe();
 

@@ -64,6 +64,7 @@ export let enmUserRolesBankAsso = [
 export let enmUserRolesBank = [
     {label: $localize`:@@RoleBankAdmin:Bank admin`, value: 'Admin_Banq' },
     {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
+    {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'}
 ];
 export let enmUserRolesAsso = [
     {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},

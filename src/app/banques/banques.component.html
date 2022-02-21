@@ -1,4 +1,4 @@
-<ng-container *ngIf="banques$ | async as banques">
+<ng-container *ngIf="banques">
     <p-table #dt [value]="banques" selectionMode="single" [rowHover]="true"
              [rows]="10" [showCurrentPageReport]="true"
              [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReport"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

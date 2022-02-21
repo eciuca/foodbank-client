@@ -149,21 +149,30 @@ export class OrganisationComponent implements OnInit {
               select(globalAuthState),
               map((authState) => {
                   if (authState.user) {
+                      const regionQuery = {};
                       this.userName = authState.user.userName;
-                      this.lienBanque = authState.banque.bankId;
+
                       switch (authState.user.rights) {
+                          case 'admin':
+                          case 'Admin_FBBA':
+                              this.booCanSave = true;
+                              break;
                           case 'Admin_Banq':
+                              this.lienBanque = authState.banque.bankId;
+                              regionQuery['lienBanque'] = this.lienBanque.toString();
                               this.booCanSave = true;
                               if (this.booCalledFromTable ) {
                                   this.booCanDelete = true;
                               }
                               break;
                           case 'Admin_Asso':
+                              this.lienBanque = authState.banque.bankId;
+                              regionQuery['lienBanque'] = this.lienBanque.toString();
                               this.booCanSave = true;
                               break;
                           default:
                       }
-                      this.regionService.getWithQuery({'lienBanque': this.lienBanque.toString()})
+                      this.regionService.getWithQuery(regionQuery)
                           .subscribe(regions => {
                               this.regions = [{ value: null, label: ' '}];
                               regions.map((region) =>

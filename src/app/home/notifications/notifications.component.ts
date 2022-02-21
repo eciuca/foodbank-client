@@ -101,6 +101,8 @@ export class NotificationsComponent implements OnInit {
                     }
                     break;
                 case 'admin':
+                case 'Admin_FBBA':
+                case 'Bank_FBBA':
                     this.queryBase = {};
                     this.booCanCreate = true;
                     break;

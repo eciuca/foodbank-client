@@ -210,7 +210,8 @@ export class OrganisationsComponent implements OnInit {
         // exfilter all depots
         this.filterBase = { 'isDepot': '0' };
         if (authState.user) {
-            if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD' ) {
+            if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'
+                && authState.user.rights !== 'Admin_FBBA' && authState.user.rights !== 'Bank_FBBA' ) {
                 this.lienBanque = authState.banque.bankId;
                 this.bankName = authState.banque.bankName;
                 this.bankShortName = authState.banque.bankShortName;
@@ -221,6 +222,8 @@ export class OrganisationsComponent implements OnInit {
                 case 'Bank':
                 case 'Admin_Banq':
                 case 'Admin_FEAD':
+                case 'Admin_FBBA':
+                case 'Bank_FBBA':
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     const  queryDepotParms: QueryParams = {};
                     queryDepotParms['offset'] = '0';
@@ -239,7 +242,7 @@ export class OrganisationsComponent implements OnInit {
                                 this.depots.push({value: depot.idDepot, label: depot.nom})
                             );
                         });
-                    if (authState.user.rights === 'admin' ) {
+                    if ( ['Admin_FBBA', 'Bank_FBBA', 'Admin_FEAD', 'admin'].includes(authState.user.rights)) {
                         this.banqueService.getAll()
                             .pipe(
                                 tap((banquesEntities) => {

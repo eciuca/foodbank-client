@@ -138,7 +138,7 @@ export class UserComponent implements OnInit {
                             }
                             else {
                                 this.rights = enmUserRolesBank;
-                                this.rights.push( {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'})
+
                             }
                         }
                     }
