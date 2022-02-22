@@ -130,7 +130,7 @@ export class AuditReportComponent implements OnInit {
         }
 
 
-        if (authState.user && (authState.user.rights === 'admin')) {
+        if (['Admin_FBBA','admin'].includes(authState.user.rights)) {
 
             this.viewOptions =  [
                 {label: $localize`:@@General:General` , value: 'general'},
@@ -139,23 +139,19 @@ export class AuditReportComponent implements OnInit {
                 {label: $localize`:@@Rights:Rights` , value: 'rights' },
             ];
             this.banqueService.getAll()
-                .pipe(
-                    tap((banquesEntities) => {
+                .subscribe((banquesEntities) => {
                     console.log('Banques now loaded:', banquesEntities);
                     this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
                         this.changeDateRangeFilter();
-                    })
-                ).subscribe();
+                    });
             this.nbOfOrganisations = 0;
             this.nbOfFeadOrganisations = 0;
             this.banqueOrgCountService.getOrgCountReport(this.authService.accessToken,false)
-                .pipe(
-                    tap((banqueOrgCounts) => {
+                .subscribe((banqueOrgCounts) => {
                         console.log('BanqueOrgCounts now loaded:', banqueOrgCounts);
                         this.banqueOrgCounts = banqueOrgCounts;
                         this.banqueOrgCounts.forEach(item => this.nbOfOrganisations += item.orgCount);
-                    })
-                ).subscribe();
+                    });
             this.banqueOrgCountService.getOrgCountReport(this.authService.accessToken,true)
                 .pipe(
                     tap((banqueOrgCounts) => {

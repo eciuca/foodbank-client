@@ -88,7 +88,7 @@ export class AuditsComponent implements OnInit {
     }
 
 
-    if (authState.user && (authState.user.rights === 'admin')) {
+    if (['Admin_FBBA','admin'].includes(authState.user.rights)) {
       this.lienBanque = 0;
       this.filterBase = {};
       this.banqueService.getAll()

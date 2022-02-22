@@ -19,7 +19,7 @@ import {ChartModule} from 'primeng/chart';
 
 const routes: Routes = [
     {
-        path: 'auditreports/:bankId',
+        path: 'auditreports',
         component: AuditReportComponent
     },
   { path: '', component: AuditsComponent }

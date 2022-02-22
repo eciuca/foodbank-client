@@ -162,6 +162,7 @@ export class MembreComponent implements OnInit {
                       case 'admin':
                       case 'Admin_FBBA':
                           this.booCanSave = true;
+                          this.isAdmin = true;
                           if (this.booCalledFromTable) {
                               this.booCanDelete = true;
                           }

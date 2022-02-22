@@ -380,17 +380,7 @@ export class AppComponent implements OnInit {
                     }
                 );
             }
-        // handle  login(s) items
-        if ( ['admin', 'Admin_Banq'].includes(authState.user.rights)) {
-            this.menuLoggedInItems.push(
-                {label: 'Logins', icon: 'pi pi-fw pi-users',
-                    items: [
-                        {label: $localize`:@@menuOverview:Overview`, icon: 'pi pi-fw pi-users',  routerLink: [`/audits/auditreports/${authState.banque.bankId}`]},
-                        {label: 'Logins', icon: 'pi pi-fw pi-users', routerLink: ['/audits']},
-                    ]
-                }
-            );
-        }
+
             // add cpass and depots for admin
             if ( authState.user.rights === 'admin') {
                 this.menuLoggedInItems.push(
@@ -415,6 +405,28 @@ export class AppComponent implements OnInit {
                 );
             }
             */
+        // handle  login(s) items
+        if (['Admin_Banq','Admin_FBBA','admin'].includes(authState.user.rights)) {
+            this.menuLoggedInItems.push(
+                {
+                    label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',
+                    items: [
+                      //  {label: $localize`:@@menuReportOrgs:ReportOrgs`, icon: 'pi pi-fw pi-map', routerLink: [`/organisations/orgreports`]},
+                        {
+                            label: 'Logins', icon: 'pi pi-fw pi-users',
+                            items: [
+                                {
+                                    label: $localize`:@@menuOverview:Overview`,
+                                    icon: 'pi pi-fw pi-users',
+                                    routerLink: [`/audits/auditreports`]
+                                },
+                                {label: 'Details', icon: 'pi pi-fw pi-users', routerLink: ['/audits']},
+                            ]
+                        }
+                    ]
+                }
+            );
+        }
 
         // Add FEAD
         if ( authState.user.rights === 'Admin_Banq')  {
