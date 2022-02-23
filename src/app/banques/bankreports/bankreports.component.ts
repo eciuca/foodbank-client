@@ -78,9 +78,9 @@ export class BankreportsComponent implements OnInit {
           .subscribe((banquesEntities) => {
             console.log('Banques now loaded:', banquesEntities);
             this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
-
+              this.report();
           });
-      this.report();
+
     }
   }
 
