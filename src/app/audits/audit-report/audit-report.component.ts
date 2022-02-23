@@ -7,12 +7,12 @@ import {AppState} from '../../reducers';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {map, tap} from 'rxjs/operators';
 import {AuditReportService} from '../services/audit-report.service';
+import { BanqueReportService} from '../../banques/services/banque-report.service';
 import {AuthState} from '../../auth/reducers';
 import {DatePipe} from '@angular/common';
 import {QueryParams} from '@ngrx/data';
 import {BanqueEntityService} from '../../banques/services/banque-entity.service';
-import {BanqueOrgCountService} from '../../banques/services/banque-orgcount.service';
-import {BanqueOrgCount} from '../../banques/model/banqueOrgCount';
+import {BanqueCount} from '../../banques/model/banqueCount';
 import {enmYn} from '../../shared/enums';
 
 @Component({
@@ -29,8 +29,8 @@ export class AuditReportComponent implements OnInit {
   toDate: Date;
   filterParams: QueryParams;
   bankOptions: any[];
-  banqueOrgCounts: BanqueOrgCount[];
-  banqueOrgFeadCounts: BanqueOrgCount[];
+  banqueOrgCounts: BanqueCount[];
+  banqueOrgFeadCounts: BanqueCount[];
   bankShortName: string;
   viewOptions: any[];
   viewOption: any;
@@ -45,7 +45,7 @@ export class AuditReportComponent implements OnInit {
       private store: Store<AppState>,
       private auditReportService: AuditReportService,
       private banqueService: BanqueEntityService,
-      private banqueOrgCountService: BanqueOrgCountService,
+      private banqueReportService: BanqueReportService,
       public datepipe: DatePipe
   ) {
       this.YNOptions = enmYn;
@@ -146,18 +146,18 @@ export class AuditReportComponent implements OnInit {
                     });
             this.nbOfOrganisations = 0;
             this.nbOfFeadOrganisations = 0;
-            this.banqueOrgCountService.getOrgCountReport(this.authService.accessToken,false)
+            this.banqueReportService.getOrgCountReport(this.authService.accessToken,false)
                 .subscribe((banqueOrgCounts) => {
                         console.log('BanqueOrgCounts now loaded:', banqueOrgCounts);
                         this.banqueOrgCounts = banqueOrgCounts;
-                        this.banqueOrgCounts.forEach(item => this.nbOfOrganisations += item.orgCount);
+                        this.banqueOrgCounts.forEach(item => this.nbOfOrganisations += item.count);
                     });
-            this.banqueOrgCountService.getOrgCountReport(this.authService.accessToken,true)
+            this.banqueReportService.getOrgCountReport(this.authService.accessToken,true)
                 .pipe(
                     tap((banqueOrgCounts) => {
                         console.log('BanqueOrgFeadCounts now loaded:', banqueOrgCounts);
                         this.banqueOrgFeadCounts = banqueOrgCounts;
-                        this.banqueOrgFeadCounts.forEach(item => this.nbOfFeadOrganisations += item.orgCount);
+                        this.banqueOrgFeadCounts.forEach(item => this.nbOfFeadOrganisations += item.count);
 
                     })
                 ).subscribe();
@@ -215,7 +215,7 @@ export class AuditReportComponent implements OnInit {
                  }
                  selectedBanqueOrgCounts.map((item) => {
                      reportLabels.push(item.bankShortName);
-                     reportDataSets[0].data.push(item.orgCount);
+                     reportDataSets[0].data.push(item.count);
                      reportDataSets[1].data.push(0);
 
 

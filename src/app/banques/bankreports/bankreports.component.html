@@ -9,4 +9,10 @@
             <p-chart type="bar" [data]="chartDataBeneficiaryByAge" [options]="stackedOptions"></p-chart>
         </div>
     </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="chartDataOrgCount" class="p-field p-col-12 p-md-4 card">
+            <h3>{{ titleOrganisations }}</h3>
+            <p-chart type="pie" [data]="chartDataOrgCount" [options]="pieOptions"></p-chart>
+        </div>
+    </div>
 </p-panel>
