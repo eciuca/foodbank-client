@@ -30,7 +30,13 @@ import {BanqProgsDataService} from './services/banqprogs-data.service';
 import {AccordionModule} from 'primeng/accordion';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputNumberModule} from 'primeng/inputnumber';
+import { BankreportsComponent } from './bankreports/bankreports.component';
+import {ChartModule} from 'primeng/chart';
 const routes: Routes = [
+    {
+        path: 'bankreports',
+        component: BankreportsComponent
+    },
     {
         path: 'banqprogs/',
         component: BanqprogsComponent
@@ -55,7 +61,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [BanquesComponent, BanqueComponent, BanqprogComponent, BanqprogsComponent],
+  declarations: [BanquesComponent, BanqueComponent, BanqprogComponent, BanqprogsComponent, BankreportsComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -73,7 +79,8 @@ const routes: Routes = [
         ToastModule,
         AccordionModule,
         InputSwitchModule,
-        InputNumberModule
+        InputNumberModule,
+        ChartModule
     ],
   providers: [
     BanquesDataService,

@@ -1,0 +1,12 @@
+<p-panel >
+    <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="chartDataBeneficiaryByFamily" class="p-field p-col-12 p-md-6 card">
+            <h3>{{ titleBenefiariesByFamily }}</h3>
+            <p-chart type="bar" [data]="chartDataBeneficiaryByFamily" [options]="basicOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataBeneficiaryByAge" class="p-field p-col-12 p-md-6 card">
+            <h3>{{ titleBenefiariesByAge }}</h3>
+            <p-chart type="bar" [data]="chartDataBeneficiaryByAge" [options]="stackedOptions"></p-chart>
+        </div>
+    </div>
+</p-panel>
