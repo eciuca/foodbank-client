@@ -1,5 +1,19 @@
 <p-panel >
     <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="chartDataOrgCount" class="p-field p-col-12 p-md-4 card">
+            <h3>{{ titleOrganisations }}</h3>
+            <p-chart type="pie" [data]="chartDataOrgCount" [options]="pieOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataMembreCount" class="p-field p-col-12 p-md-4 card">
+            <h3>{{ titleMembres }}</h3>
+            <p-chart type="pie" [data]="chartDataMembreCount" [options]="pieOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataUserCount" class="p-field p-col-12 p-md-4 card">
+            <h3>{{ titleUsers }}</h3>
+            <p-chart type="pie" [data]="chartDataUserCount" [options]="pieOptions"></p-chart>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
         <div *ngIf="chartDataBeneficiaryByFamily" class="p-field p-col-12 p-md-6 card">
             <h3>{{ titleBenefiariesByFamily }}</h3>
             <p-chart type="bar" [data]="chartDataBeneficiaryByFamily" [options]="basicOptions"></p-chart>
@@ -7,12 +21,6 @@
         <div *ngIf="chartDataBeneficiaryByAge" class="p-field p-col-12 p-md-6 card">
             <h3>{{ titleBenefiariesByAge }}</h3>
             <p-chart type="bar" [data]="chartDataBeneficiaryByAge" [options]="stackedOptions"></p-chart>
-        </div>
-    </div>
-    <div class="p-fluid p-formgrid p-grid">
-        <div *ngIf="chartDataOrgCount" class="p-field p-col-12 p-md-4 card">
-            <h3>{{ titleOrganisations }}</h3>
-            <p-chart type="pie" [data]="chartDataOrgCount" [options]="pieOptions"></p-chart>
         </div>
     </div>
 </p-panel>

@@ -406,7 +406,7 @@ export class AppComponent implements OnInit {
             }
             */
         // handle  login(s) items
-        if (['Admin_Banq','Admin_FBBA','admin'].includes(authState.user.rights)) {
+        if (['Admin_Banq','Admin_FBBA','Bank_FBBA','admin'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {
                     label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',

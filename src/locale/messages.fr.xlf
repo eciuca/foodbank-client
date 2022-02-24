@@ -651,11 +651,27 @@
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatOrganisations" datatype="html">
-        <source>Organisation Counts by Bank</source>
-        <target>Nombre d'organisations par banque</target>
+        <source>Organisation Counts by Bank - total Organisations: <x id="PH" equiv-text="totalCount"/></source>
+        <target>Nombre d'organisations par banque - nombre total d'organisations : <x id="PH" equiv-text="totalCount"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MembreStatMembres" datatype="html">
+        <source>Members Counts by Bank - total Members: <x id="PH" equiv-text="totalCount"/></source>
+        <target>Nombre de membres par banque - nombre total de membres : <x id="PH" equiv-text="totalCount"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
+          <context context-type="linenumber">174</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="UserStatUsers" datatype="html">
+        <source>Users Counts by Bank - total Users: <x id="PH" equiv-text="totalCount"/></source>
+        <target>Nombre d'utilisateurs par banque - nombre total d'utilisateurs : <x id="PH" equiv-text="totalCount"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
+          <context context-type="linenumber">210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatFamilies" datatype="html">
@@ -663,7 +679,7 @@
         <target>Familles</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">227</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatPersons" datatype="html">
@@ -671,7 +687,7 @@
         <target>Personnes</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">233</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatInfants" datatype="html">
@@ -679,7 +695,7 @@
         <target>Nourrissons (0-6 mois)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">242</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBabies" datatype="html">
@@ -687,7 +703,7 @@
         <target>Bébés (6-24 mois)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">248</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatChildren" datatype="html">
@@ -695,7 +711,7 @@
         <target>Enfants (2-14 ans)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">254</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatTeenagers" datatype="html">
@@ -703,7 +719,7 @@
         <target>Adolescents (14-18 ans)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">260</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatYoungAdults" datatype="html">
@@ -711,7 +727,7 @@
         <target>Jeunes adultes (18-24 ans)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">266</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgSeniors" datatype="html">
@@ -719,7 +735,7 @@
         <target>Séniors (&gt; 65 ans)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">272</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefByFamily" datatype="html">
@@ -727,7 +743,7 @@
         <target>Statistiques des bénéficiaires par famille</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">227</context>
+          <context context-type="linenumber">307</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefByAge" datatype="html">
@@ -735,7 +751,7 @@
         <target>Statistiques des bénéficiaires par groupe d'âge</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">233</context>
+          <context context-type="linenumber">313</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankBasic" datatype="html">
