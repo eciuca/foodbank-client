@@ -6335,11 +6335,11 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentMemberName" datatype="html">
-        <source>User Name '<x id="PH" equiv-text="userName"/>' differs from Member Name '<x id="PH_1" equiv-text="memberFullname"/>'</source>
-        <target>Le nom d'utilisateur '<x id="PH" equiv-text="userName"/>' diffère du nom du collaborateur '<x id="PH_1" equiv-text="memberFullname"/>'</target>
+        <source>User Name '<x id="PH" equiv-text="user.userName"/>' differs from Member Name '<x id="PH_1" equiv-text="user.membreNom"/> <x id="PH_2" equiv-text="user.membrePrenom"/>'</source>
+        <target>Le nom d'utilisateur '<x id="PH" equiv-text="user.userName"/>' diffère du nom du collaborateur '<x id="PH_1" equiv-text="user.membreNom"/> <x id="PH_2" equiv-text="user.membrePrenom"/>'</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">483</context>
+          <context context-type="linenumber">482</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserOK" datatype="html">
@@ -6347,7 +6347,7 @@
         <target>Cliquez ici pour afficher ou modifier les détails de l'utilisateur</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">486</context>
+          <context context-type="linenumber">485</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberEmailSorted">

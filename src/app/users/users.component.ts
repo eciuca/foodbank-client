@@ -472,15 +472,14 @@ export class UsersComponent implements OnInit {
 
     generateToolTipMessageForUserAnomalies (user:User) {
       let message:string = '';
-        const memberFullname = (user.membreNom + ' ' + user.membrePrenom).trim().replace(/[^a-zA-Z0-9] /g, '');
-        const userName = user.userName.trim().replace(/[^a-zA-Z0-9] /g, '');
+        const memberFullname = (user.membreNom + ' ' + user.membrePrenom).trim().replace( /[^0-9a-z]/gi , '');
+        const userName = user.userName.trim().replace(/[^0-9a-z]/gi , '');
       if (!user.membreNom) {
           message = $localize`:@@ToolTipUserAnomalyMissingMember:No Member Assigned to User`;
           return message;
       }
         if (userName != memberFullname) {
-            console.log(`User Name ${user.userName} differs from Member Name`,user);
-            message = $localize`:@@ToolTipUserAnomalyDifferentMemberName:User Name '${userName}' differs from Member Name '${memberFullname}'`;
+            message = $localize`:@@ToolTipUserAnomalyDifferentMemberName:User Name '${user.userName}' differs from Member Name '${user.membreNom} ${user.membrePrenom}'`;
             return message;
         }
         message = $localize`:@@ToolTipUserOK:Click here to view or change user details`;
@@ -488,8 +487,8 @@ export class UsersComponent implements OnInit {
     }
     hasUserAnomalies(user:User) {
         if (!user.membreNom) return true;
-        const memberFullname = (user.membreNom + ' ' + user.membrePrenom).trim().replace(/[^a-zA-Z0-9] /g, '');
-        const userName = user.userName.trim().replace(/[^a-zA-Z0-9] /g, '');
+        const memberFullname = (user.membreNom + ' ' + user.membrePrenom).trim().replace(/[^0-9a-z]/gi , '');
+        const userName = user.userName.trim().replace(/[^0-9a-z]/gi, '');
         if (userName != memberFullname) return true;
         return false;
     }
