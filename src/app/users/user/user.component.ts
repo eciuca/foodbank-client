@@ -276,6 +276,7 @@ export class UserComponent implements OnInit {
   save(oldUser: User, userForm: User) {
     const modifiedUser = Object.assign({}, oldUser, userForm);
       modifiedUser.lienBat = this.selectedMembre.batId;
+      this.updateUserInfoFromMember( modifiedUser,this.selectedMembre);
       if (!modifiedUser.hasOwnProperty('isNew')) {
           console.log('Updating User with content:', modifiedUser);
           this.usersService.update(modifiedUser)
@@ -302,24 +303,7 @@ export class UserComponent implements OnInit {
               .subscribe(
                   membre => {
                       if (membre !== null) {
-                          modifiedUser.userName = membre.nom + ' ' + membre.prenom;
-                          modifiedUser.email = membre.batmail;
-                          switch (membre.langue) {
-                              case 1:
-                                  modifiedUser.idLanguage = 'fr';
-                                  break;
-                              case 2:
-                                  modifiedUser.idLanguage = 'nl';
-                                  break;
-                              case 3:
-                                  modifiedUser.idLanguage = 'en';
-                                  break;
-                              case 4:
-                                  modifiedUser.idLanguage = 'de';
-                                  break;
-                              default:
-                                  modifiedUser.idLanguage = '??';
-                          }
+                          this.updateUserInfoFromMember( modifiedUser,membre);
                           if (  modifiedUser.rights === '') { modifiedUser.rights = this.rights[0].value; } // dropdown box was not touched
 
                           console.log('Creating User with content:', modifiedUser);
@@ -373,6 +357,27 @@ export class UserComponent implements OnInit {
             console.log('Form is not dirty, closing');
             this.onUserQuit.emit();
         }
+    }
+    updateUserInfoFromMember(user:User,membre:Membre) {
+        user.userName = membre.nom + ' ' + membre.prenom;
+        user.email = membre.batmail;
+        switch (membre.langue) {
+            case 1:
+                user.idLanguage = 'fr';
+                break;
+            case 2:
+                user.idLanguage = 'nl';
+                break;
+            case 3:
+                user.idLanguage = 'en';
+                break;
+            case 4:
+                user.idLanguage = 'de';
+                break;
+            default:
+                user.idLanguage = '??';
+        }
+
     }
     filterMembre(event ) {
         const  queryMemberParms = {...this.filterMemberBase};

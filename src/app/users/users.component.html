@@ -8,11 +8,16 @@
                     <div class="p-field p-col-12 p-md-6">
                         {{ getTitle() }}
                     </div>
-                    <div class="p-field p-col-12 p-md-2">
+                    <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@ShowArchived" for="archived">Show Archived?</label>
                         <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                     </div>
-                    <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
+                    <div *ngIf="booIsAdmin" class="p-field p-col-12 p-md-3">
+                        <label i18n="@@ShowAnomalies" for="anomalies">Show Anomalies?</label>
+                        <p-dropdown [ngModel]="anomalyFilter" id="anomalies" [options]="anomaliesOptions" (onChange)="changeAnomaliesFilter($event.value)" placeholder="Any" [showClear]="true">
+                        </p-dropdown>
+                    </div>
+                    <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-12">
                         <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                          (onSelect)="filterOrganisationUsers($event.idDis);"
                                          [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">
@@ -39,12 +44,12 @@
             <tr>
                 <th *ngIf="bankOptions" i18n="@@BankNameShortSorted" pSortableColumn="bankShortName">Bank<p-sortIcon field="bankShortName"></p-sortIcon></th>
                 <th colspan="2" i18n="@@UserLoginSorted" pSortableColumn="idUser">Login<p-sortIcon field="idUser"></p-sortIcon></th>
-                <th colspan="2" i18n="@@MemberNameSorted" pSortableColumn="membreNom">Name<p-sortIcon field="membreNom"></p-sortIcon></th>
+                <th colspan="2" i18n="@@UserNameSorted" pSortableColumn="userName">Name<p-sortIcon field="userName"></p-sortIcon></th>
                 <th colspan="2" i18n="@@Organisation"  *ngIf="booShowOrganisations" >Organisation</th>
-                <th i18n="@@MemberLanguageSorted" pSortableColumn="membreLangue">Language<p-sortIcon field="membreLangue"></p-sortIcon></th>
-                <th colspan="2" i18n="@@MemberEmailSorted" pSortableColumn="membreEmail">E-Mail<p-sortIcon field="membreEmail"></p-sortIcon></th>
+                <th i18n="@@UserLanguageSorted" pSortableColumn="idLanguage">Language<p-sortIcon field="idLanguage"></p-sortIcon></th>
+                <th colspan="2" i18n="@@UserEmailSorted" pSortableColumn="email">E-Mail<p-sortIcon field="email"></p-sortIcon></th>
                 <th i18n="@@RightsSorted" pSortableColumn="rights" >Role<p-sortIcon field="rights"></p-sortIcon></th>
-                <th i18n="@@NbLoginsSorted" pSortableColumn="nbLogins" >Logins<p-sortIcon field="nbLogins"></p-sortIcon></th>
+                <th pTooltip="Nb Of Logins since 2021" i18n="@@NbLoginsSorted" pSortableColumn="nbLogins" >Logins<p-sortIcon field="nbLogins"></p-sortIcon></th>
             </tr>
             <tr>
                 <th *ngIf="bankOptions">
@@ -59,31 +64,25 @@
                     <p-columnFilter type="text" field="idUser" matchMode="contains" [showMenu]="false" ></p-columnFilter>
                 </th>
                 <th colspan="2">
-                    <p-columnFilter type="text" field="membreNom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+                    <p-columnFilter type="text" field="userName" matchMode="contains" [showMenu]="false" ></p-columnFilter>
                 </th>
                 <th colspan="2" *ngIf="booShowOrganisations">
                 </th>
                 <th>
-                    <p-columnFilter field="membreLangue" matchMode="equals" [showMenu]="false">
+                    <p-columnFilter field="idLanguage" matchMode="equals" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-dropdown [ngModel]="value" [options]="languageOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                                <ng-template let-option pTemplate="item">
-                                    <span>{{option.label}}</span>
-                                </ng-template>
                             </p-dropdown>
                         </ng-template>
                     </p-columnFilter>
                 </th>
                 <th colspan="2">
-                    <p-columnFilter type="text" field="membreEmail" matchMode="contains" [showMenu]="false"></p-columnFilter>
+                    <p-columnFilter type="text" field="email" matchMode="contains" [showMenu]="false"></p-columnFilter>
                 </th>
                 <th>
                     <p-columnFilter field="rights" matchMode="equals" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-dropdown [ngModel]="value" [options]="rightOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                                <ng-template let-option pTemplate="item">
-                                    <span>{{option.label}}</span>
-                                </ng-template>
                             </p-dropdown>
                         </ng-template>
                     </p-columnFilter>
@@ -99,29 +98,29 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>
-            <tr (click)="handleSelect(user)">
+            <tr [ngStyle]="hasUserAnomalies(user) && {'background-color': 'yellow'}" pTooltip="{{generateToolTipMessageForUserAnomalies(user)}}" (click)="handleSelect(user)">
                 <td *ngIf="bankOptions">
                     {{user.idCompany}}
                 </td>
                 <td colspan="2">
-                    {{ user.idUser }}
+                    {{ user.idUser}}
                 </td>
                 <td colspan="2">
-                   {{ getuserFullName(user)}}
+                   {{ user.userName}}
                 </td>
                 <td colspan="2" *ngIf="booShowOrganisations">
                     <div *ngIf="user.idOrg > 0">
-                        {{ user.idOrg }} {{ user.societe }}
+                        {{user.idOrg }} {{ user.societe }}
                     </div>
                 </td>
                 <td>
-                    {{ labelLanguage(user.membreLangue) }}
+                    {{user.idLanguage}}
                 </td>
                 <td colspan="2">
-                    {{user.membreEmail}}
+                    {{user.email}}
                 </td>
                 <td>
-                    {{ labelRights(user.rights )}}
+                    {{labelRights(user.rights)}}
                 </td>
                 <td>
                     {{ user.nbLogins }}

@@ -30,6 +30,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import { UsersRightsComponent } from './users-rights/users-rights.component';
 import {BanquesDataService} from '../banques/services/banques-data.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
+import {TooltipModule} from 'primeng/tooltip';
 
 const routes: Routes = [
   { path: '',
@@ -63,6 +64,7 @@ const routes: Routes = [
         AutoCompleteModule,
         ToastModule,
         CheckboxModule,
+        TooltipModule,
     ],
   providers: [
         UsersDataService,

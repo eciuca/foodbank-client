@@ -8,7 +8,7 @@ import {globalAuthState, isLoggedIn} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
-import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguage, enmUserRoles, enmYn} from '../shared/enums';
+import {enmUserRolesAsso, enmUserRolesBankAsso, enmUserRoles, enmYn, enmLanguageLegacy} from '../shared/enums';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
@@ -35,6 +35,7 @@ export class UsersComponent implements OnInit {
   loading: boolean;
   filterBase: any;
   booShowArchived: boolean;
+  anomaliesOptions: any[];
   displayDialog: boolean;
   booCanCreate: boolean;
   rightOptions: any[];
@@ -56,6 +57,8 @@ export class UsersComponent implements OnInit {
     YNOptions:  any[];
     idOrg: number;
     orgName: string;
+    anomalyFilter: any;
+
   constructor(private userService: UserEntityService,
               private membreService: MembreEntityService,
               private banqueService: BanqueEntityService,
@@ -68,8 +71,13 @@ export class UsersComponent implements OnInit {
   ) {
       this.booCanCreate = false;
       this.booShowArchived = false;
+      this.anomaliesOptions = [
+          {label: ' ', value: null },
+          {label: $localize`:@@UserAnomalyNoMember:User is not associated with a Member`, value: '1'},
+          {label: $localize`:@@UserAnomalyWrongUserName:User Name differs from Member Name`, value: '2'}
+      ];
       this.rightOptions = enmUserRolesBankAsso;
-      this.languageOptions = enmLanguage;
+      this.languageOptions = enmLanguageLegacy;
       this.bankid = 0;
       this.bankName = '';
       this.bankShortName = '';
@@ -125,7 +133,7 @@ export class UsersComponent implements OnInit {
                     case 'Bank':
                     case 'Admin_Banq':
                         this.booShowOrganisations = true;
-                        this.filterBase = {'lienBanque': authState.banque.bankId};
+                        this.filterBase = {'idCompany': authState.banque.bankShortName};
                         this.rightOptions = enmUserRolesBankAsso;
                         if (authState.user.rights === 'Admin_Banq') {
                             this.booCanCreate = true;
@@ -252,12 +260,15 @@ export class UsersComponent implements OnInit {
             }  else {
                 queryParms['actif'] = '1';
             }
+            if (this.anomalyFilter ) {
+                queryParms['hasAnomalies'] = this.anomalyFilter;
+            }
             if (event.filters) {
                 if (event.filters.idUser && event.filters.idUser.value) {
                     queryParms['idUser'] =  event.filters.idUser.value;
                 }
-                if (event.filters.membreNom && event.filters.membreNom.value) {
-                    queryParms['membreNom'] = event.filters.membreNom.value;
+                if (event.filters.userName && event.filters.userName.value) {
+                    queryParms['userName'] = event.filters.userName.value;
                 }
                 if (event.filters.membreLangue && event.filters.membreLangue.value) {
                         queryParms['membreLangue'] = event.filters.membreLangue.value;
@@ -272,9 +283,9 @@ export class UsersComponent implements OnInit {
                     queryParms['hasLogins'] = event.filters.hasLogins.value;
                 }
                 if (event.filters.bankId && event.filters.bankId.value) {
-                    queryParms['lienBanque'] = event.filters.bankId.value;
                     this.filteredBankId= event.filters.bankId.value;
                     this.filteredBankShortName = this.bankOptions.find(obj => obj.value === this.filteredBankId).label;
+                    queryParms['idCompany'] =this.filteredBankShortName
                     console.log('CurrentFilteredBankIdAndShortName',  this.filteredBankId,this.filteredBankShortName,this.bankOptions);
                 } else {
                     this.filteredBankId = null;
@@ -381,6 +392,22 @@ export class UsersComponent implements OnInit {
         }
         this.loadPageSubject$.next(latestQueryParams);
     }
+    changeAnomaliesFilter(value: any) {
+       this.anomalyFilter = value;
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest Query Parms', latestQueryParams);
+        // when we switch from active to archived list and vice versa , we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if (this.anomalyFilter ) {
+            latestQueryParams['hasAnomalies'] = this.anomalyFilter;
+        } else {
+            if (latestQueryParams.hasOwnProperty('hasAnomalies')) {
+                delete latestQueryParams['hasAnomalies'];
+            }
+        }
+        this.loadPageSubject$.next(latestQueryParams);
+    }
     getTitle(): string {
         if ( this.depotName) {
             if (this.booShowArchived) {
@@ -422,8 +449,7 @@ export class UsersComponent implements OnInit {
                     cleanedItem[$localize`:@@Bank:Bank`] =item.idCompany;
                 }
                 cleanedItem['idUser'] =item.idUser;
-                cleanedItem[$localize`:@@Name:Name`] =item.membreNom;
-                cleanedItem[$localize`:@@FirstName:First Name`] =item.membrePrenom;
+                cleanedItem[$localize`:@@Name:Name`] =item.userName;
                 cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
                 cleanedItem[$localize`:@@Active:Active`] =labelActive(item.actif);
                 cleanedItem[$localize`:@@Language:Language`] =item.idLanguage;
@@ -444,13 +470,31 @@ export class UsersComponent implements OnInit {
         });
     }
 
-
-    getuserFullName(user: User) {
-        if (user.idCompany === user.membreBankShortname) {
-            return user.membreNom + ' ' + user.membrePrenom;
-        } else {
-            return user.membreNom + ' ' + user.membrePrenom + ' ' + user.membreBankShortname;
-
+    generateToolTipMessageForUserAnomalies (user:User) {
+      let message:string = '';
+        const memberFullname = (user.membreNom + ' ' + user.membrePrenom).trim().replace(/[^a-zA-Z0-9] /g, '');
+        const userName = user.userName.trim().replace(/[^a-zA-Z0-9] /g, '');
+      if (!user.membreNom) {
+          message = $localize`:@@ToolTipUserAnomalyMissingMember:No Member Assigned to User`;
+          return message;
+      }
+        if (userName != memberFullname) {
+            console.log(`User Name ${user.userName} differs from Member Name`,user);
+            message = $localize`:@@ToolTipUserAnomalyDifferentMemberName:User Name '${userName}' differs from Member Name '${memberFullname}'`;
+            return message;
         }
+        message = $localize`:@@ToolTipUserOK:Click here to view or change user details`;
+      return message;
     }
+    hasUserAnomalies(user:User) {
+        if (!user.membreNom) return true;
+        const memberFullname = (user.membreNom + ' ' + user.membrePrenom).trim().replace(/[^a-zA-Z0-9] /g, '');
+        const userName = user.userName.trim().replace(/[^a-zA-Z0-9] /g, '');
+        if (userName != memberFullname) return true;
+        return false;
+    }
+
+
+
+
 }
