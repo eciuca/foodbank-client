@@ -71,6 +71,7 @@ export interface Membre {
     lienBanque: number;
     societe: string; // calculated field
     bankShortName: string;
+    nbUsers: number;
     totalRecords: number;
     lastVisit: string;
 }
@@ -129,6 +130,7 @@ export class DefaultMembre implements Membre {
     vehTyp: string;
     zip: string;
     lastVisit: string;
+    nbUsers: number;
     constructor() {
         this.actif = true;
         this.address = '';
@@ -170,5 +172,6 @@ export class DefaultMembre implements Membre {
         this.vehTyp = '';
         this.zip = '';
         this.lastVisit = '';
+        this.nbUsers = 0;
     }
 }

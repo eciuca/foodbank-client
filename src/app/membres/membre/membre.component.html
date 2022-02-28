@@ -2,6 +2,10 @@
     <ng-template pTemplate="header">
         {{ getMemberTitle() }}
     </ng-template>
+    <div *ngIf="userIds.length > 0" >
+      <p i18n="@@MemberUsers">Users : {{ userIds }}</p>
+    </div>
+
     <form   #membreForm="ngForm" style="padding: 1em">
         <div class="p-formgroup-inline">
             <button *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event,membre)" i18n-label="@@Delete" label="Delete"></button>

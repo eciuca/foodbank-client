@@ -12,6 +12,9 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
 import {DataServiceError} from '@ngrx/data';
 import {Organisation} from '../../organisations/model/organisation';
+import {UserHttpService} from '../../users/services/user-http.service';
+import {AuthService} from '../../auth/auth.service';
+import {User} from '../../users/model/user';
 
 @Component({
   selector: 'app-membre',
@@ -23,7 +26,7 @@ export class MembreComponent implements OnInit {
     @Input() batId$: Observable<number>;
     @Input() currentFilteredOrg: Organisation;
     @Input() currentFilteredBankId: number;
-    @Input() currentFilteredBankShortName: number;
+    @Input() currentFilteredBankShortName: string;
     @Output() onMembreUpdate = new EventEmitter<Membre>();
     @Output() onMembreCreate = new EventEmitter<Membre>();
     @Output() onMembreDelete = new EventEmitter<Membre>();
@@ -44,8 +47,11 @@ export class MembreComponent implements OnInit {
     orgName: string;
     depotName: string;
     isAdmin: boolean;
+    userIds: string;
     constructor(
       private membresService: MembreEntityService,
+      private userHttpService: UserHttpService,
+      private authService: AuthService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
@@ -66,6 +72,7 @@ export class MembreComponent implements OnInit {
       this.depotName = '';
       this.booIsOrganisation = false;
       this.title = '';
+      this.userIds = '';
   }
 
   ngOnInit(): void {
@@ -93,6 +100,7 @@ export class MembreComponent implements OnInit {
 
           membre$.subscribe(
               membre => {
+                  this.userIds = '';
                   if (membre) {
                       console.log('Existing Membre : ', membre);
                       this.membre = membre;
@@ -101,6 +109,14 @@ export class MembreComponent implements OnInit {
                       } else {
 
                           this.title = $localize`:@@BankMemberExisting:Member for bank ${membre.bankShortName} Updated On ${ membre.lastVisit}`;
+                      }
+                      if (membre.nbUsers > 0 ) {
+                          this.userHttpService.getUserReport(this.authService.accessToken, null, null, membre.batId).subscribe(
+                              (users: User[]) => {
+                                  users.map((user) => {
+                                      this.userIds += user.idUser + ' ';
+                                  })
+                              });
                       }
                   } else {
                       this.membre = new DefaultMembre();

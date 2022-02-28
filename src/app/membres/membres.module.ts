@@ -26,6 +26,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {CheckboxModule} from 'primeng/checkbox';
 import {BanquesDataService} from '../banques/services/banques-data.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
+import {TooltipModule} from 'primeng/tooltip';
 
 const routes: Routes = [
   { path: '',
@@ -54,7 +55,8 @@ const routes: Routes = [
         ToastModule,
         AutoCompleteModule,
         InputSwitchModule,
-        CheckboxModule
+        CheckboxModule,
+        TooltipModule
     ],
   providers: [
     MembresDataService,

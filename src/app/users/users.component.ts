@@ -74,7 +74,9 @@ export class UsersComponent implements OnInit {
       this.anomaliesOptions = [
           {label: ' ', value: null },
           {label: $localize`:@@UserAnomalyNoMember:User is not associated with a Member`, value: '1'},
-          {label: $localize`:@@UserAnomalyWrongUserName:User Name differs from Member Name`, value: '2'}
+          {label: $localize`:@@UserAnomalyWrongUserName:User Name differs from Member Name`, value: '2'},
+          {label: $localize`:@@UserAnomalyWrongUserEmail:User Email differs from Member Email`, value: '3'},
+          {label: $localize`:@@UserAnomalyDifferentBank:User Bank differs from Member Bank`, value: '4'}
       ];
       this.rightOptions = enmUserRolesBankAsso;
       this.languageOptions = enmLanguageLegacy;
@@ -472,24 +474,40 @@ export class UsersComponent implements OnInit {
 
     generateToolTipMessageForUserAnomalies (user:User) {
       let message:string = '';
-        const memberFullname = (user.membreNom + ' ' + user.membrePrenom).trim().replace( /[^0-9a-z]/gi , '');
-        const userName = user.userName.trim().replace(/[^0-9a-z]/gi , '');
+
       if (!user.membreNom) {
           message = $localize`:@@ToolTipUserAnomalyMissingMember:No Member Assigned to User`;
           return message;
       }
-        if (userName != memberFullname) {
-            message = $localize`:@@ToolTipUserAnomalyDifferentMemberName:User Name '${user.userName}' differs from Member Name '${user.membreNom} ${user.membrePrenom}'`;
-            return message;
+        const memberFullname = (user.membreNom + ' ' + user.membrePrenom).trim().replace( /[^0-9a-z]/gi , '');
+        const userName = user.userName.trim().replace(/[^0-9a-z]/gi , '');
+        if (user.userName != (user.membreNom + ' ' + user.membrePrenom)) {
+            if (userName != memberFullname) {
+                message += $localize`:@@ToolTipUserAnomalyDifferentMemberName:User Name '${user.userName}' differs from Member Name '${user.membreNom} ${user.membrePrenom}'. `;
+
+            }
+            else {
+                message += $localize`:@@ToolTipUserAnomalyDifferentMemberNameLight:User Name '${user.userName}' differs from Member Name '${user.membreNom} ${user.membrePrenom}' only by blanks or special characters. `;
+
+            }
         }
-        message = $localize`:@@ToolTipUserOK:Click here to view or change user details`;
+        if (user.email != user.membreEmail) {
+            message += $localize`:@@ToolTipUserAnomalyDifferentMemberEmail:User Email '${user.email}' differs from Member Email '${user.membreEmail}'`;
+        }
+        if (user.idCompany != user.membreBankShortname) {
+            message += $localize`:@@ToolTipUserAnomalyDifferentMemberBank:User Bank '${user.idCompany}' differs from Member Bank '${user.membreBankShortname}'`;
+        }
+        if (message ==='') {
+            message = $localize`:@@ToolTipUserOK:Click here to view or change user details.`;
+        }
       return message;
     }
     hasUserAnomalies(user:User) {
         if (!user.membreNom) return true;
-        const memberFullname = (user.membreNom + ' ' + user.membrePrenom).trim().replace(/[^0-9a-z]/gi , '');
-        const userName = user.userName.trim().replace(/[^0-9a-z]/gi, '');
-        if (userName != memberFullname) return true;
+        if (user.userName != (user.membreNom + ' ' + user.membrePrenom)) return true;
+        if (user.email != user.membreEmail) return true;
+        if (user.idCompany != user.membreBankShortname) return true;
+
         return false;
     }
 
