@@ -41,6 +41,8 @@ export class MembresComponent implements OnInit {
     filteredOrganisationsPrepend: any[];
     booShowOrganisations: boolean;
     booIsAdmin: boolean;
+    anomaliesOptions: any[];
+    anomalyFilter: any;
     bankid: number;
     bankName: string;
     bankShortName: string;
@@ -63,6 +65,12 @@ export class MembresComponent implements OnInit {
     ) {
         this.booCanCreate = false;
         this.booIsAdmin = false;
+        this.anomaliesOptions = [
+            {label: ' ', value: null },
+            {label: $localize`:@@MemberAnomalyNoEmail:Members without emails`, value: '1'},
+            {label: $localize`:@@MemberAnomalyNonUniqueEmail:Members with non-unique emails`, value: '2'},
+            {label: $localize`:@@MemberAnomalyDuplicateNames:Members with duplicate names`, value: '3'},
+        ];
         this.booShowArchived = false;
         this.bankid = 0;
         this.booShowOrganisations = false;
@@ -164,6 +172,9 @@ export class MembresComponent implements OnInit {
         }  else {
             queryParms['actif'] = '1';
         }
+        if (this.anomalyFilter ) {
+            queryParms['hasAnomalies'] = this.anomalyFilter;
+        }
         if (event.filters) {
             if (event.filters.nom && event.filters.nom.value) {
                 queryParms['nom'] = event.filters.nom.value;
@@ -177,6 +188,9 @@ export class MembresComponent implements OnInit {
             if (event.filters.city && event.filters.city.value) {
                 queryParms['city'] = event.filters.city.value;
             }
+            if (event.filters.batmail && event.filters.batmail.value) {
+                queryParms['batmail'] = event.filters.batmail.value;
+            }
             if (event.filters.bankId && event.filters.bankId.value) {
                 queryParms['lienBanque'] = event.filters.bankId.value;
                 this.filteredBankId= event.filters.bankId.value;
@@ -188,6 +202,22 @@ export class MembresComponent implements OnInit {
             }
         }
         this.loadPageSubject$.next(queryParms);
+    }
+    changeAnomaliesFilter(value: any) {
+        this.anomalyFilter = value;
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest Query Parms', latestQueryParams);
+        // when we switch from active to archived list and vice versa , we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if (this.anomalyFilter ) {
+            latestQueryParams['hasAnomalies'] = this.anomalyFilter;
+        } else {
+            if (latestQueryParams.hasOwnProperty('hasAnomalies')) {
+                delete latestQueryParams['hasAnomalies'];
+            }
+        }
+        this.loadPageSubject$.next(latestQueryParams);
     }
     private initializeDependingOnUserRights(authState: AuthState) {
         if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'

@@ -5,19 +5,20 @@
         <ng-template pTemplate="caption">
             <div class="table-header">
                 <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-6">
+                    <div class="p-field p-col-12 p-md-12">
                         {{ getTitle() }}
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
+                    <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@ShowArchived" for="archived">Show Archived?</label>
                         <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                     </div>
-                    <div *ngIf="booIsAdmin" class="p-field p-col-12 p-md-3">
+                    <div *ngIf="booIsAdmin || booCanCreate" class="p-field p-col-12 p-md-2">
                         <label i18n="@@ShowAnomalies" for="anomalies">Show Anomalies?</label>
                         <p-dropdown [ngModel]="anomalyFilter" id="anomalies" [options]="anomaliesOptions" (onChange)="changeAnomaliesFilter($event.value)" placeholder="Any" [showClear]="true">
                         </p-dropdown>
                     </div>
-                    <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-12">
+                    <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
+                        <label i18n="@@FilterOnOrganisations" for="filteredOrganisation">Filter on Organisations?</label>
                         <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                          (onSelect)="filterOrganisationUsers($event.idDis);"
                                          [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">
@@ -28,8 +29,7 @@
                             </ng-template>
                         </p-autoComplete>
                     </div>
-                </div>
-                    <div class="p-fluid p-formgrid p-grid">
+
                     <div *ngIf="booCanCreate || (filteredBankShortName && booIsAdmin)" class="p-field p-col-12 p-md-2">
                         <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddUser" label="Add User"></button>
                     </div>

@@ -13,7 +13,13 @@
                     <label i18n="@@ShowArchived" for="archived">Show Archived?</label>
                     <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                 </div>
+                <div *ngIf="booIsAdmin || booCanCreate" class="p-field p-col-12 p-md-2">
+                    <label i18n="@@ShowAnomalies" for="anomalies">Show Anomalies?</label>
+                    <p-dropdown [ngModel]="anomalyFilter" id="anomalies" [options]="anomaliesOptions" (onChange)="changeAnomaliesFilter($event.value)" placeholder="Any" [showClear]="true">
+                    </p-dropdown>
+                </div>
                 <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
+                    <label i18n="@@FilterOnOrganisations" for="filteredOrganisation">Filter on Organisations?</label>
                     <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                      (onSelect)="filterOrganisationMembers($event.idDis);"
                                      [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">
@@ -41,6 +47,7 @@
             <th i18n="@@AddressSorted"  colspan="2" pSortableColumn="address" >Address<p-sortIcon field="address"></p-sortIcon></th>
             <th i18n="@@ZipCodeSorted" pSortableColumn="zip">Zip Code<p-sortIcon field="zip"></p-sortIcon></th>
             <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
+            <th i18n="@@EmailSorted" pSortableColumn="batmail">Email<p-sortIcon field="batmail"></p-sortIcon></th>
             <th i18n="@@NbUsersSorted" pTooltip="Nb Of Log In User Ids for this member" pSortableColumn="nbUsers">Nb Users<p-sortIcon field="nbUsers"></p-sortIcon></th>
         </tr>
         <tr>
@@ -69,6 +76,9 @@
                 <p-columnFilter type="text" field="city" matchMode="contains" [showMenu]="false"></p-columnFilter>
             </th>
             <th>
+                <p-columnFilter type="text" field="batmail" matchMode="contains" [showMenu]="false"></p-columnFilter>
+            </th>
+            <th>
 
             </th>
         </tr>
@@ -94,6 +104,9 @@
             </td>
             <td>
                 {{membre.city}}
+            </td>
+            <td>
+                {{membre.batmail}}
             </td>
             <td>
                 {{membre.nbUsers}}
