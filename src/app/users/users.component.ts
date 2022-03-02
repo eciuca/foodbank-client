@@ -288,7 +288,7 @@ export class UsersComponent implements OnInit {
                     this.filteredBankId= event.filters.bankId.value;
                     this.filteredBankShortName = this.bankOptions.find(obj => obj.value === this.filteredBankId).label;
                     queryParms['idCompany'] =this.filteredBankShortName
-                    console.log('CurrentFilteredBankIdAndShortName',  this.filteredBankId,this.filteredBankShortName,this.bankOptions);
+                  //  console.log('CurrentFilteredBankIdAndShortName',  this.filteredBankId,this.filteredBankShortName,this.bankOptions);
                 } else {
                     this.filteredBankId = null;
                     this.filteredBankShortName = null;
