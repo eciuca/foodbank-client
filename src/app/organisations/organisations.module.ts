@@ -66,6 +66,7 @@ import { OrgfeadoverviewComponent } from './orgfeadoverview/orgfeadoverview.comp
 import { OrgfeaddetailComponent } from './orgfeadoverview/orgfeaddetail/orgfeaddetail.component';
 import {OrgProgramsDataService} from './services/orgprograms-data.service';
 import {OrgProgramEntityService} from './services/orgprogram-entity.service';
+import {TooltipModule} from 'primeng/tooltip';
 const routes: Routes = [
     {
         path: 'contacts/:idDis',
@@ -147,7 +148,8 @@ const routes: Routes = [
         ChartModule,
         EditorModule,
         FileUploadModule,
-        RadioButtonModule
+        RadioButtonModule,
+        TooltipModule
     ],
   providers: [
         OrganisationsDataService,

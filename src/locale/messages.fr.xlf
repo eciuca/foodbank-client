@@ -685,6 +685,10 @@
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
           <context context-type="linenumber">227</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
+          <context context-type="linenumber">271</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="OrgStatPersons" datatype="html">
         <source>Persons</source>
@@ -692,6 +696,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
           <context context-type="linenumber">233</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
+          <context context-type="linenumber">275</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatInfants" datatype="html">
@@ -701,6 +709,10 @@
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
           <context context-type="linenumber">242</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
+          <context context-type="linenumber">279</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBabies" datatype="html">
         <source>Babies(6-24 months)</source>
@@ -708,6 +720,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
           <context context-type="linenumber">248</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
+          <context context-type="linenumber">283</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatChildren" datatype="html">
@@ -717,6 +733,10 @@
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
           <context context-type="linenumber">254</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
+          <context context-type="linenumber">287</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="OrgStatTeenagers" datatype="html">
         <source>Teenagers(14-18 years)</source>
@@ -724,6 +744,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
           <context context-type="linenumber">260</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
+          <context context-type="linenumber">291</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatYoungAdults" datatype="html">
@@ -733,6 +757,10 @@
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
           <context context-type="linenumber">266</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
+          <context context-type="linenumber">295</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="OrgSeniors" datatype="html">
         <source>Seniors(&gt; 65 years)</source>
@@ -740,6 +768,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
           <context context-type="linenumber">272</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
+          <context context-type="linenumber">299</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefByFamily" datatype="html">
@@ -3966,6 +3998,14 @@
           <context context-type="linenumber">433</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="ToolTipNbOfMemberUsers" datatype="html">
+        <source>Nb Of Log In User Ids for this member</source>
+        <target>Nb d'identifiants de connexion pour ce membre</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
+          <context context-type="linenumber">451</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="prev" datatype="html">
         <source>previous</source>
         <target>précédent</target>
@@ -5234,6 +5274,46 @@
           <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="InfantsSorted" datatype="html">
+        <source>Infants<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nNour&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Nourrissons<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nNour&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BabiesSorted" datatype="html">
+        <source>Babies<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nBebe&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Bébés<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nBebe&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ChildrenSorted" datatype="html">
+        <source>Children<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nEnf&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Enfants<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nEnf&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="YoungAdultsSorted" datatype="html">
+        <source>Young Adults<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;n1824&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Jeunes adultes<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;n1824&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgGestBen" datatype="html">
+        <source>Organisation Manages itself its Beneficiaries</source>
+        <target>L'organisation gère elle-même ses bénéficiaires</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
+          <context context-type="linenumber">267</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="Function" datatype="html">
         <source>Function</source>
         <target>Fonction</target>
@@ -6454,21 +6534,13 @@
           <context context-type="linenumber">501</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="MemberEmailSorted">
-        <source/>
-        <target>E-Mail<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;membreEmail&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
-      </trans-unit>
-      <trans-unit id="MemberLanguageSorted">
-        <source/>
-        <target>Langue<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;membreLangue&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
-      </trans-unit>
-      <trans-unit id="OrganisationActivitiesNonFood">
-        <source/>
-        <target>Activités non alimentaires complémentaires</target>
-      </trans-unit>
-      <trans-unit id="ShowByDate">
-        <source/>
-        <target>Afficher par date ?</target>
+      <trans-unit id="ToolTipNbLogins" datatype="html">
+        <source>Nb Of Logins since 2021</source>
+        <target>Nb de connexions depuis 2021</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">516</context>
+        </context-group>
       </trans-unit>
     </body>
   </file>

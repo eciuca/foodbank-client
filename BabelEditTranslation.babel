@@ -836,6 +836,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>BabiesSorted</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>Bank</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -1803,6 +1824,27 @@
             </concept_node>
             <concept_node>
                 <name>Car</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>ChildrenSorted</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -3969,6 +4011,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>InfantsSorted</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>InformationTechnology</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -4453,48 +4516,6 @@
             </concept_node>
             <concept_node>
                 <name>MemberBirthDate</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>fr-FR</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>nl-NL</language>
-                        <approved>true</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>MemberEmailSorted</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>fr-FR</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>nl-NL</language>
-                        <approved>true</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>MemberLanguageSorted</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -6090,6 +6111,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>OrgGestBen</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>OrgIdSorted</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -7141,27 +7183,6 @@
             </concept_node>
             <concept_node>
                 <name>OrganisationActivities</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>fr-FR</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>nl-NL</language>
-                        <approved>true</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>OrganisationActivitiesNonFood</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -9324,27 +9345,6 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>ShowByDate</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>fr-FR</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>nl-NL</language>
-                        <approved>true</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
                 <name>SocieteSorted</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -9682,6 +9682,48 @@
             </concept_node>
             <concept_node>
                 <name>ToMandatory</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>ToolTipNbLogins</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>ToolTipNbOfMemberUsers</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -10816,6 +10858,27 @@
             </concept_node>
             <concept_node>
                 <name>Yes</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>YoungAdultsSorted</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>

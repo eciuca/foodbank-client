@@ -40,15 +40,15 @@
         <tr>
             <th pSortableColumn="idDis">Id<p-sortIcon field="idDis"></p-sortIcon></th>
             <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
-            <th pSortableColumn="gestBen">Managed<p-sortIcon field="gestBen"></p-sortIcon></th>
-            <th pSortableColumn="nFam">Fam<p-sortIcon field="nFam"></p-sortIcon></th>
-            <th pSortableColumn="nPers">Total<p-sortIcon field="nPers"></p-sortIcon></th>
-            <th pSortableColumn="nNour">Infants<p-sortIcon field="nNour"></p-sortIcon></th>
-            <th pSortableColumn="nBebe">Babies<p-sortIcon field="nBebe"></p-sortIcon></th>
-            <th pSortableColumn="nEnf">Children<p-sortIcon field="nEnf"></p-sortIcon></th>
-            <th pSortableColumn="nAdo">Ados<p-sortIcon field="nAdo"></p-sortIcon></th>
-            <th pSortableColumn="n1824">18-24<p-sortIcon field="n1824"></p-sortIcon></th>
-            <th pSortableColumn="nSen">Seniors<p-sortIcon field="nSen"></p-sortIcon></th>
+            <th pSortableColumn="gestBen" pTooltip="{{generateTooltipGestBen()}}">Managed<p-sortIcon field="gestBen"></p-sortIcon></th>
+            <th pSortableColumn="nFam" pTooltip="{{generateTooltipBenFam()}}">Fam<p-sortIcon field="nFam"></p-sortIcon></th>
+            <th pSortableColumn="nPers" pTooltip="{{generateTooltipBenPers()}}">Pers<p-sortIcon field="nPers"></p-sortIcon></th>
+            <th i18n="@@InfantsSorted" pSortableColumn="nNour" pTooltip="{{generateTooltipBenInfants()}}">Infants<p-sortIcon field="nNour"></p-sortIcon></th>
+            <th i18n="@@BabiesSorted" pSortableColumn="nBebe" pTooltip="{{generateTooltipBenBabies()}}">Babies<p-sortIcon field="nBebe"></p-sortIcon></th>
+            <th i18n="@@ChildrenSorted" pSortableColumn="nEnf" pTooltip="{{generateTooltipBenChildren()}}">Children<p-sortIcon field="nEnf"></p-sortIcon></th>
+            <th pSortableColumn="nAdo" pTooltip="{{generateTooltipBenTeenagers()}}">Teenagers<p-sortIcon field="nAdo"></p-sortIcon></th>
+            <th i18n="@@YoungAdultsSorted"pSortableColumn="n1824" pTooltip="{{generateTooltipBenYoungAdults()}}">Young Adults<p-sortIcon field="n1824"></p-sortIcon></th>
+            <th pSortableColumn="nSen" pTooltip="{{generateTooltipBenSeniors()}}">Seniors<p-sortIcon field="nSen"></p-sortIcon></th>
         </tr>
         <tr>
             <th>

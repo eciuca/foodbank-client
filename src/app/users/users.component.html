@@ -49,7 +49,7 @@
                 <th i18n="@@UserLanguageSorted" pSortableColumn="idLanguage">Language<p-sortIcon field="idLanguage"></p-sortIcon></th>
                 <th colspan="2" i18n="@@UserEmailSorted" pSortableColumn="email">E-Mail<p-sortIcon field="email"></p-sortIcon></th>
                 <th i18n="@@RightsSorted" pSortableColumn="rights" >Role<p-sortIcon field="rights"></p-sortIcon></th>
-                <th  i18n="@@NbLoginsSorted" pTooltip="Nb Of Logins since 2021" pSortableColumn="nbLogins" >Logins<p-sortIcon field="nbLogins"></p-sortIcon></th>
+                <th  i18n="@@NbLoginsSorted"  pTooltip="{{generateLoginTooltip()}}" pSortableColumn="nbLogins" >Logins<p-sortIcon field="nbLogins"></p-sortIcon></th>
             </tr>
             <tr>
                 <th *ngIf="bankOptions">

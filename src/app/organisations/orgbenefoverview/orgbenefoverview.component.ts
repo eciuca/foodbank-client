@@ -262,6 +262,42 @@ export class OrgbenefoverviewComponent implements OnInit {
     }
     this.loadPageSubject$.next(latestQueryParams);
   }
+
+    generateTooltipGestBen() {
+      return $localize`:@@OrgGestBen:Organisation Manages itself its Beneficiaries`;
+    }
+
+  generateTooltipBenFam() {
+    return $localize`:@@OrgStatFamilies:Families`;
+  }
+
+  generateTooltipBenPers() {
+    return $localize`:@@OrgStatPersons:Persons`
+  }
+
+  generateTooltipBenInfants() {
+    return $localize`:@@OrgStatInfants:Infants(0-6 months)`;
+  }
+
+  generateTooltipBenBabies() {
+    return $localize`:@@OrgStatBabies:Babies(6-24 months)`;
+  }
+
+  generateTooltipBenChildren() {
+    return $localize`:@@OrgStatChildren:Children(2-14 years)`;
+  }
+
+  generateTooltipBenTeenagers() {
+    return  $localize`:@@OrgStatTeenagers:Teenagers(14-18 years)`;
+  }
+
+  generateTooltipBenYoungAdults() {
+    return $localize`:@@OrgStatYoungAdults:Young Adults(18-24 years)`;
+  }
+
+  generateTooltipBenSeniors() {
+    return $localize`:@@OrgSeniors:Seniors(> 65 years)`;
+  }
 }
 
 

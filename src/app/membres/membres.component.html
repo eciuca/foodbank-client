@@ -48,7 +48,7 @@
             <th i18n="@@ZipCodeSorted" pSortableColumn="zip">Zip Code<p-sortIcon field="zip"></p-sortIcon></th>
             <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
             <th i18n="@@EmailSorted" pSortableColumn="batmail">Email<p-sortIcon field="batmail"></p-sortIcon></th>
-            <th i18n="@@NbUsersSorted" pTooltip="Nb Of Log In User Ids for this member" pSortableColumn="nbUsers">Nb Users<p-sortIcon field="nbUsers"></p-sortIcon></th>
+            <th i18n="@@NbUsersSorted" pTooltip="{{generateNbOfMemberUsersTooltip()}}"  pSortableColumn="nbUsers">Nb Users<p-sortIcon field="nbUsers"></p-sortIcon></th>
         </tr>
         <tr>
             <th *ngIf="bankOptions">

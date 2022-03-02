@@ -512,6 +512,7 @@ export class UsersComponent implements OnInit {
     }
 
 
-
-
+    generateLoginTooltip() {
+        return $localize`:@@ToolTipNbLogins:Nb Of Logins since 2021`;
+    }
 }

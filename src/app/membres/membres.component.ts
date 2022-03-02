@@ -447,5 +447,8 @@ export class MembresComponent implements OnInit {
     }
 
 
+    generateNbOfMemberUsersTooltip() {
+        return $localize`:@@ToolTipNbOfMemberUsers:Nb Of Log In User Ids for this member`;
+    }
 }
 
