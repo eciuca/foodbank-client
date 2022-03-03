@@ -5871,35 +5871,42 @@
         <source>User Name &apos;<x id="PH" equiv-text="user.userName"/>&apos; differs from Member Name &apos;<x id="PH_1" equiv-text="user.membreNom"/> <x id="PH_2" equiv-text="user.membrePrenom"/>&apos; only by blanks or special characters. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">490</context>
+          <context context-type="linenumber">489</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentMemberEmail" datatype="html">
         <source>User Email &apos;<x id="PH" equiv-text="user.email"/>&apos; differs from Member Email &apos;<x id="PH_1" equiv-text="user.membreEmail"/>&apos;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">495</context>
+          <context context-type="linenumber">493</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentMemberBank" datatype="html">
         <source>User Bank &apos;<x id="PH" equiv-text="user.idCompany"/>&apos; differs from Member Bank &apos;<x id="PH_1" equiv-text="user.membreBankShortname"/>&apos;</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">498</context>
+          <context context-type="linenumber">496</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ToolTipUserAnomalyDifferentLanguage" datatype="html">
+        <source>User Language &apos;<x id="PH" equiv-text="userLanguage"/>&apos; differs from Member Language &apos;<x id="PH_1" equiv-text="memberLanguage"/>&apos;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">503</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserOK" datatype="html">
         <source>Click here to view or change user details.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">501</context>
+          <context context-type="linenumber">507</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipNbLogins" datatype="html">
         <source>Nb Of Logins since 2021</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">516</context>
+          <context context-type="linenumber">526</context>
         </context-group>
       </trans-unit>
     </body>

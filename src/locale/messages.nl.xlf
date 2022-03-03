@@ -6507,7 +6507,7 @@
         <target>Gebruikersnaam '<x id="PH" equiv-text="user.userName"/>' verschilt van de naam van de medewerker '<x id="PH_1" equiv-text="user.membreNom"/> <x id="PH_2" equiv-text="user.membrePrenom"/>' door spaties of speciale tekens.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">490</context>
+          <context context-type="linenumber">489</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentMemberEmail" datatype="html">
@@ -6515,7 +6515,7 @@
         <target>E-mailadres van gebruiker '<x id="PH" equiv-text="user.email"/>' verschilt van e-mailadres van medewerker '<x id="PH_1" equiv-text="user.membreEmail"/>'</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">495</context>
+          <context context-type="linenumber">493</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentMemberBank" datatype="html">
@@ -6523,7 +6523,15 @@
         <target>De bank van de gebruiker  '<x id="PH" equiv-text="user.idCompany"/>' verschilt van de bank van de medewerker '<x id="PH_1" equiv-text="user.membreBankShortname"/>'</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">498</context>
+          <context context-type="linenumber">496</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ToolTipUserAnomalyDifferentLanguage" datatype="html">
+        <source>User Language '<x id="PH" equiv-text="userLanguage"/>' differs from Member Language '<x id="PH_1" equiv-text="memberLanguage"/>'</source>
+        <target>Gebruikerstaal '<x id="PH" equiv-text="userLanguage"/>' verschilt van taal medewerker '<x id="PH_1" equiv-text="memberLanguage"/>'</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.ts</context>
+          <context context-type="linenumber">503</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserOK" datatype="html">
@@ -6531,7 +6539,7 @@
         <target>Klik hier om gebruikersgegevens te bekijken of te wijzigen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">501</context>
+          <context context-type="linenumber">507</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipNbLogins" datatype="html">
@@ -6539,7 +6547,7 @@
         <target>Aantal aanmeldingen sinds 2021</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">516</context>
+          <context context-type="linenumber">526</context>
         </context-group>
       </trans-unit>
     </body>

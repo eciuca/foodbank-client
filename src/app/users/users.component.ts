@@ -8,7 +8,7 @@ import {globalAuthState, isLoggedIn} from '../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
-import {enmUserRolesAsso, enmUserRolesBankAsso, enmUserRoles, enmYn, enmLanguageLegacy} from '../shared/enums';
+import {enmUserRolesAsso, enmUserRolesBankAsso, enmUserRoles, enmYn, enmLanguageLegacy, enmLanguage} from '../shared/enums';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
@@ -484,11 +484,9 @@ export class UsersComponent implements OnInit {
         if (user.userName != (user.membreNom + ' ' + user.membrePrenom)) {
             if (userName != memberFullname) {
                 message += $localize`:@@ToolTipUserAnomalyDifferentMemberName:User Name '${user.userName}' differs from Member Name '${user.membreNom} ${user.membrePrenom}'. `;
-
             }
             else {
                 message += $localize`:@@ToolTipUserAnomalyDifferentMemberNameLight:User Name '${user.userName}' differs from Member Name '${user.membreNom} ${user.membrePrenom}' only by blanks or special characters. `;
-
             }
         }
         if (user.email != user.membreEmail) {
@@ -496,6 +494,14 @@ export class UsersComponent implements OnInit {
         }
         if (user.idCompany != user.membreBankShortname) {
             message += $localize`:@@ToolTipUserAnomalyDifferentMemberBank:User Bank '${user.idCompany}' differs from Member Bank '${user.membreBankShortname}'`;
+        }
+        const userLanguageObj  = enmLanguageLegacy.find(obj => obj.value === user.idLanguage);
+        const userLanguage = userLanguageObj ? userLanguageObj.label : 'unknown';
+        const memberLanguageObj  = enmLanguage.find(obj => obj.value === user.membreLangue);
+        const memberLanguage = memberLanguageObj ? memberLanguageObj.label : 'unknown';
+        if (userLanguage != memberLanguage ) {
+            message += $localize`:@@ToolTipUserAnomalyDifferentLanguage:User Language '${userLanguage}' differs from Member Language '${memberLanguage}'`;
+
         }
         if (message ==='') {
             message = $localize`:@@ToolTipUserOK:Click here to view or change user details.`;
@@ -507,7 +513,11 @@ export class UsersComponent implements OnInit {
         if (user.userName != (user.membreNom + ' ' + user.membrePrenom)) return true;
         if (user.email != user.membreEmail) return true;
         if (user.idCompany != user.membreBankShortname) return true;
-
+        const userLanguageObj  = enmLanguageLegacy.find(obj => obj.value === user.idLanguage);
+        const userLanguage = userLanguageObj ? userLanguageObj.label : 'unknown';
+        const memberLanguageObj  = enmLanguage.find(obj => obj.value === user.membreLangue);
+        const memberLanguage = memberLanguageObj ? memberLanguageObj.label : 'unknown';
+        if (userLanguage != memberLanguage ) return true;
         return false;
     }
 
