@@ -185,7 +185,8 @@ export class UsersComponent implements OnInit {
                             .pipe(
                                 tap((banquesEntities) => {
                                     console.log('Banques now loaded:', banquesEntities);
-                                    this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId}));
+                                    const bankOptionsPrepend = [{ 'label': '???','value' : 999 }];
+                                    this.bankOptions = bankOptionsPrepend.concat( banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId})));
                                 })
                             ).subscribe();
                         break;
@@ -503,6 +504,14 @@ export class UsersComponent implements OnInit {
             message += $localize`:@@ToolTipUserAnomalyDifferentLanguage:User Language '${userLanguage}' differs from Member Language '${memberLanguage}'`;
 
         }
+        if (this.bankOptions) {
+            const bankOptionForLienBanque = this.bankOptions.find(obj => obj.value === user.lienBanque);
+            const idCompanyFromLienBanque = bankOptionForLienBanque ? bankOptionForLienBanque.label : 'unknown';
+            if (idCompanyFromLienBanque != user.idCompany) {
+                message += $localize`:@@ToolTipUserAnomalyDifferentLienBanque:lien_banque field in t_user table '${user.lienBanque}' meaning bank ${idCompanyFromLienBanque} differs from User Bank '${user.idCompany}'`;
+
+            }
+        }
         if (message ==='') {
             message = $localize`:@@ToolTipUserOK:Click here to view or change user details.`;
         }
@@ -513,6 +522,11 @@ export class UsersComponent implements OnInit {
         if (user.userName != (user.membreNom + ' ' + user.membrePrenom)) return true;
         if (user.email != user.membreEmail) return true;
         if (user.idCompany != user.membreBankShortname) return true;
+        if (this.bankOptions) {
+            const bankOptionForLienBanque = this.bankOptions.find(obj => obj.value === user.lienBanque);
+            const idCompanyFromLienBanque = bankOptionForLienBanque ? bankOptionForLienBanque.label : 'unknown';
+            if (idCompanyFromLienBanque != user.idCompany) return true;
+        }
         const userLanguageObj  = enmLanguageLegacy.find(obj => obj.value === user.idLanguage);
         const userLanguage = userLanguageObj ? userLanguageObj.label : 'unknown';
         const memberLanguageObj  = enmLanguage.find(obj => obj.value === user.membreLangue);
@@ -520,6 +534,7 @@ export class UsersComponent implements OnInit {
         if (userLanguage != memberLanguage ) return true;
         return false;
     }
+
 
 
     generateLoginTooltip() {

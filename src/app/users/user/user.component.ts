@@ -189,7 +189,7 @@ export class UserComponent implements OnInit {
                   if (authState.user) {
                       this.lienBanque = authState.banque.bankId;
                       this.idCompany = authState.banque.bankShortName;
-                      this.filterMemberBase = {};
+                      this.filterMemberBase = {'actif':1};
                       switch (authState.user.rights) {
                           case 'admin':
                           case 'Admin_FBBA':
@@ -222,9 +222,9 @@ export class UserComponent implements OnInit {
                               if (authState.organisation.depyN === true) {
                                   this.lienDepot = authState.organisation.idDis;
                                   this.depotName = authState.organisation.societe;
-                                  this.filterMemberBase = { 'lienDepot': this.lienDepot};
+                                  this.filterMemberBase['lienDepot'] = this.lienDepot;
                               } else {
-                                  this.filterMemberBase = { 'lienDis': this.idOrg};
+                                  this.filterMemberBase['lienDis'] = this.idOrg;
                               }
                               this.booIsOrganisation = true;
                               this.rights = enmUserRolesAsso;
@@ -276,6 +276,17 @@ export class UserComponent implements OnInit {
   save(oldUser: User, userForm: User) {
     const modifiedUser = Object.assign({}, oldUser, userForm);
       modifiedUser.lienBat = this.selectedMembre.batId;
+      // correct broken db field lienBanqueif needed
+      if (this.currentFilteredBankId && (modifiedUser.lienBanque != this.currentFilteredBankId) ) {
+          console.log(`Admin Correcting User lienBanque from ${modifiedUser.lienBanque} to ${this.currentFilteredBankId} `, modifiedUser);
+          modifiedUser.lienBanque = this.currentFilteredBankId;
+          modifiedUser.idCompany = this.currentFilteredBankShortName;
+      }
+      else if (this.lienBanque && (modifiedUser.lienBanque != this.lienBanque) ) {
+          console.log(`Banq Admin Correcting User lienBanque from ${modifiedUser.lienBanque} to ${this.lienBanque} `, modifiedUser);
+          modifiedUser.lienBanque = this.lienBanque;
+      }
+
       this.updateUserInfoFromMember( modifiedUser,this.selectedMembre);
       if (!modifiedUser.hasOwnProperty('isNew')) {
           console.log('Updating User with content:', modifiedUser);
@@ -361,6 +372,7 @@ export class UserComponent implements OnInit {
     updateUserInfoFromMember(user:User,membre:Membre) {
         user.userName = membre.nom + ' ' + membre.prenom;
         user.email = membre.batmail;
+        user.idCompany =membre.bankShortName;
         switch (membre.langue) {
             case 1:
                 user.idLanguage = 'fr';

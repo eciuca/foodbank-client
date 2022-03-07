@@ -3,8 +3,8 @@
          [paginator]="true" >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            <button *ngIf="booIsAdmin" i18n="@@DepotAdd" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Depot" i18n-label="@@AddDepot"></button>
             <button *ngIf="booIsAdmin" i18n="@@DepotExport" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Depots" i18n-label="@@ExportDepots"></button>
+            <button *ngIf="booIsAdmin" i18n="@@DepotAdd" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Depot" i18n-label="@@AddDepot"></button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">

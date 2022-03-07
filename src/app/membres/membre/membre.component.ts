@@ -15,6 +15,7 @@ import {Organisation} from '../../organisations/model/organisation';
 import {UserHttpService} from '../../users/services/user-http.service';
 import {AuthService} from '../../auth/auth.service';
 import {User} from '../../users/model/user';
+import {OrganisationEntityService} from '../../organisations/services/organisation-entity.service';
 
 @Component({
   selector: 'app-membre',
@@ -50,6 +51,7 @@ export class MembreComponent implements OnInit {
     userIds: string;
     constructor(
       private membresService: MembreEntityService,
+      private organisationsService: OrganisationEntityService,
       private userHttpService: UserHttpService,
       private authService: AuthService,
       private route: ActivatedRoute,
@@ -103,13 +105,30 @@ export class MembreComponent implements OnInit {
                   this.userIds = '';
                   if (membre) {
                       console.log('Existing Membre : ', membre);
-                      this.membre = membre;
+                      if((!membre.bankShortName) && (membre.lienDis > 0)) {
+                          this.organisationsService.getByKey(membre.lienDis).subscribe(
+                              (org: Organisation) => {
+                                  if (org) {
+                                      membre.lienBanque = org.lienBanque;
+                                      membre.bankShortName = org.bankShortName;
+                                      console.log('Correcting membre bank info from org info with content:', membre);
+                                      this.membre = membre; // need to repeat stmt because execution will be asynchronuous
+                                  }
+                                  else {
+                                      this.membre = membre;
+                                  }
+                              });
+                      }
+                      else {
+                          this.membre = membre;
+                      }
                       if (membre.societe) {
                           this.title = $localize`:@@OrgMemberExisting:Member for organisation ${membre.societe} Updated On ${ membre.lastVisit}`;
                       } else {
 
                           this.title = $localize`:@@BankMemberExisting:Member for bank ${membre.bankShortName} Updated On ${ membre.lastVisit}`;
                       }
+
                       if (membre.nbUsers > 0 ) {
                           this.userHttpService.getUserReport(this.authService.accessToken, null, null, membre.batId).subscribe(
                               (users: User[]) => {
@@ -252,7 +271,7 @@ export class MembreComponent implements OnInit {
   save(oldMembre: Membre, membreForm: Membre) {
     const modifiedMembre = Object.assign({}, oldMembre, membreForm);
       if (modifiedMembre.hasOwnProperty('batId')) {
-          console.log('Updating Membre with content:', modifiedMembre);
+
           this.membresService.update(modifiedMembre)
               .subscribe(() => {
                   this.messageService.add({

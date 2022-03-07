@@ -17,7 +17,7 @@
                         </ng-template>
                     </p-dropdown>
                 </div>
-                <div *ngIf="!depotName" class="p-field p-col-12 p-md-2">
+                <div *ngIf="!depotName" class="p-field p-col-12 p-md-4">
                     <label i18n="@@OrgDepot" for="depots">Depot</label>
                     <p-dropdown id ="depots" [options]="depots" (onChange)="filterDepot($event.value)"  >
                         <ng-template let-option pTemplate="item">

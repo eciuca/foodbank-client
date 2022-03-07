@@ -273,7 +273,8 @@ export class MembresComponent implements OnInit {
                         .pipe(
                             tap((banquesEntities) => {
                                 console.log('Banques now loaded:', banquesEntities);
-                                this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId}));
+                                const bankOptionsPrepend = [{ 'label': '???','value' : 999 }];
+                                this.bankOptions = bankOptionsPrepend.concat(banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId})));
                                 console.log('Bank Options are:', this.bankOptions);
                             })
                         ).subscribe();
@@ -446,9 +447,17 @@ export class MembresComponent implements OnInit {
             });
     }
 
-
+    generateNbOfMemberUsers(nbOfUsers) {
+        if(nbOfUsers == 0) {
+            return $localize`:@@None:None`;
+        }
+        if(nbOfUsers == 1) {
+            return $localize`:@@Yes:Yes`;
+        }
+        return  nbOfUsers;
+    }
     generateNbOfMemberUsersTooltip() {
-        return $localize`:@@ToolTipNbOfMemberUsers:Nb Of Log In User Ids for this member`;
+        return $localize`:@@ToolTipNbOfMemberUsers:User Id for this member`;
     }
 }
 

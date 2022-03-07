@@ -232,7 +232,7 @@ export class OrganisationsComponent implements OnInit {
                     queryDepotParms['sortOrder'] = '1';
                     if (this.lienBanque) {
                         this.filterBase['lienBanque'] =this.lienBanque
-                        queryDepotParms['lienBanque'] = this.lienBanque.toString();
+                        queryDepotParms['idCompany'] = this.bankShortName;
                     }
                     queryDepotParms['actif'] = '1';
                     this.depotService.getWithQuery(queryDepotParms)

@@ -5,10 +5,10 @@
     <ng-template pTemplate="caption">
         <div class="table-header">
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-6">
+                <div class="p-field p-col-12 p-md-12">
                     {{ getTitle() }}
                 </div>
-                <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
+                <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-6">
                     <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                      (onSelect)="filterOrganisationUsers($event.idDis);"
                                      [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">
@@ -18,10 +18,6 @@
                             </div>
                         </ng-template>
                     </p-autoComplete>
-                </div>
-
-                <div *ngIf="isUserAdmin" class="p-field p-col-12 p-md-2">
-                    <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddUser" label="Add User"></button>
                 </div>
 
             </div>

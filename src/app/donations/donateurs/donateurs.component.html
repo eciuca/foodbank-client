@@ -4,8 +4,8 @@
 >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Donateur" i18n-label="@@AddDonateur"></button>
             <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Donateurs" i18n-label="@@ExportDonateurs"></button>
+            <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Donateur" i18n-label="@@AddDonateur"></button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">

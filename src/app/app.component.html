@@ -18,10 +18,11 @@
            </div>
         </ng-template>
     </p-overlayPanel>
-   <p-menubar [model]="menuLoggedInItems">
-   </p-menubar>
 </div>
-    <router-outlet></router-outlet>
+<div class="p-fluid p-formgrid p-grid">
+   <p-menubar [model]="menuLoggedInItems" ></p-menubar>
+</div>
+ <router-outlet></router-outlet>
 <p-messages></p-messages>
 <p-toast></p-toast>
 

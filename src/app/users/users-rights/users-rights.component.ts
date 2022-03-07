@@ -142,10 +142,7 @@ export class UsersRightsComponent implements OnInit {
     this.displayDialog = true;
     this.selectedIdUser$.next(user.idUser);
   }
-  showDialogToAdd() {
-    this.selectedIdUser$.next('new');
-    this.displayDialog = true;
-  }
+
   handleUserQuit() {
     this.displayDialog = false;
   }
@@ -157,12 +154,7 @@ export class UsersRightsComponent implements OnInit {
     this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
-  handleUserCreate(createdUser: User) {
-    this.users.push({...createdUser});
-    const latestQueryParams = this.loadPageSubject$.getValue();
-    this.loadPageSubject$.next(latestQueryParams);
-    this.displayDialog = false;
-  }
+
 
   handleUserDeleted(deletedUser) {
     const index = this.users.findIndex(user => user.idUser === deletedUser.idUser);

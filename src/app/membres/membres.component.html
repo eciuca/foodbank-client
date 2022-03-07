@@ -9,16 +9,16 @@
                 <div class="p-field p-col-12 p-md-12">
                     {{ getTitle() }}
                 </div>
-                <div class="p-field p-col-12 p-md-2">
+                <div class="p-field p-col-12 p-md-3">
                     <label i18n="@@ShowArchived" for="archived">Show Archived?</label>
                     <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                 </div>
-                <div *ngIf="booIsAdmin || booCanCreate" class="p-field p-col-12 p-md-2">
+                <div *ngIf="booIsAdmin || booCanCreate" class="p-field p-col-12 p-md-3">
                     <label i18n="@@ShowAnomalies" for="anomalies">Show Anomalies?</label>
                     <p-dropdown [ngModel]="anomalyFilter" id="anomalies" [options]="anomaliesOptions" (onChange)="changeAnomaliesFilter($event.value)" placeholder="Any" [showClear]="true">
                     </p-dropdown>
                 </div>
-                <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-4">
+                <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-5">
                     <label i18n="@@FilterOnOrganisations" for="filteredOrganisation">Filter on Organisations?</label>
                     <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                      (onSelect)="filterOrganisationMembers($event.idDis);"
@@ -30,10 +30,12 @@
                         </ng-template>
                     </p-autoComplete>
                 </div>
-                <div class="p-field p-col-12 p-md-2">
+            </div>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-3">
                 <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Membres" i18n-label="@@ExportMembres"></button>
                 </div>
-                <div *ngIf="booCanCreate || (filteredBankShortName && booIsAdmin)" class="p-field p-col-12 p-md-2">
+                <div *ngIf="booCanCreate || (filteredBankShortName && booIsAdmin)" class="p-field p-col-12 p-md-3">
                     <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddEmployee" label="Add Employee"></button>
                 </div>
             </div>
@@ -48,7 +50,7 @@
             <th i18n="@@ZipCodeSorted" pSortableColumn="zip">Zip Code<p-sortIcon field="zip"></p-sortIcon></th>
             <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
             <th i18n="@@EmailSorted" pSortableColumn="batmail">Email<p-sortIcon field="batmail"></p-sortIcon></th>
-            <th i18n="@@NbUsersSorted" pTooltip="{{generateNbOfMemberUsersTooltip()}}"  pSortableColumn="nbUsers">Nb Users<p-sortIcon field="nbUsers"></p-sortIcon></th>
+            <th i18n="@@NbUsersSorted" pTooltip="{{generateNbOfMemberUsersTooltip()}}"  pSortableColumn="nbUsers">Users<p-sortIcon field="nbUsers"></p-sortIcon></th>
         </tr>
         <tr>
             <th *ngIf="bankOptions">
@@ -109,7 +111,7 @@
                 {{membre.batmail}}
             </td>
             <td>
-                {{membre.nbUsers}}
+                {{generateNbOfMemberUsers(membre.nbUsers)}}
             </td>
         </tr>
     </ng-template>
