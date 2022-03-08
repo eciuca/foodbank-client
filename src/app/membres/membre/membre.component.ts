@@ -5,7 +5,7 @@ import {map, switchMap} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import {DefaultMembre, Membre} from '../model/membre';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmGender, enmLanguage} from '../../shared/enums';
+import {enmGender, enmLanguage, enmLanguageLegacy} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
@@ -40,6 +40,8 @@ export class MembreComponent implements OnInit {
     booCanQuit: boolean;
     genders: any[];
   languages: any[];
+  legacyLanguages: any[];
+  userLanguage: string;
   lienBanque: number;
   lienDis: number;
     lienDepot: number;
@@ -62,6 +64,7 @@ export class MembreComponent implements OnInit {
   ) {
       this.genders =  enmGender;
       this.languages =  enmLanguage;
+      this.legacyLanguages = enmLanguageLegacy;
       this.booCalledFromTable = true;
       this.booCanDelete = false;
       this.booCanSave = false;
@@ -139,6 +142,15 @@ export class MembreComponent implements OnInit {
                       }
                   } else {
                       this.membre = new DefaultMembre();
+                      const userLanguageObj  = enmLanguageLegacy.find(obj => obj.value === this.userLanguage);
+                      if (userLanguageObj) {
+                          const newMemberLanguageObj  = enmLanguage.find(obj => obj.label === userLanguageObj.label);
+                          if (newMemberLanguageObj) {
+                              console.log('Setting new member language to user language', newMemberLanguageObj);
+                              this.membre.langue = newMemberLanguageObj.value;
+                          }
+                      }
+                   
                       console.log('CurrentFilteredBankAndOrg', this.currentFilteredBankShortName,this.currentFilteredOrg);
                       if (this.isAdmin) {
                           // currentFilteredBankId should always be filled in cfr GUI
@@ -193,6 +205,7 @@ export class MembreComponent implements OnInit {
           select(globalAuthState),
           map((authState) => {
               if (authState.user) {
+                  this.userLanguage = authState.user.idLanguage;
                   switch (authState.user.rights) {
                       case 'admin':
                       case 'Admin_FBBA':
