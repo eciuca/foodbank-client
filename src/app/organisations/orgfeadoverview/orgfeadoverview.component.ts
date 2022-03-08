@@ -133,6 +133,9 @@ export class OrgfeadoverviewComponent implements OnInit {
       if (event.filters.societe && event.filters.societe.value) {
         queryParms['societe'] = event.filters.societe.value;
       }
+      if (event.filters.agreed && event.filters.agreed.value != null) {
+        queryParms['agreed'] = event.filters.agreed.value;
+      }
       if (event.filters.birbyN && event.filters.birbyN.value !== null) {
         queryParms['isBirb'] = event.filters.birbyN.value;
       }
@@ -264,6 +267,25 @@ export class OrgfeadoverviewComponent implements OnInit {
       }
     }
     this.loadPageSubject$.next(latestQueryParams);
+  }
+  generateTooltipAgreed() {
+    return $localize`:@@OrgToolTipIsAgreed:Is Organisation Agreed?`;
+  }
+
+  generateTooltipUsesFEAD() {
+    return $localize`:@@OrgToolTipUsesFEAD:Does Organisation Receive FEAD ?`;
+  }
+
+  generateTooltipFEADPersons() {
+    return $localize`:@@OrgToolTipFEADPersons:Nb of Persons Agreed by FEAD`;
+  }
+
+  generateTooltipFEADFromUs() {
+    return $localize`:@@OrgToolTipFEADFromUs:Is FEAD distributed by Food Banks ?`;
+  }
+
+  generateTooltipFEADCode() {
+    return $localize`:@@OrgToolTipFEADCode:FEAD Code of the Organisation`;
   }
 }
 

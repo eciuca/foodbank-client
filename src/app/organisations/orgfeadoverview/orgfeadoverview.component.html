@@ -39,10 +39,11 @@
         <tr>
             <th pSortableColumn="idDis">Id<p-sortIcon field="idDis"></p-sortIcon></th>
             <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
-            <th pSortableColumn="birbyN">Uses Fead<p-sortIcon field="birbyN"></p-sortIcon></th>
-            <th pSortableColumn="nrFead">Fam<p-sortIcon field="nrFead"></p-sortIcon></th>
-            <th pSortableColumn="feadN">Fead by Us?<p-sortIcon field="feadN"></p-sortIcon></th>
-            <th pSortableColumn="birbCode">Fead Code<p-sortIcon field="birbCode"></p-sortIcon></th>
+            <th i18n="@@OrgAgreedSorted" pSortableColumn="agreed" pTooltip="{{generateTooltipAgreed()}}">Agreed<p-sortIcon field="agreed"></p-sortIcon></th>
+            <th pSortableColumn="birbyN" i18n="@@OrgUsesFEADSorted"  pTooltip="{{generateTooltipUsesFEAD()}}">Uses FEAD ?<p-sortIcon field="birbyN"></p-sortIcon></th>
+            <th pSortableColumn="nrFead" i18n="@@OrgEADPersons" pTooltip="{{generateTooltipFEADPersons()}}">Persons<p-sortIcon field="nrFead"></p-sortIcon></th>
+            <th pSortableColumn="feadN" i18n="@@OrgFEADFromUsSorted" pTooltip="{{generateTooltipFEADFromUs()}}" >FEAD from Us?<p-sortIcon field="feadN"></p-sortIcon></th>
+            <th pSortableColumn="birbCode" pTooltip="{{generateTooltipFEADCode()}}">Fead Code<p-sortIcon field="birbCode"></p-sortIcon></th>
         </tr>
         <tr>
             <th>
@@ -50,6 +51,17 @@
             </th>
             <th colspan="2">
                 <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="societe" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="agreed" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
             </th>
             <th>
                 <p-columnFilter field="birbyN" matchMode="equals" [showMenu]="false">
@@ -87,6 +99,9 @@
             </td>
             <td colspan="2">
                 {{ organisation.societe }}
+            </td>
+            <td>
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.agreed, 'false-icon pi-times-circle': !organisation.agreed}"></i>
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.birbyN, 'false-icon pi-times-circle': !organisation.birbyN}"></i>

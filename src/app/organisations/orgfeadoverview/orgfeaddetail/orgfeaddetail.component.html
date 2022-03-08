@@ -11,20 +11,20 @@
         </div>
         <div class="p-fluid p-formgrid p-grid p-col-12">
             <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@OrgUsesFead" for="birbyN">Uses Fead ?</label>
+                <label i18n="@@OrgUsesFEAD" pTooltip="{{generateTooltipUsesFEAD()}}" for="birbyN">Uses FEAD ?</label>
                 <p-inputSwitch id="birbyN" name="birbyN" [ngModel]="organisation.birbyN"></p-inputSwitch>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@OrgFeadFamilies" for="nrFead">Fead Families</label>
+                <label i18n="@@OrgFEADPersons" pTooltip="{{generateTooltipFEADPersons()}}" for="nrFead">Persons</label>
                 <p-inputNumber [ngModel]="organisation.nrFead" id="nrFead" name="nrFead" mode="decimal" [showButtons]="true" inputId="nrFead" [min]="0" >
                 </p-inputNumber>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label for="birbCode">FEAD Code</label>
+                <label for="birbCode" pTooltip="{{generateTooltipFEADCode()}}">FEAD Code</label>
                 <input pInputText id="birbCode" name="birbCode" maxlength="10" [ngModel]="organisation.birbCode" />
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@OrgFeadFromUs" for="feadN">FEAD from us?</label>
+                <label i18n="@@OrgFEADFromUs" pTooltip="{{generateTooltipFEADFromUs()}}" for="feadN">FEAD from Us?</label>
                 <p-inputSwitch id="feadN" name="feadN" [ngModel]="organisation.feadN"></p-inputSwitch>
             </div>
 

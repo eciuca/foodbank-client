@@ -6090,6 +6090,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>OrgEADPersons</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>OrgFBBACategory</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -6111,7 +6132,49 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>OrgFeadFamilies</name>
+                <name>OrgFEADFromUs</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgFEADFromUsSorted</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgFEADPersons</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -7014,6 +7077,111 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>OrgToolTipFEADCode</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgToolTipFEADFromUs</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgToolTipFEADPersons</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgToolTipIsAgreed</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgToolTipUsesFEAD</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>OrgUserExisting</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -7182,7 +7350,28 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>OrgUsesFead</name>
+                <name>OrgUsesFEAD</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgUsesFEADSorted</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
