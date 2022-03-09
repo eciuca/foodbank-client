@@ -203,6 +203,10 @@ export class BeneficiairesComponent implements OnInit {
           this.orgName = authState.organisation.idDis + ' ' + authState.organisation.societe;
           if ( authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
           break;
+        case 'Admin_CPAS':
+          this.filterBase = { 'cp': authState.organisation.cp};
+          this.orgName = authState.organisation.idDis + ' ' + authState.organisation.societe;
+          break;
         default:
       }
 

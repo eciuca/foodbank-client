@@ -232,7 +232,7 @@ export class AppComponent implements OnInit {
                     ]
                 }
             );
-        } else if (['Asso', 'Admin_Asso', 'admin'].includes(authState.user.rights)) {
+        } else if (['Asso', 'Admin_Asso', 'admin','Admin_CPAS'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 // tslint:disable-next-line:max-line-length
                 {label: $localize`:@@menuProfile:My Profile`, icon: 'pi pi-fw pi-user',  routerLink: [`/membres/${authState.user.lienBat}` ]}
@@ -299,7 +299,7 @@ export class AppComponent implements OnInit {
                     ]
                 }
             );
-        } else if ( ['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+        } else if ( ['Asso', 'Admin_Asso','Admin_CPAS'].includes(authState.user.rights)) {
             if (authState.organisation && authState.organisation.depyN === true) {
                 // organisation is depot
                 this.menuLoggedInItems.push(
@@ -314,7 +314,7 @@ export class AppComponent implements OnInit {
         }
        
         // handle members and users
-        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso','admin','Admin_FBBA','Bank_FBBA'].includes(authState.user.rights)) {
+        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso','admin','Admin_FBBA','Bank_FBBA','Admin_CPAS'].includes(authState.user.rights)) {
             const commonSubItems = [
                 {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
                 {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
@@ -337,7 +337,7 @@ export class AppComponent implements OnInit {
             );
         }
           // Add Beneficiaries
-        if (( authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
+        if (['Admin_Banq', 'Admin_CPAS'].includes(authState.user.rights) || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
                     this.menuLoggedInItems.push(
                         {
                             label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',
@@ -447,7 +447,8 @@ export class AppComponent implements OnInit {
         );
 
         } else {
-            if (authState.user.rights === 'Admin_FEAD' || authState.user.rights === 'Admin_EXT' ||authState.user.gestFead) {
+
+            if (['Admin_Asso','Admin_FEAD','Admin_EXT','Admin_CPAS'].includes(authState.user.rights) ||authState.user.gestFead) {
                 this.menuLoggedInItems.push(
                     {
                         label: $localize`:@@menuFEADApplication:Application` ,
