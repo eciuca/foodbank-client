@@ -424,6 +424,13 @@ export class OrganisationsComponent implements OnInit {
                 }
             });
     }
+    generateTooltipAgreed() {
+        return $localize`:@@OrgToolTipIsAgreed:Is Organisation Agreed?`;
+    }
+
+    generateTooltipUsesFEAD() {
+        return $localize`:@@OrgToolTipUsesFEAD:Does Organisation Receive FEAD ?`;
+    }
 
 }
 

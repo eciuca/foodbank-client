@@ -36,6 +36,7 @@ export class OrgfeadoverviewComponent implements OnInit {
   depots: any[];
   YNOptions:  any[];
   bankName: string;
+  bankShortName: string;
   lienBanque: number;
   depotName: string;
   first: number;
@@ -56,6 +57,7 @@ export class OrgfeadoverviewComponent implements OnInit {
     this.YNOptions = enmYn;
     this.lienBanque = 0;
     this.bankName = '';
+    this.bankShortName = '';
     this.depotName = '';
     this.first = 0;
   }
@@ -162,6 +164,7 @@ export class OrgfeadoverviewComponent implements OnInit {
       this.lienBanque = authState.banque.bankId;
       this.filterBase['lienBanque'] = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
+      this.bankShortName = authState.banque.bankShortName;
       switch (authState.user.rights) {
         case 'Bank':
         case 'Admin_Banq':
@@ -170,7 +173,7 @@ export class OrgfeadoverviewComponent implements OnInit {
           queryDepotParms['rows'] = '999';
           queryDepotParms['sortField'] = 'idDepot';
           queryDepotParms['sortOrder'] = '1';
-          queryDepotParms['lienBanque'] = this.lienBanque.toString();
+          queryDepotParms['idCompany'] = this.bankShortName;
           queryDepotParms['actif'] = '1';
           this.depotService.getWithQuery(queryDepotParms)
               .subscribe(depots => {
