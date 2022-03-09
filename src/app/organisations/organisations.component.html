@@ -66,7 +66,7 @@
             <th colspan="2" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
             <th i18n="@@OrgAgreedSorted" pSortableColumn="agreed" pTooltip="{{generateTooltipAgreed()}}">Agreed<p-sortIcon field="agreed"></p-sortIcon></th>
             <th pSortableColumn="birbyN" i18n="@@OrgUsesFEADSorted"  pTooltip="{{generateTooltipUsesFEAD()}}">Uses FEAD ?<p-sortIcon field="birbyN"></p-sortIcon></th>
-            <th i18n="@@NbLoginsSorted" pSortableColumn="nbLogins" >Logins<p-sortIcon field="nbLogins"></p-sortIcon></th>
+            <th  i18n="@@NbLoginsSorted"  pTooltip="{{generateLoginTooltip()}}" pSortableColumn="nbLogins" >Logins<p-sortIcon field="nbLogins"></p-sortIcon></th>
         </tr>
         <tr>
             <th *ngIf="bankOptions">

@@ -431,6 +431,9 @@ export class OrganisationsComponent implements OnInit {
     generateTooltipUsesFEAD() {
         return $localize`:@@OrgToolTipUsesFEAD:Does Organisation Receive FEAD ?`;
     }
+    generateLoginTooltip() {
+        return $localize`:@@ToolTipNbLogins:Nb Of Logins since 2021`;
+    }
 
 }
 
