@@ -25,7 +25,7 @@ export class AuthEffects {
                 ofType(AuthActions.logout),
                 tap(action => {
                     localStorage.removeItem('user');
-                    this.router.navigateByUrl('/home');
+                   // this.router.navigateByUrl('/home');
                 })
             )
     , {dispatch: false});
