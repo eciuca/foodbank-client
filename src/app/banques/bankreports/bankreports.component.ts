@@ -17,19 +17,16 @@ import {BanqueCount} from '../model/banqueCount';
 })
 export class BankreportsComponent implements OnInit {
   booIsLoaded: boolean;
-  banqueOrgReports: BanqueOrgReport[];
   basicOptions: any;
   stackedOptions: any;
   pieOptions: any;
-  chartDataBeneficiaryByAge: any;
-  chartDataBeneficiaryByFamily: any;
+
   chartDataOrgCount: any;
   chartDataMembreCount: any;
   chartDataUserCount: any;
   bankOptions: any[];
   backgroundColors: any[];
-  titleBenefiariesByAge: string;
-  titleBenefiariesByFamily: string;
+
   titleOrganisations: string;
   titleMembres: string;
   titleUsers: string;
@@ -105,7 +102,7 @@ export class BankreportsComponent implements OnInit {
       this.reportOrganisations();
       this.reportMembres();
       this.reportUsers();
-      this.reportBeneficiaries();
+
   }
   reportOrganisations() {
       this.banqueReportService.getOrgCountReport(this.authService.accessToken, false).subscribe(
@@ -215,109 +212,6 @@ export class BankreportsComponent implements OnInit {
 
             })
     }
-  reportBeneficiaries() {
-    this.banqueReportService.getOrgReport(this.authService.accessToken).subscribe(
-        (response: BanqueOrgReport[]) => {
-          this.banqueOrgReports = response;
-
-          let reportLabels = [];
-          let reportDataSetsByFamily = [
-            {
-              type: 'bar',
-              label: $localize`:@@OrgStatFamilies:Families`,
-              backgroundColor: 'Red',
-              data: []
-            },
-            {
-              type: 'bar',
-              label: $localize`:@@OrgStatPersons:Persons`,
-              backgroundColor: 'Blue',
-              data: []
-            },
-          ];
-
-          let reportDataSetsByAge = [
-                {
-                  type: 'bar',
-                  label: $localize`:@@OrgStatInfants:Infants(0-6 months)`,
-                  backgroundColor: 'Red',
-                  data: []
-                },
-                {
-                  type: 'bar',
-                  label: $localize`:@@OrgStatBabies:Babies(6-24 months)`,
-                  backgroundColor: 'Orange',
-                  data: []
-                },
-                {
-                  type: 'bar',
-                  label: $localize`:@@OrgStatChildren:Children(2-14 years)`,
-                  backgroundColor: 'Blue',
-                  data: []
-                },
-                {
-                  type: 'bar',
-                  label:  $localize`:@@OrgStatTeenagers:Teenagers(14-18 years)`,
-                  backgroundColor: '#ADD8E6', // light blue
-                  data: []
-                },
-                {
-                  type: 'bar',
-                  label: $localize`:@@OrgStatYoungAdults:Young Adults(18-24 years)`,
-                  backgroundColor: 'Green',
-                  data: []
-                },
-                {
-                  type: 'bar',
-                  label: $localize`:@@OrgSeniors:Seniors(> 65 years)`,
-                  backgroundColor: 'Yellow',
-                  data: []
-                },
-
-              ];
-
-          this.bankOptions.map((option) => {
-            reportLabels.push(option.value);
-          })
-          reportDataSetsByAge.map((dataSetitem) => {
-            for (let i=0; i < this.bankOptions.length; i++ ) {
-              dataSetitem.data.push(0);
-            }
-          })
-        reportDataSetsByFamily.map((dataSetitem) => {
-            for (let i=0; i < this.bankOptions.length; i++ ) {
-                dataSetitem.data.push(0);
-            }
-        })
-          console.log( 'initialized chart data', reportLabels,  reportDataSetsByAge);
-          for (let i=0; i < this.banqueOrgReports.length; i++ ) {
-
-            const indexLabel = reportLabels.indexOf(this.banqueOrgReports[i].bankShortName);
-            reportDataSetsByFamily[0].data[indexLabel] += this.banqueOrgReports[i].nFam;
-            reportDataSetsByFamily[1].data[indexLabel] += this.banqueOrgReports[i].nPers;
-            reportDataSetsByAge[0].data[indexLabel] += this.banqueOrgReports[i].nNour;
-            reportDataSetsByAge[1].data[indexLabel] += this.banqueOrgReports[i].nBebe;
-            reportDataSetsByAge[2].data[indexLabel] += this.banqueOrgReports[i].nEnf;
-            reportDataSetsByAge[3].data[indexLabel] += this.banqueOrgReports[i].nAdo;
-            reportDataSetsByAge[4].data[indexLabel] += this.banqueOrgReports[i].n1824;
-            reportDataSetsByAge[5].data[indexLabel] += this.banqueOrgReports[i].nSen;
-
-          }
-
-          this.titleBenefiariesByFamily = $localize`:@@OrgStatBenefByFamily:Beneficiaries Statistics by Family`;
-          this.chartDataBeneficiaryByFamily = {
-            labels: reportLabels,
-            datasets: reportDataSetsByFamily
-          }
-
-          this.titleBenefiariesByAge = $localize`:@@OrgStatBenefByAge:Beneficiaries Statistics by Age Group`;
-          this.chartDataBeneficiaryByAge = {
-            labels: reportLabels,
-            datasets: reportDataSetsByAge
-          }
-
-        });
-  }
 
 
 

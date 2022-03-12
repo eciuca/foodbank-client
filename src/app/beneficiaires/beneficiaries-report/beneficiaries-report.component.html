@@ -1,7 +1,18 @@
 <p-panel>
     <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="chartDataBeneficiaryByFamily" class="p-field p-col-12 p-md-6 card">
+                <h3>{{ titleBenefiariesByFamily }}</h3>
+                <p-chart type="bar" [data]="chartDataBeneficiaryByFamily" [options]="basicOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataBeneficiaryByAge" class="p-field p-col-12 p-md-6 card">
+                <h3>{{ titleBenefiariesByAge }}</h3>
+                <p-chart type="bar" [data]="chartDataBeneficiaryByAge" [options]="stackedOptions"></p-chart>
+        </div>
+
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
         <div *ngIf="chartDataBeneficiariesHistory" class="p-field p-col-12 p-md-6 card">
-            <h3>{{ titleBeneficiaries }}</h3>
+            <h3>{{ titleBeneficiariesEvolution }}</h3>
             <p-chart type="bar" [data]="chartDataBeneficiariesHistory" [options]="stackedOptions"></p-chart>
         </div>
     </div>
