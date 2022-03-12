@@ -410,6 +410,7 @@ export class AppComponent implements OnInit {
                     label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',
                     items: [
                         {label: $localize`:@@menuReportOrgs:ReportOrgs`, icon: 'pi pi-fw pi-map', routerLink: [`/banques/bankreports`]},
+                        {label: $localize`:@@menuReportBenefs:ReportBenefs`, icon: 'pi pi-fw pi-map', routerLink: [`/beneficiaires/reports`]},
                         {
                             label: 'Logins', icon: 'pi pi-fw pi-users',
                             items: [

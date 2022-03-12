@@ -1,0 +1,8 @@
+<p-panel>
+    <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="chartDataBeneficiariesHistory" class="p-field p-col-12 p-md-6 card">
+            <h3>{{ titleBeneficiaries }}</h3>
+            <p-chart type="bar" [data]="chartDataBeneficiariesHistory" [options]="stackedOptions"></p-chart>
+        </div>
+    </div>
+</p-panel>

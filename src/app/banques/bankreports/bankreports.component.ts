@@ -196,7 +196,7 @@ export class BankreportsComponent implements OnInit {
                 for (let i=0; i < banqueUserCounts.length; i++ ) {
                     if( !banqueUserCounts[i].bankShortName ) continue;
                     if (banqueUserCounts[i].count < 1) continue;
-                    totalCount += banqueUserCounts[i].count
+                    totalCount += banqueUserCounts[i].count;
                     reportLabels.push( banqueUserCounts[i].bankShortName);
                     reportDataSets[0].data.push(banqueUserCounts[i].count);
                     reportDataSets[0].backgroundColor.push(this.backgroundColors[colorIndex]) ;

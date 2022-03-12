@@ -30,11 +30,27 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {OrgSummariesDataService} from '../organisations/services/orgsummaries-data.service';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {InputNumberModule} from 'primeng/inputnumber';
+import { BeneficiariesReportComponent } from './beneficiaries-report/beneficiaries-report.component';
+import {BanquesDataService} from '../banques/services/banques-data.service';
+import {BanqueEntityService} from '../banques/services/banque-entity.service';
+import {ChartModule} from 'primeng/chart';
 
 
 
 
 const routes: Routes = [
+    {
+        path: 'Dependent',
+        component: DependentsComponent,
+    },
+    {
+        path: 'Dependent/:idDep',
+        component: DependentComponent
+    },
+    {
+        path: 'reports',
+        component: BeneficiariesReportComponent,
+    },
     {
         path: '',
         component: BeneficiairesComponent,
@@ -43,18 +59,11 @@ const routes: Routes = [
         path: ':idClient',
         component: BeneficiaireComponent
     },
-    {
-        path: 'Dependent',
-        component: DependentsComponent,
-    },
-    {
-        path: 'Dependent/:idDep',
-        component: DependentComponent
-    }
+
 ];
 
 @NgModule({
-  declarations: [BeneficiairesComponent, BeneficiaireComponent, DependentsComponent, DependentComponent],
+  declarations: [BeneficiairesComponent, BeneficiaireComponent, DependentsComponent, DependentComponent, BeneficiariesReportComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -70,11 +79,14 @@ const routes: Routes = [
         MessageModule,
         InputSwitchModule,
         CheckboxModule,
-        InputNumberModule
+        InputNumberModule,
+        ChartModule
     ],
   providers: [
         BeneficiairesDataService,
         DependentsDataService,
+      BanquesDataService,
+      BanqueEntityService,
         OrgSummariesDataService,
         CpassDataService,
         BeneficiaireEntityService,
@@ -90,11 +102,13 @@ export class BeneficiairesModule {
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
       private beneficiairesDataService: BeneficiairesDataService,
+      private banquesDataService: BanquesDataService,
       private cpassDataService: CpassDataService,
       private orgSummariesDataService: OrgSummariesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Beneficiaire', beneficiairesDataService);
+    entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('Cpas', cpassDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
   }
