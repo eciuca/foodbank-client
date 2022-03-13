@@ -15,5 +15,9 @@
             <h3>{{ titleBeneficiariesEvolution }}</h3>
             <p-chart type="bar" [data]="chartDataBeneficiariesHistory" [options]="stackedOptions"></p-chart>
         </div>
+        <div *ngIf="chartDataBeneficiariesFamilyHistory" class="p-field p-col-12 p-md-6 card">
+            <h3>{{ titleBeneficiariesFamilyEvolution }}</h3>
+            <p-chart type="bar" [data]="chartDataBeneficiariesFamilyHistory" [options]="stackedOptions"></p-chart>
+        </div>
     </div>
 </p-panel>

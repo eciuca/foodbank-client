@@ -2487,7 +2487,7 @@
         <target>Gezinnen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2499,7 +2499,7 @@
         <target>Personen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2511,7 +2511,7 @@
         <target>Zuigelingen (0-6 maanden)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2523,7 +2523,7 @@
         <target>Baby's (6-24 maanden)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">130</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2535,7 +2535,7 @@
         <target>Kinderen (2-14 jaar)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">136</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2547,7 +2547,7 @@
         <target>Tieners (14-18 jaar)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2559,7 +2559,7 @@
         <target>Jonge volwassenen (18-24 jaar)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">148</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2571,7 +2571,7 @@
         <target>Senioren (&gt; 65 jaar)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">154</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2583,7 +2583,7 @@
         <target>Statistieken van begunstigden per gezin</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">187</context>
+          <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefByAge" datatype="html">
@@ -2591,7 +2591,7 @@
         <target>Statistieken van begunstigden per leeftijdsgroep</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">193</context>
+          <context context-type="linenumber">195</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefHistory" datatype="html">
@@ -2599,7 +2599,15 @@
         <target>Evolutie van het aantal begunstigden per bank</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">251</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgStatBenefFamilyHistory" datatype="html">
+        <source>Evolution of Nb of Beneficiary Families by Bank</source>
+        <target>Evolutie van het aantal families begunstigden per bank</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
+          <context context-type="linenumber">256</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDependentDeleted" datatype="html">

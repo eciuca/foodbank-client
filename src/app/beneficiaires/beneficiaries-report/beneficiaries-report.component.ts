@@ -26,9 +26,11 @@ export class BeneficiariesReportComponent implements OnInit {
     titleBenefiariesByAge: string;
     titleBenefiariesByFamily: string;
     titleBeneficiariesEvolution: string;
+    titleBeneficiariesFamilyEvolution: string;
     chartDataBeneficiaryByAge: any;
     chartDataBeneficiaryByFamily: any;
     chartDataBeneficiariesHistory: any;
+    chartDataBeneficiariesFamilyHistory: any;
 
   constructor(
       private beneficiaireHttpService: BeneficiaireHttpService,
@@ -205,10 +207,18 @@ export class BeneficiariesReportComponent implements OnInit {
           (response: Population[]) => {
               const populationRecords: Population[] = response;
               let reportLabels = [];
-              let reportDataSets = [];
+              let reportDataSetsPerson = [];
+              let reportDataSetsFamily = [];
               let colorIndex =0;
               for (let i=0; i < this.bankOptions.length; i++ ) {
-                  reportDataSets.push(
+                  reportDataSetsPerson.push(
+                      {
+                          type: 'bar',
+                          label: this.bankOptions[i].label,
+                          backgroundColor: this.backgroundColors[colorIndex],
+                          data: []
+                      });
+                  reportDataSetsFamily.push(
                       {
                           type: 'bar',
                           label: this.bankOptions[i].label,
@@ -230,16 +240,23 @@ export class BeneficiariesReportComponent implements OnInit {
                       reportLabels.push(populationRecords[i].dateStat);
                       console.log('New Date', populationRecords[i].dateStat);
                       for (let i=0; i < this.bankOptions.length; i++ ) {
-                          reportDataSets[i].data.push(0);
+                          reportDataSetsPerson[i].data.push(0);
+                          reportDataSetsFamily[i].data.push(0);
                       }
                   }
                   const dataIndex = reportLabels.length;
-                  reportDataSets[bankOptionIndex].data[dataIndex] = populationRecords[i].nPers;
+                  reportDataSetsPerson[bankOptionIndex].data[dataIndex] = populationRecords[i].nPers;
+                  reportDataSetsFamily[bankOptionIndex].data[dataIndex] = populationRecords[i].nFam;
               }
               this.titleBeneficiariesEvolution = $localize`:@@OrgStatBenefHistory:Evolution of Nb of Beneficiaries by Bank`;
               this.chartDataBeneficiariesHistory = {
                   labels: reportLabels,
-                  datasets: reportDataSets
+                  datasets: reportDataSetsPerson
+              }
+              this.titleBeneficiariesFamilyEvolution = $localize`:@@OrgStatBenefFamilyHistory:Evolution of Nb of Beneficiary Families by Bank`;
+              this.chartDataBeneficiariesFamilyHistory = {
+                  labels: reportLabels,
+                  datasets: reportDataSetsFamily
               }
           })
   }
