@@ -109,7 +109,7 @@
         </div>
     </ng-template>
 </p-table>
- <p-dialog i18n-header="@@BeneficiaryDetails"header="Beneficiary Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+ <p-dialog i18n-header="@@BeneficiaryDetails"header="Beneficiary Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
      <app-beneficiaire *ngIf="selectedIdClient$" [idClient$]="selectedIdClient$"  [currentFilteredOrg] ="filteredOrganisation" (onBeneficiaireUpdate)="handleBeneficiaireUpdate($event)"
                        (onBeneficiaireCreate)="handleBeneficiaireCreate($event)"  (onBeneficiaireDelete)="handleBeneficiaireDeleted($event)" (onBeneficiaireQuit)="handleBeneficiaireQuit()"></app-beneficiaire>
  </p-dialog>

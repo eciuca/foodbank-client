@@ -123,7 +123,7 @@
         </div>
     </ng-template>
 </p-table>
-<p-dialog i18n-header="@@FeadDetails" header="Fead Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+<p-dialog i18n-header="@@FeadDetails" header="Fead Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'scroll'}">
     <app-orgfeaddetail *ngIf="selectedIdDis$" [idDis$]="selectedIdDis$" (onOrganisationUpdate)="handleOrganisationUpdate($event)"
                        (onOrganisationQuit)="handleOrganisationQuit()"></app-orgfeaddetail>
 </p-dialog>

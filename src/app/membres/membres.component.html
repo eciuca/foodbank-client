@@ -122,7 +122,7 @@
     </ng-template>
     <p-toast></p-toast>
 </p-table>
-<p-dialog i18n-header="@@EmployeeDetails" header="Employee Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+<p-dialog i18n-header="@@EmployeeDetails" header="Employee Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'scroll'}">
     <app-membre *ngIf="selectedBatid$"
                 [batId$]="selectedBatid$" [currentFilteredBankId] = "filteredBankId" [currentFilteredBankShortName] = "filteredBankShortName"
                 [currentFilteredOrg] ="filteredOrganisation" (onMembreUpdate)="handleMembreUpdate($event)" (onMembreCreate)="handleMembreCreate($event)"

@@ -117,7 +117,7 @@
         </div>
     </ng-template>
 </p-table>
-<p-dialog i18n-header="@@BeneficiaryDetails" header="Beneficiary Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+<p-dialog i18n-header="@@BeneficiaryDetails" header="Beneficiary Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'scroll'}">
     <app-orgbenefdetail *ngIf="selectedIdDis$" [idDis$]="selectedIdDis$" (onOrganisationUpdate)="handleOrganisationUpdate($event)"
                         (onOrganisationQuit)="handleOrganisationQuit()"></app-orgbenefdetail>
 </p-dialog>

@@ -56,7 +56,7 @@
     </ng-template>
 </p-table>
 <p-toast></p-toast>
-<p-dialog i18n-header="@@TripDetails" header="Trip Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+<p-dialog i18n-header="@@TripDetails" header="Trip Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'scroll'}">
     <app-trip *ngIf="selectedTripid$" [tripId$]="selectedTripid$"   (onTripUpdate)="handleTripUpdate($event)" (onTripCreate)="handleTripCreate($event)"
               (onTripDelete)="handleTripDeleted($event)" (onTripQuit)="handleTripQuit()"></app-trip>
 </p-dialog>

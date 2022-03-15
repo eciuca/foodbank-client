@@ -1,5 +1,5 @@
 <p-panel *ngIf="mailadresses">
-    <p-dialog   [(visible)]="displayDialog"  [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+    <p-dialog   [(visible)]="displayDialog"  [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
         <app-mailaddress  (onMailAddressCreate)="handleMailAddressCreate($event)"  (onMailAddressQuit)="handleMailAddressQuit()"></app-mailaddress>
     </p-dialog>
     <p-accordion>

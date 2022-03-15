@@ -91,7 +91,7 @@
         </div>
     </ng-template>
 </p-table>
-<p-dialog i18n-header="@@OrgMembershipMailing" header="Membership Mailing" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+<p-dialog i18n-header="@@OrgMembershipMailing" header="Membership Mailing" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'scroll'}">
     <app-org-membership *ngIf="selectedIdDis$" [idDis$]="selectedIdDis$" (onOrganisationUpdate)="handleOrganisationUpdate($event)"
                        (onOrganisationQuit)="handleOrganisationQuit()"></app-org-membership>
 </p-dialog>

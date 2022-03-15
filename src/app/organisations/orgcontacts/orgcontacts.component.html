@@ -35,7 +35,7 @@
         </tr>
     </ng-template>
 </p-table>
-<p-dialog header="Organisation Contact Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+<p-dialog header="Organisation Contact Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
     <app-orgcontact *ngIf="selectedOrgPersId$" [orgPersId$]="selectedOrgPersId$" [lienAsso$]="lienAsso$" (onOrgcontactUpdate)="handleOrgcontactUpdate($event)"
                     (onOrgcontactCreate)="handleOrgcontactCreate($event)"  (onOrgcontactDelete)="handleOrgcontactDeleted($event)" (onOrgcontactQuit)="handleOrgcontactQuit()"></app-orgcontact>
 </p-dialog>

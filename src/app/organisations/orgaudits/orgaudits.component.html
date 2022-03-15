@@ -38,7 +38,7 @@
         </tr>
     </ng-template>
 </p-table>
-<p-dialog header="Organisation Audit Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+<p-dialog header="Organisation Audit Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
     <app-orgaudit *ngIf="selectedOrgAuditId$" [auditId$]="selectedOrgAuditId$"  (onOrgauditUpdate)="handleOrgauditUpdate($event)"
                   (onOrgauditCreate)="handleOrgauditCreate($event)"  (onOrgauditDelete)="handleOrgauditDeleted($event)" (onOrgauditQuit)="handleOrgauditQuit()"></app-orgaudit>
 </p-dialog>

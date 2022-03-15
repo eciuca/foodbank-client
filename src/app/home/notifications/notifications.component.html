@@ -82,7 +82,7 @@
         </div>
     </ng-template>
 </p-table>
-<p-dialog i18n-header="@@NotificationDetails" header="Notification Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'visible'}">
+<p-dialog i18n-header="@@NotificationDetails" header="Notification Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'scroll'}">
     <app-notification *ngIf="selectedNotificationid$" [notificationId$]="selectedNotificationid$"   (onNotificationUpdate)="handleNotificationUpdate($event)" (onNotificationCreate)="handleNotificationCreate($event)"
                       (onNotificationDelete)="handleNotificationDeleted($event)" (onNotificationQuit)="handleNotificationQuit()"></app-notification>
 </p-dialog>

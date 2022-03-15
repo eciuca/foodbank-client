@@ -71,7 +71,7 @@
             </div>
         </ng-template>
     </p-table>
-    <p-dialog i18n-header="@@BankDetails" header="Bank Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'visible'}" [modal]="true" [closable]="false">
+    <p-dialog i18n-header="@@BankDetails" header="Bank Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
         <app-banque *ngIf="selectedBankid$" [bankId$]="selectedBankid$" (onBanqueUpdate)="handleBanqueUpdate()" (onBanqueCreate)="handleBanqueCreate($event)"
                     (onBanqueDelete)="handleBanqueDeleted()" (onBanqueQuit)="handleBanqueQuit()"></app-banque>
     </p-dialog>
