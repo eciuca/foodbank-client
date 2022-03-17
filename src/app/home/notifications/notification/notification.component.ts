@@ -9,6 +9,7 @@ import {DataServiceError} from '@ngrx/data';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../../auth/auth.selectors';
 import {AppState} from '../../../reducers';
+import {enmAudienceAdmin, enmAudienceBank} from '../../../shared/enums';
 
 @Component({
   selector: 'app-notification',
@@ -29,6 +30,7 @@ export class NotificationComponent implements OnInit {
   author: string;
   bankId: number;
   orgId: number;
+  userLanguage: string;
 
 
   constructor(
@@ -56,26 +58,16 @@ export class NotificationComponent implements OnInit {
               map((authState) => {
                   console.log('Notification authstate:', authState);
                   if (authState.user) {
+                      this.userLanguage = authState.user.idLanguage;
                       this.author = authState.user.membrePrenom + ' ' + authState.user.membreNom;
                       switch (authState.user.rights) {
                           case 'Admin_Banq':
                               this.bankId = authState.banque.bankId;
-                              this.audiences = [
-                                  {label: $localize`:@@audienceBankOnly:Bank Users Only`, value: 'mybank_only'},
-                                  {label: $localize`:@@audienceBankOrgAdminOnly:Organisation Admins Only`, value: 'mybank_orgadmin'},
-                                  {label: $localize`:@@audienceBankOrgOnly:Organisation Users Only`, value: 'mybank_org'},
-                                  {label: $localize`:@@audienceBankAll:Bank and Organisation Users`, value: 'mybank_all'}
-                              ];
+                              this.audiences = enmAudienceBank;
                               break;
-                          case 'admin':
-                                  this.audiences = [
-                                      {label: 'general', value: 'general'},
-                                      {label: $localize`:@@audienceBankAdmin:All Bank Admins`, value: 'bank_admins'},
-                                      {label: $localize`:@@audienceBankUsers:All Bank Users`, value: 'bank_users'},
-                                      {label: $localize`:@@audienceOrgAdmin:All Org Admins`, value: 'org_admins'},
-                                  ];
-                                  break;
-                          default:
+                          default:  // admin
+                              this.audiences = enmAudienceAdmin;
+                              break;
                        }
                   }
               })
@@ -93,6 +85,8 @@ export class NotificationComponent implements OnInit {
           } else {
             console.log('New Notification ! ');
             this.notification = new DefaultNotification();
+              this.notification.language = this.userLanguage;
+              this.notification.audience =this.audiences[0];
             this.notification.author = this.author;
             if (this.myform) {
               this.myform.reset(this.notification);

@@ -119,7 +119,18 @@ export let enmMailGroupsOrg = [
     {label: $localize`:@@OrgMailGroupOrgUsers:My Org Users` , value: 2 },
     {label: $localize`:@@OrgMailGroupOrgMembers:My Org Members` , value: 3 },
 ];
-
+export let enmAudienceBank = [
+    {label: $localize`:@@audienceBankOnly:Bank Users Only`, value: 'mybank_only'},
+    {label: $localize`:@@audienceBankOrgAdminOnly:Organisation Admins Only`, value: 'mybank_orgadmin'},
+    {label: $localize`:@@audienceBankOrgOnly:Organisation Users Only`, value: 'mybank_org'},
+    {label: $localize`:@@audienceBankAll:Bank and Organisation Users`, value: 'mybank_all'}
+];
+export let enmAudienceAdmin = [
+    {label: 'general', value: 'general'},
+    {label: $localize`:@@audienceBankAdmin:All Bank Admins`, value: 'bank_admins'},
+    {label: $localize`:@@audienceBankUsers:All Bank Users`, value: 'bank_users'},
+    {label: $localize`:@@audienceOrgAdmin:All Org Admins`, value: 'org_admins'}
+];
 
 
 
