@@ -84,6 +84,9 @@ export class MailingsComponent implements OnInit {
     this.languages = enmLanguage;
     this.booOnlyAgreed = false;
     this.booOnlyFead = false;
+    this.filteredOrganisationsPrepend = [
+      {idDis: null, fullname: $localize`:@@organisations:Organisations`},
+    ];
   }
 
   ngOnInit(): void {
@@ -149,26 +152,18 @@ export class MailingsComponent implements OnInit {
       this.mailgroupSelected
       this.filterBase = {'lienBanque': authState.banque.bankId,'actif': '1', isDepot: '0'};
       switch (authState.user.rights) {
-        case 'Bank':
-        case 'Admin_Banq':
-          this.filteredOrganisationsPrepend = [
-              {idDis: null, fullname: $localize`:@@organisations:Organisations`},
-          ];
-          this.selectedFilter = this.filteredOrganisationsPrepend[0];
-          this.mailgroups = enmMailGroupsBank;
-          break;
         case 'Asso':
         case 'Admin_Asso':
+          this.filterBase['lienDis'] = authState.organisation.idDis;
           this.orgName = authState.organisation.societe;
-          this.filteredOrganisationsPrepend = [
-              {idDis: authState.organisation.idDis, fullname: $localize`:@@organisationMine:My Organisation`},
-          ];
-          this.selectedFilter = this.filteredOrganisationsPrepend[0];
           this.mailgroups = enmMailGroupsOrg;
-          this.filterBase['target'] = "2";  // start with org users
+
+          this.selectedFilter = this.filteredOrganisationsPrepend[0];
           break;
         default:
+          this.mailgroups = enmMailGroupsBank;
       }
+      this.filterBase['target'] = this.mailgroups[0].value;
       this.regionService.getWithQuery({'lienBanque': this.bankid.toString()})
           .subscribe(regions => {
             this.regions = [{ value: null, label: ''}];
@@ -449,18 +444,11 @@ export class MailingsComponent implements OnInit {
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
     // when we switch from active to archived list and vice versa , we need to restart from first page
     this.first = 0;
-   this.setMailGroupFilter();
+    this.latestAddressQueryParams['target'] = this.mailgroupSelected;
     this.loadAddressSubject$.next(this.latestAddressQueryParams);
   }
   setMailGroupFilter() {
-    if (this.mailgroupSelected) {
-      this.latestAddressQueryParams['target'] = this.mailgroupSelected;
-    } else {
-      // delete regId entry
-      if (this.latestAddressQueryParams.hasOwnProperty('target')) {
-        delete this.latestAddressQueryParams['target'];
-      }
-    }
+        this.latestAddressQueryParams['target'] = this.mailgroupSelected;
   }
 
   saveSelection() {

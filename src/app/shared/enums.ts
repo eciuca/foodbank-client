@@ -104,15 +104,20 @@ export let enmOrgCategories = [
     {label: $localize`:@@OrgCategoryRefugee:Shelter for Refugees` , value: 15 },
 ];
 export let enmMailGroupsBank = [
-    {label: $localize`:@@OrgMailGroupContacts:Org Contacts` , value: null },
-    {label: $localize`:@@OrgMailGroupOrgItMgrs:Org It Mgrs` , value: 1 },
-    {label: $localize`:@@OrgMailGroupOrgItUsers:Org Users` , value: 2 },
-    {label: $localize`:@@BankMailGroupItMgrs:Bank It Mgrs` , value: 3 },
-    {label: $localize`:@@BankMailGroupItUsers:Bank Users` , value: 4 },
+    {label: $localize`:@@OrgMailGroupOrganisations:Organisations` , value: 0 },
+    {label: $localize`:@@BankMailGroupBankMgrs:Bank Mgrs` , value: 4 },
+    {label: $localize`:@@BankMailGroupBankUsers:Bank Users` , value: 5 },
+    {label: $localize`:@@BankMailGroupBankMembers:Bank Members` , value: 6 },
+    {label: $localize`:@@BankMailGroupOrgMgrs:Org Mgrs` , value: 1 },
+    {label: $localize`:@@BankMailGroupOrgUsers:Org Users` , value: 2 },
+    {label: $localize`:@@BankMailGroupOrgMembers:Org Members` , value: 3 },
+
 ];
 export let enmMailGroupsOrg = [
-    {label: $localize`:@@OrgMailGroupOrgItUsers:Org Users` , value: 2 },
-    {label: $localize`:@@BankMailGroupItMgrs:Bank It Mgrs` , value: 3 },
+    {label: $localize`:@@OrgMailGroupOrganisations:Organisations` , value: 0 },
+    {label: $localize`:@@OrgMailGroupOrgMgrs:My Org Mgrs` , value: 1 },
+    {label: $localize`:@@OrgMailGroupOrgUsers:My Org Users` , value: 2 },
+    {label: $localize`:@@OrgMailGroupOrgMembers:My Org Members` , value: 3 },
 ];
 
 

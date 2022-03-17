@@ -1046,7 +1046,7 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>BankMailGroupItMgrs</name>
+                <name>BankMailGroupBankMembers</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -1067,7 +1067,91 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>BankMailGroupItUsers</name>
+                <name>BankMailGroupBankMgrs</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>BankMailGroupBankUsers</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>BankMailGroupOrgMembers</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>BankMailGroupOrgMgrs</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>BankMailGroupOrgUsers</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -6321,7 +6405,7 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>OrgMailGroupContacts</name>
+                <name>OrgMailGroupOrgMembers</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -6342,7 +6426,7 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>OrgMailGroupOrgItMgrs</name>
+                <name>OrgMailGroupOrgMgrs</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -6363,7 +6447,28 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>OrgMailGroupOrgItUsers</name>
+                <name>OrgMailGroupOrgUsers</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>OrgMailGroupOrganisations</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -13693,27 +13798,6 @@
             </concept_node>
             <concept_node>
                 <name>next</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>fr-FR</language>
-                        <approved>true</approved>
-                    </translation>
-                    <translation>
-                        <language>nl-NL</language>
-                        <approved>true</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>organisationMine</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>

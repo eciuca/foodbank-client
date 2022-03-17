@@ -2447,7 +2447,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">155</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
@@ -3530,20 +3530,12 @@
           <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="organisationMine" datatype="html">
-        <source>My Organisation</source>
-        <target>Mijn Organisatie</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">164</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="messageSendMaxListError" datatype="html">
         <source>You have <x id="PH" equiv-text="mailListArray.length"/> recipients. The maximum is 3.</source>
         <target>U hebt <x id="PH" equiv-text="mailListArray.length"/> bestemmelingen. Het maximum is 3.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">228</context>
+          <context context-type="linenumber">223</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageSendNoListError" datatype="html">
@@ -3551,7 +3543,7 @@
         <target>U hebt geen bestemmelingen gespecifieerd. Selecteer ze eerst.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">237</context>
+          <context context-type="linenumber">232</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3563,7 +3555,7 @@
         <target>Wenst  u deze boodschap te versturen?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">245</context>
+          <context context-type="linenumber">240</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3575,7 +3567,7 @@
         <target>De boodschap werd verstuurd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">260</context>
+          <context context-type="linenumber">255</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3587,7 +3579,7 @@
         <target>De boodschap werd niet verstuurd: foutmelding: <x id="PH" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">268</context>
+          <context context-type="linenumber">263</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3599,7 +3591,7 @@
         <target>Upload Mail bestand is gelukt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">294</context>
+          <context context-type="linenumber">289</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3611,7 +3603,7 @@
         <target>Het bestand <x id="PH" equiv-text="file.name"/> werd opgeladen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">295</context>
+          <context context-type="linenumber">290</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3623,7 +3615,7 @@
         <target>Upload Mail bestand is mislukt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">307</context>
+          <context context-type="linenumber">302</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3635,7 +3627,7 @@
         <target>Fout upload bestand <x id="PH" equiv-text="file.name"/>. <x id="PH_1" equiv-text="errorMsg"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">308</context>
+          <context context-type="linenumber">303</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.ts</context>
@@ -3647,7 +3639,7 @@
         <target>Handmatig toegevoegd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
-          <context context-type="linenumber">343</context>
+          <context context-type="linenumber">338</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberUsers" datatype="html">
@@ -5918,52 +5910,88 @@
           <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrgMailGroupContacts" datatype="html">
-        <source>Org Contacts</source>
-        <target>E-Mail Organisatie</target>
+      <trans-unit id="OrgMailGroupOrganisations" datatype="html">
+        <source>Organisations</source>
+        <target>Organisaties</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">107</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="OrgMailGroupOrgItMgrs" datatype="html">
-        <source>Org It Mgrs</source>
-        <target>Org IT Mgrs</target>
+      <trans-unit id="BankMailGroupBankMgrs" datatype="html">
+        <source>Bank Mgrs</source>
+        <target>Bank Beheerders</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">108</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="OrgMailGroupOrgItUsers" datatype="html">
-        <source>Org Users</source>
-        <target>Org IT gebruikers</target>
+      <trans-unit id="BankMailGroupBankUsers" datatype="html">
+        <source>Bank Users</source>
+        <target>Bank Gebruikers</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">109</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">114</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="BankMailGroupItMgrs" datatype="html">
-        <source>Bank It Mgrs</source>
-        <target>Bank IT Mgrs</target>
+      <trans-unit id="BankMailGroupBankMembers" datatype="html">
+        <source>Bank Members</source>
+        <target>Bank Medewerkers</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">110</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">115</context>
-        </context-group>
       </trans-unit>
-      <trans-unit id="BankMailGroupItUsers" datatype="html">
-        <source>Bank Users</source>
-        <target>Bank IT gebruikers</target>
+      <trans-unit id="BankMailGroupOrgMgrs" datatype="html">
+        <source>Org Mgrs</source>
+        <target>Organisatie Beheerders</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BankMailGroupOrgUsers" datatype="html">
+        <source>Org Users</source>
+        <target>Gebruikers Organisatie</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BankMailGroupOrgMembers" datatype="html">
+        <source>Org Members</source>
+        <target>Organisatie Medewerkers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMailGroupOrgMgrs" datatype="html">
+        <source>My Org Mgrs</source>
+        <target>Beheerders</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMailGroupOrgUsers" datatype="html">
+        <source>My Org Users</source>
+        <target>Gebruikers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMailGroupOrgMembers" datatype="html">
+        <source>My Org Members</source>
+        <target>Medewerkers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="TitleMr" datatype="html">
