@@ -5,7 +5,14 @@ import {map} from 'rxjs/operators';
 import {DefaultUser, User} from '../model/user';
 import {MessageService} from 'primeng/api';
 import {ConfirmationService} from 'primeng/api';
-import {enmLanguageLegacy, enmUserRoles, enmUserRolesAsso, enmUserRolesBank, enmUserRolesBankAsso} from '../../shared/enums';
+import {
+    enmLanguageLegacy,
+    enmUserRoles,
+    enmUserRolesAsso,
+    enmUserRolesBank,
+    enmUserRolesBankAsso,
+    enmUserRolesFBBA
+} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
@@ -133,10 +140,12 @@ export class UserComponent implements OnInit {
                         else {
                             this.user.idOrg = 0;
                             this.title =  $localize`:@@BankUserNew1:New User for bank ${this.currentFilteredBankShortName} `;
-                            if (this.currentFilteredBankShortName == 'SPP') {
-                                this.rights = [{label: $localize`:@@RoleFEADAdmin:FEAD Admin`, value: 'Admin_FEAD'}]
+                            if (this.currentFilteredBankShortName == 'FBBA') {
+                                this.rights = enmUserRolesFBBA;
                             }
-                            else {
+                            else if (this.currentFilteredBankShortName == 'SPP') {
+                                this.rights = [{label: $localize`:@@RoleFEADAdmin:FEAD Admin`, value: 'Admin_FEAD'}]
+                            } else {
                                 this.rights = enmUserRolesBank;
 
                             }
@@ -372,7 +381,8 @@ export class UserComponent implements OnInit {
     updateUserInfoFromMember(user:User,membre:Membre) {
         user.userName = membre.nom + ' ' + membre.prenom;
         user.email = membre.batmail;
-        user.idCompany =membre.bankShortName;
+        // allow user bank to be different from bank member
+       // user.idCompany =membre.bankShortName;
         switch (membre.langue) {
             case 1:
                 user.idLanguage = 'fr';

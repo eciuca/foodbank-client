@@ -130,7 +130,7 @@ export class AuditReportComponent implements OnInit {
         }
 
 
-        if (['Admin_FBBA','admin'].includes(authState.user.rights)) {
+        if (['Admin_FBBA','Bank_FBBA','admin'].includes(authState.user.rights)) {
 
             this.viewOptions =  [
                 {label: $localize`:@@General:General` , value: 'general'},
@@ -263,18 +263,24 @@ export class AuditReportComponent implements OnInit {
                      if ((item.key === null) || (item.key === "0")) {
                          item.key = "Bank";
                      }
+
                      // reportLabels.push(item.key);
                      // reportDataSets[0].data.push(item.loginCount);
                      if (!reportLabels.includes(item.key)) {
-                         reportLabels.push(item.key);
-                         if (item.category === "FBIT") {
-                             reportDataSets[1].data.push(item.loginCount);
-                             reportDataSets[0].data.push(0);
-                             nbOfSelectedFBITLogins += item.loginCount;
-                         } else {
-                             reportDataSets[0].data.push(item.loginCount);
-                             reportDataSets[1].data.push(0);
-                             nbOfSelectedPHPLogins += item.loginCount;
+                         if (this.viewOption === 'history' ||
+                             (this.viewOption === 'general' && (this.filterParams.hasOwnProperty('bankShortName') || (!this.bankOptions ) ||
+                                 (this.bankOptions.find(opt => opt.label === item.key) )))) {
+                             reportLabels.push(item.key);
+
+                             if (item.category === "FBIT") {
+                                 reportDataSets[1].data.push(item.loginCount);
+                                 reportDataSets[0].data.push(0);
+                                 nbOfSelectedFBITLogins += item.loginCount;
+                             } else {
+                                 reportDataSets[0].data.push(item.loginCount);
+                                 reportDataSets[1].data.push(0);
+                                 nbOfSelectedPHPLogins += item.loginCount;
+                             }
                          }
                      } else {
                          const indexItem = reportLabels.indexOf(item.key);

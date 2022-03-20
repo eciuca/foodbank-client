@@ -70,6 +70,10 @@ export let enmUserRolesAsso = [
     {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
     {label: $localize`:@@RoleOrgUser:Org User`, value: 'Asso'},
 ];
+export let enmUserRolesFBBA = [
+    {label: $localize`:@@RoleFBBAAdmin:FBBA Admin`, value: 'Admin_FBBA'},
+    {label: $localize`:@@RoleFBBAUser:FBBA User`, value: 'Bank_FBBA'},
+];
 export let enmStatutFead = [
     {label: $localize`:@@FeadStatusRefused:Refused`, value: 0},
     {label: $localize`:@@FeadStatusAccepted:Accepted`, value: 1},
