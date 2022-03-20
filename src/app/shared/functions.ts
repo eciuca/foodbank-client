@@ -1,6 +1,3 @@
-import {User} from '../users/model/user';
-import {MembreEntityService} from '../membres/services/membre-entity.service';
-
 export function labelCivilite(civilite: number) {
 
     switch (civilite) {
@@ -53,6 +50,7 @@ export function  labelLanguage(membreLangue: number) {
 
 
 }
+
 export function labelAgreed(agreed: boolean) {
     if (agreed) {
         return $localize`:@@Yes:Yes`;
@@ -69,3 +67,4 @@ export function labelActive(active: boolean) {
         return $localize`:@@No:No`;
     }
 }
+

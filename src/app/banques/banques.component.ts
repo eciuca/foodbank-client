@@ -19,13 +19,14 @@ export class BanquesComponent implements OnInit {
   banques: Banque[];
   displayDialog: boolean;
   booCanCreate: boolean;
-
+  booclassicBanks:boolean;
   constructor(
       private banqueService: BanqueEntityService,
       private router: Router,
       private store: Store
       ) {
       this.booCanCreate = false;
+      this.booclassicBanks = true; // except for admin, show classic banks
   }
 
   ngOnInit() {
@@ -42,15 +43,23 @@ export class BanquesComponent implements OnInit {
                       switch (authState.user.rights) {
                           case 'admin':
                               this.booCanCreate = true;
+                              this.booclassicBanks = false;
+                              this.banqueService.getAll()
+                                  .subscribe(
+                                      banquesEntities => {
+                                          this.banques = banquesEntities;
+                                      });
                               break;
                           default:
+                              const classicBanks = { 'classicBanks': '1' };
+                              this.banqueService.getWithQuery(classicBanks)
+                                  .subscribe(
+                                      banquesEntities => {
+                                          this.banques = banquesEntities;
+                                      });
                       }
                   }
-                  this.banqueService.getAll()
-                      .subscribe(
-                          banquesEntities => {
-                              this.banques = banquesEntities;
-                          });
+
               })
 
           )

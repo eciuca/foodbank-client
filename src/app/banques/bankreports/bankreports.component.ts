@@ -85,7 +85,8 @@ export class BankreportsComponent implements OnInit {
   }
   private initializeDependingOnUserRights(authState: AuthState) {
 
-      this.banqueService.getAll()
+      const classicBanks = { 'classicBanks': '1' };
+      this.banqueService.getWithQuery(classicBanks)
           .subscribe((banquesEntities) => {
             console.log('Banques now loaded:', banquesEntities);
             this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));

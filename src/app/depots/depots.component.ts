@@ -149,13 +149,12 @@ export class DepotsComponent implements OnInit {
           break;
         case 'admin':
           this.booIsAdmin = true;
-          this.banqueService.getAll()
-              .pipe(
-                  tap((banquesEntities) => {
+          const classicBanks = { 'classicBanks': '1' };
+          this.banqueService.getWithQuery(classicBanks)
+              .subscribe((banquesEntities) => {
                     console.log('Banques now loaded:', banquesEntities);
-                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
-                  })
-              ).subscribe();
+                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));                  });
+
           break;
         default:
       }

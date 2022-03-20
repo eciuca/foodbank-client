@@ -242,14 +242,22 @@ export class OrganisationsComponent implements OnInit {
                                 this.depots.push({value: depot.idDepot, label: depot.nom})
                             );
                         });
-                    if ( ['Admin_FBBA', 'Bank_FBBA', 'Admin_FEAD', 'admin'].includes(authState.user.rights)) {
-                        this.banqueService.getAll()
-                            .pipe(
-                                tap((banquesEntities) => {
+                    if ( ['Admin_FBBA', 'Bank_FBBA', 'Admin_FEAD'].includes(authState.user.rights)) {
+                        const classicBanks = { 'classicBanks': '1' };
+                        this.banqueService.getWithQuery(classicBanks)
+                            .subscribe((banquesEntities) => {
                                     console.log('Banques now loaded:', banquesEntities);
                                     this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
-                                })
-                            ).subscribe();
+                                });
+
+                    }
+                    if (authState.user.rights === 'admin') {
+                        this.banqueService.getAll()
+                            .subscribe((banquesEntities) => {
+                                console.log('Banques now loaded:', banquesEntities);
+                                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                            });
+
                     }
 
                     break;

@@ -138,7 +138,8 @@ export class AuditReportComponent implements OnInit {
                 {label: $localize`:@@Usage:Usage` , value: 'usage' },
                 {label: $localize`:@@Rights:Rights` , value: 'rights' },
             ];
-            this.banqueService.getAll()
+            const classicBanks = { 'classicBanks': '1' };
+            this.banqueService.getWithQuery(classicBanks)
                 .subscribe((banquesEntities) => {
                     console.log('Banques now loaded:', banquesEntities);
                     this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));

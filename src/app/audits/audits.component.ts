@@ -82,13 +82,12 @@ export class AuditsComponent implements OnInit {
         .subscribe();
   }
   private initializeDependingOnUserRights(authState: AuthState) {
-    if (authState.user && (authState.user.rights === 'Admin_Banq')) {
+    if (['Admin_FBBA','Admin_Banq'].includes(authState.user.rights)) {
       this.lienBanque = authState.banque.bankId;
       this.filterBase = { 'bankShortName': authState.banque.bankShortName};
     }
 
-
-    if (['Admin_FBBA','admin'].includes(authState.user.rights)) {
+    if (authState.user.rights === 'admin') {
       this.lienBanque = 0;
       this.filterBase = {};
       this.banqueService.getAll()

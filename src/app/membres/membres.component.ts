@@ -269,15 +269,35 @@ export class MembresComponent implements OnInit {
                         {idDis: 0, fullname: $localize`:@@banks:Banks` },
                         {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
                     ];
-                    this.banqueService.getAll()
-                        .pipe(
-                            tap((banquesEntities) => {
+
+                    if (authState.user.rights === 'admin') {
+                        this.filterBase = { };
+                        this.banqueService.getAll()
+                            .subscribe( banquesEntities => {
                                 console.log('Banques now loaded:', banquesEntities);
-                                const bankOptionsPrepend = [{ 'label': '???','value' : 999 }];
-                                this.bankOptions = bankOptionsPrepend.concat(banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId})));
+                                const bankOptionsPrepend = [{'label': '???', 'value': 999}];
+                                this.bankOptions = bankOptionsPrepend.concat(banquesEntities.map(({
+                                                                                                      bankShortName,
+                                                                                                      bankId
+                                                                                                  }) => ({
+                                    'label': bankShortName,
+                                    'value': bankId
+                                })));
                                 console.log('Bank Options are:', this.bankOptions);
-                            })
-                        ).subscribe();
+                            });
+                    }
+                    else {
+                        this.filterBase = { 'classicBanks': '1'};
+                        const classicBanks = { 'classicBanks': '1' };
+                        this.banqueService.getWithQuery(classicBanks).subscribe(
+                            banquesEntities => {
+                                this.bankOptions  = banquesEntities.map(({bankShortName, bankId}) => ({
+                                    'label': bankShortName,
+                                    'value': bankId
+                                }));
+                            });
+
+                    }
                     break;
                 default:
             }

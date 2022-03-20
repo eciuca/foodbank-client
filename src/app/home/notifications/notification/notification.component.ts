@@ -83,15 +83,16 @@ export class NotificationComponent implements OnInit {
             console.log('Existing Notification : ', notification);
             this.notification = notification;
           } else {
-            console.log('New Notification ! ');
-            this.notification = new DefaultNotification();
-              this.notification.language = this.userLanguage;
-              this.notification.audience =this.audiences[0];
-            this.notification.author = this.author;
-            if (this.myform) {
-              this.myform.reset(this.notification);
-            }
-
+              if (this.audiences) { // skip if component not yet initialzed
+                  console.log('New Notification ! ');
+                  this.notification = new DefaultNotification();
+                  this.notification.language = this.userLanguage;
+                  this.notification.audience = this.audiences[0];
+                  this.notification.author = this.author;
+                  if (this.myform) {
+                      this.myform.reset(this.notification);
+                  }
+              }
           }
         });
 
