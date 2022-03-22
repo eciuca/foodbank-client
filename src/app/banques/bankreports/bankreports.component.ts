@@ -8,8 +8,9 @@ import {map} from 'rxjs/operators';
 import { BanqueReportService} from '../services/banque-report.service';
 import {AuthState} from '../../auth/reducers';
 import {BanqueEntityService} from '../services/banque-entity.service';
-import {BanqueOrgReport} from '../model/banqueOrgReport';
 import {BanqueCount} from '../model/banqueCount';
+import {formatDate} from '@angular/common';
+import {ExcelService} from '../../services/excel.service';
 @Component({
   selector: 'app-bankreports',
   templateUrl: './bankreports.component.html',
@@ -36,6 +37,7 @@ export class BankreportsComponent implements OnInit {
       private store: Store<AppState>,
       private banqueReportService: BanqueReportService,
       private banqueService: BanqueEntityService,
+      private excelService: ExcelService,
   ) {
    this.backgroundColors = ['magenta','violet','indigo','blue','x0080ff','cyan','green','olive','yellow','orange','red','darkred', 'black','silver'];
     // x0080ff dodger blue
@@ -113,6 +115,7 @@ export class BankreportsComponent implements OnInit {
               let reportDataSets = [];
               reportDataSets.push(
                   {
+                      label:  $localize`:@@organisations:Organisations`,
                       data: [],
                       backgroundColor: []
                   }
@@ -120,8 +123,8 @@ export class BankreportsComponent implements OnInit {
               let colorIndex=0;
               let totalCount =0;
               for (let i=0; i < banqueOrgCounts.length; i++ ) {
-
-                      if (banqueOrgCounts[i].count < 1) continue;
+                  const bankOptionIndex = this.bankOptions.findIndex(obj => obj.label === banqueOrgCounts[i].bankShortName );
+                  if (bankOptionIndex === -1) continue;
                       totalCount += banqueOrgCounts[i].count
                       reportLabels.push( banqueOrgCounts[i].bankShortName);
                       reportDataSets[0].data.push(banqueOrgCounts[i].count);
@@ -149,6 +152,7 @@ export class BankreportsComponent implements OnInit {
                 let reportDataSets = [];
                 reportDataSets.push(
                     {
+                        label:  $localize`:@@Employees:Employees`,
                         data: [],
                         backgroundColor: []
                     }
@@ -156,8 +160,8 @@ export class BankreportsComponent implements OnInit {
                 let colorIndex=0;
                 let totalCount =0;
                 for (let i=0; i < banqueMembreCounts.length; i++ ) {
-
-                    if (banqueMembreCounts[i].count < 1) continue;
+                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.label === banqueMembreCounts[i].bankShortName );
+                    if (bankOptionIndex === -1) continue;
                     totalCount += banqueMembreCounts[i].count
                     reportLabels.push( banqueMembreCounts[i].bankShortName);
                     reportDataSets[0].data.push(banqueMembreCounts[i].count);
@@ -185,6 +189,7 @@ export class BankreportsComponent implements OnInit {
                 let reportDataSets = [];
                 reportDataSets.push(
                     {
+                        label:  $localize`:@@Users:Users`,
                         data: [],
                         backgroundColor: []
                     }
@@ -192,8 +197,8 @@ export class BankreportsComponent implements OnInit {
                 let colorIndex=0;
                 let totalCount =0;
                 for (let i=0; i < banqueUserCounts.length; i++ ) {
-                    if( !banqueUserCounts[i].bankShortName ) continue;
-                    if (banqueUserCounts[i].count < 1) continue;
+                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.label === banqueUserCounts[i].bankShortName );
+                    if (bankOptionIndex === -1) continue;
                     totalCount += banqueUserCounts[i].count;
                     reportLabels.push( banqueUserCounts[i].bankShortName);
                     reportDataSets[0].data.push(banqueUserCounts[i].count);
@@ -215,7 +220,18 @@ export class BankreportsComponent implements OnInit {
     }
 
 
+    exportAsXLSX() {
 
+        const exportListOrgs = [];
+        exportListOrgs.push([$localize`:@@Bank:Bank`,$localize`:@@Organisations:Organisations`,$localize`:@@Users:Users` ,$localize`:@@Members:Members`]);
+        for (let i=0; i < this.chartDataOrgCount.labels.length; i++ ) {
+            const line = [this.chartDataOrgCount.labels[i]];
+            line.push(this.chartDataOrgCount.datasets[0].data[i]);
+            line.push(this.chartDataUserCount.datasets[0].data[i]);
+            line.push(this.chartDataMembreCount.datasets[0].data[i]);
+            exportListOrgs.push(line);
+        }
+        this.excelService.exportAsExcelFile(exportListOrgs, 'foodit.organisationStatistics.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
 
-
+    }
 }

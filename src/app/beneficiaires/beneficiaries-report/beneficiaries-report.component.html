@@ -1,5 +1,10 @@
 <p-panel>
     <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-3">
+            <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Report" i18n-label="@@ExportReport"></button>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
         <div *ngIf="chartDataBeneficiaryByFamily" class="p-field p-col-12 p-md-6 card">
                 <h3>{{ titleBenefiariesByFamily }}</h3>
                 <p-chart type="bar" [data]="chartDataBeneficiaryByFamily" [options]="basicOptions"></p-chart>

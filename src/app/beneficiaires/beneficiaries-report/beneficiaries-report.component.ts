@@ -11,6 +11,8 @@ import {BanqueEntityService} from '../../banques/services/banque-entity.service'
 import {Population} from '../model/population';
 import {BanqueOrgReport} from '../../banques/model/banqueOrgReport';
 import {BanqueReportService} from '../../banques/services/banque-report.service';
+import {formatDate} from '@angular/common';
+import {ExcelService} from '../../services/excel.service';
 
 @Component({
   selector: 'app-beneficiaries-report',
@@ -36,6 +38,7 @@ export class BeneficiariesReportComponent implements OnInit {
       private beneficiaireHttpService: BeneficiaireHttpService,
       private banqueService: BanqueEntityService,
       private banqueReportService: BanqueReportService,
+      private excelService: ExcelService,
       private authService: AuthService,
       private http: HttpClient,
       private store: Store<AppState>
@@ -262,4 +265,27 @@ export class BeneficiariesReportComponent implements OnInit {
               }
           })
   }
+    exportAsXLSX() {
+
+        const exportListOrgs = [];
+        exportListOrgs.push([$localize`:@@Bank:Bank`,$localize`:@@Families:Families`,$localize`:@@Persons:Persons`,
+            $localize`:@@OrgStatInfants:Infants(0-6 months)` ,$localize`:@@OrgStatBabies:Babies(6-24 months)`,
+            $localize`:@@OrgStatChildren:Children(2-14 years)`, $localize`:@@OrgStatTeenagers:Teenagers(14-18 years)`,
+            $localize`:@@OrgStatYoungAdults:Young Adults(18-24 years)`, $localize`:@@OrgSeniors:Seniors(> 65 years)`]
+        );
+        for (let i=0; i < this.chartDataBeneficiaryByFamily.labels.length; i++ ) {
+            const line = [this.chartDataBeneficiaryByFamily.labels[i]];
+            line.push(this.chartDataBeneficiaryByFamily.datasets[0].data[i]);
+            line.push(this.chartDataBeneficiaryByFamily.datasets[1].data[i]);
+            line.push(this.chartDataBeneficiaryByAge.datasets[0].data[i]);
+            line.push(this.chartDataBeneficiaryByAge.datasets[1].data[i]);
+            line.push(this.chartDataBeneficiaryByAge.datasets[2].data[i]);
+            line.push(this.chartDataBeneficiaryByAge.datasets[3].data[i]);
+            line.push(this.chartDataBeneficiaryByAge.datasets[4].data[i]);
+            line.push(this.chartDataBeneficiaryByAge.datasets[5].data[i]);
+            exportListOrgs.push(line);
+        }
+        this.excelService.exportAsExcelFile(exportListOrgs, 'foodit.beneficiaryStatistics.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
+
+    }
 }
