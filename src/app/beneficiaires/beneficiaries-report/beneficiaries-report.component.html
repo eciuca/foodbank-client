@@ -13,7 +13,11 @@
                 <h3>{{ titleBenefiariesByAge }}</h3>
                 <p-chart type="bar" [data]="chartDataBeneficiaryByAge" [options]="stackedOptions"></p-chart>
         </div>
-
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-3">
+            <button  type="button" pButton icon="pi pi-plus" (click)="exportHistoryAsXLSX()" label="Export History Report" i18n-label="@@ExportHistoryReport"></button>
+        </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">
         <div *ngIf="chartDataBeneficiariesHistory" class="p-field p-col-12 p-md-6 card">

@@ -33,8 +33,9 @@ export class BeneficiariesReportComponent implements OnInit {
     chartDataBeneficiaryByFamily: any;
     chartDataBeneficiariesHistory: any;
     chartDataBeneficiariesFamilyHistory: any;
+    populationRecords: Population[];
 
-  constructor(
+    constructor(
       private beneficiaireHttpService: BeneficiaireHttpService,
       private banqueService: BanqueEntityService,
       private banqueReportService: BanqueReportService,
@@ -210,7 +211,7 @@ export class BeneficiariesReportComponent implements OnInit {
 
     this.beneficiaireHttpService.getPopulationReport(this.authService.accessToken).subscribe(
           (response: Population[]) => {
-              const populationRecords: Population[] = response;
+              this.populationRecords = response;
               let reportLabels = [];
               let reportDataSetsPerson = [];
               let reportDataSetsFamily = [];
@@ -238,20 +239,20 @@ export class BeneficiariesReportComponent implements OnInit {
 
               }
 
-              for (let i = 0; i < populationRecords.length; i++) {
-                  const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === populationRecords[i].lienBanque);
+              for (let i = 0; i < this.populationRecords.length; i++) {
+                  const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.populationRecords[i].lienBanque);
                   if (bankOptionIndex === -1) continue;
-                  if (!reportLabels.includes(populationRecords[i].dateStat)) {
-                      reportLabels.push(populationRecords[i].dateStat);
-                      console.log('New Date', populationRecords[i].dateStat);
+                  if (!reportLabels.includes(this.populationRecords[i].dateStat)) {
+                      reportLabels.push(this.populationRecords[i].dateStat);
+                      // console.log('New Date', this.populationRecords[i].dateStat);
                       for (let i=0; i < this.bankOptions.length; i++ ) {
                           reportDataSetsPerson[i].data.push(0);
                           reportDataSetsFamily[i].data.push(0);
                       }
                   }
                   const dataIndex = reportLabels.length;
-                  reportDataSetsPerson[bankOptionIndex].data[dataIndex] = populationRecords[i].nPers;
-                  reportDataSetsFamily[bankOptionIndex].data[dataIndex] = populationRecords[i].nFam;
+                  reportDataSetsPerson[bankOptionIndex].data[dataIndex] = this.populationRecords[i].nPers;
+                  reportDataSetsFamily[bankOptionIndex].data[dataIndex] = this.populationRecords[i].nFam;
               }
               this.titleBeneficiariesEvolution = $localize`:@@OrgStatBenefHistory:Evolution of Nb of Beneficiaries by Bank`;
               this.chartDataBeneficiariesHistory = {
@@ -265,6 +266,34 @@ export class BeneficiariesReportComponent implements OnInit {
               }
           })
   }
+    exportHistoryAsXLSX() {
+        const exportListHistory = [];
+        exportListHistory.push([$localize`:@@Date:Date`,$localize`:@@Bank:Bank`,$localize`:@@Families:Families`,$localize`:@@Persons:Persons`,
+            $localize`:@@OrgStatInfants:Infants(0-6 months)` ,$localize`:@@OrgStatBabies:Babies(6-24 months)`,
+            $localize`:@@OrgStatChildren:Children(2-14 years)`, $localize`:@@OrgStatTeenagers:Teenagers(14-18 years)`,
+            $localize`:@@OrgStatYoungAdults:Young Adults(18-24 years)`, $localize`:@@OrgSeniors:Seniors(> 65 years)`]
+        );
+        for (let i=0; i < this.populationRecords.length; i++ ) {
+            const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.populationRecords[i].lienBanque);
+            if (bankOptionIndex === -1) continue;
+            if(!this.populationRecords[i].n1824) {
+                this.populationRecords[i].n1824 = 0;
+            }
+            const line = [this.populationRecords[i].dateStat];
+            line.push(this.bankOptions[bankOptionIndex].label);
+            line.push(this.populationRecords[i].nFam.toString());
+            line.push(this.populationRecords[i].nPers.toString());
+            line.push(this.populationRecords[i].nNour.toString());
+            line.push(this.populationRecords[i].nBebe.toString());
+            line.push(this.populationRecords[i].nEnf.toString());
+            line.push(this.populationRecords[i].nAdo.toString());
+            line.push(this.populationRecords[i].n1824.toString());
+            line.push(this.populationRecords[i].nSen.toString());
+            exportListHistory.push(line);
+        }
+        this.excelService.exportAsExcelFile( exportListHistory, 'foodit.beneficiaryHistoryStatistics.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
+
+    }
     exportAsXLSX() {
 
         const exportListOrgs = [];
@@ -287,5 +316,6 @@ export class BeneficiariesReportComponent implements OnInit {
         }
         this.excelService.exportAsExcelFile(exportListOrgs, 'foodit.beneficiaryStatistics.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
 
+      
     }
 }
