@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {DefaultDataService, DefaultDataServiceConfig, HttpUrlGenerator} from '@ngrx/data';
-import {Membre} from '../model/membre';
+import {MembreFunction} from '../model/membreFunction';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable()
-export class MembresDataService extends DefaultDataService<Membre> {
+export class MembreFunctionsDataService extends DefaultDataService<MembreFunction> {
     constructor( http: HttpClient, httpUrlGenerator: HttpUrlGenerator, config: DefaultDataServiceConfig) {
-        super('Membre', http, httpUrlGenerator, config);
+        super('MembreFunction', http, httpUrlGenerator, config);
     }
 }

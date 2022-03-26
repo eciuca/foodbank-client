@@ -1,0 +1,28 @@
+<p-panel  *ngIf="membreFunction">
+    <form  #membreFunctionForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button type="button" pButton icon="pi pi-times" (click)="delete($event,membreFunction)" i18n-label="@@Delete" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(membreFunction, membreFunctionForm.value)"  i18n-label="@@Save" label="Save"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="quit($event, membreFunction, membreFunctionForm, membreFunctionForm.dirty)" i18n-label="@@Return" label="Return" ></button>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-12">
+                <label i18n="@@MemberFunctionNameFr" for="fonctionName">Name of the Function (FR)</label>
+                <input pInputText id="fonctionName" name="fonctionName" maxlength="50" [ngModel]="membreFunction.fonctionName" />
+            </div>
+            <div class="p-field p-col-12 p-md-12">
+                <label i18n="@@MemberFunctionNameNl" for="fonctionNameNl">Name of the Function (NL)</label>
+                <input pInputText id="fonctionNameNl" name="fonctionNameNl" maxlength="50" [ngModel]="membreFunction.fonctionNameNl" />
+            </div>
+            <div class="p-field p-col-12 p-md-12">
+                <label i18n="@@Definition" for="definitionFonction">Definition</label>
+                <input pInputText id="definitionFonction" name="definitionFonction"  [ngModel]="membreFunction.definitionFonction" />
+            </div>
+            <div class="p-field p-col-12 p-md-12">
+                <label i18n="@@Remarks" for="rem">Remarks</label>
+                <input pInputText id="rem" name="rem"  [ngModel]="membreFunction.rem" />
+            </div>
+        </div>
+        <p-confirmPopup></p-confirmPopup>
+    </form>
+</p-panel>

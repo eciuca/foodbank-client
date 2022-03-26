@@ -21,6 +21,8 @@ import {Audit, compareAudits} from './audits/model/audit';
 import {compareOrgaudits, Orgaudit} from './organisations/model/orgaudit';
 import {compareMailAddresses, MailAddress} from './mailings/model/mailaddress';
 import {compareOrgPrograms, OrgProgram} from './organisations/model/orgprogram';
+import {compareMembreFunctions, MembreFunction} from './membres/model/membreFunction';
+import {compareMembreEmploiTypes, MembreEmploiType} from './membres/model/membreEmploiType';
 
 
 export const appEntityMetadata: EntityMetadataMap = {
@@ -37,6 +39,16 @@ export const appEntityMetadata: EntityMetadataMap = {
     MembreMail: {
         sortComparer: compareMembreMails,
         selectId: (membreMail: MembreMail) => membreMail.batId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
+    },
+    MembreFunction: {
+        sortComparer: compareMembreFunctions,
+        selectId: (membreFunction: MembreFunction) => membreFunction.funcId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
+    },
+    MembreEmploiType: {
+        sortComparer: compareMembreEmploiTypes,
+        selectId: (membreEmploiType: MembreEmploiType) => membreEmploiType.jobNr,
         entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
     },
     MailAddress: {

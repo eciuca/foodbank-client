@@ -29,8 +29,24 @@ import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {TooltipModule} from 'primeng/tooltip';
 import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
 import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
+import { MembreEmploitypesComponent } from './membre-emploitypes/membre-emploitypes.component';
+import { MembreEmploitypeComponent } from './membre-emploitypes/membre-emploitype/membre-emploitype.component';
+import { MembreFunctionComponent } from './membre-functions/membre-function/membre-function.component';
+import { MembreFunctionsComponent } from './membre-functions/membre-functions.component';
+import {MembreEmploiTypesDataService} from './services/membreEmploiTypes-data.service';
+import {MembreEmploiTypeEntityService} from './services/membreEmploiType-entity.service';
+import {MembreFunctionsDataService} from './services/membreFunctions-data.service';
+import {MembreFunctionEntityService} from './services/membreFunction-entity.service';
+
 
 const routes: Routes = [
+    {   path: 'membreemploitypes/:bankId',
+        component: MembreEmploitypesComponent,
+
+    },
+    {   path: 'membrefunctions/:bankId',
+        component: MembreFunctionsComponent,
+    },
   { path: '',
     component: MembresComponent,
   },
@@ -40,7 +56,7 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  declarations: [MembresComponent, MembreComponent],
+  declarations: [MembresComponent, MembreComponent, MembreEmploitypesComponent, MembreEmploitypeComponent, MembreFunctionComponent, MembreFunctionsComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -63,6 +79,10 @@ const routes: Routes = [
   providers: [
     MembresDataService,
     MembreEntityService,
+      MembreEmploiTypesDataService,
+      MembreEmploiTypeEntityService,
+      MembreFunctionsDataService,
+      MembreFunctionEntityService,
       OrganisationsDataService,
       OrganisationEntityService,
       OrgSummariesDataService,
@@ -77,12 +97,16 @@ export class MembresModule {
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
       private membresDataService: MembresDataService,
+      private membreFunctionsDataService: MembreFunctionsDataService,
+      private membreEmploiTypesDataService: MembreEmploiTypesDataService,
       private banquesDataService: BanquesDataService,
       private organisationsDataService: OrganisationsDataService,
       private orgSummariesDataService: OrgSummariesDataService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Membre', membresDataService);
+    entityDataService.registerService('MembreFunction', membreFunctionsDataService);
+    entityDataService.registerService('MembreEmploiType', membreEmploiTypesDataService);
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('Organisation', organisationsDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
