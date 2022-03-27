@@ -1,5 +1,5 @@
 <p-table #dt *ngIf="membreFunctions" [value]="membreFunctions" selectionMode="single" [rowHover]="true"
-         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
+         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords"  [(first)]="first"
          [paginator]="true" >
     <ng-template pTemplate="caption">
         <div class="table-header">
@@ -8,7 +8,9 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th i18n="@@NameSorted" pSortableColumn="fonctionName">Name<p-sortIcon field="fonctionName"></p-sortIcon></th>
+            <th *ngIf="userLanguage =='fr'" i18n="@@FunctionNameFrSorted" pSortableColumn="fonctionName">Name<p-sortIcon field="fonctionName"></p-sortIcon></th>
+            <th *ngIf="userLanguage !='fr'" i18n="@@FunctionNameNlSorted" pSortableColumn="fonctionNameNl">Name<p-sortIcon field="fonctionNameNl"></p-sortIcon></th>
+            <th>Type</th>
             <th i18n="@@Definition">Definition</th>
             <th i18n="@@Remarks">Remarks</th>
         </tr>
@@ -17,9 +19,15 @@
         <tr (click)="handleSelect(membreFunction)">
             <td *ngIf="userLanguage =='fr'">{{membreFunction.fonctionName}}</td>
             <td *ngIf="userLanguage !='fr'">{{membreFunction.fonctionNameNl}}</td>
+            <td>{{getType(membreFunction)}}</td>
             <td>{{membreFunction.definitionFonction}}</td>
             <td>{{membreFunction.rem}}</td>
         </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div i18n="@@FunctionsSelected" class="p-d-flex p-ai-center p-jc-between">
+            There are {{totalRecords}} functions.
+        </div>
     </ng-template>
 </p-table>
 <p-dialog header="Member Function Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">

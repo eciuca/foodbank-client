@@ -25,13 +25,19 @@ export class MembreFunctionComponent implements OnInit {
   @Output() onMembreFunctionQuit = new EventEmitter<MembreFunction>();
   membreFunction: MembreFunction;
   lienBanque: number;
+  bankShortName: string;
+  isGlobalAdmin: boolean;
+  booCanUpdate: boolean;
   constructor(
       private membreFunctionsService: MembreFunctionEntityService,
       private store: Store<AppState>,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
-     this.lienBanque = 0;
+    this.isGlobalAdmin = false;
+    this.lienBanque = 0;
+    this.bankShortName = '???';
+    this.booCanUpdate = false;
   }
 
   ngOnInit(): void {
@@ -44,6 +50,13 @@ export class MembreFunctionComponent implements OnInit {
     membreFunction$.subscribe(membreFunction => {
       if (membreFunction) {
         this.membreFunction = membreFunction;
+        this.booCanUpdate = false;
+        if((this.membreFunction.lienBanque == 0) && this.isGlobalAdmin) {
+          this.booCanUpdate = true;
+        }
+        if((this.membreFunction.lienBanque > 0) && (this.isGlobalAdmin == false)) {
+          this.booCanUpdate = true;
+        }
         console.log('our membreFunction:', this.membreFunction);
       } else {
         this.membreFunction = new DefaultMembreFunction();
@@ -51,6 +64,7 @@ export class MembreFunctionComponent implements OnInit {
         if (this.myform) {
           this.myform.reset(this.membreFunction);
         }
+        this.booCanUpdate = true;
         console.log('we have a new default membreFunction');
       }
     });
@@ -59,7 +73,13 @@ export class MembreFunctionComponent implements OnInit {
         .pipe(
             select(globalAuthState),
             map((authState) => {
-              this.lienBanque= authState.banque.bankId;
+              if (authState.user.rights == 'admin') {
+                this.isGlobalAdmin = true;
+              }
+              if (authState.user.rights == 'Admin_Banq') {
+                this.bankShortName = authState.banque.bankShortName;
+                this.lienBanque = authState.banque.bankId;
+              }
             })
         )
         .subscribe();
@@ -74,7 +94,7 @@ export class MembreFunctionComponent implements OnInit {
         const myMessage = {
           severity: 'success',
           summary: 'Delete',
-          detail: `The membreFunction  has been deleted`
+          detail: $localize`:@@messageFunctionDeleted:The function was deleted`
         };
         this.membreFunctionsService.delete(membreFunction)
             .subscribe(() => {
@@ -82,10 +102,9 @@ export class MembreFunctionComponent implements OnInit {
                   this.onMembreFunctionDelete.emit(membreFunction);
                 },
                 (dataserviceerror: DataServiceError) => {
-                  console.log('Error deleting contact', dataserviceerror.message);
-                  const  errMessage = {severity: 'error', summary: 'Delete',
+                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
-                    detail: `The membreFunction could not be deleted: error: ${dataserviceerror.message}`,
+                    detail: $localize`:@@messageFunctionDeleteError:The function could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
                 });
@@ -105,7 +124,7 @@ export class MembreFunctionComponent implements OnInit {
                 this.messageService.add({
                   severity: 'success',
                   summary: 'Update',
-                  detail: `The membreFunction  was updated`
+                  detail: $localize`:@@messageFunctionUpdated:The function was updated`
                 });
                 this.onMembreFunctionUpdate.emit(modifiedMembreFunction);
               },
@@ -113,7 +132,7 @@ export class MembreFunctionComponent implements OnInit {
                 console.log('Error updating contact', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
-                  detail: `The membreFunction could not be updated: error: ${dataserviceerror.message}`,
+                  detail: $localize`:@@messageFunctionUpdateError:The function could not be updated: error: ${dataserviceerror.message}`,
                   life: 6000 };
                 this.messageService.add(errMessage) ;
               });
@@ -125,7 +144,7 @@ export class MembreFunctionComponent implements OnInit {
                 this.messageService.add({
                   severity: 'success',
                   summary: 'Creation',
-                  detail: `The  membreFunction  has been created`
+                  detail: $localize`:@@messageFunctionCreated:The function was created`
                 });
                 this.onMembreFunctionCreate.emit(newMembreFunction);
               },
@@ -133,7 +152,7 @@ export class MembreFunctionComponent implements OnInit {
                 console.log('Error creating contact', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
-                  detail: `The  membreFunction could not be created: error: ${dataserviceerror.message}`,
+                  detail: $localize`:@@messageFunctionCreateError:The function could not be created: error: ${dataserviceerror.message}`,
                   life: 6000 };
                 this.messageService.add(errMessage) ;
               });

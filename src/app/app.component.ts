@@ -329,9 +329,14 @@ export class AppComponent implements OnInit {
                     {label: 'Contacts', icon: 'pi pi-fw pi-users', routerLink: [`/organisations/contacts/${authState.organisation.idDis}`]},
                 );
             }
+            if (['admin', 'Admin_Banq'].includes(authState.user.rights)) {
+                commonSubItems.push(
+                    {label: $localize`:@@menuFunctions:Functions`, icon: 'pi pi-fw pi-map', routerLink: [`/membres/membrefunctions/`]},
+                );
+            }
             if ( authState.user.rights === 'Admin_Banq') {
                 commonSubItems.push(
-                    {label: 'Functions', icon: 'pi pi-fw pi-map', routerLink: [`/membres/membrefunctions/${authState.banque.bankId}`]},
+                    {label: $localize`:@@menuJobTypes:Job Types`, icon: 'pi pi-fw pi-map', routerLink: [`/membres/membreemploitypes/`]},
                 );
             }
             this.menuLoggedInItems.push(

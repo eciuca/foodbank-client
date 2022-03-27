@@ -1,1 +1,30 @@
-<p>membre-emploitypes works!</p>
+<p-table #dt *ngIf="membreEmploiTypes" [value]="membreEmploiTypes" selectionMode="single" [rowHover]="true"
+         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [(first)]="first"
+         [paginator]="true" >
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <button class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add EmploiType" i18n-label="@@MemberEmploiTypeAdd"></button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngIf="userLanguage =='fr'" i18n="@@JobNameFrSorted" pSortableColumn="jobNameFr">Name<p-sortIcon field="jobNameFr"></p-sortIcon></th>
+            <th *ngIf="userLanguage !='fr'" i18n="@@JobNameNlSorted" pSortableColumn="jobNameNl">Name<p-sortIcon field="jobNameNl"></p-sortIcon></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-membreEmploiType>
+        <tr (click)="handleSelect(membreEmploiType)">
+            <td *ngIf="userLanguage =='fr'">{{membreEmploiType.jobNameFr}}</td>
+            <td *ngIf="userLanguage !='fr'">{{membreEmploiType.jobNameNl}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div i18n="@@JobNamesSelected" class="p-d-flex p-ai-center p-jc-between">
+            There are {{totalRecords}} job types.
+        </div>
+    </ng-template>
+</p-table>
+<p-dialog header="Member EmploiType Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
+    <app-membreEmploiType *ngIf="selectedMembreEmploiTypeId$" [jobNr$]="selectedMembreEmploiTypeId$"  (onMembreEmploiTypeUpdate)="handleMembreEmploiTypeUpdate($event)"
+                          (onMembreEmploiTypeCreate)="handleMembreEmploiTypeCreate($event)"  (onMembreEmploiTypeDelete)="handleMembreEmploiTypeDeleted($event)" (onMembreEmploiTypeQuit)="handleMembreEmploiTypeQuit()"></app-membreEmploiType>
+</p-dialog>

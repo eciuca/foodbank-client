@@ -29,8 +29,8 @@ import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {TooltipModule} from 'primeng/tooltip';
 import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
 import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
-import { MembreEmploitypesComponent } from './membre-emploitypes/membre-emploitypes.component';
-import { MembreEmploitypeComponent } from './membre-emploitypes/membre-emploitype/membre-emploitype.component';
+import { MembreEmploiTypesComponent } from './membre-emploitypes/membre-emploitypes.component';
+import { MembreEmploiTypeComponent } from './membre-emploitypes/membre-emploitype/membre-emploitype.component';
 import { MembreFunctionComponent } from './membre-functions/membre-function/membre-function.component';
 import { MembreFunctionsComponent } from './membre-functions/membre-functions.component';
 import {MembreEmploiTypesDataService} from './services/membreEmploiTypes-data.service';
@@ -40,11 +40,11 @@ import {MembreFunctionEntityService} from './services/membreFunction-entity.serv
 
 
 const routes: Routes = [
-    {   path: 'membreemploitypes/:bankId',
-        component: MembreEmploitypesComponent,
+    {   path: 'membreemploitypes',
+        component: MembreEmploiTypesComponent,
 
     },
-    {   path: 'membrefunctions/:bankId',
+    {   path: 'membrefunctions',
         component: MembreFunctionsComponent,
     },
   { path: '',
@@ -56,7 +56,7 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  declarations: [MembresComponent, MembreComponent, MembreEmploitypesComponent, MembreEmploitypeComponent, MembreFunctionComponent, MembreFunctionsComponent],
+  declarations: [MembresComponent, MembreComponent, MembreEmploiTypesComponent, MembreEmploiTypeComponent, MembreFunctionComponent, MembreFunctionsComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),

@@ -8,18 +8,19 @@ import {AppState} from '../../reducers';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
-  selector: 'membre-functions',
+  selector: 'app-membre-functions',
   templateUrl: './membre-functions.component.html',
   styleUrls: ['./membre-functions.component.css']
 })
 export class MembreFunctionsComponent implements OnInit {
   membreFunctions : MembreFunction[];
   bankShortName: string;
+  lienBanque: number;
   displayDialog: boolean;
   first: number;
   totalRecords: number;
   userLanguage: string;
-  loading: boolean;
+  isGlobalAdmin: boolean;
   selectedMembreFunctionId$ = new BehaviorSubject(0);
   constructor(
       private membreFunctionEntityService: MembreFunctionEntityService,
@@ -27,7 +28,9 @@ export class MembreFunctionsComponent implements OnInit {
   ) {
     this.first = 0;
     this.totalRecords = 0;
-    this.loading = true;
+    this.isGlobalAdmin = false;
+    this.lienBanque = 0;
+    this.bankShortName = '???';
 }
 
   ngOnInit(): void {
@@ -35,20 +38,31 @@ export class MembreFunctionsComponent implements OnInit {
       .pipe(
           select(globalAuthState),
           map((authState) => {
-            this.bankShortName = authState.banque.bankShortName;
+              if (authState.user.rights == 'admin') {
+                  this.isGlobalAdmin = true;
+              }
+              if (authState.user.rights == 'Admin_Banq') {
+                  this.bankShortName = authState.banque.bankShortName;
+                  this.lienBanque = authState.banque.bankId;
+              }
+
             this.userLanguage = authState.user.idLanguage;
-            const queryParms = { 'actif': '1' ,'lienBanque': authState.banque.bankId.toString(), 'language': this.userLanguage };
-              this.membreFunctionEntityService.getWithQuery(queryParms)
-                  .subscribe((membreFunctions) => {
-                    console.log('Membre functions now loaded:', membreFunctions);
-                    this.membreFunctions = membreFunctions;
-                    this.totalRecords = membreFunctions.length;
-                    this.loading = false;
-                  });
+              this.reload();
+
           })
       )
       .subscribe();
 
+  }
+  reload() {
+      const queryParms = { 'actif': '1' ,'lienBanque': this.lienBanque.toString(), 'language': this.userLanguage };
+      this.membreFunctionEntityService.getWithQuery(queryParms)
+          .subscribe((membreFunctions) => {
+              console.log('Membre functions now loaded:', membreFunctions);
+              this.membreFunctions = membreFunctions;
+              this.totalRecords = membreFunctions.length;
+              this.first = 0;
+          });
   }
 
     handleSelect(membreFunction: MembreFunction) {
@@ -72,12 +86,22 @@ export class MembreFunctionsComponent implements OnInit {
     }
     handleMembreFunctionCreate(createdMembreFunction: MembreFunction) {
         this.membreFunctions.push({...createdMembreFunction});
+        this.reload();
         this.displayDialog = false;
     }
 
     handleMembreFunctionDeleted(deletedMembreFunction) {
         const index = this.membreFunctions.findIndex(membreFunction => membreFunction.funcId === deletedMembreFunction.funcId);
         this.membreFunctions.splice(index, 1);
+        console.log('spliced index', index);
+        this.reload();
         this.displayDialog = false;
+    }
+
+    getType(membreFunction: MembreFunction) {
+      if (membreFunction.lienBanque == 0) {
+          return $localize`:@@FunctionGlobal:Global`;
+      }
+        return this.bankShortName;
     }
 }
