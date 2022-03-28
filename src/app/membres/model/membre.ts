@@ -29,11 +29,11 @@ export interface Membre {
 
     fonction: number;
 
-    ca: number;
+    ca: boolean;
 
-    ag: number;
+    ag: boolean;
 
-    cg: number;
+    cg: boolean;
 
     civilite: number;
 
@@ -47,7 +47,7 @@ export interface Membre {
 
     rem: string;
 
-    ben: number;
+    ben: boolean;
 
     codeAcces: number;
 
@@ -67,7 +67,7 @@ export interface Membre {
     nnat: string;
 
     dateContrat: string;
-    lDep: number;
+    ldep: number;
     lienBanque: number;
     societe: string; // calculated field
     bankShortName: string;
@@ -91,14 +91,14 @@ export class DefaultMembre implements Membre {
 
     actif: boolean;
     address: string;
-    ag: number;
+    ag: boolean;
     authority: number;
     lienBanque: number;
     batId: number;
     batmail: string;
-    ben: number;
-    ca: number;
-    cg: number;
+    ben: boolean;
+    ca: boolean;
+    cg: boolean;
     city: string;
     civilite: number;
     codeAcces: number;
@@ -111,7 +111,7 @@ export class DefaultMembre implements Membre {
     fonction: number;
     fullname: string;
     gsm: string;
-    lDep: number;
+    ldep: number;
     langue: number;
     lienDis: number;
     nnat: string;
@@ -134,13 +134,13 @@ export class DefaultMembre implements Membre {
     constructor() {
         this.actif = true;
         this.address = '';
-        this.ag = 0;
+        this.ag = false;
         this.authority = 0;
         this.lienBanque = 0;
         this.batmail = '';
-        this.ben = 0;
-        this.ca = 0;
-        this.cg = 0;
+        this.ben = true;
+        this.ca = false;
+        this.cg = false;
         this.city = '';
         this.civilite = 1;
         this.codeAcces = 0;
@@ -153,7 +153,7 @@ export class DefaultMembre implements Membre {
         this.fonction = 0;
         this.fullname = '';
         this.gsm = '';
-        this.lDep = 0;
+        this.ldep = 0;
         this.langue = 2;
         this.lienDis = 0;
         this.nnat = '';

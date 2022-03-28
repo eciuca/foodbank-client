@@ -16,6 +16,12 @@ import {UserHttpService} from '../../users/services/user-http.service';
 import {AuthService} from '../../auth/auth.service';
 import {User} from '../../users/model/user';
 import {OrganisationEntityService} from '../../organisations/services/organisation-entity.service';
+import {MembreFunction} from '../model/membreFunction';
+import {MembreFunctionEntityService} from '../services/membreFunction-entity.service';
+import {MembreEmploiType} from '../model/membreEmploiType';
+import {MembreEmploiTypeEntityService} from '../services/membreEmploiType-entity.service';
+import {OrgSummary} from '../../organisations/model/orgsummary';
+import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
 
 @Component({
   selector: 'app-membre',
@@ -51,9 +57,18 @@ export class MembreComponent implements OnInit {
     depotName: string;
     isAdmin: boolean;
     userIds: string;
+    membreFunctions : any[];
+    membreEmploiTypes : any[];
+    selectedFunction: any;
+    selectedEmploiType: any;
+    depots: any[];
+    selectedDepot: any;
     constructor(
       private membresService: MembreEntityService,
+      private membreFunctionEntityService: MembreFunctionEntityService,
+      private membreEmploiTypeEntityService: MembreEmploiTypeEntityService,
       private organisationsService: OrganisationEntityService,
+      private orgsummaryService: OrgSummaryEntityService,
       private userHttpService: UserHttpService,
       private authService: AuthService,
       private route: ActivatedRoute,
@@ -78,6 +93,9 @@ export class MembreComponent implements OnInit {
       this.booIsOrganisation = false;
       this.title = '';
       this.userIds = '';
+      this.depots = [{label: ' ',value: null}];
+      this.membreFunctions = [{label: ' ',value: null}];
+      this.membreEmploiTypes = [{label: ' ',value: null}];
   }
 
   ngOnInit(): void {
@@ -115,15 +133,18 @@ export class MembreComponent implements OnInit {
                                       membre.lienBanque = org.lienBanque;
                                       membre.bankShortName = org.bankShortName;
                                       console.log('Correcting membre bank info from org info with content:', membre);
-                                      this.membre = membre; // need to repeat stmt because execution will be asynchronuous
                                   }
-                                  else {
-                                      this.membre = membre;
-                                  }
-                              });
+                                  this.membre = membre;
+                                  this.selectedFunction = this.membre.fonction;
+                                  this.selectedEmploiType= this.membre.typEmploi;
+                                  this.selectedDepot= this.membre.ldep;
+                          });
                       }
                       else {
                           this.membre = membre;
+                          this.selectedFunction = this.membre.fonction;
+                          this.selectedEmploiType= this.membre.typEmploi;
+                          this.selectedDepot= this.membre.ldep;
                       }
                       if (membre.societe) {
                           this.title = $localize`:@@OrgMemberExisting:Member for organisation ${membre.societe} Updated On ${ membre.lastVisit}`;
@@ -197,6 +218,7 @@ export class MembreComponent implements OnInit {
                       if (this.myform) {
                           this.myform.reset(this.membre);
                       }
+
                   }
               });
       }
@@ -225,6 +247,9 @@ export class MembreComponent implements OnInit {
                                   this.booCanDelete = true;
                               }
                           }
+                          this.loadFunctions(this.lienBanque);
+                          this.loadEmploiTypes(this.lienBanque);
+                          this.loadDepots(this.lienBanque);
                           break;
                       case 'Asso':
                       case 'Admin_Asso':
@@ -250,6 +275,29 @@ export class MembreComponent implements OnInit {
              })
       )
       .subscribe();
+  }
+  loadFunctions(lienBanque: number) {
+      const queryParms = { 'actif': '1' ,'lienBanque': lienBanque.toString(), 'language': this.userLanguage };
+
+      this.membreFunctionEntityService.getWithQuery(queryParms)
+          .subscribe((membreFunctions) => {
+              console.log('Membre functions now loaded:', membreFunctions);
+              membreFunctions.map((membreFunction) => {
+                  this.membreFunctions.push({ label: membreFunction.fonctionName, value: membreFunction.funcId});
+            });
+          })
+  }
+  loadEmploiTypes(lienBanque: number) {
+      const queryParms = { 'actif': '1' ,'lienBanque': lienBanque.toString(), 'language': this.userLanguage };
+
+      this.membreEmploiTypeEntityService.getWithQuery(queryParms)
+          .subscribe((membreEmploiTypes) => {
+              console.log('Membre emploitypes now loaded:', membreEmploiTypes);
+              membreEmploiTypes.map((membreEmploiType) => {
+                  this.membreEmploiTypes.push({ label: membreEmploiType.jobNameFr, value: membreEmploiType.jobNr});
+              });
+
+          })
   }
     delete(event: Event, membre: Membre) {
         this.confirmationService.confirm({
@@ -283,6 +331,10 @@ export class MembreComponent implements OnInit {
 
   save(oldMembre: Membre, membreForm: Membre) {
     const modifiedMembre = Object.assign({}, oldMembre, membreForm);
+    // console.log('Selected Function', this.selectedFunction);
+      modifiedMembre.fonction = this.selectedFunction;
+      modifiedMembre.typEmploi = this.selectedEmploiType;
+      modifiedMembre.ldep= this.selectedDepot;
       if (modifiedMembre.hasOwnProperty('batId')) {
 
           this.membresService.update(modifiedMembre)
@@ -349,6 +401,21 @@ export class MembreComponent implements OnInit {
 
     getMemberTitle(): string {
         return this.title;
+    }
+    loadDepots(lienBanque ) {
+        const queryDepotParms = {};
+        queryDepotParms['offset'] = '0';
+        queryDepotParms['rows'] = '10';
+        queryDepotParms['sortField'] = 'Societe';
+        queryDepotParms['sortOrder'] = '1';
+        queryDepotParms['lienBanque'] = lienBanque;
+        queryDepotParms['isDepot'] = true;
+        this.orgsummaryService.getWithQuery(queryDepotParms)
+            .subscribe(filteredDepots => {
+                filteredDepots.map((orgSummary) => {
+                    this.depots.push({label: orgSummary.societe, value: orgSummary.idDis});
+                });
+            })
     }
 }
 

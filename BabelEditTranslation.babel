@@ -2159,6 +2159,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>ContractDateInvalid</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>Country</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -2307,6 +2328,27 @@
             </concept_node>
             <concept_node>
                 <name>DateMandatory</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>DebDateInvalid</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -3339,6 +3381,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>EndndDateInvalid</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>EnterYourMessage</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -4054,6 +4117,27 @@
             </concept_node>
             <concept_node>
                 <name>FunctionsSelected</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>GenAssembly</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -4872,7 +4956,49 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>MemberBeginDate</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>MemberBirthDate</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>MemberContractDate</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -4956,6 +5082,48 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>MemberEndDate</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>MemberFunction</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>MemberFunctionAdd</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -4999,6 +5167,48 @@
             </concept_node>
             <concept_node>
                 <name>MemberFunctionNameNl</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>MemberJobType</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>MemberMandateDate</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -5188,6 +5398,27 @@
             </concept_node>
             <concept_node>
                 <name>MembreStatMembres</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>MgtComittee</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -10206,6 +10437,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>SteeringComittee</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>StopSuspDateInvalid</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -11656,6 +11908,27 @@
             </concept_node>
             <concept_node>
                 <name>VicePresident</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Volunteer</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>

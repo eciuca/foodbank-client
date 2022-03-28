@@ -1831,7 +1831,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">333</context>
+          <context context-type="linenumber">385</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.ts</context>
@@ -3981,6 +3981,10 @@
           <context context-type="sourcefile">src/app/membres/membre-functions/membre-functions.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="messageFunctionDeleted" datatype="html">
         <source>The function was deleted</source>
@@ -4130,12 +4134,128 @@
           <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="Volunteer" datatype="html">
+        <source>Volunteer</source>
+        <target>Bénévole</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="GenAssembly" datatype="html">
+        <source>Gen Assembly</source>
+        <target>Assemblée générale</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MgtComittee" datatype="html">
+        <source>Mgt Comittee</source>
+        <target>Comité de gestion</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="SteeringComittee" datatype="html">
+        <source>Steering Comittee</source>
+        <target>Comité de pilotage</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Depot" datatype="html">
+        <source>Depot</source>
+        <target>Dépôt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MemberFunction" datatype="html">
+        <source>Function</source>
+        <target>Fonction</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MemberJobType" datatype="html">
+        <source>Job Type</source>
+        <target>Type d'emploi</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MemberBeginDate" datatype="html">
+        <source>Begin Date</source>
+        <target>Date de début</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="DebDateInvalid" datatype="html">
+        <source>Begin Date must in format dd/mm/yyyy</source>
+        <target>La date de début doit être au format jj/mm/aaaa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MemberEndDate" datatype="html">
+        <source>End Date</source>
+        <target>Date de fin</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="EndndDateInvalid" datatype="html">
+        <source>End Date must in format dd/mm/yyyy</source>
+        <target>La date de fin doit être au format jj/mm/aaaa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MemberContractDate" datatype="html">
+        <source>Date Contract</source>
+        <target>Date Contrat</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ContractDateInvalid" datatype="html">
+        <source>Contract Date must in format dd/mm/yyyy</source>
+        <target>La date du contrat doit être au format jj/mm/aaaa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MemberMandateDate" datatype="html">
+        <source>Date Mandate</source>
+        <target>Date Fin Mandat</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
+          <context context-type="linenumber">134</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="OrgMemberExisting" datatype="html">
         <source>Member for organisation <x id="PH" equiv-text="membre.societe"/> Updated On <x id="PH_1" equiv-text="membre.lastVisit"/></source>
         <target>Collaborateur de l'organisation <x id="PH" equiv-text="membre.societe"/> Mis à jour le <x id="PH_1" equiv-text="membre.lastVisit"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMemberExisting" datatype="html">
@@ -4143,7 +4263,7 @@
         <target>Collaborateur de la banque <x id="PH" equiv-text="this.idCompany"/> Mis à jour le <x id="PH_1" equiv-text="membre.lastVisit"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberNew2" datatype="html">
@@ -4151,7 +4271,7 @@
         <target>Nouveau collaborateur pour l'organisation <x id="PH" equiv-text="this.currentFilteredOrg.societe"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMemberNew1" datatype="html">
@@ -4159,11 +4279,11 @@
         <target>Nouveau collaborateur pour la banque <x id="PH" equiv-text="this.idCompany"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">186</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">191</context>
+          <context context-type="linenumber">212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberNew1" datatype="html">
@@ -4171,7 +4291,7 @@
         <target>Nouveau collaborateur pour l'organisation <x id="PH" equiv-text="this.orgName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">195</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberNewC" datatype="html">
@@ -4179,7 +4299,7 @@
         <target>Nouveau collaborateur pour l'organisation <x id="PH" equiv-text="this.depotName"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">181</context>
+          <context context-type="linenumber">202</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberNewA" datatype="html">
@@ -4187,7 +4307,7 @@
         <target>Nouveau collaborateur pour l'organisation <x id="PH" equiv-text="this.currentFilteredOrg.societe"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">183</context>
+          <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberNewB" datatype="html">
@@ -4195,7 +4315,7 @@
         <target>Nouveau collaborateur pour l'organisation <x id="PH" equiv-text="this.depotName"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">209</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeDeleted" datatype="html">
@@ -4203,7 +4323,7 @@
         <target>Le collaborateur <x id="PH" equiv-text="membre.prenom"/> <x id="PH_1" equiv-text="membre.nom"/> a été supprimé</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">261</context>
+          <context context-type="linenumber">309</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeDeleteError" datatype="html">
@@ -4211,7 +4331,7 @@
         <target>Le collaborateur <x id="PH" equiv-text="membre.prenom"/> <x id="PH_1" equiv-text="membre.nom"/> n'a pas pu être supprimé: erreur: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">272</context>
+          <context context-type="linenumber">320</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeUpdated" datatype="html">
@@ -4219,7 +4339,7 @@
         <target>L'employé <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> a été mis à jour</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">293</context>
+          <context context-type="linenumber">345</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeUpdateError" datatype="html">
@@ -4227,7 +4347,7 @@
         <target>Le collaborateur <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> n'a pas pu être mis à jour: erreur: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">301</context>
+          <context context-type="linenumber">353</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeCreated" datatype="html">
@@ -4235,7 +4355,7 @@
         <target>Le collaborateur <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> a été créé</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">313</context>
+          <context context-type="linenumber">365</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeCreateError" datatype="html">
@@ -4243,7 +4363,7 @@
         <target>Le collaborateur <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> n'a pas pu être créé: erreur: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">321</context>
+          <context context-type="linenumber">373</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ShowAnomalies" datatype="html">
@@ -4760,14 +4880,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
           <context context-type="linenumber">23</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="Depot" datatype="html">
-        <source>Depot</source>
-        <target>Dépôt</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgAgreed" datatype="html">

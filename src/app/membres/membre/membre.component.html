@@ -38,7 +38,7 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@MemberBirthDate" for="dateNaissance">Birth Date</label>
-                <input #dateNaissance="ngModel" pInputText id="dateNaissance" name="dateNaissance"   pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateNaissance"/>
+                <input #dateNaissance="ngModel" pInputText id="dateNaissance" name="dateNaissance"  required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateNaissance"/>
                 <p-message i18n-text="@@BirthDateIsMandatory"  *ngIf="dateNaissance.invalid && membreForm.touched" severity="error" text="Birth date is required and must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
@@ -78,6 +78,65 @@
             <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@PlateNumber" for="vehImm">Number Plate</label>
                 <input pInputText id="vehImm" name="vehImm" maxlength="30" [ngModel]="membre.vehImm" />
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+            </div>
+
+        </div>
+        <div *ngIf="(!booIsOrganisation) && booCanSave" class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-1">
+                <label i18n="@@Volunteer" for="ben">Volunteer</label>
+                <p-inputSwitch id="ben" name="ben" [ngModel]="membre.ben"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-1">
+            <label i18n="@@GenAssembly" for="ag">Gen Assembly</label>
+            <p-inputSwitch id="ag" name="ag" [ngModel]="membre.ag"></p-inputSwitch>
+        </div>
+            <div class="p-field p-col-12 p-md-1">
+            <label i18n="@@MgtComittee" for="ca">Mgt Comittee</label>
+            <p-inputSwitch id="ca" name="ca" [ngModel]="membre.ca"></p-inputSwitch>
+        </div>
+            <div class="p-field p-col-12 p-md-1">
+            <label i18n="@@SteeringComittee" for="cg">Steering Comittee</label>
+            <p-inputSwitch id="cg" name="cg" [ngModel]="membre.cg"></p-inputSwitch>
+        </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@Depot" for="selectedDepot">Depot</label>
+                <p-dropdown [(ngModel)]="selectedDepot" name="selectedDepot" id="selectedDepot" [options]="depots">                            >
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@MemberFunction" for="selectedFunction">Function</label>
+                <p-dropdown [(ngModel)]="selectedFunction" name="selectedFunction" id="selectedFunction" [options]="membreFunctions">                            >
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@MemberJobType" for="selectedEmploiType">Job Type</label>
+                <p-dropdown [(ngModel)]="selectedEmploiType" name="selectedEmploiType" id="selectedEmploiType" [options]="membreEmploiTypes">                            >
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@MemberBeginDate" for="datedeb">Begin Date</label>
+                <input #datdeb="ngModel" pInputText id="datedeb" name="datedeb"   pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.datedeb"/>
+                <p-message i18n-text="@@DebDateInvalid"  *ngIf="datdeb.invalid && membreForm.touched" severity="error" text="Begin Date must in format dd/mm/yyyy"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@MemberEndDate" for="dateFin">End Date</label>
+                <input #datend="ngModel" pInputText id="dateFin" name="dateFin"   pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateFin"/>
+                <p-message i18n-text="@@EndndDateInvalid"  *ngIf="datend.invalid && membreForm.touched" severity="error" text="End Date must in format dd/mm/yyyy"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@MemberContractDate" for="dateContrat">Date Contract</label>
+                <input #dateContrat="ngModel" pInputText id="dateContrat" name="dateContrat"   pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateContrat"/>
+                <p-message i18n-text="@@ContractDateInvalid"  *ngIf="dateContrat.invalid && membreForm.touched" severity="error" text="Contract Date must in format dd/mm/yyyy"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@MemberMandateDate" for="datmand">Date Mandate</label>
+                <input #datmand="ngModel" pInputText id="datmand" name="datmand"   placeholder="dd/mm/yyyy" [ngModel]="membre.datmand"/>
+            </div>
+            <div class="p-field p-col-12 p-md-12">
+                <label i18n="@@Remarks" for="rem">Remarks</label>
+                <input pInputText id="rem" name="rem"    [ngModel]="membre.rem"/>
             </div>
         </div>
         <p-confirmPopup></p-confirmPopup>
