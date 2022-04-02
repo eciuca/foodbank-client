@@ -19,7 +19,7 @@
         <tr (click)="handleSelect(membreFunction)">
             <td *ngIf="userLanguage =='fr'">{{membreFunction.fonctionName}}</td>
             <td *ngIf="userLanguage !='fr'">{{membreFunction.fonctionNameNl}}</td>
-            <td>{{getType(membreFunction)}}</td>
+            <td>{{membreFunction.bankShortName}}</td>
             <td>{{membreFunction.definitionFonction}}</td>
             <td>{{membreFunction.rem}}</td>
         </tr>

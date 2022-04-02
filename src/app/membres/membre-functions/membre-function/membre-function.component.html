@@ -7,6 +7,10 @@
         </div>
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-12">
+                <label for="bankShortName"  pTooltip="{{generateTooltipFunction()}}">Type</label>
+                <input pInputText id="bankShortName" name="bankShortName" maxlength="3" disabled [ngModel]="membreFunction.bankShortName" />
+            </div>
+            <div class="p-field p-col-12 p-md-12">
                 <label i18n="@@MemberFunctionNameFr" for="fonctionName">Name of the Function (FR)</label>
                 <input pInputText id="fonctionName" name="fonctionName" maxlength="50" [ngModel]="membreFunction.fonctionName" />
             </div>

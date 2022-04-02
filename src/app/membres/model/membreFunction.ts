@@ -7,6 +7,7 @@ export interface MembreFunction {
     rem: string;
     lienBanque: number;
     lienDis: number;
+    bankShortName: string;
 }
 export function compareMembreFunctions(c1: MembreFunction, c2: MembreFunction) {
 
@@ -28,6 +29,7 @@ export class DefaultMembreFunction implements MembreFunction {
     lienBanque: number;
     lienDis: number;
     rem: string;
+    bankShortName: string;
     constructor() {
         this.actif = true;
         this.definitionFonction = '';
@@ -36,5 +38,6 @@ export class DefaultMembreFunction implements MembreFunction {
         this.lienBanque = 0;
         this.lienDis = 0;
         this.rem = '';
+        this.bankShortName ='';
  }
 }

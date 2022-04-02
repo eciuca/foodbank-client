@@ -71,6 +71,8 @@ export interface Membre {
     lienBanque: number;
     societe: string; // calculated field
     bankShortName: string;
+    fonctionName: string;
+    fonctionNameNl: string;
     nbUsers: number;
     totalRecords: number;
     lastVisit: string;
@@ -122,6 +124,8 @@ export class DefaultMembre implements Membre {
     rem: string;
     societe: string; // calculated field
     bankShortName: string; // calculated field
+    fonctionName: string; // calculated field
+    fonctionNameNl: string; // calculated field
     tel: string;
     totalRecords: number;
     typEmploi: number;
@@ -164,6 +168,8 @@ export class DefaultMembre implements Membre {
         this.rem = '';
         this.societe = ''; // calculated field
         this.bankShortName = ''; // calculated field
+        this.fonctionName = '';  // calculated field
+        this.fonctionNameNl = ''; // calculated field
         this.tel = '';
         this.totalRecords = 0;
         this.typEmploi = 0;

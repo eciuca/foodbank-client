@@ -45,7 +45,8 @@
         <tr>
             <th *ngIf="bankOptions" i18n="@@BankNameShortSorted" pSortableColumn="bankShortName">Bank<p-sortIcon field="bankShortName"></p-sortIcon></th>
             <th i18n="@@NameSorted" pSortableColumn="nom" colspan="2">Name<p-sortIcon field="nom"></p-sortIcon></th>
-            <th i18n="@@Organisation"  *ngIf="booShowOrganisations"  colspan="2" >Organisation</th>
+            <th i18n="@@Organisation"  *ngIf="booShowOrganisations && (filteredOrganisation['idDis'] != 0)"  colspan="2" >Organisation</th>
+            <th i18n="@@Fonction"  *ngIf="booShowOrganisations && (filteredOrganisation['idDis'] == 0)"  colspan="2" >Fonction</th>
             <th i18n="@@AddressSorted"  colspan="2" pSortableColumn="address" >Address<p-sortIcon field="address"></p-sortIcon></th>
             <th i18n="@@ZipCodeSorted" pSortableColumn="zip">Zip Code<p-sortIcon field="zip"></p-sortIcon></th>
             <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
@@ -93,9 +94,17 @@
             <td colspan="2">
                 {{ membre.nom }} {{membre.prenom}}
             </td>
-            <td *ngIf="booShowOrganisations" colspan="2" >
+            <td *ngIf="booShowOrganisations  && (filteredOrganisation['idDis'] != 0)" colspan="2" >
                 <div *ngIf="membre.lienDis > 0">
                 {{ membre.lienDis }} {{ membre.societe }}
+                </div>
+            </td>
+            <td *ngIf="booShowOrganisations  && (filteredOrganisation['idDis'] == 0)" colspan="2" >
+                <div *ngIf="userLanguage =='fr'" >
+                    {{ membre.fonctionName }}
+                </div>
+                <div *ngIf="userLanguage =='nl'" >
+                    {{ membre.fonctionNameNl }}
                 </div>
             </td>
             <td colspan="2" >

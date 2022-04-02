@@ -98,10 +98,4 @@ export class MembreFunctionsComponent implements OnInit {
         this.displayDialog = false;
     }
 
-    getType(membreFunction: MembreFunction) {
-      if (membreFunction.lienBanque == 0) {
-          return $localize`:@@FunctionGlobal:Global`;
-      }
-        return this.bankShortName;
-    }
 }

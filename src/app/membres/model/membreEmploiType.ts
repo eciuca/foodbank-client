@@ -6,6 +6,7 @@ export interface MembreEmploiType {
     actif: boolean;
     jobNameEn: string;
     jobNameGe: string;
+    bankShortName: string;
 }
 export function compareMembreEmploiTypes(c1: MembreEmploiType, c2: MembreEmploiType) {
 
@@ -26,6 +27,7 @@ export class DefaultMembreEmploiType implements MembreEmploiType {
     jobNameNl: string;
     jobNr: number;
     lienBanque: number;
+    bankShortName: string;
     constructor() {
         this.actif = true;
         this.jobNameEn ='';
@@ -33,6 +35,7 @@ export class DefaultMembreEmploiType implements MembreEmploiType {
         this.jobNameGe ='';
         this.jobNameNl ='';
         this.lienBanque = 0;
+        this.bankShortName ='';
     }
 
 }

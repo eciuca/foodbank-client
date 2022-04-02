@@ -38,6 +38,7 @@ export class MembreFunctionComponent implements OnInit {
     this.lienBanque = 0;
     this.bankShortName = '???';
     this.booCanUpdate = false;
+
   }
 
   ngOnInit(): void {
@@ -180,5 +181,8 @@ export class MembreFunctionComponent implements OnInit {
       this.onMembreFunctionQuit.emit();
     }
   }
+    generateTooltipFunction() {
+        return $localize`:@@TooltipFunction:Functions can be standard for all banks or specific for a food bank`;
+    }
 }
 

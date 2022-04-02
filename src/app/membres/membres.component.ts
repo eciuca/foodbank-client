@@ -41,6 +41,7 @@ export class MembresComponent implements OnInit {
     filteredOrganisationsPrepend: any[];
     booShowOrganisations: boolean;
     booIsAdmin: boolean;
+    userLanguage: string;
     anomaliesOptions: any[];
     anomalyFilter: any;
     bankid: number;
@@ -220,6 +221,7 @@ export class MembresComponent implements OnInit {
         this.loadPageSubject$.next(latestQueryParams);
     }
     private initializeDependingOnUserRights(authState: AuthState) {
+        this.userLanguage = authState.user.idLanguage;
         if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'
             && authState.user.rights !== 'Admin_FBBA' && authState.user.rights !== 'Bank_FBBA' ) {
             this.bankid = authState.banque.bankId;

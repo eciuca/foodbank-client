@@ -64,7 +64,7 @@
                 <input pInputText id="city" name="city" maxlength="20" [ngModel]="membre.city" />
             </div>
         </div>
-        <div *ngIf="!booIsOrganisation" class="p-fluid p-formgrid p-grid">
+        <div *ngIf="membre.lienDis === 0" class="p-fluid p-formgrid p-grid">
 
             <div class="p-field p-col-12 p-md-4">
                 <label i18n="@@Car" for="veh">Car</label>
@@ -83,7 +83,7 @@
             </div>
 
         </div>
-        <div *ngIf="(!booIsOrganisation) && booCanSave" class="p-fluid p-formgrid p-grid">
+        <div *ngIf="(membre.lienDis === 0 ) && booCanSave" class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-1">
                 <label i18n="@@Volunteer" for="ben">Volunteer</label>
                 <p-inputSwitch id="ben" name="ben" [ngModel]="membre.ben"></p-inputSwitch>
@@ -106,7 +106,7 @@
                 </p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@MemberFunction" for="selectedFunction">Function</label>
+                <label i18n="@@MemberFunction" for="selectedFunction" pTooltip="{{generateTooltipFunction()}}">Function</label>
                 <p-dropdown [(ngModel)]="selectedFunction" name="selectedFunction" id="selectedFunction" [options]="membreFunctions">                            >
                 </p-dropdown>
             </div>

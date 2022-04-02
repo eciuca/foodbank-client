@@ -236,6 +236,9 @@ export class MembreComponent implements OnInit {
                           if (this.booCalledFromTable) {
                               this.booCanDelete = true;
                           }
+                          this.loadFunctions(null);
+                          this.loadEmploiTypes(null);
+                          this.loadDepots(null);
                           break;
                       case 'Bank':
                       case 'Admin_Banq':
@@ -277,24 +280,39 @@ export class MembreComponent implements OnInit {
       .subscribe();
   }
   loadFunctions(lienBanque: number) {
-      const queryParms = { 'actif': '1' ,'lienBanque': lienBanque.toString(), 'language': this.userLanguage };
-
+      const queryParms = { 'actif': '1' , 'language': this.userLanguage };
+       if (lienBanque) {
+           queryParms['lienBanque'] = lienBanque.toString();
+       }
       this.membreFunctionEntityService.getWithQuery(queryParms)
           .subscribe((membreFunctions) => {
               console.log('Membre functions now loaded:', membreFunctions);
               membreFunctions.map((membreFunction) => {
-                  this.membreFunctions.push({ label: membreFunction.fonctionName, value: membreFunction.funcId});
+                  if(this.userLanguage == 'fr') {
+                      this.membreFunctions.push({label: membreFunction.bankShortName + ' ' + membreFunction.fonctionName, value: membreFunction.funcId});
+                  }
+                  else {
+                      this.membreFunctions.push({label: membreFunction.bankShortName + ' ' + membreFunction.fonctionNameNl, value: membreFunction.funcId});
+                  }
             });
           })
   }
   loadEmploiTypes(lienBanque: number) {
-      const queryParms = { 'actif': '1' ,'lienBanque': lienBanque.toString(), 'language': this.userLanguage };
+      const queryParms = { 'actif': '1' , 'language': this.userLanguage };
+      if (lienBanque) {
+          queryParms['lienBanque'] = lienBanque.toString();
+      }
 
       this.membreEmploiTypeEntityService.getWithQuery(queryParms)
           .subscribe((membreEmploiTypes) => {
               console.log('Membre emploitypes now loaded:', membreEmploiTypes);
               membreEmploiTypes.map((membreEmploiType) => {
-                  this.membreEmploiTypes.push({ label: membreEmploiType.jobNameFr, value: membreEmploiType.jobNr});
+                  if(this.userLanguage == 'fr') {
+                      this.membreEmploiTypes.push({label: membreEmploiType.bankShortName + ' ' + membreEmploiType.jobNameFr, value: membreEmploiType.jobNr});
+                  }
+                  else {
+                      this.membreEmploiTypes.push({label: membreEmploiType.bankShortName + ' ' + membreEmploiType.jobNameNl, value: membreEmploiType.jobNr});
+                  }
               });
 
           })
@@ -402,13 +420,15 @@ export class MembreComponent implements OnInit {
     getMemberTitle(): string {
         return this.title;
     }
-    loadDepots(lienBanque ) {
+    loadDepots(lienBanque: number ) {
         const queryDepotParms = {};
         queryDepotParms['offset'] = '0';
         queryDepotParms['rows'] = '10';
         queryDepotParms['sortField'] = 'Societe';
         queryDepotParms['sortOrder'] = '1';
-        queryDepotParms['lienBanque'] = lienBanque;
+        if (lienBanque) {
+            queryDepotParms['lienBanque'] = lienBanque.toString();
+        }
         queryDepotParms['isDepot'] = true;
         this.orgsummaryService.getWithQuery(queryDepotParms)
             .subscribe(filteredDepots => {
@@ -416,6 +436,9 @@ export class MembreComponent implements OnInit {
                     this.depots.push({label: orgSummary.societe, value: orgSummary.idDis});
                 });
             })
+    }
+    generateTooltipFunction() {
+        return $localize`:@@TooltipFunction:Functions can be standard for all banks or specific for a food bank`;
     }
 }
 
