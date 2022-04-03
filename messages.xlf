@@ -3606,6 +3606,13 @@
           <context context-type="linenumber">24,26</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="MemberEmploiTypeDetails" datatype="html">
+        <source>Member EmploiType Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre-emploitypes/membre-emploitypes.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="MemberFunctionNameFr" datatype="html">
         <source>Name of the Function (FR)</source>
         <context-group purpose="location">
@@ -3733,6 +3740,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre-functions/membre-functions.component.html</context>
           <context context-type="linenumber">28,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MemberFunctionDetails" datatype="html">
+        <source>Member Function Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membre-functions/membre-functions.component.html</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberUsers" datatype="html">

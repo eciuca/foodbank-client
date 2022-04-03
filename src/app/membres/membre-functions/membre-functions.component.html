@@ -30,7 +30,7 @@
         </div>
     </ng-template>
 </p-table>
-<p-dialog header="Member Function Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
+<p-dialog i18n-header="@@MemberFunctionDetails" header="Member Function Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
     <app-membreFunction *ngIf="selectedMembreFunctionId$" [funcId$]="selectedMembreFunctionId$"  (onMembreFunctionUpdate)="handleMembreFunctionUpdate($event)"
                         (onMembreFunctionCreate)="handleMembreFunctionCreate($event)"  (onMembreFunctionDelete)="handleMembreFunctionDeleted($event)" (onMembreFunctionQuit)="handleMembreFunctionQuit()"></app-membreFunction>
 </p-dialog>

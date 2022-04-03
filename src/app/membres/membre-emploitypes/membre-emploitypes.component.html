@@ -26,7 +26,7 @@
         </div>
     </ng-template>
 </p-table>
-<p-dialog header="Member EmploiType Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
+<p-dialog i18n-header="@@MemberEmploiTypeDetails" header="Member EmploiType Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
     <app-membreEmploiType *ngIf="selectedMembreEmploiTypeId$" [jobNr$]="selectedMembreEmploiTypeId$"  (onMembreEmploiTypeUpdate)="handleMembreEmploiTypeUpdate($event)"
                           (onMembreEmploiTypeCreate)="handleMembreEmploiTypeCreate($event)"  (onMembreEmploiTypeDelete)="handleMembreEmploiTypeDeleted($event)" (onMembreEmploiTypeQuit)="handleMembreEmploiTypeQuit()"></app-membreEmploiType>
 </p-dialog>
