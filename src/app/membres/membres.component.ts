@@ -17,6 +17,7 @@ import {AuthService} from '../auth/auth.service';
 import {MembreHttpService} from './services/membre-http.service';
 import {formatDate} from '@angular/common';
 import {labelActive, labelCivilite, labelLanguage} from '../shared/functions';
+import {MembreFunctionEntityService} from './services/membreFunction-entity.service';
 
 
 @Component({
@@ -55,7 +56,10 @@ export class MembresComponent implements OnInit {
     orgName: string;
     first: number;
     bankOptions: any[];
+    membreFunctions : any[];
+    selectedFunction: any;
     constructor(private membreService: MembreEntityService,
+                private membreFunctionEntityService: MembreFunctionEntityService,
                 private banqueService: BanqueEntityService,
                 private orgsummaryService: OrgSummaryEntityService,
                 private authService: AuthService,
@@ -82,6 +86,7 @@ export class MembresComponent implements OnInit {
         this.idOrg = 0;
         this.orgName = '';
         this.lienDepot = 0;
+        this.membreFunctions = [{label: ' ',value: null}];
     }
 
     ngOnInit() {
@@ -148,18 +153,41 @@ export class MembresComponent implements OnInit {
         this.loadPageSubject$.next(latestQueryParams);
         this.displayDialog = false;
     }
-
+    filterFunction(fonction) {
+      this.selectedFunction = fonction;
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+      // we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if (this.selectedFunction && (this.filteredOrganisation['idDis'] == 0)) {
+            latestQueryParams['fonction'] = this.selectedFunction;
+        }
+       else {
+            // delete fonction entry
+            if (latestQueryParams.hasOwnProperty('fonction')) {
+                delete latestQueryParams['fonction'];
+            }
+        }
+        this.loadPageSubject$.next(latestQueryParams);
+    }
     nextPage(event: LazyLoadEvent) {
         console.log('Lazy Loaded Event', event);
         this.loading = true;
         const queryParms = {...this.filterBase};
-        queryParms['offset'] = event.first.toString();
-        queryParms['rows'] = event.rows.toString();
-        queryParms['sortOrder'] = event.sortOrder.toString();
-        if (event.sortField) {
-            queryParms['sortField'] = event.sortField.toString();
-        } else {
-            queryParms['sortField'] =  'nom';
+        if (event) {
+            queryParms['offset'] = event.first.toString();
+            queryParms['rows'] = event.rows.toString();
+            queryParms['sortOrder'] = event.sortOrder.toString();
+            if (event.sortField) {
+                queryParms['sortField'] = event.sortField.toString();
+            } else {
+                queryParms['sortField'] = 'nom';
+            }
+        }
+        else {
+            queryParms['offset'] = 0;
+            queryParms['rows'] = 10;
+            queryParms['sortField'] = 'nom';
         }
         if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
             queryParms['lienDis'] = this.filteredOrganisation.idDis;
@@ -176,6 +204,10 @@ export class MembresComponent implements OnInit {
         if (this.anomalyFilter ) {
             queryParms['hasAnomalies'] = this.anomalyFilter;
         }
+        if (this.selectedFunction && (this.filteredOrganisation['idDis'] == 0)) {
+            queryParms['fonction'] = this.selectedFunction;
+        }
+
         if (event.filters) {
             if (event.filters.nom && event.filters.nom.value) {
                 queryParms['nom'] = event.filters.nom.value;
@@ -232,6 +264,7 @@ export class MembresComponent implements OnInit {
                 case 'Bank':
                 case 'Admin_Banq':
                     this.booShowOrganisations = true;
+                    this.loadFunctions(authState.banque.bankId);
                     this.filterBase = { 'lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     this.filteredOrganisationsPrepend = [
@@ -271,7 +304,7 @@ export class MembresComponent implements OnInit {
                         {idDis: 0, fullname: $localize`:@@banks:Banks` },
                         {idDis: 999, fullname: $localize`:@@organisations:Organisations` },
                     ];
-
+                    this.loadFunctions(null);
                     if (authState.user.rights === 'admin') {
                         this.filterBase = { };
                         this.banqueService.getAll()
@@ -400,6 +433,24 @@ export class MembresComponent implements OnInit {
         }
         this.loadPageSubject$.next(latestQueryParams);
     }
+    loadFunctions(lienBanque: number) {
+        const queryParms = { 'actif': '1' , 'language': this.userLanguage };
+        if (lienBanque) {
+            queryParms['lienBanque'] = lienBanque.toString();
+        }
+        this.membreFunctionEntityService.getWithQuery(queryParms)
+            .subscribe((membreFunctions) => {
+                console.log('Membre functions now loaded:', membreFunctions);
+                membreFunctions.map((membreFunction) => {
+                    if(this.userLanguage == 'fr') {
+                        this.membreFunctions.push({label: membreFunction.bankShortName + ' ' + membreFunction.fonctionName, value: membreFunction.funcId});
+                    }
+                    else {
+                        this.membreFunctions.push({label: membreFunction.bankShortName + ' ' + membreFunction.fonctionNameNl, value: membreFunction.funcId});
+                    }
+                });
+            })
+    }
     getTitle(): string {
         if ( this.depotName) {
             if (this.booShowArchived) {
@@ -481,5 +532,10 @@ export class MembresComponent implements OnInit {
     generateNbOfMemberUsersTooltip() {
         return $localize`:@@ToolTipNbOfMemberUsers:User Id for this member`;
     }
+    generateTooltipFunction() {
+        return $localize`:@@TooltipFunction:Functions can be standard for all banks or specific for a food bank`;
+    }
+
+
 }
 

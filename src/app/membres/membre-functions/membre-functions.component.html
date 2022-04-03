@@ -10,7 +10,7 @@
         <tr>
             <th *ngIf="userLanguage =='fr'" i18n="@@FunctionNameFrSorted" pSortableColumn="fonctionName">Name<p-sortIcon field="fonctionName"></p-sortIcon></th>
             <th *ngIf="userLanguage !='fr'" i18n="@@FunctionNameNlSorted" pSortableColumn="fonctionNameNl">Name<p-sortIcon field="fonctionNameNl"></p-sortIcon></th>
-            <th>Type</th>
+            <th pTooltip="{{generateTooltipFunction()}}">Type</th>
             <th i18n="@@Definition">Definition</th>
             <th i18n="@@Remarks">Remarks</th>
         </tr>

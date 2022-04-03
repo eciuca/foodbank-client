@@ -374,7 +374,9 @@ export class MembreComponent implements OnInit {
                   }
               );
       } else {
-          console.log('Creating Membre with content:', modifiedMembre);
+          if (modifiedMembre.fonction == null && modifiedMembre.lienDis == 0) {
+              modifiedMembre.fonction = 26; // set general help function by default for new bank members
+          }
           this.membresService.add(modifiedMembre)
               .subscribe(() => {
                   this.messageService.add({

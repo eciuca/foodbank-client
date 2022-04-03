@@ -98,4 +98,8 @@ export class MembreFunctionsComponent implements OnInit {
         this.displayDialog = false;
     }
 
+    generateTooltipFunction() {
+        return $localize`:@@TooltipFunction:Functions can be standard for all banks or specific for a food bank`;
+    }
+
 }
