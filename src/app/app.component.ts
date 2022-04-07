@@ -54,6 +54,7 @@ export class AppComponent implements OnInit {
     isDoneLoading: Observable<boolean>;
     canActivateProtectedRoutes: Observable<boolean>;
     baseurl: string;
+    feadBaseUrl: string;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -64,6 +65,7 @@ export class AppComponent implements OnInit {
         @Inject(LOCALE_ID) public locale: string
     ) {
         this.baseurl = window.location.origin;
+        this.feadBaseUrl = window.location.hostname === 'localhost' ? this.baseurl : window.location.protocol + '//fead.' + window.location.host;
     }
 
     ngOnInit() {
@@ -149,7 +151,7 @@ export class AppComponent implements OnInit {
 
     }
     openFEAD() {
-       const feadUrl = `fead.${this.baseurl}/isis/general/portal/access.jsp` ;
+       const feadUrl = `${this.feadBaseUrl}/isis/general/portal/access.jsp` ;
        console.log('Opening FEAD Tab', feadUrl);
         window.open(feadUrl, '_blank');
     }
