@@ -149,7 +149,7 @@ export class AppComponent implements OnInit {
 
     }
     openFEAD() {
-       const feadUrl = `${this.baseurl}/isis/general/portal/access.jsp` ;
+       const feadUrl = `fead.${this.baseurl}/isis/general/portal/access.jsp` ;
        console.log('Opening FEAD Tab', feadUrl);
         window.open(feadUrl, '_blank');
     }
