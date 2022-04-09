@@ -415,6 +415,14 @@ export class MembresComponent implements OnInit {
                     }
                 }
             }
+        if (this.selectedFunction && (this.filteredOrganisation['idDis'] == 0)) {
+            latestQueryParams['fonction'] = this.selectedFunction;
+        }
+        else {
+            if (latestQueryParams.hasOwnProperty('fonction')) {
+                delete latestQueryParams['fonction'];
+            }
+        }
 
         this.loadPageSubject$.next(latestQueryParams);
     }
