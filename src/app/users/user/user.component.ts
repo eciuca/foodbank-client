@@ -22,6 +22,7 @@ import {Membre} from '../../membres/model/membre';
 import {DataServiceError} from '@ngrx/data';
 import {Observable, combineLatest} from 'rxjs';
 import {Organisation} from '../../organisations/model/organisation';
+import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 
 @Component({
   selector: 'app-user',
@@ -58,9 +59,12 @@ export class UserComponent implements OnInit {
     isAdmin: boolean;
     title: string;
     orgName: string;
+    loggedInUserId: string;
+    loggedInUserName: string;
   constructor(
       private usersService: UserEntityService,
       private membresService: MembreEntityService,
+      private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
@@ -196,6 +200,8 @@ export class UserComponent implements OnInit {
               select(globalAuthState),
               map((authState) => {
                   if (authState.user) {
+                      this.loggedInUserName = authState.user.userName;
+                      this.loggedInUserId = authState.user.idUser;
                       this.lienBanque = authState.banque.bankId;
                       this.idCompany = authState.banque.bankShortName;
                       this.filterMemberBase = {'actif':1};
@@ -266,6 +272,8 @@ export class UserComponent implements OnInit {
                   .subscribe( () => {
                       this.messageService.add(myMessage);
                       this.onUserDelete.emit(user);
+                      this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,user.lienBanque,user.idOrg,'User',
+                              user.idUser, 'Delete' );
                   },
                       (dataserviceerror: DataServiceError) => {
                           console.log('Error deleting user', dataserviceerror.message);
@@ -306,6 +314,8 @@ export class UserComponent implements OnInit {
                 summary: 'Update',
                 detail: $localize`:@@messageUserUpdated:User  ${modifiedUser.idUser} ${modifiedUser.userName} was updated`});
             this.onUserUpdate.emit(updatedUser);
+            this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,modifiedUser.lienBanque,modifiedUser.idOrg,'User',
+                    modifiedUser.idUser, 'Update' );
         } ,
             (dataserviceerror: DataServiceError) => {
                 console.log('Error updating user', dataserviceerror.message);
@@ -335,6 +345,8 @@ export class UserComponent implements OnInit {
                                           detail: $localize`:@@messageUserCreated:User  ${modifiedUser.idUser} ${modifiedUser.userName} has been created`
                                       });
                                       this.onUserCreate.emit(modifiedUser);
+                                      this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,modifiedUser.lienBanque,modifiedUser.idOrg,'User',
+                                          modifiedUser.idUser, 'Create' );
                                   },
                                   (dataserviceerror: DataServiceError) => {
                                       console.log('Error creating user', dataserviceerror.message);

@@ -37,6 +37,8 @@ import {MembreEmploiTypesDataService} from './services/membreEmploiTypes-data.se
 import {MembreEmploiTypeEntityService} from './services/membreEmploiType-entity.service';
 import {MembreFunctionsDataService} from './services/membreFunctions-data.service';
 import {MembreFunctionEntityService} from './services/membreFunction-entity.service';
+import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
+import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 
 
 const routes: Routes = [
@@ -89,6 +91,8 @@ const routes: Routes = [
       OrgSummaryEntityService,
       BanquesDataService,
       BanqueEntityService,
+      AuditChangesDataService,
+      AuditChangeEntityService,
     ConfirmationService
   ],
 })
@@ -101,7 +105,8 @@ export class MembresModule {
       private membreEmploiTypesDataService: MembreEmploiTypesDataService,
       private banquesDataService: BanquesDataService,
       private organisationsDataService: OrganisationsDataService,
-      private orgSummariesDataService: OrgSummariesDataService
+      private orgSummariesDataService: OrgSummariesDataService,
+      private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Membre', membresDataService);
@@ -110,6 +115,7 @@ export class MembresModule {
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('Organisation', organisationsDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
+    entityDataService.registerService('AuditChange', auditChangesDataService);
   }
 
 }

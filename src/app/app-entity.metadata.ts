@@ -23,12 +23,18 @@ import {compareMailAddresses, MailAddress} from './mailings/model/mailaddress';
 import {compareOrgPrograms, OrgProgram} from './organisations/model/orgprogram';
 import {compareMembreFunctions, MembreFunction} from './membres/model/membreFunction';
 import {compareMembreEmploiTypes, MembreEmploiType} from './membres/model/membreEmploiType';
+import {AuditChange, compareAuditChanges} from './audits/model/auditChange';
 
 
 export const appEntityMetadata: EntityMetadataMap = {
     Audit: {
         sortComparer: compareAudits,
         selectId: (audit: Audit) => audit.auditId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
+    },
+    AuditChange: {
+        sortComparer: compareAuditChanges,
+        selectId: (auditChange: AuditChange) => auditChange.auditId,
         entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
     },
     Membre: {

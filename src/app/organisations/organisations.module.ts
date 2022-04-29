@@ -67,6 +67,8 @@ import { OrgfeaddetailComponent } from './orgfeadoverview/orgfeaddetail/orgfeadd
 import {OrgProgramsDataService} from './services/orgprograms-data.service';
 import {OrgProgramEntityService} from './services/orgprogram-entity.service';
 import {TooltipModule} from 'primeng/tooltip';
+import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
+import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 const routes: Routes = [
     {
         path: 'contacts/:idDis',
@@ -177,6 +179,8 @@ const routes: Routes = [
       BanqueEntityService,
       BanqProgsDataService,
       BanqProgEntityService,
+      AuditChangesDataService,
+      AuditChangeEntityService,
         ConfirmationService
   ]
 })
@@ -194,7 +198,8 @@ export class OrganisationsModule {
       private cpassDataService: CpassDataService,
       private depotsDataService: DepotsDataService,
       private banquesDataService: BanquesDataService,
-      private banqProgsDataService: BanqProgsDataService
+      private banqProgsDataService: BanqProgsDataService,
+      private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Organisation', organisationsDataService);
@@ -208,5 +213,6 @@ export class OrganisationsModule {
     entityDataService.registerService('Depot', depotsDataService);
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('BanqProg', banqProgsDataService);
+    entityDataService.registerService('AuditChange', auditChangesDataService);
   }
 }

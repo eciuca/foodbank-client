@@ -16,11 +16,18 @@ import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import { AuditReportComponent } from './audit-report/audit-report.component';
 import {PanelModule} from 'primeng/panel';
 import {ChartModule} from 'primeng/chart';
+import { AuditChangesComponent } from './audit-changes.component';
+import {AuditChangeEntityService} from './services/auditChange-entity.service';
+import {AuditChangesDataService} from './services/auditChanges-data.service';
 
 const routes: Routes = [
     {
         path: 'auditreports',
         component: AuditReportComponent
+    },
+    {
+        path: 'entitychanges',
+        component: AuditChangesComponent
     },
   { path: '', component: AuditsComponent }
 ];
@@ -28,7 +35,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AuditsComponent,
-    AuditReportComponent
+    AuditReportComponent,
+    AuditChangesComponent
   ],
     imports: [
         CommonModule,
@@ -44,6 +52,8 @@ const routes: Routes = [
   providers: [
     AuditsDataService,
     AuditEntityService,
+      AuditChangesDataService,
+      AuditChangeEntityService,
       BanquesDataService,
       BanqueEntityService,
       DatePipe
@@ -54,10 +64,12 @@ export class AuditsModule {
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
       private auditsDataService: AuditsDataService,
+      private auditChangesDataService: AuditChangesDataService,
       private banquesDataService: BanquesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Audit', auditsDataService);
+    entityDataService.registerService('AuditChange', auditChangesDataService);
     entityDataService.registerService('Banque', banquesDataService);
   }
 }

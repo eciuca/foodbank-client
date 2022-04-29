@@ -22,6 +22,7 @@ import {MembreEmploiType} from '../model/membreEmploiType';
 import {MembreEmploiTypeEntityService} from '../services/membreEmploiType-entity.service';
 import {OrgSummary} from '../../organisations/model/orgsummary';
 import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
+import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 
 @Component({
   selector: 'app-membre',
@@ -48,6 +49,8 @@ export class MembreComponent implements OnInit {
   languages: any[];
   legacyLanguages: any[];
   userLanguage: string;
+  userId: string;
+  userName: string;
   lienBanque: number;
   lienDis: number;
     lienDepot: number;
@@ -70,6 +73,7 @@ export class MembreComponent implements OnInit {
       private organisationsService: OrganisationEntityService,
       private orgsummaryService: OrgSummaryEntityService,
       private userHttpService: UserHttpService,
+      private auditChangeEntityService: AuditChangeEntityService,
       private authService: AuthService,
       private route: ActivatedRoute,
       private router: Router,
@@ -228,6 +232,8 @@ export class MembreComponent implements OnInit {
           map((authState) => {
               if (authState.user) {
                   this.userLanguage = authState.user.idLanguage;
+                  this.userId= authState.user.idUser;
+                  this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
                   switch (authState.user.rights) {
                       case 'admin':
                       case 'Admin_FBBA':
@@ -330,6 +336,8 @@ export class MembreComponent implements OnInit {
                         console.log('successfully deleted employee');
                         this.messageService.add(myMessage);
                         this.onMembreDelete.emit(membre);
+                        this.auditChangeEntityService.logDbChange(this.userId,this.userName,membre.lienBanque,membre.lienDis,'Member',
+                                membre.nom + ' ' + membre.prenom, 'Delete' );
                     },
                         (dataserviceerror: DataServiceError) => {
                             console.log('Error deleting employee', dataserviceerror.message);
@@ -363,6 +371,8 @@ export class MembreComponent implements OnInit {
                       detail: $localize`:@@messageEmployeeUpdated:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was updated`
                   });
                   this.onMembreUpdate.emit(modifiedMembre);
+                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedMembre.lienBanque,modifiedMembre.lienDis,'Member',
+                      modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Update' );
               },
                   (dataserviceerror: DataServiceError) => {
                       console.log('Error updating membre', dataserviceerror.message);
@@ -385,6 +395,8 @@ export class MembreComponent implements OnInit {
                       detail: $localize`:@@messageEmployeeCreated:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was created`
                   });
                   this.onMembreCreate.emit(modifiedMembre);
+                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedMembre.lienBanque,modifiedMembre.lienDis,'Member',
+                          modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Create' );
               },
                   (dataserviceerror: DataServiceError) => {
                       console.log('Error creating membre', dataserviceerror.message);

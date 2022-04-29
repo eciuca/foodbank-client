@@ -434,7 +434,8 @@ export class AppComponent implements OnInit {
                                 },
                                 {label: 'Details', icon: 'pi pi-fw pi-users', routerLink: ['/audits']},
                             ]
-                        }
+                        },
+                        {label: $localize`:@@menuEntityChanges:Entity Changes`, icon: 'pi pi-fw pi-map', routerLink: [`/audits/entitychanges`]},
                     ]
                 }
             );

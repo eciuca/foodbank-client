@@ -18,6 +18,7 @@ import {OrgSummary} from '../model/orgsummary';
 import {RegionEntityService} from '../services/region-entity.service';
 import {OrgProgramEntityService} from '../services/orgprogram-entity.service';
 import {DefaultOrgProgram, OrgProgram} from '../model/orgprogram';
+import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 
 @Component({
   selector: 'app-organisation',
@@ -50,6 +51,7 @@ export class OrganisationComponent implements OnInit {
     orgCategories: any[];
    lienBanque: number;
     userName: string;
+    userId: string;
     gestBen: boolean;
 
   constructor(
@@ -58,6 +60,7 @@ export class OrganisationComponent implements OnInit {
       private orgsummaryService: OrgSummaryEntityService,
       private cpassService: CpasEntityService,
       private regionService: RegionEntityService,
+      private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
@@ -151,6 +154,7 @@ export class OrganisationComponent implements OnInit {
                   if (authState.user) {
                       const regionQuery = {};
                       this.userName = authState.user.userName;
+                      this.userId= authState.user.idUser;
 
                       switch (authState.user.rights) {
                           case 'admin':
@@ -204,6 +208,8 @@ export class OrganisationComponent implements OnInit {
                       detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.societe} was updated`
                   });
                   this.onOrganisationUpdate.emit(modifiedOrganisation);
+                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedOrganisation.lienBanque,modifiedOrganisation.idDis,'Org',
+                           ' ' , 'Update' );
               },
                   (dataserviceerror: DataServiceError) => {
                       console.log('Error updating organisation', dataserviceerror.message);
@@ -224,6 +230,8 @@ export class OrganisationComponent implements OnInit {
                       detail: $localize`:@@messageOrganisationCreated:Organisation ${newOrganisation.societe} was created`
                   });
                   this.onOrganisationCreate.emit(newOrganisation);
+                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,newOrganisation.lienBanque,newOrganisation.idDis,'Org',
+                          ' ' , 'Create' );
               },
                   (dataserviceerror: DataServiceError) => {
                       console.log('Error creating organisation', dataserviceerror.message);
@@ -246,6 +254,8 @@ export class OrganisationComponent implements OnInit {
                         summary: 'Update',
                         detail: $localize`:@@messageOrgDetailsUpdated:Org Program for organisation  ${this.organisation.idDis} ${this.organisation.societe} was updated`
                     });
+                    this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.organisation.lienBanque,this.organisation.idDis,'OrgProgram',
+                        ' ', 'Update' );
 
                 },
                 (dataserviceerror: DataServiceError) => {
@@ -271,6 +281,8 @@ export class OrganisationComponent implements OnInit {
                     .subscribe( () => {
                         this.messageService.add(myMessage);
                         this.onOrganisationDelete.emit();
+                        this.auditChangeEntityService.logDbChange(this.userId,this.userName,organisation.lienBanque,organisation.idDis,'Org',
+                                ' ' , 'Delete' );
                     },
                         (dataserviceerror: DataServiceError) => {
                             console.log('Error deleting organisation', dataserviceerror.message);
@@ -357,6 +369,8 @@ export class OrganisationComponent implements OnInit {
                     .subscribe( () => {
                             this.messageService.add(myMessage);
                             this.orgProg = null;
+                            this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.organisation.lienBanque,this.organisation.idDis,'OrgProgram',
+                                ' ', 'Delete' );
                         },
                         (dataserviceerror: DataServiceError) => {
                             console.log('Error deleting organisation', dataserviceerror.message);

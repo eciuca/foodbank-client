@@ -31,6 +31,8 @@ import { UsersRightsComponent } from './users-rights/users-rights.component';
 import {BanquesDataService} from '../banques/services/banques-data.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {TooltipModule} from 'primeng/tooltip';
+import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
+import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 
 const routes: Routes = [
   { path: '',
@@ -75,6 +77,8 @@ const routes: Routes = [
         BanqueEntityService,
         OrgSummariesDataService,
         OrgSummaryEntityService,
+        AuditChangesDataService,
+        AuditChangeEntityService,
         ConfirmationService
   ],
 })
@@ -85,13 +89,15 @@ export class UsersModule {
       private usersDataService: UsersDataService,
       private membresDataService: MembresDataService,
       private banquesDataService: BanquesDataService,
-      private orgSummariesDataService: OrgSummariesDataService
+      private orgSummariesDataService: OrgSummariesDataService,
+      private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('User', usersDataService);
     entityDataService.registerService('Membre', membresDataService);
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
+    entityDataService.registerService('AuditChange', auditChangesDataService);
   }
 
 }
