@@ -14,6 +14,7 @@ import {Cpas} from '../../cpass/model/cpas';
 import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {Organisation} from '../../organisations/model/organisation';
+import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 
 @Component({
   selector: 'app-beneficiaire',
@@ -46,9 +47,12 @@ export class BeneficiaireComponent implements OnInit {
     orgName: string;
     depotName: string;
     title: string;
+    userId: string;
+    userName: string;
   constructor(
       private beneficiairesService: BeneficiaireEntityService,
       private cpassService: CpasEntityService,
+      private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
@@ -149,6 +153,8 @@ export class BeneficiaireComponent implements OnInit {
               select(globalAuthState),
               map((authState) => {
                   if (authState.user) {
+                      this.userId= authState.user.idUser;
+                      this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
                       switch (authState.user.rights) {
                           case 'Bank':
                               this.lienBanque = authState.banque.bankId;
@@ -201,6 +207,8 @@ export class BeneficiaireComponent implements OnInit {
                     .subscribe( () => {
                         this.messageService.add(myMessage);
                         this.onBeneficiaireDelete.emit(beneficiaire);
+                            this.auditChangeEntityService.logDbChange(this.userId,this.userName,beneficiaire.lbanque,beneficiaire.lienDis,'Client',
+                                beneficiaire.nom + ' ' + beneficiaire.prenom, 'Update' );
                     },
                         (dataserviceerror: DataServiceError) => {
                             console.log('Error deleting beneficiary', dataserviceerror.message);
@@ -230,6 +238,8 @@ export class BeneficiaireComponent implements OnInit {
               summary: 'Update',
               detail: $localize`:@@messageBeneficiaryUpdated:The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was updated`});
             this.onBeneficiaireUpdate.emit(modifiedBeneficiaire);
+            this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedBeneficiaire.lbanque,modifiedBeneficiaire.lienDis,'Client',
+                    modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Update' );
         },
             (dataserviceerror: DataServiceError) => {
                 console.log('Error updating beneficiary', dataserviceerror.message);
@@ -249,6 +259,8 @@ export class BeneficiaireComponent implements OnInit {
                       detail: $localize`:@@messageBeneficiaryCreated:The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was created`
                   });
                   this.onBeneficiaireCreate.emit(modifiedBeneficiaire);
+                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedBeneficiaire.lbanque,modifiedBeneficiaire.lienDis,'Client',
+                          modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Create' );
               },
                   (dataserviceerror: DataServiceError) => {
                       console.log('Error updating beneficiary', dataserviceerror.message);

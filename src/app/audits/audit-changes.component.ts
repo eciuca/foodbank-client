@@ -6,11 +6,10 @@ import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {LazyLoadEvent} from 'primeng/api';
 import {DatePipe} from '@angular/common';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
-import {enmApp, enmUserRoles} from '../shared/enums';
+import {enmApp, enmUserRoles,enmDbChangeActions,enmDbChangeEntities} from '../shared/enums';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {AuthState} from '../auth/reducers';
-import {labelRights} from '../shared/functions';
 
 @Component({
   selector: 'app-audit-changes',
@@ -32,6 +31,8 @@ export class AuditChangesComponent implements OnInit {
   appOptions: any[];
   filterBase: any;
   lienBanque: number;
+  actionOptions: any;
+  entityOptions: any;
   constructor(
       private auditChangeService: AuditChangeEntityService,
       private banqueService: BanqueEntityService,
@@ -42,7 +43,10 @@ export class AuditChangesComponent implements OnInit {
     this.totalRecords = 0;
     this.rightOptions = enmUserRoles;
     this.appOptions = enmApp;
+    this.actionOptions = enmDbChangeActions;
+    this.entityOptions = enmDbChangeEntities;
   }
+
   ngOnInit() {
     this.fromDate = new Date();
     this.fromDate.setDate(this.fromDate.getDate() - 30);

@@ -135,6 +135,21 @@ export let enmAudienceAdmin = [
     {label: $localize`:@@audienceBankUsers:All Bank Users`, value: 'bank_users'},
     {label: $localize`:@@audienceOrgAdmin:All Org Admins`, value: 'org_admins'}
 ];
+export let enmDbChangeEntities = [
+    {label: $localize`:@@DbChangeEntityUser:User` , value: 'User'},
+    {label: $localize`:@@DbChangeEntityMember:Member` , value: 'Member'},
+    {label: $localize`:@@DbChangeEntityOrg:Organisation` , value: 'Org'},
+    {label: $localize`:@@DbChangeEntityBank:Bank` , value: 'Bank'},
+    {label: $localize`:@@DbChangeEntityDepot:Depot` , value: 'Depot'},
+    {label: $localize`:@@DbChangeEntityClient:Client` , value: 'Client'},
+
+];
+export let enmDbChangeActions = [
+    {label: $localize`:@@DbChangeActionUpdate:Update` , value: 'Update'},
+    {label: $localize`:@@DbChangeActionCreate:Create` , value: 'Create'},
+    {label: $localize`:@@DbChangeActionDelete:Delete` , value: 'Delete'},
+
+];
 
 
 

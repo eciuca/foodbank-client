@@ -15,6 +15,7 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
 import {BanqProg} from '../model/banqprog';
 import {BanqProgEntityService} from '../services/banqprog-entity.service';
+import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 
 
 
@@ -31,6 +32,8 @@ export class BanqueComponent implements OnInit {
     @Output() onBanqueUpdate = new EventEmitter<Banque>();
     @Output() onBanqueDelete = new EventEmitter<Banque>();
     @Output() onBanqueQuit = new EventEmitter<Banque>();
+    userId: string;
+    userName: string;
     booCalledFromTable: boolean;
     booCanSave: boolean;
     booCanDelete: boolean;
@@ -60,6 +63,7 @@ export class BanqueComponent implements OnInit {
       private banquesService: BanqueEntityService,
       private membresService: MembreEntityService,
       private banqProgService: BanqProgEntityService,
+      private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
@@ -271,6 +275,8 @@ export class BanqueComponent implements OnInit {
               select(globalAuthState),
               map((authState) => {
                   if (authState.user) {
+                      this.userId= authState.user.idUser;
+                      this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
                       switch (authState.user.rights) {
                         case 'admin':
                         case 'Admin_FBBA':
@@ -345,6 +351,8 @@ export class BanqueComponent implements OnInit {
                      detail: $localize`:@@messageBankUpdated:Bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName}  was updated`
                  });
                  this.onBanqueUpdate.emit();
+                 this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedBanque.bankId,0,'Bank',
+                     modifiedBanque.bankShortName , 'Update' );
              },
                  (dataserviceerror: DataServiceError) => {
                      console.log('Error updating bank', dataserviceerror.message);
@@ -364,6 +372,8 @@ export class BanqueComponent implements OnInit {
                      detail: $localize`:@@messageBankCreated:Bank ${newBanque.bankName} was created`
                  });
                  this.onBanqueCreate.emit(newBanque);
+                     this.auditChangeEntityService.logDbChange(this.userId,this.userName,newBanque.bankId,0,'Bank',
+                         newBanque.bankShortName, 'Create' );
              },
                  (dataserviceerror: DataServiceError) => {
                      console.log('Error creating bank', dataserviceerror.message);
@@ -390,6 +400,8 @@ export class BanqueComponent implements OnInit {
                     .subscribe( () => {
                         this.messageService.add(myMessage);
                         this.onBanqueDelete.emit();
+                            this.auditChangeEntityService.logDbChange(this.userId,this.userName,banque.bankId,0,'Bank',
+                                banque.bankShortName , 'Delete' );
                     },
                         (dataserviceerror: DataServiceError) => {
                             console.log('Error deleting bank', dataserviceerror.message);

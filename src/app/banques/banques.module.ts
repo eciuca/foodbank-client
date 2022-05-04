@@ -32,6 +32,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputNumberModule} from 'primeng/inputnumber';
 import { BankreportsComponent } from './bankreports/bankreports.component';
 import {ChartModule} from 'primeng/chart';
+import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
+import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 const routes: Routes = [
     {
         path: 'bankreports',
@@ -89,6 +91,8 @@ const routes: Routes = [
     BanqProgEntityService,
     MembresDataService,
     MembreEntityService,
+    AuditChangesDataService,
+    AuditChangeEntityService,
     ConfirmationService,
     BanquesResolver
   ],
@@ -99,12 +103,14 @@ export class BanquesModule {
       private entityDataService: EntityDataService,
       private banquesDataService: BanquesDataService,
       private banqProgsDataService: BanqProgsDataService,
-      private membresDataService: MembresDataService
+      private membresDataService: MembresDataService,
+      private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('Membre', membresDataService);
     entityDataService.registerService('BanqProg',  banqProgsDataService);
+    entityDataService.registerService('AuditChange', auditChangesDataService);
   }
 
 }

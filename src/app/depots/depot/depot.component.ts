@@ -10,6 +10,7 @@ import {map, switchMap} from 'rxjs/operators';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 
 @Component({
     selector: 'app-depot',
@@ -29,8 +30,11 @@ export class DepotComponent implements OnInit {
     booCanSave: boolean;
     booCanDelete: boolean;
     booCanQuit: boolean;
+    userId: string;
+    userName: string;
     constructor(
         private depotsService: DepotEntityService,
+        private auditChangeEntityService: AuditChangeEntityService,
         private store: Store<AppState>,
         private route: ActivatedRoute,
         private router: Router,
@@ -82,6 +86,8 @@ export class DepotComponent implements OnInit {
                 select(globalAuthState),
                 map((authState) => {
                     if (authState.user) {
+                        this.userId= authState.user.idUser;
+                        this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
                         this.lienBanque = authState.banque.bankId;
                         switch (authState.user.rights) {
                             case 'Bank':
@@ -115,6 +121,8 @@ export class DepotComponent implements OnInit {
                     .subscribe(() => {
                             this.messageService.add(myMessage);
                             this.onDepotDelete.emit(depot);
+                            this.auditChangeEntityService.logDbChange(this.userId,this.userName,depot.lienBanque,0,'Depot',
+                                depot.idDepot + ' ' + depot.nom, 'Update' );
                         },
                         (dataserviceerror: DataServiceError) => {
                             console.log('Error deleting depot', dataserviceerror.message);
@@ -143,6 +151,8 @@ export class DepotComponent implements OnInit {
                             detail: $localize`:@@messageDepotUpdated:The depot ${modifiedDepot.idDepot} ${modifiedDepot.nom} was updated`
                         });
                         this.onDepotUpdate.emit(modifiedDepot);
+                        this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedDepot.lienBanque,0,'Depot',
+                            modifiedDepot.idDepot + ' ' + modifiedDepot.nom, 'Update' );
                     },
                     (dataserviceerror: DataServiceError) => {
                         console.log('Error updating depot', dataserviceerror.message);
@@ -163,6 +173,8 @@ export class DepotComponent implements OnInit {
                             detail: $localize`:@@messageDepotCreated:The depot ${newDepot.idDepot} ${newDepot.nom}  has been created`
                         });
                         this.onDepotCreate.emit(newDepot);
+                        this.auditChangeEntityService.logDbChange(this.userId,this.userName,newDepot.lienBanque,0,'Depot',
+                            newDepot.idDepot + ' ' + newDepot.nom, 'Create' );
                     },
                     (dataserviceerror: DataServiceError) => {
                         console.log('Error creating depot', dataserviceerror.message);

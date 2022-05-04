@@ -23,6 +23,8 @@ import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ToastModule} from 'primeng/toast';
 import {BanquesDataService} from '../banques/services/banques-data.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
+import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
+import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 
 const routes: Routes = [
   { path: '',
@@ -57,6 +59,8 @@ const routes: Routes = [
     DepotEntityService,
     BanquesDataService,
     BanqueEntityService,
+    AuditChangesDataService,
+    AuditChangeEntityService,
     ConfirmationService
   ],
 })
@@ -65,11 +69,13 @@ export class DepotsModule {
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
       private depotsDataService: DepotsDataService,
-      private banquesDataService: BanquesDataService
+      private banquesDataService: BanquesDataService,
+      private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Depot', depotsDataService);
     entityDataService.registerService('Banque', banquesDataService);
+    entityDataService.registerService('AuditChange', auditChangesDataService);
   }
 
 }
