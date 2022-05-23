@@ -104,6 +104,9 @@
                 <div *ngIf="membre.lienDis > 0">
                 {{ membre.lienDis }} {{ membre.societe }}
                 </div>
+                <div *ngIf="!membre.lienDis > 0">
+                    {{ membre.bankShortName }}
+                </div>
             </td>
             <td *ngIf="booShowOrganisations && filteredOrganisation && (filteredOrganisation['idDis'] == 0)" colspan="2" >
                 <div *ngIf="userLanguage =='fr'" >

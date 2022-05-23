@@ -6,7 +6,7 @@ import {Observable, combineLatest} from 'rxjs';
 import {DefaultOrganisation, Organisation} from '../model/organisation';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {enmStatusCompany, enmGender, enmCountry, enmOrgActivities, enmOrgCategories} from '../../shared/enums';
-import {NgForm} from '@angular/forms';
+import {NgForm, ValidationErrors} from '@angular/forms';
 import {Cpas} from '../../cpass/model/cpas';
 import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
 import {DataServiceError, QueryParams} from '@ngrx/data';
@@ -387,5 +387,22 @@ export class OrganisationComponent implements OnInit {
             }
         });
     }
+    /*
+    getFormValidationErrors() {
+
+        console.log('%c ==>> Validation Errors: ', 'color: red; font-weight: bold; font-size:25px;');
+
+        let totalErrors = 0;
+        if (this.myform.errors) {
+            this.myform.errors.forEach(oneError => {
+                totalErrors++;
+                console.log('Validation Error: ' + oneError.toString());
+            });
+        }
+
+        console.log('Number of errors: ' ,totalErrors);
+    }
+
+     */
 }
 

@@ -113,6 +113,9 @@
                     <div *ngIf="user.idOrg > 0">
                         {{user.idOrg }} {{ user.societe }}
                     </div>
+                    <div *ngIf="!user.idOrg > 0">
+                        {{user.idCompany }}
+                    </div>
                 </td>
                 <td>
                     {{user.idLanguage}}
