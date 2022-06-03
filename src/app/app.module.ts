@@ -27,6 +27,8 @@ import { FallbackComponent } from './fallback.component';
 import { ShouldLoginComponent } from './should-login.component';
 import { AuthGuardWithForcedLogin } from './auth/auth-guard-with-forced-login.guard';
 import {ToastModule} from 'primeng/toast';
+import { DocumentationComponent } from './documentation/documentation.component';
+import {AccordionModule} from 'primeng/accordion';
 
 
 const routes: Routes = [
@@ -79,6 +81,7 @@ const routes: Routes = [
         loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule),
         canActivate: [AuthGuardWithForcedLogin]
     },
+    { path: 'documentation', component: DocumentationComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     {
         path: '**',
@@ -91,7 +94,8 @@ const routes: Routes = [
     declarations: [
         AppComponent,
         FallbackComponent,
-        ShouldLoginComponent
+        ShouldLoginComponent,
+        DocumentationComponent
     ],
     imports: [
         BrowserModule,
@@ -122,7 +126,8 @@ const routes: Routes = [
         }),
         ButtonModule,
         PanelModule,
-        ToastModule
+        ToastModule,
+        AccordionModule
     ],
     providers: [ MessageService, ExcelService,
         { provide: DefaultDataServiceConfig,

@@ -473,6 +473,11 @@ export class AppComponent implements OnInit {
                 );
             }
         }
+        if (['Admin_Banq','Admin_FBBA','Bank_FBBA', 'Asso', 'Admin_Asso' ,'admin'].includes(authState.user.rights)) {
+            this.menuLoggedInItems.push(
+                {label: 'Help', icon: 'pi pi-fw pi-envelope', routerLink: ['/documentation']}
+            );
+        }
             // add logout
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
