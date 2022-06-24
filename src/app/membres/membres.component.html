@@ -45,7 +45,7 @@
         <tr>
             <th *ngIf="bankOptions" i18n="@@BankNameShortSorted" pSortableColumn="bankShortName">Bank<p-sortIcon field="bankShortName"></p-sortIcon></th>
             <th i18n="@@NameSorted" pSortableColumn="nom" colspan="2">Name<p-sortIcon field="nom"></p-sortIcon></th>
-            <th i18n="@@Organisation"  *ngIf="booShowOrganisations && filteredOrganisation && (filteredOrganisation['idDis'] != 0)"  colspan="2" >Organisation</th>
+            <th i18n="@@Organisation"  *ngIf="booShowOrganisations && ((!filteredOrganisation) || (filteredOrganisation && (filteredOrganisation['idDis'] != 0)))"  colspan="2" >Organisation</th>
             <th i18n="@@Fonction"  *ngIf="booShowOrganisations && filteredOrganisation && (filteredOrganisation['idDis'] == 0)"
                 pTooltip="{{generateTooltipFunction()}}" colspan="2" >Function</th>
             <th i18n="@@AddressSorted"  colspan="2" pSortableColumn="address" >Address<p-sortIcon field="address"></p-sortIcon></th>
@@ -66,13 +66,14 @@
             <th colspan="2">
                 <p-columnFilter type="text" field="nom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
             </th>
-            <th *ngIf="booShowOrganisations && filteredOrganisation && (filteredOrganisation['idDis'] != 0)" colspan="2" >
-            </th>
             <th *ngIf="booShowOrganisations && filteredOrganisation && (filteredOrganisation['idDis'] == 0) " colspan="2" >
                 <p-dropdown [ngModel]="selectedFunction" name="selectedFunction" id="selectedFunction"
                             [options]="membreFunctions" (onChange)="filterFunction($event.value)">                            >
                 </p-dropdown>
             </th>
+            <th *ngIf="booShowOrganisations && ((!filteredOrganisation) || (filteredOrganisation && (filteredOrganisation['idDis'] != 0)))"  colspan="2" >
+            </th>
+
             <th>
                 <p-columnFilter type="text" field="address" matchMode="contains" [showMenu]="false" ></p-columnFilter>
             </th>
@@ -100,14 +101,6 @@
             <td colspan="2">
                 {{ membre.nom }} {{membre.prenom}}
             </td>
-            <td *ngIf="booShowOrganisations && filteredOrganisation && (filteredOrganisation['idDis'] != 0)" colspan="2" >
-                <div *ngIf="membre.lienDis > 0">
-                {{ membre.lienDis }} {{ membre.societe }}
-                </div>
-                <div *ngIf="!membre.lienDis > 0">
-                    {{ membre.bankShortName }}
-                </div>
-            </td>
             <td *ngIf="booShowOrganisations && filteredOrganisation && (filteredOrganisation['idDis'] == 0)" colspan="2" >
                 <div *ngIf="userLanguage =='fr'" >
                     {{ membre.fonctionType }} {{ membre.fonctionName }}
@@ -116,6 +109,15 @@
                     {{ membre.fonctionType }} {{ membre.fonctionNameNl }}
                 </div>
             </td>
+            <td *ngIf="booShowOrganisations && ((!filteredOrganisation) || (filteredOrganisation && (filteredOrganisation['idDis'] != 0)))"  colspan="2" >
+                <div *ngIf="membre.lienDis > 0">
+                {{ membre.lienDis }} {{ membre.societe }}
+                </div>
+                <div *ngIf="!membre.lienDis > 0">
+                    {{ membre.bankShortName }}
+                </div>
+            </td>
+
             <td colspan="2" >
                 {{membre.address}}
             </td>

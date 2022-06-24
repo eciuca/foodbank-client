@@ -293,13 +293,7 @@ export class UserComponent implements OnInit {
   save(oldUser: User, userForm: User) {
     const modifiedUser = Object.assign({}, oldUser, userForm);
       modifiedUser.lienBat = this.selectedMembre.batId;
-      // correct broken db field lienBanqueif needed
-      if (this.currentFilteredBankId && (modifiedUser.lienBanque != this.currentFilteredBankId) ) {
-          console.log(`Admin Correcting User lienBanque from ${modifiedUser.lienBanque} to ${this.currentFilteredBankId} `, modifiedUser);
-          modifiedUser.lienBanque = this.currentFilteredBankId;
-          modifiedUser.idCompany = this.currentFilteredBankShortName;
-      }
-      
+
       this.updateUserInfoFromMember( modifiedUser,this.selectedMembre);
       if (!modifiedUser.hasOwnProperty('isNew')) {
           console.log('Updating User with content:', modifiedUser);
