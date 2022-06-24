@@ -1947,7 +1947,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">377</context>
+          <context context-type="linenumber">373</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDetailsUpdated" datatype="html">
@@ -7139,7 +7139,7 @@
         <target>Gebruiker <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> is bijgewerkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">315</context>
+          <context context-type="linenumber">311</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserUpdateError" datatype="html">
@@ -7147,7 +7147,7 @@
         <target>De gebruiker <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> kan niet worden bijgewerkt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">324</context>
+          <context context-type="linenumber">320</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreated" datatype="html">
@@ -7155,7 +7155,7 @@
         <target>Gebruiker <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> is aangemaakt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">345</context>
+          <context context-type="linenumber">341</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreateError" datatype="html">
@@ -7163,7 +7163,7 @@
         <target>De gebruiker <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> kan niet worden aangemaakt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">355</context>
+          <context context-type="linenumber">351</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreateErrorNoEmployee" datatype="html">
@@ -7171,7 +7171,7 @@
         <target>De gebruiker <x id="PH" equiv-text="modifiedUser.idUser"/> kan niet worden aangemaakt: er is geen medewerker geselecteerd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">364</context>
+          <context context-type="linenumber">360</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserLoginSorted" datatype="html">

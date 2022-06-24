@@ -1793,7 +1793,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">377</context>
+          <context context-type="linenumber">373</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDetailsUpdated" datatype="html">
@@ -6449,35 +6449,35 @@
         <source>User  <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> was updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">315</context>
+          <context context-type="linenumber">311</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserUpdateError" datatype="html">
         <source>The user <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">324</context>
+          <context context-type="linenumber">320</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreated" datatype="html">
         <source>User  <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> has been created</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">345</context>
+          <context context-type="linenumber">341</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreateError" datatype="html">
         <source>The user <x id="PH" equiv-text="modifiedUser.idUser"/> <x id="PH_1" equiv-text="modifiedUser.userName"/> could not be created: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">355</context>
+          <context context-type="linenumber">351</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageUserCreateErrorNoEmployee" datatype="html">
         <source>The user <x id="PH" equiv-text="modifiedUser.idUser"/>  could not be created: no employee was selected</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.ts</context>
-          <context context-type="linenumber">364</context>
+          <context context-type="linenumber">360</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserLoginSorted" datatype="html">

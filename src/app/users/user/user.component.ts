@@ -299,11 +299,7 @@ export class UserComponent implements OnInit {
           modifiedUser.lienBanque = this.currentFilteredBankId;
           modifiedUser.idCompany = this.currentFilteredBankShortName;
       }
-      else if (this.lienBanque && (modifiedUser.lienBanque != this.lienBanque) ) {
-          console.log(`Banq Admin Correcting User lienBanque from ${modifiedUser.lienBanque} to ${this.lienBanque} `, modifiedUser);
-          modifiedUser.lienBanque = this.lienBanque;
-      }
-
+      
       this.updateUserInfoFromMember( modifiedUser,this.selectedMembre);
       if (!modifiedUser.hasOwnProperty('isNew')) {
           console.log('Updating User with content:', modifiedUser);
