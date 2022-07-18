@@ -55,17 +55,14 @@
                                 </p-dropdown>
                             </div>
                             <div *ngIf="!orgName" class="p-field p-col-12 p-md-4">
-                                <label for="filteredOrganisation">To:</label>
-                                <p-autoComplete [(ngModel)]="selectedFilter" [suggestions]="filterOptions"
+                                <label for="filteredOrganisation">Organisation:</label>
+                                <p-autoComplete [ngModel]="selectedFilter" [suggestions]="filterOptions"
                                                 (completeMethod)="addOrganisationsToFilterOptions($event)"
                                                 (onSelect)="filterAddresses($event.idDis);"
                                                 [forceSelection]="true" id="filteredOrganisation"
+                                                delay="1000"
                                                 name="filteredOrganisation" field="fullname" [dropdown]="true">
-                                    <ng-template let-organisation pTemplate="item">
-                                        <div class="organisation-item">
-                                            <div> {{organisation.idDis}} {{organisation.societe}} </div>
-                                        </div>
-                                    </ng-template>
+
                                 </p-autoComplete>
                             </div>
 

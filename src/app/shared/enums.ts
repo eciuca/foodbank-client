@@ -117,6 +117,11 @@ export let enmMailGroupsBank = [
     {label: $localize`:@@BankMailGroupOrgMembers:Org Members` , value: 3 },
 
 ];
+export let enmMailGroupsFBBA = [
+    {label: $localize`:@@OrgMailGroupOrganisations:Organisations` , value: 0 },
+    {label: $localize`:@@BankMailGroupBankMgrs:Bank Mgrs` , value: 4 },
+    {label: $localize`:@@BankMailGroupOrgMgrs:Org Mgrs` , value: 1 },
+];
 export let enmMailGroupsOrg = [
     {label: $localize`:@@OrgMailGroupOrganisations:Organisations` , value: 0 },
     {label: $localize`:@@OrgMailGroupOrgMgrs:My Org Mgrs` , value: 1 },

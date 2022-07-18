@@ -400,7 +400,7 @@ export class AppComponent implements OnInit {
                  );
             }
             // add mailings
-        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso'].includes(authState.user.rights)) {
+        if ( ['Admin_Banq',  'Admin_Asso','Admin_FBBA','admin'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope', routerLink: ['/mailings']}
             );

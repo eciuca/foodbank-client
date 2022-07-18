@@ -17,7 +17,7 @@ import {FileUploadService} from './services/file-upload.service';
 import {MailAddress} from './model/mailaddress';
 import {MailadressEntityService} from './services/mailadress-entity.service';
 import {RegionEntityService} from '../organisations/services/region-entity.service';
-import {enmLanguage, enmMailGroupsBank, enmMailGroupsOrg} from '../shared/enums';
+import {enmLanguage, enmMailGroupsBank, enmMailGroupsFBBA, enmMailGroupsOrg} from '../shared/enums';
 
 
 
@@ -85,8 +85,9 @@ export class MailingsComponent implements OnInit {
     this.booOnlyAgreed = false;
     this.booOnlyFead = false;
     this.filteredOrganisationsPrepend = [
-      {idDis: null, fullname: $localize`:@@organisations:Organisations`},
+      {idDis: null, fullname: $localize`:@@All:All`},
     ];
+    this.mailgroupSelected = '0';
   }
 
   ngOnInit(): void {
@@ -108,7 +109,8 @@ export class MailingsComponent implements OnInit {
           console.log('Nb of Loaded organisations ' + loadedOrgSummaries.length);
           this.filterOptions = this.filteredOrganisationsPrepend.concat(loadedOrgSummaries.map((organisation) =>
               Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
-              ))
+              ));
+          this.selectedFilter = this.filterOptions[0];
         });
     this.loadAddressSubject$
         .pipe(
@@ -149,19 +151,25 @@ export class MailingsComponent implements OnInit {
       this.bankid = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
       this.senderFullEmail = `${authState.user.membrePrenom} ${authState.user.membreNom}<${authState.user.membreEmail}>` ;
-      this.mailgroupSelected
-      this.filterBase = {'lienBanque': authState.banque.bankId,'actif': '1', isDepot: '0'};
+      this.filterBase = {'actif': '1', isDepot: '0'};
       switch (authState.user.rights) {
-        case 'Asso':
+        case 'Admin_FBBA':
+        case 'admin':
+          this.mailgroups = enmMailGroupsFBBA;
+          break;
+        case 'Admin_Banq':
+          this.filterBase['lienBanque'] = authState.banque.bankId
+          this.mailgroups = enmMailGroupsBank;
+          break;
         case 'Admin_Asso':
+          this.filterBase['lienBanque'] = authState.banque.bankId;
           this.filterBase['lienDis'] = authState.organisation.idDis;
           this.orgName = authState.organisation.societe;
           this.mailgroups = enmMailGroupsOrg;
-
           this.selectedFilter = this.filteredOrganisationsPrepend[0];
           break;
         default:
-          this.mailgroups = enmMailGroupsBank;
+
       }
       this.filterBase['target'] = this.mailgroups[0].value;
       this.regionService.getWithQuery({'lienBanque': this.bankid.toString()})
@@ -179,13 +187,12 @@ export class MailingsComponent implements OnInit {
     if (event.query.length > 0) {
       this.latestOrgQueryParams['societe'] = event.query.toLowerCase();
     }
-    this.setAgreedFilter();
-    this.setFeadFilter();
-    this.setRegionFilter();
-    this.setMailGroupFilter();
-    this.setLanguageFilter();
-
-    // console.log('IdDis:', idDis, 'My latest Query parms are:', latestQueryParams);
+    else {
+      if (this.latestOrgQueryParams.hasOwnProperty('societe')) {
+        delete this.latestOrgQueryParams['societe'];
+      }
+    }
+   console.log( 'My org Query parms are:', this.latestOrgQueryParams);
     this.loadOrganisationSubject$.next(this.latestOrgQueryParams);
 
   }
@@ -217,10 +224,10 @@ export class MailingsComponent implements OnInit {
       mailListArray = this.mailingToList.split('\n');
     }
     console.log('mailListArray', mailListArray);
-    if ( mailListArray.length > 3) {
+    if ( mailListArray.length > 200) {
       const errMessage = {
         severity: 'error', summary: 'Send',
-        detail: $localize`:@@messageSendMaxListError:You have ${mailListArray.length} recipients. The maximum is 3.`,
+        detail: $localize`:@@messageSendMaxListError:You have ${mailListArray.length} recipients. The maximum is 200.`,
         life: 6000
       };
       this.messageService.add(errMessage);
