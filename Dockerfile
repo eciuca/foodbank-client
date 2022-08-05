@@ -50,6 +50,7 @@ RUN rm -r /usr/local/apache2/htdocs/*
 COPY --from=dist-build /dist-build/dist/foodbank-it-client/ /usr/local/apache2/htdocs/
 COPY --from=dist-build /dist-build/docker/httpd-vhosts.conf /usr/local/apache2/conf/extra
 COPY --from=dist-build /dist-build/docker/httpd.conf /usr/local/apache2/conf/
+RUN echo 31oscdj5v-0dkkuv72rlx1vl3k8wp5462-bo6nsrskmwy6h-2v86rtcoumjc3233r4r3l3v29p3u11gcf76vkpnp7yk4hy9fte8v2u1tj4yuf6nkzp2tmkkb4tkektta > /usr/local/apache2/htdocs/nortonsw_23cb38b0-f6ca-0.html
 
 # Change owner of the publicly available files to root user and daemon group. Httpd threads run as daemon.
 RUN chown -R root:daemon \
