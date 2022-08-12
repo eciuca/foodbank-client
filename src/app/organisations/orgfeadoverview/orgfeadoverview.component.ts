@@ -138,8 +138,11 @@ export class OrgfeadoverviewComponent implements OnInit {
       if (event.filters.agreed && event.filters.agreed.value != null) {
         queryParms['agreed'] = event.filters.agreed.value;
       }
-      if (event.filters.birbyN && event.filters.birbyN.value !== null) {
-        queryParms['isBirb'] = event.filters.birbyN.value;
+      if (event.filters.isFead && event.filters.isFead.value !== null) {
+        queryParms['isFead'] = event.filters.isFead.value;
+      }
+      if (event.filters.birbCode && event.filters.birbCode.value !== null) {
+        queryParms['birbCode'] = event.filters.birbCode.value;
       }
       if (event.filters.feadN && event.filters.feadN.value !== null) {
         queryParms['feadN'] = event.filters.feadN.value;

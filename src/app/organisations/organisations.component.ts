@@ -176,8 +176,8 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.nomDepot && event.filters.nomDepot.value) {
                 queryParms['nomDepot'] = event.filters.nomDepot.value;
             }
-            if (event.filters.birbyN && event.filters.birbyN.value !== null) {
-                queryParms['isBirb'] = event.filters.birbyN.value;
+            if (event.filters.isFead && event.filters.isFead.value !== null) {
+                queryParms['isFead'] = event.filters.isFead.value;
             }
             if (event.filters.refInt && event.filters.refInt.value !== null ) {
                 queryParms['refint'] = event.filters.refInt.value;
