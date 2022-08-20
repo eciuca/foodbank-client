@@ -4931,7 +4931,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">164,166</context>
+          <context context-type="linenumber">167,169</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
@@ -4939,7 +4939,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeadoverview.component.html</context>
-          <context context-type="linenumber">121,123</context>
+          <context context-type="linenumber">124,126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMembershipMailing" datatype="html">
@@ -5703,7 +5703,7 @@
         <target>Détails de l'organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisations.component.html</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">172</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DepotOrgsTitleArchive" datatype="html">
@@ -6171,7 +6171,7 @@
         <target>Fead Details</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeadoverview.component.html</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberReportError" datatype="html">

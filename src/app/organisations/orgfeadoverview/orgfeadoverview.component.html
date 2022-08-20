@@ -106,7 +106,10 @@
             <td>
 
             </td>
-            <td>
+            <td *ngIf="organisation.birbCode==1" pTooltip="{{organisation.antenneOrgName}}" >
+                Antenne
+            </td>
+            <td *ngIf="organisation.birbCode != 1" >
                 {{ organisation.birbCode }}
             </td>
             <td>

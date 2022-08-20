@@ -151,7 +151,10 @@
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.agreed, 'false-icon pi-times-circle': !organisation.agreed}"></i>
             </td>
-            <td>
+            <td *ngIf="organisation.birbCode==1" pTooltip="{{organisation.antenneOrgName}}" >
+               Antenne
+            </td>
+            <td *ngIf="organisation.birbCode != 1" >
                 {{ organisation.birbCode }}
             </td>
             <td>

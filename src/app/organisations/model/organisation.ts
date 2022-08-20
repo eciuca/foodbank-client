@@ -180,6 +180,8 @@ export interface Organisation {
 
     antenne: number;
 
+    antenneOrgName: string;
+
     afsca1: string;
 
     afsca2: string;
@@ -260,6 +262,7 @@ export class DefaultOrganisation implements Organisation {
     afsca2: string;
     afsca3: string;
     antenne: number;
+    antenneOrgName: string;
     banque: string;
     bic: string;
     birbCode: string;
@@ -380,6 +383,7 @@ export class DefaultOrganisation implements Organisation {
         this.afsca2 = '';
         this.afsca3 = '';
         this.antenne = 0;
+        this.antenneOrgName = '';
         this.banque = '';
         this.bic = '';
         this.birbCode = '';
