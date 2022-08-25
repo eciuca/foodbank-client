@@ -267,14 +267,14 @@ export class AppComponent implements OnInit {
         // handle  organisation(s) items
         if (  ['admin', 'Admin_FEAD', 'Admin_FBBA','Bank_FBBA'].includes(authState.user.rights))  {
             this.menuLoggedInItems.push(
-                {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
-
+                 {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']}
             );
         } else if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                     {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',
                     items: [
                         {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']},
+                        { label: $localize`:@@menuFEADOverview:FEAD`,icon: 'pi pi-fw pi-map', routerLink: ['/organisations/orgfeadoverview/']},
                         {
                             label: $localize`:@@menuRegions:Regions`, icon: 'pi pi-fw pi-globe',
                             routerLink: [`/organisations/regions/${authState.user.lienBat}`]
@@ -441,46 +441,25 @@ export class AppComponent implements OnInit {
             );
         }
 
-        // Add FEAD
-        if ( authState.user.rights === 'Admin_Banq')  {
-            this.menuLoggedInItems.push(
-                {
-                    label: 'Stock', icon: 'pi pi-fw pi-briefcase',
-                    items: [
-                        {
-                            label: $localize`:@@menuFEADOverview:Overview`,
-                            icon: 'pi pi-fw pi-map',
-                            routerLink: ['/organisations/orgfeadoverview/']
-                        },
-                        {
-                            label: $localize`:@@menuFEADApplication:Application` ,
-                                 icon: 'pi pi-fw pi-briefcase',
-                            command: (event) => { this.openFEAD(); }
-                         },
-                    ]
-                 }
-        );
-
-        } else {
-
-            if (['Admin_Asso','Admin_FEAD','Admin_EXT','Admin_CPAS'].includes(authState.user.rights) ||authState.user.gestFead) {
+        // Add Stock
+        if (['Admin_Banq','Admin_Asso','Admin_FEAD','Admin_EXT','Admin_CPAS'].includes(authState.user.rights) ||authState.user.gestFead) {
                 this.menuLoggedInItems.push(
                     {
-                        label: $localize`:@@menuFEADApplication:Application` ,
+                        label: $localize`:@@menuFEADApplication:Stock` ,
                         icon: 'pi pi-fw pi-briefcase',
                         command: (event) => { this.openFEAD(); }
                     }
                 );
             }
-        }
+
         if (['Admin_Banq','Admin_FBBA','Bank_FBBA', 'Asso', 'Admin_Asso' ,'admin'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {label: 'Help', icon: 'pi pi-fw pi-envelope', routerLink: ['/documentation']}
             );
         }
-            // add logout
-            this.menuLoggedInItems.push(
-                {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
-            );
+        // add logout
+        this.menuLoggedInItems.push(
+            {label: $localize`:@@menuLogout:Logout`, icon: 'pi pi-fw pi-sign-out',  command: (event) => { this.doLogout(); }}
+        );
     }
 }

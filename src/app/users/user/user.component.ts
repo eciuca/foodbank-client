@@ -61,6 +61,8 @@ export class UserComponent implements OnInit {
     orgName: string;
     loggedInUserId: string;
     loggedInUserName: string;
+    loggedInUserRights: string;
+    loggedInMember: Membre ;
   constructor(
       private usersService: UserEntityService,
       private membresService: MembreEntityService,
@@ -202,6 +204,18 @@ export class UserComponent implements OnInit {
                   if (authState.user) {
                       this.loggedInUserName = authState.user.userName;
                       this.loggedInUserId = authState.user.idUser;
+                      this.loggedInUserRights = authState.user.rights
+                      this.membresService.getByKey(authState.user.lienBat)
+                          .subscribe(
+                          membre => {
+                              if (membre != null) {
+                                  this.loggedInMember = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
+                                  console.log('logged in membre:', this.selectedMembre);
+                              } else {
+                                  console.log('There is no logged in membre !');
+                              }
+                          });
+
                       this.lienBanque = authState.banque.bankId;
                       this.idCompany = authState.banque.bankShortName;
                       this.filterMemberBase = {'actif':1};
@@ -417,7 +431,7 @@ export class UserComponent implements OnInit {
         }
         const query = event.query;
         queryMemberParms['offset'] = '0';
-        queryMemberParms['rows'] = '10';
+        queryMemberParms['rows'] = '20';
         queryMemberParms['sortField'] = 'nom';
         queryMemberParms['sortOrder'] = '1';
         queryMemberParms['nom'] = query.toLowerCase();
@@ -426,6 +440,10 @@ export class UserComponent implements OnInit {
                 this.filteredMembres = filteredMembres.map((membre) =>
                     Object.assign({}, membre, {fullname: this.setMembreFullName(membre)})
                 );
+                if ( ['Admin_Banq',  'Admin_FBBA','admin'].includes(this.loggedInUserRights)) {
+                    this.filteredMembres.push(this.loggedInMember);
+                }
+                console.log("Filtered Members", this.filteredMembres, this.selectedMembre );
             });
     }
 
