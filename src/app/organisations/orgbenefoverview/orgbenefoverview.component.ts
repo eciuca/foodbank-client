@@ -13,6 +13,10 @@ import {enmYn, enmStatusCompany, enmOrgCategories} from '../../shared/enums';
 import {RegionEntityService} from '../services/region-entity.service';
 import {DepotEntityService} from '../../depots/services/depot-entity.service';
 import {QueryParams} from '@ngrx/data';
+import {formatDate} from '@angular/common';
+import {ExcelService} from '../../services/excel.service';
+import {AuthService} from '../../auth/auth.service';
+import {OrganisationHttpService} from '../services/organisation-http.service';
 
 
 @Component({
@@ -37,16 +41,19 @@ export class OrgbenefoverviewComponent implements OnInit {
   YNOptions:  any[];
   bankName: string;
   lienBanque: number;
+  bankShortName: string;
   depotName: string;
   first: number;
   regionSelected: number;
   depotSelected: string;
-
   statutSelected: string;
   statuts: any[];
   constructor(private organisationService: OrganisationEntityService,
               private regionService: RegionEntityService,
               private depotService: DepotEntityService,
+              private organisationHttpService: OrganisationHttpService,
+              private authService: AuthService,
+              private excelService: ExcelService,
               private router: Router,
               private route: ActivatedRoute,
               private store: Store<AppState>
@@ -56,6 +63,7 @@ export class OrgbenefoverviewComponent implements OnInit {
     this.YNOptions = enmYn;
     this.lienBanque = 0;
     this.bankName = '';
+    this.bankShortName = '';
     this.depotName = '';
     this.first = 0;
   }
@@ -156,6 +164,7 @@ export class OrgbenefoverviewComponent implements OnInit {
       this.lienBanque = authState.banque.bankId;
       this.filterBase['lienBanque'] = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
+      this.bankShortName = authState.banque.bankShortName;
       switch (authState.user.rights) {
         case 'Bank':
         case 'Admin_Banq':
@@ -164,7 +173,7 @@ export class OrgbenefoverviewComponent implements OnInit {
           queryDepotParms['rows'] = '999';
           queryDepotParms['sortField'] = 'idDepot';
           queryDepotParms['sortOrder'] = '1';
-          queryDepotParms['lienBanque'] = this.lienBanque.toString();
+          queryDepotParms['idCompany'] = this.bankShortName;
           queryDepotParms['actif'] = '1';
           this.depotService.getWithQuery(queryDepotParms)
               .subscribe(depots => {
@@ -262,7 +271,37 @@ export class OrgbenefoverviewComponent implements OnInit {
     }
     this.loadPageSubject$.next(latestQueryParams);
   }
+  exportAsXLSX(): void {
+     const reportOption = this.lienBanque;
+    this.organisationHttpService.getOrganisationReport(this.authService.accessToken, reportOption).subscribe(
+        (organisations: any[]) => {
+          const cleanedList = [
 
+          ];
+          organisations.map((item) => {
+            const cleanedItem = {};
+            cleanedItem['Id'] = item.idDis;
+            cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
+            const regionObject = this.regions.find(obj => obj.value == item.region);
+            cleanedItem[$localize`:@@Region:Region`] =(typeof regionObject !== "undefined") ? regionObject.label : '';
+            cleanedItem[$localize`:@@City:City`] =item.localite;
+            cleanedItem[$localize`:@@FeadCode:Fead Code`] =item.birbCode;
+            cleanedItem[$localize`:@@Families:Families`] = item.nFam;
+            cleanedItem[$localize`:@@Beneficiaries:Beneficiaries`] = item.nPers;
+            cleanedItem[$localize`:@@Infants:Infants`] = item.nNour;
+            cleanedItem[$localize`:@@Babies:Babies`] = item.nBebe;
+            cleanedItem[$localize`:@@Children:Children`] =item.nEnf;
+            cleanedItem[$localize`:@@TeenAgers:TeenAgers`] =item.nAdo;
+            cleanedItem[$localize`:@@YoungAdults:YoungAdults`] =item.n1824;
+            cleanedItem['Seniors'] =item.nSen;
+
+            cleanedList.push( cleanedItem);
+          });
+
+            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.beneficiaries.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+
+        });
+  }
     generateTooltipGestBen() {
       return $localize`:@@OrgGestBen:Organisation Manages itself its Beneficiaries`;
     }
