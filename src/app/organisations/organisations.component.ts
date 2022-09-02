@@ -39,6 +39,7 @@ export class OrganisationsComponent implements OnInit {
     loading: boolean;
     filterBase: any;
     booShowArchived: boolean;
+    booShowDepots: boolean;
     booCanCreate: boolean;
     regions: any[];
     depots: any[];
@@ -68,6 +69,7 @@ export class OrganisationsComponent implements OnInit {
     ) {
         this.booCanCreate = false;
         this.booShowArchived = false;
+        this.booShowDepots = false;
         this.orgCategories = enmOrgCategories;
         this.statuts = enmStatusCompany;
         this.YNOptions = enmYn;
@@ -160,6 +162,11 @@ export class OrganisationsComponent implements OnInit {
         }  else {
             queryParms['actif'] = '1';
         }
+        if (this.booShowDepots ) {
+            queryParms['isDepot'] = '1';
+        }  else {
+            queryParms['isDepot'] = '0';
+        }
         if (event.filters) {
             if (event.filters.idDis && event.filters.idDis.value) {
                 queryParms['idDis'] = event.filters.idDis.value;
@@ -207,8 +214,8 @@ export class OrganisationsComponent implements OnInit {
         this.loadPageSubject$.next(queryParms);
     }
     private initializeDependingOnUserRights(authState: AuthState) {
-        // exfilter all depots
-        this.filterBase = { 'isDepot': '0' };
+
+        this.filterBase = {  };
         if (authState.user) {
             if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'
                 && authState.user.rights !== 'Admin_FBBA' && authState.user.rights !== 'Bank_FBBA' ) {
@@ -319,8 +326,25 @@ export class OrganisationsComponent implements OnInit {
         } else {
             latestQueryParams['actif'] = '1';
         }
+
         this.loadPageSubject$.next(latestQueryParams);
     }
+    changeDepotFilter($event) {
+        console.log('Depot filter is now:', $event);
+        this.booShowDepots = $event.checked;
+        this.first = 0;
+        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        console.log('Latest Query Parms', latestQueryParams);
+        // when we switch from active to archived list and vice versa , we need to restart from first page
+        latestQueryParams['offset'] = '0';
+        if (this.booShowDepots ) {
+            latestQueryParams['isDepot'] = '1';
+        } else {
+            latestQueryParams['isDepot'] = '0';
+        }
+        this.loadPageSubject$.next(latestQueryParams);
+    }
+
 
     filterRegion(regId) {
         console.log('Region filter is now:', regId);

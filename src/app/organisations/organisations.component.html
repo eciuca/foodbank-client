@@ -41,7 +41,11 @@
                         </ng-template>
                     </p-dropdown>
                 </div>
-                <div class="p-field p-col-12 p-md-2">
+                <div class="p-field p-col-12 p-md-1">
+                    <label i18n="@@ShowDepots" for="showdepots">Show Depots?</label>
+                    <p-checkbox [value]="booShowDepots" binary="true" name="showdepots" id="showdepots" (onChange)="changeDepotFilter($event)"></p-checkbox>
+                </div>
+                <div class="p-field p-col-12 p-md-1">
                     <label i18n="@@ShowArchived" for="archived">Show Archived?</label>
                     <p-checkbox [value]="booShowArchived" binary="true" name="archived" id="archived" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                 </div>

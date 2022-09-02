@@ -23,11 +23,15 @@
                         <label i18n="@@OrgRefInt" for="refInt">Internal Reference</label>
                         <input  pInputText id="refInt" name="refInt"  maxlength="15" [ngModel]="organisation.refInt" />
                     </div>
-                    <div class="p-field p-col-12 p-md-3">
+                    <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@Depot" for="selectedDepot">Depot</label>
                         <p-autoComplete  [(ngModel)]="selectedDepot" [suggestions]="filteredDepots"  (completeMethod)="filterDepot($event)"
                                          [forceSelection]="true"  id="selectedDepot" name="selectedDepot" field="societe" [dropdown]="true">
                         </p-autoComplete>
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        <label for="isDepot">Depot?</label>
+                        <p-inputSwitch id="isDepot" name="isDepot" [ngModel]="organisation.depyN"></p-inputSwitch>
                     </div>
                     <div class="p-field p-col-12 p-md-1">
                         <label i18n="@@OrgAgreed" for="agreed">Agreed</label>
