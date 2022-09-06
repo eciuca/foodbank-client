@@ -168,6 +168,15 @@ export class DepotsComponent implements OnInit {
         });
   }
 
+    hasDepotAnomalies(depot: Depot) {
+        if (depot.anomalies == "") return false;
+        else return true;
+    }
+
+  generateToolTipMessageForDepotAnomalies(depot: Depot) {
+    if (depot.anomalies == "") return $localize`:@@ToolTipDepotNoAnomalies:Depot Info is consistent with its Organisation Info`;
+    else return $localize`:@@ToolTipDepotAnomalies:Depot Info is not consistent with its Organisation Info - see depot details`;
+  }
 }
 
 

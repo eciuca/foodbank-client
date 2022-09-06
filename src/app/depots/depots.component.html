@@ -46,7 +46,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-depot>
-        <tr (click)="handleSelect(depot)">
+        <tr [ngStyle]="hasDepotAnomalies(depot) && {'background-color': 'yellow'}" pTooltip="{{generateToolTipMessageForDepotAnomalies(depot)}}" (click)="handleSelect(depot)">
             <td *ngIf="bankOptions">
                 {{depot.idCompany}}
             </td>

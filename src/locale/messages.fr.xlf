@@ -3058,6 +3058,22 @@
           <context context-type="linenumber">183</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="ToolTipDepotFieldNoAnomaly" datatype="html">
+        <source>Depot field {field} Info is consistent with its Organisation Info</source>
+        <target>Les informations du champ Dépôt {field} sont cohérentes avec ses informations d'organisation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
+          <context context-type="linenumber">213</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ToolTipDepotFieldAnomaly" datatype="html">
+        <source>Depot field <x id="PH" equiv-text="field"/> is not consistent with its Organisation field <x id="PH_1" equiv-text="anomaly"/></source>
+        <target>Le champ Dépôt <x id="PH" equiv-text="field"/> n'est pas cohérent avec son champ Organisation <x id="PH_1" equiv-text="anomaly"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
+          <context context-type="linenumber">214</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="ExportDepots" datatype="html">
         <source>Export Depots</source>
         <target>Télécharger les Dépots</target>
@@ -3100,6 +3116,22 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.html</context>
           <context context-type="linenumber">71,73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ToolTipDepotNoAnomalies" datatype="html">
+        <source>Depot Info is consistent with its Organisation Info</source>
+        <target>Les informations sur le dépôt sont cohérentes avec ses informations sur l'organisation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
+          <context context-type="linenumber">177</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ToolTipDepotAnomalies" datatype="html">
+        <source>Depot Info is not consistent with its Organisation Info - see depot details</source>
+        <target>Les informations sur le dépôt ne sont pas cohérentes avec les informations sur l'organisation - voir les détails du dépôt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
+          <context context-type="linenumber">178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="TitleMandatory" datatype="html">

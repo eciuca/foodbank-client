@@ -208,6 +208,30 @@ export class DepotComponent implements OnInit {
             this.onDepotQuit.emit();
         }
     }
+    generateToolTipMessageForDepotAnomaly(field: string) {
+        const anomaly = this.findAnomaly(field);
+        if (anomaly == "") return $localize`:@@ToolTipDepotFieldNoAnomaly:Depot field {field} Info is consistent with its Organisation Info`;
+        else return $localize`:@@ToolTipDepotFieldAnomaly:Depot field ${field} is not consistent with its Organisation field ${anomaly}`;
+    }
+
+    hasDepotAnomaly(field: string) {
+        if (this.findAnomaly(field) == "") return false;
+        else return true;
+    }
+    findAnomaly(field: string) {
+        let myanomaly = "";
+        if (this.depot.anomalies.length > 0) {
+            const anomaliesArray = this.depot.anomalies.split(';').map(kvp => kvp.split(':'));
+            console.log("anomalies array is", anomaliesArray)
+            anomaliesArray.forEach((anomaly) => {
+                console.log("anomaly is", anomaly);
+                if (anomaly[0] == field) {
+                    myanomaly += anomaly[1];
+                }
+            });
+        }
+        return myanomaly;
+    }
 }
 
 

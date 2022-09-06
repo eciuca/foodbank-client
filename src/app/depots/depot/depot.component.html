@@ -6,12 +6,18 @@
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label for="idDepot">Id</label>
-                <input #idDepot="ngModel" pInputText id="idDepot" name="idDepot" required maxLength="10" [ngModel]="depot.idDepot" />
+                <input #idDepot="ngModel" pInputText id="idDepot" name="idDepot"  required maxLength="10" [ngModel]="depot.idDepot"
+                       [ngStyle]="hasDepotAnomaly('idDepot') && {'background-color': 'yellow'}"
+                       pTooltip="{{generateToolTipMessageForDepotAnomaly('idDepot')}}"
+                />
                 <p-message *ngIf="idDepot.invalid && depotForm.touched" severity="error" text="Depot Id is required"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="nom">Name</label>
-                <input #nom="ngModel" pInputText id="nom" name="nom" required minlength="4" maxLength="45" [ngModel]="depot.nom" />
+                <input #nom="ngModel"  pInputText id="nom" name="nom" required minlength="4" maxLength="45" [ngModel]="depot.nom"
+                       [ngStyle]="hasDepotAnomaly('nom') && {'background-color': 'yellow'}"
+                       pTooltip="{{generateToolTipMessageForDepotAnomaly('nom')}}"
+                />
                 <p-message *ngIf="nom.invalid && depotForm.touched" severity="error" text="User Name is required and must be minimum 4 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-6">
@@ -20,39 +26,61 @@
             </div>
             <div class="p-field p-col-12 p-md-6">
                 <label for="adresse">Address</label>
-                <input pInputText id="adresse" name="adresse" maxLength="45" [ngModel]="depot.adresse" />
+                <input pInputText id="adresse" name="adresse" maxLength="45" [ngModel]="depot.adresse"
+                       [ngStyle]="hasDepotAnomaly('adresse') && {'background-color': 'yellow'}"
+                       pTooltip="{{generateToolTipMessageForDepotAnomaly('adresse')}}"
+                />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="cp">Zip Code</label>
-                <input pInputText id="cp" name="cp" maxLength="8" [ngModel]="depot.cp" />
+                <input pInputText id="cp" name="cp" maxLength="8" [ngModel]="depot.cp"
+                       [ngStyle]="hasDepotAnomaly('cp') && {'background-color': 'yellow'}"
+                       pTooltip="{{generateToolTipMessageForDepotAnomaly('cp')}}"
+                />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="ville">City</label>
-                <input pInputText id="ville" name="ville" maxLength="45" [ngModel]="depot.ville" />
+                <input pInputText id="ville" name="ville" maxLength="45" [ngModel]="depot.ville"
+                       [ngStyle]="hasDepotAnomaly('ville') && {'background-color': 'yellow'}"
+                       pTooltip="{{generateToolTipMessageForDepotAnomaly('ville')}}"
+                />
             </div>
             <div class="p-field p-col-12 p-md-6">
                 <label for="adresse2">2nd Address</label>
-                <input pInputText id="adresse2" name="adresse2" maxLength="45" [ngModel]="depot.adresse2" />
+                <input pInputText id="adresse2" name="adresse2" maxLength="45" [ngModel]="depot.adresse2"
+                       [ngStyle]="hasDepotAnomaly('adresse2') && {'background-color': 'yellow'}"
+                       pTooltip="{{generateToolTipMessageForDepotAnomaly('adresse2')}}"
+                />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="telephone">Tel</label>
-                <input pInputText id="telephone" name="telephone" maxLength="20" [ngModel]="depot.telephone" />
+                <input pInputText id="telephone" name="telephone" maxLength="20" [ngModel]="depot.telephone"
+                       [ngStyle]="hasDepotAnomaly('tel') && {'background-color': 'yellow'}"
+                       pTooltip="{{generateToolTipMessageForDepotAnomaly('tel')}}"
+                />
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label for="email">E-mail</label>
-                <input pInputText id="email" name="email" maxLength="45" [ngModel]="depot.email" />
+                <input pInputText id="email" name="email" maxLength="45" [ngModel]="depot.email"
+                       [ngStyle]="hasDepotAnomaly('email') && {'background-color': 'yellow'}"
+                       pTooltip="{{generateToolTipMessageForDepotAnomaly('email')}}"
+                />
             </div>
             <div class="p-field p-col-12">
                 <label for="memo">Memo</label>
                 <input pInputText id="memo" name="memo" [ngModel]="depot.memo" />
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="depPrinc">Main Depot?</label>
-                 <p-inputSwitch id="depPrinc" name="depPrinc" [ngModel]="depot.depPrinc"></p-inputSwitch>
+                <label   [ngStyle]="hasDepotAnomaly('depPrinc') && {'color': 'yellow'}" for="depPrinc">Main Depot?</label>
+                 <p-inputSwitch id="depPrinc" name="depPrinc" [ngModel]="depot.depPrinc"
+                       pTooltip="{{generateToolTipMessageForDepotAnomaly('depPrinc')}}"
+                 ></p-inputSwitch>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="actif">Actif?</label>
-                <p-inputSwitch id="actif" name="actif" [ngModel]="depot.actif"></p-inputSwitch>
+                <label  [ngStyle]="hasDepotAnomaly('actif') && {'background-color': 'yellow'}" for="actif">Actif?</label>
+                <p-inputSwitch id="actif" name="actif" [ngModel]="depot.actif"
+                     pTooltip="{{generateToolTipMessageForDepotAnomaly('actif')}}"
+                ></p-inputSwitch>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="depFead">Dep Fead ?</label>

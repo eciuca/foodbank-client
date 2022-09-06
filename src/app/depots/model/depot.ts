@@ -14,6 +14,7 @@ export interface Depot {
     depFead: boolean;
     idCompany: string;
     lienBanque: number;
+    anomalies: string;
     totalRecords: number;
 }
 export function compareDepots(c1: Depot, c2: Depot) {
@@ -41,6 +42,7 @@ export class DefaultDepot implements Depot {
     nom: string;
     telephone: string;
     ville: string;
+    anomalies: string;
     totalRecords: number;
     isNew: boolean; // calculated property to indicate we are creating a new depot
     constructor() {
@@ -59,6 +61,7 @@ export class DefaultDepot implements Depot {
         this.nom = '';
         this.telephone = '';
         this.ville = '';
+        this.anomalies = '';
         this.totalRecords = 0;
         this.isNew = true;
     }

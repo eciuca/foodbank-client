@@ -21,10 +21,12 @@ import {appEntityMetadata} from '../app-entity.metadata';
 import {ConfirmationService} from 'primeng/api';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ToastModule} from 'primeng/toast';
+import {TooltipModule} from 'primeng/tooltip';
 import {BanquesDataService} from '../banques/services/banques-data.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+
 
 const routes: Routes = [
   { path: '',
@@ -52,7 +54,8 @@ const routes: Routes = [
         MessageModule,
         FormsModule,
         ConfirmPopupModule,
-        ToastModule
+        ToastModule,
+        TooltipModule,
     ],
   providers: [
     DepotsDataService,
