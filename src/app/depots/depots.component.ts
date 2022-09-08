@@ -104,19 +104,18 @@ export class DepotsComponent implements OnInit {
    console.log("new depot for organisation", this.selectedIdDis);
    this.depotService.getByKey(this.selectedIdDis.toString())
        .subscribe( existingDepot => {
-         if (existingDepot != null) {
+
            const  errMessage = {severity: 'error', summary: 'Create',
              // tslint:disable-next-line:max-line-length
              detail: $localize`:@@messageDepotCreationError1:The depot ${existingDepot.idDepot} ${existingDepot.nom} exists already`,
              life: 6000 };
            this.messageService.add(errMessage) ;
-         }
-         else {
-
-           this.orgsummaryService.getByKey(this.selectedIdDis)
+         },
+           (dataserviceerror: DataServiceError) => {
+             console.log('depot', dataserviceerror.message);
+             this.orgsummaryService.getByKey(this.selectedIdDis)
                .subscribe(
                    orgsummary => {
-                     if (orgsummary !== null) {
 
                        const newDepot = new DefaultDepot();
                        newDepot.idDepot = this.selectedIdDis.toString();
@@ -144,17 +143,18 @@ export class DepotsComponent implements OnInit {
                                  };
                                  this.messageService.add(errMessage);
                                });
-                     }
-                     else {
+                     },
+                   (dataserviceerror: DataServiceError) => {
+                     console.log('Error finding org for depot', dataserviceerror.message);
                        const  errMessage = {severity: 'error', summary: 'Create',
                          // tslint:disable-next-line:max-line-length
                          detail: $localize`:@@messageDepotCreationError2:There is no organisation with id ${this.selectedIdDis}`,
                          life: 6000 };
                        this.messageService.add(errMessage) ;
-                     }
+
                    });
 
-         }
+
        })
   }
 

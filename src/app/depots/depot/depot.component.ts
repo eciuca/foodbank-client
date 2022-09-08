@@ -72,12 +72,6 @@ export class DepotComponent implements OnInit {
                 if (depot) {
                     this.depot = depot;
                     console.log('our depot:', this.depot);
-                } else {
-                    this.depot = new DefaultDepot();
-                    if (this.myform) {
-                        this.myform.reset(this.depot);
-                    }
-                    console.log('we have a new default depot');
                 }
             });
         }
