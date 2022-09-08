@@ -3,6 +3,12 @@
         Depot {{ depot.nom}}
     </ng-template>
     <form   #depotForm="ngForm">
+        <div class="p-formgroup-inline">
+            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, depot)" label="Delete"></button>
+            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(depot,false, depotForm.value)" label="Save" [disabled] = "depotForm.invalid" ></button>
+            <button *ngIf="booCanSave && depot.anomalies != ''" type="button" pButton icon="pi pi-check" (click)="save(depot, true,depotForm.value)" label="Synchronize from Organisation"  ></button>
+            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, depot, depotForm,depotForm.dirty)" label="Return" ></button>
+        </div>
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label for="idDepot">Id</label>
@@ -88,11 +94,6 @@
             </div>
         </div>
         <p-confirmPopup></p-confirmPopup>
-        <div class="p-formgroup-inline">
-            <button  *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, depot)" label="Delete"></button>
-            <button *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(depot, depotForm.value)" label="Save" [disabled] = "depotForm.invalid" ></button>
-            <button *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, depot, depotForm,depotForm.dirty)" label="Return" ></button>
-        </div>
     </form>
 </p-panel>
 

@@ -26,6 +26,9 @@ import {BanquesDataService} from '../banques/services/banques-data.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {CheckboxModule} from 'primeng/checkbox';
+import {OrgSummariesDataService} from '../organisations/services/orgsummaries-data.service';
+import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 
 
 const routes: Routes = [
@@ -56,10 +59,13 @@ const routes: Routes = [
         ConfirmPopupModule,
         ToastModule,
         TooltipModule,
+        CheckboxModule,
     ],
   providers: [
     DepotsDataService,
     DepotEntityService,
+      OrgSummariesDataService,
+      OrgSummaryEntityService,
     BanquesDataService,
     BanqueEntityService,
     AuditChangesDataService,
@@ -73,11 +79,13 @@ export class DepotsModule {
       private entityDataService: EntityDataService,
       private depotsDataService: DepotsDataService,
       private banquesDataService: BanquesDataService,
+      private orgSummariesDataService: OrgSummariesDataService,
       private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Depot', depotsDataService);
     entityDataService.registerService('Banque', banquesDataService);
+      entityDataService.registerService('OrgSummary', orgSummariesDataService);
     entityDataService.registerService('AuditChange', auditChangesDataService);
   }
 

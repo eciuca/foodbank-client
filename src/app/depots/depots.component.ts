@@ -1,18 +1,21 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Depot} from './model/depot';
+import {DefaultDepot, Depot} from './model/depot';
 import {DepotEntityService} from './services/depot-entity.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LazyLoadEvent} from 'primeng/api';
+import {LazyLoadEvent, MessageService} from 'primeng/api';
 import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {DepotHttpService} from './services/depot-http.service';
 import {AuthState} from '../auth/reducers';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {formatDate} from '@angular/common';
+import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
+import {DataServiceError} from '@ngrx/data';
+import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 
 
 
@@ -31,25 +34,34 @@ export class DepotsComponent implements OnInit {
   loading: boolean;
   filterBase: any;
   booIsAdmin: boolean;
+  booShowArchived: boolean;
   lienBanque: number;
+  userId: string;
+  userName: string;
   bankShortName: string;
   bankOptions: any[];
   first: number;
   totalRecords: number;
+  selectedIdDis: number;
   constructor(private depotService: DepotEntityService,
               private banqueService: BanqueEntityService,
+              private orgsummaryService: OrgSummaryEntityService,
+              private auditChangeEntityService: AuditChangeEntityService,
               private authService: AuthService,
               private excelService: ExcelService,
+              private messageService: MessageService,
               private route: ActivatedRoute,
               private router: Router,
               private store: Store,
               private depotHttpService: DepotHttpService
   ) {
     this.booIsAdmin = false;
+    this.booShowArchived = false;
     this.first = 0;
     this.totalRecords = 0;
     this.bankShortName = '';
     this.filterBase = {};
+    this.selectedIdDis = 1;
   }
   ngOnInit() {
     this.reload();
@@ -88,9 +100,62 @@ export class DepotsComponent implements OnInit {
     this.selectedIdDepot$.next(depot.idDepot);
     this.displayDialog = true;
   }
-  showDialogToAdd() {
-    this.selectedIdDepot$.next(0);
-    this.displayDialog = true;
+  addNewDepotFromOrg() {
+   console.log("new depot for organisation", this.selectedIdDis);
+   this.depotService.getByKey(this.selectedIdDis.toString())
+       .subscribe( existingDepot => {
+         if (existingDepot != null) {
+           const  errMessage = {severity: 'error', summary: 'Create',
+             // tslint:disable-next-line:max-line-length
+             detail: $localize`:@@messageDepotCreationError1:The depot ${existingDepot.idDepot} ${existingDepot.nom} exists already`,
+             life: 6000 };
+           this.messageService.add(errMessage) ;
+         }
+         else {
+
+           this.orgsummaryService.getByKey(this.selectedIdDis)
+               .subscribe(
+                   orgsummary => {
+                     if (orgsummary !== null) {
+
+                       const newDepot = new DefaultDepot();
+                       newDepot.idDepot = this.selectedIdDis.toString();
+                       newDepot.lienBanque = this.lienBanque;
+                       newDepot.idCompany = this.bankShortName;
+                       console.log('Creating Depot with content:', newDepot);
+                       this.depotService.add(newDepot)
+                           .subscribe((createdDepot) => {
+                                 this.messageService.add({
+                                   severity: 'success',
+                                   summary: 'Creation',
+                                   detail: $localize`:@@messageDepotCreated:The depot ${createdDepot.idDepot} ${createdDepot.nom}  has been created`
+                                 });
+
+                                 this.auditChangeEntityService.logDbChange(this.userId, this.userName, createdDepot.lienBanque, 0, 'Depot',
+                                     createdDepot.idDepot + ' ' + createdDepot.nom, 'Create');
+                               },
+                               (dataserviceerror: DataServiceError) => {
+                                 console.log('Error creating depot', dataserviceerror.message);
+                                 const errMessage = {
+                                   severity: 'error', summary: 'Create',
+                                   // tslint:disable-next-line:max-line-length
+                                   detail: $localize`:@@messageDepotNotCreated:The depot  ${newDepot.idDepot} ${newDepot.nom} could not be created: error: ${dataserviceerror.message}`,
+                                   life: 6000
+                                 };
+                                 this.messageService.add(errMessage);
+                               });
+                     }
+                     else {
+                       const  errMessage = {severity: 'error', summary: 'Create',
+                         // tslint:disable-next-line:max-line-length
+                         detail: $localize`:@@messageDepotCreationError2:There is no organisation with id ${this.selectedIdDis}`,
+                         life: 6000 };
+                       this.messageService.add(errMessage) ;
+                     }
+                   });
+
+         }
+       })
   }
 
   handleDepotQuit() {
@@ -100,16 +165,22 @@ export class DepotsComponent implements OnInit {
   handleDepotUpdate(updatedDepot) {
     const index = this.depots.findIndex(depot => depot.idDepot === updatedDepot.idDepot);
     this.depots[index] = updatedDepot;
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
   handleDepotCreate(createdDepot: Depot) {
     this.depots.push({...createdDepot});
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
 
   handleDepotDeleted(deletedDepot) {
     const index = this.depots.findIndex(depot => depot.idDepot === deletedDepot.idDepot);
     this.depots.splice(index, 1);
+    const latestQueryParams = this.loadPageSubject$.getValue();
+    this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
   nextPage(event: LazyLoadEvent) {
@@ -124,6 +195,11 @@ export class DepotsComponent implements OnInit {
     } else {
       queryParms['sortField'] =  'nom';
     }
+    if (this.booShowArchived ) {
+      queryParms['actif'] = '0';
+    }  else {
+      queryParms['actif'] = '1';
+    }
     if (event.filters) {
       if (event.filters.nom && event.filters.nom.value) {
         queryParms['nom'] = event.filters.nom.value;
@@ -134,9 +210,28 @@ export class DepotsComponent implements OnInit {
     }
     this.loadPageSubject$.next(queryParms);
   }
+
+  changeArchiveFilter($event) {
+    console.log('Archive is now:', $event);
+    this.booShowArchived = $event.checked;
+    this.first = 0;
+    const latestQueryParams = {...this.loadPageSubject$.getValue()};
+    console.log('Latest Query Parms', latestQueryParams);
+    // when we switch from active to archived list and vice versa , we need to restart from first page
+    latestQueryParams['offset'] = '0';
+    if (this.booShowArchived ) {
+      latestQueryParams['actif'] = '0';
+    } else {
+      latestQueryParams['actif'] = '1';
+    }
+    this.loadPageSubject$.next(latestQueryParams);
+  }
+
   private initializeDependingOnUserRights(authState: AuthState) {
     this.filterBase = { 'actif': '1'};
     if (authState.user) {
+      this.userId= authState.user.idUser;
+      this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
       switch (authState.user.rights) {
         case 'Bank':
           this.filterBase ['idCompany'] = authState.banque.bankShortName;

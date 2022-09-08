@@ -139,10 +139,11 @@ export class DepotComponent implements OnInit {
         });
     }
 
-    save(oldDepot: Depot, depotForm: Depot) {
+    save(oldDepot: Depot, sync: boolean, depotForm: Depot) {
         const modifiedDepot = Object.assign({}, oldDepot, depotForm);
 
         if (!modifiedDepot.hasOwnProperty('isNew')) {
+            modifiedDepot.sync = sync; // sync request from organisation yes or no
             this.depotsService.update(modifiedDepot)
                 .subscribe(() => {
                         this.messageService.add({
@@ -163,27 +164,7 @@ export class DepotComponent implements OnInit {
                         this.messageService.add(errMessage) ;
                     });
         } else {
-            modifiedDepot.lienBanque = this.lienBanque;
-            console.log('Creating Depot with content:', modifiedDepot);
-            this.depotsService.add(modifiedDepot)
-                .subscribe((newDepot) => {
-                        this.messageService.add({
-                            severity: 'success',
-                            summary: 'Creation',
-                            detail: $localize`:@@messageDepotCreated:The depot ${newDepot.idDepot} ${newDepot.nom}  has been created`
-                        });
-                        this.onDepotCreate.emit(newDepot);
-                        this.auditChangeEntityService.logDbChange(this.userId,this.userName,newDepot.lienBanque,0,'Depot',
-                            newDepot.idDepot + ' ' + newDepot.nom, 'Create' );
-                    },
-                    (dataserviceerror: DataServiceError) => {
-                        console.log('Error creating depot', dataserviceerror.message);
-                        const  errMessage = {severity: 'error', summary: 'Create',
-                            // tslint:disable-next-line:max-line-length
-                            detail: $localize`:@@messageDepotNotCreated:The depot  ${modifiedDepot.idDepot} ${modifiedDepot.nom} could not be created: error: ${dataserviceerror.message}`,
-                            life: 6000 };
-                        this.messageService.add(errMessage) ;
-                    });
+
         }
 
     }

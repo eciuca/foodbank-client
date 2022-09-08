@@ -15,6 +15,7 @@ export interface Depot {
     idCompany: string;
     lienBanque: number;
     anomalies: string;
+    sync: boolean; // used when saving depot stating sync is requested with matching organisation
     totalRecords: number;
 }
 export function compareDepots(c1: Depot, c2: Depot) {
@@ -43,6 +44,7 @@ export class DefaultDepot implements Depot {
     telephone: string;
     ville: string;
     anomalies: string;
+    sync: boolean; // used when saving depot stating sync is requested with matching organisation
     totalRecords: number;
     isNew: boolean; // calculated property to indicate we are creating a new depot
     constructor() {
@@ -63,6 +65,7 @@ export class DefaultDepot implements Depot {
         this.ville = '';
         this.anomalies = '';
         this.totalRecords = 0;
+        this.sync = false;  // used when saving depot stating sync is requested with matching organisation
         this.isNew = true;
     }
 }
