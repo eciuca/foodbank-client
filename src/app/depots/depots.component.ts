@@ -14,7 +14,7 @@ import {AuthState} from '../auth/reducers';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {formatDate} from '@angular/common';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
-import {DataServiceError} from '@ngrx/data';
+import {DataServiceError, QueryParams} from '@ngrx/data';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 
 
@@ -43,6 +43,8 @@ export class DepotsComponent implements OnInit {
   first: number;
   totalRecords: number;
   selectedIdDis: number;
+  candidateOrganisation: any;
+  candidateOrganisations: any;
   constructor(private depotService: DepotEntityService,
               private banqueService: BanqueEntityService,
               private orgsummaryService: OrgSummaryEntityService,
@@ -60,6 +62,7 @@ export class DepotsComponent implements OnInit {
     this.first = 0;
     this.totalRecords = 0;
     this.bankShortName = '';
+    this.lienBanque = 0;
     this.filterBase = {};
     this.selectedIdDis = 1;
   }
@@ -100,7 +103,8 @@ export class DepotsComponent implements OnInit {
     this.selectedIdDepot$.next(depot.idDepot);
     this.displayDialog = true;
   }
-  addNewDepotFromOrg() {
+  addNewDepotFromOrg(idDis: number) {
+   this.selectedIdDis = idDis;
    console.log("new depot for organisation", this.selectedIdDis);
    this.depotService.getByKey(this.selectedIdDis.toString())
        .subscribe( existingDepot => {
@@ -226,6 +230,25 @@ export class DepotsComponent implements OnInit {
     }
     this.loadPageSubject$.next(latestQueryParams);
   }
+  filterCandidateOrganisations(event ) {
+    const  queryOrganisationParms: QueryParams = {};
+    queryOrganisationParms['actif'] = '1';
+    queryOrganisationParms['depotMissing'] = '1';
+    queryOrganisationParms['bankShortName'] = this.bankShortName;
+    if (event.query.length > 0) {
+      queryOrganisationParms['societe'] = event.query.toLowerCase();
+    }
+
+    this.orgsummaryService.getWithQuery(queryOrganisationParms)
+        .subscribe(filteredOrganisations => {
+          this.candidateOrganisations = filteredOrganisations.map((organisation) =>
+              Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
+          );
+          console.log('Proposed Organisations', this.candidateOrganisations);
+        });
+
+  }
+
 
   private initializeDependingOnUserRights(authState: AuthState) {
     this.filterBase = { 'actif': '1'};
@@ -236,10 +259,12 @@ export class DepotsComponent implements OnInit {
         case 'Bank':
           this.filterBase ['idCompany'] = authState.banque.bankShortName;
           this.bankShortName = authState.banque.bankShortName;
+          this.lienBanque = authState.banque.bankId;
           break;
         case 'Admin_Banq':
           this.filterBase ['idCompany'] = authState.banque.bankShortName;
           this.bankShortName = authState.banque.bankShortName;
+          this.lienBanque = authState.banque.bankId;
           this.booIsAdmin = true;
           break;
         case 'admin':
@@ -248,7 +273,8 @@ export class DepotsComponent implements OnInit {
           this.banqueService.getWithQuery(classicBanks)
               .subscribe((banquesEntities) => {
                     console.log('Banques now loaded:', banquesEntities);
-                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));                  });
+                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+              });
 
           break;
         default:

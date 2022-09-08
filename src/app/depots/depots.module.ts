@@ -29,6 +29,7 @@ import {AuditChangeEntityService} from '../audits/services/auditChange-entity.se
 import {CheckboxModule} from 'primeng/checkbox';
 import {OrgSummariesDataService} from '../organisations/services/orgsummaries-data.service';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 
 const routes: Routes = [
@@ -60,6 +61,7 @@ const routes: Routes = [
         ToastModule,
         TooltipModule,
         CheckboxModule,
+        AutoCompleteModule,
     ],
   providers: [
     DepotsDataService,

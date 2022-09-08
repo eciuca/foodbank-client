@@ -7,10 +7,13 @@
                 <div class="p-field p-col-12 p-md-2">
                     <button *ngIf="booIsAdmin" i18n="@@DepotExport" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Depots" i18n-label="@@ExportDepots"></button>
                 </div>
-                <div *ngIf="booIsAdmin" class="p-field p-col-12 p-md-3">
-                    <button  class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="addNewDepotFromOrg()" label="Add Depot from Organisation" i18n-label="@@DepotAddfromOrganisation"></button>
-                     <p-inputNumber [(ngModel)]="selectedIdDis" id="selectedIdDis" name="selectedIdDis" (onInput)="addNewDepotFromOrg()" [min]="1">
-                    </p-inputNumber>
+                <div *ngIf="booIsAdmin && !bankOptions" class="p-field p-col-12 p-md-3">
+                    <label i18n="@@FilterDepotOrganisations" for="candidateOrganisation">Add Depot from Organisation</label>
+                    <p-autoComplete  [(ngModel)]="candidateOrganisation" [suggestions]="candidateOrganisations" (completeMethod)="filterCandidateOrganisations($event)"
+                                     (onSelect)="addNewDepotFromOrg($event.idDis);"
+                                     [forceSelection]="true"  id="candidateOrganisation" name="candidateOrganisation" field="fullname" [dropdown]="true">
+
+                    </p-autoComplete>
 
                 </div>
             <div class="p-field p-col-12 p-md-3">
