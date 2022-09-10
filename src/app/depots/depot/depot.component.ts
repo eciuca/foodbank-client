@@ -88,6 +88,8 @@ export class DepotComponent implements OnInit {
                                 break;
                             case 'Admin_Banq':
                             case 'Admin_Asso':
+                            case 'admin':
+                            case 'Admin_FBBA':
                                 this.booCanSave = true;
                                 this.booCanDelete = true;
                                 break;
