@@ -7,7 +7,7 @@
                 <div class="p-field p-col-12 p-md-2">
                     <button *ngIf="booIsAdmin" i18n="@@DepotExport" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Depots" i18n-label="@@ExportDepots"></button>
                 </div>
-                <div *ngIf="booIsAdmin && !bankOptions" class="p-field p-col-12 p-md-3">
+                <div *ngIf="booCanCreate || (filteredBankShortName && booIsAdmin)" class="p-field p-col-12 p-md-3" pTooltip="{{generateToolTipMessageForOrgsWithoutDepot()}}">
                     <label i18n="@@FilterDepotOrganisations" for="candidateOrganisation">Add Depot from Organisation</label>
                     <p-autoComplete  [(ngModel)]="candidateOrganisation" [suggestions]="candidateOrganisations" (completeMethod)="filterCandidateOrganisations($event)"
                                      (onSelect)="addNewDepotFromOrg($event.idDis);"
@@ -93,5 +93,5 @@
 
 <p-dialog header="Depot Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
     <app-depot *ngIf="selectedIdDepot$" [idDepot$]="selectedIdDepot$"  (onDepotUpdate)="handleDepotUpdate($event)"
-               (onDepotCreate)="handleDepotCreate($event)"  (onDepotDelete)="handleDepotDeleted($event)" (onDepotQuit)="handleDepotQuit()"></app-depot>
+                 (onDepotDelete)="handleDepotDeleted($event)" (onDepotQuit)="handleDepotQuit()"></app-depot>
 </p-dialog>

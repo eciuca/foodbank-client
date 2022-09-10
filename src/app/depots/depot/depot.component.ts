@@ -1,7 +1,7 @@
 import {combineLatest, Observable} from 'rxjs';
 import {DataServiceError} from '@ngrx/data';
 import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
-import {DefaultDepot, Depot} from '../model/depot';
+import {Depot} from '../model/depot';
 import {DepotEntityService} from '../services/depot-entity.service';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
@@ -23,7 +23,6 @@ export class DepotComponent implements OnInit {
     @Input() idDepot$: Observable<string>;
     lienBanque: number;
     @Output() onDepotUpdate = new EventEmitter<Depot>();
-    @Output() onDepotCreate = new EventEmitter<Depot>();
     @Output() onDepotDelete = new EventEmitter<Depot>();
     @Output() onDepotQuit = new EventEmitter<Depot>();
     depot: Depot;
@@ -120,10 +119,19 @@ export class DepotComponent implements OnInit {
                         },
                         (dataserviceerror: DataServiceError) => {
                             console.log('Error deleting depot', dataserviceerror.message);
-                            const  errMessage = {severity: 'error', summary: 'Delete',
+
+                            let  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageDepotNotDeleted:The depot  ${depot.idDepot} ${depot.nom}  could not be deleted: error: ${dataserviceerror.message}`,
                                 life: 6000 };
+                            if ((dataserviceerror.message.includes('a foreign key constraint fails')) &&
+                                (dataserviceerror.message.includes('mouvements'))) {
+                                errMessage = {severity: 'error', summary: 'Delete',
+                                    // tslint:disable-next-line:max-line-length
+                                    detail: $localize`:@@messageDepotNotDeletedConstraint:The depot  ${depot.idDepot} ${depot.nom}  could not be deleted: mouvements do exist for this depot`,
+                                    life: 6000 };
+                            }
+
                             this.messageService.add(errMessage) ;
                         });
             },

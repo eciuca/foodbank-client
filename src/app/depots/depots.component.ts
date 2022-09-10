@@ -16,6 +16,7 @@ import {formatDate} from '@angular/common';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {OrgSummary} from '../organisations/model/orgsummary';
 
 
 
@@ -35,6 +36,7 @@ export class DepotsComponent implements OnInit {
   filterBase: any;
   booIsAdmin: boolean;
   booShowArchived: boolean;
+  booCanCreate: boolean;
   lienBanque: number;
   userId: string;
   userName: string;
@@ -44,7 +46,8 @@ export class DepotsComponent implements OnInit {
   totalRecords: number;
   selectedIdDis: number;
   candidateOrganisation: any;
-  candidateOrganisations: any;
+  candidateOrganisations: OrgSummary[];
+  filteredBankShortName: string;
   constructor(private depotService: DepotEntityService,
               private banqueService: BanqueEntityService,
               private orgsummaryService: OrgSummaryEntityService,
@@ -58,6 +61,7 @@ export class DepotsComponent implements OnInit {
               private depotHttpService: DepotHttpService
   ) {
     this.booIsAdmin = false;
+    this.booCanCreate = false;
     this.booShowArchived = false;
     this.first = 0;
     this.totalRecords = 0;
@@ -65,6 +69,7 @@ export class DepotsComponent implements OnInit {
     this.lienBanque = 0;
     this.filterBase = {};
     this.selectedIdDis = 1;
+    this.candidateOrganisations= [];
   }
   ngOnInit() {
     this.reload();
@@ -105,6 +110,7 @@ export class DepotsComponent implements OnInit {
   }
   addNewDepotFromOrg(idDis: number) {
    this.selectedIdDis = idDis;
+   this.candidateOrganisation = null;
    console.log("new depot for organisation", this.selectedIdDis);
    this.depotService.getByKey(this.selectedIdDis.toString())
        .subscribe( existingDepot => {
@@ -124,7 +130,12 @@ export class DepotsComponent implements OnInit {
                        const newDepot = new DefaultDepot();
                        newDepot.idDepot = this.selectedIdDis.toString();
                        newDepot.lienBanque = this.lienBanque;
+                     if (this.filteredBankShortName) {
+                       newDepot.idCompany = this.filteredBankShortName;
+                     }
+                     else {
                        newDepot.idCompany = this.bankShortName;
+                     }
                        console.log('Creating Depot with content:', newDepot);
                        this.depotService.add(newDepot)
                            .subscribe((createdDepot) => {
@@ -136,6 +147,8 @@ export class DepotsComponent implements OnInit {
 
                                  this.auditChangeEntityService.logDbChange(this.userId, this.userName, createdDepot.lienBanque, 0, 'Depot',
                                      createdDepot.idDepot + ' ' + createdDepot.nom, 'Create');
+                                 const latestQueryParams = this.loadPageSubject$.getValue();
+                                 this.loadPageSubject$.next(latestQueryParams);
                                },
                                (dataserviceerror: DataServiceError) => {
                                  console.log('Error creating depot', dataserviceerror.message);
@@ -173,12 +186,7 @@ export class DepotsComponent implements OnInit {
     this.loadPageSubject$.next(latestQueryParams);
     this.displayDialog = false;
   }
-  handleDepotCreate(createdDepot: Depot) {
-    this.depots.push({...createdDepot});
-    const latestQueryParams = this.loadPageSubject$.getValue();
-    this.loadPageSubject$.next(latestQueryParams);
-    this.displayDialog = false;
-  }
+
 
   handleDepotDeleted(deletedDepot) {
     const index = this.depots.findIndex(depot => depot.idDepot === deletedDepot.idDepot);
@@ -208,8 +216,12 @@ export class DepotsComponent implements OnInit {
       if (event.filters.nom && event.filters.nom.value) {
         queryParms['nom'] = event.filters.nom.value;
       }
-      if (event.filters.idCompany && event.filters.idCompany.value) {
-        queryParms['idCompany'] = event.filters.idCompany.value;
+     if (event.filters.idCompany && event.filters.idCompany.value) {
+        this.filteredBankShortName= event.filters.idCompany.value;
+        queryParms['idCompany'] = this.filteredBankShortName;
+        console.log('CurrentFilteredBankShortName', this.filteredBankShortName,this.bankOptions);
+      } else {
+          this.filteredBankShortName = null;
       }
     }
     this.loadPageSubject$.next(queryParms);
@@ -234,7 +246,19 @@ export class DepotsComponent implements OnInit {
     const  queryOrganisationParms: QueryParams = {};
     queryOrganisationParms['actif'] = '1';
     queryOrganisationParms['depotMissing'] = '1';
-    queryOrganisationParms['bankShortName'] = this.bankShortName;
+
+    if (this.bankOptions) {
+      if (this.filteredBankShortName) {
+        queryOrganisationParms['bankShortName'] = this.filteredBankShortName;
+      } else {
+        if (queryOrganisationParms.hasOwnProperty('lienBanque')) {
+          delete queryOrganisationParms['lienBanque'];
+        }
+      }
+    }
+    else {
+      queryOrganisationParms['bankShortName'] = this.bankShortName;
+    }
     if (event.query.length > 0) {
       queryOrganisationParms['societe'] = event.query.toLowerCase();
     }
@@ -265,7 +289,7 @@ export class DepotsComponent implements OnInit {
           this.filterBase ['idCompany'] = authState.banque.bankShortName;
           this.bankShortName = authState.banque.bankShortName;
           this.lienBanque = authState.banque.bankId;
-          this.booIsAdmin = true;
+          this.booCanCreate = true;
           break;
         case 'admin':
           this.booIsAdmin = true;
@@ -297,6 +321,9 @@ export class DepotsComponent implements OnInit {
   generateToolTipMessageForDepotAnomalies(depot: Depot) {
     if (depot.anomalies == "") return $localize`:@@ToolTipDepotNoAnomalies:Depot Info is consistent with its Organisation Info`;
     else return $localize`:@@ToolTipDepotAnomalies:Depot Info is not consistent with its Organisation Info - see depot details`;
+  }
+  generateToolTipMessageForOrgsWithoutDepot() {
+   return $localize`:@@ToolTipOrgsWithoutDepot:${this.candidateOrganisations.length} organisations without depot proposed`;
   }
 }
 

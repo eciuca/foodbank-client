@@ -824,6 +824,10 @@
           <context context-type="linenumber">4</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depot/depot.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateur/donateur.component.html</context>
           <context context-type="linenumber">4</context>
         </context-group>
@@ -889,6 +893,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.html</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depot/depot.component.html</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateur/donateur.component.html</context>
@@ -968,6 +976,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.html</context>
           <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depot/depot.component.html</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateur/donateur.component.html</context>
@@ -1725,7 +1737,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">178</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateur/donateur.component.ts</context>
@@ -2777,11 +2789,18 @@
           <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="SaveDepotWithSync" datatype="html">
+        <source>Synchronize from Organisation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depot/depot.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="messageDepotDeleted" datatype="html">
         <source>The depot <x id="PH" equiv-text="depot.idDepot"/> <x id="PH_1" equiv-text="depot.nom"/> has been deleted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">111</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDepotNotDeleted" datatype="html">
@@ -2791,32 +2810,39 @@
           <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="messageDepotNotDeletedConstraint" datatype="html">
+        <source>The depot  <x id="PH" equiv-text="depot.idDepot"/> <x id="PH_1" equiv-text="depot.nom"/>  could not be deleted: mouvements do exist for this depot</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="messageDepotUpdated" datatype="html">
         <source>The depot <x id="PH" equiv-text="modifiedDepot.idDepot"/> <x id="PH_1" equiv-text="modifiedDepot.nom"/> was updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDepotNotUpdated" datatype="html">
         <source>The depot  <x id="PH" equiv-text="modifiedDepot.idDepot"/> <x id="PH_1" equiv-text="modifiedDepot.nom"/> could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">164</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotFieldNoAnomaly" datatype="html">
         <source>Depot field {field} Info is consistent with its Organisation Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotFieldAnomaly" datatype="html">
         <source>Depot field <x id="PH" equiv-text="field"/> is not consistent with its Organisation field <x id="PH_1" equiv-text="anomaly"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">197</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ExportDepots" datatype="html">
@@ -2862,42 +2888,49 @@
         <source>The depot <x id="PH" equiv-text="existingDepot.idDepot"/> <x id="PH_1" equiv-text="existingDepot.nom"/> exists already</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDepotCreated" datatype="html">
         <source>The depot <x id="PH" equiv-text="createdDepot.idDepot"/> <x id="PH_1" equiv-text="createdDepot.nom"/>  has been created</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDepotNotCreated" datatype="html">
         <source>The depot  <x id="PH" equiv-text="newDepot.idDepot"/> <x id="PH_1" equiv-text="newDepot.nom"/> could not be created: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">158</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDepotCreationError2" datatype="html">
         <source>There is no organisation with id <x id="PH" equiv-text="this.selectedIdDis"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">155</context>
+          <context context-type="linenumber">168</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotNoAnomalies" datatype="html">
         <source>Depot Info is consistent with its Organisation Info</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">298</context>
+          <context context-type="linenumber">322</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotAnomalies" datatype="html">
         <source>Depot Info is not consistent with its Organisation Info - see depot details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">299</context>
+          <context context-type="linenumber">323</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ToolTipOrgsWithoutDepot" datatype="html">
+        <source><x id="PH" equiv-text="this.candidateOrganisations.length"/> organisations without depot proposed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
+          <context context-type="linenumber">326</context>
         </context-group>
       </trans-unit>
       <trans-unit id="TitleMandatory" datatype="html">
