@@ -5,7 +5,15 @@ import {map, switchMap} from 'rxjs/operators';
 import {Observable, combineLatest} from 'rxjs';
 import {DefaultOrganisation, Organisation} from '../model/organisation';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmStatusCompany, enmGender, enmCountry, enmOrgActivities, enmOrgCategories} from '../../shared/enums';
+import {
+    enmStatusCompany,
+    enmGender,
+    enmCountry,
+    enmOrgActivities,
+    enmOrgCategories,
+    enmSupplyMonth,
+    enmSupplyWeek, enmSupplyDay
+} from '../../shared/enums';
 import {NgForm, ValidationErrors} from '@angular/forms';
 import {Cpas} from '../../cpass/model/cpas';
 import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
@@ -34,6 +42,7 @@ export class OrganisationComponent implements OnInit {
     @Output() onOrganisationDelete = new EventEmitter<Organisation>();
     @Output() onOrganisationQuit = new EventEmitter<Organisation>();
     booCalledFromTable: boolean;
+    booIsAdmin: boolean;
     booCanSave: boolean;
     booCanDelete: boolean;
     booCanQuit: boolean;
@@ -49,7 +58,10 @@ export class OrganisationComponent implements OnInit {
     countries: any[];
     orgActivities: any[];
     orgCategories: any[];
-   lienBanque: number;
+    supplyOptionsMonth: any[];
+    supplyOptionsWeek: any[];
+    supplyOptionsDay: any[];
+    lienBanque: number;
     userName: string;
     userId: string;
     gestBen: boolean;
@@ -71,8 +83,12 @@ export class OrganisationComponent implements OnInit {
       this.genders = enmGender;
       this.countries = enmCountry;
       this.orgActivities = enmOrgActivities;
+      this.supplyOptionsMonth = enmSupplyMonth;
+      this.supplyOptionsWeek = enmSupplyWeek;
+      this.supplyOptionsDay = enmSupplyDay;
       this.orgCategories = [...enmOrgCategories];
       this.orgCategories.splice(0,1); // get rid of all option
+      this.booIsAdmin = false;
       this.booCalledFromTable = true;
       this.booCanDelete = false;
       this.booCanSave = false;
@@ -160,11 +176,13 @@ export class OrganisationComponent implements OnInit {
                           case 'admin':
                           case 'Admin_FBBA':
                               this.booCanSave = true;
+                              this.booIsAdmin = true;
                               break;
                           case 'Admin_Banq':
                               this.lienBanque = authState.banque.bankId;
                               regionQuery['lienBanque'] = this.lienBanque.toString();
                               this.booCanSave = true;
+                              this.booIsAdmin = true;
                               if (this.booCalledFromTable ) {
                                   this.booCanDelete = true;
                               }
@@ -404,5 +422,6 @@ export class OrganisationComponent implements OnInit {
     }
 
      */
+
 }
 

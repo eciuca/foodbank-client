@@ -2516,6 +2516,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>Day</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>DbChangeActionCreate</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -3864,6 +3885,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>Everyday</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>ExportBeneficiaries</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -4390,6 +4432,27 @@
             </concept_node>
             <concept_node>
                 <name>Fonction</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Friday</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -5944,6 +6007,27 @@
             </concept_node>
             <concept_node>
                 <name>Mobile</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Monday</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -10647,6 +10731,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>Saturday</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>SaturdayAfternoon</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -11046,6 +11151,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>Sunday</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>SundayAfternoon</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -11109,6 +11235,69 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>SupplyProgram</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>SupplyRemarks</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>SupplyRemarksPlaceHolder</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>TeenAgers</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -11131,6 +11320,27 @@
             </concept_node>
             <concept_node>
                 <name>Tel</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Thursday</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -11655,6 +11865,69 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>TourneeEvenMonth</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>TourneeEveryMonth</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>TourneeUnevenMonth</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>Treasurer</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -11929,6 +12202,27 @@
             </concept_node>
             <concept_node>
                 <name>TripsSelected</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Tuesday</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -12642,6 +12936,27 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>Wednesday</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>WednesdayAfternoon</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -12664,6 +12979,300 @@
             </concept_node>
             <concept_node>
                 <name>WednesdayMorning</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week1</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week12</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week13</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week14</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week2</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week23</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week24</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week3</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week34</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>Week4</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>WeekEvery</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>WeeksEven</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>fr-FR</language>
+                        <approved>true</approved>
+                    </translation>
+                    <translation>
+                        <language>nl-NL</language>
+                        <approved>true</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>WeeksUneven</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>

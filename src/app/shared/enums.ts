@@ -43,6 +43,37 @@ export let enmCountry = [
     {label: 'Nederland', value: 4},
     {label: 'Luxembourg', value: 5}
 ];
+export let enmSupplyDay = [
+    {label: $localize`:@@Everyday:Everyday` , value: 0},
+    {label: $localize`:@@Monday:Monday` , value: 1},
+    {label: $localize`:@@Tuesday:Tuesday` , value: 2},
+    {label: $localize`:@@Wednesday:Wednesday` , value: 3},
+    {label: $localize`:@@Thursday:Thursday` , value: 4},
+    {label: $localize`:@@Friday:Friday` , value: 5},
+    {label: $localize`:@@Saturday:Saturday` , value: 6},
+    {label: $localize`:@@Sunday:Sunday` , value: 7}
+];
+export let enmSupplyWeek = [
+    {label: $localize`:@@WeekEvery:Every Week` , value: 5},
+    {label: $localize`:@@Week1:Week 1` , value: 1},
+    {label: $localize`:@@Week2:Week 2` , value: 2},
+    {label: $localize`:@@Week3:Week 3` , value: 3},
+    {label: $localize`:@@Week4:Week 4` , value: 4},
+    {label: $localize`:@@Week13:Week 1 and 3` , value: 6},
+    {label: $localize`:@@Week24:Week 2 and 4` , value: 7},
+    {label: $localize`:@@Week12:Week 1 and 2` , value: 8},
+    {label: $localize`:@@Week34:Week 3 and 4` , value: 9},
+    {label: $localize`:@@Week23:Week 2 and 3` , value: 10},
+    {label: $localize`:@@Week14:Week 1 and 4` , value: 13},
+    {label: $localize`:@@WeeksEven: Even Weeks` , value: 11},
+    {label: $localize`:@@WeeksUneven: Uneven Weeks` , value: 12},
+
+];
+export let enmSupplyMonth = [
+    {label: $localize`:@@TourneeUnevenMonth:Uneven Month` , value: 1},
+    {label: $localize`:@@TourneeEvenMonth:Even Month` , value: 2},
+    {label: $localize`:@@TourneeEveryMonth:Every Month` , value: 3},
+];
 export let enmUserRoles = [
     {label: $localize`:@@RoleAdmin:Global admin`, value: 'admin'},
     {label: $localize`:@@RoleBankAdmin:Bank admin`, value: 'Admin_Banq' },

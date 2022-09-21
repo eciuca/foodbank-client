@@ -306,10 +306,25 @@
                         <label i18n="@@ActivityOther" for="actComp7">Other Activity</label>
                         <input pInputText id="actComp7" name="actComp7" maxlength="100" [ngModel]="organisation.actComp7" />
                     </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@SupplyProgram" for="tourneeMois">Supply Program</label>
+                        <p-dropdown [options]="supplyOptionsMonth" id="tourneeMois" name="tourneeMois" [ngModel]="organisation.tourneeMois" [disabled] ="!booIsAdmin"  ></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@Week" for="tourneeSem">Week</label>
+                        <p-dropdown [options]="supplyOptionsWeek" id="tourneeSem" name="tourneeSem" [ngModel]="organisation.tourneeSem" [disabled] ="!booIsAdmin"  ></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@Day" for="tourneeJour">Day</label>
+                        <p-dropdown [options]="supplyOptionsDay" id="tourneeJour" name="tourneeJour" [ngModel]="organisation.tourneeJour" [disabled] ="!booIsAdmin"  ></p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label i18n="@@SupplyRemarks" for="remLivr">Remarks</label>
+                        <input pInputText id="remLivr" name="remLivr" i18n-placeholder="@@SupplyRemarksPlaceHolder" placeholder="Specify only if needed"  [disabled] ="!booIsAdmin"  [ngModel]="organisation.remLivr" />
+                    </div>
                 </div>
             </p-accordionTab>
             <p-accordionTab i18n-header="@@OrganisationPublicAuthorities"  *ngIf="organisation.lienBanque < 11" header="Relations with the Public authorities">
-
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@OrganisationCpasCooperation" for="cpasyN">Cooperation with CPAS/OCMW?</label>
