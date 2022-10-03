@@ -13,7 +13,7 @@
             <div class="p-field p-col-12 p-md-2">
                 <label for="idDepot">Id</label>
                 <input #idDepot="ngModel" pInputText id="idDepot" name="idDepot"  required maxLength="10" [ngModel]="depot.idDepot"
-                       [ngStyle]="hasDepotAnomaly('idDepot') && {'background-color': 'yellow'}"
+                       [ngStyle]="hasDepotAnomaly('idDepot') && {'background-color': 'red'}"
                        pTooltip="{{generateToolTipMessageForDepotAnomaly('idDepot')}}"
                 />
                 <p-message *ngIf="idDepot.invalid && depotForm.touched" severity="error" text="Depot Id is required"></p-message>
@@ -74,13 +74,13 @@
                 <input pInputText id="memo" name="memo" [ngModel]="depot.memo" />
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label  i18n="@@MainDepot" [ngStyle]="hasDepotAnomaly('depPrinc') && {'color': 'yellow'}" for="depPrinc">Main Depot?</label>
+                <label  i18n="@@MainDepot" [ngStyle]="hasDepotAnomaly('depPrinc') && {'color': 'red'}" for="depPrinc">Main Depot?</label>
                  <p-inputSwitch id="depPrinc" name="depPrinc" [ngModel]="depot.depPrinc"
                        pTooltip="{{generateToolTipMessageForDepotAnomaly('depPrinc')}}"
                  ></p-inputSwitch>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@Active"  [ngStyle]="hasDepotAnomaly('actif') && {'background-color': 'yellow'}" for="actif">Active</label>
+                <label i18n="@@Active"  [ngStyle]="hasDepotAnomaly('actif') && {'color': 'red'}" for="actif">Active</label>
                 <p-inputSwitch id="actif" name="actif" [ngModel]="depot.actif"
                      pTooltip="{{generateToolTipMessageForDepotAnomaly('actif')}}"
                 ></p-inputSwitch>

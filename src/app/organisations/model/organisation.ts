@@ -111,6 +111,7 @@ export interface Organisation {
     birbyN: boolean;
 
     depyN: boolean;
+    depotMissing: boolean; // calculated field when an organisation is a depot, the matching depot entity must be created
 
     logBirb: number;
 
@@ -288,6 +289,7 @@ export class DefaultOrganisation implements Organisation {
     depotram: number;
     birbyN: boolean;
     depyN: boolean;
+    depotMissing: boolean; // calculated field when an organisation is a depot, the matching depot entity must be created
     disprog: string;
     distrListPdt: boolean;
     distrListSec: boolean;
@@ -409,6 +411,7 @@ export class DefaultOrganisation implements Organisation {
         this.depotram = 0;
         this.birbyN = false;
         this.depyN = false;
+        this.depotMissing = false; // calculated field when an organisation is a depot, the matching depot entity must be created
         this.disprog = '';
         this.distrListPdt = true;
         this.distrListSec = true;

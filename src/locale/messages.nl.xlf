@@ -3166,12 +3166,20 @@
           <context context-type="linenumber">198</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="ToolTipDepotNoOrganisation" datatype="html">
+        <source>Depot  <x id="PH" equiv-text="this.depot.idDepot"/> has no matching organization entity</source>
+        <target>Depot <x id="PH" equiv-text="this.depot.idDepot"/> heeft geen overeenkomende organisatie-entiteit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
+          <context context-type="linenumber">201</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="ToolTipDepotFieldAnomaly" datatype="html">
         <source>Depot field <x id="PH" equiv-text="field"/> is not consistent with its Organisation field <x id="PH_1" equiv-text="anomaly"/></source>
         <target>Depotveld <x id="PH" equiv-text="field"/> komt niet overeen met het veld Organisatie <x id="PH_1" equiv-text="anomaly"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ExportDepots" datatype="html">
@@ -6020,6 +6028,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">559</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ToolTipDepotMissing" datatype="html">
+        <source>A Depot entity with id <x id="PH" equiv-text="organisation.idDis"/> does not exist</source>
+        <target>Een Depot-entiteit met id <x id="PH" equiv-text="organisation.idDis"/> bestaat niet</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisations.component.ts</context>
+          <context context-type="linenumber">478</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgAuditor" datatype="html">

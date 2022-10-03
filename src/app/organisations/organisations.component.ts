@@ -467,5 +467,17 @@ export class OrganisationsComponent implements OnInit {
         return $localize`:@@ToolTipNbLogins:Nb Of Logins since 2021`;
     }
 
+    isDepotMissing(organisation: Organisation) {
+        if (organisation.depyN && organisation.depotMissing) {
+            return true;
+        }
+        return false;
+    }
+
+    generateToolTipMessageForDepotMissing(organisation: Organisation) {
+        if (organisation.depyN && organisation.depotMissing) return $localize`:@@ToolTipDepotMissing:A Depot entity with id ${organisation.idDis} does not exist`;
+        else return "";
+
+    }
 }
 

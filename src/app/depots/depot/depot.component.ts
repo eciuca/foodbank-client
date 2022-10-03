@@ -196,7 +196,14 @@ export class DepotComponent implements OnInit {
     generateToolTipMessageForDepotAnomaly(field: string) {
         const anomaly = this.findAnomaly(field);
         if (anomaly == "") return $localize`:@@ToolTipDepotFieldNoAnomaly:Depot field {field} Info is consistent with its Organisation Info`;
-        else return $localize`:@@ToolTipDepotFieldAnomaly:Depot field ${field} is not consistent with its Organisation field ${anomaly}`;
+        else {
+            if (field == 'idDepot') {
+                return $localize`:@@ToolTipDepotNoOrganisation:Depot  ${this.depot.idDepot} has no matching organization entity`;
+            }
+            else {
+                return $localize`:@@ToolTipDepotFieldAnomaly:Depot field ${field} is not consistent with its Organisation field ${anomaly}`;
+            }
+        }
     }
 
     hasDepotAnomaly(field: string) {
