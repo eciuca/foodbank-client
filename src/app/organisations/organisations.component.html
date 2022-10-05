@@ -132,7 +132,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-organisation>
-        <tr [ngStyle]="isDepotMissing(organisation) && {'background-color': 'yellow'}" pTooltip="{{generateToolTipMessageForDepotMissing(organisation)}}" (click)="handleSelect(organisation)">
+        <tr [ngStyle]="hasAnomalies(organisation) && {'background-color': 'yellow'}" pTooltip="{{generateToolTipMessageForAnomalies(organisation)}}" (click)="handleSelect(organisation)">
             <td *ngIf="bankOptions">
                 {{organisation.bankShortName}}
             </td>

@@ -52,6 +52,7 @@
             <th i18n="@@ZipCodeSorted" pSortableColumn="zip">Zip Code<p-sortIcon field="zip"></p-sortIcon></th>
             <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
             <th i18n="@@EmailSorted" pSortableColumn="batmail">Email<p-sortIcon field="batmail"></p-sortIcon></th>
+            <th>Tel/Gsm</th>
             <th i18n="@@NbUsersSorted" pTooltip="{{generateNbOfMemberUsersTooltip()}}"  pSortableColumn="nbUsers">Users<p-sortIcon field="nbUsers"></p-sortIcon></th>
         </tr>
         <tr>
@@ -89,7 +90,9 @@
                 <p-columnFilter type="text" field="batmail" matchMode="contains" [showMenu]="false"></p-columnFilter>
             </th>
             <th>
-
+                <p-columnFilter type="text" field="telgsm" matchMode="contains" [showMenu]="false"></p-columnFilter>
+            </th>
+            <th>
             </th>
         </tr>
     </ng-template>
@@ -129,6 +132,9 @@
             </td>
             <td>
                 {{membre.batmail}}
+            </td>
+            <td>
+                {{generateTelGsm(membre)}}
             </td>
             <td>
                 {{generateNbOfMemberUsers(membre.nbUsers)}}

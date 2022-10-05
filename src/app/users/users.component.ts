@@ -511,6 +511,9 @@ export class UsersComponent implements OnInit {
         if (user.email != user.membreEmail) {
             message += $localize`:@@ToolTipUserAnomalyDifferentMemberEmail:User Email '${user.email}' differs from Member Email '${user.membreEmail}'`;
         }
+        if (user.actif == true && user.membreActif == false) {
+             message += $localize`:@@ToolTipUserAnomalyDifferentMemberActif:User points to Archived Member !!!'`;
+        }
         if (user.idCompany != user.membreBankShortname) {
             message += $localize`:@@ToolTipUserAnomalyDifferentMemberBank:User Bank '${user.idCompany}' differs from Member Bank '${user.membreBankShortname}'`;
         }
@@ -539,6 +542,7 @@ export class UsersComponent implements OnInit {
         if (!user.membreNom) return true;
         if (user.userName != (user.membreNom + ' ' + user.membrePrenom)) return true;
         if (user.email != user.membreEmail) return true;
+        if (user.actif != user.membreActif) return true;
         if (user.idCompany != user.membreBankShortname) return true;
         if (this.bankOptions) {
             const bankOptionForLienBanque = this.bankOptions.find(obj => obj.value === user.lienBanque);

@@ -17,7 +17,7 @@
                 <label i18n="@@Gender" for="civilite">Gender</label>
                 <p-dropdown [options]="genders" id="civilite" name="civilite" [ngModel]="membre.civilite"></p-dropdown>
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@NameMandatory" for="nom">Name *</label>
                 <input #nom="ngModel"  pInputText id="nom" name="nom"  required minlength="2" maxlength="50" [ngModel]="membre.nom" />
                 <p-message i18n-text="@@NameIsMandatory" *ngIf="nom.invalid && membreForm.touched" severity="error" text="Name is required and must be minimum 2 chars long"></p-message>
@@ -38,30 +38,40 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@MemberBirthDate" for="dateNaissance">Birth Date</label>
-                <input #dateNaissance="ngModel" pInputText id="dateNaissance" name="dateNaissance"  required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateNaissance"/>
+                <input #dateNaissance="ngModel" pInputText id="dateNaissance" name="dateNaissance"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateNaissance"/>
                 <p-message i18n-text="@@BirthDateIsMandatory"  *ngIf="dateNaissance.invalid && membreForm.touched" severity="error" text="Birth date is required and must in format dd/mm/yyyy"></p-message>
             </div>
+            <div class="p-field p-col-12 p-md-1">
+                <label i18n="@@NationalNumber" for="nnat">National Number</label>
+                <input pInputText id="nnat" name="nnat" maxlength="50" [ngModel]="membre.nnat" />
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@Language" for="langue">Language</label>
                 <p-dropdown [options]="languages" id="langue" name="langue" [ngModel]="membre.langue"></p-dropdown>
             </div>
-            <div class="p-field p-col-12 p-md-2">
-                <label i18n="@@NationalNumber" for="nnat">National Number</label>
-                <input pInputText id="nnat" name="nnat" maxlength="50" [ngModel]="membre.nnat" />
-            </div>
 
-            <div class="p-field p-col-12 p-md-4">
+            <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@Address" for="address">Address</label>
                 <input pInputText id="address" name="address" maxlength="50" [ngModel]="membre.address" />
             </div>
 
-            <div class="p-field p-col-12 p-md-2">
+            <div class="p-field p-col-12 p-md-1">
                 <label i18n="@@ZipCode" for="zip">Zip Code</label>
                 <input pInputText id="zip" name="zip" maxlength="10" [ngModel]="membre.zip" />
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@City" for="city">City</label>
                 <input pInputText id="city" name="city" maxlength="50" [ngModel]="membre.city" />
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="tel">Tel</label>
+                <input pInputText id="tel" name="tel" maxlength="20" [ngModel]="membre.tel" />
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="gsm">Gsm</label>
+                <input pInputText id="gsm" name="gsm" maxlength="20" [ngModel]="membre.gsm" />
             </div>
         </div>
         <div *ngIf="membre.lienDis === 0" class="p-fluid p-formgrid p-grid">

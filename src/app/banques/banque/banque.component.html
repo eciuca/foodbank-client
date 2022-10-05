@@ -120,9 +120,8 @@
                 <p-message i18n-text="@@EntrNumberIsMandatory" *ngIf="nrentr.invalid && banqueForm.touched" severity="error" text="Enterprise Number is required and must be minimum 9 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label i18n="@@BankAccountNumberMandatory" for="bank">Bank Account Number *</label>
-                <input #nrbankacct="ngModel" pInputText id="bank" name="bank" required minlength="9" maxLength="20" [ngModel]="banque.bank" />
-                <p-message i18n-text="@@BankAccountNumberIsMandatory" *ngIf="nrbankacct.invalid && banqueForm.touched" severity="error" text="Bank Account Number is required and must be minimum 9 chars long"></p-message>
+                <label i18n="@@BankAccountNumber" for="bank">Bank Account Number</label>
+                <input  pInputText id="bank" name="bank"  maxLength="20" [ngModel]="banque.bank" />
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@BankWebSite" for="website">Web Site</label>
@@ -148,7 +147,7 @@
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@CityMandatory"  for="localite">City *</label>
                 <input #localite="ngModel" pInputText id="localite" name="localite"  required minlength="4" maxLength="30" [ngModel]="banque.localite" />
-                <p-message i18n-text="@@CityIsMandatory" *ngIf="localite.invalid && banqueForm.touched" severity="error" text="City is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n-text="@@CityIsMandatory" *ngIf="localite.invalid && banqueForm.touched" severity="error" text="City is required and must be minimum 3 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@Tel" for="bankTel">Tel</label>
@@ -173,8 +172,8 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@SSCityMandatory" for="ssCity">HQ City *</label>
-                <input #localitess="ngModel" pInputText id="ssCity" name="ssCity"  required minlength="4" maxLength="30" [ngModel]="banque.ssCity" />
-                <p-message i18n-text="@@SSCityIsMandatory" *ngIf="localitess.invalid && banqueForm.touched" severity="error" text="HQ City is required and must be minimum 4 chars long"></p-message>
+                <input #localitess="ngModel" pInputText id="ssCity" name="ssCity"  required minlength="3" maxLength="30" [ngModel]="banque.ssCity" />
+                <p-message i18n-text="@@SSCityIsMandatory" *ngIf="localitess.invalid && banqueForm.touched" severity="error" text="HQ City is required and must be minimum 3 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@SSTelMandatory" for="ssTel">HQ Tel *</label>
@@ -196,7 +195,7 @@
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@DepotCityMandatory" for="cityDepotPrinc">Depot City *</label>
                 <input #localitedepot="ngModel" pInputText id="cityDepotPrinc" name="cityDepotPrinc"  required minlength="4" maxLength="30" [ngModel]="banque.cityDepotPrinc" />
-                <p-message i18n-text="@@DepotCityIsMandatory" *ngIf="localitedepot.invalid && banqueForm.touched" severity="error" text="Depot City is required and must be minimum 4 chars long"></p-message>
+                <p-message i18n-text="@@DepotCityIsMandatory" *ngIf="localitedepot.invalid && banqueForm.touched" severity="error" text="Depot City is required and must be minimum 3 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@DepotTelMandatory" for="depPrincTel">Depot Tel *</label>

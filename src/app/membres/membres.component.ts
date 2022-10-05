@@ -224,6 +224,9 @@ export class MembresComponent implements OnInit {
             if (event.filters.batmail && event.filters.batmail.value) {
                 queryParms['batmail'] = event.filters.batmail.value;
             }
+            if (event.filters.telgsm && event.filters.telgsm.value) {
+                queryParms['telgsm'] = event.filters.telgsm.value;
+            }
             if (event.filters.bankId && event.filters.bankId.value) {
                 queryParms['lienBanque'] = event.filters.bankId.value;
                 this.filteredBankId= event.filters.bankId.value;
@@ -545,5 +548,16 @@ export class MembresComponent implements OnInit {
     }
 
 
+    generateTelGsm(membre: Membre) {
+        let telgsm = "";
+        if (membre.tel && membre.tel !="") {
+            telgsm += membre.tel.trim() + " ";
+        }
+        if (membre.gsm && membre.gsm !="") {
+            telgsm += membre.gsm.trim() + " ";
+        }
+        return telgsm;
+
+    }
 }
 

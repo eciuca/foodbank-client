@@ -474,10 +474,32 @@ export class OrganisationsComponent implements OnInit {
         return false;
     }
 
-    generateToolTipMessageForDepotMissing(organisation: Organisation) {
-        if (organisation.depyN && organisation.depotMissing) return $localize`:@@ToolTipDepotMissing:A Depot entity with id ${organisation.idDis} does not exist`;
-        else return "";
+    isAntenneMissing(organisation: Organisation) {
+        if (organisation.birbCode == "1" && organisation.antenneOrgName == "") {
+            return true;
+        }
+        return false;
+    }
+
+    hasAnomalies(organisation:  Organisation) {
+        if (this.isDepotMissing(organisation) || this.isAntenneMissing(organisation)) {
+            return true;
+        }
+        return false;
+    }
+
+    generateToolTipMessageForAnomalies(organisation: Organisation) {
+        let message = "";
+        if (this.isDepotMissing(organisation)) {
+            message += $localize`:@@ToolTipDepotMissing:A Depot entity with id ${organisation.idDis} does not exist.`;
+        }
+        if (this.isAntenneMissing(organisation)) {
+            message += $localize`:@@ToolTipAntenneMissing:For this antenne a parent Organisation with id ${organisation.antenne} does not exist.`;
+        }
+       return message;
 
     }
+
+
 }
 

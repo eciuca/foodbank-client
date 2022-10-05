@@ -46,6 +46,7 @@ export interface User {
     membrePrenom: string;
     membreEmail: string;
     membreLangue: number;
+    membreActif: boolean;
     membreBankShortname: string;
     nbLogins: number;
     totalRecords: number;
@@ -89,6 +90,7 @@ export class DefaultUser implements User {
     membrePrenom: string;
     membreEmail: string;
     membreLangue: number;
+    membreActif: boolean;
     membreBankShortname: string;
     nbLogins: number;
     totalRecords: number;
@@ -120,6 +122,7 @@ export class DefaultUser implements User {
         this.membrePrenom = '';
         this.membreEmail = '';
         this.membreLangue = 0;
+        this.membreActif = true;
         this.membreBankShortname = '';
         this.nbLogins = 0;
         this.isNew = true;

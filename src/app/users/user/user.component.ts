@@ -123,7 +123,7 @@ export class UserComponent implements OnInit {
                     this.membresService.getByKey(user.lienBat)
                         .subscribe(
                             membre => {
-                                if (membre != null) {
+                                if (membre != null && membre.actif == true) {
                                     this.selectedMembre = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
                                     console.log('our users membre:', this.selectedMembre);
                                 } else {
@@ -145,15 +145,13 @@ export class UserComponent implements OnInit {
                         }
                         else {
                             this.user.idOrg = 0;
+                            this.rights = enmUserRolesBank;
                             this.title =  $localize`:@@BankUserNew1:New User for bank ${this.currentFilteredBankShortName} `;
                             if (this.currentFilteredBankShortName == 'FBBA') {
                                 this.rights = enmUserRolesFBBA;
                             }
                             else if (this.currentFilteredBankShortName == 'SPP') {
                                 this.rights = [{label: $localize`:@@RoleFEADAdmin:FEAD Admin`, value: 'Admin_FEAD'}]
-                            } else {
-                                this.rights = enmUserRolesBank;
-
                             }
                         }
                     }
@@ -210,7 +208,7 @@ export class UserComponent implements OnInit {
                           membre => {
                               if (membre != null) {
                                   this.loggedInMember = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                                  console.log('logged in membre:', this.selectedMembre);
+                                  console.log('logged in membre:', this.loggedInMember);
                               } else {
                                   console.log('There is no logged in membre !');
                               }
