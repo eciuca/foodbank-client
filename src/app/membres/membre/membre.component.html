@@ -27,6 +27,10 @@
                 <input  #prenom="ngModel" pInputText id="prenom" name="prenom" required minlength="2" maxlength="40" [ngModel]="membre.prenom" />
                 <p-message i18n-text="@@NameFirstIsMandatory" *ngIf="prenom.invalid && membreForm.touched" severity="error" text="First Name is required and must be minimum 2 chars long"></p-message>
             </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@Language" for="langue">Language</label>
+                <p-dropdown [options]="languages" id="langue" name="langue" [ngModel]="membre.langue"></p-dropdown>
+            </div>
             <div class="p-field p-col-12 p-md-1">
                 <label i18n="@@Active" for="actif">Active</label>
                 <p-inputSwitch id="actif" name="actif" [ngModel]="membre.actif"></p-inputSwitch>
@@ -36,22 +40,13 @@
                 <input #batmail="ngModel" pInputText id="batmail" name="batmail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [ngModel]="membre.batmail" />
                 <p-message i18n-text="@@EmailIsMandatory" *ngIf="batmail.invalid && membreForm.touched" severity="error" text="E-mail is required and must be valid"></p-message>
             </div>
-            <div class="p-field p-col-12 p-md-2">
-                <label i18n="@@MemberBirthDate" for="dateNaissance">Birth Date</label>
-                <input #dateNaissance="ngModel" pInputText id="dateNaissance" name="dateNaissance"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateNaissance"/>
-                <p-message i18n-text="@@BirthDateIsMandatory"  *ngIf="dateNaissance.invalid && membreForm.touched" severity="error" text="Birth date is required and must in format dd/mm/yyyy"></p-message>
-            </div>
+
             <div class="p-field p-col-12 p-md-1">
                 <label i18n="@@NationalNumber" for="nnat">National Number</label>
                 <input pInputText id="nnat" name="nnat" maxlength="50" [ngModel]="membre.nnat" />
             </div>
         </div>
         <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col-12 p-md-2">
-                <label i18n="@@Language" for="langue">Language</label>
-                <p-dropdown [options]="languages" id="langue" name="langue" [ngModel]="membre.langue"></p-dropdown>
-            </div>
-
             <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@Address" for="address">Address</label>
                 <input pInputText id="address" name="address" maxlength="50" [ngModel]="membre.address" />
@@ -66,6 +61,11 @@
                 <input pInputText id="city" name="city" maxlength="50" [ngModel]="membre.city" />
             </div>
             <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@MemberBirthDate" for="dateNaissance">Birth Date</label>
+                <input #dateNaissance="ngModel" pInputText id="dateNaissance" name="dateNaissance"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateNaissance"/>
+                <p-message i18n-text="@@BirthDateIsMandatory"  *ngIf="dateNaissance.invalid && membreForm.touched" severity="error" text="Birth date is required and must in format dd/mm/yyyy"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
                 <label for="tel">Tel</label>
                 <input pInputText id="tel" name="tel" maxlength="20" [ngModel]="membre.tel" />
             </div>
@@ -75,7 +75,6 @@
             </div>
         </div>
         <div *ngIf="membre.lienDis === 0" class="p-fluid p-formgrid p-grid">
-
             <div class="p-field p-col-12 p-md-4">
                 <label i18n="@@Car" for="veh">Car</label>
                 <input pInputText id="veh" name="veh" maxlength="30" [ngModel]="membre.veh" />
