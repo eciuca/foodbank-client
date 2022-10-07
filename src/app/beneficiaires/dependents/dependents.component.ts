@@ -41,7 +41,7 @@ export class DependentsComponent implements OnInit {
         .pipe(
             select(globalAuthState),
             map((authState) => {
-              if (authState.user && ( authState.user.rights === 'Admin_Asso' || authState.user.rights === 'Admin_Banq'  ) ) {
+              if (authState.user && ( authState.user.rights === 'Admin_Asso' || authState.user.rights === 'Admin_Banq' || (( authState.user.rights === 'Bank') && (authState.user.gestBen)) ) ) {
                  this.booIsAdmin = true;
               }
             })

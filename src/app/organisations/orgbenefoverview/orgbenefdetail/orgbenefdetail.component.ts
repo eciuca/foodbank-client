@@ -55,15 +55,20 @@ export class OrgbenefdetailComponent implements OnInit {
             select(globalAuthState),
             map((authState) => {
               if (authState.user) {
-                this.userName = authState.user.userName;
-                   switch (authState.user.rights) {
-                  case 'Admin_Banq':
-                    this.booCanSave = true;
-                    break;
-                  case 'Admin_Asso':
-                    this.booCanSave = true;
-                    break;
-                  default:
+                 this.userName = authState.user.userName;
+                 switch (authState.user.rights) {
+                   case 'Bank':
+                     if (authState.user.gestBen) {
+                       this.booCanSave = true;
+                     }
+                     break;
+                    case 'Admin_Banq':
+                      this.booCanSave = true;
+                      break;
+                    case 'Admin_Asso':
+                      this.booCanSave = true;
+                      break;
+                    default:
                 }
 
               }

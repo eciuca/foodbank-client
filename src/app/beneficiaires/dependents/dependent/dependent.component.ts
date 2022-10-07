@@ -77,12 +77,12 @@ export class DependentComponent implements OnInit {
               if (authState.user) {
                 switch (authState.user.rights) {
                   case 'Bank':
-                    this.lienBanque = authState.banque.bankId;
-                    break;
                   case 'Admin_Banq':
                     this.lienBanque = authState.banque.bankId;
-                    this.booCanSave = true;
-                    this.booCanDelete = true;
+                    if  ((authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
+                      this.booCanSave = true;
+                      this.booCanDelete = true;
+                    }
                     break;
                   case 'Asso':
                     this.lienBanque = authState.banque.bankId;

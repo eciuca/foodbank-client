@@ -156,16 +156,15 @@ export class BeneficiaireComponent implements OnInit {
                       this.userId= authState.user.idUser;
                       this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
                       switch (authState.user.rights) {
+                          case 'Admin_Banq':
                           case 'Bank':
                               this.lienBanque = authState.banque.bankId;
                               this.idCompany = authState.banque.bankShortName;
-                               break;
-                          case 'Admin_Banq':
-                              this.lienBanque = authState.banque.bankId;
-                              this.idCompany = authState.banque.bankShortName;
-                              this.booCanSave = true;
-                              if (this.booCalledFromTable && this.beneficiaire.hasOwnProperty('idClient')) {
-                                  this.booCanDelete = true;
+                              if  ((authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
+                                  this.booCanSave = true;
+                                  if (this.booCalledFromTable && this.beneficiaire.hasOwnProperty('idClient')) {
+                                      this.booCanDelete = true;
+                                  }
                               }
                               break;
                           case 'Admin_Asso':
@@ -178,7 +177,7 @@ export class BeneficiaireComponent implements OnInit {
                                   this.depotName = authState.organisation.societe;
                               }
                               this.booIsOrganisation = true;
-                              if  (authState.user.rights === 'Admin_Asso') {
+                              if  ((authState.user.rights === 'Admin_Asso') || (( authState.user.rights === 'Asso') && (authState.user.gestBen))) {
                                   this.booCanSave = true;
                                   if (this.booCalledFromTable) {
                                       this.booCanDelete = true;
