@@ -104,6 +104,7 @@ export let enmUserRolesAsso = [
 export let enmUserRolesFBBA = [
     {label: $localize`:@@RoleFBBAAdmin:FBBA Admin`, value: 'Admin_FBBA'},
     {label: $localize`:@@RoleFBBAUser:FBBA User`, value: 'Bank_FBBA'},
+    {label: $localize`:@@RoleAdmin:Global admin`, value: 'admin'},
 ];
 export let enmStatutFead = [
     {label: $localize`:@@FeadStatusRefused:Refused`, value: 0},
