@@ -42,7 +42,7 @@ export class OrgfeadoverviewComponent implements OnInit {
   first: number;
   regionSelected: number;
   depotSelected: string;
-
+  feadSelected: string;
   statutSelected: string;
   statuts: any[];
   constructor(private organisationService: OrganisationEntityService,
@@ -128,6 +128,18 @@ export class OrgfeadoverviewComponent implements OnInit {
       queryParms['sortField'] =  'societe';
     }
     queryParms['actif'] = '1';
+    if (this.regionSelected) {
+      queryParms['regId'] = this.regionSelected;
+    }
+    if (this.depotSelected) {
+      queryParms['lienDepot'] = this.depotSelected;
+    }
+    if (this.statutSelected && (this.statutSelected !== '')) {
+      queryParms['statut'] = this.statutSelected;
+    }
+    if (this.feadSelected ) {
+      queryParms['isFead'] = this.feadSelected;
+    }
     if (event.filters) {
       if (event.filters.idDis && event.filters.idDis.value) {
         queryParms['idDis'] = event.filters.idDis.value;
@@ -137,9 +149,6 @@ export class OrgfeadoverviewComponent implements OnInit {
       }
       if (event.filters.agreed && event.filters.agreed.value != null) {
         queryParms['agreed'] = event.filters.agreed.value;
-      }
-      if (event.filters.isFead && event.filters.isFead.value !== null) {
-        queryParms['isFead'] = event.filters.isFead.value;
       }
       if (event.filters.birbCode && event.filters.birbCode.value !== null) {
         queryParms['birbCode'] = event.filters.birbCode.value;
@@ -274,6 +283,23 @@ export class OrgfeadoverviewComponent implements OnInit {
     }
     this.loadPageSubject$.next(latestQueryParams);
   }
+  filterFEAD(isFead) {
+    console.log('FEAD filter is now:', isFead);
+    this.feadSelected = isFead;
+    this.first = 0;
+    const latestQueryParams = {...this.loadPageSubject$.getValue()};
+    console.log('Latest statut Query Parms', latestQueryParams);
+    // when we switch f, we need to restart from first page
+    latestQueryParams['offset'] = '0';
+    if (isFead != null) {
+      latestQueryParams['isFead'] = isFead;
+    } else {
+      if (latestQueryParams.hasOwnProperty('isFead')) {
+        delete latestQueryParams['isFead'];
+      }
+    }
+    this.loadPageSubject$.next(latestQueryParams);
+  }
   generateTooltipAgreed() {
     return $localize`:@@OrgToolTipIsAgreed:Is Organisation Agreed?`;
   }
@@ -293,5 +319,7 @@ export class OrgfeadoverviewComponent implements OnInit {
   generateTooltipFEADCode() {
     return $localize`:@@OrgToolTipFEADCode:FEAD Code of the Organisation`;
   }
+
+
 }
 

@@ -29,7 +29,7 @@
                             [forceSelection]="true" id="selectedAntenne" name="selectedAntenne" field="fullname" [dropdown]="true">
             </p-autoComplete>
             </div>
-            <div class="p-field p-col-12 p-md-2">
+            <div *ngIf="organisation.birbCode > '1' " class="p-field p-col-12 p-md-2">
                 <label i18n="@@OrgFEADFromUs" pTooltip="{{generateTooltipFEADFromUs()}}" for="feadN">FEAD from Us?</label>
                 <p-inputSwitch id="feadN" name="feadN" [ngModel]="organisation.feadN"></p-inputSwitch>
             </div>
