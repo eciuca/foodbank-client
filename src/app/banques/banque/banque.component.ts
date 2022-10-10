@@ -327,21 +327,21 @@ export class BanqueComponent implements OnInit {
  save(oldBanque: Banque, banqueForm: Banque) {
       console.log('Banque Form value', banqueForm);
       const modifiedBanque = Object.assign({}, oldBanque, banqueForm);
-      modifiedBanque.idMemberPres = this.selectedPresident.batId;
-      modifiedBanque.idMemberVp = this.selectedVicePresident.batId;
-      modifiedBanque.idMemberCeo = this.selectedCEO.batId;
-      modifiedBanque.idMemberSec = this.selectedSecretary.batId;
-      modifiedBanque.idMemberTres = this.selectedTreasurer.batId;
-      modifiedBanque.idMemberRh = this.selectedHR.batId;
-      modifiedBanque.idMemberLog = this.selectedLogistics.batId;
-      modifiedBanque.idMemberSh = this.selectedSecHygiene.batId;
-      modifiedBanque.idMemberIt = this.selectedIT.batId;
-      modifiedBanque.idMemberAppro = this.selectedSupply.batId;
-      modifiedBanque.idMemberPp = this.selectedPress.batId;
-      modifiedBanque.idMemberAsso = this.selectedAssocRel.batId;
-      modifiedBanque.idMemberPubrel = this.selectedPubRel.batId;
-      modifiedBanque.idMemberFead = this.selectedFEAD.batId;
-      modifiedBanque.idMemberQual = this.selectedQuality.batId;
+      modifiedBanque.idMemberPres = this.selectedPresident? this.selectedPresident.batId : 0;
+      modifiedBanque.idMemberVp = this.selectedVicePresident ? this.selectedVicePresident.batId : 0;
+      modifiedBanque.idMemberCeo = this.selectedCEO ? this.selectedCEO.batId: 0;
+      modifiedBanque.idMemberSec = this.selectedSecretary ? this.selectedSecretary.batId: 0;
+      modifiedBanque.idMemberTres = this.selectedTreasurer ? this.selectedTreasurer.batId: 0;
+      modifiedBanque.idMemberRh = this.selectedHR ? this.selectedHR.batId: 0;
+      modifiedBanque.idMemberLog = this.selectedLogistics ? this.selectedLogistics.batId: 0;
+      modifiedBanque.idMemberSh = this.selectedSecHygiene ? this.selectedSecHygiene.batId: 0;
+      modifiedBanque.idMemberIt = this.selectedIT ? this.selectedIT.batId: 0;
+      modifiedBanque.idMemberAppro = this.selectedSupply?  this.selectedSupply.batId: 0;
+      modifiedBanque.idMemberPp = this.selectedPress ? this.selectedPress.batId: 0;
+      modifiedBanque.idMemberAsso = this.selectedAssocRel? this.selectedAssocRel.batId: 0;
+      modifiedBanque.idMemberPubrel = this.selectedPubRel ? this.selectedPubRel.batId : 0;
+      modifiedBanque.idMemberFead = this.selectedFEAD? this.selectedFEAD.batId: 0;
+      modifiedBanque.idMemberQual = this.selectedQuality ? this.selectedQuality.batId: 0;
      if (modifiedBanque.hasOwnProperty('bankId')) {
          this.banquesService.update(modifiedBanque)
              .subscribe(() => {

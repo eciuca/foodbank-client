@@ -189,7 +189,7 @@ export class UserComponent implements OnInit {
                         }
                     }
                     this.booIsCreate = true;
-                    if (this.myform) {
+                     if (this.myform) {
                         this.myform.reset(this.user);
                     }
                 }
@@ -429,7 +429,7 @@ export class UserComponent implements OnInit {
         }
         const query = event.query;
         queryMemberParms['offset'] = '0';
-        queryMemberParms['rows'] = '20';
+        queryMemberParms['rows'] = '5';
         queryMemberParms['sortField'] = 'nom';
         queryMemberParms['sortOrder'] = '1';
         queryMemberParms['nom'] = query.toLowerCase();
@@ -457,4 +457,7 @@ export class UserComponent implements OnInit {
 
     }
 
+    setSelectedMembre(membre: Membre) {
+        this.selectedMembre = membre;
+    }
 }

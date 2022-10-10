@@ -3099,7 +3099,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
@@ -6171,7 +6171,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrganisationPopulation" datatype="html">
@@ -7410,36 +7410,12 @@
           <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="UserProfile" datatype="html">
-        <source>Profile</source>
-        <target>Profil</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="Employee" datatype="html">
-        <source>Employee</source>
-        <target>Collaborateur</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="EmployeeIsMandatory" datatype="html">
-        <source>A employee must be selected</source>
-        <target>Un employé doit être sélectionné</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="UserLogin" datatype="html">
         <source>Login</source>
         <target>Identifiant</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserLoginIsMandatory" datatype="html">
@@ -7447,23 +7423,23 @@
         <target>Le login de l'utilisateur est requise et doit comporter au moins 6 caractères</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="UserPassword" datatype="html">
-        <source>Password</source>
-        <target>Mot de passe</target>
+      <trans-unit id="Employee" datatype="html">
+        <source>Employee</source>
+        <target>Collaborateur</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="UserPasswordIsMandatory" datatype="html">
-        <source>Password is required for a new user and must be minimum 6 chars long</source>
-        <target>Le mot de passe est requis pour un nouvel utilisateur et doit comporter au moins 6 caractères</target>
+      <trans-unit id="EmployeeIsMandatory" datatype="html">
+        <source>A employee must be selected</source>
+        <target>Un employé doit être sélectionné</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserRole" datatype="html">
@@ -7471,15 +7447,23 @@
         <target>Fonction</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="UserRights" datatype="html">
-        <source>User Rights</source>
-        <target>Fonction de l'utilisateur</target>
+      <trans-unit id="UserPassword" datatype="html">
+        <source>Password</source>
+        <target>Mot de passe</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="UserPasswordIsMandatory" datatype="html">
+        <source>Password is required for a new user and must be minimum 6 chars long</source>
+        <target>Le mot de passe est requis pour un nouvel utilisateur et doit comporter au moins 6 caractères</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/user/user.component.html</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserRightsManageMembers" datatype="html">
@@ -7487,7 +7471,7 @@
         <target>Gérer les membres ?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserRightsManageFead" datatype="html">
@@ -7495,7 +7479,7 @@
         <target>Gérer le Fead?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserRightsManageOCMW" datatype="html">
@@ -7503,7 +7487,7 @@
         <target>Gérer les Cpas?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserRightsManageGifts" datatype="html">
@@ -7511,7 +7495,7 @@
         <target>Gérer les Dons ?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgUserExisting" datatype="html">
@@ -7929,6 +7913,14 @@
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">537</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="UserProfile">
+        <source/>
+        <target>Profil</target>
+      </trans-unit>
+      <trans-unit id="UserRights">
+        <source/>
+        <target>Fonction de l'utilisateur</target>
       </trans-unit>
     </body>
   </file>

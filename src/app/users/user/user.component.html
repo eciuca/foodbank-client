@@ -8,61 +8,58 @@
             <button  i18n-label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save" [disabled] = "userForm.invalid"></button>
             <button  i18n-label="@@Return" *ngIf="booCanQuit" type="button" pButton icon="pi pi-check" (click)="quit($event, user, userForm, userForm.dirty)" label="Return" ></button>
         </div>
-        <p-accordion >
-            <p-accordionTab i18n-header="@@UserProfile" header="Profile" [selected]="true">
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-3">
-                        <label i18n="@@Employee" for="selectedMembre">Employee</label>
-                        <p-autoComplete #membre="ngModel" [(ngModel)]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
-                                         [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">
-                        </p-autoComplete>
-                        <p-message i18n-text="@@EmployeeIsMandatory" *ngIf="membre.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@UserLogin" for="idUser">Login</label>
-                        <input #iduser="ngModel" pInputText id="idUser" name="idUser"  required [disabled] ="!booIsCreate" minlength="6" maxlength="60" [ngModel]="user.idUser" />
-                        <p-message i18n-text="@@UserLoginIsMandatory" *ngIf="iduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
-                    </div>
-                    <div *ngIf="booIsCreate" class="p-field p-col-12 p-md-2">
-                        <label i18n="@@UserPassword" for="password">Password</label>
-                        <input #password="ngModel" pInputText id="password" name="password"  required minlength="6" maxlength="12" [ngModel]="user.password" />
-                        <p-message i18n-text="@@UserPasswordIsMandatory" *ngIf="password.invalid && userForm.touched" severity="error" text="Password is required for a new user and must be minimum 6 chars long"></p-message>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@UserRole" for="rights">Role</label>
-                        <p-dropdown [options]="rights" id="rights" name="rights" [ngModel]="user.rights"  ></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-1">
-                        <label i18n="@@Active" for="actif">Active</label>
-                        <p-inputSwitch id="actif" name="actif" [ngModel]="user.actif"></p-inputSwitch>
-                    </div>
-                </div>
-            </p-accordionTab>
-            <p-accordionTab i18n-header="@@UserRights" header="User Rights">
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-3">
-                        <label i18n="@@UserRightsManageMembers" for="gestMemb">Manage Members ?</label>
-                        <p-inputSwitch id="gestMemb" name="gestMemb" [ngModel]="user.gestMemb"></p-inputSwitch>
-                    </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        <label i18n="@@UserRightsManageBeneficiaries" for="gestBen">Manage Beneficiaries ?</label>
-                        <p-inputSwitch id="gestBen" name="gestBen" [ngModel]="user.gestBen"></p-inputSwitch>
-                    </div>
-                    <div class="p-field p-col-12 p-md-4">
-                        <label i18n="@@UserRightsManageFead" for="gestFead">Manage Fead ?</label>
-                        <p-inputSwitch id="gestFead" name="gestFead" [ngModel]="user.gestFead"></p-inputSwitch>
-                    </div>
-                    <div *ngIf="!booIsOrganisation" class="p-field p-col-12 p-md-4">
-                        <label i18n="@@UserRightsManageOCMW" for="gestCpas">Manage Cpas/OCMW ?</label>
-                        <p-inputSwitch id="gestCpas" name="gestCpas" [ngModel]="user.gestCpas"></p-inputSwitch>
-                    </div>
-                    <div *ngIf="!booIsOrganisation" class="p-field p-col-12 p-md-4">
-                        <label i18n="@@UserRightsManageGifts" for="gestDon">Manage Gifts ?</label>
-                        <p-inputSwitch id="gestDon" name="gestDon" [ngModel]="user.gestDon"></p-inputSwitch>
-                    </div>
-                </div>
-            </p-accordionTab>
-        </p-accordion>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@UserLogin" for="idUser">Login</label>
+                <input #myiduser="ngModel" pInputText id="idUser" name="idUser"  required [disabled] ="!booIsCreate" minlength="6" maxlength="60" [ngModel]="user.idUser" />
+                <p-message i18n-text="@@UserLoginIsMandatory" *ngIf="myiduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@Employee" for="selectedMembre">Employee</label>
+                <p-autoComplete #membreref="ngModel" [ngModel]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
+                                (onSelect)="setSelectedMembre($event);"
+                                [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">
+                </p-autoComplete>
+                <p-message i18n-text="@@EmployeeIsMandatory" *ngIf="membreref.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
+            </div>
+
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@UserRole" for="rights">Role</label>
+                <p-dropdown [options]="rights" id="rights" name="rights" [ngModel]="user.rights"  ></p-dropdown>
+            </div>
+            <div *ngIf="booIsCreate" class="p-field p-col-12 p-md-3">
+                <label i18n="@@UserPassword" for="password">Password</label>
+                <input #mypassword="ngModel" pInputText id="password" name="password"  required minlength="6" maxlength="12" [ngModel]="user.password" />
+                <p-message i18n-text="@@UserPasswordIsMandatory" *ngIf="mypassword.invalid && userForm.touched" severity="error" text="Password is required for a new user and must be minimum 6 chars long"></p-message>
+            </div>
+
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@Active" for="actif">Active</label>
+                <p-inputSwitch id="actif" name="actif" [ngModel]="user.actif"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@UserRightsManageMembers" for="gestMemb">Manage Members ?</label>
+                <p-inputSwitch id="gestMemb" name="gestMemb" [ngModel]="user.gestMemb"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@UserRightsManageBeneficiaries" for="gestBen">Manage Beneficiaries ?</label>
+                <p-inputSwitch id="gestBen" name="gestBen" [ngModel]="user.gestBen"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@UserRightsManageFead" for="gestFead">Manage Fead ?</label>
+                <p-inputSwitch id="gestFead" name="gestFead" [ngModel]="user.gestFead"></p-inputSwitch>
+            </div>
+        </div>
+        <div *ngIf="!booIsOrganisation"class="p-fluid p-formgrid p-grid">
+            <div  class="p-field p-col-12 p-md-6">
+                <label i18n="@@UserRightsManageOCMW" for="gestCpas">Manage Cpas/OCMW ?</label>
+                <p-inputSwitch id="gestCpas" name="gestCpas" [ngModel]="user.gestCpas"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <label i18n="@@UserRightsManageGifts" for="gestDon">Manage Gifts ?</label>
+                <p-inputSwitch id="gestDon" name="gestDon" [ngModel]="user.gestDon"></p-inputSwitch>
+            </div>
+        </div>
         <p-confirmPopup></p-confirmPopup>
 
     </form>
