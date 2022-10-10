@@ -16,11 +16,10 @@
             </div>
             <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@Employee" for="selectedMembre">Employee</label>
-                <p-autoComplete #membreref="ngModel" [ngModel]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
+                <p-autoComplete  [ngModel]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
                                 (onSelect)="setSelectedMembre($event);"
                                 [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">
                 </p-autoComplete>
-                <p-message i18n-text="@@EmployeeIsMandatory" *ngIf="membreref.invalid && userForm.touched" severity="error" text="A employee must be selected"></p-message>
             </div>
 
             <div class="p-field p-col-12 p-md-3">
