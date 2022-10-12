@@ -62,8 +62,8 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@MemberBirthDate" for="dateNaissance">Birth Date</label>
-                <input #dateNaissance="ngModel" pInputText id="dateNaissance" name="dateNaissance" required pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateNaissance"/>
-                <p-message i18n-text="@@BirthDateIsMandatory"  *ngIf="dateNaissance.invalid && membreForm.touched" severity="error" text="Birth date is required and must in format dd/mm/yyyy"></p-message>
+                <input #dateNaissance="ngModel" pInputText id="dateNaissance" name="dateNaissance" pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$" placeholder="dd/mm/yyyy" [ngModel]="membre.dateNaissance"/>
+                <p-message i18n-text="@@BirthDateMustBeValid"  *ngIf="dateNaissance.invalid && membreForm.touched" severity="error" text="Birth date must in format dd/mm/yyyy"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label for="tel">Tel</label>
