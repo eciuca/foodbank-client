@@ -437,7 +437,7 @@ export class MembreComponent implements OnInit {
     loadDepots(lienBanque: number ) {
         const queryDepotParms = {};
         queryDepotParms['offset'] = '0';
-        queryDepotParms['rows'] = '10';
+        queryDepotParms['rows'] = '100';
         queryDepotParms['sortField'] = 'Societe';
         queryDepotParms['sortOrder'] = '1';
         if (lienBanque) {
