@@ -444,8 +444,10 @@ export class MembreComponent implements OnInit {
             queryDepotParms['lienBanque'] = lienBanque.toString();
         }
         queryDepotParms['isDepot'] = true;
+        queryDepotParms['actif'] = true;
         this.orgsummaryService.getWithQuery(queryDepotParms)
             .subscribe(filteredDepots => {
+                this.depots = [{label: ' ',value: null}];
                 filteredDepots.map((orgSummary) => {
                     this.depots.push({label: orgSummary.societe, value: orgSummary.idDis});
                 });
