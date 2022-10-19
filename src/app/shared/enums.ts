@@ -141,7 +141,7 @@ export let enmOrgCategories = [
 ];
 export let enmMailGroupsBank = [
     {label: $localize`:@@OrgMailGroupOrganisations:Organisations` , value: 0 },
-    {label: $localize`:@@BankMailGroupBankMgrs:Bank Mgrs` , value: 4 },
+    {label: $localize`:@@BankMailGroupBankMgrs:Bank Food-IT Mgrs` , value: 4 },
     {label: $localize`:@@BankMailGroupBankUsers:Bank Users` , value: 5 },
     {label: $localize`:@@BankMailGroupBankMembers:Bank Members` , value: 6 },
     {label: $localize`:@@BankMailGroupOrgMgrs:Org Mgrs` , value: 1 },
@@ -151,7 +151,7 @@ export let enmMailGroupsBank = [
 ];
 export let enmMailGroupsFBBA = [
     {label: $localize`:@@OrgMailGroupOrganisations:Organisations` , value: 0 },
-    {label: $localize`:@@BankMailGroupBankMgrs:Bank Mgrs` , value: 4 },
+    {label: $localize`:@@BankMailGroupBankMgrs:Bank Food-IT Mgrs` , value: 4 },
     {label: $localize`:@@BankMailGroupOrgMgrs:Org Mgrs` , value: 1 },
 ];
 export let enmMailGroupsOrg = [

@@ -68,6 +68,7 @@
             <th i18n="@@RefintSorted" pSortableColumn="refInt">Reference<p-sortIcon field="refInt"></p-sortIcon></th>
             <th colspan="2" i18n="@@AddressSorted" pSortableColumn="adresse">Address<p-sortIcon field="adresse"></p-sortIcon></th>
             <th colspan="2" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
+            <th colspan="2" i18n="@@NomDepotRamasseSorted" pSortableColumn="nomDepotRamasse">Depot Ramasse<p-sortIcon field="nomDepotRamasse"></p-sortIcon></th>
             <th i18n="@@OrgAgreedSorted" pSortableColumn="agreed" pTooltip="{{generateTooltipAgreed()}}">Agreed<p-sortIcon field="agreed"></p-sortIcon></th>
             <th pSortableColumn="birbCode" pTooltip="{{generateTooltipUsesFEAD()}}">FEAD<p-sortIcon field="birbCode"></p-sortIcon></th>
             <th  i18n="@@NbLoginsSorted"  pTooltip="{{generateLoginTooltip()}}" pSortableColumn="nbLogins" >Logins<p-sortIcon field="nbLogins"></p-sortIcon></th>
@@ -98,6 +99,9 @@
             </th>
             <th colspan="2">
                 <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="nomDepot" ></p-columnFilter>
+            </th>
+            <th colspan="2">
+                <p-columnFilter type="text" matchMode="contains" [showMenu]="false" field="nomDepotRamasse" ></p-columnFilter>
             </th>
             <th>
                 <p-columnFilter field="agreed" matchMode="equals" [showMenu]="false">
@@ -151,15 +155,20 @@
             <td colspan="2">
                 {{ organisation.nomDepot }}
             </td>
-
+            <td [ngStyle]="hasDifferentRamasseDepot(organisation) && {'background-color': 'Aquamarine'}" pTooltip="{{generateToolTipMessageForDepotRamasse(organisation)}}" colspan="2">
+                {{ organisation.nomDepotRamasse }}
+            </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.agreed, 'false-icon pi-times-circle': !organisation.agreed}"></i>
             </td>
             <td *ngIf="organisation.birbCode==1" pTooltip="{{organisation.antenneOrgName}}" >
                Antenne
             </td>
-            <td *ngIf="organisation.birbCode != 1" >
+            <td *ngIf="organisation.birbCode > 1" >
                 {{ organisation.birbCode }}
+            </td>
+            <td *ngIf="organisation.birbCode < 1" >
+                -
             </td>
             <td>
                 {{ organisation.nbLogins }}

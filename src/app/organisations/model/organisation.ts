@@ -11,6 +11,7 @@ export interface Organisation {
     birbCode: string;
 
     lienDepot: number;
+    nomDepot: string;
 
     societe: string;
 
@@ -111,7 +112,6 @@ export interface Organisation {
     birbyN: boolean;
 
     depyN: boolean;
-    depotMissing: boolean; // calculated field when an organisation is a depot, the matching depot entity must be created
 
     logBirb: number;
 
@@ -226,12 +226,14 @@ export interface Organisation {
     cotMonthsSup: number;
 
     depotram: number;
+    nomDepotRamasse: string;
 
     lupdUserName: string;
 
     lupdTs: string;
 
     nbLogins: number;
+    anomalies: string;
     totalRecords: number;
 
 }
@@ -287,9 +289,9 @@ export class DefaultOrganisation implements Organisation {
     agreed: boolean;
     depPrinc: boolean;
     depotram: number;
+    nomDepotRamasse: string;
     birbyN: boolean;
     depyN: boolean;
-    depotMissing: boolean; // calculated field when an organisation is a depot, the matching depot entity must be created
     disprog: string;
     distrListPdt: boolean;
     distrListSec: boolean;
@@ -316,6 +318,7 @@ export class DefaultOrganisation implements Organisation {
     bankShortName: string; // calculated field
     lienCpas: number;
     lienDepot: number;
+    nomDepot: string;
     lienGd: number;
     lienGs: number;
     localite: string;
@@ -367,6 +370,7 @@ export class DefaultOrganisation implements Organisation {
     webauthority: boolean;
     website: string;
     nbLogins: number;
+    anomalies: string;
     totalRecords: number;
 
     constructor() {
@@ -409,9 +413,9 @@ export class DefaultOrganisation implements Organisation {
         this.agreed = true;
         this.depPrinc = false;
         this.depotram = 0;
+        this.nomDepotRamasse ='';
         this.birbyN = false;
         this.depyN = false;
-        this.depotMissing = false; // calculated field when an organisation is a depot, the matching depot entity must be created
         this.disprog = '';
         this.distrListPdt = true;
         this.distrListSec = true;
@@ -438,6 +442,7 @@ export class DefaultOrganisation implements Organisation {
         this.bankShortName = '';
         this.lienCpas = 0;
         this.lienDepot = 0;
+        this.nomDepot ='';
         this.lienGd = 0;
         this.lienGs = 0;
         this.localite = '';
@@ -489,6 +494,7 @@ export class DefaultOrganisation implements Organisation {
         this.webauthority = true;
         this.website = '';
         this.nbLogins = 0;
+        this.anomalies ='';
         this.totalRecords = 0;
     }
 }

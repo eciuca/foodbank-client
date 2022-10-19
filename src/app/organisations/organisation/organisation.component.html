@@ -29,18 +29,17 @@
                                          [forceSelection]="true"  id="selectedDepot" name="selectedDepot" field="societe" [dropdown]="true">
                         </p-autoComplete>
                     </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@DepotRamasse" for="selectedDepotRamasse">Depot Ramasse</label>
+                        <p-autoComplete [(ngModel)]="selectedDepotRamasse" [suggestions]="filteredDepots" (completeMethod)="filterDepot($event)"
+                                        [forceSelection]="true" id="selectedDepotRamasse" name="selectedDepotRamasse" field="societe" [dropdown]="true">
+                        </p-autoComplete>
+                    </div>
                     <div class="p-field p-col-12 p-md-1">
                         <label for="depyN">Depot?</label>
                         <p-inputSwitch id="depyN" name="depyN" [ngModel]="organisation.depyN"></p-inputSwitch>
                     </div>
-                    <div class="p-field p-col-12 p-md-1">
-                        <label i18n="@@OrgAgreed" for="agreed">Agreed</label>
-                        <p-inputSwitch id="agreed" name="agreed" [ngModel]="organisation.agreed"></p-inputSwitch>
-                    </div>
-                    <div class="p-field p-col-12 p-md-1">
-                        <label i18n="@@Active" for="actif">Active</label>
-                        <p-inputSwitch id="actif" name="actif" [ngModel]="organisation.actif"></p-inputSwitch>
-                    </div>
+
                     <div class="p-field p-col-12 p-md-2">
                         <label  i18n="@@OrganisationRegion" for="statut">Region</label>
                         <p-dropdown [options]="regions" id="region" name="region" [ngModel]="organisation.region"></p-dropdown>
@@ -145,6 +144,14 @@
                         <label i18n="@@OrganisationGuestCapacity" for="nbrefix">Guest Capacity</label>
                         <p-inputNumber [ngModel]="organisation.nbrefix" id="nbrefix" name="nbrefix" mode="decimal" [showButtons]="true" inputId="nbrefix" [min]="0" [max]="500">
                         </p-inputNumber>
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        <label i18n="@@OrgAgreed" for="agreed">Agreed</label>
+                        <p-inputSwitch id="agreed" name="agreed" [ngModel]="organisation.agreed"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        <label i18n="@@Active" for="actif">Active</label>
+                        <p-inputSwitch id="actif" name="actif" [ngModel]="organisation.actif"></p-inputSwitch>
                     </div>
                 </div>
             </p-accordionTab>

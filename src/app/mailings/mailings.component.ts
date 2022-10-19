@@ -37,6 +37,7 @@ export class MailingsComponent implements OnInit {
   bankid: number;
   bankName: string;
   senderFullEmail: string;
+  orgId: number;
   orgName: string;
   loading: boolean;
   totalRecords: number;
@@ -76,6 +77,7 @@ export class MailingsComponent implements OnInit {
     this.first = 0;
     this.bankName = '';
     this.orgName = '';
+    this.orgId = 0;
     this.senderFullEmail = '';
     this.mailingText = '';
     this.mailingSubject = '';
@@ -139,6 +141,7 @@ export class MailingsComponent implements OnInit {
     console.log('Entering loadAddresses');
     this.loading = true;
     this.latestAddressQueryParams = {...this.filterBase};
+    this.latestAddressQueryParams['target'] = '0';
 
     if (this.selectedFilter && this.selectedFilter.idDis != null) {
       this.latestAddressQueryParams['lienDis'] = this.selectedFilter.idDis;
@@ -163,7 +166,7 @@ export class MailingsComponent implements OnInit {
           break;
         case 'Admin_Asso':
           this.filterBase['lienBanque'] = authState.banque.bankId;
-          this.filterBase['lienDis'] = authState.organisation.idDis;
+          this.orgId = authState.organisation.idDis;
           this.orgName = authState.organisation.societe;
           this.mailgroups = enmMailGroupsOrg;
           this.selectedFilter = this.filteredOrganisationsPrepend[0];
@@ -171,7 +174,6 @@ export class MailingsComponent implements OnInit {
         default:
 
       }
-      this.filterBase['target'] = this.mailgroups[0].value;
       this.regionService.getWithQuery({'lienBanque': this.bankid.toString()})
           .subscribe(regions => {
             this.regions = [{ value: null, label: ''}];
@@ -395,7 +397,7 @@ export class MailingsComponent implements OnInit {
 
   filterAgreed(agreed) {
     console.log('Agreed filter is now:', agreed);
-    this.booOnlyAgreed = agreed;
+    this.booOnlyAgreed = agreed.checked;
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
     this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
     console.log('Latest Agreed Query Parms', this.latestAddressQueryParams);
@@ -421,7 +423,7 @@ export class MailingsComponent implements OnInit {
   }
 
   filterFead(feadN) {
-    this.booOnlyFead = feadN;
+    this.booOnlyFead = feadN.checked;
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
     this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
     // when we switch , we need to restart from first page
@@ -451,8 +453,31 @@ export class MailingsComponent implements OnInit {
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
     // when we switch from active to archived list and vice versa , we need to restart from first page
     this.first = 0;
+    if (this.orgId == 0) { // admin functionality
+      this.booOnlyAgreed = false;
+      this.booOnlyFead = false;
+      this.regionSelected = null;
+      if (this.latestAddressQueryParams.hasOwnProperty('lienDis')) {
+        delete this.latestAddressQueryParams['lienDis'];
+      }
+      this.setFeadFilter();
+      this.setAgreedFilter();
+      this.setRegionFilter();
+      this.setLanguageFilter();
+    }
+    else {  // functionality for organisations
+      if (this.mailgroupSelected == '0') {
+        if (this.latestAddressQueryParams.hasOwnProperty('lienDis')) {
+          delete this.latestAddressQueryParams['lienDis'];
+        }
+      }
+      else {
+        this.latestAddressQueryParams['lienDis'] = this.orgId;
+      }
+    }
     this.latestAddressQueryParams['target'] = this.mailgroupSelected;
     this.loadAddressSubject$.next(this.latestAddressQueryParams);
+    this.loadOrganisationSubject$.next( this.latestOrgQueryParams);
   }
   setMailGroupFilter() {
         this.latestAddressQueryParams['target'] = this.mailgroupSelected;
@@ -461,5 +486,6 @@ export class MailingsComponent implements OnInit {
   saveSelection() {
     this.mailadresses = this.selectedMailadresses;
   }
+
 }
 

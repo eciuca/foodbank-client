@@ -52,6 +52,7 @@ export class OrganisationComponent implements OnInit {
     filteredCpass: Cpas[];
     filteredDepots: OrgSummary[];
     selectedDepot: OrgSummary;
+    selectedDepotRamasse: OrgSummary;
     genders: any[];
     statuts: any[];
     regions: any[];
@@ -147,9 +148,20 @@ export class OrganisationComponent implements OnInit {
                           orgsummary => {
                               if (orgsummary !== null) {
                                   this.selectedDepot = {...orgsummary};
-                                  console.log('our organisation depot:', this.selectedDepot);
+
                               } else {
                                   console.log('There is no depot for this organisation!');
+                              }
+                          });
+              }
+              if (this.organisation.depotram != null && this.organisation.depotram !== 0  ) {
+                  this.orgsummaryService.getByKey(this.organisation.depotram)
+                      .subscribe(
+                          orgsummary => {
+                              if (orgsummary !== null) {
+                                  this.selectedDepotRamasse = {...orgsummary};
+                              } else {
+                                  console.log('There is no ramasse depot for this organisation!');
                               }
                           });
               }
@@ -160,6 +172,7 @@ export class OrganisationComponent implements OnInit {
               }
               this.selectedCpas = null;
               this.selectedDepot = null;
+              this.selectedDepotRamasse = null;
               console.log('we have a new default organisation');
           }
       });
@@ -214,6 +227,9 @@ export class OrganisationComponent implements OnInit {
     }
       if (this.selectedDepot) {
           modifiedOrganisation.lienDepot = this.selectedDepot.idDis;
+      }
+      if (this.selectedDepotRamasse) {
+          modifiedOrganisation.depotram = this.selectedDepotRamasse.idDis;
       }
     modifiedOrganisation.lupdUserName = this.userName;
       if (modifiedOrganisation.hasOwnProperty('idDis')) {
@@ -358,6 +374,7 @@ export class OrganisationComponent implements OnInit {
         queryDepotParms['sortOrder'] = '1';
         queryDepotParms['lienBanque'] = this.lienBanque.toString();
         queryDepotParms['isDepot'] = true;
+        queryDepotParms['actif'] = true;
         queryDepotParms['societe'] = query.toLowerCase();
         this.orgsummaryService.getWithQuery(queryDepotParms)
             .subscribe(filteredDepots =>  this.filteredDepots = filteredDepots);

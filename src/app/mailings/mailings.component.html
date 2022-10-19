@@ -22,30 +22,8 @@
                             <div  class="p-field p-col-12 p-md-2">
                                 <button type="button" pButton icon="pi pi-user-minus" (click)="saveSelection()" i18n-label="@@Save Selection" label="Save Selection"></button>
                             </div>
-                            <div *ngIf="!orgName" class="p-field p-col-12 p-md-2">
-                                <label i18n="@@OrgRegion" for="regions">Region</label>
-                                <p-dropdown id ="regions" [options]="regions" (onChange)="filterRegion($event.value)"  >
-                                    <ng-template let-option pTemplate="item">
-                                        <span>{{option.label}}</span>
-                                    </ng-template>
-                                </p-dropdown>
-                            </div>
-                            <div *ngIf="!orgName" class="p-field p-col-12 p-md-2">
-                                <label i18n="@@UserLanguage" for="languages">User Language</label>
-                                <p-dropdown id ="languages" [options]="languages" (onChange)="filterLanguage($event.value)"  >
-                                    <ng-template let-option pTemplate="item">
-                                        <span>{{option.label}}</span>
-                                    </ng-template>
-                                </p-dropdown>
-                            </div>
-                            <div *ngIf="!orgName" class="p-field p-col-12 p-md-1">
-                                <label i18n="@@FilterAgreed" for="booOnlyAgreed">Only Agreed Orgs?</label>
-                                <p-checkbox [value]="booOnlyAgreed" binary="true" name="booOnlyAgreed" id="booOnlyAgreed" (onChange)="filterAgreed($event)"></p-checkbox>
-                            </div>
-                            <div *ngIf="!orgName" class="p-field p-col-12 p-md-1">
-                                <label i18n="@@FilterFead" for="booOnlyFead">Only Fead by Us Orgs?</label>
-                                <p-checkbox [value]="booOnlyFead" binary="true" name="booOnlyFead" id="booOnlyFead" (onChange)="filterFead($event)"></p-checkbox>
-                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
                             <div class="p-field p-col-12 p-md-2">
                                 <label i18n="@@MailGroup" for="mailgroup">Mail Group</label>
                                 <p-dropdown id ="mailgroup" [options]="mailgroups" (onChange)="filterMailGroup($event.value)"  >
@@ -54,7 +32,9 @@
                                     </ng-template>
                                 </p-dropdown>
                             </div>
-                            <div *ngIf="!orgName" class="p-field p-col-12 p-md-4">
+                            <!--Mailgroups less than 4 allow filtering on organisations for bank and fbba users-->
+
+                            <div *ngIf="(mailgroupSelected < 4) && (!orgName)" class="p-field p-col-12 p-md-4">
                                 <label for="filteredOrganisation">Organisation:</label>
                                 <p-autoComplete [ngModel]="selectedFilter" [suggestions]="filterOptions"
                                                 (completeMethod)="addOrganisationsToFilterOptions($event)"
@@ -64,6 +44,31 @@
                                                 name="filteredOrganisation" field="fullname" [dropdown]="true">
 
                                 </p-autoComplete>
+                            </div>
+                            <div *ngIf="(mailgroupSelected < 4)  && (!orgName)" class="p-field p-col-12 p-md-2">
+                                <label i18n="@@OrgRegion" for="regions">Region</label>
+                                <p-dropdown id ="regions" [options]="regions" (onChange)="filterRegion($event.value)"  >
+                                    <ng-template let-option pTemplate="item">
+                                        <span>{{option.label}}</span>
+                                    </ng-template>
+                                </p-dropdown>
+                            </div>
+
+                            <div *ngIf="(mailgroupSelected < 4) && (!orgName)" class="p-field p-col-12 p-md-1">
+                                <label i18n="@@FilterAgreed" for="booOnlyAgreed">Only Agreed Orgs?</label>
+                                <p-checkbox [value]="booOnlyAgreed" binary="true" name="booOnlyAgreed" id="booOnlyAgreed" (onChange)="filterAgreed($event)"></p-checkbox>
+                            </div>
+                            <div *ngIf="(mailgroupSelected < 4) && (!orgName)" class="p-field p-col-12 p-md-1">
+                                <label i18n="@@FilterFead" for="booOnlyFead">Only Fead by Us Orgs?</label>
+                                <p-checkbox [value]="booOnlyFead" binary="true" name="booOnlyFead" id="booOnlyFead" (onChange)="filterFead($event)"></p-checkbox>
+                            </div>
+                            <div *ngIf="(mailgroupSelected != 0) && (!orgName)" class="p-field p-col-12 p-md-2">
+                                <label i18n="@@UserLanguage" for="languages">User Language</label>
+                                <p-dropdown id ="languages" [options]="languages" (onChange)="filterLanguage($event.value)"  >
+                                    <ng-template let-option pTemplate="item">
+                                        <span>{{option.label}}</span>
+                                    </ng-template>
+                                </p-dropdown>
                             </div>
 
 

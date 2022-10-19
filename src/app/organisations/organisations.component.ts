@@ -183,6 +183,9 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.nomDepot && event.filters.nomDepot.value) {
                 queryParms['nomDepot'] = event.filters.nomDepot.value;
             }
+            if (event.filters.nomDepotRamasse && event.filters.nomDepotRamasse.value) {
+                queryParms['nomDepotRamasse'] = event.filters.nomDepotRamasse.value;
+            }
             if (event.filters.isFead && event.filters.isFead.value !== null) {
                 queryParms['isFead'] = event.filters.isFead.value;
             }
@@ -467,13 +470,6 @@ export class OrganisationsComponent implements OnInit {
         return $localize`:@@ToolTipNbLogins:Nb Of Logins since 2021`;
     }
 
-    isDepotMissing(organisation: Organisation) {
-        if (organisation.depyN && organisation.depotMissing) {
-            return true;
-        }
-        return false;
-    }
-
     isAntenneMissing(organisation: Organisation) {
         if (organisation.birbCode == "1" && organisation.antenneOrgName == "") {
             return true;
@@ -482,16 +478,27 @@ export class OrganisationsComponent implements OnInit {
     }
 
     hasAnomalies(organisation:  Organisation) {
-        if (this.isDepotMissing(organisation) || this.isAntenneMissing(organisation)) {
+        if ((organisation.anomalies != "") || this.isAntenneMissing(organisation)) {
             return true;
         }
         return false;
     }
+    generateNGStyleForAnomalies(organisation: Organisation) {
+        if (this.hasAnomalies(organisation)) {
+            return "'background-color': 'yellow'";
+        }
+
+    }
 
     generateToolTipMessageForAnomalies(organisation: Organisation) {
         let message = "";
-        if (this.isDepotMissing(organisation)) {
-            message += $localize`:@@ToolTipDepotMissing:A Depot entity with id ${organisation.idDis} does not exist.`;
+        let anomaly = this.findAnomaly(organisation,'depotMissing');
+        if (anomaly != "") {
+            message += $localize`:@@ToolTipDepotMissing:A Depot entity with id ${anomaly} does not exist.`;
+        }
+        anomaly = this.findAnomaly(organisation,'duplicates');
+        if (anomaly != "") {
+            message += $localize`:@@ToolTipOrganisationDuplicates:${anomaly} organisations exist with the same name. Some could be archived`;
         }
         if (this.isAntenneMissing(organisation)) {
             message += $localize`:@@ToolTipAntenneMissing:For this antenne a parent Organisation with id ${organisation.antenne} does not exist.`;
@@ -499,7 +506,34 @@ export class OrganisationsComponent implements OnInit {
        return message;
 
     }
+    findAnomaly(organisation: Organisation,field: string) {
+        let myanomaly = "";
+        if (organisation.anomalies.length > 0) {
+            const anomaliesArray = organisation.anomalies.split(';').map(kvp => kvp.split(':'));
+            // console.log("anomalies array is", anomaliesArray)
+            anomaliesArray.forEach((anomaly) => {
+                // console.log("anomaly is", anomaly);
+                if (anomaly[0] == field) {
+                    myanomaly += anomaly[1];
+                }
+            });
+        }
+        return myanomaly;
+    }
 
 
+    hasDifferentRamasseDepot(organisation: Organisation) {
+        if (organisation.depotram != organisation.lienDepot) return true;
+        return false;
+
+    }
+
+    generateToolTipMessageForDepotRamasse(organisation: Organisation) {
+        let message = "";
+        if (this.hasDifferentRamasseDepot(organisation)) {
+            message += $localize`:@@ToolTipDepotRamasseDifferent:this organisation has a different depot for the ramasse`;
+        }
+        return message;
+    }
 }
 
