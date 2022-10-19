@@ -45,8 +45,8 @@
                 <p-inputSwitch id="gestBen" name="gestBen" [ngModel]="user.gestBen"></p-inputSwitch>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label *ngIf="idOrg > 0" i18n="@@UserRightsManageFead" for="gestFead">Manage Fead ?</label>
-                <label *ngIf="idOrg == 0" i18n="@@UserRightsManageStock" for="gestFead">Manage Stock ?</label>
+                <label *ngIf="user.idOrg > 0" i18n="@@UserRightsManageFead" for="gestFead">Manage Fead ?</label>
+                <label *ngIf="user.idOrg == 0" i18n="@@UserRightsManageStock" for="gestFead">Manage Stock ?</label>
                 <p-inputSwitch id="gestFead" name="gestFead" [ngModel]="user.gestFead"></p-inputSwitch>
             </div>
         </div>
