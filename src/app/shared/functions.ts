@@ -13,28 +13,31 @@ export function labelCivilite(civilite: number) {
 
 }
 export function  labelRights(rights: string) {
-    switch (rights.toLowerCase()) {
-        case 'admin_banq':
-            return $localize`:@@RoleBankAdmin:Bank admin`;
-        case 'bank':
-            return $localize`:@@RoleBankUser:Bank User`;
-        case 'admin_asso':
-            return  $localize`:@@RoleOrgAdmin:Org Admin`;
-        case 'asso':
-            return $localize`:@@RoleOrgUser:Org User`;
-        case 'admin':
-            return $localize`:@@RoleAdmin:Global admin`;
-        case 'admin_cpas':
-            return $localize`:@@RoleCPASAdmin:CPAS Admin`;
-        case 'admin_fead':
-            return $localize`:@@RoleFEADAdmin:FEAD Admin`;
-        case 'admin_fbba':
-            return $localize`:@@RoleFBBAAdmin:FBBA Admin`;
-        case 'bank_fbba':
-            return  $localize`:@@RoleFBBAUser:FBBA User`;
-        default:
-            return rights;
+    if (rights) {
+        switch (rights.toLowerCase()) {
+            case 'admin_banq':
+                return $localize`:@@RoleBankAdmin:Bank admin`;
+            case 'bank':
+                return $localize`:@@RoleBankUser:Bank User`;
+            case 'admin_asso':
+                return $localize`:@@RoleOrgAdmin:Org Admin`;
+            case 'asso':
+                return $localize`:@@RoleOrgUser:Org User`;
+            case 'admin':
+                return $localize`:@@RoleAdmin:Global admin`;
+            case 'admin_cpas':
+                return $localize`:@@RoleCPASAdmin:CPAS Admin`;
+            case 'admin_fead':
+                return $localize`:@@RoleFEADAdmin:FEAD Admin`;
+            case 'admin_fbba':
+                return $localize`:@@RoleFBBAAdmin:FBBA Admin`;
+            case 'bank_fbba':
+                return $localize`:@@RoleFBBAUser:FBBA User`;
+            default:
+                return rights;
+        }
     }
+    return '?';
 }
 export function  labelLanguage(membreLangue: number) {
     switch (membreLangue) {
