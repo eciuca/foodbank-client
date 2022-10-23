@@ -141,7 +141,7 @@ export class MailingsComponent implements OnInit {
     console.log('Entering loadAddresses');
     this.loading = true;
     this.latestAddressQueryParams = {...this.filterBase};
-    this.latestAddressQueryParams['target'] = '0';
+    this.latestAddressQueryParams['mailGroup'] = '0';
 
     if (this.selectedFilter && this.selectedFilter.idDis != null) {
       this.latestAddressQueryParams['lienDis'] = this.selectedFilter.idDis;
@@ -225,7 +225,7 @@ export class MailingsComponent implements OnInit {
     if ( this.mailingToList) {
       mailListArray = this.mailingToList.split('\n');
     }
-    console.log('mailListArray', mailListArray);
+    console.log('Send Mail Event', event);
     if ( mailListArray.length > 200) {
       const errMessage = {
         severity: 'error', summary: 'Send',
@@ -475,12 +475,12 @@ export class MailingsComponent implements OnInit {
         this.latestAddressQueryParams['lienDis'] = this.orgId;
       }
     }
-    this.latestAddressQueryParams['target'] = this.mailgroupSelected;
+    this.latestAddressQueryParams['mailGroup'] = this.mailgroupSelected;
     this.loadAddressSubject$.next(this.latestAddressQueryParams);
     this.loadOrganisationSubject$.next( this.latestOrgQueryParams);
   }
   setMailGroupFilter() {
-        this.latestAddressQueryParams['target'] = this.mailgroupSelected;
+        this.latestAddressQueryParams['mailGroup'] = this.mailgroupSelected;
   }
 
   saveSelection() {
