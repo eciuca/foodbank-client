@@ -12,6 +12,7 @@ export class FileUploadService {
     }
 
     upload(file: File, accesstoken: string): Observable<any> {
+
         const formData: FormData = new FormData();
              formData.append('file', file);
 

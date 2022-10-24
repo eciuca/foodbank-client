@@ -165,6 +165,14 @@
                     </div>
                     <div class="p-field p-col-12 p-md-4">
                         <p-fileUpload i18n-chooseLabel="@@SelectFile" name="myFile[]"  [auto]="true"  customUpload="true"  chooseLabel="Select File"
+                                      maxFileSize="1000000" invalidFileSizeMessageSummary="{0} is too large to be attached in a mail"
+                                      invalidFileSizeMessageDetail="You can attach only files not greater than {0} bytes"
+                                      i18n-invalidFileSizeMessageSummary ="@@FileUploadInvalidSizeSummmary"
+                                      i18n-invalidFileSizeMessageDetail="@@FileUploadInvalidSizeDetail"
+                                      fileLimit="2" invalidFileLimitMessageSummary="max {0} files"
+                                      i18n-invalidFileLimitMessageSummary="@@FileUploadInvalidLimitSummmary"
+                                      invalidFileLimitMessageDetail="you can attach  max {0} files to your mail"
+                                      i18n-invalidFileLimitMessageDetail="@@FileUploadInvalidLimitDetail"
                                       (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event)">
                             <ng-template pTemplate="toolbar">
                                 <div i18n="@@AttachFilesToMail">Attach Files to your mail</div>

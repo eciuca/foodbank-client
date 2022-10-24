@@ -3648,11 +3648,39 @@
           <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="FileUploadInvalidSizeSummmary" datatype="html">
+        <source>{0} is too large to be attached in a mail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">168</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="FileUploadInvalidSizeDetail" datatype="html">
+        <source>You can attach only files not greater than {0} bytes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">169</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="FileUploadInvalidLimitSummmary" datatype="html">
+        <source>max {0} files</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">172</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="FileUploadInvalidLimitDetail" datatype="html">
+        <source>you can attach  max {0} files to your mail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
+          <context context-type="linenumber">174</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="AttachFilesToMail" datatype="html">
         <source>Attach Files to your mail</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.html</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">178</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-membership-mailing/org-membership-mailing.component.html</context>
