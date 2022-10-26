@@ -18,6 +18,7 @@ import {MailAddress} from './model/mailaddress';
 import {MailadressEntityService} from './services/mailadress-entity.service';
 import {RegionEntityService} from '../organisations/services/region-entity.service';
 import {enmLanguage, enmMailGroupsBank, enmMailGroupsFBBA, enmMailGroupsOrg} from '../shared/enums';
+import { FileUpload } from 'primeng/fileupload';
 
 
 
@@ -286,7 +287,7 @@ export class MailingsComponent implements OnInit {
     });
   }
 
-  storeMailAttachment(event: any) {
+  storeMailAttachment(event: any,uploader: FileUpload) {
   console.log('Entering storeMailAttachment', event );
   console.log('Current Files Selection', this.attachmentFileNames);
     const newFiles : File[] = event.files.filter(item => !this.attachmentFileNames.includes( item.name));
@@ -294,8 +295,10 @@ export class MailingsComponent implements OnInit {
 
     if (newFiles.length > 0) {
       const file = newFiles[0];
-      console.log(`loading file ${file.name} with size ${file.size}` );
+      const i = event.files.findIndex(x => x.name === file.name);
+      console.log(`loading file ${file.name} with size ${file.size}. index is ${i}` );
       if (file.size > this.maxAttachmentFileSize) {
+        uploader.remove(event, i);
         this.messageService.add({
           severity: 'error',
           summary: $localize`:@@fileUploadError:Upload Mail Attachment Failed`,
@@ -320,6 +323,7 @@ export class MailingsComponent implements OnInit {
             },
             (err: any) => {
               this.isAttachmentUploadOngoing = false;
+              uploader.remove(event, i);
               console.log(err);
               let errorMsg = '';
               if (err.error && err.error.message) {

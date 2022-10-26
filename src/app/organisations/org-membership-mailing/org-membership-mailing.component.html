@@ -122,8 +122,8 @@
                 Attachments: {{attachmentFileNames.toString() }}
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <p-fileUpload i18n-chooseLabel="@@SelectFile" name="myFile[]"  [auto]="true"  customUpload="true"  chooseLabel="Select File"
-                              multiple="multiple"    (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event)">
+               <p-fileUpload #fileUpload i18n-chooseLabel="@@SelectFile" name="myFile[]"  [auto]="true"  customUpload="true"  chooseLabel="Select File"
+                              multiple="multiple"   (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event,fileUpload)">
                     <ng-template pTemplate="toolbar">
                         <div i18n="@@AttachFilesToMail">Attach Files to your mail</div>
                     </ng-template>

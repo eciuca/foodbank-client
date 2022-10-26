@@ -18,6 +18,7 @@ import {AuthService} from '../../auth/auth.service';
 import {NgForm} from '@angular/forms';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {BanqProgEntityService} from '../../banques/services/banqprog-entity.service';
+import {FileUpload} from 'primeng/fileupload';
 
 @Component({
   selector: 'app-org-membership-mailing',
@@ -280,23 +281,26 @@ export class OrgMembershipMailingComponent implements OnInit {
             }
         });
     }
-    storeMailAttachment(event: any) {
-        console.log('Entering storeMailAttachment', event);
+    storeMailAttachment(event: any,uploader: FileUpload) {
+        console.log('Entering storeMailAttachment', event );
         console.log('Current Files Selection', this.attachmentFileNames);
-        const newFiles: File[] = event.files.filter(item => !this.attachmentFileNames.includes(item.name));
-        console.log('New Files:', newFiles);
+        const newFiles : File[] = event.files.filter(item => !this.attachmentFileNames.includes( item.name));
+        console.log('New Files:',newFiles);
 
         if (newFiles.length > 0) {
             const file = newFiles[0];
-            console.log(`loading file ${file.name} with size ${file.size}`);
+            const i = event.files.findIndex(x => x.name === file.name);
+            console.log(`loading file ${file.name} with size ${file.size}. index is ${i}` );
             if (file.size > this.maxAttachmentFileSize) {
+                uploader.remove(event, i);
                 this.messageService.add({
                     severity: 'error',
                     summary: $localize`:@@fileUploadError:Upload Mail Attachment Failed`,
                     detail: $localize`:@@fileUploadErrorDetailSize:Could not upload file ${file.name}. Size ${file.size} is too big for our internal mailing system(maximum is ${this.maxAttachmentFileSize} bytes) `,
                     life: 6000
                 });
-            } else {
+            }
+            else {
                 this.isAttachmentUploadOngoing = true;
                 this.uploadService.upload(file, this.authService.accessToken).subscribe(
                     (response: any) => {
@@ -313,6 +317,7 @@ export class OrgMembershipMailingComponent implements OnInit {
                     },
                     (err: any) => {
                         this.isAttachmentUploadOngoing = false;
+                        uploader.remove(event, i);
                         console.log(err);
                         let errorMsg = '';
                         if (err.error && err.error.message) {
