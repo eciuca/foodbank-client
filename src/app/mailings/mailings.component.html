@@ -112,7 +112,8 @@
                     <p-message i18n-text="@@MailSubjectIsMandatory" *ngIf="idsubject.invalid && idsubject.touched" severity="error" text="Mail subject is required and must be minimum 6 chars long"></p-message>
                 </div>
                 <div class="p-field p-col-12 p-md-2">
-                    <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)" [disabled] = "sendForm.invalid" label="Send Email"></button>
+                    <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)"
+                            [disabled] = "sendForm.invalid || isAttachmentUploadOngoing" label="Send Email"></button>
                 </div>
                 <div class="p-field p-col-12 p-md-12">
                     <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" required i18n-placeholder="@@EnterYourMessage" placeholder="Enter your message" name="mailingText" [style]="{'height':'320px'}">
@@ -165,21 +166,15 @@
                     </div>
                     <div class="p-field p-col-12 p-md-4">
                         <p-fileUpload i18n-chooseLabel="@@SelectFile" name="myFile[]"  [auto]="true"  customUpload="true"  chooseLabel="Select File"
-                                      maxFileSize="1000000" invalidFileSizeMessageSummary="{0} is too large to be attached in a mail"
-                                      invalidFileSizeMessageDetail="You can attach only files not greater than {0} bytes"
-                                      i18n-invalidFileSizeMessageSummary ="@@FileUploadInvalidSizeSummmary"
-                                      i18n-invalidFileSizeMessageDetail="@@FileUploadInvalidSizeDetail"
-                                      fileLimit="2" invalidFileLimitMessageSummary="max {0} files"
-                                      i18n-invalidFileLimitMessageSummary="@@FileUploadInvalidLimitSummmary"
-                                      invalidFileLimitMessageDetail="you can attach  max {0} files to your mail"
-                                      i18n-invalidFileLimitMessageDetail="@@FileUploadInvalidLimitDetail"
-                                      (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event)">
+                                      multiple="multiple"   (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event)">
                             <ng-template pTemplate="toolbar">
                                 <div i18n="@@AttachFilesToMail">Attach Files to your mail</div>
                             </ng-template>
                         </p-fileUpload>
                     </div>
                 </div>
+                <p-progressSpinner *ngIf="isAttachmentUploadOngoing"></p-progressSpinner>
+
             </form>
         </p-accordionTab>
     </p-accordion>

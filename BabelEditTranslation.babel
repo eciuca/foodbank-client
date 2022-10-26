@@ -4104,86 +4104,6 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>FileUploadInvalidLimitDetail</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>FileUploadInvalidLimitSummmary</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>FileUploadInvalidSizeDetail</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>FileUploadInvalidSizeSummmary</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
                         <name>FilterAgreed</name>
                         <description/>
                         <comment/>
@@ -13245,6 +13165,26 @@
                     </concept_node>
                     <concept_node>
                         <name>fileUploadErrorDetail</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>fileUploadErrorDetailSize</name>
                         <description/>
                         <comment/>
                         <default_text/>

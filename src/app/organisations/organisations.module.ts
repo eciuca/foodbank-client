@@ -69,6 +69,7 @@ import {OrgProgramEntityService} from './services/orgprogram-entity.service';
 import {TooltipModule} from 'primeng/tooltip';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 const routes: Routes = [
     {
         path: 'contacts/:idDis',
@@ -151,7 +152,8 @@ const routes: Routes = [
         EditorModule,
         FileUploadModule,
         RadioButtonModule,
-        TooltipModule
+        TooltipModule,
+        ProgressSpinnerModule
     ],
   providers: [
         OrganisationsDataService,

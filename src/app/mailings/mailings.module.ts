@@ -30,6 +30,7 @@ import {RegionEntityService} from '../organisations/services/region-entity.servi
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 import {CheckboxModule} from 'primeng/checkbox';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 
 
@@ -62,7 +63,8 @@ const routes: Routes = [
         FileUploadModule,
         InputTextareaModule,
         DialogModule,
-        CheckboxModule
+        CheckboxModule,
+        ProgressSpinnerModule
     ],
     providers: [
         MailingsDataService,

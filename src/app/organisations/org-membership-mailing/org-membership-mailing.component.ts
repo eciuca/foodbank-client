@@ -59,6 +59,8 @@ export class OrgMembershipMailingComponent implements OnInit {
     orgemail: string;
     dueDate: string;
     due: number;
+    maxAttachmentFileSize: number;
+    isAttachmentUploadOngoing: boolean;
   constructor(private organisationService: OrganisationEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private membreService: MembreEntityService,
@@ -101,6 +103,8 @@ export class OrgMembershipMailingComponent implements OnInit {
       ];
       this.due = 0;
       this.dueDate = '';
+      this.maxAttachmentFileSize = 5000000; // max 5 MB file size
+      this.isAttachmentUploadOngoing = false;
   }
 
   ngOnInit() {
@@ -277,37 +281,51 @@ export class OrgMembershipMailingComponent implements OnInit {
         });
     }
     storeMailAttachment(event: any) {
-        // console.log('Entering storeMailAttachment', event );
-        // console.log('Current Files Selection', this.attachmentFileNames);
-        const file: File | null = event.files[0];
+        console.log('Entering storeMailAttachment', event);
+        console.log('Current Files Selection', this.attachmentFileNames);
+        const newFiles: File[] = event.files.filter(item => !this.attachmentFileNames.includes(item.name));
+        console.log('New Files:', newFiles);
 
-        if (file) {
-            this.uploadService.upload(file, this.authService.accessToken).subscribe(
-                (response: any) => {
-                    console.log(response);
-                    this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
-                    this.attachmentFileNames.push(file.name);
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: $localize`:@@fileUploadSuccess:Upload Mail Attachment Succeeded`,
-                        detail: $localize`:@@fileUploadSuccessDetail:File ${file.name} was uploaded`,
-                        life: 6000
-                    });
-                },
-                (err: any) => {
-                    console.log(err);
-                    let errorMsg = '';
-                    if (err.error && err.error.message) {
-                        errorMsg = err.error.message;
-                    }
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: $localize`:@@fileUploadError:Upload Mail Attachment Failed`,
-                        detail: $localize`:@@fileUploadErrorDetail:Could not upload file ${file.name}. ${errorMsg} `,
-                        life: 6000
-                    });
+        if (newFiles.length > 0) {
+            const file = newFiles[0];
+            console.log(`loading file ${file.name} with size ${file.size}`);
+            if (file.size > 1000000) {
+                this.messageService.add({
+                    severity: 'error',
+                    summary: $localize`:@@fileUploadError:Upload Mail Attachment Failed`,
+                    detail: $localize`:@@fileUploadErrorDetailSize:Could not upload file ${file.name}. Size ${file.size} is too big for our internal mailing system(maximum is ${this.maxAttachmentFileSize} bytes) `,
+                    life: 6000
                 });
-
+            } else {
+                this.isAttachmentUploadOngoing = true;
+                this.uploadService.upload(file, this.authService.accessToken).subscribe(
+                    (response: any) => {
+                        console.log(response);
+                        this.isAttachmentUploadOngoing = false;
+                        this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
+                        this.attachmentFileNames.push(file.name);
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: $localize`:@@fileUploadSuccess:Upload Mail Attachment Succeeded`,
+                            detail: $localize`:@@fileUploadSuccessDetail:File ${file.name} was uploaded`,
+                            life: 6000
+                        });
+                    },
+                    (err: any) => {
+                        this.isAttachmentUploadOngoing = false;
+                        console.log(err);
+                        let errorMsg = '';
+                        if (err.error && err.error.message) {
+                            errorMsg = err.error.message;
+                        }
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: $localize`:@@fileUploadError:Upload Mail Attachment Failed`,
+                            detail: $localize`:@@fileUploadErrorDetail:Could not upload file ${file.name}. ${errorMsg} `,
+                            life: 6000
+                        });
+                    });
+            }
         }
     }
     removeMailAttachment(event: any) {

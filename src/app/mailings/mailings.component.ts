@@ -61,6 +61,8 @@ export class MailingsComponent implements OnInit {
   // variables for file upload
   attachmentFileNames: string[];
   displayDialog: boolean;
+  maxAttachmentFileSize: number;
+  isAttachmentUploadOngoing: boolean;
 
   constructor(private orgsummaryService: OrgSummaryEntityService,
               private regionService: RegionEntityService,
@@ -90,6 +92,8 @@ export class MailingsComponent implements OnInit {
       {idDis: null, fullname: $localize`:@@All:All`},
     ];
     this.mailgroupSelected = '0';
+    this.maxAttachmentFileSize = 5000000; // max 5 MB file size
+    this.isAttachmentUploadOngoing = false;
   }
 
   ngOnInit(): void {
@@ -283,24 +287,39 @@ export class MailingsComponent implements OnInit {
   }
 
   storeMailAttachment(event: any) {
-   // console.log('Entering storeMailAttachment', event );
-   // console.log('Current Files Selection', this.attachmentFileNames);
-    const file: File | null = event.files[0];
+  console.log('Entering storeMailAttachment', event );
+  console.log('Current Files Selection', this.attachmentFileNames);
+    const newFiles : File[] = event.files.filter(item => !this.attachmentFileNames.includes( item.name));
+    console.log('New Files:',newFiles);
 
-      if (file) {
+    if (newFiles.length > 0) {
+      const file = newFiles[0];
+      console.log(`loading file ${file.name} with size ${file.size}` );
+      if (file.size > 1000000) {
+        this.messageService.add({
+          severity: 'error',
+          summary: $localize`:@@fileUploadError:Upload Mail Attachment Failed`,
+          detail: $localize`:@@fileUploadErrorDetailSize:Could not upload file ${file.name}. Size ${file.size} is too big for our internal mailing system(maximum is ${this.maxAttachmentFileSize} bytes) `,
+          life: 6000
+        });
+      }
+      else {
+        this.isAttachmentUploadOngoing = true;
         this.uploadService.upload(file, this.authService.accessToken).subscribe(
             (response: any) => {
               console.log(response);
+              this.isAttachmentUploadOngoing = false;
               this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
               this.attachmentFileNames.push(file.name);
               this.messageService.add({
-                  severity: 'success',
-                  summary: $localize`:@@fileUploadSuccess:Upload Mail Attachment Succeeded`,
-                  detail: $localize`:@@fileUploadSuccessDetail:File ${file.name} was uploaded`,
-                  life: 6000
-                });
+                severity: 'success',
+                summary: $localize`:@@fileUploadSuccess:Upload Mail Attachment Succeeded`,
+                detail: $localize`:@@fileUploadSuccessDetail:File ${file.name} was uploaded`,
+                life: 6000
+              });
             },
             (err: any) => {
+              this.isAttachmentUploadOngoing = false;
               console.log(err);
               let errorMsg = '';
               if (err.error && err.error.message) {
@@ -313,7 +332,7 @@ export class MailingsComponent implements OnInit {
                 life: 6000
               });
             });
-
+        }
       }
   }
 

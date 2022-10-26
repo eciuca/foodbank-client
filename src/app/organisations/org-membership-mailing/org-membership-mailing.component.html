@@ -14,7 +14,8 @@
                  <button type="button" pButton icon="pi pi-caret-right" (click)=" getNextOrganisation()" i18n-label="@@next" label="next"></button>
              </div>
              <div class="p-field p-col-12 p-md-2">
-                 <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)" [disabled] = "orgMembershipForm.invalid" label="Send Email"></button>
+                 <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)"
+                         [disabled] = "orgMembershipForm.invalid || isAttachmentUploadOngoing" label="Send Email"></button>
              </div>
              <div class="p-field p-col-12 p-md-6">
                  <label i18n="@@OrgSummarySelect" for="orgsummaries">Select Organisation</label>
@@ -122,12 +123,13 @@
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <p-fileUpload i18n-chooseLabel="@@SelectFile" name="myFile[]"  [auto]="true"  customUpload="true"  chooseLabel="Select File"
-                              (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event)">
+                              multiple="multiple"    (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event)">
                     <ng-template pTemplate="toolbar">
                         <div i18n="@@AttachFilesToMail">Attach Files to your mail</div>
                     </ng-template>
                 </p-fileUpload>
             </div>
+            <p-progressSpinner *ngIf="isAttachmentUploadOngoing"></p-progressSpinner>
         </div>
         </div> <!-- end of if due > 0 tag -->
         <div *ngIf="due < 500">
@@ -137,6 +139,7 @@
                 </div>
             </div>
         </div>
+        <p-toast></p-toast>
         <p-confirmPopup></p-confirmPopup>
     </form>
 
