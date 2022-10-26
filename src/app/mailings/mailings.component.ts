@@ -295,7 +295,7 @@ export class MailingsComponent implements OnInit {
     if (newFiles.length > 0) {
       const file = newFiles[0];
       console.log(`loading file ${file.name} with size ${file.size}` );
-      if (file.size > 1000000) {
+      if (file.size > this.maxAttachmentFileSize) {
         this.messageService.add({
           severity: 'error',
           summary: $localize`:@@fileUploadError:Upload Mail Attachment Failed`,
