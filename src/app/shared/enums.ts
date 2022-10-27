@@ -176,6 +176,7 @@ export let enmDbChangeEntities = [
     {label: $localize`:@@DbChangeEntityUser:User` , value: 'User'},
     {label: $localize`:@@DbChangeEntityMember:Member` , value: 'Member'},
     {label: $localize`:@@DbChangeEntityOrg:Organisation` , value: 'Org'},
+    {label: $localize`:@@DbChangeEntityOrgBeneficiaries:OrgBeneficiaries` , value: 'OrgBenefiaries'},
     {label: $localize`:@@DbChangeEntityBank:Bank` , value: 'Bank'},
     {label: $localize`:@@DbChangeEntityDepot:Depot` , value: 'Depot'},
     {label: $localize`:@@DbChangeEntityClient:Client` , value: 'Client'},

@@ -405,40 +405,36 @@ export class AppComponent implements OnInit {
                 {label: $localize`:@@menuMailings:Mailings`, icon: 'pi pi-fw pi-envelope', routerLink: ['/mailings']}
             );
         }
-            /* add reports
-            if (['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
-                this.menuLoggedInItems.push(
-                    {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreports/${authState.banque.bankId}`]}
-                );
-            } else if (['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
-                this.menuLoggedInItems.push(
-                    {label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',  routerLink: [`/organisations/orgreport/${authState.organisation.idDis}`]}
-                );
+            /* add reports */
+        if (['Admin_Banq','Admin_FBBA','admin'].includes(authState.user.rights)) {
+            // handle  login(s) items
+            let reportItems = [
+                {
+                    label: 'Logins', icon: 'pi pi-fw pi-users',
+                    items: [
+                        {
+                            label: $localize`:@@menuOverview:Overview`,
+                            icon: 'pi pi-fw pi-users',
+                            routerLink: [`/audits/auditreports`]
+                        },
+                        {label: 'Details', icon: 'pi pi-fw pi-users', routerLink: ['/audits']},
+                    ]
+                },
+                {label: $localize`:@@menuEntityChanges:Entity Changes`, icon: 'pi pi-fw pi-map', routerLink: [`/audits/entitychanges`]},
+            ]
+            if (['Admin_FBBA', 'admin'].includes(authState.user.rights)) {
+                reportItems.push(
+                    {label: $localize`:@@menuReportOrgs:ReportOrgs`, icon: 'pi pi-fw pi-map', routerLink: [`/banques/bankreports`]},
+                    {label: $localize`:@@menuReportBenefs:ReportBenefs`, icon: 'pi pi-fw pi-map', routerLink: [`/beneficiaires/reports`]},
+                )
             }
-            */
-        // handle  login(s) items
-        if (['Admin_Banq','Admin_FBBA','Bank_FBBA','admin'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {
                     label: $localize`:@@menuReports:Reports`, icon: 'pi pi-fw pi-map',
-                    items: [
-                        {label: $localize`:@@menuReportOrgs:ReportOrgs`, icon: 'pi pi-fw pi-map', routerLink: [`/banques/bankreports`]},
-                        {label: $localize`:@@menuReportBenefs:ReportBenefs`, icon: 'pi pi-fw pi-map', routerLink: [`/beneficiaires/reports`]},
-                        {
-                            label: 'Logins', icon: 'pi pi-fw pi-users',
-                            items: [
-                                {
-                                    label: $localize`:@@menuOverview:Overview`,
-                                    icon: 'pi pi-fw pi-users',
-                                    routerLink: [`/audits/auditreports`]
-                                },
-                                {label: 'Details', icon: 'pi pi-fw pi-users', routerLink: ['/audits']},
-                            ]
-                        },
-                        {label: $localize`:@@menuEntityChanges:Entity Changes`, icon: 'pi pi-fw pi-map', routerLink: [`/audits/entitychanges`]},
-                    ]
+                    items: reportItems
                 }
             );
+
         }
 
         // Add Stock

@@ -96,6 +96,7 @@ export class OrganisationComponent implements OnInit {
       this.booCanQuit = true;
       this.lienBanque = 0;
       this.userName = '' ;
+      this.userId = '' ;
       this.gestBen = false;
   }
 

@@ -11,6 +11,7 @@ import {DataServiceError} from '@ngrx/data';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../reducers';
 import {globalAuthState} from '../../../auth/auth.selectors';
+import {AuditChangeEntityService} from '../../../audits/services/auditChange-entity.service';
 
 @Component({
   selector: 'app-orgbenefdetail',
@@ -27,9 +28,10 @@ export class OrgbenefdetailComponent implements OnInit {
   booCanSave: boolean;
   organisation: Organisation;
   userName: string;
-
+  userId: string;
   constructor(
       private organisationsService: OrganisationEntityService,
+      private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
@@ -38,6 +40,7 @@ export class OrgbenefdetailComponent implements OnInit {
   ) {
     this.booCanSave = false;
     this.userName = '' ;
+    this.userId = '' ;
   }
 
   ngOnInit(): void {
@@ -55,7 +58,8 @@ export class OrgbenefdetailComponent implements OnInit {
             select(globalAuthState),
             map((authState) => {
               if (authState.user) {
-                 this.userName = authState.user.userName;
+                this.userName = authState.user.userName;
+                this.userId= authState.user.idUser;
                  switch (authState.user.rights) {
                    case 'Bank':
                      if (authState.user.gestBen) {
@@ -91,6 +95,8 @@ export class OrgbenefdetailComponent implements OnInit {
                 detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.societe} was updated`
               });
               this.onOrganisationUpdate.emit(modifiedOrganisation);
+              this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedOrganisation.lienBanque,modifiedOrganisation.idDis,'OrgBenefiaries',
+                  ' ' , 'Update' );
             },
             (dataserviceerror: DataServiceError) => {
               console.log('Error updating organisation', dataserviceerror.message);
