@@ -13,6 +13,7 @@ export interface Depot {
     actif: boolean;
     depFead: boolean;
     idCompany: string;
+    ipMainAddress: string;
     lienBanque: number;
     anomalies: string;
     sync: boolean; // used when saving depot stating sync is requested with matching organisation
@@ -37,6 +38,7 @@ export class DefaultDepot implements Depot {
     depPrinc: boolean;
     email: string;
     idDepot: string;
+    ipMainAddress: string;
     lienBanque: number;
     idCompany: string;
     memo: string;
@@ -58,6 +60,7 @@ export class DefaultDepot implements Depot {
         this.email = '';
         this.idDepot = '';
         this.lienBanque = 0;
+        this.ipMainAddress ='';
         this.idCompany = '';
         this.memo = '';
         this.nom = '';

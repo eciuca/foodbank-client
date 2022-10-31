@@ -224,6 +224,10 @@ export class DepotComponent implements OnInit {
         }
         return myanomaly;
     }
+
+    generateTooltipIpMainAddress() {
+        return $localize`:@@ToolTipDepotIpMainAddress:Specify here the default IP Address for this depot - needed for scanners`;
+    }
 }
 
 

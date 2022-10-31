@@ -24,11 +24,18 @@
                        [ngStyle]="hasDepotAnomaly('nom') && {'background-color': 'yellow'}"
                        pTooltip="{{generateToolTipMessageForDepotAnomaly('nom')}}"
                 />
-                <p-message *ngIf="nom.invalid && depotForm.touched" severity="error" text="User Name is required and must be minimum 4 chars long"></p-message>
+                <p-message *ngIf="nom.invalid && depotForm.touched" severity="error" text="Depot Name is required and must be minimum 4 chars long"></p-message>
             </div>
-            <div class="p-field p-col-12 p-md-6">
+            <div class="p-field p-col-12 p-md-3">
                 <label for="contact">Contact</label>
                 <input pInputText id="contact" name="contact" maxLength="45" [ngModel]="depot.contact" />
+            </div>
+            <div pTooltip="{{generateTooltipIpMainAddress()}}" class="p-field p-col-12 p-md-3">
+                <label i18n="@@DepotIpMainAddress" for="ipMainAddress">IP Main Address</label>
+                <input #ipMainAddress="ngModel" pInputText id="ipMainAddress" name="ipMainAddress" maxLength="30" [ngModel]="depot.ipMainAddress"
+                       pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"
+                />
+                <p-message *ngIf="ipMainAddress.invalid && depotForm.touched" severity="error" text="IP Address is Invalid"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-6">
                 <label i18n="@@OrganisationDistAddress" for="adresse">Distribution Address</label>
