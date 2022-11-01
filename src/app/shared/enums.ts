@@ -180,6 +180,7 @@ export let enmDbChangeEntities = [
     {label: $localize`:@@DbChangeEntityBank:Bank` , value: 'Bank'},
     {label: $localize`:@@DbChangeEntityDepot:Depot` , value: 'Depot'},
     {label: $localize`:@@DbChangeEntityClient:Client` , value: 'Client'},
+    {label: 'Email' , value: 'Email'},
 
 ];
 export let enmDbChangeActions = [

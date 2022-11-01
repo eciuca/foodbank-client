@@ -19,6 +19,7 @@ import {MailadressEntityService} from './services/mailadress-entity.service';
 import {RegionEntityService} from '../organisations/services/region-entity.service';
 import {enmLanguage, enmMailGroupsBank, enmMailGroupsFBBA, enmMailGroupsOrg} from '../shared/enums';
 import { FileUpload } from 'primeng/fileupload';
+import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 
 
 
@@ -37,6 +38,8 @@ export class MailingsComponent implements OnInit {
   selectedMailadresses: MailAddress[];
   bankid: number;
   bankName: string;
+  userId: string;
+  userName: string;
   senderFullEmail: string;
   orgId: number;
   orgName: string;
@@ -69,6 +72,7 @@ export class MailingsComponent implements OnInit {
               private regionService: RegionEntityService,
               private mailAddressService: MailadressEntityService,
               private mailingService: MailingEntityService,
+              private auditChangeEntityService: AuditChangeEntityService,
               private uploadService: FileUploadService,
               private messageService: MessageService,
               private confirmationService: ConfirmationService,
@@ -158,6 +162,8 @@ export class MailingsComponent implements OnInit {
     if (authState.banque) {
       this.bankid = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
+      this.userId= authState.user.idUser;
+      this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
       this.senderFullEmail = `${authState.user.membrePrenom} ${authState.user.membreNom}<${authState.user.membreEmail}>` ;
       this.filterBase = {'actif': '1', isDepot: '0'};
       switch (authState.user.rights) {
@@ -268,6 +274,15 @@ export class MailingsComponent implements OnInit {
                     summary: 'Creation',
                     detail: $localize`:@@messageSent:Message has been sent`
                   });
+                  let mailGroupLabel = "?"
+                  // to retrieve mailGroupLabel, use enmMailGroupsBank because it contains all possible options
+                  const indexItem = enmMailGroupsBank.map(e => e.value).indexOf(Number(this.mailgroupSelected));
+                  if (indexItem > -1) {
+                    mailGroupLabel = enmMailGroupsBank[indexItem ].label;
+                  }
+
+                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.bankid, this.orgId,'Email',
+                      mailGroupLabel + "("+ mailListArray.length + " dest)", 'Create' );
                 },
                 (dataserviceerror: DataServiceError) => {
                   console.log('Error Sending Message', dataserviceerror);

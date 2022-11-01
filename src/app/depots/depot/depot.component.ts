@@ -168,7 +168,7 @@ export class DepotComponent implements OnInit {
                         this.messageService.add(errMessage) ;
                     });
         } else {
-
+        // new depots can only be created by function addNewDepotFromOrg in depots component
         }
 
     }

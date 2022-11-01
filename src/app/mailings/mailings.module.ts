@@ -31,6 +31,8 @@ import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
+import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 
 
 
@@ -75,6 +77,8 @@ const routes: Routes = [
         RegionEntityService,
         OrgSummariesDataService,
         OrgSummaryEntityService,
+        AuditChangesDataService,
+        AuditChangeEntityService,
         ConfirmationService
     ],
 })
@@ -85,12 +89,14 @@ export class MailingsModule {
         private mailingsDataService: MailingsDataService,
         private mailAddressesDataService: MailAddressesDataService,
         private regionsDataService: RegionsDataService,
-        private orgSummariesDataService: OrgSummariesDataService
+        private orgSummariesDataService: OrgSummariesDataService,
+        private auditChangesDataService: AuditChangesDataService,
     ) {
         eds.registerMetadataMap(appEntityMetadata);
         entityDataService.registerService('Mailing', mailingsDataService);
         entityDataService.registerService(' MailAddress', mailAddressesDataService);
         entityDataService.registerService('Region', regionsDataService);
         entityDataService.registerService('OrgSummary', orgSummariesDataService);
+        entityDataService.registerService('AuditChange', auditChangesDataService);
     }
 }

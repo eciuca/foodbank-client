@@ -87,7 +87,7 @@ export class DepotsModule {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Depot', depotsDataService);
     entityDataService.registerService('Banque', banquesDataService);
-      entityDataService.registerService('OrgSummary', orgSummariesDataService);
+    entityDataService.registerService('OrgSummary', orgSummariesDataService);
     entityDataService.registerService('AuditChange', auditChangesDataService);
   }
 
