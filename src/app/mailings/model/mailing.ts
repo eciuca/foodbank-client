@@ -5,6 +5,7 @@ export interface Mailing {
     bodyText: string;
     sentDate: string;
     attachmentFileNames: string;
+    bccMode: boolean;
 }
 export function compareMailings(c1: Mailing, c2: Mailing) {
 
@@ -23,6 +24,7 @@ export class DefaultMailing implements Mailing {
     to: string;
     sentDate: string;
     attachmentFileNames: string;
+    bccMode: boolean;
     constructor() {
         this.to = '';
         this.from = '';
@@ -30,5 +32,6 @@ export class DefaultMailing implements Mailing {
         this.bodyText = '';
         this.attachmentFileNames = '';
         this.sentDate = new Date().toISOString();
+        this.bccMode = true;
     }
 }

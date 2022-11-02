@@ -115,6 +115,10 @@
                     <button i18n-label="@@SendEmail"  type="button" pButton icon="pi pi-times" (click)="sendmail($event)"
                             [disabled] = "sendForm.invalid || isAttachmentUploadOngoing" label="Send Email"></button>
                 </div>
+                    <div pTooltip="{{generateTooltipBccMode()}}" class="p-field p-col-12 p-md-2">
+                        <label i18n="@@MailBccMode" for="bccMode">Send Mail in Blind Copy Mode ?</label>
+                        <p-inputSwitch id="bccMode" name="bccMode" [(ngModel)]="bccMode"></p-inputSwitch>
+                    </div>
                 <div class="p-field p-col-12 p-md-12">
                     <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" required i18n-placeholder="@@EnterYourMessage" placeholder="Enter your message" name="mailingText" [style]="{'height':'320px'}">
                         <p-header>

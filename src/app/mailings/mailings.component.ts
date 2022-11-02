@@ -67,6 +67,7 @@ export class MailingsComponent implements OnInit {
   displayDialog: boolean;
   maxAttachmentFileSize: number;
   isAttachmentUploadOngoing: boolean;
+  bccMode:boolean;
 
   constructor(private orgsummaryService: OrgSummaryEntityService,
               private regionService: RegionEntityService,
@@ -99,6 +100,7 @@ export class MailingsComponent implements OnInit {
     this.mailgroupSelected = '0';
     this.maxAttachmentFileSize = 5000000; // max 5 MB file size
     this.isAttachmentUploadOngoing = false;
+    this.bccMode = true;
   }
 
   ngOnInit(): void {
@@ -266,6 +268,8 @@ export class MailingsComponent implements OnInit {
         // this.mailing.bodyText = 'Hello World';
         this.mailing.bodyText = this.mailingText;
         this.mailing.attachmentFileNames = this.attachmentFileNames.toString();
+        this.mailing.bccMode = this.bccMode;
+        console.log( 'bccMode', this.bccMode, this.mailing)
         this.mailingService.add(this.mailing)
             .subscribe((myMail: Mailing) => {
                   console.log('Returned mailing', myMail);
@@ -525,5 +529,8 @@ export class MailingsComponent implements OnInit {
     this.mailadresses = this.selectedMailadresses;
   }
 
+  generateTooltipBccMode() {
+    return $localize`:@@ToolTipMailingBccMode:Unless your mailing list is small, blind copy mode is recommended to hide the e-mails of your adressees to protect their privacy`;
+  }
 }
 

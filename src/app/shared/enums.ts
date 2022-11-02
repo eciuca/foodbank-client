@@ -147,6 +147,9 @@ export let enmMailGroupsBank = [
     {label: $localize`:@@BankMailGroupOrgMgrs:Org Mgrs` , value: 1 },
     {label: $localize`:@@BankMailGroupOrgUsers:Org Users` , value: 2 },
     {label: $localize`:@@BankMailGroupOrgMembers:Org Members` , value: 3 },
+    {label: $localize`:@@BankMailGroupCA:CA Members` , value: 7 },
+    {label: $localize`:@@BankMailGroupAG:AG Members` , value: 8 },
+    {label: $localize`:@@BankMailGroupCG:CG Members` , value: 9 },
 
 ];
 export let enmMailGroupsFBBA = [

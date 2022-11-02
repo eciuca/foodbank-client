@@ -33,6 +33,8 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {TooltipModule} from 'primeng/tooltip';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 
 
@@ -66,7 +68,9 @@ const routes: Routes = [
         InputTextareaModule,
         DialogModule,
         CheckboxModule,
-        ProgressSpinnerModule
+        TooltipModule,
+        ProgressSpinnerModule,
+        InputSwitchModule
     ],
     providers: [
         MailingsDataService,
