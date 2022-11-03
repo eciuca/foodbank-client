@@ -3447,7 +3447,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">173</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankOrgAdminOnly" datatype="html">
@@ -3458,7 +3458,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">174</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankOrgOnly" datatype="html">
@@ -3469,7 +3469,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankAll" datatype="html">
@@ -3480,7 +3480,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">176</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankAdmin" datatype="html">
@@ -3491,7 +3491,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">180</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceBankUsers" datatype="html">
@@ -3502,7 +3502,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">181</context>
         </context-group>
       </trans-unit>
       <trans-unit id="audienceOrgAdmin" datatype="html">
@@ -3513,7 +3513,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">176</context>
+          <context context-type="linenumber">182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="EmailMandatory" datatype="html">
@@ -6226,6 +6226,10 @@
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">98</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="RoleFBBAAdmin" datatype="html">
         <source>FBBA Admin</source>
@@ -6261,194 +6265,179 @@
         <source>Refused</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">111</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FeadStatusAccepted" datatype="html">
         <source>Accepted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">112</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FeadStatusUnderStudy" datatype="html">
         <source>Under Study</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">112</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivity2ndHandClothes" datatype="html">
         <source>2nd hand Clothes Collect &amp; Sell</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivitySocialGrocery" datatype="html">
         <source>Social Grocery</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivity2ndHandFurniture" datatype="html">
         <source>2nd hand Furniture Collect &amp; Sell</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">119</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivityHomeworkClub" datatype="html">
         <source>Homework Club</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivitySocialRestaurant" datatype="html">
         <source>Social Restaurant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgActivityCommunityKitchen" datatype="html">
         <source>Community Kitchen</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryUnassigned" datatype="html">
         <source>Unassigned</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryShelterYoung" datatype="html">
         <source>Shelter for Youngsters and Children</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryShelterHandicapped" datatype="html">
         <source>Shelter for Handicapped People</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryShelterWomen" datatype="html">
         <source>Shelter for Women</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryShelterMen" datatype="html">
         <source>Shelter for Men</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategorySocialCenter" datatype="html">
         <source>Approved Social Center</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryCommunity" datatype="html">
         <source>Community</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryNeighbourhood" datatype="html">
         <source>Neighbourhood Mutual Help</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryUrban" datatype="html">
         <source>Urban Mutual Help</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryRural" datatype="html">
         <source>Rural Mutual Help</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryRegional" datatype="html">
         <source>Regional Mutual Help</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryHoliday" datatype="html">
         <source>Holiday Center for Needy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">136</context>
+          <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryRestaurant" datatype="html">
         <source>Restaurant for Needy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryElderly" datatype="html">
         <source>Elderly Help</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryPrison" datatype="html">
         <source>Prisoner Support</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCategoryRefugee" datatype="html">
         <source>Shelter for Refugees</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">141</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMailGroupOrganisations" datatype="html">
         <source>Organisations</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">143</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">156</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">161</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="BankMailGroupBankMgrs" datatype="html">
-        <source>Bank Food-IT Mgrs</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">144</context>
@@ -6457,156 +6446,191 @@
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">157</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">167</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="BankMailGroupBankUsers" datatype="html">
-        <source>Bank Users</source>
+      <trans-unit id="BankMailGroupBankMgrs" datatype="html">
+        <source>Bank Food-IT Mgrs</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">145</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="BankMailGroupBankMembers" datatype="html">
-        <source>Bank Members</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">146</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="BankMailGroupOrgMgrs" datatype="html">
-        <source>Org Mgrs</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">147</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
           <context context-type="linenumber">158</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="BankMailGroupBankUsers" datatype="html">
+        <source>Bank Users</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">146</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BankMailGroupBankMembers" datatype="html">
+        <source>Bank Members</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">161</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BankMailGroupOrgMgrs" datatype="html">
+        <source>Org Mgrs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">159</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="BankMailGroupOrgUsers" datatype="html">
         <source>Org Users</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMailGroupOrgMembers" datatype="html">
         <source>Org Members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMailGroupCA" datatype="html">
         <source>CA Members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMailGroupAG" datatype="html">
         <source>AG Members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMailGroupCG" datatype="html">
         <source>CG Members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/enums.ts</context>
+          <context context-type="linenumber">164</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMailGroupOrgMgrs" datatype="html">
         <source>My Org Mgrs</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">168</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMailGroupOrgUsers" datatype="html">
         <source>My Org Users</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">163</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMailGroupOrgMembers" datatype="html">
         <source>My Org Members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DbChangeEntityUser" datatype="html">
         <source>User</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DbChangeEntityMember" datatype="html">
         <source>Member</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DbChangeEntityOrg" datatype="html">
         <source>Organisation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">181</context>
+          <context context-type="linenumber">187</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DbChangeEntityOrgBeneficiaries" datatype="html">
         <source>OrgBeneficiaries</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">182</context>
+          <context context-type="linenumber">188</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DbChangeEntityBank" datatype="html">
         <source>Bank</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">183</context>
+          <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DbChangeEntityDepot" datatype="html">
         <source>Depot</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">184</context>
+          <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DbChangeEntityClient" datatype="html">
         <source>Client</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">191</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DbChangeActionUpdate" datatype="html">
         <source>Update</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DbChangeActionCreate" datatype="html">
         <source>Create</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">191</context>
+          <context context-type="linenumber">197</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DbChangeActionDelete" datatype="html">
         <source>Delete</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/enums.ts</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">198</context>
         </context-group>
       </trans-unit>
       <trans-unit id="TitleMr" datatype="html">
