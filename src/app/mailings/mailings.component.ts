@@ -526,15 +526,15 @@ export class MailingsComponent implements OnInit {
   }
   setMailGroupFilter() {
     this.latestAddressQueryParams['mailGroup'] = this.mailgroupSelected;
-    if (this.isFBBA )
-      if ( Number(this.mailgroupSelected) > 4 ) { // mail adressees of fbaa limited to Fbba bank for those groups
-      this.latestAddressQueryParams['lienBanque'] = this.bankid
-      }
-      else {
+    if (this.isFBBA ) {
+      if (Number(this.mailgroupSelected) > 4) { // mail adressees of fbaa limited to Fbba bank for those groups
+        this.latestAddressQueryParams['lienBanque'] = this.bankid
+      } else {
         if (this.latestAddressQueryParams.hasOwnProperty('lienBanque')) {
           delete this.latestAddressQueryParams['lienBanque'];
         }
       }
+    }
   }
 
   saveSelection() {
