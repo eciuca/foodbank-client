@@ -105,6 +105,7 @@ export let enmUserRolesFBBA = [
     {label: $localize`:@@RoleFBBAAdmin:FBBA Admin`, value: 'Admin_FBBA'},
     {label: $localize`:@@RoleFBBAUser:FBBA User`, value: 'Bank_FBBA'},
     {label: $localize`:@@RoleAdmin:Global admin`, value: 'admin'},
+    {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'}
 ];
 export let enmStatutFead = [
     {label: $localize`:@@FeadStatusRefused:Refused`, value: 0},
@@ -156,6 +157,11 @@ export let enmMailGroupsFBBA = [
     {label: $localize`:@@OrgMailGroupOrganisations:Organisations` , value: 0 },
     {label: $localize`:@@BankMailGroupBankMgrs:Bank Food-IT Mgrs` , value: 4 },
     {label: $localize`:@@BankMailGroupOrgMgrs:Org Mgrs` , value: 1 },
+    {label: $localize`:@@BankMailGroupBankUsers:Bank Users` , value: 5 },
+    {label: $localize`:@@BankMailGroupBankMembers:Bank Members` , value: 6 },
+    {label: $localize`:@@BankMailGroupCA:CA Members` , value: 7 },
+    {label: $localize`:@@BankMailGroupAG:AG Members` , value: 8 },
+    {label: $localize`:@@BankMailGroupCG:CG Members` , value: 9 },
 ];
 export let enmMailGroupsOrg = [
     {label: $localize`:@@OrgMailGroupOrganisations:Organisations` , value: 0 },
