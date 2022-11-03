@@ -509,6 +509,7 @@ export class MailingsComponent implements OnInit {
       this.setAgreedFilter();
       this.setRegionFilter();
       this.setLanguageFilter();
+      this.setMailGroupFilter();
     }
     else {  // functionality for organisations
       if (this.mailgroupSelected == '0') {
