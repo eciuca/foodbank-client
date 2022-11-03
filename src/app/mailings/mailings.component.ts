@@ -68,6 +68,7 @@ export class MailingsComponent implements OnInit {
   maxAttachmentFileSize: number;
   isAttachmentUploadOngoing: boolean;
   bccMode:boolean;
+  isFBBA: boolean;
 
   constructor(private orgsummaryService: OrgSummaryEntityService,
               private regionService: RegionEntityService,
@@ -101,6 +102,7 @@ export class MailingsComponent implements OnInit {
     this.maxAttachmentFileSize = 5000000; // max 5 MB file size
     this.isAttachmentUploadOngoing = false;
     this.bccMode = true;
+    this.isFBBA = false;
   }
 
   ngOnInit(): void {
@@ -172,6 +174,7 @@ export class MailingsComponent implements OnInit {
         case 'Admin_FBBA':
         case 'admin':
           this.mailgroups = enmMailGroupsFBBA;
+          this.isFBBA = true;
           break;
         case 'Admin_Banq':
           this.filterBase['lienBanque'] = authState.banque.bankId
@@ -493,9 +496,9 @@ export class MailingsComponent implements OnInit {
   filterMailGroup(mailgroup) {
     this.mailgroupSelected = mailgroup;
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
-    // when we switch from active to archived list and vice versa , we need to restart from first page
+    // when we switch filters , we need to restart from first page
     this.first = 0;
-    if (this.orgId == 0) { // admin functionality
+    if (this.orgId == 0) { // admin or admin_bank or FBBA functionality
       this.booOnlyAgreed = false;
       this.booOnlyFead = false;
       this.regionSelected = null;
@@ -522,7 +525,16 @@ export class MailingsComponent implements OnInit {
     this.loadOrganisationSubject$.next( this.latestOrgQueryParams);
   }
   setMailGroupFilter() {
-        this.latestAddressQueryParams['mailGroup'] = this.mailgroupSelected;
+    this.latestAddressQueryParams['mailGroup'] = this.mailgroupSelected;
+    if (this.isFBBA )
+      if ( Number(this.mailgroupSelected) > 4 ) { // mail adressees of fbaa limited to Fbba bank for those groups
+      this.latestAddressQueryParams['lienBanque'] = this.bankid
+      }
+      else {
+        if (this.latestAddressQueryParams.hasOwnProperty('lienBanque')) {
+          delete this.latestAddressQueryParams['lienBanque'];
+        }
+      }
   }
 
   saveSelection() {
