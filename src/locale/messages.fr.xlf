@@ -840,14 +840,14 @@
       </trans-unit>
       <trans-unit id="OrgMembers" datatype="html">
         <source>Org Members</source>
-        <target>Membres de l'organisation</target>
+        <target>Collaborateurs de l'organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
           <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MembreStatMembres" datatype="html">
-        <source>Total Members - Bank : <x id="PH" equiv-text="totalBankMembers"/>- Orgs: <x id="PH_1" equiv-text="totalOrgMembers"/></source>
+        <source>Total Members - Bank : <x id="PH" equiv-text="totalBankMembers"/> - Orgs: <x id="PH_1" equiv-text="totalOrgMembers"/></source>
         <target>Nombre total de collaborateurs - Banque : <x id="PH" equiv-text="totalBankMembers"/>-  Organisations : <x id="PH_1" equiv-text="totalOrgMembers"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
@@ -871,7 +871,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="UserStatUsers" datatype="html">
-        <source>Total Users - Bank : <x id="PH" equiv-text="totalBankUsers"/>- Orgs: <x id="PH_1" equiv-text="totalOrgUsers"/></source>
+        <source>Total Users - Bank : <x id="PH" equiv-text="totalBankUsers"/> - Orgs: <x id="PH_1" equiv-text="totalOrgUsers"/></source>
         <target>Nombre total d'utilisateurs - Banque : <x id="PH" equiv-text="totalBankUsers"/> - Organisations : <x id="PH_1" equiv-text="totalOrgUsers"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
@@ -886,20 +886,36 @@
           <context context-type="linenumber">237</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="Users" datatype="html">
-        <source>Users</source>
-        <target>Utilisateurs</target>
+      <trans-unit id="UsersBank" datatype="html">
+        <source>Bank Users</source>
+        <target>Utilisateurs de la banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">237</context>
+          <context context-type="linenumber">238</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="Members" datatype="html">
-        <source>Members</source>
-        <target>Collaborateurs</target>
+      <trans-unit id="UsersOrg" datatype="html">
+        <source>Org Users</source>
+        <target>Utilisateurs de l'organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">237</context>
+          <context context-type="linenumber">238</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MembersBank" datatype="html">
+        <source>Bank Members</source>
+        <target>Collaborateurs de la banque</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
+          <context context-type="linenumber">238</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="MembersOrg" datatype="html">
+        <source>Org Members</source>
+        <target>Collaborateurs de l'organisation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
+          <context context-type="linenumber">238</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankBasic" datatype="html">
@@ -8077,6 +8093,14 @@
       <trans-unit id="Employees">
         <source/>
         <target>Collaborateurs</target>
+      </trans-unit>
+      <trans-unit id="Members">
+        <source/>
+        <target>Collaborateurs</target>
+      </trans-unit>
+      <trans-unit id="Users">
+        <source/>
+        <target>Utilisateurs</target>
       </trans-unit>
     </body>
   </file>

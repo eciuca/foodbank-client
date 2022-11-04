@@ -178,7 +178,7 @@ export class BankreportsComponent implements OnInit {
                     reportDataSets[1].data.push(bankMemberCounts[i].orgCount);
                 }
 
-                this.titleMembres = $localize`:@@MembreStatMembres:Total Members - Bank : ${totalBankMembers}- Orgs: ${totalOrgMembers}`;
+                this.titleMembres = $localize`:@@MembreStatMembres:Total Members - Bank : ${totalBankMembers} - Orgs: ${totalOrgMembers}`;
                 this.chartDataMembreCount = {
                     labels: reportLabels,
                     datasets: reportDataSets
@@ -219,7 +219,7 @@ export class BankreportsComponent implements OnInit {
                     reportDataSets[1].data.push(bankUserCounts[i].orgCount);
                 }
 
-                this.titleUsers = $localize`:@@UserStatUsers:Total Users - Bank : ${totalBankUsers}- Orgs: ${totalOrgUsers}`;
+                this.titleUsers = $localize`:@@UserStatUsers:Total Users - Bank : ${totalBankUsers} - Orgs: ${totalOrgUsers}`;
                 this.chartDataUserCount = {
                     labels: reportLabels,
                     datasets: reportDataSets
@@ -234,12 +234,15 @@ export class BankreportsComponent implements OnInit {
     exportAsXLSX() {
 
         const exportListOrgs = [];
-        exportListOrgs.push([$localize`:@@Bank:Bank`,$localize`:@@Organisations:Organisations`,$localize`:@@Users:Users` ,$localize`:@@Members:Members`]);
+        exportListOrgs.push([$localize`:@@Bank:Bank`,$localize`:@@Organisations:Organisations`,
+            $localize`:@@UsersBank:Bank Users` ,$localize`:@@UsersOrg:Org Users`,  $localize`:@@MembersBank:Bank Members`,  $localize`:@@MembersOrg:Org Members`]);
         for (let i=0; i < this.chartDataOrgCount.labels.length; i++ ) {
             const line = [this.chartDataOrgCount.labels[i]];
             line.push(this.chartDataOrgCount.datasets[0].data[i]);
             line.push(this.chartDataUserCount.datasets[0].data[i]);
+            line.push(this.chartDataUserCount.datasets[1].data[i]);
             line.push(this.chartDataMembreCount.datasets[0].data[i]);
+            line.push(this.chartDataMembreCount.datasets[1].data[i]);
             exportListOrgs.push(line);
         }
         this.excelService.exportAsExcelFile(exportListOrgs, 'foodit.organisationStatistics.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
