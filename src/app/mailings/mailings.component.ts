@@ -291,12 +291,12 @@ export class MailingsComponent implements OnInit {
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.bankid, this.orgId,'Email',
                       mailGroupLabel + "("+ mailListArray.length + " dest)", 'Create' );
                 },
-                (dataserviceerror: DataServiceError) => {
-                  console.log('Error Sending Message', dataserviceerror);
+                (error: Error) => {
+                  console.log('Error Sending Message', error);
                   const errMessage = {
                     severity: 'error', summary: 'Send',
                     // tslint:disable-next-line:max-line-length
-                    detail: $localize`:@@messageSendError:The message could not be sent: error: ${dataserviceerror.message}`,
+                    detail: $localize`:@@messageSendError:The message could not be sent: error: ${error.message}`,
                     life: 6000
                   };
                   this.messageService.add(errMessage);
