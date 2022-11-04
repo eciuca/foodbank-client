@@ -4095,8 +4095,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="messageSendError" datatype="html">
-        <source>The message could not be sent: error: <x id="PH" equiv-text="dataserviceerror.message"/></source>
-        <target>The message n'a pu être envoyé: erreur: <x id="PH" equiv-text="dataserviceerror.message"/></target>
+        <source>The message could not be sent: error: <x id="PH" equiv-text="error.message"/></source>
+        <target>Le message n'a pas pu être envoyé : erreur : <x id="PH" equiv-text="error.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
           <context context-type="linenumber">299</context>
@@ -8089,18 +8089,6 @@
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">537</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="Employees">
-        <source/>
-        <target>Collaborateurs</target>
-      </trans-unit>
-      <trans-unit id="Members">
-        <source/>
-        <target>Collaborateurs</target>
-      </trans-unit>
-      <trans-unit id="Users">
-        <source/>
-        <target>Utilisateurs</target>
       </trans-unit>
     </body>
   </file>
