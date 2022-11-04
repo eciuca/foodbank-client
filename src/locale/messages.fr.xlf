@@ -615,7 +615,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">237</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
@@ -783,7 +783,7 @@
         <target>Organisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">119</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.ts</context>
@@ -823,47 +823,59 @@
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatOrganisations" datatype="html">
-        <source>Organisation Counts by Bank - total Organisations: <x id="PH" equiv-text="totalCount"/></source>
-        <target>Nombre d'organisations par banque - nombre total d'organisations : <x id="PH" equiv-text="totalCount"/></target>
+        <source>Total Organisations: <x id="PH" equiv-text="totalCount"/></source>
+        <target>Nb d'organisations: <x id="PH" equiv-text="totalCount"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="Employees" datatype="html">
-        <source>Employees</source>
-        <target>Collaborateurs</target>
+      <trans-unit id="BankMembers" datatype="html">
+        <source>Bank Members</source>
+        <target>Collaborateurs de la banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">155</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrgMembers" datatype="html">
+        <source>Org Members</source>
+        <target>Membres de l'organisation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
+          <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MembreStatMembres" datatype="html">
-        <source>Members Counts by Bank - total Members: <x id="PH" equiv-text="totalCount"/></source>
-        <target>Nombre de membres par banque - nombre total de membres : <x id="PH" equiv-text="totalCount"/></target>
+        <source>Total Members - Bank : <x id="PH" equiv-text="totalBankMembers"/>- Orgs: <x id="PH_1" equiv-text="totalOrgMembers"/></source>
+        <target>Nombre total de collaborateurs - Banque : <x id="PH" equiv-text="totalBankMembers"/>-  Organisations : <x id="PH_1" equiv-text="totalOrgMembers"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">176</context>
+          <context context-type="linenumber">181</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="Users" datatype="html">
-        <source>Users</source>
-        <target>Utilisateurs</target>
+      <trans-unit id="BankUsers" datatype="html">
+        <source>Bank Users</source>
+        <target>Utilisateurs de la banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">198</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="OrgUsers" datatype="html">
+        <source>Org Users</source>
+        <target>Utilisateurs de l'organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserStatUsers" datatype="html">
-        <source>Users Counts by Bank - total Users: <x id="PH" equiv-text="totalCount"/></source>
-        <target>Nombre d'utilisateurs par banque - nombre total d'utilisateurs : <x id="PH" equiv-text="totalCount"/></target>
+        <source>Total Users - Bank : <x id="PH" equiv-text="totalBankUsers"/>- Orgs: <x id="PH_1" equiv-text="totalOrgUsers"/></source>
+        <target>Nombre total d'utilisateurs - Banque : <x id="PH" equiv-text="totalBankUsers"/> - Organisations : <x id="PH_1" equiv-text="totalOrgUsers"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">213</context>
+          <context context-type="linenumber">222</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Organisations" datatype="html">
@@ -871,7 +883,15 @@
         <target>Organisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">237</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Users" datatype="html">
+        <source>Users</source>
+        <target>Utilisateurs</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
+          <context context-type="linenumber">237</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Members" datatype="html">
@@ -879,7 +899,7 @@
         <target>Collaborateurs</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">237</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankBasic" datatype="html">
@@ -8053,6 +8073,10 @@
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">537</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="Employees">
+        <source/>
+        <target>Collaborateurs</target>
       </trans-unit>
     </body>
   </file>

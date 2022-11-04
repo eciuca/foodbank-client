@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {BanqueOrgReport} from '../model/banqueOrgReport';
 import {BanqueCount} from '../model/banqueCount';
+import {BanqueOrgCount} from '../model/banqueOrgCount';
 
 @Injectable({
     providedIn: 'root'
@@ -35,7 +36,7 @@ export class BanqueReportService {
         }
         return this.http.get<BanqueCount[]>(`${baseUrl}/`, requestOptions);
     }
-    getMembreCountReport(accesstoken: string): Observable<BanqueCount[]> {
+    getMembreCountReport(accesstoken: string): Observable<BanqueOrgCount[]> {
         const baseUrl = '/api/banqueMembreCount';
         const requestOptions = {
             headers: new HttpHeaders({
@@ -44,9 +45,9 @@ export class BanqueReportService {
             }),
         };
 
-        return this.http.get<BanqueCount[]>(`${baseUrl}/`, requestOptions);
+        return this.http.get<BanqueOrgCount[]>(`${baseUrl}/`, requestOptions);
     }
-    getUserCountReport(accesstoken: string): Observable<BanqueCount[]> {
+    getUserCountReport(accesstoken: string): Observable<BanqueOrgCount[]> {
         const baseUrl = '/api/banqueUserCount';
         const requestOptions = {
             headers: new HttpHeaders({
@@ -55,7 +56,7 @@ export class BanqueReportService {
             }),
         };
 
-        return this.http.get<BanqueCount[]>(`${baseUrl}/`, requestOptions);
+        return this.http.get<BanqueOrgCount[]>(`${baseUrl}/`, requestOptions);
     }
 
 }

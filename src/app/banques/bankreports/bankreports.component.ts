@@ -9,6 +9,7 @@ import { BanqueReportService} from '../services/banque-report.service';
 import {AuthState} from '../../auth/reducers';
 import {BanqueEntityService} from '../services/banque-entity.service';
 import {BanqueCount} from '../model/banqueCount';
+import {BanqueOrgCount} from '../model/banqueOrgCount';
 import {formatDate} from '@angular/common';
 import {ExcelService} from '../../services/excel.service';
 @Component({
@@ -125,7 +126,7 @@ export class BankreportsComponent implements OnInit {
               for (let i=0; i < banqueOrgCounts.length; i++ ) {
                   const bankOptionIndex = this.bankOptions.findIndex(obj => obj.label === banqueOrgCounts[i].bankShortName );
                   if (bankOptionIndex === -1) continue;
-                      totalCount += banqueOrgCounts[i].count
+                      totalCount += banqueOrgCounts[i].count;
                       reportLabels.push( banqueOrgCounts[i].bankShortName);
                       reportDataSets[0].data.push(banqueOrgCounts[i].count);
                       reportDataSets[0].backgroundColor.push(this.backgroundColors[colorIndex]) ;
@@ -136,7 +137,7 @@ export class BankreportsComponent implements OnInit {
                       }
                   }
 
-              this.titleOrganisations = $localize`:@@OrgStatOrganisations:Organisation Counts by Bank - total Organisations: ${totalCount}`;
+              this.titleOrganisations = $localize`:@@OrgStatOrganisations:Total Organisations: ${totalCount}`;
               this.chartDataOrgCount = {
                   labels: reportLabels,
                   datasets: reportDataSets
@@ -146,34 +147,38 @@ export class BankreportsComponent implements OnInit {
   }
     reportMembres() {
         this.banqueReportService.getMembreCountReport(this.authService.accessToken).subscribe(
-            (response: BanqueCount[]) => {
-                const banqueMembreCounts: BanqueCount[] = response;
+            (response: BanqueOrgCount[]) => {
+                const bankMemberCounts: BanqueOrgCount[] = response;
                 let reportLabels = [];
                 let reportDataSets = [];
                 reportDataSets.push(
                     {
-                        label:  $localize`:@@Employees:Employees`,
-                        data: [],
-                        backgroundColor: []
-                    }
+                        type: 'bar',
+                        label: $localize`:@@BankMembers:Bank Members`,
+                        backgroundColor: 'Red',
+                        data: []
+                    },
+                    {
+                        type: 'bar',
+                        label: $localize`:@@OrgMembers:Org Members`,
+                        backgroundColor: 'Blue',
+                        data: []
+                    },
                 )
-                let colorIndex=0;
-                let totalCount =0;
-                for (let i=0; i < banqueMembreCounts.length; i++ ) {
-                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.label === banqueMembreCounts[i].bankShortName );
+
+                let totalBankMembers=0;
+                let totalOrgMembers=0;
+                for (let i=0; i < bankMemberCounts.length; i++ ) {
+                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.label === bankMemberCounts[i].bankShortName );
                     if (bankOptionIndex === -1) continue;
-                    totalCount += banqueMembreCounts[i].count
-                    reportLabels.push( banqueMembreCounts[i].bankShortName);
-                    reportDataSets[0].data.push(banqueMembreCounts[i].count);
-                    reportDataSets[0].backgroundColor.push(this.backgroundColors[colorIndex]) ;
-                    colorIndex++;
-                    if (colorIndex >= this.backgroundColors.length) {
-                        console.log('Not enough colors in backgroundColors array');
-                        colorIndex=0;
-                    }
+                    totalBankMembers += bankMemberCounts[i].bankCount
+                    totalOrgMembers += bankMemberCounts[i].orgCount
+                    reportLabels.push( bankMemberCounts[i].bankShortName);
+                    reportDataSets[0].data.push(bankMemberCounts[i].bankCount);
+                    reportDataSets[1].data.push(bankMemberCounts[i].orgCount);
                 }
 
-                this.titleMembres = $localize`:@@MembreStatMembres:Members Counts by Bank - total Members: ${totalCount}`;
+                this.titleMembres = $localize`:@@MembreStatMembres:Total Members - Bank : ${totalBankMembers}- Orgs: ${totalOrgMembers}`;
                 this.chartDataMembreCount = {
                     labels: reportLabels,
                     datasets: reportDataSets
@@ -183,38 +188,44 @@ export class BankreportsComponent implements OnInit {
     }
     reportUsers() {
         this.banqueReportService.getUserCountReport(this.authService.accessToken).subscribe(
-            (response: BanqueCount[]) => {
-                const banqueUserCounts: BanqueCount[] = response;
+            (response: BanqueOrgCount[]) => {
+                const bankUserCounts: BanqueOrgCount[] = response;
                 let reportLabels = [];
                 let reportDataSets = [];
                 reportDataSets.push(
                     {
-                        label:  $localize`:@@Users:Users`,
-                        data: [],
-                        backgroundColor: []
-                    }
+                        type: 'bar',
+                        label: $localize`:@@BankUsers:Bank Users`,
+                        backgroundColor: 'Red',
+                        data: []
+                    },
+                    {
+                        type: 'bar',
+                        label: $localize`:@@OrgUsers:Org Users`,
+                        backgroundColor: 'Blue',
+                        data: []
+                    },
                 )
-                let colorIndex=0;
-                let totalCount =0;
-                for (let i=0; i < banqueUserCounts.length; i++ ) {
-                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.label === banqueUserCounts[i].bankShortName );
+
+                let totalBankUsers=0;
+                let totalOrgUsers=0;
+                for (let i=0; i < bankUserCounts.length; i++ ) {
+                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.label === bankUserCounts[i].bankShortName );
                     if (bankOptionIndex === -1) continue;
-                    totalCount += banqueUserCounts[i].count;
-                    reportLabels.push( banqueUserCounts[i].bankShortName);
-                    reportDataSets[0].data.push(banqueUserCounts[i].count);
-                    reportDataSets[0].backgroundColor.push(this.backgroundColors[colorIndex]) ;
-                    colorIndex++;
-                    if (colorIndex >= this.backgroundColors.length) {
-                        console.log('Not enough colors in backgroundColors array');
-                        colorIndex=0;
-                    }
+                    totalBankUsers += bankUserCounts[i].bankCount
+                    totalOrgUsers += bankUserCounts[i].orgCount
+                    reportLabels.push( bankUserCounts[i].bankShortName);
+                    reportDataSets[0].data.push(bankUserCounts[i].bankCount);
+                    reportDataSets[1].data.push(bankUserCounts[i].orgCount);
                 }
 
-                this.titleUsers = $localize`:@@UserStatUsers:Users Counts by Bank - total Users: ${totalCount}`;
+                this.titleUsers = $localize`:@@UserStatUsers:Total Users - Bank : ${totalBankUsers}- Orgs: ${totalOrgUsers}`;
                 this.chartDataUserCount = {
                     labels: reportLabels,
                     datasets: reportDataSets
                 }
+
+
 
             })
     }

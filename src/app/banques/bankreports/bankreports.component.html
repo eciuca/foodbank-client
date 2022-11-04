@@ -11,11 +11,11 @@
         </div>
         <div *ngIf="chartDataMembreCount" class="p-field p-col-12 p-md-4 card">
             <h3>{{ titleMembres }}</h3>
-            <p-chart type="bar" [data]="chartDataMembreCount" [options]="basicOptions"></p-chart>
+            <p-chart type="bar" [data]="chartDataMembreCount" [options]="stackedOptions"></p-chart>
         </div>
         <div *ngIf="chartDataUserCount" class="p-field p-col-12 p-md-4 card">
             <h3>{{ titleUsers }}</h3>
-            <p-chart type="bar" [data]="chartDataUserCount" [options]="basicOptions"></p-chart>
+            <p-chart type="bar" [data]="chartDataUserCount" [options]="stackedOptions"></p-chart>
         </div>
     </div>
 </p-panel>
