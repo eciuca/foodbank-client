@@ -20,7 +20,7 @@ import {RegionEntityService} from '../organisations/services/region-entity.servi
 import {enmLanguage, enmMailGroupsBank, enmMailGroupsFBBA, enmMailGroupsOrg} from '../shared/enums';
 import { FileUpload } from 'primeng/fileupload';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
-
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -237,6 +237,15 @@ export class MailingsComponent implements OnInit {
   }
 
   sendmail(event: Event) {
+    if(environment.apiUrl.includes('localhost') || environment.apiUrl.includes('dev.')) {
+      const errMessage = {
+        severity: 'error', summary: 'Send',
+        detail: $localize`:@@MailingNotAllowed:Mailing is disabled for test environments`,
+        life: 6000
+      };
+      this.messageService.add(errMessage);
+      return;
+    }
     let mailListArray = [];
     if ( this.mailingToList) {
       mailListArray = this.mailingToList.split('\n');
