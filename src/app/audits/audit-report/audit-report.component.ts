@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuditReport} from '../model/auditreport';
 import {AuthService} from '../../auth/auth.service';
 import {HttpClient} from '@angular/common/http';
@@ -7,7 +7,7 @@ import {AppState} from '../../reducers';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {map, tap} from 'rxjs/operators';
 import {AuditReportService} from '../services/audit-report.service';
-import { BanqueReportService} from '../../banques/services/banque-report.service';
+import {BanqueReportService} from '../../banques/services/banque-report.service';
 import {AuthState} from '../../auth/reducers';
 import {DatePipe} from '@angular/common';
 import {QueryParams} from '@ngrx/data';

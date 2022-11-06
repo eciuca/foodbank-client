@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {NotificationEntityService} from '../services/notification-entity.service';
@@ -9,6 +9,7 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {AuthState} from '../../auth/reducers';
 import {Notification} from './model/notification';
 import {LazyLoadEvent} from 'primeng/api';
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',

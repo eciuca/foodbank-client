@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {TripEntityService} from './services/trip-entity.service';
@@ -9,6 +9,7 @@ import {globalAuthState} from '../auth/auth.selectors';
 import {AuthState} from '../auth/reducers';
 import {Trip} from './model/trip';
 import {LazyLoadEvent} from 'primeng/api';
+
 @Component({
   selector: 'app-trips',
   templateUrl: './trips.component.html',

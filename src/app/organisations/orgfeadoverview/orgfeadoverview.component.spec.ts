@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { OrgfeadoverviewComponent } from './orgfeadoverview.component';
+import {OrgfeadoverviewComponent} from './orgfeadoverview.component';
 
 describe('OrgfeadoverviewComponent', () => {
   let component: OrgfeadoverviewComponent;

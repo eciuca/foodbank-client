@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {map} from 'rxjs/operators';
-import { BanqueReportService} from '../services/banque-report.service';
+import {BanqueReportService} from '../services/banque-report.service';
 import {AuthState} from '../../auth/reducers';
 import {BanqueEntityService} from '../services/banque-entity.service';
 import {BanqueCount} from '../model/banqueCount';
 import {BanqueOrgCount} from '../model/banqueOrgCount';
 import {formatDate} from '@angular/common';
 import {ExcelService} from '../../services/excel.service';
+
 @Component({
   selector: 'app-bankreports',
   templateUrl: './bankreports.component.html',

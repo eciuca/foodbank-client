@@ -9,7 +9,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../../auth/reducers';
-import {enmYn, enmStatusCompany, enmOrgCategories} from '../../shared/enums';
+import {enmOrgCategories, enmStatusCompany, enmYn} from '../../shared/enums';
 import {RegionEntityService} from '../services/region-entity.service';
 import {DepotEntityService} from '../../depots/services/depot-entity.service';
 import {QueryParams} from '@ngrx/data';

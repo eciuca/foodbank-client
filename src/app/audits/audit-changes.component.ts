@@ -1,4 +1,4 @@
-import {Component,  OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuditChange} from './model/auditChange';
 import {AuditChangeEntityService} from './services/auditChange-entity.service';
 import {BehaviorSubject} from 'rxjs';
@@ -6,7 +6,7 @@ import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {LazyLoadEvent} from 'primeng/api';
 import {DatePipe} from '@angular/common';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
-import {enmApp, enmUserRoles,enmDbChangeActions,enmDbChangeEntities} from '../shared/enums';
+import {enmApp, enmDbChangeActions, enmDbChangeEntities, enmUserRoles} from '../shared/enums';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {AuthState} from '../auth/reducers';

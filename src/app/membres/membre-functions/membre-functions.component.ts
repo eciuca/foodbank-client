@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MembreFunctionEntityService} from '../services/membreFunction-entity.service';
 import {MembreFunction} from '../model/membreFunction';
 import {select, Store} from '@ngrx/store';

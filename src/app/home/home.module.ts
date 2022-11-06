@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home.component';
 import {PanelModule} from 'primeng/panel';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { NotificationComponent } from './notifications/notification/notification.component';
-import {EntityDataService, EntityDefinitionService } from '@ngrx/data';
+import {NotificationsComponent} from './notifications/notifications.component';
+import {NotificationComponent} from './notifications/notification/notification.component';
+import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {appEntityMetadata} from '../app-entity.metadata';
 import {NotificationsDataService} from './services/notifications-data.service';
 import {NotificationEntityService} from './services/notification-entity.service';

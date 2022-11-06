@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { DepotsComponent } from './depots.component';
-import {DepotComponent } from './depot/depot.component';
-import {EntityDataService, EntityDefinitionService } from '@ngrx/data';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {DepotsComponent} from './depots.component';
+import {DepotComponent} from './depot/depot.component';
+import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {DepotsDataService} from './services/depots-data.service';
 import {DepotEntityService} from './services/depot-entity.service';
 import {TableModule} from 'primeng/table';

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { TripsComponent } from './trips.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {TripsComponent} from './trips.component';
 
 import {appEntityMetadata} from '../app-entity.metadata';
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
@@ -20,8 +20,7 @@ import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {CalendarModule} from 'primeng/calendar';
 import {ToastModule} from 'primeng/toast';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-import { TripComponent } from './trip/trip.component';
-import {MembreComponent} from '../membres/membre/membre.component';
+import {TripComponent} from './trip/trip.component';
 import {InputNumberModule} from 'primeng/inputnumber';
 
 

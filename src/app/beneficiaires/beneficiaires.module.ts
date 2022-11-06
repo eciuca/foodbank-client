@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { BeneficiairesComponent } from './beneficiaires.component';
-import { BeneficiaireComponent } from './beneficiaire/beneficiaire.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {BeneficiairesComponent} from './beneficiaires.component';
+import {BeneficiaireComponent} from './beneficiaire/beneficiaire.component';
 
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
@@ -19,8 +19,8 @@ import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {CpasEntityService} from '../cpass/services/cpas-entity.service';
-import { DependentsComponent } from './dependents/dependents.component';
-import { DependentComponent } from './dependents/dependent/dependent.component';
+import {DependentsComponent} from './dependents/dependents.component';
+import {DependentComponent} from './dependents/dependent/dependent.component';
 import {DependentsDataService} from './services/dependents-data.service';
 import {DependentEntityService} from './services/dependent-entity.service';
 import {CalendarModule} from 'primeng/calendar';
@@ -30,14 +30,12 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {OrgSummariesDataService} from '../organisations/services/orgsummaries-data.service';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {InputNumberModule} from 'primeng/inputnumber';
-import { BeneficiariesReportComponent } from './beneficiaries-report/beneficiaries-report.component';
+import {BeneficiariesReportComponent} from './beneficiaries-report/beneficiaries-report.component';
 import {BanquesDataService} from '../banques/services/banques-data.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {ChartModule} from 'primeng/chart';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
-
-
 
 
 const routes: Routes = [

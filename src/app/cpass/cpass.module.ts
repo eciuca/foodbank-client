@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { CpassComponent } from './cpass.component';
-import {CpasComponent } from './cpas/cpas.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {CpassComponent} from './cpass.component';
+import {CpasComponent} from './cpas/cpas.component';
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {CpassDataService} from './services/cpass-data.service';
 import {CpasEntityService} from './services/cpas-entity.service';

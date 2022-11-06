@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UsersRightsComponent } from './users-rights.component';
+import {UsersRightsComponent} from './users-rights.component';
 
 describe('UsersRightsComponent', () => {
   let component: UsersRightsComponent;

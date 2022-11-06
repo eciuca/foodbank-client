@@ -14,7 +14,6 @@ import {AuthState} from '../../auth/reducers';
 import {formatDate} from '@angular/common';
 
 
-
 @Component({
   selector: 'app-donateurs',
   templateUrl: './donateurs.component.html',

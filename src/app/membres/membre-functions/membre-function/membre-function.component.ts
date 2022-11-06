@@ -1,6 +1,6 @@
 import {combineLatest, Observable} from 'rxjs';
 import {DataServiceError} from '@ngrx/data';
-import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DefaultMembreFunction, MembreFunction} from '../../model/membreFunction';
 import {MembreFunctionEntityService} from '../../services/membreFunction-entity.service';
 import {select, Store} from '@ngrx/store';

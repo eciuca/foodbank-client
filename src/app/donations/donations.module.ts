@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import {DonateursComponent } from './donateurs/donateurs.component';
-import {DonateurComponent } from './donateurs/donateur/donateur.component';
-import {DonsComponent } from './dons/dons.component';
-import {DonComponent } from './dons/don/don.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {DonateursComponent} from './donateurs/donateurs.component';
+import {DonateurComponent} from './donateurs/donateur/donateur.component';
+import {DonsComponent} from './dons/dons.component';
+import {DonComponent} from './dons/don/don.component';
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {DonateurEntityService} from './services/donateur-entity.service';
 import {DonateursDataService} from './services/donateurs-data.service';
@@ -27,6 +27,7 @@ import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ChartModule} from 'primeng/chart';
+
 const routes: Routes = [
   {
     path: 'donateurs/:bankId',

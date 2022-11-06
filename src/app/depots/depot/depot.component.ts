@@ -1,6 +1,6 @@
 import {combineLatest, Observable} from 'rxjs';
 import {DataServiceError} from '@ngrx/data';
-import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Depot} from '../model/depot';
 import {DepotEntityService} from '../services/depot-entity.service';
 import {select, Store} from '@ngrx/store';

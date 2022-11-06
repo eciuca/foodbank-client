@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CpasComponent } from './cpas.component';
+import {CpasComponent} from './cpas.component';
 
 describe('CpasComponent', () => {
   let component: CpasComponent;

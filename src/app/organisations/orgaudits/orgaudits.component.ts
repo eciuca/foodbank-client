@@ -1,4 +1,4 @@
-import {Component,  OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Orgaudit} from '../model/orgaudit';
 import {OrgauditEntityService} from '../services/orgaudit-entity.service';
 import {BehaviorSubject} from 'rxjs';
@@ -8,7 +8,6 @@ import {filter, map, mergeMap} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../../auth/reducers';
-
 
 
 @Component({

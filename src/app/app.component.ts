@@ -4,15 +4,12 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ActivatedRoute, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
 import {AppState} from './reducers';
-import {globalAuthState, isLoggedIn, isLoggedOut} from './auth/auth.selectors';
-import {login, logout} from './auth/auth.actions';
-import {FilterMatchMode, MenuItem} from 'primeng/api';
-import {IAuthPrincipal } from './auth/auth-principal';
-import { AuthState } from './auth/reducers';
-import { PrimeNGConfig } from 'primeng/api';
-import { OAuthService, UserInfo } from 'angular-oauth2-oidc';
-import { AuthService } from './auth/auth.service';
-import { environment } from '../environments/environment';
+import {globalAuthState} from './auth/auth.selectors';
+import {logout} from './auth/auth.actions';
+import {FilterMatchMode, MenuItem, PrimeNGConfig} from 'primeng/api';
+import {AuthState} from './auth/reducers';
+import {AuthService} from './auth/auth.service';
+import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
 
 @Component({

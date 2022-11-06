@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {NotificationEntityService} from '../../services/notification-entity.service';
 import {map} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';

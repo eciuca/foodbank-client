@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AuditChangesComponent } from './audit-changes.component';
+import {AuditChangesComponent} from './audit-changes.component';
 
 describe('AuditChangesComponent', () => {
   let component: AuditChangesComponent;

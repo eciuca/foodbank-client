@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BanqprogsComponent } from './banqprogs.component';
+import {BanqprogsComponent} from './banqprogs.component';
 
 describe('BanqprogsComponent', () => {
   let component: BanqprogsComponent;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { OrgfeaddetailComponent } from './orgfeaddetail.component';
+import {OrgfeaddetailComponent} from './orgfeaddetail.component';
 
 describe('OrgfeaddetailComponent', () => {
   let component: OrgfeaddetailComponent;

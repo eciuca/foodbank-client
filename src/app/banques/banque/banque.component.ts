@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {BanqueEntityService} from '../services/banque-entity.service';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -6,7 +6,6 @@ import {map} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import {Banque, DefaultBanque} from '../model/banque';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import { Input } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {Membre} from '../../membres/model/membre';
@@ -16,7 +15,6 @@ import {AppState} from '../../reducers';
 import {BanqProg} from '../model/banqprog';
 import {BanqProgEntityService} from '../services/banqprog-entity.service';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
-
 
 
 @Component({

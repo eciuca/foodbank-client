@@ -1,21 +1,19 @@
 /* eslint-disable brace-style */
 
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
-import { OAuthErrorEvent, OAuthService, UserInfo } from 'angular-oauth2-oidc';
-import { BehaviorSubject, combineLatest, forkJoin, Observable, of, ReplaySubject, throwError } from 'rxjs';
-import {catchError, defaultIfEmpty, distinctUntilChanged, filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
-import { Banque } from '../banques/model/banque';
-import { Organisation } from '../organisations/model/organisation';
-import { AppState } from '../reducers';
-import { User } from '../users/model/user';
-import { UserEntityService } from '../users/services/user-entity.service';
-import { AuthPrincipal, IAuthPrincipal } from './auth-principal';
-import { login } from './auth.actions';
-import {AuthState} from './reducers';
-import {globalAuthState, isLoggedIn} from './auth.selectors';
+import {OAuthErrorEvent, OAuthService, UserInfo} from 'angular-oauth2-oidc';
+import {BehaviorSubject, combineLatest, forkJoin, Observable, of, ReplaySubject, throwError} from 'rxjs';
+import {catchError, distinctUntilChanged, filter, map, mergeMap} from 'rxjs/operators';
+import {Banque} from '../banques/model/banque';
+import {Organisation} from '../organisations/model/organisation';
+import {AppState} from '../reducers';
+import {User} from '../users/model/user';
+import {AuthPrincipal, IAuthPrincipal} from './auth-principal';
+import {login} from './auth.actions';
+import {globalAuthState} from './auth.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

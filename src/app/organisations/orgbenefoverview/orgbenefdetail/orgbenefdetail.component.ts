@@ -1,8 +1,8 @@
-import {Component, Input, Output, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {OrganisationEntityService} from '../../services/organisation-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
-import {Observable, combineLatest} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {Organisation} from '../../model/organisation';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {NgForm} from '@angular/forms';

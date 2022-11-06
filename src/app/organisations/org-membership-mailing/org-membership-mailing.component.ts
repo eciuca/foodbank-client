@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {enmYn} from '../../shared/enums';
-import { map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {OrgSummary} from '../model/orgsummary';

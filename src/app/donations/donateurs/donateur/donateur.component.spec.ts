@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DonateurComponent } from './donateur.component';
+import {DonateurComponent} from './donateur.component';
 
 describe('DonateurComponent', () => {
   let component: DonateurComponent;

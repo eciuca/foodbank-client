@@ -8,7 +8,6 @@ import {map} from 'rxjs/operators';
 import {labelCivilite} from '../../shared/functions';
 
 
-
 @Component({
   selector: 'app-dependents',
   templateUrl: './dependents.component.html',

@@ -3,8 +3,7 @@ import {UserEntityService} from '../services/user-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {DefaultUser, User} from '../model/user';
-import {MessageService} from 'primeng/api';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {
     enmLanguageLegacy,
     enmUserRoles,
@@ -20,7 +19,7 @@ import {AppState} from '../../reducers';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {Membre} from '../../membres/model/membre';
 import {DataServiceError} from '@ngrx/data';
-import {Observable, combineLatest} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {Organisation} from '../../organisations/model/organisation';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 

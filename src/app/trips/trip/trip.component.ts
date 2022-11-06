@@ -1,6 +1,6 @@
 import {combineLatest, Observable} from 'rxjs';
 import {DataServiceError} from '@ngrx/data';
-import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DefaultTrip, Trip} from '../model/trip';
 import {TripEntityService} from '../services/trip-entity.service';
 import {ConfirmationService, MessageService} from 'primeng/api';

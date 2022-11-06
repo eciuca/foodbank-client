@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MembreEmploiTypeEntityService} from '../services/membreEmploiType-entity.service';
 import {MembreEmploiType} from '../model/membreEmploiType';
 import {select, Store} from '@ngrx/store';

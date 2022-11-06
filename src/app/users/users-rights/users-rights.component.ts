@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {filter, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {User} from '../model/user';
@@ -8,7 +8,7 @@ import {globalAuthState, isLoggedIn} from '../../auth/auth.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {LazyLoadEvent} from 'primeng/api';
-import {enmUserRolesAsso, enmUserRolesBankAsso, enmLanguage, enmYn } from '../../shared/enums';
+import {enmLanguage, enmUserRolesAsso, enmUserRolesBankAsso, enmYn} from '../../shared/enums';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
 import {labelRights} from '../../shared/functions';

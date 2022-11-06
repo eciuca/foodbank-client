@@ -1,14 +1,14 @@
 import {NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { BanquesComponent } from './banques.component';
-import { BanquesResolver} from './banques.resolver';
-import { BanqueComponent } from './banque/banque.component';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {BanquesComponent} from './banques.component';
+import {BanquesResolver} from './banques.resolver';
+import {BanqueComponent} from './banque/banque.component';
 
 import {BanquesDataService} from './services/banques-data.service';
 import {BanqueEntityService} from './services/banque-entity.service';
-import {EntityDataService, EntityDefinitionService } from '@ngrx/data';
-import {TableModule } from 'primeng/table';
+import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
+import {TableModule} from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
@@ -23,17 +23,18 @@ import {ConfirmationService} from 'primeng/api';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {ToastModule} from 'primeng/toast';
-import { BanqprogComponent } from './banqprogs/banqprog/banqprog.component';
-import { BanqprogsComponent } from './banqprogs/banqprogs.component';
+import {BanqprogComponent} from './banqprogs/banqprog/banqprog.component';
+import {BanqprogsComponent} from './banqprogs/banqprogs.component';
 import {BanqProgEntityService} from './services/banqprog-entity.service';
 import {BanqProgsDataService} from './services/banqprogs-data.service';
 import {AccordionModule} from 'primeng/accordion';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputNumberModule} from 'primeng/inputnumber';
-import { BankreportsComponent } from './bankreports/bankreports.component';
+import {BankreportsComponent} from './bankreports/bankreports.component';
 import {ChartModule} from 'primeng/chart';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+
 const routes: Routes = [
     {
         path: 'bankreports',

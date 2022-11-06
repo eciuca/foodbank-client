@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { MailingsComponent } from './mailings.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {MailingsComponent} from './mailings.component';
 import {TableModule} from 'primeng/table';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {FormsModule} from '@angular/forms';
@@ -22,7 +22,7 @@ import {MessageModule} from 'primeng/message';
 import {InputTextModule} from 'primeng/inputtext';
 import {FileUploadModule} from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
-import { MailaddressComponent } from './mailaddress/mailaddress.component';
+import {MailaddressComponent} from './mailaddress/mailaddress.component';
 import {MailAddressesDataService} from './services/mailaddresses-data.service';
 import {MailadressEntityService} from './services/mailadress-entity.service';
 import {RegionsDataService} from '../organisations/services/regions-data.service';
@@ -35,7 +35,6 @@ import {AuditChangesDataService} from '../audits/services/auditChanges-data.serv
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 import {TooltipModule} from 'primeng/tooltip';
 import {InputSwitchModule} from 'primeng/inputswitch';
-
 
 
 const routes: Routes = [

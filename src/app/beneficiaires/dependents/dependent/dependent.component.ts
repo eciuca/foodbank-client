@@ -1,6 +1,6 @@
 import {combineLatest, Observable} from 'rxjs';
-import {DataServiceError, QueryParams} from '@ngrx/data';
-import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {DataServiceError} from '@ngrx/data';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DefaultDependent, Dependent} from '../../model/dependent';
 import {DependentEntityService} from '../../services/dependent-entity.service';
 import {select, Store} from '@ngrx/store';

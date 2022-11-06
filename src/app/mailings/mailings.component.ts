@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {AuthState} from '../auth/reducers';
-import { AuthService } from '../auth/auth.service';
+import {AuthService} from '../auth/auth.service';
 import {globalAuthState} from '../auth/auth.selectors';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {BehaviorSubject} from 'rxjs';
-import {DataServiceError, QueryParams} from '@ngrx/data';
 import {MailingEntityService} from './services/mailing-entity.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {DefaultMailing, Mailing} from './model/mailing';
@@ -18,9 +17,9 @@ import {MailAddress} from './model/mailaddress';
 import {MailadressEntityService} from './services/mailadress-entity.service';
 import {RegionEntityService} from '../organisations/services/region-entity.service';
 import {enmLanguage, enmMailGroupsBank, enmMailGroupsFBBA, enmMailGroupsOrg} from '../shared/enums';
-import { FileUpload } from 'primeng/fileupload';
+import {FileUpload} from 'primeng/fileupload';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
-import { environment } from '../../environments/environment';
+import {environment} from '../../environments/environment';
 
 
 @Component({

@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { UsersComponent } from './users.component';
-import {UserComponent } from './user/user.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {UsersComponent} from './users.component';
+import {UserComponent} from './user/user.component';
 
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {UsersDataService} from './services/users-data.service';
@@ -27,7 +27,7 @@ import {ToastModule} from 'primeng/toast';
 import {OrgSummariesDataService} from '../organisations/services/orgsummaries-data.service';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {CheckboxModule} from 'primeng/checkbox';
-import { UsersRightsComponent } from './users-rights/users-rights.component';
+import {UsersRightsComponent} from './users-rights/users-rights.component';
 import {BanquesDataService} from '../banques/services/banques-data.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {TooltipModule} from 'primeng/tooltip';

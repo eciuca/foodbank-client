@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MembreFunctionComponent } from './membre-function.component';
+import {MembreFunctionComponent} from './membre-function.component';
 
 describe('MembreFunctionComponent', () => {
   let component: MembreFunctionComponent;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Beneficiaire} from './model/beneficiaire';
 import {BeneficiaireEntityService} from './services/beneficiaire-entity.service';
 import {filter, map, mergeMap} from 'rxjs/operators';

@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ExcelService } from './services/excel.service';
+import {ExcelService} from './services/excel.service';
 
 import {RouterModule, Routes} from '@angular/router';
 import {AuthModule} from './auth/auth.module';
@@ -23,11 +23,11 @@ import {MessageService} from 'primeng/api';
 import {appEntityMetadata} from './app-entity.metadata';
 import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
-import { FallbackComponent } from './fallback.component';
-import { ShouldLoginComponent } from './should-login.component';
-import { AuthGuardWithForcedLogin } from './auth/auth-guard-with-forced-login.guard';
+import {FallbackComponent} from './fallback.component';
+import {ShouldLoginComponent} from './should-login.component';
+import {AuthGuardWithForcedLogin} from './auth/auth-guard-with-forced-login.guard';
 import {ToastModule} from 'primeng/toast';
-import { DocumentationComponent } from './documentation/documentation.component';
+import {DocumentationComponent} from './documentation/documentation.component';
 import {AccordionModule} from 'primeng/accordion';
 
 

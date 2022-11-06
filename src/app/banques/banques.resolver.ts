@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {BanqueEntityService} from './services/banque-entity.service';
-import {filter, first, tap, mergeMap} from 'rxjs/operators';
+import {filter, first, mergeMap} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {globalAuthState} from '../auth/auth.selectors';

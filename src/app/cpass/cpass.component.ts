@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Cpas, DefaultCpas} from './model/cpas';
+import {Cpas} from './model/cpas';
 import {CpasEntityService} from './services/cpas-entity.service';
 import {LazyLoadEvent} from 'primeng/api';
 import {filter, map, mergeMap} from 'rxjs/operators';

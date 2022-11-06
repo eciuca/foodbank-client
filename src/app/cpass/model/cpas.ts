@@ -1,5 +1,3 @@
-import {Membre} from '../../membres/model/membre';
-
 export interface Cpas {
 
     cpasId: number;

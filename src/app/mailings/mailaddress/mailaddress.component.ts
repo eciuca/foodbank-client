@@ -3,7 +3,6 @@ import {DefaultMailAddress, MailAddress} from '../model/mailaddress';
 import {NgForm} from '@angular/forms';
 
 
-
 @Component({
   selector: 'app-mailaddress',
   templateUrl: './mailaddress.component.html',

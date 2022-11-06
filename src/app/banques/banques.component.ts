@@ -1,7 +1,7 @@
-import {Component, OnInit } from '@angular/core';
-import {Banque } from './model/banque';
+import {Component, OnInit} from '@angular/core';
+import {Banque} from './model/banque';
 import {BanqueEntityService} from './services/banque-entity.service';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';

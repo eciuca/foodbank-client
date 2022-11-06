@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MembreEntityService} from '../services/membre-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map, switchMap} from 'rxjs/operators';
@@ -16,11 +16,8 @@ import {UserHttpService} from '../../users/services/user-http.service';
 import {AuthService} from '../../auth/auth.service';
 import {User} from '../../users/model/user';
 import {OrganisationEntityService} from '../../organisations/services/organisation-entity.service';
-import {MembreFunction} from '../model/membreFunction';
 import {MembreFunctionEntityService} from '../services/membreFunction-entity.service';
-import {MembreEmploiType} from '../model/membreEmploiType';
 import {MembreEmploiTypeEntityService} from '../services/membreEmploiType-entity.service';
-import {OrgSummary} from '../../organisations/model/orgsummary';
 import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 

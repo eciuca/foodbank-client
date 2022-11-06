@@ -1,20 +1,21 @@
-import {Component, Input, Output, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {OrganisationEntityService} from '../services/organisation-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map, switchMap} from 'rxjs/operators';
-import {Observable, combineLatest} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {DefaultOrganisation, Organisation} from '../model/organisation';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {
-    enmStatusCompany,
-    enmGender,
     enmCountry,
+    enmGender,
     enmOrgActivities,
     enmOrgCategories,
+    enmStatusCompany,
+    enmSupplyDay,
     enmSupplyMonth,
-    enmSupplyWeek, enmSupplyDay
+    enmSupplyWeek
 } from '../../shared/enums';
-import {NgForm, ValidationErrors} from '@angular/forms';
+import {NgForm} from '@angular/forms';
 import {Cpas} from '../../cpass/model/cpas';
 import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
 import {DataServiceError, QueryParams} from '@ngrx/data';

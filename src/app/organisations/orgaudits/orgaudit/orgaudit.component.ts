@@ -1,6 +1,6 @@
 import {combineLatest, Observable} from 'rxjs';
 import {DataServiceError, QueryParams} from '@ngrx/data';
-import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DefaultOrgaudit, Orgaudit} from '../../model/orgaudit';
 import {OrgauditEntityService} from '../../services/orgaudit-entity.service';
 import {select, Store} from '@ngrx/store';

@@ -1,12 +1,12 @@
 import {combineLatest, Observable} from 'rxjs';
-import {DataServiceError, QueryParams} from '@ngrx/data';
-import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {DataServiceError} from '@ngrx/data';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DefaultDonateur, Donateur} from '../../model/donateur';
 import {DonateurEntityService} from '../../services/donateur-entity.service';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../reducers';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmCountry, enmGender} from '../../../shared/enums';
+import {enmCountry} from '../../../shared/enums';
 import {map} from 'rxjs/operators';
 import {globalAuthState} from '../../../auth/auth.selectors';
 import {NgForm} from '@angular/forms';

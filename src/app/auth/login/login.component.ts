@@ -1,16 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 import {Store} from '@ngrx/store';
 
 import {AuthService} from '../auth.service';
-import {mergeMap, tap} from 'rxjs/operators';
-import {noop} from 'rxjs';
 import {Router} from '@angular/router';
 import {AppState} from '../../reducers';
-import {login} from '../auth.actions';
-import {AuthActions} from '../action-types';
-import { IAuthPrincipal } from '../auth-principal';
 import {MessageService} from 'primeng/api';
 
 @Component({

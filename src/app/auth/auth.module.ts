@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {LoginComponent} from './login/login.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
+import {StoreModule} from '@ngrx/store';
 import {AuthService} from './auth.service';
 import {authReducer} from './reducers';
 import {EffectsModule} from '@ngrx/effects';
@@ -13,11 +13,11 @@ import {PanelModule} from 'primeng/panel';
 import {MessageModule} from 'primeng/message';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
-import { AuthGuardWithForcedLogin } from './auth-guard-with-forced-login.guard';
-import { AuthConfig, OAuthModule, OAuthModuleConfig, OAuthStorage } from 'angular-oauth2-oidc';
-import { authConfig } from './auth-config';
-import { authModuleConfig } from './auth-module-config';
-import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import {AuthGuardWithForcedLogin} from './auth-guard-with-forced-login.guard';
+import {AuthConfig, OAuthModule, OAuthModuleConfig, OAuthStorage} from 'angular-oauth2-oidc';
+import {authConfig} from './auth-config';
+import {authModuleConfig} from './auth-module-config';
+import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 
 // We need a factory since localStorage is not available at AOT build time
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions

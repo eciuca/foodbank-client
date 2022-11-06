@@ -1,5 +1,5 @@
-import {Component,  OnInit} from '@angular/core';
-import { Region } from '../model/region';
+import {Component, OnInit} from '@angular/core';
+import {Region} from '../model/region';
 import {RegionEntityService} from '../services/region-entity.service';
 import {map} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';

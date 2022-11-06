@@ -1,5 +1,3 @@
-import {Organisation} from './organisation';
-
 export interface Orgcontact {
     orgPersId: number;
     lienAsso: number;

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {filter, map, mergeMap, tap} from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {Membre} from './model/membre';
 import {MembreEntityService} from './services/membre-entity.service';

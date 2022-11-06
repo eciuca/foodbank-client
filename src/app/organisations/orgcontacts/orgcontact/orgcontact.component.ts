@@ -1,6 +1,6 @@
 import {combineLatest, Observable} from 'rxjs';
-import {DataServiceError, QueryParams} from '@ngrx/data';
-import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {DataServiceError} from '@ngrx/data';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DefaultOrgcontact, Orgcontact} from '../../model/orgcontact';
 import {OrgcontactEntityService} from '../../services/orgcontact-entity.service';
 import {select, Store} from '@ngrx/store';

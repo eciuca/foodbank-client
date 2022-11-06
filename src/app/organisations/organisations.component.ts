@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {filter, map, mergeMap, tap} from 'rxjs/operators';
+import {filter, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import {Organisation} from './model/organisation';
 import {OrganisationEntityService} from './services/organisation-entity.service';
@@ -9,7 +9,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../reducers';
 import {LazyLoadEvent} from 'primeng/api';
 import {AuthState} from '../auth/reducers';
-import {enmYn, enmStatusCompany, enmOrgCategories} from '../shared/enums';
+import {enmOrgCategories, enmStatusCompany, enmYn} from '../shared/enums';
 import {RegionEntityService} from './services/region-entity.service';
 import {DepotEntityService} from '../depots/services/depot-entity.service';
 import {QueryParams} from '@ngrx/data';

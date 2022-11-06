@@ -1,12 +1,11 @@
-import { Component, Input , Output, EventEmitter, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RegionEntityService} from '../../services/region-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {DefaultRegion, Region} from '../../model/region';
-import {MessageService} from 'primeng/api';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {NgForm} from '@angular/forms';
-import {Observable,  combineLatest} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../../auth/auth.selectors';
 

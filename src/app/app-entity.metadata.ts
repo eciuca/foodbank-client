@@ -12,7 +12,7 @@ import {compareOrgcontacts, Orgcontact} from './organisations/model/orgcontact';
 import {compareOrgSummaries, OrgSummary} from './organisations/model/orgsummary';
 import {compareMembreMails, MembreMail} from './membres/model/membreMail';
 import {compareMailings, Mailing} from './mailings/model/mailing';
-import {Notification, compareNotifications} from './home/notifications/model/notification';
+import {compareNotifications, Notification} from './home/notifications/model/notification';
 import {compareTrips, Trip} from './trips/model/trip';
 import {compareDonateurs, Donateur} from './donations/model/donateur';
 import {compareDons, Don} from './donations/model/don';

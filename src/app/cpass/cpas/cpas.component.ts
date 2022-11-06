@@ -1,13 +1,12 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CpasEntityService} from '../services/cpas-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
-import {Observable, combineLatest} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {Cpas, DefaultCpas} from '../model/cpas';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {enmGender, enmLanguage} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
-import {DefaultMembre} from '../../membres/model/membre';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';

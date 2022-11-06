@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CpassComponent } from './cpass.component';
+import {CpassComponent} from './cpass.component';
 
 describe('CpassComponent', () => {
   let component: CpassComponent;

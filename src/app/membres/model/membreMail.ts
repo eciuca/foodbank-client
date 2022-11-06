@@ -1,5 +1,3 @@
-import {Membre} from './membre';
-
 export interface MembreMail {
     batId: number;
     societe: string; // calculated field

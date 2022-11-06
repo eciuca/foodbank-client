@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {select, Store} from '@ngrx/store';

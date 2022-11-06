@@ -1,4 +1,4 @@
-import {Component,  OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Audit} from './model/audit';
 import {AuditEntityService} from './services/audit-entity.service';
 import {BehaviorSubject} from 'rxjs';
