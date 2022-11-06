@@ -164,11 +164,13 @@
                     <p-message i18n-text="@@MailingTextIsMandatory" *ngIf="idmailingtext.invalid && idmailingtext.touched" severity="error" text="Mail text is required"></p-message>
                 </div>
                 </div>
+
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-8">
                         Attachments: {{attachmentFileNames.toString() }}
                     </div>
                     <div class="p-field p-col-12 p-md-4">
+                        <p-progressSpinner *ngIf="isAttachmentUploadOngoing"></p-progressSpinner>
                         <p-fileUpload #fileUpload i18n-chooseLabel="@@SelectFile" name="myFile[]"  [auto]="true"  customUpload="true"  chooseLabel="Select File"
                                       multiple="multiple"   (onRemove)="removeMailAttachment($event)" (uploadHandler)="storeMailAttachment($event,fileUpload)">
                             <ng-template pTemplate="toolbar">
@@ -177,7 +179,6 @@
                         </p-fileUpload>
                     </div>
                 </div>
-                <p-progressSpinner *ngIf="isAttachmentUploadOngoing"></p-progressSpinner>
 
             </form>
         </p-accordionTab>

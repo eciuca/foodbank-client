@@ -76,7 +76,7 @@ export let enmSupplyMonth = [
 ];
 export let enmUserRoles = [
     {label: $localize`:@@RoleAdmin:Global admin`, value: 'admin'},
-    {label: $localize`:@@RoleBankAdmin:Bank admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
     {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
     {label: $localize`:@@RoleCPASAdmin:CPAS Admin`, value: 'Admin_CPAS' },
     {label: $localize`:@@RoleFEADAdmin:FEAD Admin`, value: 'Admin_FEAD'},
@@ -87,13 +87,13 @@ export let enmUserRoles = [
     {label: $localize`:@@RoleFBBAUser:FBBA User`, value: 'Bank_FBBA'},
 ];
 export let enmUserRolesBankAsso = [
-    {label: $localize`:@@RoleBankAdmin:Bank admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
     {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
     {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
     {label: $localize`:@@RoleOrgUser:Org User`, value: 'Asso'},
 ];
 export let enmUserRolesBank = [
-    {label: $localize`:@@RoleBankAdmin:Bank admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
     {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
     {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'}
 ];

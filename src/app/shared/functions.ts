@@ -16,7 +16,7 @@ export function  labelRights(rights: string) {
     if (rights) {
         switch (rights.toLowerCase()) {
             case 'admin_banq':
-                return $localize`:@@RoleBankAdmin:Bank admin`;
+                return $localize`:@@RoleBankAdmin:Bank Admin`;
             case 'bank':
                 return $localize`:@@RoleBankUser:Bank User`;
             case 'admin_asso':

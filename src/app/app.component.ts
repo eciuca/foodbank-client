@@ -181,7 +181,7 @@ export class AppComponent implements OnInit {
                     this.loggedInUserRole = $localize`:@@RoleBankUser:Bank User`;
                     break;
                 case 'Admin_Banq':
-                    this.loggedInUserRole = $localize`:@@RoleBankAdmin:Bank admin`;
+                    this.loggedInUserRole = $localize`:@@RoleBankAdmin:Bank Admin`;
                     break;
                 case 'Asso':
                     this.loggedInUserRole = $localize`:@@RoleOrgUser:Org User`;
