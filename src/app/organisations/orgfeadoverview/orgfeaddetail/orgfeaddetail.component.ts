@@ -75,9 +75,7 @@ export class OrgfeaddetailComponent implements OnInit {
                 this.userName = authState.user.userName;
                 switch (authState.user.rights) {
                   case 'Admin_Banq':
-                    this.booCanSave = true;
-                    break;
-                  case 'Admin_Asso':
+                  case 'admin':
                     this.booCanSave = true;
                     break;
                   default:

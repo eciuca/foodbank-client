@@ -249,11 +249,11 @@ export class MailingsComponent implements OnInit {
     if ( this.mailingToList) {
       mailListArray = this.mailingToList.split('\n');
     }
-    console.log('Send Mail Event', event);
-    if ( mailListArray.length > 200) {
+
+    if ( mailListArray.length > 80) {
       const errMessage = {
         severity: 'error', summary: 'Send',
-        detail: $localize`:@@messageSendMaxListError:You have ${mailListArray.length} recipients. The maximum is 200.`,
+        detail: $localize`:@@messageSendMaxListError:You have specified ${mailListArray.length} recipients. The maximum is 80. This mailing system is intended for intercommunication in our community, mot for mass-mailing`,
         life: 6000
       };
       this.messageService.add(errMessage);

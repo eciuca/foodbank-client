@@ -264,7 +264,17 @@ export class AppComponent implements OnInit {
         // handle  organisation(s) items
         if (  ['admin', 'Admin_FEAD', 'Admin_FBBA','Bank_FBBA'].includes(authState.user.rights))  {
             this.menuLoggedInItems.push(
-                 {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',  routerLink: ['/organisations']}
+                {
+                    label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map',
+                    items: [
+                        {label: $localize`:@@menuOrganisations:Organisations`, icon: 'pi pi-fw pi-map', routerLink: ['/organisations']},
+                        {
+                            label: $localize`:@@menuFEADOverview:FEAD`,
+                            icon: 'pi pi-fw pi-map',
+                            routerLink: ['/organisations/orgfeadoverview/']
+                        },
+                    ]
+                }
             );
         } else if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(

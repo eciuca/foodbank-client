@@ -55,7 +55,6 @@ export class OrganisationsComponent implements OnInit {
     statutSelected: string;
     statuts: any[];
     bankOptions: any[]
-    filteredBankShortName: string;
     constructor(private organisationService: OrganisationEntityService,
                 private banqueService: BanqueEntityService,
                 private regionService: RegionEntityService,
@@ -209,9 +208,6 @@ export class OrganisationsComponent implements OnInit {
             }
             if (event.filters.bankShortName && event.filters.bankShortName.value) {
                 queryParms['bankShortName'] = event.filters.bankShortName.value;
-                this.filteredBankShortName = event.filters.bankShortName.value;
-            } else {
-                this.filteredBankShortName = null;
             }
         }
         this.loadPageSubject$.next(queryParms);

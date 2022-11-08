@@ -13,6 +13,7 @@ import {enmOrgCategories, enmStatusCompany, enmYn} from '../../shared/enums';
 import {RegionEntityService} from '../services/region-entity.service';
 import {DepotEntityService} from '../../depots/services/depot-entity.service';
 import {QueryParams} from '@ngrx/data';
+import {BanqueEntityService} from '../../banques/services/banque-entity.service';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class OrgfeadoverviewComponent implements OnInit {
   filterBase: any;
   regions: any[];
   depots: any[];
-  YNOptions:  any[];
+  YNOptions: any[];
   bankName: string;
   bankShortName: string;
   lienBanque: number;
@@ -45,7 +46,10 @@ export class OrgfeadoverviewComponent implements OnInit {
   feadSelected: string;
   statutSelected: string;
   statuts: any[];
+  bankOptions: any[]
+
   constructor(private organisationService: OrganisationEntityService,
+              private banqueService: BanqueEntityService,
               private regionService: RegionEntityService,
               private depotService: DepotEntityService,
               private router: Router,
@@ -73,10 +77,10 @@ export class OrgfeadoverviewComponent implements OnInit {
           console.log('Loaded organisations from nextpage: ' + loadedOrganisations.length);
           if (loadedOrganisations.length > 0) {
             this.totalRecords = loadedOrganisations[0].totalRecords;
-          }  else {
+          } else {
             this.totalRecords = 0;
           }
-          this.organisations  = loadedOrganisations;
+          this.organisations = loadedOrganisations;
           this.loading = false;
           this.organisationService.setLoaded(true);
         });
@@ -97,10 +101,11 @@ export class OrgfeadoverviewComponent implements OnInit {
   }
 
   handleSelect(organisation) {
-    console.log( 'Organisation was selected', organisation);
+    console.log('Organisation was selected', organisation);
     this.selectedIdDis$.next(organisation.idDis);
     this.displayDialog = true;
   }
+
   handleOrganisationQuit() {
     this.displayDialog = false;
   }
@@ -114,7 +119,6 @@ export class OrgfeadoverviewComponent implements OnInit {
   }
 
 
-
   nextPage(event: LazyLoadEvent) {
     console.log('Lazy Loaded Event', event);
     this.loading = true;
@@ -125,7 +129,7 @@ export class OrgfeadoverviewComponent implements OnInit {
     if (event.sortField) {
       queryParms['sortField'] = event.sortField.toString();
     } else {
-      queryParms['sortField'] =  'societe';
+      queryParms['sortField'] = 'societe';
     }
     queryParms['actif'] = '1';
     if (this.regionSelected) {
@@ -137,7 +141,7 @@ export class OrgfeadoverviewComponent implements OnInit {
     if (this.statutSelected && (this.statutSelected !== '')) {
       queryParms['statut'] = this.statutSelected;
     }
-    if (this.feadSelected ) {
+    if (this.feadSelected) {
       queryParms['isFead'] = this.feadSelected;
     }
     if (event.filters) {
@@ -156,6 +160,9 @@ export class OrgfeadoverviewComponent implements OnInit {
       if (event.filters.feadN && event.filters.feadN.value !== null) {
         queryParms['feadN'] = event.filters.feadN.value;
       }
+      if (event.filters.bankShortName && event.filters.bankShortName.value) {
+        queryParms['bankShortName'] = event.filters.bankShortName.value;
+      }
       if (this.regionSelected) {
         queryParms['regId'] = this.regionSelected;
       }
@@ -169,50 +176,77 @@ export class OrgfeadoverviewComponent implements OnInit {
     }
     this.loadPageSubject$.next(queryParms);
   }
+
   private initializeDependingOnUserRights(authState: AuthState) {
     // exfilter all depots
-    this.filterBase = { 'isDepot': '0' };
-    if (authState.banque) {
+    this.filterBase = {'isDepot': '0'};
+    if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'
+        && authState.user.rights !== 'Admin_FBBA' && authState.user.rights !== 'Bank_FBBA') {
       this.lienBanque = authState.banque.bankId;
-      this.filterBase['lienBanque'] = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
       this.bankShortName = authState.banque.bankShortName;
-      switch (authState.user.rights) {
-        case 'Bank':
-        case 'Admin_Banq':
-          const  queryDepotParms: QueryParams = {};
-          queryDepotParms['offset'] = '0';
-          queryDepotParms['rows'] = '999';
-          queryDepotParms['sortField'] = 'idDepot';
-          queryDepotParms['sortOrder'] = '1';
+    }
+
+    switch (authState.user.rights) {
+      case 'admin':
+      case 'Bank':
+      case 'Admin_Banq':
+      case 'Admin_FEAD':
+      case 'Admin_FBBA':
+      case 'Bank_FBBA':
+        const queryDepotParms: QueryParams = {};
+        queryDepotParms['offset'] = '0';
+        queryDepotParms['rows'] = '999';
+        queryDepotParms['sortField'] = 'nom';
+        queryDepotParms['sortOrder'] = '1';
+        if (this.lienBanque) {
+          this.filterBase['lienBanque'] = this.lienBanque
           queryDepotParms['idCompany'] = this.bankShortName;
-          queryDepotParms['actif'] = '1';
-          this.depotService.getWithQuery(queryDepotParms)
-              .subscribe(depots => {
-                this.depots = [{ value: null, label: ''}];
-                depots.map((depot) =>
-                    this.depots.push({value: depot.idDepot, label: depot.nom})
-                );
+        }
+        queryDepotParms['actif'] = '1';
+        this.depotService.getWithQuery(queryDepotParms)
+            .subscribe(depots => {
+              this.depots = [{value: null, label: ''}];
+              depots.map((depot) =>
+                  this.depots.push({value: depot.idDepot, label: depot.nom})
+              );
+            });
+        if (['Admin_FBBA', 'Bank_FBBA', 'Admin_FEAD'].includes(authState.user.rights)) {
+          const classicBanks = {'classicBanks': '1'};
+          this.banqueService.getWithQuery(classicBanks)
+              .subscribe((banquesEntities) => {
+                console.log('Banques now loaded:', banquesEntities);
+                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
               });
 
-          break;
-        case 'Asso':
-        case 'Admin_Asso':
-          // This module is only called for depots see menu
-          this.depotName = authState.organisation.societe;
-          this.filterBase['lienDepot'] = authState.organisation.idDis;
-          break;
-        default:
-      }
-      this.regionService.getWithQuery({'lienBanque': this.lienBanque.toString()})
-          .subscribe(regions => {
-            this.regions = [{ value: null, label: ''}];
-            regions.map((region) =>
-                this.regions.push({value: region.regId, label: region.regName})
-            );
-          });
+        }
+        if (authState.user.rights === 'admin') {
+          this.banqueService.getAll()
+              .subscribe((banquesEntities) => {
+                console.log('Banques now loaded:', banquesEntities);
+                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+              });
+
+        }
+
+        break;
+      case 'Asso':
+      case 'Admin_Asso':
+        // This module is only called for depots see menu
+        this.depotName = authState.organisation.societe;
+        this.filterBase['lienDepot'] = authState.organisation.idDis;
+        break;
+      default:
     }
+    this.regionService.getWithQuery({'lienBanque': this.lienBanque.toString()})
+        .subscribe(regions => {
+          this.regions = [{value: null, label: ''}];
+          regions.map((region) =>
+              this.regions.push({value: region.regId, label: region.regName})
+          );
+        });
   }
+
 
   showDialogToAdd() {
     this.selectedIdDis$.next(0);
