@@ -282,6 +282,7 @@ export class OrgbenefoverviewComponent implements OnInit {
             const cleanedItem = {};
             cleanedItem['Id'] = item.idDis;
             cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
+            cleanedItem[$localize`:@@OrgRefInt:Internal Reference`] =item.refInt;
             const regionObject = this.regions.find(obj => obj.value == item.region);
             cleanedItem[$localize`:@@Region:Region`] =(typeof regionObject !== "undefined") ? regionObject.label : '';
             cleanedItem[$localize`:@@City:City`] =item.localite;

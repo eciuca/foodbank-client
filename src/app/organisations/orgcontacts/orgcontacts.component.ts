@@ -37,8 +37,13 @@ export class OrgcontactsComponent implements OnInit {
         .pipe(
             select(globalAuthState),
             map((authState) => {
-              if (authState.user && ( authState.user.rights === 'Admin_Asso' ) ) {
+              switch (authState.user.rights) {
+                case 'admin':
+                case 'Admin_Asso':
+                case 'Admin_Banq':
                 this.booIsAdmin = true;
+                break;
+                default:
               }
             })
         )
@@ -69,7 +74,7 @@ export class OrgcontactsComponent implements OnInit {
       } else {
         this.orgcontacts = [];
         this.booCanCreate = false;
-        console.log(' not yet initializing orgcontacts of lienAsso, we are creating a new beneficiary !!!');
+        console.log(' not yet initializing orgcontacts of lienAsso, we are creating a new association !!!');
       }
     });
   }

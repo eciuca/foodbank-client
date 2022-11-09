@@ -69,12 +69,12 @@ export class OrgcontactComponent implements OnInit {
             map((authState) => {
               if (authState.user) {
                 switch (authState.user.rights) {
-                  case 'Asso':
-                     break;
-                  case 'Admin_Asso':
-                    this.booCanSave = true;
-                    this.booCanDelete = true;
-                    break;
+                    case 'admin':
+                    case 'Admin_Asso':
+                    case 'Admin_Banq':
+                        this.booCanSave = true;
+                        this.booCanDelete = true;
+                        break;
                   default:
                 }
               }

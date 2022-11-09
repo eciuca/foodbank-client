@@ -18,7 +18,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {OrganisationHttpService} from './services/organisation-http.service';
 import {formatDate} from '@angular/common';
-import {labelActive, labelAgreed, labelLanguage} from '../shared/functions';
+import {labelAgreed, labelLanguage} from '../shared/functions';
 
 
 @Component({
@@ -432,9 +432,8 @@ export class OrganisationsComponent implements OnInit {
                     }
                     cleanedItem['Id'] = item.idDis;
                     cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
-                    cleanedItem[$localize`:@@InternalRef:Internal Ref`] = item.refInt;
-                    cleanedItem[$localize`:@@Active:Active`] = labelActive(item.actif);
-                    cleanedItem[$localize`:@@Language:Language`] = labelLanguage(item.langue)
+                    cleanedItem[$localize`:@@OrgRefInt:Internal Reference`] =item.refInt;
+                    cleanedItem[$localize`:@@Language:Language`] = labelLanguage(item.langue);
                     cleanedItem[$localize`:@@Address:Address`] = item.adresse;
                     cleanedItem[$localize`:@@ZipCode:Zip Code`] =item.cp;
                     cleanedItem[$localize`:@@City:City`] =item.localite;
@@ -467,22 +466,12 @@ export class OrganisationsComponent implements OnInit {
     }
 
     isAntenneMissing(organisation: Organisation) {
-        if (organisation.birbCode == "1" && organisation.antenneOrgName == "") {
-            return true;
-        }
-        return false;
+        return organisation.birbCode == "1" && organisation.antenneOrgName == "";
+
     }
 
     hasAnomalies(organisation:  Organisation) {
-        if ((organisation.anomalies != "") || this.isAntenneMissing(organisation)) {
-            return true;
-        }
-        return false;
-    }
-    generateNGStyleForAnomalies(organisation: Organisation) {
-        if (this.hasAnomalies(organisation)) {
-            return "'background-color': 'yellow'";
-        }
+        return (organisation.anomalies != "") || this.isAntenneMissing(organisation);
 
     }
 
@@ -519,8 +508,8 @@ export class OrganisationsComponent implements OnInit {
 
 
     hasDifferentRamasseDepot(organisation: Organisation) {
-        if (organisation.depotram != organisation.lienDepot) return true;
-        return false;
+        return organisation.depotram != organisation.lienDepot;
+
 
     }
 

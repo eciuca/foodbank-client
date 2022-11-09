@@ -238,7 +238,11 @@ export class OrgfeadoverviewComponent implements OnInit {
         break;
       default:
     }
-    this.regionService.getWithQuery({'lienBanque': this.lienBanque.toString()})
+    const  queryRegionParms: QueryParams = {};
+    if (this.lienBanque) {
+      queryRegionParms['lienBanque'] = this.lienBanque.toString();
+    }
+    this.regionService.getWithQuery(queryRegionParms)
         .subscribe(regions => {
           this.regions = [{value: null, label: ''}];
           regions.map((region) =>
