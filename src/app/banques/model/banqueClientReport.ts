@@ -1,4 +1,4 @@
-export interface BanqueOrgReport {
+export interface BanqueClientReport {
     bankShortName: string;
     orgCount: number;
     nFam: number;

@@ -1,9 +1,10 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {BanqueOrgReport} from '../model/banqueOrgReport';
+import {BanqueClientReport} from '../model/banqueClientReport';
 import {BanqueCount} from '../model/banqueCount';
 import {BanqueOrgCount} from '../model/banqueOrgCount';
+import {BanqueFeadReport} from '../model/banqueFeadReport';
 
 @Injectable({
     providedIn: 'root'
@@ -12,8 +13,8 @@ export class BanqueReportService {
 
     constructor(private http: HttpClient) {
     }
-    getOrgReport(accesstoken: string): Observable<BanqueOrgReport[]> {
-        const baseUrl = '/api/banqueOrgReport';
+    getOrgClientReport(accesstoken: string): Observable<BanqueClientReport[]> {
+        const baseUrl = '/api/banqueOrgClientReport';
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
@@ -21,9 +22,20 @@ export class BanqueReportService {
             }),
         };
 
-        return this.http.get<BanqueOrgReport[]>(`${baseUrl}/`, requestOptions);
+        return this.http.get<BanqueClientReport[]>(`${baseUrl}/`, requestOptions);
     }
-    getOrgCountReport(accesstoken: string,hasBirbCode: boolean): Observable<BanqueCount[]> {
+    getOrgFeadReport(accesstoken: string): Observable<BanqueFeadReport[]> {
+        const baseUrl = '/api/banqueOrgFeadReport';
+        const requestOptions = {
+            headers: new HttpHeaders({
+                responseType: 'json',
+                Authorization: 'Bearer ' + accesstoken
+            }),
+        };
+
+        return this.http.get<BanqueFeadReport[]>(`${baseUrl}/`, requestOptions);
+    }
+    getOrgCountReport(accesstoken: string,filter:string): Observable<BanqueCount[]> {
         const baseUrl = '/api/banqueOrgCount';
         const requestOptions = {
             headers: new HttpHeaders({
@@ -31,8 +43,9 @@ export class BanqueReportService {
                 Authorization: 'Bearer ' + accesstoken
             }),
         };
-        if ( hasBirbCode) {
-            return this.http.get<BanqueCount[]>(`${baseUrl}/?hasBirbCode=1`, requestOptions);
+
+        if (filter.length >0) {
+           return this.http.get<BanqueCount[]>(`${baseUrl}/?filter=${filter}`, requestOptions);
         }
         return this.http.get<BanqueCount[]>(`${baseUrl}/`, requestOptions);
     }

@@ -147,13 +147,13 @@ export class AuditReportComponent implements OnInit {
                     });
             this.nbOfOrganisations = 0;
             this.nbOfFeadOrganisations = 0;
-            this.banqueReportService.getOrgCountReport(this.authService.accessToken,false)
+            this.banqueReportService.getOrgCountReport(this.authService.accessToken,"")
                 .subscribe((banqueOrgCounts) => {
                         console.log('BanqueOrgCounts now loaded:', banqueOrgCounts);
                         this.banqueOrgCounts = banqueOrgCounts;
                         this.banqueOrgCounts.forEach(item => this.nbOfOrganisations += item.count);
                     });
-            this.banqueReportService.getOrgCountReport(this.authService.accessToken,true)
+            this.banqueReportService.getOrgCountReport(this.authService.accessToken,"FEAD")
                 .pipe(
                     tap((banqueOrgCounts) => {
                         console.log('BanqueOrgFeadCounts now loaded:', banqueOrgCounts);

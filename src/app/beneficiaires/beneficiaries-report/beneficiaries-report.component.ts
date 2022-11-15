@@ -9,7 +9,7 @@ import {AuthState} from '../../auth/reducers';
 import {BeneficiaireHttpService} from '../services/beneficiaire-http.service';
 import {BanqueEntityService} from '../../banques/services/banque-entity.service';
 import {Population} from '../model/population';
-import {BanqueOrgReport} from '../../banques/model/banqueOrgReport';
+import {BanqueClientReport} from '../../banques/model/banqueClientReport';
 import {BanqueReportService} from '../../banques/services/banque-report.service';
 import {formatDate} from '@angular/common';
 import {ExcelService} from '../../services/excel.service';
@@ -103,9 +103,9 @@ export class BeneficiariesReportComponent implements OnInit {
       this.reportBeneficiariesHistory();
   }
     reportBeneficiaries() {
-        this.banqueReportService.getOrgReport(this.authService.accessToken).subscribe(
-            (response: BanqueOrgReport[]) => {
-                const banqueOrgReportRecords:  BanqueOrgReport[] = response;
+        this.banqueReportService.getOrgClientReport(this.authService.accessToken).subscribe(
+            (response: BanqueClientReport[]) => {
+                const banqueOrgReportRecords:  BanqueClientReport[] = response;
 
                 let reportLabels = [];
                 let reportDataSetsByFamily = [
