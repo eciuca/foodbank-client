@@ -1,6 +1,9 @@
 <div class="spinner-container" *ngIf="!(isDoneLoading | async)">
    <p-progressSpinner ></p-progressSpinner>
 </div>
+<div *ngIf="baseurl.includes('localhost') || baseurl.toLowerCase().includes('dev')">
+    <h1 i18n="@@WarningTestSystem" style="text-align: center">This is a Test System</h1>
+</div>
 <div *ngIf="isLoggedIn$ | async">
     <p-button [label]="loggedInUserName" icon="pi pi-user" (click)="op.toggle($event)"></p-button>
     <p-overlayPanel #op [showCloseIcon]="false" [style]="{width: '450px'}">
