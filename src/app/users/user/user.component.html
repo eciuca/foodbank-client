@@ -28,8 +28,8 @@
             </div>
             <div *ngIf="booIsCreate" class="p-field p-col-12 p-md-3">
                 <label i18n="@@UserPassword" for="password">Password</label>
-                <input #mypassword="ngModel" pInputText id="password" name="password"  required minlength="6" maxlength="12" [ngModel]="user.password" />
-                <p-message i18n-text="@@UserPasswordIsMandatory" *ngIf="mypassword.invalid && userForm.touched" severity="error" text="Password is required for a new user and must be minimum 6 chars long"></p-message>
+                <input #mypassword="ngModel" pInputText id="password" name="password"  required pattern ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}$" [ngModel]="user.password" />
+                <p-message i18n-text="@@UserPasswordIsMandatory" *ngIf="mypassword.invalid && userForm.touched" severity="error" text="Password must contain at least a uppercase and a lowercase letter, a number and contain 8 to 20 characters"></p-message>
             </div>
 
             <div class="p-field p-col-12 p-md-3">

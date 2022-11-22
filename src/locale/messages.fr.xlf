@@ -7687,8 +7687,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="UserPasswordIsMandatory" datatype="html">
-        <source>Password is required for a new user and must be minimum 6 chars long</source>
-        <target>Le mot de passe est requis pour un nouvel utilisateur et doit comporter au moins 6 caractères</target>
+        <source>Password must contain at least a uppercase and a lowercase letter, a number and contain 8 to 20 characters</source>
+        <target>Le mot de passe doit contenir au moins une majuscule et une minuscule, un chiffre et contenir de 8 à 20 caractères</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
           <context context-type="linenumber">32</context>
