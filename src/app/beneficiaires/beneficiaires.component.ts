@@ -35,6 +35,7 @@ export class BeneficiairesComponent implements OnInit {
   filterBase: any;
   booCanCreate: boolean;
   booShowArchived: boolean;
+  booShowDuplicates: boolean;
   filteredOrganisation: any;
   filteredOrganisations: any[];
   filteredOrganisationsPrepend: any[];
@@ -45,6 +46,7 @@ export class BeneficiairesComponent implements OnInit {
   bankShortName: string;
   orgName: string; // if logging in with asso role we need to display the organisation
   YNOptions:  any[];
+
   constructor(private beneficiaireService: BeneficiaireEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private authService: AuthService,
@@ -55,6 +57,7 @@ export class BeneficiairesComponent implements OnInit {
   ) {
     this.booCanCreate = false;
     this.booShowArchived = false;
+    this.booShowDuplicates = false;
     this.bankid = 0;
     this.booShowOrganisations = false;
     this.first = 0;
@@ -161,6 +164,9 @@ export class BeneficiairesComponent implements OnInit {
     }  else {
       queryParms['actif'] = '1';
     }
+    if (this.booShowDuplicates ) {
+      queryParms['duplicate'] = '1';
+    }
     console.log('Filtered Organisation', this.filteredOrganisation);
     if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
       queryParms['lienDis'] = this.filteredOrganisation.idDis;
@@ -253,6 +259,22 @@ export class BeneficiairesComponent implements OnInit {
       latestQueryParams['actif'] = '0';
     } else {
       latestQueryParams['actif'] = '1';
+    }
+    this.loadPageSubject$.next(latestQueryParams);
+  }
+  changeDuplicateFilter($event) {
+    this.booShowDuplicates = $event.checked;
+    this.first = 0;
+    const latestQueryParams = {...this.loadPageSubject$.getValue()};
+    console.log('Latest Query Parms', latestQueryParams);
+    // when we switch from active to archived list and vice versa , we need to restart from first page
+    latestQueryParams['offset'] = '0';
+    if (this.booShowDuplicates ) {
+      latestQueryParams['duplicate'] = '0';
+    } else {
+      if (latestQueryParams.hasOwnProperty('duplicate')) {
+        delete latestQueryParams['duplicate'];
+      }
     }
     this.loadPageSubject$.next(latestQueryParams);
   }

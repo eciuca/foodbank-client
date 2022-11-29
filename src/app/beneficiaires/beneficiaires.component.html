@@ -23,6 +23,10 @@
                     <label i18n="@@ShowArchived" for="actif">Show Archived?</label>
                     <p-checkbox [value]="booShowArchived" binary="true" name="actif" id="actif" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                 </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <label i18n="@@ShowDuplicates" for="duplicate">Show Duplicates?</label>
+                    <p-checkbox [value]="booShowDuplicates" binary="true" name="duplicate" id="duplicate" (onChange)="changeDuplicateFilter($event)"></p-checkbox>
+                </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 p-md-3">
@@ -109,7 +113,7 @@
         </div>
     </ng-template>
 </p-table>
- <p-dialog i18n-header="@@BeneficiaryDetails"header="Beneficiary Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
+ <p-dialog i18n-header="@@BeneficiaryDetails" header="Beneficiary Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
      <app-beneficiaire *ngIf="selectedIdClient$" [idClient$]="selectedIdClient$"  [currentFilteredOrg] ="filteredOrganisation" (onBeneficiaireUpdate)="handleBeneficiaireUpdate($event)"
                        (onBeneficiaireCreate)="handleBeneficiaireCreate($event)"  (onBeneficiaireDelete)="handleBeneficiaireDeleted($event)" (onBeneficiaireQuit)="handleBeneficiaireQuit()"></app-beneficiaire>
  </p-dialog>
