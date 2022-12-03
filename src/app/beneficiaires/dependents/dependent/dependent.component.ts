@@ -118,7 +118,9 @@ export class DependentComponent implements OnInit {
               this.messageService.add(myMessage);
               this.onDependentDelete.emit(dependent);
             },
-                (dataserviceerror: DataServiceError) => {
+                (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                   console.log('Error deleting dependent', dataserviceerror.message);
                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
@@ -146,7 +148,9 @@ export class DependentComponent implements OnInit {
             });
             this.onDependentUpdate.emit(modifiedDependent);
           },
-              (dataserviceerror: DataServiceError) => {
+              (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error updating dependent', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
@@ -165,7 +169,9 @@ export class DependentComponent implements OnInit {
             });
             this.onDependentCreate.emit(newDependent);
           },
-              (dataserviceerror: DataServiceError) => {
+              (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error creating dependent', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length

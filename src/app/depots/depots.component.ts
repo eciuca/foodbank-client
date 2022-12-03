@@ -120,7 +120,9 @@ export class DepotsComponent implements OnInit {
              life: 6000 };
            this.messageService.add(errMessage) ;
          },
-           (dataserviceerror: DataServiceError) => {
+           (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
              console.log('depot', dataserviceerror.message);
              this.orgsummaryService.getByKey(this.selectedIdDis)
                .subscribe(
@@ -149,7 +151,9 @@ export class DepotsComponent implements OnInit {
                                  const latestQueryParams = this.loadPageSubject$.getValue();
                                  this.loadPageSubject$.next(latestQueryParams);
                                },
-                               (dataserviceerror: DataServiceError) => {
+                               (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                                  console.log('Error creating depot', dataserviceerror.message);
                                  const errMessage = {
                                    severity: 'error', summary: 'Create',
@@ -160,7 +164,9 @@ export class DepotsComponent implements OnInit {
                                  this.messageService.add(errMessage);
                                });
                      },
-                   (dataserviceerror: DataServiceError) => {
+                   (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                      console.log('Error finding org for depot', dataserviceerror.message);
                        const  errMessage = {severity: 'error', summary: 'Create',
                          // tslint:disable-next-line:max-line-length

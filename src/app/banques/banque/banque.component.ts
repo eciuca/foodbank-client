@@ -352,7 +352,9 @@ export class BanqueComponent implements OnInit {
                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedBanque.bankId,0,'Bank',
                      modifiedBanque.bankShortName , 'Update' );
              },
-                 (dataserviceerror: DataServiceError) => {
+                 (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                      console.log('Error updating bank', dataserviceerror.message);
                      const  errMessage = {severity: 'error', summary: 'Update',
                          // tslint:disable-next-line:max-line-length
@@ -373,7 +375,9 @@ export class BanqueComponent implements OnInit {
                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,newBanque.bankId,0,'Bank',
                          newBanque.bankShortName, 'Create' );
              },
-                 (dataserviceerror: DataServiceError) => {
+                 (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                      console.log('Error creating bank', dataserviceerror.message);
                      const  errMessage = {severity: 'error', summary: 'Create',
                          // tslint:disable-next-line:max-line-length
@@ -401,7 +405,9 @@ export class BanqueComponent implements OnInit {
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,banque.bankId,0,'Bank',
                                 banque.bankShortName , 'Delete' );
                     },
-                        (dataserviceerror: DataServiceError) => {
+                        (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             console.log('Error deleting bank', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
@@ -449,7 +455,9 @@ export class BanqueComponent implements OnInit {
                     });
                     this.onBanqueUpdate.emit();
                 },
-                (dataserviceerror: DataServiceError) => {
+                (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                     console.log('Error updating bank', dataserviceerror.message);
                     const  errMessage = {severity: 'error', summary: 'Update',
                         // tslint:disable-next-line:max-line-length

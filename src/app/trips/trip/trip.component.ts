@@ -75,7 +75,9 @@ export class TripComponent implements OnInit {
                   this.messageService.add(myMessage);
                   this.onTripDelete.emit(trip);
                 },
-                (dataserviceerror: DataServiceError) => {
+                (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                   console.log('Error deleting trip', dataserviceerror.message);
                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
@@ -105,7 +107,9 @@ export class TripComponent implements OnInit {
                 });
                 this.onTripUpdate.emit(modifiedTrip);
               },
-              (dataserviceerror: DataServiceError) => {
+              (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error updating trip', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
@@ -125,7 +129,9 @@ export class TripComponent implements OnInit {
                 });
                 this.onTripCreate.emit(newTrip);
               },
-              (dataserviceerror: DataServiceError) => {
+              (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error creating trip', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length

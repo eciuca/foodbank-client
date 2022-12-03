@@ -247,7 +247,9 @@ export class OrganisationComponent implements OnInit {
                       this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedOrganisation.lienBanque,modifiedOrganisation.idDis,'Org',
                            ' ' , 'Update' );
               },
-                  (dataserviceerror: DataServiceError) => {
+                  (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                       console.log('Error updating organisation', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Update',
                           // tslint:disable-next-line:max-line-length
@@ -269,7 +271,9 @@ export class OrganisationComponent implements OnInit {
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,newOrganisation.lienBanque,newOrganisation.idDis,'Org',
                           ' ' , 'Create' );
               },
-                  (dataserviceerror: DataServiceError) => {
+                  (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                       console.log('Error creating organisation', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Creation',
                           // tslint:disable-next-line:max-line-length
@@ -294,7 +298,9 @@ export class OrganisationComponent implements OnInit {
                         ' ', 'Update' );
 
                 },
-                (dataserviceerror: DataServiceError) => {
+                (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                     console.log('Error updating organisation', dataserviceerror.message);
                     const  errMessage = {severity: 'error', summary: 'Update',
                         // tslint:disable-next-line:max-line-length
@@ -320,7 +326,9 @@ export class OrganisationComponent implements OnInit {
                         this.auditChangeEntityService.logDbChange(this.userId,this.userName,organisation.lienBanque,organisation.idDis,'Org',
                                 ' ' , 'Delete' );
                     },
-                        (dataserviceerror: DataServiceError) => {
+                        (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             console.log('Error deleting organisation', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
@@ -409,7 +417,9 @@ export class OrganisationComponent implements OnInit {
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.organisation.lienBanque,this.organisation.idDis,'OrgProgram',
                                 ' ', 'Delete' );
                         },
-                        (dataserviceerror: DataServiceError) => {
+                        (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             console.log('Error deleting organisation', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length

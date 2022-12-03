@@ -264,7 +264,9 @@ export class OrgMembershipMailingComponent implements OnInit {
                                 detail: $localize`:@@messageSent:Message has been sent`
                             });
                         },
-                        (dataserviceerror: DataServiceError) => {
+                        (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             console.log('Error Sending Message', dataserviceerror);
                             const errMessage = {
                                 severity: 'error', summary: 'Send',

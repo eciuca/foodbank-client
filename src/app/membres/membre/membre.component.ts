@@ -336,7 +336,9 @@ export class MembreComponent implements OnInit {
                         this.auditChangeEntityService.logDbChange(this.userId,this.userName,membre.lienBanque,membre.lienDis,'Member',
                                 membre.nom + ' ' + membre.prenom, 'Delete' );
                     },
-                        (dataserviceerror: DataServiceError) => {
+                        (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             console.log('Error deleting employee', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
@@ -371,7 +373,9 @@ export class MembreComponent implements OnInit {
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedMembre.lienBanque,modifiedMembre.lienDis,'Member',
                       modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Update' );
               },
-                  (dataserviceerror: DataServiceError) => {
+                  (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                       console.log('Error updating membre', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Update',
                           // tslint:disable-next-line:max-line-length
@@ -395,8 +399,11 @@ export class MembreComponent implements OnInit {
                       this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedMembre.lienBanque,modifiedMembre.lienDis,'Member',
                           modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Create' );
               },
-                  (dataserviceerror: DataServiceError) => {
-                      console.log('Error creating membre', dataserviceerror.message);
+                  (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+
+                      console.log('Error creating membre', dataserviceerror);
                       const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageEmployeeCreateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${dataserviceerror.message}`,

@@ -67,7 +67,9 @@ export class OrgMembershipComponent implements OnInit {
               });
               this.onOrganisationUpdate.emit(modifiedOrganisation);
             },
-            (dataserviceerror: DataServiceError) => {
+            (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
               console.log('Error updating organisation', dataserviceerror.message);
               const  errMessage = {severity: 'error', summary: 'Update',
                 // tslint:disable-next-line:max-line-length
