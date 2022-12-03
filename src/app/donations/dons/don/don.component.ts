@@ -115,7 +115,9 @@ export class DonComponent implements OnInit {
                   this.messageService.add(myMessage);
                   this.onDonDelete.emit(don);
                 },
-                (dataserviceerror: DataServiceError) => {
+                (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                   console.log('Error deleting don', dataserviceerror.message);
                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
@@ -146,7 +148,9 @@ export class DonComponent implements OnInit {
                 });
                 this.onDonUpdate.emit(modifiedDon);
               },
-              (dataserviceerror: DataServiceError) => {
+              (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error updating don', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
@@ -166,7 +170,9 @@ export class DonComponent implements OnInit {
                 });
                 this.onDonCreate.emit(newDon);
               },
-              (dataserviceerror: DataServiceError) => {
+              (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error creating don', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length

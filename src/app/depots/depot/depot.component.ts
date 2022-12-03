@@ -119,7 +119,9 @@ export class DepotComponent implements OnInit {
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,depot.lienBanque,0,'Depot',
                                 depot.idDepot + ' ' + depot.nom, 'Update' );
                         },
-                        (dataserviceerror: DataServiceError) => {
+                        (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             console.log('Error deleting depot', dataserviceerror.message);
 
                             let  errMessage = {severity: 'error', summary: 'Delete',
@@ -159,7 +161,9 @@ export class DepotComponent implements OnInit {
                         this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedDepot.lienBanque,0,'Depot',
                             modifiedDepot.idDepot + ' ' + modifiedDepot.nom, 'Update' );
                     },
-                    (dataserviceerror: DataServiceError) => {
+                    (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                         console.log('Error updating depot', dataserviceerror.message);
                         const  errMessage = {severity: 'error', summary: 'Update',
                             // tslint:disable-next-line:max-line-length

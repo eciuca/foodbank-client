@@ -108,7 +108,9 @@ export class BeneficiaireComponent implements OnInit {
                                   console.log('There is no cpas for this beneficiaire!');
                               }
                           },
-                          (dataserviceerror: DataServiceError) => {
+                          (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                               console.log('Could not retrieve Cpas with id:', beneficiaire.lcpas);
                           });
               }
@@ -209,7 +211,9 @@ export class BeneficiaireComponent implements OnInit {
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,beneficiaire.lbanque,beneficiaire.lienDis,'Client',
                                 beneficiaire.nom + ' ' + beneficiaire.prenom, 'Update' );
                     },
-                        (dataserviceerror: DataServiceError) => {
+                        (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             console.log('Error deleting beneficiary', dataserviceerror.message);
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
@@ -240,7 +244,9 @@ export class BeneficiaireComponent implements OnInit {
             this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedBeneficiaire.lbanque,modifiedBeneficiaire.lienDis,'Client',
                     modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Update' );
         },
-            (dataserviceerror: DataServiceError) => {
+            (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error updating beneficiary', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                     // tslint:disable-next-line:max-line-length
@@ -261,7 +267,9 @@ export class BeneficiaireComponent implements OnInit {
                       this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedBeneficiaire.lbanque,modifiedBeneficiaire.lienDis,'Client',
                           modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Create' );
               },
-                  (dataserviceerror: DataServiceError) => {
+                  (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                       console.log('Error updating beneficiary', dataserviceerror.message);
                       const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length

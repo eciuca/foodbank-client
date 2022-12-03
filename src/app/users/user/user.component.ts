@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {UserEntityService} from '../services/user-entity.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {DefaultUser, User} from '../model/user';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {
@@ -19,7 +19,7 @@ import {AppState} from '../../reducers';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {Membre} from '../../membres/model/membre';
 import {DataServiceError} from '@ngrx/data';
-import {combineLatest, Observable} from 'rxjs';
+import {combineLatest, Observable, of} from 'rxjs';
 import {Organisation} from '../../organisations/model/organisation';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 
@@ -286,7 +286,9 @@ export class UserComponent implements OnInit {
                       this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,user.lienBanque,user.idOrg,'User',
                               user.idUser, 'Delete' );
                   },
-                      (dataserviceerror: DataServiceError) => {
+                      (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                           console.log('Error deleting user', dataserviceerror.message);
                           const  errMessage = {severity: 'error', summary: 'Delete',
                               // tslint:disable-next-line:max-line-length
@@ -318,7 +320,9 @@ export class UserComponent implements OnInit {
             this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,modifiedUser.lienBanque,modifiedUser.idOrg,'User',
                     modifiedUser.idUser, 'Update' );
         } ,
-            (dataserviceerror: DataServiceError) => {
+            (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error updating user', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                     // tslint:disable-next-line:max-line-length
@@ -349,7 +353,12 @@ export class UserComponent implements OnInit {
                                       this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,modifiedUser.lienBanque,modifiedUser.idOrg,'User',
                                           modifiedUser.idUser, 'Create' );
                                   },
-                                  (dataserviceerror: DataServiceError) => {
+                                  (dataserviceerrorFn: () => DataServiceError) => {
+                                      const dataserviceerror = dataserviceerrorFn();
+                                      if (!dataserviceerror.message) {
+                                          dataserviceerror.message = dataserviceerror.error().message
+                                      }
+
                                       console.log('Error creating user', dataserviceerror.message);
                                       const  errMessage = {severity: 'error', summary: 'Create',
                                           // tslint:disable-next-line:max-line-length

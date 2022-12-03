@@ -188,7 +188,9 @@ export class OrgauditComponent implements OnInit {
                   this.messageService.add(myMessage);
                   this.onOrgauditDelete.emit(orgaudit);
                 },
-                (dataserviceerror: DataServiceError) => {
+                (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                   console.log('Error deleting audit', dataserviceerror.message);
                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
@@ -222,7 +224,9 @@ export class OrgauditComponent implements OnInit {
                 });
                 this.onOrgauditUpdate.emit(modifiedOrgaudit);
               },
-              (dataserviceerror: DataServiceError) => {
+              (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error updating audit', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
@@ -243,7 +247,9 @@ export class OrgauditComponent implements OnInit {
                 });
                 this.onOrgauditCreate.emit(newOrgaudit);
               },
-              (dataserviceerror: DataServiceError) => {
+              (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 // console.log('Error creating audit', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length

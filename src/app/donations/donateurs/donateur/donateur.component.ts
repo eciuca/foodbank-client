@@ -97,7 +97,9 @@ export class DonateurComponent implements OnInit {
                   this.messageService.add(myMessage);
                   this.onDonateurDelete.emit(donateur);
                 },
-                (dataserviceerror: DataServiceError) => {
+                (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                   console.log('Error deleting donateur', dataserviceerror.message);
                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
@@ -125,7 +127,9 @@ export class DonateurComponent implements OnInit {
                 });
                 this.onDonateurUpdate.emit(modifiedDonateur);
               },
-              (dataserviceerror: DataServiceError) => {
+              (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error updating donateur', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
@@ -145,7 +149,9 @@ export class DonateurComponent implements OnInit {
                 });
                 this.onDonateurCreate.emit(newDonateur);
               },
-              (dataserviceerror: DataServiceError) => {
+              (dataserviceerrorFn: () => DataServiceError) => { 
+ const dataserviceerror = dataserviceerrorFn(); 
+ if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 console.log('Error creating donateur', dataserviceerror.message);
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
