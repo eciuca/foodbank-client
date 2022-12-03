@@ -396,10 +396,11 @@ export class MembreComponent implements OnInit {
                           modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Create' );
               },
                   (dataserviceerror: DataServiceError) => {
-                      console.log('Error creating membre', dataserviceerror.message);
+                      const message = dataserviceerror.message ? dataserviceerror.message : dataserviceerror.error().message
+                      console.log('Error creating membre', message);
                       const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length
-                          detail: $localize`:@@messageEmployeeCreateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${dataserviceerror.message}`,
+                          detail: $localize`:@@messageEmployeeCreateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${message}`,
                           life: 6000 };
                       this.messageService.add(errMessage) ;
                   }
