@@ -291,11 +291,11 @@ export class UsersComponent implements OnInit {
                 if (event.filters.userName && event.filters.userName.value) {
                     queryParms['userName'] = event.filters.userName.value;
                 }
-                if (event.filters.membreLangue && event.filters.membreLangue.value) {
-                        queryParms['membreLangue'] = event.filters.membreLangue.value;
+                if (event.filters.idLanguage && event.filters.idLanguage.value) {
+                        queryParms['idLanguage'] = event.filters.idLanguage.value;
                 }
-                if (event.filters.membreEmail && event.filters.membreEmail.value) {
-                        queryParms['membreEmail'] = event.filters.membreEmail.value;
+                if (event.filters.email && event.filters.email.value) {
+                        queryParms['email'] = event.filters.email.value;
                 }
                 if (event.filters.rights && event.filters.rights.value) {
                         queryParms['rights'] = event.filters.rights.value;

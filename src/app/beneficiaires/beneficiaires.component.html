@@ -45,6 +45,7 @@
              <th i18n="@@AddressSorted" pSortableColumn="adresse"  colspan="2" >Address<p-sortIcon field="adresse"></p-sortIcon></th>
              <th i18n="@@ZipCodeSorted" pSortableColumn="cp">Zip Code<p-sortIcon field="cp"></p-sortIcon></th>
              <th i18n="@@CitySorted" pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
+             <th i18n="@@BirthDateSorted" pSortableColumn="daten">Birth Date<p-sortIcon field="daten"></p-sortIcon></th>
              <th i18n="@@NbDependentsSorted" pSortableColumn="nbDep">Nb Dependents<p-sortIcon field="nbDep"></p-sortIcon></th>
              <th i18n="@@BeneficiarySuspect" pSortableColumn="coeff">Suspect<p-sortIcon field="coeff"></p-sortIcon></th>
          </tr>
@@ -67,6 +68,8 @@
              </th>
              <th>
 
+             </th>
+             <th>
              </th>
              <th>
                  <p-columnFilter field="suspect" matchMode="equals" [showMenu]="false">
@@ -98,6 +101,9 @@
             </td>
             <td>
                 {{beneficiaire.localite}}
+            </td>
+            <td>
+                {{beneficiaire.daten}}
             </td>
             <td>
                 {{beneficiaire.nbDep}}
