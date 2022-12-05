@@ -191,7 +191,7 @@ export class BeneficiairesComponent implements OnInit {
       if (event.filters.daten && event.filters.daten.value) {
         queryParms['daten'] = event.filters.daten.value;
       }
-      if (event.filters.suspect && event.filters.suspect.value) {
+      if (event.filters.suspect && event.filters.suspect.value !== null) {
         queryParms['suspect'] = event.filters.suspect.value;
       }
     }
