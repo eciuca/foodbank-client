@@ -35,7 +35,6 @@ export class BeneficiairesComponent implements OnInit {
   filterBase: any;
   booCanCreate: boolean;
   booShowArchived: boolean;
-  booShowDuplicates: boolean;
   filteredOrganisation: any;
   filteredOrganisations: any[];
   filteredOrganisationsPrepend: any[];
@@ -46,6 +45,8 @@ export class BeneficiairesComponent implements OnInit {
   bankShortName: string;
   orgName: string; // if logging in with asso role we need to display the organisation
   YNOptions:  any[];
+  duplicatesOptions: any[];
+  duplicateFilter: any;
 
   constructor(private beneficiaireService: BeneficiaireEntityService,
               private orgsummaryService: OrgSummaryEntityService,
@@ -57,7 +58,6 @@ export class BeneficiairesComponent implements OnInit {
   ) {
     this.booCanCreate = false;
     this.booShowArchived = false;
-    this.booShowDuplicates = false;
     this.bankid = 0;
     this.booShowOrganisations = false;
     this.first = 0;
@@ -69,6 +69,11 @@ export class BeneficiairesComponent implements OnInit {
     ];
     this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
     this.YNOptions = enmYn;
+    this.duplicatesOptions = [
+      {label: ' ', value: null },
+      {label: $localize`:@@ClientDuplicateNames:Beneficiaries with Duplicate Names`, value: 'name'},
+      {label: $localize`:@@ClientDuplicateBirthDates:Beneficiaries with Duplicate BirthDates`, value: 'birthDate'},
+    ];
   }
 
   ngOnInit() {
@@ -143,7 +148,6 @@ export class BeneficiairesComponent implements OnInit {
   }
 
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
     this.loading = true;
     if (event.sortField == null) {
       setTimeout(() => {
@@ -164,8 +168,8 @@ export class BeneficiairesComponent implements OnInit {
     }  else {
       queryParms['actif'] = '1';
     }
-    if (this.booShowDuplicates ) {
-      queryParms['duplicate'] = '1';
+    if (this.duplicateFilter ) {
+      queryParms['duplicate'] = this.duplicateFilter;
     }
     console.log('Filtered Organisation', this.filteredOrganisation);
     if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
@@ -184,13 +188,31 @@ export class BeneficiairesComponent implements OnInit {
       if (event.filters.localite && event.filters.localite.value) {
          queryParms['localite'] = event.filters.localite.value;
       }
+      if (event.filters.daten && event.filters.daten.value) {
+        queryParms['daten'] = event.filters.daten.value;
+      }
       if (event.filters.suspect && event.filters.suspect.value) {
         queryParms['suspect'] = event.filters.suspect.value;
       }
     }
     this.loadPageSubject$.next(queryParms);
   }
-
+  changeDuplicatesFilter(value: any) {
+    this.duplicateFilter = value;
+    this.first = 0;
+    const latestQueryParams = {...this.loadPageSubject$.getValue()};
+    console.log('Latest Query Parms', latestQueryParams);
+    // when we switch filter , we need to restart from first page
+    latestQueryParams['offset'] = '0';
+    if (this.duplicateFilter ) {
+      latestQueryParams['duplicate'] = this.duplicateFilter;
+    } else {
+      if (latestQueryParams.hasOwnProperty('duplicate')) {
+        delete latestQueryParams['duplicate'];
+      }
+    }
+    this.loadPageSubject$.next(latestQueryParams);
+  }
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.user) {
       this.bankid = authState.banque.bankId;
@@ -262,22 +284,7 @@ export class BeneficiairesComponent implements OnInit {
     }
     this.loadPageSubject$.next(latestQueryParams);
   }
-  changeDuplicateFilter($event) {
-    this.booShowDuplicates = $event.checked;
-    this.first = 0;
-    const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Query Parms', latestQueryParams);
-    // when we switch from active to archived list and vice versa , we need to restart from first page
-    latestQueryParams['offset'] = '0';
-    if (this.booShowDuplicates ) {
-      latestQueryParams['duplicate'] = '0';
-    } else {
-      if (latestQueryParams.hasOwnProperty('duplicate')) {
-        delete latestQueryParams['duplicate'];
-      }
-    }
-    this.loadPageSubject$.next(latestQueryParams);
-  }
+
 
   getSuspectStatus(coeff: number) {
     if (coeff === 1) {

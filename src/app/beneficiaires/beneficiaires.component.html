@@ -24,8 +24,9 @@
                     <p-checkbox [value]="booShowArchived" binary="true" name="actif" id="actif" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                 </div>
                 <div class="p-field p-col-12 p-md-3">
-                    <label i18n="@@ShowDuplicates" for="duplicate">Show Duplicates?</label>
-                    <p-checkbox [value]="booShowDuplicates" binary="true" name="duplicate" id="duplicate" (onChange)="changeDuplicateFilter($event)"></p-checkbox>
+                    <label i18n="@@Showduplicates" for="duplicates">Find Duplicates?</label>
+                    <p-dropdown [ngModel]="duplicateFilter" id="duplicates" [options]="duplicatesOptions" (onChange)="changeDuplicatesFilter($event.value)" placeholder="Any" [showClear]="true">
+                    </p-dropdown>
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
@@ -67,7 +68,7 @@
                  <p-columnFilter type="text" field="localite" matchMode="contains" [showMenu]="false"></p-columnFilter>
              </th>
              <th>
-
+                 <p-columnFilter type="text" field="daten" matchMode="contains" [showMenu]="false"></p-columnFilter>
              </th>
              <th>
              </th>
