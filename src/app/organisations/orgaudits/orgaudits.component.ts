@@ -82,7 +82,6 @@ export class OrgauditsComponent implements OnInit {
     }
   }
   handleSelect(orgaudit) {
-    console.log( 'Orgaudit was selected', orgaudit);
     this.selectedOrgAuditId$.next(orgaudit.auditId);
     this.displayDialog = true;
   }
@@ -117,7 +116,6 @@ export class OrgauditsComponent implements OnInit {
     this.displayDialog = false;
   }
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();

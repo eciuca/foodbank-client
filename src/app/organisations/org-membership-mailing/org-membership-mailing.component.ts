@@ -144,7 +144,6 @@ export class OrgMembershipMailingComponent implements OnInit {
 
   }
   setMailContent() {
-      console.log('setting mail content');
       if (this.organisation.email && this.organisation.email.trim() ) {
           this.orgemail = `${this.organisation.email.toLowerCase()}`;
       }
@@ -233,8 +232,6 @@ export class OrgMembershipMailingComponent implements OnInit {
         if (this.ccAdress) {
             mailListArray.push( this.ccAdress );
         }
-        console.log('mailListArray', mailListArray);
-
         if (mailListArray.length === 0 ) {
             const errMessage = {
                 severity: 'error', summary: 'Send',
@@ -257,17 +254,15 @@ export class OrgMembershipMailingComponent implements OnInit {
                 this.mailing.attachmentFileNames = this.attachmentFileNames.toString();
                 this.mailingService.add(this.mailing)
                     .subscribe((myMail: Mailing) => {
-                            console.log('Returned mailing', myMail);
-                            this.messageService.add({
+                           this.messageService.add({
                                 severity: 'success',
                                 summary: 'Creation',
                                 detail: $localize`:@@messageSent:Message has been sent`
                             });
                         },
                         (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error Sending Message', dataserviceerror);
+                        const dataserviceerror = dataserviceerrorFn();
+                        if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             const errMessage = {
                                 severity: 'error', summary: 'Send',
                                 // tslint:disable-next-line:max-line-length
@@ -277,22 +272,15 @@ export class OrgMembershipMailingComponent implements OnInit {
                             this.messageService.add(errMessage);
                         }
                     );
-            },
-            reject: () => {
-                console.log('We do nothing');
             }
         });
     }
     storeMailAttachment(event: any,uploader: FileUpload) {
-        console.log('Entering storeMailAttachment', event );
-        console.log('Current Files Selection', this.attachmentFileNames);
         const newFiles : File[] = event.files.filter(item => !this.attachmentFileNames.includes( item.name));
-        console.log('New Files:',newFiles);
 
         if (newFiles.length > 0) {
             const file = newFiles[0];
             const i = event.files.findIndex(x => x.name === file.name);
-            console.log(`loading file ${file.name} with size ${file.size}. index is ${i}` );
             if (file.size > this.maxAttachmentFileSize) {
                 uploader.remove(event, i);
                 this.messageService.add({
@@ -306,7 +294,6 @@ export class OrgMembershipMailingComponent implements OnInit {
                 this.isAttachmentUploadOngoing = true;
                 this.uploadService.upload(file, this.authService.accessToken).subscribe(
                     (response: any) => {
-                        console.log(response);
                         this.isAttachmentUploadOngoing = false;
                         this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
                         this.attachmentFileNames.push(file.name);
@@ -320,7 +307,6 @@ export class OrgMembershipMailingComponent implements OnInit {
                     (err: any) => {
                         this.isAttachmentUploadOngoing = false;
                         uploader.remove(event, i);
-                        console.log(err);
                         let errorMsg = '';
                         if (err.error && err.error.message) {
                             errorMsg = err.error.message;
@@ -336,22 +322,17 @@ export class OrgMembershipMailingComponent implements OnInit {
         }
     }
     removeMailAttachment(event: any) {
-        console.log('Entering removeMailAttachment', event );
         const file: File | null = event.file;
         this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
     }
     loadOrgSummaries(regular: boolean) {
-
-      console.log('Membership orgsummaries loading: event is:' , regular);
        const queryparms: QueryParams = {'lienBanque': this.lienBanque.toString(),
            'actif': '1', 'isDepot': '0', 'agreed': '1', 'cotType': '1'} ;
         if (regular === false) {
             queryparms['cotType'] = '0';
         }
-        console.log('Membership mailing orgsummaries loading: regular option is:' , regular, 'query parms', queryparms);
         this.orgsummaryService.getWithQuery(queryparms)
             .subscribe(loadedOrgSummaries => {
-                console.log('Loaded orgsummaries: ' + loadedOrgSummaries.length);
                 this.totalOrgSummaries = loadedOrgSummaries.length;
                 this.orgSummaries  = loadedOrgSummaries;
                 this.orgsummary = this.orgSummaries[0];

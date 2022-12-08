@@ -68,12 +68,10 @@ export class OrgMembershipComponent implements OnInit {
               this.onOrganisationUpdate.emit(modifiedOrganisation);
             },
             (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-              console.log('Error updating organisation', dataserviceerror.message);
-              const  errMessage = {severity: 'error', summary: 'Update',
-                // tslint:disable-next-line:max-line-length
-                detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                         const  errMessage = {severity: 'error', summary: 'Update',
+                         detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
                 life: 6000 };
               this.messageService.add(errMessage) ;
             });
@@ -86,15 +84,10 @@ export class OrgMembershipComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     organisationForm.reset( oldOrganisation); // reset in-memory object for next open
-                    console.log('We have reset the form to its original value');
                     this.onOrganisationQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
             this.onOrganisationQuit.emit();
         }
     }

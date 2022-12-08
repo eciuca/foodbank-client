@@ -104,7 +104,6 @@ export class MembreComponent implements OnInit {
       // or sometimes via a router link via the Main Menu
       if (!this.batId$) {
           // we must come from the menu
-          console.log('We initialize a new membre object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
           this.route.paramMap
@@ -113,8 +112,7 @@ export class MembreComponent implements OnInit {
                   map(batIdString => Number(batIdString)),
                   switchMap(batId => this.membresService.getByKey(batId))
               ).subscribe(membre => {
-              console.log('Membre from Link : ', membre);
-              this.membre = membre;
+               this.membre = membre;
           });
       }  else {
          const membre$ = combineLatest([this.batId$, this.membresService.entities$])
@@ -126,8 +124,7 @@ export class MembreComponent implements OnInit {
               membre => {
                   this.userIds = '';
                   if (membre) {
-                      console.log('Existing Membre : ', membre);
-                      if((!membre.bankShortName) && (membre.lienDis > 0)) {
+                     if((!membre.bankShortName) && (membre.lienDis > 0)) {
                           this.organisationsService.getByKey(membre.lienDis).subscribe(
                               (org: Organisation) => {
                                   if (org) {
@@ -173,7 +170,6 @@ export class MembreComponent implements OnInit {
                           }
                       }
                    
-                      console.log('CurrentFilteredBankAndOrg', this.currentFilteredBankShortName,this.currentFilteredOrg);
                       if (this.isAdmin) {
                           // currentFilteredBankId should always be filled in cfr GUI
                             this.membre.lienBanque = this.currentFilteredBankId;
@@ -330,16 +326,14 @@ export class MembreComponent implements OnInit {
                     detail: $localize`:@@messageEmployeeDeleted:The employee ${membre.prenom} ${membre.nom} was deleted`};
                 this.membresService.delete(membre)
                     .subscribe( () => {
-                        console.log('successfully deleted employee');
                         this.messageService.add(myMessage);
                         this.onMembreDelete.emit(membre);
                         this.auditChangeEntityService.logDbChange(this.userId,this.userName,membre.lienBanque,membre.lienDis,'Member',
                                 membre.nom + ' ' + membre.prenom, 'Delete' );
                     },
                         (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error deleting employee', dataserviceerror.message);
+                            const dataserviceerror = dataserviceerrorFn();
+                            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageEmployeeDeleteError:The employee ${membre.prenom} ${membre.nom} could not be deleted: error: ${dataserviceerror.message}`,
@@ -347,16 +341,13 @@ export class MembreComponent implements OnInit {
                                 this.messageService.add(errMessage) ;
                         }
                     );
-            },
-            reject: () => {
-                console.log('We do nothing');
             }
+
         });
     }
 
   save(oldMembre: Membre, membreForm: Membre) {
     const modifiedMembre = Object.assign({}, oldMembre, membreForm);
-    // console.log('Selected Function', this.selectedFunction);
       modifiedMembre.fonction = this.selectedFunction;
       modifiedMembre.typEmploi = this.selectedEmploiType;
       modifiedMembre.ldep= this.selectedDepot;
@@ -374,14 +365,13 @@ export class MembreComponent implements OnInit {
                       modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Update' );
               },
                   (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                      console.log('Error updating membre', dataserviceerror.message);
-                      const  errMessage = {severity: 'error', summary: 'Update',
+                    const dataserviceerror = dataserviceerrorFn();
+                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                    const  errMessage = {severity: 'error', summary: 'Update',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageEmployeeUpdateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be updated: error: ${dataserviceerror.message}`,
                           life: 6000 };
-                      this.messageService.add(errMessage) ;
+                    this.messageService.add(errMessage) ;
                   }
               );
       } else {
@@ -400,15 +390,13 @@ export class MembreComponent implements OnInit {
                           modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Create' );
               },
                   (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-
-                      console.log('Error creating membre', dataserviceerror);
-                      const  errMessage = {severity: 'error', summary: 'Create',
+                    const dataserviceerror = dataserviceerrorFn();
+                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                    const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageEmployeeCreateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${dataserviceerror.message}`,
                           life: 6000 };
-                      this.messageService.add(errMessage) ;
+                    this.messageService.add(errMessage) ;
                   }
               );
       }
@@ -422,15 +410,10 @@ export class MembreComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     membreForm.reset(oldMembre); // reset in-memory object for next open
-                    console.log('We have reset the membre form to its original value');
                     this.onMembreQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
             this.onMembreQuit.emit();
         }
     }

@@ -56,7 +56,6 @@ export class MembreEmploiTypesComponent implements OnInit {
   }
 
   handleSelect(membreEmploiType: MembreEmploiType) {
-    console.log('MembreEmploiType was selected',membreEmploiType );
     this.selectedMembreEmploiTypeId$.next(membreEmploiType.jobNr);
     this.displayDialog = true;
   }

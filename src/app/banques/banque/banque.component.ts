@@ -80,7 +80,6 @@ export class BanqueComponent implements OnInit {
       // or sometimes via a router link via the Main Menu
       if (!this.bankId$) {
           // we must come from the menu
-         // console.log('We initialize a new banque object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
           this.booIsCreate = false;
@@ -112,9 +111,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedPresident = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our president:', this.selectedPresident);
-                          } else {
-                              console.log('There is no president!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberVp)
@@ -122,9 +118,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedVicePresident = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  vice president:', this.selectedVicePresident);
-                          } else {
-                              console.log('There is no vice-president!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberCeo)
@@ -132,9 +125,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedCEO = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  CEO:', this.selectedCEO);
-                          } else {
-                              console.log('There is no CEO!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberSec)
@@ -142,9 +132,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedSecretary = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our secretary:', this.selectedSecretary);
-                          } else {
-                              console.log('There is no secretary!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberTres)
@@ -152,9 +139,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedTreasurer = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Treasurer:', this.selectedTreasurer);
-                          } else {
-                              console.log('There is no Treasurer!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberRh)
@@ -162,9 +146,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedHR = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  HR:', this.selectedHR);
-                          } else {
-                              console.log('There is no HR!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberLog)
@@ -172,9 +153,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedLogistics = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our resp logistics:', this.selectedLogistics);
-                          } else {
-                              console.log('There is no resp logistics!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberSh)
@@ -182,19 +160,13 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedSecHygiene = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp Sec&Hygiene:', this.selectedSecHygiene);
-                          } else {
-                              console.log('There is no Resp Sec&Hygiene!');
-                          }
+                           }
                       });
               this.membresService.getByKey(banque.idMemberIt)
                   .subscribe(
                       membre => {
                           if (membre !== null) {
                               this.selectedIT = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp IT:', this.selectedIT);
-                          } else {
-                              console.log('There is no Resp IT!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberAppro)
@@ -202,9 +174,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedSupply = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our resp Supply:', this.selectedSupply);
-                          } else {
-                              console.log('There is no resp Supply!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberPp)
@@ -212,9 +181,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedPress = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp Press:', this.selectedPress);
-                          } else {
-                              console.log('There is no Resp Press!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberAsso)
@@ -222,9 +188,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedAssocRel = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp Assoc Rel:', this.selectedAssocRel);
-                          } else {
-                              console.log('There is no Resp Assoc Rel!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberPubrel)
@@ -232,9 +195,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedPubRel = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp PubRel:', this.selectedPubRel);
-                          } else {
-                              console.log('There is no Resp PubRel!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberFead)
@@ -242,9 +202,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedFEAD = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp FEAD:', this.selectedFEAD);
-                          } else {
-                              console.log('There is no Resp FEAD!');
                           }
                       });
 
@@ -253,10 +210,7 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedQuality =  Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp Quality:', this.selectedQuality);
-                          } else {
-                              console.log('There is no Resp Quality!');
-                          }
+                           }
                       });
 
       } else {
@@ -265,8 +219,7 @@ export class BanqueComponent implements OnInit {
               this.bankform.reset(this.banque);
           }
           this.booIsCreate = true;
-          console.log('we have a new default banque');
-      }
+        }
       }); // End of Subscribe
       this.store
           .pipe(
@@ -323,7 +276,6 @@ export class BanqueComponent implements OnInit {
     }
 
  save(oldBanque: Banque, banqueForm: Banque) {
-      console.log('Banque Form value', banqueForm);
       const modifiedBanque = Object.assign({}, oldBanque, banqueForm);
       modifiedBanque.idMemberPres = this.selectedPresident? this.selectedPresident.batId : 0;
       modifiedBanque.idMemberVp = this.selectedVicePresident ? this.selectedVicePresident.batId : 0;
@@ -353,18 +305,16 @@ export class BanqueComponent implements OnInit {
                      modifiedBanque.bankShortName , 'Update' );
              },
                  (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                     console.log('Error updating bank', dataserviceerror.message);
-                     const  errMessage = {severity: 'error', summary: 'Update',
+                 const dataserviceerror = dataserviceerrorFn();
+                 if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                    const  errMessage = {severity: 'error', summary: 'Update',
                          // tslint:disable-next-line:max-line-length
                          detail: $localize`:@@messageBankUpdateError:The bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName} could not be updated: error: ${dataserviceerror.message}`,
                          life: 6000 };
-                     this.messageService.add(errMessage) ;
+                    this.messageService.add(errMessage) ;
                  });
      } else {
-         console.log('Creating Banque with content:', modifiedBanque);
-         this.banquesService.add(modifiedBanque)
+          this.banquesService.add(modifiedBanque)
              .subscribe((newBanque) => {
                  this.messageService.add({
                      severity: 'success',
@@ -376,10 +326,9 @@ export class BanqueComponent implements OnInit {
                          newBanque.bankShortName, 'Create' );
              },
                  (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                     console.log('Error creating bank', dataserviceerror.message);
-                     const  errMessage = {severity: 'error', summary: 'Create',
+                    const dataserviceerror = dataserviceerrorFn();
+                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                      const  errMessage = {severity: 'error', summary: 'Create',
                          // tslint:disable-next-line:max-line-length
                          detail: $localize`:@@messageBankCreateError:The bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName} could not be created: error: ${dataserviceerror.message}`,
                          life: 6000 };
@@ -406,19 +355,15 @@ export class BanqueComponent implements OnInit {
                                 banque.bankShortName , 'Delete' );
                     },
                         (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error deleting bank', dataserviceerror.message);
-                            const  errMessage = {severity: 'error', summary: 'Delete',
+                            const dataserviceerror = dataserviceerrorFn();
+                            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                                const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageBankDeleteError:The bank ${banque.bankId} ${banque.bankShortName} ${banque.bankName} could not be deleted: error: ${dataserviceerror.message}`,
                                 life: 6000 };
                             this.messageService.add(errMessage) ;
                         }
                         );
-            },
-            reject: () => {
-                console.log('We do nothing');
             }
         });
     }
@@ -430,22 +375,15 @@ export class BanqueComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     banqueForm.reset( oldBanque); // reset in-memory object for next open
-                    console.log('We have reset the form to its original value');
                     this.onBanqueQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
             this.onBanqueQuit.emit();
         }
     }
     saveDetails(oldBanqProg: BanqProg, banqProgForm: BanqProg) {
-        console.log('Entering SaveDetails - BanqProg Form value', banqProgForm);
         const modifiedBanqProg = Object.assign({}, oldBanqProg, banqProgForm);
-        console.log('Modified BanqProg', modifiedBanqProg);
         this.banqProgService.update(modifiedBanqProg)
             .subscribe(() => {
                     this.messageService.add({
@@ -456,9 +394,8 @@ export class BanqueComponent implements OnInit {
                     this.onBanqueUpdate.emit();
                 },
                 (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                    console.log('Error updating bank', dataserviceerror.message);
+                    const dataserviceerror = dataserviceerrorFn();
+                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                     const  errMessage = {severity: 'error', summary: 'Update',
                         // tslint:disable-next-line:max-line-length
                         detail: $localize`:@@messageBankDetailsUpdateError:The bank  ${this.banque.bankShortName} ${this.banque.bankName} details could not be updated: error: ${dataserviceerror.message}`,

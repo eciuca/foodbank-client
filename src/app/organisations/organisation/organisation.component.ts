@@ -107,7 +107,6 @@ export class OrganisationComponent implements OnInit {
       let organisation$: Observable<Organisation>;
       if (!this.idDis$) {
           // we must come from the menu
-          console.log('We initialize a new organisation object from the router!');
              this.booCalledFromTable = false;
              this.booCanQuit = false;
           organisation$ = this.route.paramMap
@@ -138,9 +137,6 @@ export class OrganisationComponent implements OnInit {
                           cpas => {
                               if (cpas !== null) {
                                   this.selectedCpas = {...cpas};
-                                  console.log('our organisation cpas:', this.selectedCpas);
-                              } else {
-                                  console.log('There is no cpas for this organisation!');
                               }
                           });
               }
@@ -150,9 +146,6 @@ export class OrganisationComponent implements OnInit {
                           orgsummary => {
                               if (orgsummary !== null) {
                                   this.selectedDepot = {...orgsummary};
-
-                              } else {
-                                  console.log('There is no depot for this organisation!');
                               }
                           });
               }
@@ -162,8 +155,6 @@ export class OrganisationComponent implements OnInit {
                           orgsummary => {
                               if (orgsummary !== null) {
                                   this.selectedDepotRamasse = {...orgsummary};
-                              } else {
-                                  console.log('There is no ramasse depot for this organisation!');
                               }
                           });
               }
@@ -175,7 +166,6 @@ export class OrganisationComponent implements OnInit {
               this.selectedCpas = null;
               this.selectedDepot = null;
               this.selectedDepotRamasse = null;
-              console.log('we have a new default organisation');
           }
       });
       this.store
@@ -235,8 +225,7 @@ export class OrganisationComponent implements OnInit {
       }
     modifiedOrganisation.lupdUserName = this.userName;
       if (modifiedOrganisation.hasOwnProperty('idDis')) {
-          console.log('Modifying Organisation with content:', modifiedOrganisation);
-          this.organisationsService.update(modifiedOrganisation)
+         this.organisationsService.update(modifiedOrganisation)
               .subscribe( ()  => {
                   this.messageService.add({
                       severity: 'success',
@@ -248,9 +237,8 @@ export class OrganisationComponent implements OnInit {
                            ' ' , 'Update' );
               },
                   (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                      console.log('Error updating organisation', dataserviceerror.message);
+                    const dataserviceerror = dataserviceerrorFn();
+                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                       const  errMessage = {severity: 'error', summary: 'Update',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
@@ -259,7 +247,6 @@ export class OrganisationComponent implements OnInit {
               });
       } else {
           modifiedOrganisation.lienBanque = this.lienBanque;
-          console.log('Creating Organisation with content:', modifiedOrganisation);
           this.organisationsService.add(modifiedOrganisation)
               .subscribe((newOrganisation) => {
                   this.messageService.add({
@@ -272,9 +259,8 @@ export class OrganisationComponent implements OnInit {
                           ' ' , 'Create' );
               },
                   (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                      console.log('Error creating organisation', dataserviceerror.message);
+                    const dataserviceerror = dataserviceerrorFn();
+                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                       const  errMessage = {severity: 'error', summary: 'Creation',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageOrganisationCreateError:The organisation ${modifiedOrganisation.societe} could not be created: error: ${dataserviceerror.message}`,
@@ -286,7 +272,6 @@ export class OrganisationComponent implements OnInit {
     saveOrgProgram(progForm: OrgProgram) {
 
         const modifiedOrgProgram = Object.assign({}, this.orgProg, progForm);
-        console.log('Modified OrgProgram', modifiedOrgProgram);
         this.orgProgramService.update(modifiedOrgProgram)
             .subscribe(() => {
                     this.messageService.add({
@@ -299,9 +284,8 @@ export class OrganisationComponent implements OnInit {
 
                 },
                 (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                    console.log('Error updating organisation', dataserviceerror.message);
+                    const dataserviceerror = dataserviceerrorFn();
+                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                     const  errMessage = {severity: 'error', summary: 'Update',
                         // tslint:disable-next-line:max-line-length
                         detail: $localize`:@@messageOrgDetailsUpdateError:Org Program for organisation  ${this.organisation.idDis} ${this.organisation.societe} could not be updated: error: ${dataserviceerror.message}`,
@@ -327,9 +311,8 @@ export class OrganisationComponent implements OnInit {
                                 ' ' , 'Delete' );
                     },
                         (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error deleting organisation', dataserviceerror.message);
+                        const dataserviceerror = dataserviceerrorFn();
+                        if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageOrganisationDeleteError:The organisation ${organisation.idDis} ${organisation.societe} could not be deleted: error: ${dataserviceerror.message}`,
@@ -337,9 +320,6 @@ export class OrganisationComponent implements OnInit {
                             this.messageService.add(errMessage) ;
                         }
                     );
-            },
-            reject: () => {
-                console.log('We do nothing');
             }
         });
     }
@@ -351,16 +331,11 @@ export class OrganisationComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     organisationForm.reset( oldOrganisation); // reset in-memory object for next open
-                    console.log('We have reset the form to its original value');
-                    this.onOrganisationQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
+                   this.onOrganisationQuit.emit();
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
-            this.onOrganisationQuit.emit();
+               this.onOrganisationQuit.emit();
         }
     }
     filterCpas(event ) {
@@ -418,9 +393,8 @@ export class OrganisationComponent implements OnInit {
                                 ' ', 'Delete' );
                         },
                         (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error deleting organisation', dataserviceerror.message);
+                        const dataserviceerror = dataserviceerrorFn();
+                        if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageOrgProgramDeleteError:The org program for organisation  ${this.organisation.idDis} ${this.organisation.societe} could not be deleted: error: ${dataserviceerror.message}`,
@@ -428,9 +402,6 @@ export class OrganisationComponent implements OnInit {
                             this.messageService.add(errMessage) ;
                         }
                     );
-            },
-            reject: () => {
-                console.log('We do nothing');
             }
         });
     }

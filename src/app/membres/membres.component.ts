@@ -124,7 +124,6 @@ export class MembresComponent implements OnInit {
     }
 
     handleSelect(membre) {
-        console.log( 'Membre was selected', membre);
         this.selectedBatid$.next(membre.batId);
         this.displayDialog = true;
     }
@@ -171,7 +170,6 @@ export class MembresComponent implements OnInit {
         this.loadPageSubject$.next(latestQueryParams);
     }
     nextPage(event: LazyLoadEvent) {
-        console.log('Lazy Loaded Event', event);
         this.loading = true;
         const queryParms = {...this.filterBase};
         if (event) {
@@ -231,7 +229,6 @@ export class MembresComponent implements OnInit {
                 queryParms['lienBanque'] = event.filters.bankId.value;
                 this.filteredBankId= event.filters.bankId.value;
                 this.filteredBankShortName = this.bankOptions.find(obj => obj.value === this.filteredBankId).label;
-                console.log('CurrentFilteredBankIdAndShortName',  this.filteredBankId,this.filteredBankShortName,this.bankOptions);
             } else {
                 this.filteredBankId = null;
                 this.filteredBankShortName = null;
@@ -243,7 +240,6 @@ export class MembresComponent implements OnInit {
         this.anomalyFilter = value;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Query Parms', latestQueryParams);
         // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (this.anomalyFilter ) {
@@ -312,7 +308,6 @@ export class MembresComponent implements OnInit {
                         this.filterBase = { };
                         this.banqueService.getAll()
                             .subscribe( banquesEntities => {
-                                console.log('Banques now loaded:', banquesEntities);
                                 const bankOptionsPrepend = [{'label': '???', 'value': 999}];
                                 this.bankOptions = bankOptionsPrepend.concat(banquesEntities.map(({
                                                                                                       bankShortName,
@@ -321,7 +316,6 @@ export class MembresComponent implements OnInit {
                                     'label': bankShortName,
                                     'value': bankId
                                 })));
-                                console.log('Bank Options are:', this.bankOptions);
                             });
                     }
                     else {
@@ -375,7 +369,6 @@ export class MembresComponent implements OnInit {
                 this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
                     Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
                 ));
-                console.log('Proposed Organisations', this.filteredOrganisations);
             });
 
     }
@@ -430,11 +423,9 @@ export class MembresComponent implements OnInit {
         this.loadPageSubject$.next(latestQueryParams);
     }
     changeArchiveFilter($event) {
-        console.log('Archive is now:', $event);
         this.booShowArchived = $event.checked;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Query Parms', latestQueryParams);
         // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (this.booShowArchived ) {
@@ -451,8 +442,7 @@ export class MembresComponent implements OnInit {
         }
         this.membreFunctionEntityService.getWithQuery(queryParms)
             .subscribe((membreFunctions) => {
-                console.log('Membre functions now loaded:', membreFunctions);
-                membreFunctions.map((membreFunction) => {
+                 membreFunctions.map((membreFunction) => {
                     if(this.userLanguage == 'fr') {
                         this.membreFunctions.push({label: membreFunction.bankShortName + ' ' + membreFunction.fonctionName, value: membreFunction.funcId});
                     }

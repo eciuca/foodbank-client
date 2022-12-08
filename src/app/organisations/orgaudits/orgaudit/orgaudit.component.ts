@@ -62,15 +62,11 @@ export class OrgauditComponent implements OnInit {
     orgaudit$.subscribe(orgaudit => {
       if (orgaudit) {
         this.orgaudit = orgaudit;
-        console.log('our orgaudit:', this.orgaudit);
         this.membresService.getByKey(orgaudit.auditorNr)
             .subscribe(
                 membre => {
                   if (membre !== null) {
                     this.selectedAuditor = Object.assign({}, membre, {fullname: membre.nom + ' ' + membre.prenom});
-                    console.log('our auditor:', this.selectedAuditor);
-                  } else {
-                    console.log('There is no auditor!');
                   }
                 });
         this.orgsummaryService.getByKey(orgaudit.lienDis)
@@ -78,9 +74,6 @@ export class OrgauditComponent implements OnInit {
                 orgsummary => {
                   if (orgsummary !== null) {
                     this.selectedOrganisation = Object.assign({}, orgsummary, {fullname: orgsummary.idDis + ' ' + orgsummary.societe});
-                    console.log('audited org:', this.selectedOrganisation);
-                  } else {
-                    console.log('There is no audited org!');
                   }
                 });
         this.orgsummaryService.getByKey(orgaudit.lienDep)
@@ -88,9 +81,6 @@ export class OrgauditComponent implements OnInit {
                 orgsummary => {
                   if (orgsummary !== null) {
                     this.selectedDepot = Object.assign({}, orgsummary, {fullname: orgsummary.idDis + ' ' + orgsummary.societe});
-                    console.log('audited depot:', this.selectedDepot);
-                  } else {
-                    console.log('There is no audited depot!');
                   }
                 });
       } else {
@@ -98,7 +88,6 @@ export class OrgauditComponent implements OnInit {
         if (this.myform) {
           this.myform.reset(this.orgaudit);
         }
-        console.log('we have a new default orgaudit');
       }
     });
 
@@ -140,7 +129,6 @@ export class OrgauditComponent implements OnInit {
         });
   }
   filterOrganisation(event ) {
-    console.log('Filter Organisation', event);
     const  queryOrganisationParms: QueryParams = {};
     queryOrganisationParms['lienBanque'] = this.lienBanque.toString();
     queryOrganisationParms['actif'] = '1';
@@ -189,18 +177,14 @@ export class OrgauditComponent implements OnInit {
                   this.onOrgauditDelete.emit(orgaudit);
                 },
                 (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                  console.log('Error deleting audit', dataserviceerror.message);
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: `The audit for ${orgaudit.societe} could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
                 });
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
@@ -225,11 +209,9 @@ export class OrgauditComponent implements OnInit {
                 this.onOrgauditUpdate.emit(modifiedOrgaudit);
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating audit', dataserviceerror.message);
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 const  errMessage = {severity: 'error', summary: 'Update',
-                  // tslint:disable-next-line:max-line-length
                   detail: `The audit  for ${modifiedOrgaudit.societe} could not be updated: error: ${dataserviceerror.message}`,
                   life: 6000 };
                 this.messageService.add(errMessage) ;
@@ -269,15 +251,10 @@ export class OrgauditComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           orgauditForm.reset(oldOrgaudit); // reset in-memory object for next open
-          console.log('We have reset the audit form to its original value');
           this.onOrgauditQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
       this.onOrgauditQuit.emit();
     }
   }

@@ -66,7 +66,6 @@ export class MembreFunctionsComponent implements OnInit {
   }
 
     handleSelect(membreFunction: MembreFunction) {
-        console.log('MembreFunction was selected',membreFunction );
         this.selectedMembreFunctionId$.next(membreFunction.funcId);
         this.displayDialog = true;
     }
@@ -93,7 +92,6 @@ export class MembreFunctionsComponent implements OnInit {
     handleMembreFunctionDeleted(deletedMembreFunction) {
         const index = this.membreFunctions.findIndex(membreFunction => membreFunction.funcId === deletedMembreFunction.funcId);
         this.membreFunctions.splice(index, 1);
-        console.log('spliced index', index);
         this.reload();
         this.displayDialog = false;
     }

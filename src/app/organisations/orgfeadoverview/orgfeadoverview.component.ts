@@ -101,7 +101,6 @@ export class OrgfeadoverviewComponent implements OnInit {
   }
 
   handleSelect(organisation) {
-    console.log('Organisation was selected', organisation);
     this.selectedIdDis$.next(organisation.idDis);
     this.displayDialog = true;
   }
@@ -120,7 +119,6 @@ export class OrgfeadoverviewComponent implements OnInit {
 
 
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();
@@ -215,7 +213,6 @@ export class OrgfeadoverviewComponent implements OnInit {
           const classicBanks = {'classicBanks': '1'};
           this.banqueService.getWithQuery(classicBanks)
               .subscribe((banquesEntities) => {
-                console.log('Banques now loaded:', banquesEntities);
                 this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
               });
 
@@ -223,7 +220,6 @@ export class OrgfeadoverviewComponent implements OnInit {
         if (authState.user.rights === 'admin') {
           this.banqueService.getAll()
               .subscribe((banquesEntities) => {
-                console.log('Banques now loaded:', banquesEntities);
                 this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
               });
 
@@ -267,11 +263,9 @@ export class OrgfeadoverviewComponent implements OnInit {
   }
 
   filterRegion(regId) {
-    console.log('Region filter is now:', regId);
     this.regionSelected = regId;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Region Query Parms', latestQueryParams);
     // when we switch from active to archived list and vice versa , we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (this.regionSelected) {
@@ -285,12 +279,10 @@ export class OrgfeadoverviewComponent implements OnInit {
     this.loadPageSubject$.next(latestQueryParams);
   }
   filterDepot(idDepot) {
-    console.log('Depot filter is now:', idDepot);
     this.depotSelected = idDepot;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Depot Query Parms', latestQueryParams);
-    // when we switch f we need to restart from first page
+    // when we switch we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (this.depotSelected) {
       latestQueryParams['lienDepot'] = idDepot;
@@ -305,12 +297,10 @@ export class OrgfeadoverviewComponent implements OnInit {
 
 
   filterStatut(statut) {
-    console.log('statut filter is now:', statut);
     this.statutSelected = statut;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest statut Query Parms', latestQueryParams);
-    // when we switch f, we need to restart from first page
+    // when we switch , we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (statut !== '') {
       latestQueryParams['statut'] = statut;
@@ -322,12 +312,10 @@ export class OrgfeadoverviewComponent implements OnInit {
     this.loadPageSubject$.next(latestQueryParams);
   }
   filterFEAD(isFead) {
-    console.log('FEAD filter is now:', isFead);
     this.feadSelected = isFead;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest statut Query Parms', latestQueryParams);
-    // when we switch f, we need to restart from first page
+    // when we switch , we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (isFead != null) {
       latestQueryParams['isFead'] = isFead;

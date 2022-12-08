@@ -47,35 +47,32 @@ export class NotificationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.reload();
-      this.loadPageSubject$
+      this.loading = true;
+      this.totalRecords = 0;
+      this.store
           .pipe(
-              filter(queryParams => !!queryParams),
-              mergeMap(queryParams => this.notificationService.getWithQuery(queryParams))
-          )
-          .subscribe(loadedNotifications => {
-              console.log('Loaded notifications from nextpage: ' + loadedNotifications);
-              if (loadedNotifications.length > 0) {
-                  this.totalRecords = loadedNotifications[0].totalRecords;
-              }  else {
-                  this.totalRecords = 0;
-              }
-              this.notifications  = loadedNotifications;
-              this.loading = false;
-              this.notificationService.setLoaded(true);
-          });
-  }
-    reload() {
-        this.loading = true;
-        this.totalRecords = 0;
-        this.store
-            .pipe(
-                select(globalAuthState),
-                map((authState) => {
-                    this.initializeDependingOnUserRights(authState);
-                })
-            )
-            .subscribe();
+              select(globalAuthState),
+              map((authState) => {
+                  this.initializeDependingOnUserRights(authState);
+                  this.loadPageSubject$
+                 .pipe(
+                    filter(queryParams => !!queryParams),
+                     mergeMap(queryParams => this.notificationService.getWithQuery(queryParams))
+                    )
+                    .subscribe(loadedNotifications => {
+                     console.log('Loaded notifications from nextpage: ' + loadedNotifications);
+                    if (loadedNotifications.length > 0) {
+                    this.totalRecords = loadedNotifications[0].totalRecords;
+                    }  else {
+                    this.totalRecords = 0;
+                     }
+                    this.notifications  = loadedNotifications;
+                    this.loading = false;
+                    this.notificationService.setLoaded(true);
+                });
+             })
+          ).subscribe();
+
     }
     private initializeDependingOnUserRights(authState: AuthState) {
         console.log ('AuthState is at initialization:', authState);
@@ -112,9 +109,10 @@ export class NotificationsComponent implements OnInit {
                 default:
                     this.queryBase = {};
             }
+            this.nextPage(null);
         }
         console.log('initialization sets query base to:', this.queryBase);
-        this.nextPage(null);
+
     }
     nextPage(event: LazyLoadEvent) {
         console.log('Initial Lazy Loaded Event', event, 'Query Base:', this.queryBase);

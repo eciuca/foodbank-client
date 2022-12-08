@@ -123,8 +123,7 @@ export class UsersComponent implements OnInit {
             select(globalAuthState),
             filter(authState => authState.isLoggedIn)
         ).subscribe((authState) => {
-            console.log('Entering Users component with authState:', authState);
-          if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'
+           if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'
               && authState.user.rights !== 'Admin_FBBA' && authState.user.rights !== 'Bank_FBBA' ) {
               this.bankid = authState.banque.bankId;
               this.bankName = authState.banque.bankName;
@@ -185,7 +184,6 @@ export class UsersComponent implements OnInit {
                             this.filterBase = { };
                             this.banqueService.getAll()
                                 .subscribe( banquesEntities => {
-                                    console.log('Banques now loaded:', banquesEntities);
                                     const bankOptionsPrepend = [{'label': '???', 'value': 999}];
                                     this.bankOptions = bankOptionsPrepend.concat(banquesEntities.map(({
                                                                                                           bankShortName,
@@ -194,7 +192,6 @@ export class UsersComponent implements OnInit {
                                         'label': bankShortName,
                                         'value': bankId
                                     })));
-                                    console.log('Bank Options are:', this.bankOptions);
                                 });
                         }
                         else {
@@ -218,8 +215,7 @@ export class UsersComponent implements OnInit {
 
   }
   handleSelect(user) {
-    console.log( 'User was selected', user);
-    this.displayDialog = true;
+      this.displayDialog = true;
       this.selectedIdUser$.next(user.idUser);
   }
     showDialogToAdd() {
@@ -258,7 +254,6 @@ export class UsersComponent implements OnInit {
             select(isLoggedIn),
             filter(isLoggedIn => isLoggedIn))
         .subscribe(_ => {
-            console.log('Lazy Loaded Event', event, 'FilterBase:', this.filterBase);
             this.loading = true;
             const queryParms = {...this.filterBase};
             queryParms['offset'] = event.first.toString();
@@ -307,8 +302,7 @@ export class UsersComponent implements OnInit {
                     this.filteredBankId= event.filters.bankId.value;
                     this.filteredBankShortName = this.bankOptions.find(obj => obj.value === this.filteredBankId).label;
                     queryParms['idCompany'] =this.filteredBankShortName
-                  //  console.log('CurrentFilteredBankIdAndShortName',  this.filteredBankId,this.filteredBankShortName,this.bankOptions);
-                } else {
+                 } else {
                     this.filteredBankId = null;
                     this.filteredBankShortName = null;
                 }
@@ -320,7 +314,6 @@ export class UsersComponent implements OnInit {
   }
 
     filterOrganisation(event ) {
-        console.log('Filter Organisation', event);
         const  queryOrganisationParms: QueryParams = {};
         queryOrganisationParms['actif'] = '1';
         if (this.bankOptions) {
@@ -399,11 +392,9 @@ export class UsersComponent implements OnInit {
 
     }
     changeArchiveFilter($event) {
-        console.log('Archive is now:', $event);
         this.booShowArchived = $event.checked;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Query Parms', latestQueryParams);
         // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (this.booShowArchived ) {
@@ -417,8 +408,7 @@ export class UsersComponent implements OnInit {
        this.anomalyFilter = value;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Query Parms', latestQueryParams);
-        // when we switch from active to archived list and vice versa , we need to restart from first page
+       // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (this.anomalyFilter ) {
             latestQueryParams['hasAnomalies'] = this.anomalyFilter;

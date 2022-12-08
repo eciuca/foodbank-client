@@ -59,9 +59,6 @@ export class OrgfeaddetailComponent implements OnInit {
                       antenne => {
                         if (antenne !== null) {
                           this.selectedAntenne = Object.assign({}, antenne, {fullname: antenne.idDis + ' ' + antenne.societe});
-                          console.log('our antenne:', this.selectedAntenne);
-                        } else {
-                          console.log('There is no antenne!');
                         }
                       });
             }
@@ -96,7 +93,6 @@ export class OrgfeaddetailComponent implements OnInit {
     else {
       modifiedOrganisation.antenne = 0;
     }
-    console.log('Modifying Organisation with content:', modifiedOrganisation);
     this.organisationsService.update(modifiedOrganisation)
         .subscribe( ()  => {
               this.messageService.add({
@@ -107,10 +103,9 @@ export class OrgfeaddetailComponent implements OnInit {
               this.onOrganisationUpdate.emit(modifiedOrganisation);
             },
             (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-              console.log('Error updating organisation', dataserviceerror.message);
-              const  errMessage = {severity: 'error', summary: 'Update',
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                const  errMessage = {severity: 'error', summary: 'Update',
                 // tslint:disable-next-line:max-line-length
                 detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
                 life: 6000 };
@@ -127,15 +122,10 @@ export class OrgfeaddetailComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           orgForm.reset( oldOrganisation); // reset in-memory object for next open
-          console.log('We have reset the form to its original value');
           this.onOrganisationQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
       this.onOrganisationQuit.emit();
     }
   }
@@ -150,7 +140,6 @@ export class OrgfeaddetailComponent implements OnInit {
           this.filteredOrganisations = filteredOrganisations.map((organisation) =>
               Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
           );
-          console.log('Proposed Organisations', this.filteredOrganisations);
         });
   }
 

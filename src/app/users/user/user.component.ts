@@ -93,7 +93,6 @@ export class UserComponent implements OnInit {
 
       if (!this.idUser$) {
           // we must come from the menu
-          console.log('We initialize a new user object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
           this.booIsCreate = false;
@@ -124,14 +123,10 @@ export class UserComponent implements OnInit {
                             membre => {
                                 if (membre != null && membre.actif == true) {
                                     this.selectedMembre = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                                    console.log('our users membre:', this.selectedMembre);
-                                } else {
-                                    console.log('There is no membre for this user!');
                                 }
                             });
                 } else {
                     this.user = new DefaultUser();
-                    console.log('CurrentFilteredBankAndOrg', this.currentFilteredBankShortName,this.currentFilteredOrg);
                     if (this.isAdmin) {
                         // currentFilteredBankId should always be filled in cfr GUI
                         this.user.lienBanque = this.currentFilteredBankId;
@@ -157,8 +152,6 @@ export class UserComponent implements OnInit {
                     else {
                         this.user.lienBanque = this.lienBanque;
                         this.user.idCompany = this.idCompany;
-                        console.log('CurrentFilteredOrg', this.currentFilteredOrg);
-
                         if (this.idOrg > 0 && this.lienDepot === 0) {
                             // handle  users from single organisation ( logged in as organisation admin
                             this.user.idOrg = this.idOrg;
@@ -207,9 +200,6 @@ export class UserComponent implements OnInit {
                           membre => {
                               if (membre != null) {
                                   this.loggedInMember = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                                  console.log('logged in membre:', this.loggedInMember);
-                              } else {
-                                  console.log('There is no logged in membre !');
                               }
                           });
 
@@ -287,18 +277,14 @@ export class UserComponent implements OnInit {
                               user.idUser, 'Delete' );
                   },
                       (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                          console.log('Error deleting user', dataserviceerror.message);
-                          const  errMessage = {severity: 'error', summary: 'Delete',
+                        const dataserviceerror = dataserviceerrorFn();
+                        if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                              const  errMessage = {severity: 'error', summary: 'Delete',
                               // tslint:disable-next-line:max-line-length
                               detail: $localize`:@@messageUserDeleteError:The user ${user.idUser} ${user.userName} could not be deleted: error: ${dataserviceerror.message}`,
                               life: 6000 };
                           this.messageService.add(errMessage) ;
                       });
-          },
-          reject: () => {
-              console.log('We do nothing');
           }
       });
  }
@@ -309,8 +295,7 @@ export class UserComponent implements OnInit {
 
       this.updateUserInfoFromMember( modifiedUser,this.selectedMembre);
       if (!modifiedUser.hasOwnProperty('isNew')) {
-          console.log('Updating User with content:', modifiedUser);
-          this.usersService.update(modifiedUser)
+         this.usersService.update(modifiedUser)
         .subscribe(updatedUser  => {
             this.messageService.add({
                 severity: 'success',
@@ -321,9 +306,8 @@ export class UserComponent implements OnInit {
                     modifiedUser.idUser, 'Update' );
         } ,
             (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating user', dataserviceerror.message);
+            const dataserviceerror = dataserviceerrorFn();
+            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 const  errMessage = {severity: 'error', summary: 'Update',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageUserUpdateError:The user ${modifiedUser.idUser} ${modifiedUser.userName} could not be updated: error: ${dataserviceerror.message}`,
@@ -340,8 +324,6 @@ export class UserComponent implements OnInit {
                       if (membre !== null) {
                           this.updateUserInfoFromMember( modifiedUser,membre);
                           if (  modifiedUser.rights === '') { modifiedUser.rights = this.rights[0].value; } // dropdown box was not touched
-
-                          console.log('Creating User with content:', modifiedUser);
                           this.usersService.add(modifiedUser)
                               .subscribe(() => {
                                       this.messageService.add({
@@ -359,8 +341,7 @@ export class UserComponent implements OnInit {
                                           dataserviceerror.message = dataserviceerror.error().message
                                       }
 
-                                      console.log('Error creating user', dataserviceerror.message);
-                                      const  errMessage = {severity: 'error', summary: 'Create',
+                                   const  errMessage = {severity: 'error', summary: 'Create',
                                           // tslint:disable-next-line:max-line-length
                                           detail: $localize`:@@messageUserCreateError:The user ${modifiedUser.idUser} ${modifiedUser.userName} could not be created: error: ${dataserviceerror.message}`,
                                           life: 6000 };
@@ -368,8 +349,7 @@ export class UserComponent implements OnInit {
                                   }
                             );
                       } else {
-                          console.log('Error creating user: no employee was selected');
-                          const  errMessage = {severity: 'error', summary: 'Create',
+                         const  errMessage = {severity: 'error', summary: 'Create',
                               // tslint:disable-next-line:max-line-length
                               detail: $localize`:@@messageUserCreateErrorNoEmployee:The user ${modifiedUser.idUser}  could not be created: no employee was selected`,
                               life: 6000 };
@@ -388,16 +368,11 @@ export class UserComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     userForm.reset(oldUser); // reset in-memory object for next open
-                    console.log('We have reset the user form to its original value');
                     this.onUserQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
-            this.onUserQuit.emit();
+             this.onUserQuit.emit();
         }
     }
     updateUserInfoFromMember(user:User,membre:Membre) {
@@ -449,7 +424,6 @@ export class UserComponent implements OnInit {
                 if ( ['Admin_Banq',  'Admin_FBBA','admin'].includes(this.loggedInUserRights)) {
                     this.filteredMembres.push(this.loggedInMember);
                 }
-                console.log("Filtered Members", this.filteredMembres, this.selectedMembre );
             });
     }
 

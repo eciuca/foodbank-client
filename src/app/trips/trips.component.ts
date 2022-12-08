@@ -71,7 +71,6 @@ export class TripsComponent implements OnInit {
       this.queryBase = { 'batId': authState.user.lienBat};
     }
     console.log('initialization sets query base to:', this.queryBase);
-    this.nextPage(null);
   }
   nextPage(event: LazyLoadEvent) {
     console.log('Initial Lazy Loaded Event', event, 'Query Base:', this.queryBase);

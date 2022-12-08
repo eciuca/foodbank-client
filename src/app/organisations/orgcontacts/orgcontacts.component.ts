@@ -57,7 +57,6 @@ export class OrgcontactsComponent implements OnInit {
     }
     this.lienAsso$.subscribe(lienAsso => {
       if (lienAsso) {
-        console.log('initializing orgcontacts of id of Association', lienAsso);
         this.loading = true;
         const queryParms = {};
         queryParms['lienAsso'] = lienAsso;
@@ -74,12 +73,10 @@ export class OrgcontactsComponent implements OnInit {
       } else {
         this.orgcontacts = [];
         this.booCanCreate = false;
-        console.log(' not yet initializing orgcontacts of lienAsso, we are creating a new association !!!');
       }
     });
   }
   handleSelect(orgcontact) {
-    console.log( 'Orgcontact was selected', orgcontact);
     this.selectedOrgPersId$.next(orgcontact.orgPersId);
     this.displayDialog = true;
   }

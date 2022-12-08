@@ -90,7 +90,6 @@ export class UsersRightsComponent implements OnInit {
             select(globalAuthState),
             filter(authState => authState.isLoggedIn)
         ).subscribe((authState) => {
-      console.log('Entering Users component with authState:', authState);
       if (authState.banque) {
         this.bankid = authState.banque.bankId;
         this.bankName = authState.banque.bankName;
@@ -134,11 +133,9 @@ export class UsersRightsComponent implements OnInit {
             console.log('Entering Users component with unsupported user rights, see complete authstate:', authState);
         }
       }
-      console.log('Users FilterBase is: ', this.filterBase);
-    });
+        });
   }
   handleSelect(user) {
-    console.log( 'User was selected', user);
     this.displayDialog = true;
     this.selectedIdUser$.next(user.idUser);
   }
@@ -170,7 +167,6 @@ export class UsersRightsComponent implements OnInit {
             select(isLoggedIn),
             filter(isLoggedIn => isLoggedIn))
         .subscribe(_ => {
-          console.log('Lazy Loaded Event', event, 'FilterBase:', this.filterBase);
           this.loading = true;
           const queryParms = {...this.filterBase};
           queryParms['offset'] = event.first.toString();

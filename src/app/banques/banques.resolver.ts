@@ -43,7 +43,6 @@ export class BanquesResolver implements Resolve<boolean> {
                 mergeMap(authState => this.loadBanquesDependingOnUserRights(authState))
                 )
             .subscribe(loadedBanques => {
-            console.log('Loaded banques: ' + loadedBanques.length);
             this.banquesService.setLoaded(true);
         });
     }

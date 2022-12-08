@@ -114,7 +114,6 @@ export class OrganisationsComponent implements OnInit {
     }
 
     handleSelect(organisation) {
-        console.log( 'Organisation was selected', organisation);
         this.selectedIdDis$.next(organisation.idDis);
         this.displayDialog = true;
     }
@@ -145,7 +144,6 @@ export class OrganisationsComponent implements OnInit {
     }
 
     nextPage(event: LazyLoadEvent) {
-        console.log('Lazy Loaded Event', event);
         this.loading = true;
         const queryParms = {...this.filterBase};
         queryParms['offset'] = event.first.toString();
@@ -252,15 +250,13 @@ export class OrganisationsComponent implements OnInit {
                         const classicBanks = { 'classicBanks': '1' };
                         this.banqueService.getWithQuery(classicBanks)
                             .subscribe((banquesEntities) => {
-                                    console.log('Banques now loaded:', banquesEntities);
-                                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                                  this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
                                 });
 
                     }
                     if (authState.user.rights === 'admin') {
                         this.banqueService.getAll()
                             .subscribe((banquesEntities) => {
-                                console.log('Banques now loaded:', banquesEntities);
                                 this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
                             });
 
@@ -313,11 +309,9 @@ export class OrganisationsComponent implements OnInit {
         }
     }
     changeArchiveFilter($event) {
-        console.log('Archive is now:', $event);
         this.booShowArchived = $event.checked;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Query Parms', latestQueryParams);
         // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (this.booShowArchived ) {
@@ -329,11 +323,9 @@ export class OrganisationsComponent implements OnInit {
         this.loadPageSubject$.next(latestQueryParams);
     }
     changeDepotFilter($event) {
-        console.log('Depot filter is now:', $event);
         this.booShowDepots = $event.checked;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Query Parms', latestQueryParams);
         // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (this.booShowDepots ) {
@@ -346,11 +338,9 @@ export class OrganisationsComponent implements OnInit {
 
 
     filterRegion(regId) {
-        console.log('Region filter is now:', regId);
         this.regionSelected = regId;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Region Query Parms', latestQueryParams);
         // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (this.regionSelected) {
@@ -364,12 +354,10 @@ export class OrganisationsComponent implements OnInit {
         this.loadPageSubject$.next(latestQueryParams);
     }
     filterDepot(idDepot) {
-        console.log('Depot filter is now:', idDepot);
         this.depotSelected = idDepot;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Depot Query Parms', latestQueryParams);
-        // when we switch f we need to restart from first page
+        // when we switch we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (this.depotSelected) {
             latestQueryParams['lienDepot'] = idDepot;
@@ -382,10 +370,8 @@ export class OrganisationsComponent implements OnInit {
         this.loadPageSubject$.next(latestQueryParams);
     }
     filterClasseFBBA(classeFBBA) {
-        console.log('ClasseFBBA filter is now:', classeFBBA);
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest ClasseFBBA Query Parms', latestQueryParams);
         // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if ((classeFBBA >= 0)  && (classeFBBA != 999 )) {
@@ -401,12 +387,10 @@ export class OrganisationsComponent implements OnInit {
     }
 
     filterStatut(statut) {
-        console.log('statut filter is now:', statut);
         this.statutSelected = statut;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest statut Query Parms', latestQueryParams);
-        // when we switch f, we need to restart from first page
+        // when we switch , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (statut !== '') {
             latestQueryParams['statut'] = statut;
