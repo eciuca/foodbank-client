@@ -118,12 +118,13 @@ export class NotificationsComponent implements OnInit {
 
     }
     nextPage(event: LazyLoadEvent) {
-        if (!this.isLoggedIn) {
+     /*   if (!this.isLoggedIn) {
             setTimeout(() => {
                 console.log('ignore notifications initial nextPage and delaying 250ms');
             }, 250);
             return;
         }
+     */
         console.log('Initial Lazy Loaded Event', event, 'Query Base:', this.queryBase);
         // Ignore first nextpage  by testing this.queryBase - initialization not finished and double i18n load side effect
       if (this.queryBase) {
