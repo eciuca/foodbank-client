@@ -218,10 +218,8 @@ export class OrgauditComponent implements OnInit {
               });
     } else {
       modifiedOrgaudit.lienBanque = this.lienBanque;
-      // console.log('Creating Orgaudit with content:', modifiedOrgaudit);
       this.orgauditsService.add(modifiedOrgaudit)
           .subscribe((newOrgaudit) => {
-                // console.log('Created Orgaudit with content:', newOrgaudit);
                 this.messageService.add({
                   severity: 'success',
                   summary: 'Creation',
@@ -230,10 +228,9 @@ export class OrgauditComponent implements OnInit {
                 this.onOrgauditCreate.emit(newOrgaudit);
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                // console.log('Error creating audit', dataserviceerror.message);
-                const  errMessage = {severity: 'error', summary: 'Create',
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                  const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: `The audit  for ${modifiedOrgaudit.societe} could not be created: error: ${dataserviceerror.message}`,
                   life: 6000 };

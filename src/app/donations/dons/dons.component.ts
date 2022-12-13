@@ -100,7 +100,6 @@ export class DonsComponent implements OnInit {
         .subscribe();
   }
   handleSelect(don) {
-    console.log( 'Don was selected', don);
     this.selectedIdDon$.next(don.idDon);
     this.displayDialog = true;
   }
@@ -129,7 +128,7 @@ export class DonsComponent implements OnInit {
     this.displayDialog = false;
   }
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
+    
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();

@@ -81,7 +81,6 @@ export class DonateursComponent implements OnInit {
         .subscribe();
   }
   handleSelect(donateur) {
-    console.log( 'Donateur was selected', donateur);
     this.selectedDonateurId$.next(donateur.donateurId);
     this.displayDialog = true;
   }
@@ -110,7 +109,7 @@ export class DonateursComponent implements OnInit {
     this.displayDialog = false;
   }
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
+    
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();

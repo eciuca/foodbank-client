@@ -96,14 +96,13 @@ export class AuditChangesComponent implements OnInit {
       this.banqueService.getAll()
           .pipe(
               tap((banquesEntities) => {
-                console.log('Banques now loaded:', banquesEntities);
+                console.log('Banques now loaded:', banquesEntities.length);
                 this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
               })
           ).subscribe();
     }
   }
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();

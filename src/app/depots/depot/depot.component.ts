@@ -51,7 +51,6 @@ export class DepotComponent implements OnInit {
     ngOnInit(): void {
         if (!this.idDepot$) {
             // we must come from the menu
-            console.log('We initialize a new depot object from the router!');
             this.booCalledFromTable = false;
             this.booCanQuit = false;
             this.route.paramMap
@@ -59,8 +58,7 @@ export class DepotComponent implements OnInit {
                     map(paramMap => paramMap.get('idDepot')),
                     switchMap(idDepot => this.depotsService.getByKey(idDepot))
                 ).subscribe(depot => {
-                console.log('Depot from Link : ', depot);
-                this.depot = depot;
+                   this.depot = depot;
             });
         }  else {
             const depot$ = combineLatest([this.idDepot$, this.depotsService.entities$])
@@ -70,7 +68,6 @@ export class DepotComponent implements OnInit {
             depot$.subscribe(depot => {
                 if (depot) {
                     this.depot = depot;
-                    console.log('our depot:', this.depot);
                 }
             });
         }
@@ -120,10 +117,8 @@ export class DepotComponent implements OnInit {
                                 depot.idDepot + ' ' + depot.nom, 'Update' );
                         },
                         (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error deleting depot', dataserviceerror.message);
-
+                            const dataserviceerror = dataserviceerrorFn();
+                            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             let  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageDepotNotDeleted:The depot  ${depot.idDepot} ${depot.nom}  could not be deleted: error: ${dataserviceerror.message}`,
@@ -138,10 +133,7 @@ export class DepotComponent implements OnInit {
 
                             this.messageService.add(errMessage) ;
                         });
-            },
-            reject: () => {
-                console.log('We do nothing');
-            }
+            } 
         });
     }
 
@@ -162,9 +154,8 @@ export class DepotComponent implements OnInit {
                             modifiedDepot.idDepot + ' ' + modifiedDepot.nom, 'Update' );
                     },
                     (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                        console.log('Error updating depot', dataserviceerror.message);
+                        const dataserviceerror = dataserviceerrorFn();
+                        if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                         const  errMessage = {severity: 'error', summary: 'Update',
                             // tslint:disable-next-line:max-line-length
                             detail: $localize`:@@messageDepotNotUpdated:The depot  ${modifiedDepot.idDepot} ${modifiedDepot.nom} could not be updated: error: ${dataserviceerror.message}`,
@@ -185,16 +176,11 @@ export class DepotComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     depotForm.reset(oldDepot); // reset in-memory object for next open
-                    console.log('We have reset the depot form to its original value');
                     this.onDepotQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
-            this.onDepotQuit.emit();
+           this.onDepotQuit.emit();
         }
     }
     generateToolTipMessageForDepotAnomaly(field: string) {
@@ -218,10 +204,8 @@ export class DepotComponent implements OnInit {
         let myanomaly = "";
         if (this.depot.anomalies.length > 0) {
             const anomaliesArray = this.depot.anomalies.split(';').map(kvp => kvp.split(':'));
-            console.log("anomalies array is", anomaliesArray)
             anomaliesArray.forEach((anomaly) => {
-                console.log("anomaly is", anomaly);
-                if (anomaly[0] == field) {
+               if (anomaly[0] == field) {
                     myanomaly += anomaly[1];
                 }
             });

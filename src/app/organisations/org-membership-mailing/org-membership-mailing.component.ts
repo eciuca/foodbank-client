@@ -193,13 +193,10 @@ export class OrgMembershipMailingComponent implements OnInit {
     });
   }
   getNextOrganisation() {
-      // console.log('entering getNextOrganisation with orgsummary', this.orgsummary);
       this.orgSummaryIndex = this.orgSummaries.findIndex(item => item.idDis === this.organisation.idDis);
-      // console.log('Old Summary index is:', this.orgSummaryIndex);
       if (this.orgSummaryIndex < (this.totalOrgSummaries - 1)) {
           this.orgSummaryIndex++;
           this.orgsummary = this.orgSummaries[this.orgSummaryIndex];
-          // console.log('New index and Summary is:', this.orgSummaryIndex, this.orgsummary);
           this.getOrganisation(this.orgsummary.idDis);
       }
   }

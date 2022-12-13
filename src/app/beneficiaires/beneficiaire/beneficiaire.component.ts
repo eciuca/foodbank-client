@@ -79,7 +79,6 @@ export class BeneficiaireComponent implements OnInit {
 
       if (!this.idClient$) {
           // we must come from the menu
-          console.log('We initialize a new beneficiaire object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
           this.idClient$ = this.route.paramMap
@@ -96,22 +95,13 @@ export class BeneficiaireComponent implements OnInit {
           if (beneficiaire) {
               this.beneficiaire = beneficiaire;
               this.title = $localize`:@@OrgBeneficiaryExisting:Beneficiary for organisation ${beneficiaire.societe} Updated On ${ beneficiaire.dateUpd}`;
-              console.log('our beneficiaire:',  this.beneficiaire);
               if (beneficiaire.lcpas && beneficiaire.lcpas !== 0) {
                   this.cpassService.getByKey(beneficiaire.lcpas)
                       .subscribe(
                           cpas => {
                               if (cpas !== null) {
                                   this.selectedCpas = {...cpas};
-                                  console.log('our beneficiaire cpas:', this.selectedCpas);
-                              } else {
-                                  console.log('There is no cpas for this beneficiaire!');
-                              }
-                          },
-                          (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                              console.log('Could not retrieve Cpas with id:', beneficiaire.lcpas);
+                               }
                           });
               }
           } else {
@@ -125,7 +115,6 @@ export class BeneficiaireComponent implements OnInit {
                   // tslint:disable-next-line:max-line-length
                   if (this.currentFilteredOrg != null && this.currentFilteredOrg.idDis != null && this.currentFilteredOrg.idDis > 0) {
                       // create beneficiaire from bank admin beneficiaire or depot admin beneficiaire
-                      console.log ('Our CurrentFilteredOrg from Bank Or Depot:', this.currentFilteredOrg)
                       this.beneficiaire.lienDis = this.currentFilteredOrg.idDis;
                       if (this.currentFilteredOrg.societe === 'Depot') {
                           this.title = $localize`:@@OrgBeneficiaryNewC:New Beneficiary for organisation  ${this.depotName}`;
@@ -212,18 +201,14 @@ export class BeneficiaireComponent implements OnInit {
                                 beneficiaire.nom + ' ' + beneficiaire.prenom, 'Update' );
                     },
                         (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error deleting beneficiary', dataserviceerror.message);
+                            const dataserviceerror = dataserviceerrorFn();
+                            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageBeneficiaryDeleteError:The beneficiary  ${beneficiaire.nom} ${beneficiaire.prenom} could not be deleted: error: ${dataserviceerror.message}`,
                                 life: 6000 };
                             this.messageService.add(errMessage) ;
                         });
-            },
-            reject: () => {
-                console.log('We do nothing');
             }
         });
     }
@@ -245,17 +230,15 @@ export class BeneficiaireComponent implements OnInit {
                     modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Update' );
         },
             (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating beneficiary', dataserviceerror.message);
-                const  errMessage = {severity: 'error', summary: 'Update',
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+               const  errMessage = {severity: 'error', summary: 'Update',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageBeneficiaryUpdateError:The beneficiary  ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} could not be updated: error: ${dataserviceerror.message}`,
                     life: 6000 };
                 this.messageService.add(errMessage) ;
         });
       } else {
-          console.log('Creating Beneficiaire with content:', modifiedBeneficiaire);
           this.beneficiairesService.add(modifiedBeneficiaire)
               .subscribe(() => {
                   this.messageService.add({
@@ -268,10 +251,9 @@ export class BeneficiaireComponent implements OnInit {
                           modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Create' );
               },
                   (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                      console.log('Error updating beneficiary', dataserviceerror.message);
-                      const  errMessage = {severity: 'error', summary: 'Create',
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                     const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageBeneficiaryCreateError:The beneficiary  ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} could not be created: error: ${dataserviceerror.message}`,
                           life: 6000 };
@@ -288,15 +270,10 @@ export class BeneficiaireComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     beneficiaireForm.reset(oldBeneficiaire); // reset in-memory object for next open
-                    console.log('We have reset the beneficiaire form to its original value');
                     this.onBeneficiaireQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
             this.onBeneficiaireQuit.emit();
         }
     }

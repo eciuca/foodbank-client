@@ -48,7 +48,6 @@ export class DependentsComponent implements OnInit {
         .subscribe();
     this.masterId$.subscribe(masterId => {
     if (masterId) {
-        console.log('initializing dependents of idClient', masterId);
         this.loading = true;
         this.dependentQuery['lienMast'] = masterId;
         this.dependentQuery['actif'] = '1';
@@ -65,12 +64,10 @@ export class DependentsComponent implements OnInit {
       } else {
         this.dependents = [];
         this.booCanCreate = false;
-        console.log(' not yet initializing dependents of masterId, we are creating a new beneficiary !!!');
       }
     });
   }
   handleSelect(dependent) {
-    console.log( 'Dependent was selected', dependent);
     this.selectedIdDep$.next(dependent.idDep);
     this.displayDialog = true;
   }
@@ -104,7 +101,6 @@ export class DependentsComponent implements OnInit {
 
   }
     changeArchiveFilter($event) {
-        console.log('Archive is now:', $event);
         this.first = 0;
         this.booShowArchived = $event.checked;
         if (this.booShowArchived ) {
@@ -114,7 +110,7 @@ export class DependentsComponent implements OnInit {
         }
         this.dependentService.getWithQuery(this.dependentQuery)
             .subscribe(loadedDependents => {
-                console.log('New Loaded dependents: ' + loadedDependents);
+                console.log('New Loaded dependents: ' + loadedDependents.length);
                 this.dependents = loadedDependents;
                 if (this.booIsAdmin) {
                     this.booCanCreate = true;

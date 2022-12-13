@@ -41,7 +41,7 @@ export class TripsComponent implements OnInit {
             mergeMap(queryParams => this.tripService.getWithQuery(queryParams))
         )
         .subscribe(loadedTrips => {
-          console.log('Loaded trips from nextpage: ' + loadedTrips);
+          console.log('Loaded trips from nextpage: ' + loadedTrips.length);
           if (loadedTrips.length > 0) {
             this.totalRecords = loadedTrips[0].totalRecords;
           }  else {
@@ -65,15 +65,12 @@ export class TripsComponent implements OnInit {
         .subscribe();
   }
   private initializeDependingOnUserRights(authState: AuthState) {
-    console.log ('AuthState is at initialization:', authState);
     if (authState.user) {
       this.author = authState.user.membreNom + ' ' + authState.user.membrePrenom;
       this.queryBase = { 'batId': authState.user.lienBat};
     }
-    console.log('initialization sets query base to:', this.queryBase);
   }
   nextPage(event: LazyLoadEvent) {
-    console.log('Initial Lazy Loaded Event', event, 'Query Base:', this.queryBase);
     // Ignore first nextpage  by testing this.queryBase - initialization not finished and double i18n load side effect
     if (this.queryBase) {
       this.loading = true;

@@ -141,22 +141,19 @@ export class AuditReportComponent implements OnInit {
             const classicBanks = { 'classicBanks': '1' };
             this.banqueService.getWithQuery(classicBanks)
                 .subscribe((banquesEntities) => {
-                    console.log('Banques now loaded:', banquesEntities);
-                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                        this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
                         this.changeDateRangeFilter();
                     });
             this.nbOfOrganisations = 0;
             this.nbOfFeadOrganisations = 0;
             this.banqueReportService.getOrgCountReport(this.authService.accessToken,"")
                 .subscribe((banqueOrgCounts) => {
-                        console.log('BanqueOrgCounts now loaded:', banqueOrgCounts);
                         this.banqueOrgCounts = banqueOrgCounts;
                         this.banqueOrgCounts.forEach(item => this.nbOfOrganisations += item.count);
                     });
             this.banqueReportService.getOrgCountReport(this.authService.accessToken,"FEAD")
                 .pipe(
                     tap((banqueOrgCounts) => {
-                        console.log('BanqueOrgFeadCounts now loaded:', banqueOrgCounts);
                         this.banqueOrgFeadCounts = banqueOrgCounts;
                         this.banqueOrgFeadCounts.forEach(item => this.nbOfFeadOrganisations += item.count);
 
@@ -170,16 +167,11 @@ export class AuditReportComponent implements OnInit {
         this.report(null);
     }
     changeFilter() {
-      console.log('Audit Option Selected:',this.viewOption)
         // remove previous filters
-
         this.filterParams['reportType'] = this.viewOption;
-
         this.report(null);
-
     }
   report(event: any) {
-      console.log('Audit Report Started', event);
     if (event)  {
         this.filterParams['bankShortName']= event;
     }
@@ -209,7 +201,6 @@ export class AuditReportComponent implements OnInit {
                          data: []
                      },
                  ];
-                 console.log('Fead Option', this.feadOption);
                  let selectedBanqueOrgCounts = this.banqueOrgCounts;
                  if (this.feadOption) {
                      selectedBanqueOrgCounts = this.banqueOrgFeadCounts;
@@ -377,18 +368,13 @@ export class AuditReportComponent implements OnInit {
                          dataSetitem.data.push(0);
                      }
                  })
-                 console.log( 'initialized chart data', reportLabels,  reportDataSets);
                  for (let i=0; i < this.auditReports.length; i++ ) {
                      if (this.auditReports[i].key === null ) continue;
                      const indexLabel = reportLabels.indexOf(this.auditReports[i].key);
                      let indexDataset = reportDataSets.findIndex(item => item.label.toUpperCase() === this.auditReports[i].category.toUpperCase());
                      if( indexDataset === -1) { indexDataset = reportDataSets.length - 1 } // Assign to Other
-                     console.log(this.auditReports[i],'indexLabel', indexLabel, 'indexDataset',indexDataset);
                      if (indexLabel >= 0 && indexDataset >= 0 && indexLabel < reportLabels.length && indexDataset < reportDataSets.length) {
                          reportDataSets[indexDataset].data[indexLabel] += this.auditReports[i].loginCount;
-                     }
-                     else {
-                         console.log('can not create a audit report entry for item', this.auditReports[i],indexLabel,indexDataset);
                      }
                  }
                  this.title = `Breakdown by User Rights`;

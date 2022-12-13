@@ -57,7 +57,6 @@ export class DependentComponent implements OnInit {
     dependent$.subscribe(dependent => {
       if (dependent) {
         this.dependent = dependent;
-        console.log('our dependent:', this.dependent);
       } else {
         this.dependent = new DefaultDependent();
         this.dependent.lienBanque = this.lienBanque;
@@ -66,7 +65,6 @@ export class DependentComponent implements OnInit {
         if (this.myform) {
           this.myform.reset(this.dependent);
         }
-        console.log('we have a new default dependent');
       }
     });
 
@@ -119,18 +117,14 @@ export class DependentComponent implements OnInit {
               this.onDependentDelete.emit(dependent);
             },
                 (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                  console.log('Error deleting dependent', dataserviceerror.message);
-                  const  errMessage = {severity: 'error', summary: 'Delete',
+                    const dataserviceerror = dataserviceerrorFn();
+                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                    const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageDependentDeleteError:The dependent  ${dependent.nom} ${dependent.prenom} could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
                 });
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
@@ -149,9 +143,8 @@ export class DependentComponent implements OnInit {
             this.onDependentUpdate.emit(modifiedDependent);
           },
               (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating dependent', dataserviceerror.message);
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageDependentUpdateError:The dependent  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be updated: error: ${dataserviceerror.message}`,
@@ -159,8 +152,7 @@ export class DependentComponent implements OnInit {
                 this.messageService.add(errMessage) ;
           });
     } else {
-      console.log('Creating Dependent with content:', modifiedDependent);
-      this.dependentsService.add(modifiedDependent)
+       this.dependentsService.add(modifiedDependent)
           .subscribe((newDependent) => {
             this.messageService.add({
               severity: 'success',
@@ -170,9 +162,8 @@ export class DependentComponent implements OnInit {
             this.onDependentCreate.emit(newDependent);
           },
               (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error creating dependent', dataserviceerror.message);
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageDependentCreateError:The dependent  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be created: error: ${dataserviceerror.message}`,
@@ -191,16 +182,11 @@ export class DependentComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           dependentForm.reset(oldDependent); // reset in-memory object for next open
-          console.log('We have reset the dependent form to its original value');
           this.onDependentQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
-      this.onDependentQuit.emit();
+        this.onDependentQuit.emit();
     }
   }
 }

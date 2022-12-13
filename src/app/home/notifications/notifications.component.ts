@@ -31,6 +31,7 @@ export class NotificationsComponent implements OnInit {
     first: number;
     languages: any[];
     selectedLanguage: number;
+    isLoggedIn: boolean;
   constructor( private notificationService: NotificationEntityService,
                private router: Router,
                private store: Store<AppState>) {
@@ -44,6 +45,7 @@ export class NotificationsComponent implements OnInit {
           {label: 'Nederlands', value: 2 },
           {label: 'All', value: 0 }
       ];
+      this.isLoggedIn = false;
   }
 
   ngOnInit(): void {
@@ -54,13 +56,14 @@ export class NotificationsComponent implements OnInit {
               select(globalAuthState),
               map((authState) => {
                   this.initializeDependingOnUserRights(authState);
+                  this.isLoggedIn = authState.isLoggedIn;
                   this.loadPageSubject$
                  .pipe(
                     filter(queryParams => !!queryParams),
                      mergeMap(queryParams => this.notificationService.getWithQuery(queryParams))
                     )
                     .subscribe(loadedNotifications => {
-                     console.log('Loaded notifications from nextpage: ' + loadedNotifications);
+                     console.log('Loaded notifications from nextpage: ' + loadedNotifications.length);
                     if (loadedNotifications.length > 0) {
                     this.totalRecords = loadedNotifications[0].totalRecords;
                     }  else {
@@ -115,6 +118,12 @@ export class NotificationsComponent implements OnInit {
 
     }
     nextPage(event: LazyLoadEvent) {
+        if (!this.isLoggedIn) {
+            setTimeout(() => {
+                console.log('ignore notifications initial nextPage and delaying 250ms');
+            }, 250);
+            return;
+        }
         console.log('Initial Lazy Loaded Event', event, 'Query Base:', this.queryBase);
         // Ignore first nextpage  by testing this.queryBase - initialization not finished and double i18n load side effect
       if (this.queryBase) {

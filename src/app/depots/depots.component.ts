@@ -103,14 +103,12 @@ export class DepotsComponent implements OnInit {
         .subscribe();
   }
   handleSelect(depot) {
-    console.log( 'Depot was selected', depot);
     this.selectedIdDepot$.next(depot.idDepot);
     this.displayDialog = true;
   }
   addNewDepotFromOrg(idDis: number) {
    this.selectedIdDis = idDis;
    this.candidateOrganisation = null;
-   console.log("new depot for organisation", this.selectedIdDis);
    this.depotService.getByKey(this.selectedIdDis.toString())
        .subscribe( existingDepot => {
 
@@ -201,7 +199,7 @@ export class DepotsComponent implements OnInit {
     this.displayDialog = false;
   }
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
+    
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();
@@ -224,8 +222,7 @@ export class DepotsComponent implements OnInit {
      if (event.filters.idCompany && event.filters.idCompany.value) {
         this.filteredBankShortName= event.filters.idCompany.value;
         queryParms['idCompany'] = this.filteredBankShortName;
-        console.log('CurrentFilteredBankShortName', this.filteredBankShortName,this.bankOptions);
-      } else {
+     } else {
           this.filteredBankShortName = null;
       }
     }
@@ -233,12 +230,10 @@ export class DepotsComponent implements OnInit {
   }
 
   changeArchiveFilter($event) {
-    console.log('Archive is now:', $event);
     this.booShowArchived = $event.checked;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Query Parms', latestQueryParams);
-    // when we switch from active to archived list and vice versa , we need to restart from first page
+     // when we switch from active to archived list and vice versa , we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (this.booShowArchived ) {
       latestQueryParams['actif'] = '0';
@@ -273,7 +268,6 @@ export class DepotsComponent implements OnInit {
           this.candidateOrganisations = filteredOrganisations.map((organisation) =>
               Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
           );
-          console.log('Proposed Organisations', this.candidateOrganisations);
         });
 
   }
@@ -301,8 +295,7 @@ export class DepotsComponent implements OnInit {
           const classicBanks = { 'classicBanks': '1' };
           this.banqueService.getWithQuery(classicBanks)
               .subscribe((banquesEntities) => {
-                    console.log('Banques now loaded:', banquesEntities);
-                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                  this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
               });
 
           break;

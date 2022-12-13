@@ -112,7 +112,6 @@ export class BeneficiairesComponent implements OnInit {
 
   }
   handleSelect(beneficiaire) {
-    console.log( 'Beneficiaire was selected', beneficiaire);
     this.selectedIdClient$.next(beneficiaire.idClient);
     this.displayDialog = true;
   }
@@ -171,7 +170,6 @@ export class BeneficiairesComponent implements OnInit {
     if (this.duplicateFilter ) {
       queryParms['duplicate'] = this.duplicateFilter;
     }
-    console.log('Filtered Organisation', this.filteredOrganisation);
     if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
       queryParms['lienDis'] = this.filteredOrganisation.idDis;
     }
@@ -201,8 +199,7 @@ export class BeneficiairesComponent implements OnInit {
     this.duplicateFilter = value;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Query Parms', latestQueryParams);
-    // when we switch filter , we need to restart from first page
+     // when we switch filter , we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (this.duplicateFilter ) {
       latestQueryParams['duplicate'] = this.duplicateFilter;
@@ -251,14 +248,12 @@ export class BeneficiairesComponent implements OnInit {
           this.filteredOrganisations = this.filteredOrganisationsPrepend.concat(filteredOrganisations.map((organisation) =>
               Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
           ));
-          console.log('Proposed Organisations', this.filteredOrganisations);
         });
   }
   filterOrganisationBeneficiaries(idDis: number) {
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
     latestQueryParams['offset'] = '0';
-    console.log('Latest Query Parms and new idOrg', latestQueryParams, idDis);
     // when we switch from active to archived list and vice versa , we need to restart from first page
     if (idDis != null) {
       latestQueryParams['lienDis'] = idDis;
@@ -270,11 +265,9 @@ export class BeneficiairesComponent implements OnInit {
     this.loadPageSubject$.next(latestQueryParams);
   }
   changeArchiveFilter($event) {
-    console.log('Archive is now:', $event);
     this.booShowArchived = $event.checked;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Query Parms', latestQueryParams);
     // when we switch from active to archived list and vice versa , we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (this.booShowArchived ) {

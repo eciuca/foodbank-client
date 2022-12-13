@@ -90,7 +90,7 @@ export class OrgbenefdetailComponent implements OnInit {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Update',
-                detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.societe} was updated`
+                  detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.idDis}  ${modifiedOrganisation.societe} was updated`
               });
               this.onOrganisationUpdate.emit(modifiedOrganisation);
               this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedOrganisation.lienBanque,modifiedOrganisation.idDis,'OrgBenefiaries',
@@ -101,8 +101,8 @@ export class OrgbenefdetailComponent implements OnInit {
                 if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 const  errMessage = {severity: 'error', summary: 'Update',
                 // tslint:disable-next-line:max-line-length
-                detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
-                life: 6000 };
+                    detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
+                    life: 6000 };
               this.messageService.add(errMessage) ;
             });
 

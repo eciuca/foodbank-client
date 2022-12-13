@@ -479,10 +479,8 @@ export class OrganisationsComponent implements OnInit {
         let myanomaly = "";
         if (organisation.anomalies.length > 0) {
             const anomaliesArray = organisation.anomalies.split(';').map(kvp => kvp.split(':'));
-            // console.log("anomalies array is", anomaliesArray)
             anomaliesArray.forEach((anomaly) => {
-                // console.log("anomaly is", anomaly);
-                if (anomaly[0] == field) {
+              if (anomaly[0] == field) {
                     myanomaly += anomaly[1];
                 }
             });

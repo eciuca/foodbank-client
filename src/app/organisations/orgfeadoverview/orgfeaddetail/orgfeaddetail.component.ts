@@ -30,6 +30,7 @@ export class OrgfeaddetailComponent implements OnInit {
   userName: string;
   selectedAntenne: any;
   filteredOrganisations: any[];
+  isAntenne: boolean;
 
 
   constructor(
@@ -43,6 +44,7 @@ export class OrgfeaddetailComponent implements OnInit {
   ) {
     this.booCanSave = false;
     this.userName = '' ;
+    this.isAntenne = false;
   }
 
   ngOnInit(): void {
@@ -53,7 +55,9 @@ export class OrgfeaddetailComponent implements OnInit {
         ).subscribe(organisation => {
           if (organisation) {
             this.organisation = organisation;
+            this.isAntenne = false;
             if (organisation.birbCode == "1") {
+              this.isAntenne = true;
               this.orgsummaryService.getByKey(organisation.antenne)
                   .subscribe(
                       antenne => {
@@ -98,7 +102,7 @@ export class OrgfeaddetailComponent implements OnInit {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Update',
-                detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.societe} was updated`
+                detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.idDis}  ${modifiedOrganisation.societe} was updated`
               });
               this.onOrganisationUpdate.emit(modifiedOrganisation);
             },
@@ -107,7 +111,7 @@ export class OrgfeaddetailComponent implements OnInit {
                 if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 const  errMessage = {severity: 'error', summary: 'Update',
                 // tslint:disable-next-line:max-line-length
-                detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
+                detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
                 life: 6000 };
               this.messageService.add(errMessage) ;
             });
@@ -142,7 +146,19 @@ export class OrgfeaddetailComponent implements OnInit {
           );
         });
   }
+    handleAntenneStatusChange(e: any) {
+        if (e.checked) {
+            this.organisation.birbCode = "1";
+            this.isAntenne = true;
+        }
+        else {
+            this.organisation.birbCode = "0";
+            this.isAntenne = false;
+            this.organisation.antenne = 0;
+            this.selectedAntenne = 0;
+        }
 
+    }
   generateTooltipAgreed() {
     return $localize`:@@OrgToolTipIsAgreed:Is Organisation Agreed?`;
   }
@@ -158,6 +174,15 @@ export class OrgfeaddetailComponent implements OnInit {
   generateTooltipFEADCode() {
     return $localize`:@@OrgToolTipFEADCode:FEAD Code of the Organisation`;
   }
+
+   generateTooltipIsAntenne() {
+        return $localize`:@@OrgToolTipIsAntenne:Is this Organisation a Subsidiary of another Organisation?`;
+    }
+
+    generateTooltipAntenne() {
+        return $localize`:@@OrgToolTipAntenne:Parent Organisation of this Subsidiary`;
+    }
+
 
 }
 

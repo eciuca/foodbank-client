@@ -149,23 +149,18 @@ export class AppComponent implements OnInit {
     }
     openFEAD() {
        const feadUrl = `${this.feadBaseUrl}/isis/general/portal/access.jsp` ;
-       console.log('Opening FEAD Tab', feadUrl);
-        window.open(feadUrl, '_blank');
+       window.open(feadUrl, '_blank');
     }
 
 
     private processAuthState(authState: AuthState) {
-        console.log('User lienbat is:', authState.user?.lienBat, 'Membre Langue is ', authState.user?.membreLangue);
-       // const idLanguage = authState.user?.idLanguage;
-                let idLanguage = null;
+        let idLanguage = null;
         if (authState.user?.membreLangue === 1) {
             idLanguage = 'fr-FR';
         }
         if (authState.user?.membreLangue === 2) {
             idLanguage = 'nl-NL';
         }
-        console.log(environment.availableLocales);
-        console.log(this.locale);
         if (idLanguage && environment.availableLocales.includes(idLanguage) && idLanguage !== this.locale) {
             const url = window.location.href;
             const newLocaleUrl = url.replace(this.locale, idLanguage);

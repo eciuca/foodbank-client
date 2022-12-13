@@ -88,7 +88,6 @@ export class BeneficiariesReportComponent implements OnInit {
       const classicBanks = { 'classicBanks': '1' };
       this.banqueService.getWithQuery(classicBanks)
         .subscribe((banquesEntities) => {
-          console.log('Banques now loaded:', banquesEntities);
           this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId}));
           if (! this.booIsLoaded) {
             this.report();
@@ -176,7 +175,6 @@ export class BeneficiariesReportComponent implements OnInit {
                         dataSetitem.data.push(0);
                     }
                 })
-                console.log( 'initialized chart data', reportLabels,  reportDataSetsByAge);
                 for (let i=0; i < banqueOrgReportRecords.length; i++ ) {
 
                     const indexLabel = reportLabels.indexOf(banqueOrgReportRecords[i].bankShortName);
@@ -244,7 +242,6 @@ export class BeneficiariesReportComponent implements OnInit {
                   if (bankOptionIndex === -1) continue;
                   if (!reportLabels.includes(this.populationRecords[i].dateStat)) {
                       reportLabels.push(this.populationRecords[i].dateStat);
-                      // console.log('New Date', this.populationRecords[i].dateStat);
                       for (let i=0; i < this.bankOptions.length; i++ ) {
                           reportDataSetsPerson[i].data.push(0);
                           reportDataSetsFamily[i].data.push(0);

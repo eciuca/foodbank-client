@@ -230,7 +230,7 @@ export class OrganisationComponent implements OnInit {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Update',
-                      detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.societe} was updated`
+                      detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.idDis}  ${modifiedOrganisation.societe} was updated`
                   });
                   this.onOrganisationUpdate.emit(modifiedOrganisation);
                       this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedOrganisation.lienBanque,modifiedOrganisation.idDis,'Org',
@@ -240,9 +240,8 @@ export class OrganisationComponent implements OnInit {
                     const dataserviceerror = dataserviceerrorFn();
                     if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                       const  errMessage = {severity: 'error', summary: 'Update',
-                          // tslint:disable-next-line:max-line-length
-                          detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
-                          life: 6000 };
+                       detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
+                       life: 6000 };
                       this.messageService.add(errMessage) ;
               });
       } else {
@@ -252,7 +251,7 @@ export class OrganisationComponent implements OnInit {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: $localize`:@@messageOrganisationCreated:Organisation ${newOrganisation.societe} was created`
+                      detail: $localize`:@@messageOrganisationCreated:Organisation ${newOrganisation.idDis}  ${newOrganisation.societe} was created`
                   });
                   this.onOrganisationCreate.emit(newOrganisation);
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,newOrganisation.lienBanque,newOrganisation.idDis,'Org',
@@ -302,7 +301,7 @@ export class OrganisationComponent implements OnInit {
                 const  myMessage = {
                     severity: 'success',
                     summary: 'Delete',
-                    detail: $localize`:@@messageOrganisationDeleted:Organisation ${organisation.societe} was deleted`};
+                    detail: $localize`:@@messageOrganisationDeleted:Organisation ${organisation.idDis} ${organisation.societe} was deleted`};
                 this.organisationsService.delete(organisation)
                     .subscribe( () => {
                         this.messageService.add(myMessage);
@@ -405,23 +404,5 @@ export class OrganisationComponent implements OnInit {
             }
         });
     }
-    /*
-    getFormValidationErrors() {
-
-        console.log('%c ==>> Validation Errors: ', 'color: red; font-weight: bold; font-size:25px;');
-
-        let totalErrors = 0;
-        if (this.myform.errors) {
-            this.myform.errors.forEach(oneError => {
-                totalErrors++;
-                console.log('Validation Error: ' + oneError.toString());
-            });
-        }
-
-        console.log('Number of errors: ' ,totalErrors);
-    }
-
-     */
-
 }
 

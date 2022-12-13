@@ -47,14 +47,12 @@ export class TripComponent implements OnInit {
     trip$.subscribe(trip => {
       if (trip) {
         this.trip = trip;
-        console.log('our trip:', this.trip);
       } else {
         this.trip = new DefaultTrip();
         if (this.myform) {
           this.myform.reset(this.trip);
         }
-        console.log('we have a new default trip');
-      }
+       }
     });
 
   }
@@ -76,18 +74,13 @@ export class TripComponent implements OnInit {
                   this.onTripDelete.emit(trip);
                 },
                 (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                  console.log('Error deleting trip', dataserviceerror.message);
-                  const  errMessage = {severity: 'error', summary: 'Delete',
-                    // tslint:disable-next-line:max-line-length
-                    detail: $localize`:@@messageTripDeleteError:The trip  for ${trip.membreNom} could not be deleted: error: ${dataserviceerror.message}`,
-                    life: 6000 };
-                  this.messageService.add(errMessage) ;
+                    const dataserviceerror = dataserviceerrorFn();
+                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                    const  errMessage = {severity: 'error', summary: 'Delete',
+                        detail: $localize`:@@messageTripDeleteError:The trip  for ${trip.membreNom} could not be deleted: error: ${dataserviceerror.message}`,
+                        life: 6000 };
+                    this.messageService.add(errMessage) ;
                 });
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
@@ -97,7 +90,6 @@ export class TripComponent implements OnInit {
 
     if (modifiedTrip.hasOwnProperty('tripId')) {
       modifiedTrip.dateEnreg = ''; // Date Enregistrement will be regenerated
-      console.log('Updating Trip with content:', modifiedTrip);
       this.tripsService.update(modifiedTrip)
           .subscribe(() => {
                 this.messageService.add({
@@ -108,9 +100,8 @@ export class TripComponent implements OnInit {
                 this.onTripUpdate.emit(modifiedTrip);
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating trip', dataserviceerror.message);
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageTripUpdateError:The trip  for ${modifiedTrip.membreNom} could not be updated: error: ${dataserviceerror.message}`,
@@ -119,7 +110,6 @@ export class TripComponent implements OnInit {
               });
     } else {
       modifiedTrip.batId = this.batId; // Trip created by the Logged In User
-      console.log('Creating Trip with content:', modifiedTrip);
       this.tripsService.add(modifiedTrip)
           .subscribe((newTrip) => {
                 this.messageService.add({
@@ -130,9 +120,8 @@ export class TripComponent implements OnInit {
                 this.onTripCreate.emit(newTrip);
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error creating trip', dataserviceerror.message);
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageTripCreateError:The trip for ${modifiedTrip.membreNom} could not be created: error: ${dataserviceerror.message}`,
@@ -151,16 +140,11 @@ export class TripComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           tripForm.reset(oldTrip); // reset in-memory object for next open
-          console.log('We have reset the trip form to its original value');
           this.onTripQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
-      this.onTripQuit.emit();
+       this.onTripQuit.emit();
     }
   }
 }

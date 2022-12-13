@@ -58,7 +58,7 @@ export class MembreFunctionsComponent implements OnInit {
       const queryParms = { 'actif': '1' ,'lienBanque': this.lienBanque.toString(), 'language': this.userLanguage };
       this.membreFunctionEntityService.getWithQuery(queryParms)
           .subscribe((membreFunctions) => {
-              console.log('Membre functions now loaded:', membreFunctions);
+              console.log('Membre functions now loaded:', membreFunctions.length);
               this.membreFunctions = membreFunctions;
               this.totalRecords = membreFunctions.length;
               this.first = 0;

@@ -48,7 +48,6 @@ export class CpasComponent implements OnInit {
   ngOnInit(): void {
       if (!this.cpasId$) {
           // we must come from the menu
-          console.log('We initialize a new cpas object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
           this.cpasId$ = this.route.paramMap
@@ -68,7 +67,6 @@ export class CpasComponent implements OnInit {
                           this.cpas = cpas; // existing cpas
                       }  else {
                           this.cpas = new DefaultCpas();
-                          console.log('we have a new default Cpas');
                       }
                   });
       this.store
@@ -103,10 +101,7 @@ export class CpasComponent implements OnInit {
                         this.messageService.add(myMessage);
                         this.onCpasDelete.emit(cpas);
                     });
-            },
-            reject: () => {
-                console.log('We do nothing');
-            }
+            } 
         });
     }
 
@@ -123,7 +118,6 @@ export class CpasComponent implements OnInit {
                   this.onCpasUpdate.emit(modifiedCpas);
               });
       } else {
-          console.log('Creating Cpas with content:', modifiedCpas);
           this.cpassService.add(modifiedCpas)
               .subscribe((newCpas) => {
                   this.messageService.add({
@@ -143,11 +137,7 @@ export class CpasComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     cpasForm.reset(oldCpas); // reset in-memory object for next open
-                    console.log('We have reset the cpas form to its original value');
                     this.onCpasQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
                 }
             });
         } else {

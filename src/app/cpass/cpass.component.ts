@@ -73,7 +73,6 @@ export class CpassComponent implements OnInit {
   }
 
   handleSelect(cpas) {
-    console.log( 'Cpas was selected', cpas);
     this.selectedCpasid$.next(cpas.cpasId);
     this.displayDialog = true;
   }
@@ -102,7 +101,7 @@ export class CpassComponent implements OnInit {
   }
 
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
+    
     this.loading = true;
     if (event.sortField == null) {
       setTimeout(() => {

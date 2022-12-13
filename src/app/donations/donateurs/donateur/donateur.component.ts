@@ -50,13 +50,11 @@ export class DonateurComponent implements OnInit {
     donateur$.subscribe(donateur => {
       if (donateur) {
         this.donateur = donateur;
-        console.log('our donateur:', this.donateur);
-      } else {
+        } else {
         this.donateur = new DefaultDonateur();
         if (this.myform) {
           this.myform.reset(this.donateur);
         }
-        console.log('we have a new default donateur');
       }
     });
 
@@ -98,18 +96,14 @@ export class DonateurComponent implements OnInit {
                   this.onDonateurDelete.emit(donateur);
                 },
                 (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                  console.log('Error deleting donateur', dataserviceerror.message);
-                  const  errMessage = {severity: 'error', summary: 'Delete',
+                    const dataserviceerror = dataserviceerrorFn();
+                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                    const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: `The donateur  ${donateur.nom} ${donateur.prenom} could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
                 });
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
@@ -128,9 +122,8 @@ export class DonateurComponent implements OnInit {
                 this.onDonateurUpdate.emit(modifiedDonateur);
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating donateur', dataserviceerror.message);
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: `The donateur  ${modifiedDonateur.nom} ${modifiedDonateur.prenom} could not be updated: error: ${dataserviceerror.message}`,
@@ -139,8 +132,7 @@ export class DonateurComponent implements OnInit {
               });
     } else {
       modifiedDonateur.lienBanque = this.lienBanque;
-      console.log('Creating Donateur with content:', modifiedDonateur);
-      this.donateursService.add(modifiedDonateur)
+       this.donateursService.add(modifiedDonateur)
           .subscribe((newDonateur) => {
                 this.messageService.add({
                   severity: 'success',
@@ -150,9 +142,8 @@ export class DonateurComponent implements OnInit {
                 this.onDonateurCreate.emit(newDonateur);
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error creating donateur', dataserviceerror.message);
+                const dataserviceerror = dataserviceerrorFn();
+                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: `The donateur  ${modifiedDonateur.nom} ${modifiedDonateur.prenom} could not be created: error: ${dataserviceerror.message}`,
@@ -171,16 +162,11 @@ export class DonateurComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           donateurForm.reset(oldDonateur); // reset in-memory object for next open
-          console.log('We have reset the donateur form to its original value');
           this.onDonateurQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
-      this.onDonateurQuit.emit();
+         this.onDonateurQuit.emit();
     }
   }
 }

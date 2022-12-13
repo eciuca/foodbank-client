@@ -90,7 +90,6 @@ export class BankreportsComponent implements OnInit {
       const classicBanks = { 'classicBanks': '1' };
       this.banqueService.getWithQuery(classicBanks)
           .subscribe((banquesEntities) => {
-            console.log('Banques now loaded:', banquesEntities);
             if (! this.booIsLoaded) {
                 this.reportLabels = banquesEntities.map(({bankShortName}) => bankShortName);
                 this.report();
