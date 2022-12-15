@@ -15,7 +15,7 @@ import {AuthService} from '../auth/auth.service';
 import {ExcelService} from '../services/excel.service';
 import {BeneficiaireHttpService} from './services/beneficiaire-http.service';
 import {formatDate} from '@angular/common';
-import {labelCivilite} from '../shared/functions';
+import {labelActive, labelCivilite} from '../shared/functions';
 
 
 @Component({
@@ -43,6 +43,7 @@ export class BeneficiairesComponent implements OnInit {
   bankid: number;
   bankName: string;
   bankShortName: string;
+  idOrg: number;
   orgName: string; // if logging in with asso role we need to display the organisation
   YNOptions:  any[];
   duplicatesOptions: any[];
@@ -63,6 +64,7 @@ export class BeneficiairesComponent implements OnInit {
     this.first = 0;
     this.bankName = '';
     this.bankShortName = '';
+    this.idOrg = 0;
     this.orgName = '';
     this.filteredOrganisationsPrepend = [
           {idDis: null, fullname: $localize`:@@organisations:Organisations` },
@@ -225,11 +227,13 @@ export class BeneficiairesComponent implements OnInit {
         case 'Asso':
         case 'Admin_Asso':
           this.filterBase = { 'lienDis': authState.organisation.idDis};
+          this.idOrg = authState.organisation.idDis;
           this.orgName = authState.organisation.idDis + ' ' + authState.organisation.societe;
           if ( authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
           break;
         case 'Admin_CPAS':
           this.filterBase = { 'cp': authState.organisation.cp};
+          this.idOrg = authState.organisation.idDis;
           this.orgName = authState.organisation.idDis + ' ' + authState.organisation.societe;
           break;
         default:
@@ -287,15 +291,21 @@ export class BeneficiairesComponent implements OnInit {
     }
   }
   exportAsXLSX(): void {
-    this.beneficiaireHttpService.getBeneficiaireReport(this.authService.accessToken, this.bankid).subscribe(
+    this.beneficiaireHttpService.getBeneficiaireReport(this.authService.accessToken, this.bankid,this.idOrg).subscribe(
         (beneficiaires: any[] ) => {
           const cleanedList = [];
           beneficiaires.map((item) => {
             cleanedList.push({  gender: labelCivilite(item.civilite), name: item.nom ,firstname: item.prenom, address: item.adresse, city: item.localite,
-              zip: item.cp, tel: item.tel, gsm: item.gsm, email: item.email })
+              zip: item.cp, org: item.societe, active: labelActive(item.actif), tel: item.tel, gsm: item.gsm, email: item.email })
           });
-          this.excelService.exportAsExcelFile(cleanedList,  'foodit.' + this.bankShortName +'.beneficiaries.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
-        });
+          if (this.idOrg > 0) {
+            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.beneficiaries.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+          }
+          else {
+            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.beneficiaries.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+          }
+
+          });
   }
 
 }

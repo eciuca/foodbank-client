@@ -8,18 +8,26 @@ import {Population} from '../model/population';
     providedIn: 'root'
 })
 export class BeneficiaireHttpService {
-
+    private baseUrl = '/api/beneficiairesall';
     constructor(private http: HttpClient) {
     }
-    getBeneficiaireReport(accesstoken: string, lienBanque: number): Observable<Beneficiaire[]> {
+    getBeneficiaireReport(accesstoken: string, lienBanque: number, lienDis: number): Observable<Beneficiaire[]> {
         const requestOptions = {
             headers: new HttpHeaders( {
                 responseType: 'json',
                 Authorization:  'Bearer ' + accesstoken
             }),
         };
-        // tslint:disable-next-line:max-line-length
-        return this.http.get<Beneficiaire[]>(`/api/beneficiaires/?actif=1&lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=nom`, requestOptions);
+        if(lienDis > 0) {
+            return this.http.get<Beneficiaire[]>(`${this.baseUrl}/?lienDis=${lienDis.toString()}`, requestOptions);
+        }
+        if (lienBanque) {
+            return this.http.get<Beneficiaire[]>(`${this.baseUrl}/?lienBanque=${lienBanque.toString()}`, requestOptions);
+        }
+        else {
+            return this.http.get<Beneficiaire[]>(`${this.baseUrl}/`, requestOptions);
+
+        }
     }
     getPopulationReport(accesstoken: string): Observable<Population[]> {
         const requestOptions = {
