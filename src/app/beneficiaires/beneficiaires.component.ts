@@ -296,7 +296,7 @@ export class BeneficiairesComponent implements OnInit {
           const cleanedList = [];
           beneficiaires.map((item) => {
             cleanedList.push({  gender: labelCivilite(item.civilite), name: item.nom ,firstname: item.prenom, address: item.adresse, city: item.localite,
-              zip: item.cp, org: item.societe, active: labelActive(item.actif), tel: item.tel, gsm: item.gsm, email: item.email })
+              zip: item.cp, org: item.societe, active: labelActive(item.actif), tel: item.tel, gsm: item.gsm, email: item.email ,dependents: item.nbDep})
           });
           if (this.idOrg > 0) {
             this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.beneficiaries.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
