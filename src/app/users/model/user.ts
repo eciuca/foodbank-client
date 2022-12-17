@@ -17,7 +17,7 @@ export interface User {
 
     password: string;
 
-    depot: string;
+    lienDepot: string;
 
     droit1: boolean;
 
@@ -66,7 +66,7 @@ export function compareUsers(c1: User, c2: User) {
 }
 export class DefaultUser implements User {
     actif: boolean;
-    depot: string;
+    lienDepot: string;
     droit1: boolean;
     email: string;
     gestAsso: boolean;
@@ -100,7 +100,7 @@ export class DefaultUser implements User {
     constructor() {
         this.idLanguage = 'nl';
         this.actif = true;
-        this.depot = '';
+        this.lienDepot = '';
         this.droit1 = false;
         this.email = '';
         this.gestAsso = false;

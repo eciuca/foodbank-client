@@ -16,7 +16,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {UserHttpService} from './services/user-http.service';
 import {formatDate} from '@angular/common';
-import {labelActive, labelLanguage, labelRights} from '../shared/functions';
+import {labelActive, labelRights} from '../shared/functions';
 import {MembreEntityService} from '../membres/services/membre-entity.service';
 
 
@@ -30,7 +30,6 @@ export class UsersComponent implements OnInit {
   loadPageSubject$ = new BehaviorSubject(null);
   selectedIdUser$ = new BehaviorSubject(null);
   users: User[];
-  cols: any[];
   totalRecords: number;
   loading: boolean;
   filterBase: any;
@@ -51,13 +50,14 @@ export class UsersComponent implements OnInit {
   first: number;
   booShowOrganisations: boolean;
   booIsAdmin: boolean;
-    lienDepot: number;
+    depotIdDis: number;
     depotName: string;
     bankOptions: any[];
     YNOptions:  any[];
     idOrg: number;
     orgName: string;
     anomalyFilter: any;
+    organisationFilterId: any; // default null
 
   constructor(private userService: UserEntityService,
               private membreService: MembreEntityService,
@@ -83,7 +83,7 @@ export class UsersComponent implements OnInit {
       this.bankid = 0;
       this.bankName = '';
       this.bankShortName = '';
-      this.lienDepot = 0;
+      this.depotIdDis = 0;
       this.depotName = '';
       this.first = 0;
       this.booShowOrganisations = false;
@@ -91,6 +91,7 @@ export class UsersComponent implements OnInit {
       this.orgName = '';
       this.idOrg = 0;
       this.YNOptions = enmYn;
+      this.organisationFilterId = null;
   }
 
   ngOnInit() {
@@ -150,7 +151,7 @@ export class UsersComponent implements OnInit {
                     case 'Admin_Asso':
                         if (authState.organisation && authState.organisation.depyN === true) {
                             this.booShowOrganisations = true;
-                            this.lienDepot = authState.organisation.idDis;
+                            this.depotIdDis = authState.organisation.idDis;
                             this.depotName = authState.organisation.societe;
                             this.filteredOrganisationsPrepend = [
                                 {idDis: null, fullname: 'Depot' },
@@ -264,12 +265,31 @@ export class UsersComponent implements OnInit {
             } else {
                 queryParms['sortField'] =  'idUser';
             }
-            if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
-                queryParms['idOrg'] = this.filteredOrganisation.idDis;
-            } else {
-                    if ( this.lienDepot !== 0) {
-                        queryParms['idOrg'] = this.lienDepot;
+            if (this.booShowOrganisations) {
+                if (this.depotIdDis != 0) {
+                    // we are logged in as a user of a depot
+                    switch (this.organisationFilterId) {
+                        case 999: // members of all organisations depending of depot
+                            queryParms['lienDepot'] = this.depotIdDis;
+                            break;
+                        case null: // members of depot
+                            queryParms['idOrg'] = this.depotIdDis;
+                            break;
+                        default:    // members of a specific organisation
+                            queryParms['idOrg'] = this.organisationFilterId;
                     }
+                } else {
+                    // we are logged in as a user of a bank
+                    switch (this.organisationFilterId) {
+                        case 999: // members of all organisations depending of bank
+                            queryParms['idOrg'] = 999;
+                            break;
+                        case null: // all members of bank
+                            break;
+                        default:    // members of a specific organisation
+                            queryParms['idOrg'] = this.organisationFilterId;
+                    }
+                }
             }
             if (this.booShowArchived ) {
                 queryParms['actif'] = '0';
@@ -326,10 +346,10 @@ export class UsersComponent implements OnInit {
             }
         }
         else {
-        if (this.lienDepot === 0) {
+        if (this.depotIdDis === 0) {
                 queryOrganisationParms['lienBanque'] = this.bankid.toString();
             }  else {
-                queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
+                queryOrganisationParms['lienDepot'] = this.depotIdDis.toString();
             }
         }
         if (event.query.length > 0) {
@@ -342,50 +362,55 @@ export class UsersComponent implements OnInit {
                 ));
             });
     }
-    filterOrganisationUsers(idDis: number) {
-        this.first = 0;
-        const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        latestQueryParams['offset'] = '0';
-
-        if (idDis === 999) {
-
-            if (this.lienDepot != 0) {
-                latestQueryParams['lienDepot'] = this.lienDepot;
-                if (latestQueryParams.hasOwnProperty('idOrg')) {
-                    delete latestQueryParams['idOrg'];
-                }
-            }
-            else {
-                latestQueryParams['idOrg'] = 999;
-            }
-
-        }
-        else if (idDis != null) {
-            latestQueryParams['idOrg'] = idDis;
-            if (latestQueryParams.hasOwnProperty('lienDepot')) {
-                delete latestQueryParams['lienDepot'];
+    setOrganisationFilters(idDis: number,latestQueryParams: any) {
+        this.organisationFilterId =idDis;
+        let newQueryParams = {...latestQueryParams};
+        if (this.depotIdDis != 0) {
+            // we are logged in as a user of a depot
+            switch(idDis) {
+                case 999: // members of all organisations depending of depot
+                    newQueryParams['lienDepot'] = this.depotIdDis;
+                    if (newQueryParams.hasOwnProperty('idOrg')) {
+                        delete newQueryParams['idOrg'];
+                    }
+                    break;
+                case null: // members of depot
+                    newQueryParams['idOrg'] = this.depotIdDis;
+                    if (newQueryParams.hasOwnProperty('lienDepot')) {
+                        delete newQueryParams['lienDepot'];
+                    }
+                    break;
+                default:    // members of a specific organisation
+                    newQueryParams['idOrg'] = idDis;
+                    if (newQueryParams.hasOwnProperty('lienDepot')) {
+                        delete newQueryParams['lienDepot'];
+                    }
             }
         }
         else {
-            if (this.lienDepot != 0) {
-                latestQueryParams['idOrg'] = this.lienDepot;
-                if (latestQueryParams.hasOwnProperty('lienDepot')) {
-                    delete latestQueryParams['lienDepot'];
-                }
-            }
-            else {
-                if (latestQueryParams.hasOwnProperty('idOrg')) {
-                    delete latestQueryParams['idOrg'];
-                }
+            // we are logged in as a user of a bank
+            switch(idDis) {
+                case 999: // members of all organisations depending of bank
+                    newQueryParams['idOrg'] = 999;
+                    break;
+                case null: // all members of bank
+                    if (newQueryParams.hasOwnProperty('idOrg')) {
+                        delete newQueryParams['idOrg'];
+                    }
+                    break;
+                default:    // members of a specific organisation
+                    newQueryParams['idOrg'] = idDis;
             }
         }
+        return newQueryParams;
+    }
+    filterOrganisationUsers(idDis: number) {
+        this.first = 0;
+        const latestQueryParams = this.setOrganisationFilters(idDis,{...this.loadPageSubject$.getValue()});
+        latestQueryParams['offset'] = '0';
 
         this.loadPageSubject$.next(latestQueryParams);
     }
-
-    labelLanguage(membreLangue: number) {
-          return labelLanguage(membreLangue);
-        }
 
     labelRights(rights: string) {
         return labelRights(rights);
@@ -543,8 +568,7 @@ export class UsersComponent implements OnInit {
         const userLanguage = userLanguageObj ? userLanguageObj.label : 'unknown';
         const memberLanguageObj  = enmLanguage.find(obj => obj.value === user.membreLangue);
         const memberLanguage = memberLanguageObj ? memberLanguageObj.label : 'unknown';
-        if (userLanguage != memberLanguage ) return true;
-        return false;
+        return userLanguage != memberLanguage;
     }
 
 
