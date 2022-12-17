@@ -37,6 +37,7 @@ export class MembresComponent implements OnInit {
     filterBase: any;
     booShowArchived: boolean;
     booCanCreate: boolean;
+    organisationFilterId: any; // default null
     filteredOrganisation: any;
     filteredOrganisations: any[];
     filteredOrganisationsPrepend: any[];
@@ -50,8 +51,8 @@ export class MembresComponent implements OnInit {
     bankShortName: string;
     filteredBankId: number;
     filteredBankShortName: string;
-    lienDepot: number;
     depotName: string;
+    depotIdDis: number;
     idOrg: number;
     orgName: string;
     first: number;
@@ -83,10 +84,11 @@ export class MembresComponent implements OnInit {
         this.bankName = '';
         this.bankShortName = '';
         this.depotName = '';
+        this.depotIdDis = 0;
         this.idOrg = 0;
         this.orgName = '';
-        this.lienDepot = 0;
         this.membreFunctions = [{label: ' ',value: null}];
+        this.organisationFilterId = null;
     }
 
     ngOnInit() {
@@ -172,40 +174,54 @@ export class MembresComponent implements OnInit {
     nextPage(event: LazyLoadEvent) {
         this.loading = true;
         const queryParms = {...this.filterBase};
-        if (event) {
-            queryParms['offset'] = event.first.toString();
-            queryParms['rows'] = event.rows.toString();
-            queryParms['sortOrder'] = event.sortOrder.toString();
-            if (event.sortField) {
-                queryParms['sortField'] = event.sortField.toString();
-            } else {
-                queryParms['sortField'] = 'nom';
-            }
-        }
-        else {
-            queryParms['offset'] = 0;
-            queryParms['rows'] = 10;
+        queryParms['offset'] = event.first.toString();
+        queryParms['rows'] = event.rows.toString();
+        queryParms['sortOrder'] = event.sortOrder.toString();
+        if (event.sortField) {
+            queryParms['sortField'] = event.sortField.toString();
+        } else {
             queryParms['sortField'] = 'nom';
         }
-        if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
-            queryParms['lienDis'] = this.filteredOrganisation.idDis;
-        }  else {
-            if ( this.lienDepot !== 0) {
-                queryParms['lienDis'] = this.lienDepot;
-            }
-        }
+
+
         if (this.booShowArchived ) {
             queryParms['actif'] = '0';
         }  else {
             queryParms['actif'] = '1';
         }
-        if (this.anomalyFilter ) {
-            queryParms['hasAnomalies'] = this.anomalyFilter;
-        }
+
         if (this.selectedFunction && (this.filteredOrganisation['idDis'] == 0)) {
             queryParms['fonction'] = this.selectedFunction;
         }
-
+        if (this.anomalyFilter ) {
+            queryParms['hasAnomalies'] = this.anomalyFilter;
+        }
+        if (this.booShowOrganisations) {
+            if (this.depotIdDis != 0) {
+                // we are logged in as a user of a depot
+                switch (this.organisationFilterId) {
+                    case 999: // members of all organisations depending of depot
+                        queryParms['lienDepot'] = this.depotIdDis;
+                        break;
+                    case null: // members of depot
+                        queryParms['lienDis'] = this.depotIdDis;
+                        break;
+                    default:    // members of a specific organisation
+                        queryParms['lienDis'] = this.organisationFilterId;
+                }
+            } else {
+                // we are logged in as a user of a bank
+                switch (this.organisationFilterId) {
+                    case 999: // members of all organisations depending of bank
+                        queryParms['lienDis'] = 999;
+                        break;
+                    case null: // all members of bank
+                        break;
+                    default:    // members of a specific organisation
+                        queryParms['lienDis'] = this.organisationFilterId;
+                }
+            }
+        }
         if (event.filters) {
             if (event.filters.nom && event.filters.nom.value) {
                 queryParms['nom'] = event.filters.nom.value;
@@ -264,7 +280,7 @@ export class MembresComponent implements OnInit {
                 case 'Admin_Banq':
                     this.booShowOrganisations = true;
                     this.loadFunctions(authState.banque.bankId);
-                    this.filterBase = { 'lienBanque': authState.banque.bankId};
+                    this.filterBase = { 'actif':'1','lienBanque': authState.banque.bankId};
                     if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
                     this.filteredOrganisationsPrepend = [
                         {idDis: null, fullname: $localize`:@@All:All` },
@@ -277,7 +293,7 @@ export class MembresComponent implements OnInit {
                 case 'Admin_Asso':
                     if (authState.organisation && authState.organisation.depyN === true) {
                         this.booShowOrganisations = true;
-                        this.lienDepot = authState.organisation.idDis;
+                        this.depotIdDis = authState.organisation.idDis;
                         this.depotName = authState.organisation.societe;
                         this.filteredOrganisationsPrepend = [
                             {idDis: null, fullname: 'Depot' },
@@ -285,7 +301,7 @@ export class MembresComponent implements OnInit {
                         ];
                         this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
                     } else {
-                        this.filterBase = { 'lienDis': authState.organisation.idDis};
+                        this.filterBase = { 'actif':'1','lienDis': authState.organisation.idDis};
                         this.idOrg = authState.organisation.idDis;
                         this.orgName = authState.organisation.societe;
                     }
@@ -305,7 +321,7 @@ export class MembresComponent implements OnInit {
                     ];
                     this.loadFunctions(null);
                     if (authState.user.rights === 'admin') {
-                        this.filterBase = { };
+                        this.filterBase = { 'actif':'1'};
                         this.banqueService.getAll()
                             .subscribe( banquesEntities => {
                                 const bankOptionsPrepend = [{'label': '???', 'value': 999}];
@@ -319,7 +335,7 @@ export class MembresComponent implements OnInit {
                             });
                     }
                     else {
-                        this.filterBase = { 'classicBanks': '1'};
+                        this.filterBase = { 'actif':'1', 'classicBanks': '1'};
                         const classicBanks = { 'classicBanks': '1' };
                         this.banqueService.getWithQuery(classicBanks).subscribe(
                             banquesEntities => {
@@ -354,10 +370,10 @@ export class MembresComponent implements OnInit {
             }
         }
         else {
-            if (this.lienDepot === 0) {
+            if (this.depotIdDis === 0) {
                 queryOrganisationParms['lienBanque'] = this.bankid.toString();
             } else {
-                queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
+                queryOrganisationParms['lienDepot'] = this.depotIdDis.toString();
             }
         }
         if (event.query.length > 0) {
@@ -372,45 +388,54 @@ export class MembresComponent implements OnInit {
             });
 
     }
+    setOrganisationFilters(idDis: number,latestQueryParams: any) {
+        this.organisationFilterId =idDis;
+        let newQueryParams = {...latestQueryParams};
+        if (this.depotIdDis != 0) {
+            // we are logged in as a user of a depot
+            switch(idDis) {
+                case 999: // members of all organisations depending of depot
+                    newQueryParams['lienDepot'] = this.depotIdDis;
+                    if (newQueryParams.hasOwnProperty('lienDis')) {
+                        delete newQueryParams['lienDis'];
+                    }
+                    break;
+                case null: // members of depot
+                    newQueryParams['lienDis'] = this.depotIdDis;
+                    if (newQueryParams.hasOwnProperty('lienDepot')) {
+                        delete newQueryParams['lienDepot'];
+                    }
+                    break;
+                default:    // members of a specific organisation
+                    newQueryParams['lienDis'] = idDis;
+                    if (newQueryParams.hasOwnProperty('lienDepot')) {
+                        delete newQueryParams['lienDepot'];
+                    }
+            }
+        }
+        else {
+            // we are logged in as a user of a bank
+            switch(idDis) {
+                case 999: // members of all organisations depending of bank
+                   newQueryParams['lienDis'] = 999;
+                   break;
+                case null: // all members of bank
+                    if (newQueryParams.hasOwnProperty('lienDis')) {
+                        delete newQueryParams['lienDis'];
+                    }
+                    break;
+                default:    // members of a specific organisation
+                    newQueryParams['lienDis'] = idDis;
+            }
+        }
+        return newQueryParams;
+    }
 
     filterOrganisationMembers(idDis: number) {
         // when we switch we need to restart from first page
         this.first = 0;
-        const latestQueryParams = {...this.loadPageSubject$.getValue()};
+        const latestQueryParams = this.setOrganisationFilters(idDis,{...this.loadPageSubject$.getValue()});
         latestQueryParams['offset'] = '0';
-
-            if (idDis === 999) {
-
-                if (this.lienDepot != 0) {
-                        latestQueryParams['lienDepot'] = this.lienDepot;
-                    if (latestQueryParams.hasOwnProperty('lienDis')) {
-                        delete latestQueryParams['lienDis'];
-                    }
-                }
-                else {
-                    latestQueryParams['lienDis'] = 999;
-                }
-
-            }
-            else if (idDis != null) {
-                latestQueryParams['lienDis'] = idDis;
-                if (latestQueryParams.hasOwnProperty('lienDepot')) {
-                    delete latestQueryParams['lienDepot'];
-                }
-            }
-            else {
-                if (this.lienDepot != 0) {
-                    latestQueryParams['lienDis'] = this.lienDepot;
-                    if (latestQueryParams.hasOwnProperty('lienDepot')) {
-                        delete latestQueryParams['lienDepot'];
-                    }
-                }
-                else {
-                    if (latestQueryParams.hasOwnProperty('lienDis')) {
-                        delete latestQueryParams['lienDis'];
-                    }
-                }
-            }
         if (this.selectedFunction && (this.filteredOrganisation['idDis'] == 0)) {
             latestQueryParams['fonction'] = this.selectedFunction;
         }
