@@ -476,7 +476,7 @@ export class UsersComponent implements OnInit {
         if (!this.bankOptions) {
             lienBanque = this.bankid;
         }
-        this.userHttpService.getUserReport(this.authService.accessToken, lienBanque,this.idOrg).subscribe(
+        this.userHttpService.getUserReport(this.authService.accessToken, lienBanque,this.idOrg,this.depotIdDis).subscribe(
         (users: any[]) => {
             const cleanedList = [];
             users.map((item) => {

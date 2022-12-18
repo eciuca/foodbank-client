@@ -509,7 +509,7 @@ export class MembresComponent implements OnInit {
         if (!this.bankOptions) {
             lienBanque = this.bankid;
         }
-        this.membreHttpService.getMembreReport(this.authService.accessToken, lienBanque,this.idOrg).subscribe(
+        this.membreHttpService.getMembreReport(this.authService.accessToken, lienBanque,this.idOrg,this.depotIdDis).subscribe(
             (membres: any[]) => {
                 const cleanedList = [];
                 membres.map((item) => {

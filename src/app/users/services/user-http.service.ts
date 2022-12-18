@@ -10,7 +10,7 @@ export class UserHttpService {
     private baseUrl = '/api/usersall';
     constructor(private http: HttpClient) {
     }
-    getUserReport(accesstoken: string, lienBanque: number,idOrg: number,lienBat?:number): Observable<User[]> {
+    getUserReport(accesstoken: string, lienBanque: number,idOrg: number,lienDepot: number, lienBat?:number): Observable<User[]> {
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
@@ -19,6 +19,9 @@ export class UserHttpService {
         };
         if (lienBat) {
             return this.http.get<User[]>(`${this.baseUrl}/?lienBat=${lienBat.toString()}`, requestOptions);
+        }
+        if(lienDepot > 0) {
+            return this.http.get<User[]>(`${this.baseUrl}/?lienDepot=${lienDepot.toString()}`, requestOptions);
         }
         if(idOrg > 0) {
             return this.http.get<User[]>(`${this.baseUrl}/?idOrg=${idOrg.toString()}`, requestOptions);
