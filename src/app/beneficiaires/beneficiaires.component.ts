@@ -222,14 +222,18 @@ export class BeneficiairesComponent implements OnInit {
         case 'Admin_Banq':
           this.booShowOrganisations = true;
           this.filterBase = { 'lienBanque': authState.banque.bankId};
-          if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
+          if  ((authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen)))
+          { this.booCanCreate = true; }
           break;
         case 'Asso':
         case 'Admin_Asso':
           this.filterBase = { 'lienDis': authState.organisation.idDis};
           this.idOrg = authState.organisation.idDis;
           this.orgName = authState.organisation.idDis + ' ' + authState.organisation.societe;
-          if ( authState.user.rights === 'Admin_Asso' ) { this.booCanCreate = true; }
+          if  ((authState.user.rights === 'Admin_Asso') || (( authState.user.rights === 'Asso') && (authState.user.gestBen)))
+          {
+            this.booCanCreate = true;
+          }
           break;
         case 'Admin_CPAS':
           this.filterBase = { 'cp': authState.organisation.cp};
