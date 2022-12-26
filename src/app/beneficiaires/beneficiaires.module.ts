@@ -36,6 +36,7 @@ import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {ChartModule} from 'primeng/chart';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {TooltipModule} from 'primeng/tooltip';
 
 
 const routes: Routes = [
@@ -80,6 +81,7 @@ const routes: Routes = [
         InputSwitchModule,
         CheckboxModule,
         InputNumberModule,
+        TooltipModule,
         ChartModule
     ],
   providers: [

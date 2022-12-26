@@ -1760,6 +1760,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>BenefRightsBankUsers</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>BenefSummaryExport</name>
                         <description/>
                         <comment/>

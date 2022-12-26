@@ -35,8 +35,6 @@ export class BeneficiaireComponent implements OnInit {
     filteredCpass: Cpas[];
     booCalledFromTable: boolean;
     booCanSave: boolean;
-    booCanDelete: boolean;
-    booCanQuit: boolean;
     civilites: any[];
     countries: any[];
     feadStatuses: any[];
@@ -63,9 +61,7 @@ export class BeneficiaireComponent implements OnInit {
     this.countries = enmCountry;
     this.feadStatuses = enmStatutFead;
       this.booCalledFromTable = true;
-      this.booCanDelete = false;
       this.booCanSave = false;
-      this.booCanQuit = true;
       this.lienDis = 0;
       this.lienBanque = 0;
       this.idCompany = '';
@@ -77,16 +73,7 @@ export class BeneficiaireComponent implements OnInit {
 
   ngOnInit(): void {
 
-      if (!this.idClient$) {
-          // we must come from the menu
-          this.booCalledFromTable = false;
-          this.booCanQuit = false;
-          this.idClient$ = this.route.paramMap
-              .pipe(
-                  map(paramMap => paramMap.get('idClient')),
-                  map(idClient => Number(idClient))
-              );
-      }
+
       const beneficiaire$ = combineLatest([this.idClient$, this.beneficiairesService.entities$])
           .pipe(
               map(([idClient, beneficiaires]) => beneficiaires.find(beneficiaire => beneficiaire['idClient'] === idClient))
@@ -153,9 +140,6 @@ export class BeneficiaireComponent implements OnInit {
                               this.idCompany = authState.banque.bankShortName;
                               if  ((authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
                                   this.booCanSave = true;
-                                  if (this.booCalledFromTable && this.beneficiaire.hasOwnProperty('idClient')) {
-                                      this.booCanDelete = true;
-                                  }
                               }
                               break;
                           case 'Admin_Asso':
@@ -170,9 +154,6 @@ export class BeneficiaireComponent implements OnInit {
                               this.booIsOrganisation = true;
                               if  ((authState.user.rights === 'Admin_Asso') || (( authState.user.rights === 'Asso') && (authState.user.gestBen))) {
                                   this.booCanSave = true;
-                                  if (this.booCalledFromTable) {
-                                      this.booCanDelete = true;
-                                  }
                               }
                               break;
                           default:
@@ -293,5 +274,8 @@ export class BeneficiaireComponent implements OnInit {
 
     getBeneficiaryTitle(): string {
         return this.title;
+    }
+    generateTooltipRightsBankUsers() {
+           return $localize`:@@BenefRightsBankUsers:Bank Users can only modify Beneficiary Suspician Coefficient and delete Duplicates who have a suspicion coefficient > 1`;
     }
 }

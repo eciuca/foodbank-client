@@ -222,8 +222,9 @@ export class BeneficiairesComponent implements OnInit {
         case 'Admin_Banq':
           this.booShowOrganisations = true;
           this.filterBase = { 'lienBanque': authState.banque.bankId};
-          if  ((authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen)))
-          { this.booCanCreate = true; }
+          // Only organisations can create beneficiaries
+         // if  ((authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen)))
+          // { this.booCanCreate = true; }
           break;
         case 'Asso':
         case 'Admin_Asso':

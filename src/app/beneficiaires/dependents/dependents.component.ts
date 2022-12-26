@@ -22,7 +22,6 @@ export class DependentsComponent implements OnInit {
   displayDialog: boolean;
   loading: boolean;
   booCanCreate: boolean;
-  booIsAdmin: boolean;
   dependentQuery: any;
   booShowArchived: boolean;
   first: number;
@@ -30,7 +29,6 @@ export class DependentsComponent implements OnInit {
               private store: Store
   ) {
     this.booCanCreate = false;
-    this.booIsAdmin = false;
     this.dependentQuery = {};
     this.booShowArchived = false;
     this.first = 0;
@@ -40,15 +38,12 @@ export class DependentsComponent implements OnInit {
         .pipe(
             select(globalAuthState),
             map((authState) => {
-              if (authState.user &&
-                  (
-                      authState.user.rights === 'Admin_Asso' || authState.user.rights === 'Admin_Banq' ||
-                        (( authState.user.rights === 'Bank') && (authState.user.gestBen)) ||
+                // Only organisations can create dependents
+               if ( authState.user.rights === 'Admin_Asso' ||
                         (( authState.user.rights === 'Asso') && (authState.user.gestBen))
-                  )
               )
              {
-              this.booIsAdmin = true;
+              this.booCanCreate = true;
              }
             })
         )
@@ -62,15 +57,11 @@ export class DependentsComponent implements OnInit {
             .subscribe(loadedDependents => {
               console.log('Initial Loaded dependents: ' + loadedDependents.length);
               this.dependents = loadedDependents;
-              if (this.booIsAdmin) {
-                  this.booCanCreate = true;
-              }
               this.loading = false;
               this.dependentService.setLoaded(true);
         });
       } else {
         this.dependents = [];
-        this.booCanCreate = false;
       }
     });
   }
@@ -119,9 +110,6 @@ export class DependentsComponent implements OnInit {
             .subscribe(loadedDependents => {
                 console.log('New Loaded dependents: ' + loadedDependents.length);
                 this.dependents = loadedDependents;
-                if (this.booIsAdmin) {
-                    this.booCanCreate = true;
-                }
                 this.loading = false;
                 this.dependentService.setLoaded(true);
             });

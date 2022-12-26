@@ -28,7 +28,6 @@ export class DependentComponent implements OnInit {
   dependent: Dependent;
   booCanSave: boolean;
   booCanDelete: boolean;
-  booCanQuit: boolean;
   genders: any[];
   lienBanque: number;
   lienDis: number;
@@ -42,7 +41,6 @@ export class DependentComponent implements OnInit {
     this.genders = enmGender;
     this.booCanDelete = false;
     this.booCanSave = false;
-    this.booCanQuit = true;
     this.lienDis = 0;
     this.lienBanque = 0;
   }
@@ -77,20 +75,16 @@ export class DependentComponent implements OnInit {
                   case 'Bank':
                   case 'Admin_Banq':
                     this.lienBanque = authState.banque.bankId;
-                    if  ((authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
-                      this.booCanSave = true;
-                      this.booCanDelete = true;
-                    }
+                      // only organisations can modify dependents
                     break;
                   case 'Asso':
-                    this.lienBanque = authState.banque.bankId;
-                    this.lienDis = authState.user.idOrg;
-                    break;
                   case 'Admin_Asso':
                     this.lienBanque = authState.banque.bankId;
                     this.lienDis = authState.user.idOrg;
-                    this.booCanSave = true;
-                    this.booCanDelete = true;
+                      if  ((authState.user.rights === 'Admin_Asso') || (( authState.user.rights === 'Asso') && (authState.user.gestBen))) {
+                          this.booCanSave = true;
+                          this.booCanDelete = true;
+                      }
                     break;
                   default:
                 }
