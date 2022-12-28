@@ -264,57 +264,29 @@
             <p-accordionTab i18n-header="@@OrganisationContacts" header="Contacts">
                 <app-orgcontacts  [lienAsso$]="idDis$"></app-orgcontacts>
             </p-accordionTab>
+          
 
-            <p-accordionTab i18n-header="@@FEADAndMgt" header="FEAD and Mgt Activities">
+            <p-accordionTab i18n-header="@@OrgSupplyFeadProgram" header="FEAD Distribution Program">
                 <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-12">
-                        <input i18n-placeholder="@@OrganisationDistribProgram" pInputText id="disprog" name="disprog"  placeholder="Distribution Program" [ngModel]="organisation.disprog" />
+                    <label i18n="@@OrganisationDistribProgram" for="disprog">Distribution Program</label>
+                    <div class="p-field p-col-12 p-md-8">
+                        <input pInputText id="disprog" name="disprog" [ngModel]="organisation.disprog" />
                     </div>
-                    <div class="p-field p-col-12 p-md-1">
+                    <div class="p-field p-col-12 p-md-2">
                         <label for="birbCode">FEAD Code</label>
                         <input pInputText id="birbCode" name="birbCode" maxlength="10" [disabled] ="!booIsAdmin" [ngModel]="organisation.birbCode" />
                     </div>
-                    <div class="p-field p-col-12 p-md-1">
+                    <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@OrgFeadFromUs" for="feadN">FEAD from us?</label>
                         <p-inputSwitch id="feadN" name="feadN" [disabled] ="!booIsAdmin" [ngModel]="organisation.feadN"></p-inputSwitch>
                     </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@OrganisationNbFEADBeneficiaries" for="nrFead">Nb FEAD Beneficiaries</label>
-                        <p-inputNumber [ngModel]="organisation.nrFead" id="nrFead" name="nrFead" mode="decimal" [showButtons]="true" inputId="nrFead" [min]="0" [max]="500">
-                        </p-inputNumber>
-                    </div>
                 </div>
+            </p-accordionTab>
+
+            <p-accordionTab i18n-header="@@OrgSupplyNonFeadProgram" header="Non-FEAD Supply Program">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@Activity" for="actComp1">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp1" name="actComp1" [ngModel]="organisation.actComp1"  ></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@Activity" for="actComp2">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp2" name="actComp2" [ngModel]="organisation.actComp2"  ></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@Activity" for="actComp3">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp3" name="actComp3" [ngModel]="organisation.actComp3"  ></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@Activity" for="actComp4">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp4" name="actComp4" [ngModel]="organisation.actComp4"  ></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@Activity" for="actComp5">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp5" name="actComp5" [ngModel]="organisation.actComp5"  ></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@Activity" for="actComp6">Activity</label>
-                        <p-dropdown [options]="orgActivities" id="actComp6" name="actComp6" [ngModel]="organisation.actComp6"  ></p-dropdown>
-                    </div>
-                    <div class="p-field p-col-12 p-md-12">
-                        <label i18n="@@ActivityOther" for="actComp7">Other Activity</label>
-                        <input pInputText id="actComp7" name="actComp7" maxlength="100" [ngModel]="organisation.actComp7" />
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@SupplyProgram" for="tourneeMois">Supply Program</label>
+                        <label i18n="@@Month" for="tourneeMois">Month</label>
                         <p-dropdown [options]="supplyOptionsMonth" id="tourneeMois" name="tourneeMois" [ngModel]="organisation.tourneeMois" [disabled] ="!booIsAdmin"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
@@ -326,7 +298,7 @@
                         <p-dropdown [options]="supplyOptionsDay" id="tourneeJour" name="tourneeJour" [ngModel]="organisation.tourneeJour" [disabled] ="!booIsAdmin"  ></p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-6">
-                        <label i18n="@@SupplyRemarks" for="remLivr">Remarks</label>
+                        <label i18n="@@Remarks" for="remLivr">Remarks</label>
                         <input pInputText id="remLivr" name="remLivr" i18n-placeholder="@@SupplyRemarksPlaceHolder" placeholder="Specify only if needed"  [disabled] ="!booIsAdmin"  [ngModel]="organisation.remLivr" />
                     </div>
                 </div>
@@ -351,7 +323,36 @@
                     </div>
                 </div>
             </p-accordionTab>
-
+            <p-accordionTab i18n-header="@@OrgActivities" header="Organisation Activities">
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@Activity" for="actComp1">Activity</label>
+                    <p-dropdown [options]="orgActivities" id="actComp1" name="actComp1" [ngModel]="organisation.actComp1"  ></p-dropdown>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@Activity" for="actComp2">Activity</label>
+                    <p-dropdown [options]="orgActivities" id="actComp2" name="actComp2" [ngModel]="organisation.actComp2"  ></p-dropdown>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@Activity" for="actComp3">Activity</label>
+                    <p-dropdown [options]="orgActivities" id="actComp3" name="actComp3" [ngModel]="organisation.actComp3"  ></p-dropdown>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@Activity" for="actComp4">Activity</label>
+                    <p-dropdown [options]="orgActivities" id="actComp4" name="actComp4" [ngModel]="organisation.actComp4"  ></p-dropdown>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@Activity" for="actComp5">Activity</label>
+                    <p-dropdown [options]="orgActivities" id="actComp5" name="actComp5" [ngModel]="organisation.actComp5"  ></p-dropdown>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@Activity" for="actComp6">Activity</label>
+                    <p-dropdown [options]="orgActivities" id="actComp6" name="actComp6" [ngModel]="organisation.actComp6"  ></p-dropdown>
+                </div>
+                <div class="p-field p-col-12 p-md-12">
+                    <label i18n="@@ActivityOther" for="actComp7">Other Activity</label>
+                    <input pInputText id="actComp7" name="actComp7" maxlength="100" [ngModel]="organisation.actComp7" />
+                </div>
+            </p-accordionTab>
         </p-accordion>
     </form>
     <div class="p-formgroup-inline">
