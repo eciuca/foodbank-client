@@ -54,6 +54,7 @@ export let enmSupplyDay = [
     {label: $localize`:@@Sunday:Sunday` , value: 7}
 ];
 export let enmSupplyWeek = [
+    {label: '-' , value: 0},
     {label: $localize`:@@WeekEvery:Every Week` , value: 5},
     {label: $localize`:@@Week1:Week 1` , value: 1},
     {label: $localize`:@@Week2:Week 2` , value: 2},
@@ -70,6 +71,7 @@ export let enmSupplyWeek = [
 
 ];
 export let enmSupplyMonth = [
+    {label: '-' , value: 0},
     {label: $localize`:@@TourneeUnevenMonth:Uneven Month` , value: 1},
     {label: $localize`:@@TourneeEvenMonth:Even Month` , value: 2},
     {label: $localize`:@@TourneeEveryMonth:Every Month` , value: 3},

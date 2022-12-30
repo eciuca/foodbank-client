@@ -7304,6 +7304,46 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgDistributionDescription</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgDistributionSchedule</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrgEADPersons</name>
                         <description/>
                         <comment/>
@@ -7385,26 +7425,6 @@
                     </concept_node>
                     <concept_node>
                         <name>OrgFEADPersons</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>OrgFeadFromUs</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -8364,26 +8384,6 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>OrgSupplyFeadProgram</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
                         <name>OrgSupplyNonFeadProgram</name>
                         <description/>
                         <comment/>
@@ -8925,26 +8925,6 @@
                     </concept_node>
                     <concept_node>
                         <name>OrganisationDistAddress</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>OrganisationDistribProgram</name>
                         <description/>
                         <comment/>
                         <default_text/>
