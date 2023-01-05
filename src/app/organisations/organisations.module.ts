@@ -70,6 +70,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {DropdownModule} from 'primeng/dropdown';
 
 const routes: Routes = [
     {
@@ -139,6 +140,7 @@ const routes: Routes = [
         PaginatorModule,
         InputTextModule,
         ButtonModule,
+        DropdownModule,
         PanelModule,
         AccordionModule,
         DialogModule,

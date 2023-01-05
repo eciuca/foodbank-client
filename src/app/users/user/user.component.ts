@@ -18,10 +18,11 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {Membre} from '../../membres/model/membre';
-import {DataServiceError} from '@ngrx/data';
+import {DataServiceError, QueryParams} from '@ngrx/data';
 import {combineLatest, Observable, of} from 'rxjs';
 import {Organisation} from '../../organisations/model/organisation';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
+import {DepotEntityService} from '../../depots/services/depot-entity.service';
 
 @Component({
   selector: 'app-user',
@@ -58,6 +59,7 @@ export class UserComponent implements OnInit {
     isAdmin: boolean;
     title: string;
     orgName: string;
+    depotOptions: any[];
     loggedInUserId: string;
     loggedInUserName: string;
     loggedInUserRights: string;
@@ -65,6 +67,7 @@ export class UserComponent implements OnInit {
   constructor(
       private usersService: UserEntityService,
       private membresService: MembreEntityService,
+      private depotService: DepotEntityService,
       private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
       private router: Router,
@@ -229,6 +232,20 @@ export class UserComponent implements OnInit {
                                       this.booCanDelete = true;
                                   }
                               }
+                              const  queryDepotParms: QueryParams = {};
+                              queryDepotParms['offset'] = '0';
+                              queryDepotParms['rows'] = '999';
+                              queryDepotParms['sortField'] = 'nom';
+                              queryDepotParms['sortOrder'] = '1';
+                              queryDepotParms['idCompany'] = this.idCompany;
+                              queryDepotParms['actif'] = '1';
+                              this.depotService.getWithQuery(queryDepotParms)
+                                  .subscribe(depots => {
+                                      this.depotOptions = [{ value: null, label: $localize`:@@All:All`}];
+                                      depots.map((depot) =>
+                                          this.depotOptions.push({value: depot.idDepot, label: depot.nom})
+                                      );
+                                  });
                               break;
                           case 'Asso':
                           case 'Admin_Asso':
@@ -438,7 +455,9 @@ export class UserComponent implements OnInit {
         }
 
     }
-
+    generateTooltipManageDepot() {
+        return $localize`:@@OrgToolTipManageDepot:Do you want this user to manage the stock in all depots of the bank, or only the stock of a specific depot?`;
+    }
     setSelectedMembre(membre: Membre) {
         this.selectedMembre = membre;
     }
