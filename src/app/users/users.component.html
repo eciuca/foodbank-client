@@ -136,9 +136,8 @@
             There are {{totalRecords}} users selected.
             </div>
         </ng-template>
-
+        <p-toast></p-toast>
 </p-table>
-<p-toast></p-toast>
 <p-dialog i18n-header="@@UserDetails" header="User Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false" >
     <app-user *ngIf="selectedIdUser$" [idUser$]="selectedIdUser$"
               [currentFilteredBankId] = "filteredBankId" [currentFilteredBankShortName] = "filteredBankShortName"

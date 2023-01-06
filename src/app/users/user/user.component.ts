@@ -119,6 +119,7 @@ export class UserComponent implements OnInit {
                     } else {
                         this.rights = enmUserRolesBank;
                         this.title = $localize`:@@BankUserExisting:User ${user.idUser} for bank ${this.user.idCompany}`;
+                        this.loadDepotOptions(this.user.idCompany);
                     }
                     this.booIsCreate = false;
                     this.membresService.getByKey(user.lienBat)
@@ -142,6 +143,7 @@ export class UserComponent implements OnInit {
                         }
                         else {
                             this.user.idOrg = 0;
+                            this.loadDepotOptions(this.user.idCompany);
                             this.rights = enmUserRolesBank;
                             this.title =  $localize`:@@BankUserNew1:New User for bank ${this.currentFilteredBankShortName} `;
                             if (this.currentFilteredBankShortName == 'FBBA') {
@@ -178,6 +180,7 @@ export class UserComponent implements OnInit {
                                     this.title = $localize`:@@OrgUserNewB:New User for depot  ${this.depotName}`;
                                 } else {
                                     this.rights = enmUserRolesBank;
+                                    this.loadDepotOptions(this.idCompany);
                                     this.title = $localize`:@@BankUserNew1:New User for bank ${this.idCompany} `;
                                 }
                             }
@@ -232,20 +235,6 @@ export class UserComponent implements OnInit {
                                       this.booCanDelete = true;
                                   }
                               }
-                              const  queryDepotParms: QueryParams = {};
-                              queryDepotParms['offset'] = '0';
-                              queryDepotParms['rows'] = '999';
-                              queryDepotParms['sortField'] = 'nom';
-                              queryDepotParms['sortOrder'] = '1';
-                              queryDepotParms['idCompany'] = this.idCompany;
-                              queryDepotParms['actif'] = '1';
-                              this.depotService.getWithQuery(queryDepotParms)
-                                  .subscribe(depots => {
-                                      this.depotOptions = [{ value: null, label: $localize`:@@All:All`}];
-                                      depots.map((depot) =>
-                                          this.depotOptions.push({value: depot.idDepot, label: depot.nom})
-                                      );
-                                  });
                               break;
                           case 'Asso':
                           case 'Admin_Asso':
@@ -391,6 +380,22 @@ export class UserComponent implements OnInit {
         } else {
              this.onUserQuit.emit();
         }
+    }
+    loadDepotOptions(idCompany) {
+        const  queryDepotParms: QueryParams = {};
+        queryDepotParms['offset'] = '0';
+        queryDepotParms['rows'] = '999';
+        queryDepotParms['sortField'] = 'nom';
+        queryDepotParms['sortOrder'] = '1';
+        queryDepotParms['idCompany'] = idCompany;
+        queryDepotParms['actif'] = '1';
+        this.depotService.getWithQuery(queryDepotParms)
+            .subscribe(depots => {
+                this.depotOptions = [{ value: null, label: $localize`:@@All:All`}];
+                depots.map((depot) =>
+                    this.depotOptions.push({value: depot.idDepot, label: depot.nom})
+                );
+            });
     }
     updateUserInfoFromMember(user:User,membre:Membre) {
         user.userName = membre.nom + ' ' + membre.prenom;
