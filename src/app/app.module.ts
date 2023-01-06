@@ -81,6 +81,10 @@ const routes: Routes = [
         loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule),
         canActivate: [AuthGuardWithForcedLogin]
     },
+    { path: 'movements',
+        loadChildren: () => import('./movements/movements.module').then(m => m.MovementsModule),
+        canActivate: [AuthGuardWithForcedLogin]
+    },
     { path: 'documentation', component: DocumentationComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     {
