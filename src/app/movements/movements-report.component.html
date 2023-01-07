@@ -1,1 +1,16 @@
-<h1>This Report is under construction</h1>
+<p-panel>
+    <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="chartDataFoodDeliveriesFEADAgreedCollectHistory" class="p-field p-col-12 p-md-4 card">
+            <h3>{{ titleFoodDeliveriesFEADAgreedCollectEvolution }}</h3>
+            <p-chart type="bar" [data]="chartDataFoodDeliveriesFEADAgreedCollectHistory" [options]="stackedOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataFoodDeliveriesFEADNonAgreedHistory" class="p-field p-col-12 p-md-4 card">
+            <h3>{{ titleFoodDeliveriesFEADNonAgreedEvolution }}</h3>
+            <p-chart type="bar" [data]="chartDataFoodDeliveriesFEADNonAgreedHistory" [options]="stackedOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataFoodDeliveriesNonFEADHistory" class="p-field p-col-12 p-md-4 card">
+            <h3>{{ titleFoodDeliveriesNonFEADEvolution}}</h3>
+            <p-chart type="bar" [data]="chartDataFoodDeliveriesNonFEADHistory" [options]="stackedOptions"></p-chart>
+        </div>
+    </div>
+</p-panel>

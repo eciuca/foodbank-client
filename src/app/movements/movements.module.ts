@@ -8,6 +8,7 @@ import {BanquesDataService} from '../banques/services/banques-data.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {appEntityMetadata} from '../app-entity.metadata';
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
+import {PanelModule} from 'primeng/panel';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         TooltipModule,
+        PanelModule,
         ChartModule
 
     ],
