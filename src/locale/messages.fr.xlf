@@ -5092,7 +5092,7 @@
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesNonFEADHistory" datatype="html">
         <source>Food Delivered to Non FEAD Orgs(kg)</source>
-        <target>Évolution de la nourriture livrée aux organisations non FEAD</target>
+        <target>Aliments livrés aux organisations non FEAD(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
           <context context-type="linenumber">172</context>
@@ -5100,7 +5100,7 @@
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADNonAgreedHistory" datatype="html">
         <source>FEAD Food Delivered to Non Agreed Orgs(kg)</source>
-        <target>Évolution des aliments FEAD livrés à des organisations non agréées</target>
+        <target>Aliments FEAD livrés à des organisations non agréées(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
           <context context-type="linenumber">177</context>
