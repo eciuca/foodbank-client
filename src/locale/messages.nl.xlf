@@ -416,7 +416,7 @@
       </trans-unit>
       <trans-unit id="menuReportMovements" datatype="html">
         <source>ReportMovements</source>
-        <target>Verzendingen</target>
+        <target>Voedsel Leveringen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">431</context>
@@ -5091,27 +5091,27 @@
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesNonFEADHistory" datatype="html">
-        <source>Evolution of Food Delivered to Non FEAD Orgs</source>
+        <source>Food Delivered to Non FEAD Orgs(kg)</source>
         <target>Evolutie van voedsel geleverd aan niet-FEAD-organisaties</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">166</context>
+          <context context-type="linenumber">172</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADNonAgreedHistory" datatype="html">
-        <source>Evolution of FEAD Food Delivered to Non Agreed Orgs</source>
+        <source>FEAD Food Delivered to Non Agreed Orgs(kg)</source>
         <target>Evolutie van FEAD + Opgehaald voedsel geleverd aan niet-erkende verenigingen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">177</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADAgreedCollectHistory" datatype="html">
-        <source>Evolution of FEAD + Collect Food Delivered to Agreed Orgs</source>
-        <target>Evolutie van FEAD + Opgehaald voedsel geleverd aan erkende verenigingen</target>
+        <source>FEAD + Collect Food Delivered to Agreed Orgs(kg)</source>
+        <target>FEAD + Opgehaald voedsel geleverd aan erkende verenigingen(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">177</context>
+          <context context-type="linenumber">183</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prev" datatype="html">

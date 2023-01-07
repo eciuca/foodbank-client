@@ -82,7 +82,7 @@ export class MovementReportComponent implements OnInit {
         const classicBanks = { 'classicBanks': '1' };
         this.banqueService.getWithQuery(classicBanks)
             .subscribe((banquesEntities) => {
-                this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId}));
+                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
                 if (! this.booIsLoaded) {
                     this.report();
                 }
@@ -135,7 +135,9 @@ export class MovementReportComponent implements OnInit {
 
                 }
 
-
+                for (let j=0; j < 50; j++ ) {
+                    console.log(this.movementsRecordsMonthly[j]);
+                }
                 for (let i = 0; i < this.movementsRecordsMonthly.length; i++) {
                     const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.movementsRecordsMonthly[i].bankShortName);
                     if (bankOptionIndex === -1) continue;
@@ -148,38 +150,43 @@ export class MovementReportComponent implements OnInit {
                         }
                     }
                     const dataIndex = reportLabels.length;
+
+
                     switch (this.movementsRecordsMonthly[i].category) {
-                        case 'Non FEAD':
+                        case 'NOFEADNONAGREED':
                             reportDataSetsMonthlyNonFEAD[bankOptionIndex].data[dataIndex] += this.movementsRecordsMonthly[i].quantity;
                             break;
-                        case 'FEAD non agreed':
+                        case 'FEADNONAGREED':
                             reportDataSetsMonthlyFEADnonAgreed[bankOptionIndex].data[dataIndex] += this.movementsRecordsMonthly[i].quantity;
                             break;
-                        case 'FEAD agreed collect':
+                        case 'AGREEDFEADCOLLECT':
                             reportDataSetsMonthlyFEADAgreedCollect[bankOptionIndex].data[dataIndex] += this.movementsRecordsMonthly[i].quantity;
                             break;
                         default:
                             console.log('Unknown movement category: ' + this.movementsRecordsMonthly[i].category);
                     }
                 }
-
-                this.titleFoodDeliveriesNonFEADEvolution = $localize`:@@StatFoodDeliveriesNonFEADHistory:Evolution of Food Delivered to Non FEAD Orgs`;
+                    console.log('movements report is done. reportDataFoodDeliveriesNonFEADHistory:', reportDataSetsMonthlyNonFEAD);
+                console.log('movements report is done. reportDataFoodDeliveriesFEADNonAgreedHistory:', reportDataSetsMonthlyFEADnonAgreed);
+                console.log('movements report is done. reportDataFoodDeliveriesFEADAgreedCollectHistory:', reportDataSetsMonthlyFEADAgreedCollect);
+                this.titleFoodDeliveriesNonFEADEvolution = $localize`:@@StatFoodDeliveriesNonFEADHistory:Food Delivered to Non FEAD Orgs(kg)`;
                 this.chartDataFoodDeliveriesNonFEADHistory = {
                     labels: reportLabels,
                     datasets: reportDataSetsMonthlyNonFEAD
                 }
-                this.titleFoodDeliveriesFEADNonAgreedEvolution = $localize`:@@StatFoodDeliveriesFEADNonAgreedHistory:Evolution of FEAD Food Delivered to Non Agreed Orgs`;
+                this.titleFoodDeliveriesFEADNonAgreedEvolution = $localize`:@@StatFoodDeliveriesFEADNonAgreedHistory:FEAD Food Delivered to Non Agreed Orgs(kg)`;
                 this.chartDataFoodDeliveriesFEADNonAgreedHistory = {
                     labels: reportLabels,
                     datasets: reportDataSetsMonthlyFEADnonAgreed
                 }
 
-                this.titleFoodDeliveriesFEADAgreedCollectEvolution = $localize`:@@StatFoodDeliveriesFEADAgreedCollectHistory:Evolution of FEAD + Collect Food Delivered to Agreed Orgs`;
+                this.titleFoodDeliveriesFEADAgreedCollectEvolution = $localize`:@@StatFoodDeliveriesFEADAgreedCollectHistory:FEAD + Collect Food Delivered to Agreed Orgs(kg)`;
                 this.chartDataFoodDeliveriesFEADAgreedCollectHistory = {
                     labels: reportLabels,
                     datasets: reportDataSetsMonthlyFEADAgreedCollect
                 }
             });
+
     }
 
 }

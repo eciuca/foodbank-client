@@ -7,7 +7,7 @@ import {MovementReport} from '../model/movementReport';
     providedIn: 'root'
 })
 export class MovementReportHttpService {
-    private baseUrl = '/api/movementsummary';
+    private baseUrl = '/api/movements';
     constructor(private http: HttpClient) {
     }
     getMovementReport(accesstoken: string, idCompany: string, lienDis: number): Observable<MovementReport[]> {
