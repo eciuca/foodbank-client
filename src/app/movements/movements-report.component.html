@@ -1,19 +1,23 @@
 <p-panel>
     <div class="p-fluid p-formgrid p-grid">
         <div *ngIf="chartDataFoodDeliveriesYearPrevious2" class="p-field p-col-12 p-md-3 card">
-            <h3>{{ titleFoodDeliveriesYearPrevious2 }}</h3>
+            <h4>{{ titleFoodDeliveriesYearPrevious2 }}</h4>
+            <p>{{ getTotalFoodDeliveriesYearPrevious2()}}</p>
             <p-chart type="pie" [data]="chartDataFoodDeliveriesYearPrevious2" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
         </div>
         <div *ngIf="chartDataFoodDeliveriesYearPrevious1" class="p-field p-col-12 p-md-3 card">
-            <h3>{{ titleFoodDeliveriesYearPrevious1 }}</h3>
+            <h4>{{ titleFoodDeliveriesYearPrevious1 }}</h4>
+            <p>{{ getTotalFoodDeliveriesYearPrevious1()}}</p>
             <p-chart type="pie" [data]="chartDataFoodDeliveriesYearPrevious1" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
         </div>
         <div *ngIf="chartDataFoodDeliveriesYearPrevious" class="p-field p-col-12 p-md-3 card">
-            <h3>{{ titleFoodDeliveriesYearPrevious }}</h3>
+            <h4>{{ titleFoodDeliveriesYearPrevious }}</h4>
+            <p>{{ getTotalFoodDeliveriesYearPrevious()}}</p>
             <p-chart type="pie" [data]="chartDataFoodDeliveriesYearPrevious" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
         </div>
         <div *ngIf="chartDataFoodDeliveriesYearCurrent" class="p-field p-col-12 p-md-3 card">
-            <h3>{{ titleFoodDeliveriesYearCurrent }}</h3>
+            <h4>{{ titleFoodDeliveriesYearCurrent }}</h4>
+            <p>{{ getTotalFoodDeliveriesYearCurrent()}}</p>
             <p-chart type="pie" [data]="chartDataFoodDeliveriesYearCurrent" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
         </div>
 
@@ -21,15 +25,18 @@
     <div class="p-fluid p-formgrid p-grid">
 
         <div *ngIf="chartDataFoodDeliveriesFEADAgreedCollectHistory" class="p-field p-col-12 p-md-4 card">
-            <h3>{{ titleFoodDeliveriesFEADAgreedCollectEvolution }}</h3>
+            <h4>{{ titleFoodDeliveriesFEADAgreedCollectEvolution }}</h4>
+            <p>{{getTotalFoodDeliveriesFEADAgreedCollect()}}</p>
             <p-chart type="bar" [data]="chartDataFoodDeliveriesFEADAgreedCollectHistory" [options]="stackedOptions"></p-chart>
         </div>
         <div *ngIf="chartDataFoodDeliveriesFEADNonAgreedHistory" class="p-field p-col-12 p-md-4 card">
-            <h3>{{ titleFoodDeliveriesFEADNonAgreedEvolution }}</h3>
+            <h4>{{ titleFoodDeliveriesFEADNonAgreedEvolution }}</h4>
+            <p>{{getTotalFoodDeliveriesFEADNonAgreed()}}</p>
             <p-chart type="bar" [data]="chartDataFoodDeliveriesFEADNonAgreedHistory" [options]="stackedOptions"></p-chart>
         </div>
         <div *ngIf="chartDataFoodDeliveriesNonFEADHistory" class="p-field p-col-12 p-md-4 card">
-            <h3>{{ titleFoodDeliveriesNonFEADEvolution}}</h3>
+            <h4>{{ titleFoodDeliveriesNonFEADEvolution}}</h4>
+            <p>{{getTotalFoodDeliveriesNonFEAD()}}</p>
             <p-chart type="bar" [data]="chartDataFoodDeliveriesNonFEADHistory" [options]="stackedOptions"></p-chart>
         </div>
     </div>

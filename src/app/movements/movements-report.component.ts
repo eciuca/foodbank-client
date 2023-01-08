@@ -39,6 +39,13 @@ export class MovementReportComponent implements OnInit {
     titleFoodDeliveriesYearPrevious: string;
     titleFoodDeliveriesYearPrevious1: string;
     titleFoodDeliveriesYearPrevious2: string;
+    totalFoodDeliveriesNonFEAD: number ;
+    totalFoodDeliveriesFEADNonAgreed: number;
+    totalFoodDeliveriesFEADAgreedCollect: number;
+    totalFoodDeliveriesYearCurrent: number;
+    totalFoodDeliveriesYearPrevious: number;
+    totalFoodDeliveriesYearPrevious1: number;
+    totalFoodDeliveriesYearPrevious2: number;
     constructor(
         private movementReportHttpService: MovementReportHttpService,
         private banqueService: BanqueEntityService,
@@ -113,7 +120,13 @@ export class MovementReportComponent implements OnInit {
        console.log('movements report is initialized');
     }
     reportMovementsHistory() {
-
+        this.totalFoodDeliveriesNonFEAD = 0 ;
+        this.totalFoodDeliveriesFEADNonAgreed = 0;
+        this.totalFoodDeliveriesFEADAgreedCollect = 0;
+        this.totalFoodDeliveriesYearCurrent = 0;
+        this.totalFoodDeliveriesYearPrevious = 0;
+        this.totalFoodDeliveriesYearPrevious1 = 0;
+        this.totalFoodDeliveriesYearPrevious2 = 0;
         this.movementReportHttpService.getMovementReport(this.authService.accessToken,null,null).subscribe(
             (response: MovementReport[]) => {
                 this.movementsRecordsMonthly = response;
@@ -193,16 +206,20 @@ export class MovementReportComponent implements OnInit {
                     const movementYear = this.movementsRecordsMonthly[i].month.substr(0,4);
                     switch (movementYear) {
                         case currentYear.toString():
-                        reportDataSetsYearCurrent[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                            reportDataSetsYearCurrent[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                            this.totalFoodDeliveriesYearCurrent += this.movementsRecordsMonthly[i].quantity;
                         break;
                         case previousYear.toString():
-                        reportDataSetsYearPrevious[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                            reportDataSetsYearPrevious[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                            this.totalFoodDeliveriesYearPrevious += this.movementsRecordsMonthly[i].quantity;
                         break;
                         case previousYear2.toString():
-                        reportDataSetsYearPrevious1[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                            reportDataSetsYearPrevious1[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                            this.totalFoodDeliveriesYearPrevious1 += this.movementsRecordsMonthly[i].quantity;
                         break;
                         case previousYear3.toString():
-                        reportDataSetsYearPrevious2[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                            reportDataSetsYearPrevious2[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                            this.totalFoodDeliveriesYearPrevious2 += this.movementsRecordsMonthly[i].quantity;
                         break;
                         default:
                             console.log('Movements Report Unknown year',movementYear);
@@ -221,12 +238,15 @@ export class MovementReportComponent implements OnInit {
                     switch (this.movementsRecordsMonthly[i].category) {
                         case 'NOFEADNONAGREED':
                             reportDataSetsMonthlyNonFEAD[bankOptionIndex].data[dataIndex] += this.movementsRecordsMonthly[i].quantity;
+                            this.totalFoodDeliveriesNonFEAD += this.movementsRecordsMonthly[i].quantity;
                             break;
                         case 'FEADNONAGREED':
                             reportDataSetsMonthlyFEADnonAgreed[bankOptionIndex].data[dataIndex] += this.movementsRecordsMonthly[i].quantity;
+                            this.totalFoodDeliveriesFEADNonAgreed += this.movementsRecordsMonthly[i].quantity;
                             break;
                         case 'AGREEDFEADCOLLECT':
                             reportDataSetsMonthlyFEADAgreedCollect[bankOptionIndex].data[dataIndex] += this.movementsRecordsMonthly[i].quantity;
+                            this.totalFoodDeliveriesFEADAgreedCollect += this.movementsRecordsMonthly[i].quantity;
                             break;
                         default:
                             console.log('Unknown movement category: ' + this.movementsRecordsMonthly[i].category);
@@ -274,5 +294,25 @@ export class MovementReportComponent implements OnInit {
             });
 
     }
-
+    getTotalFoodDeliveriesYearPrevious() {
+        return $localize`:@@StatFoodDeliveriesYearPrevious:Total: ${this.totalFoodDeliveriesYearPrevious} kg`;
+    }
+    getTotalFoodDeliveriesYearPrevious1() {
+        return $localize`:@@StatFoodDeliveriesYearPrevious1:Total: ${this.totalFoodDeliveriesYearPrevious1} kg`;
+    }
+    getTotalFoodDeliveriesYearPrevious2() {
+        return $localize`:@@StatFoodDeliveriesYearPrevious2:Total: ${this.totalFoodDeliveriesYearPrevious2} kg`;
+    }
+    getTotalFoodDeliveriesYearCurrent() {
+        return $localize`:@@StatFoodDeliveriesYearCurrent:Total: ${this.totalFoodDeliveriesYearCurrent} kg`;
+    }
+    getTotalFoodDeliveriesNonFEAD() {
+        return $localize`:@@StatFoodDeliveriesNonFEAD:Total: ${this.totalFoodDeliveriesNonFEAD} kg`;
+    }
+    getTotalFoodDeliveriesFEADNonAgreed() {
+        return $localize`:@@StatFoodDeliveriesFEADNonAgreed:Total: ${this.totalFoodDeliveriesFEADNonAgreed} kg`;
+    }
+    getTotalFoodDeliveriesFEADAgreedCollect() {
+        return $localize`:@@StatFoodDeliveriesFEADAgreedCollect:Total: ${this.totalFoodDeliveriesFEADAgreedCollect} kg`;
+    }
 }
