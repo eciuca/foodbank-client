@@ -5091,27 +5091,59 @@
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesNonFEADHistory" datatype="html">
-        <source>Food Delivered to Non FEAD Orgs(kg)</source>
-        <target>Voedsel geleverd aan niet-FEAD-organisaties(kg)</target>
+        <source>Food Delivered to Non FEAD Orgs(kg/month)</source>
+        <target>Voedsel geleverd aan niet-FEAD-organisaties(kg/maand)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">237</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADNonAgreedHistory" datatype="html">
-        <source>FEAD Food Delivered to Non Agreed Orgs(kg)</source>
-        <target>FEAD voedsel geleverd aan niet-erkende verenigingen(kg)</target>
+        <source>FEAD Food Delivered to Non Agreed Orgs(kg/month)</source>
+        <target>FEAD voedsel geleverd aan niet-erkende verenigingen(kg/maand)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">177</context>
+          <context context-type="linenumber">242</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADAgreedCollectHistory" datatype="html">
-        <source>FEAD + Collect Food Delivered to Agreed Orgs(kg)</source>
-        <target>FEAD + Opgehaald voedsel geleverd aan erkende verenigingen(kg)</target>
+        <source>FEAD + Collect Food Delivered to Agreed Orgs(kg/month)</source>
+        <target>FEAD + Opgehaald voedsel geleverd aan erkende verenigingen(kg/maand)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">183</context>
+          <context context-type="linenumber">248</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="StatFoodDeliveriesYearCurrent" datatype="html">
+        <source>Food Delivered in <x id="PH" equiv-text="currentYear"/>(kg)</source>
+        <target>Voedsel bezorgd in <x id="PH" equiv-text="currentYear"/>(kg)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
+          <context context-type="linenumber">253</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="StatFoodDeliveriesYearPrevious" datatype="html">
+        <source>Food Delivered in <x id="PH" equiv-text="previousYear"/>(kg)</source>
+        <target>Voedsel bezorgd in <x id="PH" equiv-text="previousYear"/>(kg)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
+          <context context-type="linenumber">258</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="StatFoodDeliveriesYearPrevious1" datatype="html">
+        <source>Food Delivered in <x id="PH" equiv-text="previousYear2"/>(kg)</source>
+        <target>Voedsel bezorgd in <x id="PH" equiv-text="previousYear2"/>(kg)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
+          <context context-type="linenumber">263</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="StatFoodDeliveriesYearPrevious2" datatype="html">
+        <source>Food Delivered in <x id="PH" equiv-text="previousYear3"/>(kg)</source>
+        <target>Voedsel bezorgd in <x id="PH" equiv-text="previousYear3"/>(kg)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
+          <context context-type="linenumber">268</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prev" datatype="html">

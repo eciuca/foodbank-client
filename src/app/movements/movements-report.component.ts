@@ -22,6 +22,7 @@ export class MovementReportComponent implements OnInit {
     backgroundColors: any[];
     basicOptions: any;
     stackedOptions: any;
+    pieOptions: any;
     titleMovementsEvolution: string;
     movementsRecordsMonthly: MovementReport[];
     titleFoodDeliveriesNonFEADEvolution: string;
@@ -30,6 +31,14 @@ export class MovementReportComponent implements OnInit {
     chartDataFoodDeliveriesFEADNonAgreedHistory: { labels: any[]; datasets: any[]; };
     titleFoodDeliveriesFEADAgreedCollectEvolution: string;
     chartDataFoodDeliveriesFEADAgreedCollectHistory: { labels: any[]; datasets: any[]; };
+    chartDataFoodDeliveriesYearCurrent: { labels: any[]; datasets: any[]; };
+    chartDataFoodDeliveriesYearPrevious: { labels: any[]; datasets: any[]; };
+    chartDataFoodDeliveriesYearPrevious1: { labels: any[]; datasets: any[]; };
+    chartDataFoodDeliveriesYearPrevious2: { labels: any[]; datasets: any[]; };
+    titleFoodDeliveriesYearCurrent: string;
+    titleFoodDeliveriesYearPrevious: string;
+    titleFoodDeliveriesYearPrevious1: string;
+    titleFoodDeliveriesYearPrevious2: string;
     constructor(
         private movementReportHttpService: MovementReportHttpService,
         private banqueService: BanqueEntityService,
@@ -63,6 +72,14 @@ export class MovementReportComponent implements OnInit {
                 }
             }
         };
+
+        this.pieOptions = {
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            responsive: true,
+        }
         this.titleMovementsEvolution = '';
     }
 
@@ -104,6 +121,36 @@ export class MovementReportComponent implements OnInit {
                 let reportDataSetsMonthlyNonFEAD = [];
                 let reportDataSetsMonthlyFEADnonAgreed = [];
                 let reportDataSetsMonthlyFEADAgreedCollect = [];
+                let reportDataSetsYearCurrent= [
+                    {
+                        data: [],
+                        backgroundColor: this.backgroundColors,
+                    }
+                ];
+                let reportDataSetsYearPrevious= [
+                    {
+                        data: [],
+                        backgroundColor: this.backgroundColors,
+                    }
+                ];
+                let reportDataSetsYearPrevious1= [
+                    {
+                        data: [],
+                        backgroundColor: this.backgroundColors,
+                    }
+                ];
+                let reportDataSetsYearPrevious2= [
+                    {
+                        data: [],
+                        backgroundColor: this.backgroundColors,
+                    }
+                ];
+                for (let i=0; i < this.bankOptions.length; i++ ) {
+                    reportDataSetsYearCurrent[0].data.push(0);
+                    reportDataSetsYearPrevious[0].data.push(0);
+                    reportDataSetsYearPrevious1[0].data.push(0);
+                    reportDataSetsYearPrevious2[0].data.push(0);
+                }
                 let colorIndex =0;
                 for (let i=0; i < this.bankOptions.length; i++ ) {
                     reportDataSetsMonthlyNonFEAD.push(
@@ -127,6 +174,7 @@ export class MovementReportComponent implements OnInit {
                             backgroundColor: this.backgroundColors[colorIndex],
                             data: []
                         });
+
                     colorIndex++;
                     if (colorIndex >= this.backgroundColors.length) {
                         console.log('Not enough colors in backgroundColors array');
@@ -135,12 +183,30 @@ export class MovementReportComponent implements OnInit {
 
                 }
 
-                for (let j=0; j < 50; j++ ) {
-                    console.log(this.movementsRecordsMonthly[j]);
-                }
+                const currentYear = new Date().getFullYear();
+                const previousYear = currentYear - 1;
+                const previousYear2 = currentYear - 2;
+                const previousYear3 = currentYear - 3;
                 for (let i = 0; i < this.movementsRecordsMonthly.length; i++) {
                     const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.movementsRecordsMonthly[i].bankShortName);
                     if (bankOptionIndex === -1) continue;
+                    const movementYear = this.movementsRecordsMonthly[i].month.substr(0,4);
+                    switch (movementYear) {
+                        case currentYear.toString():
+                        reportDataSetsYearCurrent[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                        break;
+                        case previousYear.toString():
+                        reportDataSetsYearPrevious[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                        break;
+                        case previousYear2.toString():
+                        reportDataSetsYearPrevious1[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                        break;
+                        case previousYear3.toString():
+                        reportDataSetsYearPrevious2[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
+                        break;
+                        default:
+                            console.log('Movements Report Unknown year',movementYear);
+                    }
                     if (!reportLabels.includes(this.movementsRecordsMonthly[i].month)) {
                         reportLabels.push(this.movementsRecordsMonthly[i].month);
                         for (let i=0; i < this.bankOptions.length; i++ ) {
@@ -166,25 +232,45 @@ export class MovementReportComponent implements OnInit {
                             console.log('Unknown movement category: ' + this.movementsRecordsMonthly[i].category);
                     }
                 }
-                    console.log('movements report is done. reportDataFoodDeliveriesNonFEADHistory:', reportDataSetsMonthlyNonFEAD);
-                console.log('movements report is done. reportDataFoodDeliveriesFEADNonAgreedHistory:', reportDataSetsMonthlyFEADnonAgreed);
-                console.log('movements report is done. reportDataFoodDeliveriesFEADAgreedCollectHistory:', reportDataSetsMonthlyFEADAgreedCollect);
-                this.titleFoodDeliveriesNonFEADEvolution = $localize`:@@StatFoodDeliveriesNonFEADHistory:Food Delivered to Non FEAD Orgs(kg)`;
+
+
+                this.titleFoodDeliveriesNonFEADEvolution = $localize`:@@StatFoodDeliveriesNonFEADHistory:Food Delivered to Non FEAD Orgs(kg/month)`;
                 this.chartDataFoodDeliveriesNonFEADHistory = {
                     labels: reportLabels,
                     datasets: reportDataSetsMonthlyNonFEAD
                 }
-                this.titleFoodDeliveriesFEADNonAgreedEvolution = $localize`:@@StatFoodDeliveriesFEADNonAgreedHistory:FEAD Food Delivered to Non Agreed Orgs(kg)`;
+                this.titleFoodDeliveriesFEADNonAgreedEvolution = $localize`:@@StatFoodDeliveriesFEADNonAgreedHistory:FEAD Food Delivered to Non Agreed Orgs(kg/month)`;
                 this.chartDataFoodDeliveriesFEADNonAgreedHistory = {
                     labels: reportLabels,
                     datasets: reportDataSetsMonthlyFEADnonAgreed
                 }
 
-                this.titleFoodDeliveriesFEADAgreedCollectEvolution = $localize`:@@StatFoodDeliveriesFEADAgreedCollectHistory:FEAD + Collect Food Delivered to Agreed Orgs(kg)`;
+                this.titleFoodDeliveriesFEADAgreedCollectEvolution = $localize`:@@StatFoodDeliveriesFEADAgreedCollectHistory:FEAD + Collect Food Delivered to Agreed Orgs(kg/month)`;
                 this.chartDataFoodDeliveriesFEADAgreedCollectHistory = {
                     labels: reportLabels,
                     datasets: reportDataSetsMonthlyFEADAgreedCollect
                 }
+                this.titleFoodDeliveriesYearCurrent = $localize`:@@StatFoodDeliveriesYearCurrent:Food Delivered in ${currentYear}(kg)`;
+                this.chartDataFoodDeliveriesYearCurrent = {
+                    labels: this.bankOptions.map(({label}) => label),
+                    datasets: reportDataSetsYearCurrent
+                }
+                this.titleFoodDeliveriesYearPrevious = $localize`:@@StatFoodDeliveriesYearPrevious:Food Delivered in ${previousYear}(kg)`;
+                this.chartDataFoodDeliveriesYearPrevious = {
+                    labels: this.bankOptions.map(({label}) => label),
+                    datasets: reportDataSetsYearPrevious
+                }
+                this.titleFoodDeliveriesYearPrevious1 = $localize`:@@StatFoodDeliveriesYearPrevious1:Food Delivered in ${previousYear2}(kg)`;
+                this.chartDataFoodDeliveriesYearPrevious1 = {
+                    labels: this.bankOptions.map(({label}) => label),
+                    datasets: reportDataSetsYearPrevious1
+                }
+                this.titleFoodDeliveriesYearPrevious2 = $localize`:@@StatFoodDeliveriesYearPrevious2:Food Delivered in ${previousYear3}(kg)`;
+                this.chartDataFoodDeliveriesYearPrevious2 = {
+                    labels: this.bankOptions.map(({label}) => label),
+                    datasets: reportDataSetsYearPrevious2
+                }
+
             });
 
     }
