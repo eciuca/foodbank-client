@@ -298,10 +298,10 @@ export class MovementReportComponent implements OnInit {
         return $localize`:@@StatFoodDeliveriesYearPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesYearPrevious)} kg`;
     }
     getTotalFoodDeliveriesYearPrevious1() {
-        return $localize`:@@StatFoodDeliveriesYearPrevious1Total:Total: ${Math.round(this.totalFoodDeliveriesYearPrevious)} kg`;
+        return $localize`:@@StatFoodDeliveriesYearPrevious1Total:Total: ${Math.round(this.totalFoodDeliveriesYearPrevious1)} kg`;
     }
     getTotalFoodDeliveriesYearPrevious2() {
-        return $localize`:@@StatFoodDeliveriesYearPrevious2Total:Total: ${Math.round(this.totalFoodDeliveriesYearPrevious)} kg`;
+        return $localize`:@@StatFoodDeliveriesYearPrevious2Total:Total: ${Math.round(this.totalFoodDeliveriesYearPrevious2)} kg`;
     }
     getTotalFoodDeliveriesYearCurrent() {
         return $localize`:@@StatFoodDeliveriesYearCurrentTotal:Total: ${Math.round(this.totalFoodDeliveriesYearCurrent)} kg`;
