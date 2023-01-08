@@ -26,17 +26,14 @@
 
         <div *ngIf="chartDataFoodDeliveriesFEADAgreedCollectHistory" class="p-field p-col-12 p-md-4 card">
             <h4>{{ titleFoodDeliveriesFEADAgreedCollectEvolution }}</h4>
-            <p>{{getTotalFoodDeliveriesFEADAgreedCollect()}}</p>
             <p-chart type="bar" [data]="chartDataFoodDeliveriesFEADAgreedCollectHistory" [options]="stackedOptions"></p-chart>
         </div>
         <div *ngIf="chartDataFoodDeliveriesFEADNonAgreedHistory" class="p-field p-col-12 p-md-4 card">
             <h4>{{ titleFoodDeliveriesFEADNonAgreedEvolution }}</h4>
-            <p>{{getTotalFoodDeliveriesFEADNonAgreed()}}</p>
             <p-chart type="bar" [data]="chartDataFoodDeliveriesFEADNonAgreedHistory" [options]="stackedOptions"></p-chart>
         </div>
         <div *ngIf="chartDataFoodDeliveriesNonFEADHistory" class="p-field p-col-12 p-md-4 card">
             <h4>{{ titleFoodDeliveriesNonFEADEvolution}}</h4>
-            <p>{{getTotalFoodDeliveriesNonFEAD()}}</p>
             <p-chart type="bar" [data]="chartDataFoodDeliveriesNonFEADHistory" [options]="stackedOptions"></p-chart>
         </div>
     </div>

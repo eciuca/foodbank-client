@@ -295,24 +295,24 @@ export class MovementReportComponent implements OnInit {
 
     }
     getTotalFoodDeliveriesYearPrevious() {
-        return $localize`:@@StatFoodDeliveriesYearPrevious:Total: ${this.totalFoodDeliveriesYearPrevious} kg`;
+        return $localize`:@@StatFoodDeliveriesYearPreviousTotal:Total: ${this.totalFoodDeliveriesYearPrevious} kg`;
     }
     getTotalFoodDeliveriesYearPrevious1() {
-        return $localize`:@@StatFoodDeliveriesYearPrevious1:Total: ${this.totalFoodDeliveriesYearPrevious1} kg`;
+        return $localize`:@@StatFoodDeliveriesYearPrevious1Total:Total: ${this.totalFoodDeliveriesYearPrevious1} kg`;
     }
     getTotalFoodDeliveriesYearPrevious2() {
-        return $localize`:@@StatFoodDeliveriesYearPrevious2:Total: ${this.totalFoodDeliveriesYearPrevious2} kg`;
+        return $localize`:@@StatFoodDeliveriesYearPrevious2Total:Total: ${this.totalFoodDeliveriesYearPrevious2} kg`;
     }
     getTotalFoodDeliveriesYearCurrent() {
-        return $localize`:@@StatFoodDeliveriesYearCurrent:Total: ${this.totalFoodDeliveriesYearCurrent} kg`;
+        return $localize`:@@StatFoodDeliveriesYearCurrentTotal:Total: ${this.totalFoodDeliveriesYearCurrent} kg`;
     }
     getTotalFoodDeliveriesNonFEAD() {
-        return $localize`:@@StatFoodDeliveriesNonFEAD:Total: ${this.totalFoodDeliveriesNonFEAD} kg`;
+        return $localize`:@@StatFoodDeliveriesNonFEADTotal:Total: ${this.totalFoodDeliveriesNonFEAD} kg`;
     }
     getTotalFoodDeliveriesFEADNonAgreed() {
-        return $localize`:@@StatFoodDeliveriesFEADNonAgreed:Total: ${this.totalFoodDeliveriesFEADNonAgreed} kg`;
+        return $localize`:@@StatFoodDeliveriesFEADNonAgreedTotal:Total: ${this.totalFoodDeliveriesFEADNonAgreed} kg`;
     }
     getTotalFoodDeliveriesFEADAgreedCollect() {
-        return $localize`:@@StatFoodDeliveriesFEADAgreedCollect:Total: ${this.totalFoodDeliveriesFEADAgreedCollect} kg`;
+        return $localize`:@@StatFoodDeliveriesFEADAgreedCollectTotal:Total: ${this.totalFoodDeliveriesFEADAgreedCollect} kg`;
     }
 }
