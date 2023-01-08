@@ -295,16 +295,16 @@ export class MovementReportComponent implements OnInit {
 
     }
     getTotalFoodDeliveriesYearPrevious() {
-        return $localize`:@@StatFoodDeliveriesYearPreviousTotal:Total: ${this.totalFoodDeliveriesYearPrevious} kg`;
+        return $localize`:@@StatFoodDeliveriesYearPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesYearPrevious)} kg`;
     }
     getTotalFoodDeliveriesYearPrevious1() {
-        return $localize`:@@StatFoodDeliveriesYearPrevious1Total:Total: ${this.totalFoodDeliveriesYearPrevious1} kg`;
+        return $localize`:@@StatFoodDeliveriesYearPrevious1Total:Total: ${Math.round(this.totalFoodDeliveriesYearPrevious)} kg`;
     }
     getTotalFoodDeliveriesYearPrevious2() {
-        return $localize`:@@StatFoodDeliveriesYearPrevious2Total:Total: ${this.totalFoodDeliveriesYearPrevious2} kg`;
+        return $localize`:@@StatFoodDeliveriesYearPrevious2Total:Total: ${Math.round(this.totalFoodDeliveriesYearPrevious)} kg`;
     }
     getTotalFoodDeliveriesYearCurrent() {
-        return $localize`:@@StatFoodDeliveriesYearCurrentTotal:Total: ${this.totalFoodDeliveriesYearCurrent} kg`;
+        return $localize`:@@StatFoodDeliveriesYearCurrentTotal:Total: ${Math.round(this.totalFoodDeliveriesYearCurrent)} kg`;
     }
     getTotalFoodDeliveriesNonFEAD() {
         return $localize`:@@StatFoodDeliveriesNonFEADTotal:Total: ${this.totalFoodDeliveriesNonFEAD} kg`;
