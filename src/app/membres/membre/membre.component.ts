@@ -136,6 +136,7 @@ export class MembreComponent implements OnInit {
                                   this.selectedFunction = this.membre.fonction;
                                   this.selectedEmploiType= this.membre.typEmploi;
                                   this.selectedDepot= this.membre.ldep;
+
                           });
                       }
                       else {
@@ -144,6 +145,9 @@ export class MembreComponent implements OnInit {
                           this.selectedEmploiType= this.membre.typEmploi;
                           this.selectedDepot= this.membre.ldep;
                       }
+                      this.loadFunctions(membre.lienBanque);
+                      this.loadEmploiTypes(membre.lienBanque);
+                      this.loadDepots(membre.lienBanque);
                       if (membre.societe) {
                           this.title = $localize`:@@OrgMemberExisting:Member for organisation ${membre.societe} Updated On ${ membre.lastVisit}`;
                       } else {
@@ -212,6 +216,9 @@ export class MembreComponent implements OnInit {
                               }
                           }
                       }
+                      this.loadFunctions(membre.lienBanque);
+                      this.loadEmploiTypes(membre.lienBanque);
+                      this.loadDepots(membre.lienBanque);
                       if (this.myform) {
                           this.myform.reset(this.membre);
                       }
@@ -235,9 +242,6 @@ export class MembreComponent implements OnInit {
                           if (this.booCalledFromTable) {
                               this.booCanDelete = true;
                           }
-                          this.loadFunctions(null);
-                          this.loadEmploiTypes(null);
-                          this.loadDepots(null);
                           break;
                       case 'Bank':
                       case 'Admin_Banq':
@@ -249,9 +253,6 @@ export class MembreComponent implements OnInit {
                                   this.booCanDelete = true;
                               }
                           }
-                          this.loadFunctions(this.lienBanque);
-                          this.loadEmploiTypes(this.lienBanque);
-                          this.loadDepots(this.lienBanque);
                           break;
                       case 'Asso':
                       case 'Admin_Asso':

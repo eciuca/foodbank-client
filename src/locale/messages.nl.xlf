@@ -2023,7 +2023,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">409</context>
+          <context context-type="linenumber">410</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/org-memberships/org-membership/org-membership.component.ts</context>
@@ -4531,7 +4531,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">444</context>
+          <context context-type="linenumber">445</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
@@ -4739,7 +4739,7 @@
         <target>Medewerker voor organisatie <x id="PH" equiv-text="membre.societe"/> bijgewerkt op <x id="PH_1" equiv-text="membre.lastVisit"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMemberExisting" datatype="html">
@@ -4747,7 +4747,7 @@
         <target>Medewerker voor bank <x id="PH" equiv-text="this.idCompany"/> bijgewerkt op <x id="PH_1" equiv-text="membre.lastVisit"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">151</context>
+          <context context-type="linenumber">155</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberNew2" datatype="html">
@@ -4755,7 +4755,7 @@
         <target>Nieuwe medewerker voor organisatie <x id="PH" equiv-text="this.currentFilteredOrg.societe"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">183</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMemberNew1" datatype="html">
@@ -4763,11 +4763,11 @@
         <target>Nieuwe medewerker voor bank <x id="PH" equiv-text="this.idCompany"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">183</context>
+          <context context-type="linenumber">187</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">213</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberNew1" datatype="html">
@@ -4775,7 +4775,7 @@
         <target>Nieuwe medewerker voor organisatie <x id="PH" equiv-text="this.orgName"/> </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">192</context>
+          <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberNewC" datatype="html">
@@ -4783,7 +4783,7 @@
         <target>Nieuwe medewerker voor organisatie <x id="PH" equiv-text="this.depotName"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">203</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberNewA" datatype="html">
@@ -4791,7 +4791,7 @@
         <target>Nieuwe medewerker voor organisatie <x id="PH" equiv-text="this.currentFilteredOrg.societe"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">201</context>
+          <context context-type="linenumber">205</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgMemberNewB" datatype="html">
@@ -4799,7 +4799,7 @@
         <target>Nieuwe medewerker voor organisatie <x id="PH" equiv-text="this.depotName"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeDeleted" datatype="html">
@@ -4807,7 +4807,7 @@
         <target>De medewerker <x id="PH" equiv-text="membre.prenom"/> <x id="PH_1" equiv-text="membre.nom"/> is verwijderd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">326</context>
+          <context context-type="linenumber">327</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeDeleteError" datatype="html">
@@ -4815,7 +4815,7 @@
         <target>De medewerker <x id="PH" equiv-text="membre.prenom"/> <x id="PH_1" equiv-text="membre.nom"/> kan niet worden verwijderd: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">339</context>
+          <context context-type="linenumber">340</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeUpdated" datatype="html">
@@ -4823,7 +4823,7 @@
         <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> is bijgewerkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">361</context>
+          <context context-type="linenumber">362</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeUpdateError" datatype="html">
@@ -4831,7 +4831,7 @@
         <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> kan niet worden bijgewerkt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">373</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeCreated" datatype="html">
@@ -4839,7 +4839,7 @@
         <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> is aangemaakt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">386</context>
+          <context context-type="linenumber">387</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeCreateError" datatype="html">
@@ -4847,7 +4847,7 @@
         <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> kan niet worden aangemaakt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">398</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ShowAnomalies" datatype="html">
