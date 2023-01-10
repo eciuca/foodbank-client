@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {Beneficiaire, DefaultBeneficiaire} from '../model/beneficiaire';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmCountry, enmGender, enmStatutFead} from '../../shared/enums';
+import {enmCountry, enmGender, enmStatutFead, enmSupplyDay} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
@@ -15,6 +15,9 @@ import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {Organisation} from '../../organisations/model/organisation';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
+import {Dependent} from '../model/dependent';
+import {DependentEntityService} from '../services/dependent-entity.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-beneficiaire',
@@ -22,6 +25,10 @@ import {AuditChangeEntityService} from '../../audits/services/auditChange-entity
   styleUrls: ['./beneficiaire.component.css']
 })
 export class BeneficiaireComponent implements OnInit {
+    readonly povertyRevenueSingleBeneficiary = 1262;
+    readonly povertyRevenueDependentAdult= 630;
+    readonly povertyRevenueDependentChild = 379;
+    readonly povertyRevenueIndexDate = '25/6/2021';
     @ViewChild('beneficiaireForm') myform: NgForm;
     @Input() idClient$: Observable<number>;
     @Input() currentFilteredOrg: Organisation;
@@ -47,8 +54,14 @@ export class BeneficiaireComponent implements OnInit {
     title: string;
     userId: string;
     userName: string;
+    dependentQuery: any;
+    dependents: Dependent[];
+    nbAdults: number;
+    nbChildren: number;
+    povertyIndex: number;
   constructor(
       private beneficiairesService: BeneficiaireEntityService,
+      private dependentService: DependentEntityService,
       private cpassService: CpasEntityService,
       private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
@@ -69,6 +82,7 @@ export class BeneficiaireComponent implements OnInit {
       this.lienDepot = 0;
       this.depotName = '';
       this.title = '';
+      this.dependentQuery = {};
   }
 
   ngOnInit(): void {
@@ -79,8 +93,11 @@ export class BeneficiaireComponent implements OnInit {
               map(([idClient, beneficiaires]) => beneficiaires.find(beneficiaire => beneficiaire['idClient'] === idClient))
           );
       beneficiaire$.subscribe(beneficiaire => {
+          this.povertyIndex = 0;
+
           if (beneficiaire) {
               this.beneficiaire = beneficiaire;
+
               this.title = $localize`:@@OrgBeneficiaryExisting:Beneficiary for organisation ${beneficiaire.societe} Updated On ${ beneficiaire.dateUpd}`;
               if (beneficiaire.lcpas && beneficiaire.lcpas !== 0) {
                   this.cpassService.getByKey(beneficiaire.lcpas)
@@ -91,8 +108,18 @@ export class BeneficiaireComponent implements OnInit {
                                }
                           });
               }
+              this.dependentQuery['lienMast'] = this.beneficiaire.idClient;
+              this.dependentQuery['actif'] = '1';
+              this.dependentService.getWithQuery(this.dependentQuery)
+                  .subscribe(loadedDependents => {
+                      console.log('Initial Loaded dependents: ' + loadedDependents.length);
+                      this.dependents = loadedDependents;
+                      this.setPovertyIndex();
+
+                  });
           } else {
               this.beneficiaire = new DefaultBeneficiaire();
+              this.dependents = [];
               this.beneficiaire.lbanque = this.lienBanque;
               if (this.lienDis > 0 && this.lienDepot === 0) {
                   // handle organisation beneficiaires
@@ -277,5 +304,34 @@ export class BeneficiaireComponent implements OnInit {
     }
     generateTooltipRightsBankUsers() {
            return $localize`:@@BenefRightsBankUsers:Bank Users can only modify Beneficiary Suspician Coefficient and delete Duplicates who have a suspicion coefficient > 1`;
+    }
+    setPovertyIndex() {
+      this.povertyIndex = this.povertyRevenueSingleBeneficiary;
+        this.nbAdults = 0;
+      if (this.beneficiaire.nomconj) {
+            this.nbAdults = 1;
+      }
+        this.nbChildren = 0;
+        this.dependents.forEach( (dependent) => {
+            const dayDifference = - moment(dependent.datenais, 'DD/MM/YYYY').diff(moment(),'days');
+            console.log('dayDifference', dayDifference);
+            if (dayDifference < 6205) { // 6205 days = 17 years old
+                this.nbChildren++;
+                this.povertyIndex += this.povertyRevenueDependentChild;
+            }
+            else {
+                this.nbAdults++;
+                this.povertyIndex += this.povertyRevenueDependentAdult;
+            }
+        });
+
+    }
+    getPovertyIndex() {
+        return $localize`:@@povertyIndex:Poverty Index: ${this.povertyIndex}`;
+    }
+
+    getPovertyIndexTooltip(): string {
+        return $localize`:@@povertyIndexTooltip:Poverty Index is calculated for ${this.nbAdults} Adult Dependents and ${this.nbChildren} Children based on the rates updated on 25/06/2021`;
+
     }
 }

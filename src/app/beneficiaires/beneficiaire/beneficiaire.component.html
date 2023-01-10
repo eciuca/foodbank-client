@@ -40,6 +40,8 @@
                 <p-inputSwitch id="actif" name="actif"
                                [disabled] ="lienDis==0" [ngModel]="beneficiaire.actif"></p-inputSwitch>
             </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid" >
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@GenderPartner" for="civiliteconj">Gender Partner</label>
                 <p-dropdown [options]="civilites" id="civiliteconj" name="civiliteconj" [disabled] ="lienDis==0" [ngModel]="beneficiaire.civiliteconj" ></p-dropdown>
@@ -58,7 +60,9 @@
                        placeholder="dd/mm/yyyy" [disabled] ="lienDis==0" [ngModel]="beneficiaire.datenConj"/>
                 <p-message i18n-text="@@BirthDateNotValid" *ngIf="datenconj.invalid && beneficiaireForm.touched" severity="error" text="Birth Date must in format dd/mm/yyyy"></p-message>
             </div>
-            <div class="p-field p-col-12 p-md-4">
+        </div>
+        <div class="p-fluid p-formgrid p-grid" >
+            <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@Address" for="adresse">Address</label>
                 <input pInputText id="adresse" name="adresse"  maxlength="50" [disabled] ="lienDis==0" [ngModel]="beneficiaire.adresse" />
             </div>
@@ -66,14 +70,27 @@
                 <label i18n="@@ZipCode" for="cp">Zip Code</label>
                 <input pInputText id="cp" name="cp"  maxlength="6" [disabled] ="lienDis==0" [ngModel]="beneficiaire.cp" />
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@City" for="localite">City</label>
                 <input pInputText id="localite" name="localite"  maxlength="50" [disabled] ="lienDis==0" [ngModel]="beneficiaire.localite" />
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@Country" for="pays">Country</label>
                 <p-dropdown [options]="countries" id="pays" name="pays" [disabled] ="lienDis==0" [ngModel]="beneficiaire.pays" ></p-dropdown>
             </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@Cpas" for="selectedCpas">Cpas</label>
+                <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" (completeMethod)="filterCpas($event)"
+                                 [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true" [disabled] ="lienDis==0">
+                    <ng-template let-cpas pTemplate="item">
+                        <div class="cpas-item">
+                            <div> {{cpas.cpasName}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid" >
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@NationalNumber" for="natnr">National Number</label>
                 <input pInputText id="natnr"  name="natnr" maxlength="50" [disabled] ="lienDis==0" [ngModel]="beneficiaire.natnr" />
@@ -91,17 +108,10 @@
                 <p-inputNumber [ngModel]="beneficiaire.coeff" id="coeff" name="coeff" mode="decimal" [showButtons]="true" inputId="coeff" [min]="1" [max]="5">
                 </p-inputNumber>
             </div>
-            <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@Cpas" for="selectedCpas">Cpas</label>
-                <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" (completeMethod)="filterCpas($event)"
-                                 [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true" [disabled] ="lienDis==0">
-                    <ng-template let-cpas pTemplate="item">
-                        <div class="cpas-item">
-                            <div> {{cpas.cpasName}}</div>
-                        </div>
-                    </ng-template>
-                </p-autoComplete>
+            <div *ngIf="dependents" [pTooltip]="getPovertyIndexTooltip()" class="p-field p-col-12 p-md-3">
+                <p>{{ getPovertyIndex()}}</p>
             </div>
+
         </div>
         <p-confirmPopup></p-confirmPopup>
 
