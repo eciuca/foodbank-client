@@ -123,31 +123,34 @@ export class MembreComponent implements OnInit {
           membre$.subscribe(
               membre => {
                   this.userIds = '';
+                  console.log( ' We have a membre ' + JSON.stringify(membre));
                   if (membre) {
-                     if((!membre.bankShortName) && (membre.lienDis > 0)) {
-                          this.organisationsService.getByKey(membre.lienDis).subscribe(
+                      this.membre = membre;
+                      console.log( ' We have a existing membre ' );
+                     if(membre.lienDis > 0) {
+                         console.log( ' We have a existing org membre ' );
+                          this.organisationsService.getByKey(this.membre.lienDis).subscribe(
                               (org: Organisation) => {
                                   if (org) {
-                                      membre.lienBanque = org.lienBanque;
-                                      membre.bankShortName = org.bankShortName;
+                                      this.membre.lienBanque = org.lienBanque;
+                                      this.membre.bankShortName = org.bankShortName;
                                       console.log('Correcting membre bank info from org info with content:', membre);
                                   }
-                                  this.membre = membre;
-                                  this.selectedFunction = this.membre.fonction;
-                                  this.selectedEmploiType= this.membre.typEmploi;
-                                  this.selectedDepot= this.membre.ldep;
+
+
 
                           });
                       }
                       else {
-                          this.membre = membre;
-                          this.selectedFunction = this.membre.fonction;
-                          this.selectedEmploiType= this.membre.typEmploi;
-                          this.selectedDepot= this.membre.ldep;
-                      }
-                      this.loadFunctions(membre.lienBanque);
-                      this.loadEmploiTypes(membre.lienBanque);
-                      this.loadDepots(membre.lienBanque);
+                         console.log( ' We have a existing bank membre ' );
+
+
+                         this.loadFunctions(this.membre.lienBanque);
+                         this.loadEmploiTypes(this.membre.lienBanque);
+                         this.loadDepots(this.membre.lienBanque);
+
+                     }
+
                       if (membre.societe) {
                           this.title = $localize`:@@OrgMemberExisting:Member for organisation ${membre.societe} Updated On ${ membre.lastVisit}`;
                       } else {
@@ -164,7 +167,11 @@ export class MembreComponent implements OnInit {
                               });
                       }
                   } else {
+                      console.log( ' We have a new membre ' );
                       this.membre = new DefaultMembre();
+                      this.selectedEmploiType= null;
+                      this.selectedFunction= null;
+                      this.selectedDepot= null;
                       const userLanguageObj  = enmLanguageLegacy.find(obj => obj.value === this.userLanguage);
                       if (userLanguageObj) {
                           const newMemberLanguageObj  = enmLanguage.find(obj => obj.label === userLanguageObj.label);
@@ -177,6 +184,7 @@ export class MembreComponent implements OnInit {
                       if (this.isAdmin) {
                           // currentFilteredBankId should always be filled in cfr GUI
                             this.membre.lienBanque = this.currentFilteredBankId;
+                          console.log('Setting new member bank to current bankid', this.currentFilteredBankId);
                             if ( this.currentFilteredOrg && this.currentFilteredOrg.idDis != 999 && this.currentFilteredOrg.idDis != 0 ) {
                                 // must be org
                                 this.membre.lienDis = this.currentFilteredOrg.idDis;
@@ -184,7 +192,11 @@ export class MembreComponent implements OnInit {
                             }
                             else {
                                 this.membre.lienDis = 0;
+                                console.log('Setting new member bank to current bankshortname', this.currentFilteredBankShortName);
                                 this.title =  $localize`:@@BankMemberNew1:New Member for bank ${this.currentFilteredBankShortName} `;
+                                this.loadFunctions(this.membre.lienBanque);
+                                this.loadEmploiTypes(this.membre.lienBanque);
+                                this.loadDepots(this.membre.lienBanque);
                             }
                       }
                       else {
@@ -211,17 +223,16 @@ export class MembreComponent implements OnInit {
                                   } else {
                                       // must be bank
                                       this.title = $localize`:@@BankMemberNew1:New Member for bank ${this.idCompany} `;
+                                      this.loadFunctions(this.membre.lienBanque);
+                                      this.loadEmploiTypes(this.membre.lienBanque);
+                                      this.loadDepots(this.membre.lienBanque);
 
                                   }
                               }
                           }
                       }
-                      this.loadFunctions(membre.lienBanque);
-                      this.loadEmploiTypes(membre.lienBanque);
-                      this.loadDepots(membre.lienBanque);
-                      if (this.myform) {
-                          this.myform.reset(this.membre);
-                      }
+
+
 
                   }
               });
@@ -280,13 +291,12 @@ export class MembreComponent implements OnInit {
       .subscribe();
   }
   loadFunctions(lienBanque: number) {
-      const queryParms = { 'actif': '1' , 'language': this.userLanguage };
-       if (lienBanque) {
-           queryParms['lienBanque'] = lienBanque.toString();
-       }
+        if (!lienBanque) return;
+      const queryParms = { 'actif': '1' , 'language': this.userLanguage,'lienBanque': lienBanque.toString() };
+      this.membreFunctions = [{ value: 0, label: $localize`:@@SelectFunction:Select Function` }];
       this.membreFunctionEntityService.getWithQuery(queryParms)
           .subscribe((membreFunctions) => {
-              console.log('Membre functions now loaded:', membreFunctions);
+              console.log('Membre functions now loaded');
               membreFunctions.map((membreFunction) => {
                   if(this.userLanguage == 'fr') {
                       this.membreFunctions.push({label: membreFunction.bankShortName + ' ' + membreFunction.fonctionName, value: membreFunction.funcId});
@@ -295,17 +305,16 @@ export class MembreComponent implements OnInit {
                       this.membreFunctions.push({label: membreFunction.bankShortName + ' ' + membreFunction.fonctionNameNl, value: membreFunction.funcId});
                   }
             });
+              this.selectedFunction = this.membre.fonction;
           })
   }
   loadEmploiTypes(lienBanque: number) {
-      const queryParms = { 'actif': '1' , 'language': this.userLanguage };
-      if (lienBanque) {
-          queryParms['lienBanque'] = lienBanque.toString();
-      }
-
+      if (!lienBanque) return;
+      const queryParms = { 'actif': '1' , 'language': this.userLanguage,'lienBanque': lienBanque.toString() };
+      this.membreEmploiTypes= [{label: 'Select', value: 0}];
       this.membreEmploiTypeEntityService.getWithQuery(queryParms)
           .subscribe((membreEmploiTypes) => {
-              console.log('Membre emploitypes now loaded:', membreEmploiTypes);
+              console.log('Membre emploitypes now loaded');
               membreEmploiTypes.map((membreEmploiType) => {
                   if(this.userLanguage == 'fr') {
                       this.membreEmploiTypes.push({label: membreEmploiType.bankShortName + ' ' + membreEmploiType.jobNameFr, value: membreEmploiType.jobNr});
@@ -314,7 +323,7 @@ export class MembreComponent implements OnInit {
                       this.membreEmploiTypes.push({label: membreEmploiType.bankShortName + ' ' + membreEmploiType.jobNameNl, value: membreEmploiType.jobNr});
                   }
               });
-
+              this.selectedEmploiType= this.membre.typEmploi;
           })
   }
     delete(event: Event, membre: Membre) {
@@ -439,6 +448,7 @@ export class MembreComponent implements OnInit {
                 filteredDepots.map((orgSummary) => {
                     this.depots.push({label: orgSummary.societe, value: orgSummary.idDis});
                 });
+                this.selectedDepot= this.membre.ldep;
             })
     }
     generateTooltipFunction() {
