@@ -235,6 +235,8 @@ export interface Organisation {
     nbLogins: number;
     anomalies: string;
     totalRecords: number;
+    totalFamilies: number;
+    totalPersons: number;
 
 }
 
@@ -372,6 +374,8 @@ export class DefaultOrganisation implements Organisation {
     nbLogins: number;
     anomalies: string;
     totalRecords: number;
+    totalFamilies: number;
+    totalPersons: number;
 
     constructor() {
         this.actComp1 = 0;
@@ -496,5 +500,7 @@ export class DefaultOrganisation implements Organisation {
         this.nbLogins = 0;
         this.anomalies ='';
         this.totalRecords = 0;
+        this.totalFamilies = 0;
+        this.totalPersons = 0;
     }
 }

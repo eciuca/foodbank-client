@@ -34,6 +34,8 @@ export class OrgbenefoverviewComponent implements OnInit {
   orgCategories: any[];
   displayDialog: boolean;
   totalRecords: number;
+  totalFamilies: number;
+  totalPersons: number;
   loading: boolean;
   filterBase: any;
   regions: any[];
@@ -79,8 +81,12 @@ export class OrgbenefoverviewComponent implements OnInit {
           console.log('Loaded organisations from nextpage: ' + loadedOrganisations.length);
           if (loadedOrganisations.length > 0) {
             this.totalRecords = loadedOrganisations[0].totalRecords;
+            this.totalFamilies = loadedOrganisations[0].totalFamilies;
+            this.totalPersons = loadedOrganisations[0].totalPersons;
           }  else {
             this.totalRecords = 0;
+            this.totalFamilies = 0;
+            this.totalPersons = 0;
           }
           this.organisations  = loadedOrganisations;
           this.loading = false;
@@ -329,6 +335,11 @@ export class OrgbenefoverviewComponent implements OnInit {
 
   generateTooltipBenSeniors() {
     return $localize`:@@OrgSeniors:Seniors(> 65 years)`;
+  }
+  getTotalStatistics() {
+    const strTotalFamilies = this.totalFamilies.toString();
+    const strTotalPersons = this.totalPersons.toString();
+    return $localize`:@@OrgTotalStatistics:Total for selection ${strTotalFamilies} families, ${strTotalPersons} persons`;
   }
 }
 

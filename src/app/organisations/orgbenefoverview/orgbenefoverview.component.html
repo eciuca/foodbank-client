@@ -41,6 +41,10 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
+            <th  colspan="12" >{{getTotalStatistics()}}</th>
+        </tr>
+
+        <tr>
             <th pSortableColumn="idDis">Id<p-sortIcon field="idDis"></p-sortIcon></th>
             <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
             <th pSortableColumn="gestBen" pTooltip="{{generateTooltipGestBen()}}">Managed<p-sortIcon field="gestBen"></p-sortIcon></th>
@@ -73,8 +77,10 @@
             </th>
 
         </tr>
+
     </ng-template>
     <ng-template pTemplate="body" let-organisation>
+
         <tr (click)="handleSelect(organisation)">
             <td>
                 {{ organisation.idDis }}
