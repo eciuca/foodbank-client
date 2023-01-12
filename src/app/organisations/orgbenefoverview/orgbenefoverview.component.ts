@@ -36,6 +36,12 @@ export class OrgbenefoverviewComponent implements OnInit {
   totalRecords: number;
   totalFamilies: number;
   totalPersons: number;
+  totalInfants: number;
+  totalBabies: number;
+  totalChildren: number;
+  totalTeens: number;
+  totalYoungAdults: number;
+  totalSeniors: number;
   loading: boolean;
   filterBase: any;
   regions: any[];
@@ -83,10 +89,22 @@ export class OrgbenefoverviewComponent implements OnInit {
             this.totalRecords = loadedOrganisations[0].totalRecords;
             this.totalFamilies = loadedOrganisations[0].totalFamilies;
             this.totalPersons = loadedOrganisations[0].totalPersons;
+            this.totalInfants = loadedOrganisations[0].totalInfants;
+            this.totalBabies = loadedOrganisations[0].totalBabies;
+            this.totalChildren = loadedOrganisations[0].totalChildren;
+            this.totalTeens = loadedOrganisations[0].totalTeens;
+            this.totalYoungAdults = loadedOrganisations[0].totalYoungAdults;
+            this.totalSeniors = loadedOrganisations[0].totalSeniors;
           }  else {
             this.totalRecords = 0;
             this.totalFamilies = 0;
             this.totalPersons = 0;
+            this.totalInfants = 0;
+            this.totalBabies = 0;
+            this.totalChildren = 0;
+            this.totalTeens = 0;
+            this.totalYoungAdults = 0;
+            this.totalSeniors = 0;
           }
           this.organisations  = loadedOrganisations;
           this.loading = false;
@@ -337,9 +355,8 @@ export class OrgbenefoverviewComponent implements OnInit {
     return $localize`:@@OrgSeniors:Seniors(> 65 years)`;
   }
   getTotalStatistics() {
-    const strTotalFamilies = this.totalFamilies.toString();
-    const strTotalPersons = this.totalPersons.toString();
-    return $localize`:@@OrgTotalStatistics:Total for selection ${strTotalFamilies} families, ${strTotalPersons} persons`;
+
+    return $localize`:@@OrgTotalStatistics:Total for selection ${this.totalFamilies} families, ${this.totalPersons} persons,${this.totalInfants} infants,${this.totalBabies} babies,${this.totalChildren} children,${this.totalTeens} teenagers,${this.totalYoungAdults} young adults,${this.totalSeniors} seniors`;
   }
 }
 

@@ -237,6 +237,14 @@ export interface Organisation {
     totalRecords: number;
     totalFamilies: number;
     totalPersons: number;
+    totalInfants: number;
+    totalBabies: number;
+    totalChildren: number;
+    totalTeens: number;
+    totalYoungAdults: number;
+    totalSeniors: number;
+
+
 
 }
 
@@ -376,6 +384,13 @@ export class DefaultOrganisation implements Organisation {
     totalRecords: number;
     totalFamilies: number;
     totalPersons: number;
+    totalInfants: number;
+    totalBabies: number;
+    totalChildren: number;
+    totalTeens: number;
+    totalYoungAdults: number;
+    totalSeniors: number;
+
 
     constructor() {
         this.actComp1 = 0;
@@ -502,5 +517,12 @@ export class DefaultOrganisation implements Organisation {
         this.totalRecords = 0;
         this.totalFamilies = 0;
         this.totalPersons = 0;
+        this.totalInfants = 0;
+        this.totalBabies = 0;
+        this.totalChildren = 0;
+        this.totalTeens = 0;
+        this.totalYoungAdults = 0;
+        this.totalSeniors = 0;
+
     }
 }
