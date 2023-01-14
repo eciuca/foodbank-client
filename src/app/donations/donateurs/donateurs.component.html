@@ -11,19 +11,33 @@
     <ng-template pTemplate="header">
         <tr>
             <th></th>
-            <th i18n="@@NameSorted" pSortableColumn="nom" colspan="2">Name<p-sortIcon field="nom"></p-sortIcon></th>
-            <th></th>
+            <th i18n="@@NameSorted" pSortableColumn="nom" >Name<p-sortIcon field="nom"></p-sortIcon></th>
+            <th i18n="@@NameFirstSorted" pSortableColumn="prenom" >First Name<p-sortIcon field="prenom"></p-sortIcon></th>
+            <th i18n="@@AddressSorted"  pSortableColumn="adresse" >Address<p-sortIcon field="adresse"></p-sortIcon></th>
+            <th i18n="@@ZipCodeSorted" pSortableColumn="cp">Zip Code<p-sortIcon field="cp"></p-sortIcon></th>
+            <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
+            <th i18n="@@TotalDonsSorted" pSortableColumn="totalDons">Total Gifts<p-sortIcon field="totalDons"></p-sortIcon></th>
         </tr>
         <tr>
             <th></th>
-            <p-columnFilter type="text" field="nom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            <th>
+                <p-columnFilter type="text" field="nom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="prenom" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="adresse" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="cp" matchMode="equals" [showMenu]="false"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="city" matchMode="contains" [showMenu]="false"></p-columnFilter>
+            </th>
             <th></th>
         </tr>
-        <tr>
-            <th i18n="@@DonateurTitle">Titre</th>
-            <th i18n="@@DonateurName">Name</th>
-            <th i18n="@@DonateurNameFirst">First Name</th>
-        </tr>
+
     </ng-template>
     <ng-template pTemplate="body" let-donateur>
         <tr (click)="handleSelect(donateur)">
@@ -35,6 +49,18 @@
             </td>
             <td>
                 {{donateur.prenom}}
+            </td>
+            <td>
+                {{donateur.adresse}}
+            </td>
+            <td>
+                {{donateur.cp}}
+            </td>
+            <td>
+                {{donateur.city}}
+            </td>
+            <td>
+                {{donateur.totalDons}}
             </td>
 
         </tr>

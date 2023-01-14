@@ -34,8 +34,10 @@ export class DonsComponent implements OnInit {
   bankShortName: string;
   first: number;
   totalRecords: number;
+  totalAmount: number;
   currentYear: number;
   donYears: any[];
+
   constructor(private donService: DonEntityService,
               private authService: AuthService,
               private excelService: ExcelService,
@@ -47,24 +49,26 @@ export class DonsComponent implements OnInit {
     this.booIsAdmin = false;
     this.first = 0;
     this.totalRecords = 0;
+    this.totalAmount = 0;
     this.filterBase = {};
     this.bankShortName = '';
     this.currentYear = (new Date()).getFullYear();
   }
+
   ngOnInit() {
     this.donYears = [
       {label: $localize`:@@All:All`, value: null},
       {label: this.currentYear.toString(), value: this.currentYear.toString()},
-      {label: (this.currentYear - 1 ).toString(), value: (this.currentYear - 1).toString()},
+      {label: (this.currentYear - 1).toString(), value: (this.currentYear - 1).toString()},
       {label: (this.currentYear - 2).toString(), value: (this.currentYear - 2).toString()},
       {label: (this.currentYear - 3).toString(), value: (this.currentYear - 3).toString()},
-      {label: (this.currentYear - 4 ).toString(), value: (this.currentYear - 4).toString()},
+      {label: (this.currentYear - 4).toString(), value: (this.currentYear - 4).toString()},
       {label: (this.currentYear - 5).toString(), value: (this.currentYear - 5).toString()},
       {label: (this.currentYear - 6).toString(), value: (this.currentYear - 6).toString()},
-      {label: (this.currentYear - 7 ).toString(), value: (this.currentYear - 7).toString()},
+      {label: (this.currentYear - 7).toString(), value: (this.currentYear - 7).toString()},
       {label: (this.currentYear - 8).toString(), value: (this.currentYear - 8).toString()},
       {label: (this.currentYear - 9).toString(), value: (this.currentYear - 9).toString()},
-      {label: (this.currentYear - 10 ).toString(), value: (this.currentYear - 10).toString()},
+      {label: (this.currentYear - 10).toString(), value: (this.currentYear - 10).toString()},
       {label: (this.currentYear - 11).toString(), value: (this.currentYear - 11).toString()},
       {label: (this.currentYear - 12).toString(), value: (this.currentYear - 12).toString()}
     ];
@@ -78,14 +82,17 @@ export class DonsComponent implements OnInit {
           console.log('Loaded dons from nextpage: ' + loadedDons.length);
           if (loadedDons.length > 0) {
             this.totalRecords = loadedDons[0].totalRecords;
-          }  else {
+            this.totalAmount = loadedDons[0].totalAmount;
+          } else {
             this.totalRecords = 0;
+            this.totalAmount = 0;
           }
-          this.dons  = loadedDons;
+          this.dons = loadedDons;
           this.loading = false;
           this.donService.setLoaded(true);
         });
   }
+
   reload() {
     this.loading = true;
     this.totalRecords = 0;
@@ -99,10 +106,12 @@ export class DonsComponent implements OnInit {
         )
         .subscribe();
   }
+
   handleSelect(don) {
     this.selectedIdDon$.next(don.idDon);
     this.displayDialog = true;
   }
+
   showDialogToAdd() {
     this.selectedIdDon$.next(0);
     this.displayDialog = true;
@@ -117,6 +126,7 @@ export class DonsComponent implements OnInit {
     this.dons[index] = updatedDon;
     this.displayDialog = false;
   }
+
   handleDonCreate(createdDon: Don) {
     this.dons.push({...createdDon});
     this.displayDialog = false;
@@ -127,8 +137,9 @@ export class DonsComponent implements OnInit {
     this.dons.splice(index, 1);
     this.displayDialog = false;
   }
+
   nextPage(event: LazyLoadEvent) {
-    
+
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();
@@ -137,7 +148,7 @@ export class DonsComponent implements OnInit {
     if (event.sortField) {
       queryParms['sortField'] = event.sortField.toString();
     } else {
-      queryParms['sortField'] =  'donateurNom';
+      queryParms['sortField'] = 'donateurNom';
     }
     if (event.filters) {
       if (event.filters.donateurNom && event.filters.donateurNom.value) {
@@ -149,25 +160,28 @@ export class DonsComponent implements OnInit {
     }
     this.loadPageSubject$.next(queryParms);
   }
+
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.user) {
       this.lienBanque = authState.banque.bankId;
       this.bankShortName = authState.banque.bankShortName;
-      this.filterBase = { 'lienBanque': authState.banque.bankId};
+      this.filterBase = {'lienBanque': authState.banque.bankId};
       if (authState.user.rights === 'Admin_Banq') {
         this.booIsAdmin = true;
       }
     }
   }
+
   exportAsXLSX(): void {
     this.donHttpService.getDonReport(this.authService.accessToken, this.lienBanque).subscribe(
-        (dons: any[] ) => {
-          const cleanedList = dons.map(({ idDon, lienBanque, donateurId, appended, checked, totalRecords, ...item }) => item);
-          this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.gifts.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
+        (dons: any[]) => {
+          const cleanedList = dons.map(({idDon, lienBanque, donateurId, appended, checked, totalRecords, ...item}) => item);
+          this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.gifts.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
         });
   }
 
+  getTotalStatistics() {
+
+    return $localize`:@@DonTotalStatistics:Total amount gifts for selection ${this.totalAmount}  €`;
+  }
 }
-
-
-

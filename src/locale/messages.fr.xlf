@@ -2762,6 +2762,10 @@
           <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/donations/donateurs/donateurs.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.html</context>
           <context context-type="linenumber">51</context>
         </context-group>
@@ -2778,6 +2782,10 @@
           <context context-type="linenumber">47</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/donations/donateurs/donateurs.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.html</context>
           <context context-type="linenumber">52</context>
         </context-group>
@@ -2792,6 +2800,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.html</context>
           <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/donations/donateurs/donateurs.component.html</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.html</context>
@@ -3486,28 +3498,20 @@
           <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="DonateurTitle" datatype="html">
-        <source>Titre</source>
-        <target>Titre</target>
+      <trans-unit id="NameFirstSorted" datatype="html">
+        <source>First Name<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;prenom&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Prénom<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;prenom&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateurs.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="DonateurName" datatype="html">
-        <source>Name</source>
-        <target>Nom</target>
+      <trans-unit id="TotalDonsSorted" datatype="html">
+        <source>Total Gifts<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;totalDons&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Total des dons<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;totalDons&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateurs.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="DonateurNameFirst" datatype="html">
-        <source>First Name</source>
-        <target>Prénom</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/donations/donateurs/donateurs.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Donateur" datatype="html">
@@ -3579,7 +3583,7 @@
         <target>Date<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;date&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/dons/dons.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="NameDonatorSorted" datatype="html">
@@ -3587,7 +3591,7 @@
         <target>Nom du donateur<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;donateurNom&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/dons/dons.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DonAmountSorted" datatype="html">
@@ -3595,7 +3599,7 @@
         <target>Montant<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;amount&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/dons/dons.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DonDate" datatype="html">
@@ -3603,7 +3607,7 @@
         <target>Date</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/dons/dons.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DonDonateur" datatype="html">
@@ -3611,7 +3615,7 @@
         <target>Donateur</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/dons/dons.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DonAmount" datatype="html">
@@ -3619,7 +3623,7 @@
         <target>Montant</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/dons/dons.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="All" datatype="html">
@@ -3627,7 +3631,7 @@
         <target>Tout</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/dons/dons.component.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/mailings/mailings.component.ts</context>
@@ -3656,6 +3660,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">180</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="DonTotalStatistics" datatype="html">
+        <source>Total amount gifts for selection <x id="PH" equiv-text="this.totalAmount"/>  €</source>
+        <target>Montant total des dons pour la sélection <x id="PH" equiv-text="this.totalAmount"/>  €</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/donations/dons/dons.component.ts</context>
+          <context context-type="linenumber">185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="HomeHeader" datatype="html">
@@ -8381,6 +8393,18 @@
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">552</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="DonateurName">
+        <source/>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="DonateurNameFirst">
+        <source/>
+        <target>Prénom</target>
+      </trans-unit>
+      <trans-unit id="DonateurTitle">
+        <source/>
+        <target>Titre</target>
       </trans-unit>
     </body>
   </file>

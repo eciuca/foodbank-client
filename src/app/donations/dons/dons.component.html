@@ -10,6 +10,9 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
+            <th  colspan="12" >{{getTotalStatistics()}}</th>
+        </tr>
+        <tr>
             <th i18n="@@DonDateSorted" pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
             <th i18n="@@NameDonatorSorted" pSortableColumn="donateurNom" colspan="2">Name Donator<p-sortIcon field="donateurNom"></p-sortIcon></th>
             <th i18n="@@DonAmountSorted" pSortableColumn="amount">Amount<p-sortIcon field="amount"></p-sortIcon></th>

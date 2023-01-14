@@ -8,6 +8,7 @@ export interface Donateur {
     pays: string;
     donateurId: number;
     lienBanque: number;
+    totalDons: number;
     totalRecords: number;
 }
 export function compareDonateurs(c1: Donateur, c2: Donateur) {
@@ -28,6 +29,7 @@ export class DefaultDonateur implements Donateur {
     city: string;
     pays: string;
     titre: string;
+    totalDons: number;
     totalRecords: number;
     constructor() {
         this.lienBanque = 0;
@@ -38,6 +40,7 @@ export class DefaultDonateur implements Donateur {
         this.city = '';
         this.pays = '';
         this.titre = '';
+        this.totalDons = 0;
         this.totalRecords = 0;
     }
 }
