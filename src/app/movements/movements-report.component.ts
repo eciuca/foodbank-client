@@ -127,7 +127,7 @@ export class MovementReportComponent implements OnInit {
         this.totalFoodDeliveriesYearPrevious = 0;
         this.totalFoodDeliveriesYearPrevious1 = 0;
         this.totalFoodDeliveriesYearPrevious2 = 0;
-        this.movementReportHttpService.getMovementReport(this.authService.accessToken,"month",null,null).subscribe(
+        this.movementReportHttpService.getMovementReport(this.authService.accessToken,"monthly",null,null).subscribe(
             (response: MovementReport[]) => {
                 this.movementsRecordsMonthly = response;
                 let reportLabels = [];
@@ -203,7 +203,7 @@ export class MovementReportComponent implements OnInit {
                 for (let i = 0; i < this.movementsRecordsMonthly.length; i++) {
                     const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.movementsRecordsMonthly[i].bankShortName);
                     if (bankOptionIndex === -1) continue;
-                    const movementYear = this.movementsRecordsMonthly[i].month.substr(0,4);
+                    const movementYear = this.movementsRecordsMonthly[i].key.substr(0,4);
                     switch (movementYear) {
                         case currentYear.toString():
                             reportDataSetsYearCurrent[0].data[bankOptionIndex] += this.movementsRecordsMonthly[i].quantity;
@@ -224,8 +224,8 @@ export class MovementReportComponent implements OnInit {
                         default:
                             console.log('Movements Report Unknown year',movementYear);
                     }
-                    if (!reportLabels.includes(this.movementsRecordsMonthly[i].month)) {
-                        reportLabels.push(this.movementsRecordsMonthly[i].month);
+                    if (!reportLabels.includes(this.movementsRecordsMonthly[i].key)) {
+                        reportLabels.push(this.movementsRecordsMonthly[i].key);
                         for (let i=0; i < this.bankOptions.length; i++ ) {
                             reportDataSetsMonthlyNonFEAD[i].data.push(0);
                             reportDataSetsMonthlyFEADnonAgreed[i].data.push(0);

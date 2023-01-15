@@ -7,7 +7,7 @@ import {MovementReport} from '../model/movementReport';
     providedIn: 'root'
 })
 export class MovementReportHttpService {
-    private baseUrl = '/api/movements';
+    private baseUrl = '';
     constructor(private http: HttpClient) {
     }
     getMovementReport(accesstoken: string, scope: string,idCompany: string, lienDis: number): Observable<MovementReport[]> {
@@ -17,14 +17,19 @@ export class MovementReportHttpService {
                 Authorization:  'Bearer ' + accesstoken
             }),
         };
+        if (scope === 'monthly') {
+          this.baseUrl =  '/api/movementsmonthly';
+        } else {
+            this.baseUrl =  '/api/movementsdaily'
+            }
         if(lienDis > 0) {
-            return this.http.get<MovementReport[]>(`${this.baseUrl}/?scope=${scope}&lienDis=${lienDis.toString()}`, requestOptions);
+            return this.http.get<MovementReport[]>(`${this.baseUrl}/?lienDis=${lienDis.toString()}`, requestOptions);
         }
         if (idCompany) {
-            return this.http.get<MovementReport[]>(`${this.baseUrl}/?scope=${scope}idCompany=${idCompany}`, requestOptions);
+            return this.http.get<MovementReport[]>(`${this.baseUrl}/?idCompany=${idCompany}`, requestOptions);
         }
         else {
-            return this.http.get<MovementReport[]>(`${this.baseUrl}/?scope=${scope}`, requestOptions);
+            return this.http.get<MovementReport[]>(`${this.baseUrl}/`, requestOptions);
         }
     }
 }
