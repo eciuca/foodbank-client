@@ -1,5 +1,5 @@
 export interface MovementReport {
-    month: string;
+    month: string; // key of the movement: month or day
     bankShortName: string;
     idOrg: number;
 

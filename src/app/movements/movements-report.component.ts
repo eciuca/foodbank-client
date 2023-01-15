@@ -127,7 +127,7 @@ export class MovementReportComponent implements OnInit {
         this.totalFoodDeliveriesYearPrevious = 0;
         this.totalFoodDeliveriesYearPrevious1 = 0;
         this.totalFoodDeliveriesYearPrevious2 = 0;
-        this.movementReportHttpService.getMovementReport(this.authService.accessToken,null,null).subscribe(
+        this.movementReportHttpService.getMovementReport(this.authService.accessToken,"month",null,null).subscribe(
             (response: MovementReport[]) => {
                 this.movementsRecordsMonthly = response;
                 let reportLabels = [];
