@@ -62,7 +62,7 @@ export class MovementReportComponent implements OnInit {
     previousPeriod1: any;
     previousPeriod2: any;
     previousPeriod3: any;
-    p
+
     constructor(
         private movementReportHttpService: MovementReportHttpService,
         private banqueService: BanqueEntityService,
@@ -150,7 +150,7 @@ export class MovementReportComponent implements OnInit {
     reportMovementsHistoryMonthly() {
 
         this.initializeChart();
-        this.movementReportHttpService.getMovementReport(this.authService.accessToken,"monthly",null,null).subscribe(
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken,"monthly",null).subscribe(
             (response: MovementReport[]) => {
                 this.movementsRecords = response;
 
@@ -215,7 +215,7 @@ export class MovementReportComponent implements OnInit {
     }
     reportMovementsHistoryDaily() {
        this.initializeChart()
-        this.movementReportHttpService.getMovementReport(this.authService.accessToken,"daily",null,null).subscribe(
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken,"daily",null).subscribe(
             (response: MovementReport[]) => {
                 this.movementsRecords = response;
 

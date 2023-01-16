@@ -85,6 +85,10 @@ const routes: Routes = [
         loadChildren: () => import('./movements/movements.module').then(m => m.MovementsModule),
         canActivate: [AuthGuardWithForcedLogin]
     },
+    { path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+        canActivate: [AuthGuardWithForcedLogin]
+    },
     { path: 'documentation', component: DocumentationComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     {

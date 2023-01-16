@@ -7,10 +7,10 @@ import {MovementReport} from '../model/movementReport';
     providedIn: 'root'
 })
 export class MovementReportHttpService {
-    private baseUrl = '';
+    private requestUrl = '';
     constructor(private http: HttpClient) {
     }
-    getMovementReport(accesstoken: string, scope: string,idCompany: string, lienDis: number): Observable<MovementReport[]> {
+    getMovementReportByBank(accesstoken: string, scope: string, idCompany: string, lowRange:string=null, highRange:string=null): Observable<MovementReport[]> {
         const requestOptions = {
             headers: new HttpHeaders( {
                 responseType: 'json',
@@ -18,18 +18,20 @@ export class MovementReportHttpService {
             }),
         };
         if (scope === 'monthly') {
-          this.baseUrl =  '/api/movementsmonthly';
+          this.requestUrl =  '/api/movementsmonthlybank/';
         } else {
-            this.baseUrl =  '/api/movementsdaily'
-            }
-        if(lienDis > 0) {
-            return this.http.get<MovementReport[]>(`${this.baseUrl}/?lienDis=${lienDis.toString()}`, requestOptions);
+          this.requestUrl =  '/api/movementsdailybank/';
         }
-        if (idCompany) {
-            return this.http.get<MovementReport[]>(`${this.baseUrl}/?idCompany=${idCompany}`, requestOptions);
+
+        this.requestUrl+= '?idCompany=' + idCompany ;
+
+        if (lowRange) {
+            this.requestUrl += '&lowRange=' + lowRange ;
         }
-        else {
-            return this.http.get<MovementReport[]>(`${this.baseUrl}/`, requestOptions);
+        if (highRange) {
+            this.requestUrl += '&highRange=' + highRange ;
         }
+
+        return this.http.get<MovementReport[]>(`${this.requestUrl}`, requestOptions);
     }
 }
