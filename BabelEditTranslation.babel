@@ -3460,66 +3460,6 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>DonateurName</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>DonateurNameFirst</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>DonateurTitle</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
                         <name>DonatorIsMandatory</name>
                         <description/>
                         <comment/>
@@ -11004,6 +10944,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>ShowDaily</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>ShowDepots</name>
                         <description/>
                         <comment/>
@@ -11045,6 +11005,46 @@
                     </concept_node>
                     <concept_node>
                         <name>SocieteSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesCurrent</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesCurrentTotal</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -11184,7 +11184,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>StatFoodDeliveriesYearCurrent</name>
+                        <name>StatFoodDeliveriesPrevious</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -11204,7 +11204,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>StatFoodDeliveriesYearCurrentTotal</name>
+                        <name>StatFoodDeliveriesPrevious1</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -11224,7 +11224,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>StatFoodDeliveriesYearPrevious</name>
+                        <name>StatFoodDeliveriesPrevious1Total</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -11244,7 +11244,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>StatFoodDeliveriesYearPrevious1</name>
+                        <name>StatFoodDeliveriesPrevious2</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -11264,7 +11264,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>StatFoodDeliveriesYearPrevious1Total</name>
+                        <name>StatFoodDeliveriesPrevious2Total</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -11284,47 +11284,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>StatFoodDeliveriesYearPrevious2</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>StatFoodDeliveriesYearPrevious2Total</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>StatFoodDeliveriesYearPreviousTotal</name>
+                        <name>StatFoodDeliveriesPreviousTotal</name>
                         <description/>
                         <comment/>
                         <default_text/>

@@ -1,24 +1,25 @@
 <p-panel>
     <div class="p-fluid p-formgrid p-grid">
-        <div *ngIf="chartDataFoodDeliveriesYearPrevious2" class="p-field p-col-12 p-md-3 card">
-            <h4>{{ titleFoodDeliveriesYearPrevious2 }}</h4>
-            <p>{{ getTotalFoodDeliveriesYearPrevious2()}}</p>
-            <p-chart type="pie" [data]="chartDataFoodDeliveriesYearPrevious2" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
+        <div class="p-field p-col-12 p-md-3">
+            <label i18n="@@ShowDaily" for="daily">Show Daily?</label>
+            <p-checkbox [value]="booShowDaily" binary="true" name="daily" id="daily" (onChange)="changePeriodFilter($event)"></p-checkbox>
         </div>
-        <div *ngIf="chartDataFoodDeliveriesYearPrevious1" class="p-field p-col-12 p-md-3 card">
-            <h4>{{ titleFoodDeliveriesYearPrevious1 }}</h4>
-            <p>{{ getTotalFoodDeliveriesYearPrevious1()}}</p>
-            <p-chart type="pie" [data]="chartDataFoodDeliveriesYearPrevious1" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="chartDataFoodDeliveriesPrevious1" class="p-field p-col-12 p-md-4 card">
+            <h4>{{ titleFoodDeliveriesPrevious1 }}</h4>
+            <p>{{ getTotalFoodDeliveriesPrevious1()}}</p>
+            <p-chart type="pie" [data]="chartDataFoodDeliveriesPrevious1" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
         </div>
-        <div *ngIf="chartDataFoodDeliveriesYearPrevious" class="p-field p-col-12 p-md-3 card">
-            <h4>{{ titleFoodDeliveriesYearPrevious }}</h4>
-            <p>{{ getTotalFoodDeliveriesYearPrevious()}}</p>
-            <p-chart type="pie" [data]="chartDataFoodDeliveriesYearPrevious" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
+        <div *ngIf="chartDataFoodDeliveriesPrevious" class="p-field p-col-12 p-md-4 card">
+            <h4>{{ titleFoodDeliveriesPrevious }}</h4>
+            <p>{{ getTotalFoodDeliveriesPrevious()}}</p>
+            <p-chart type="pie" [data]="chartDataFoodDeliveriesPrevious" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
         </div>
-        <div *ngIf="chartDataFoodDeliveriesYearCurrent" class="p-field p-col-12 p-md-3 card">
-            <h4>{{ titleFoodDeliveriesYearCurrent }}</h4>
-            <p>{{ getTotalFoodDeliveriesYearCurrent()}}</p>
-            <p-chart type="pie" [data]="chartDataFoodDeliveriesYearCurrent" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
+        <div *ngIf="chartDataFoodDeliveriesCurrent" class="p-field p-col-12 p-md-4 card">
+            <h4>{{ titleFoodDeliveriesCurrent }}</h4>
+            <p>{{ getTotalFoodDeliveriesCurrent()}}</p>
+            <p-chart type="pie" [data]="chartDataFoodDeliveriesCurrent" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
         </div>
 
     </div>

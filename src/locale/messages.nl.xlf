@@ -5126,92 +5126,100 @@
           <context context-type="linenumber">559</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="ShowDaily" datatype="html">
+        <source>Show Daily?</source>
+        <target>Dagelijks weergeven?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/movements/movements-report.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="StatFoodDeliveriesNonFEADHistory" datatype="html">
-        <source>Food Delivered to Non FEAD Orgs(kg/month)</source>
-        <target>Voedsel geleverd aan niet-FEAD-organisaties(kg/maand)</target>
+        <source>Food Delivered to Non FEAD Orgs(kg)</source>
+        <target>Voedsel geleverd aan niet-FEAD-organisaties(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">257</context>
+          <context context-type="linenumber">358</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADNonAgreedHistory" datatype="html">
-        <source>FEAD Food Delivered to Non Agreed Orgs(kg/month)</source>
-        <target>FEAD voedsel geleverd aan niet-erkende verenigingen(kg/maand)</target>
+        <source>FEAD Food Delivered to Non Agreed Orgs(kg)</source>
+        <target>FEAD voedsel geleverd aan niet-erkende verenigingen(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">262</context>
+          <context context-type="linenumber">363</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADAgreedCollectHistory" datatype="html">
-        <source>FEAD + Collect Food Delivered to Agreed Orgs(kg/month)</source>
-        <target>FEAD + Opgehaald voedsel geleverd aan erkende verenigingen(kg/maand)</target>
+        <source>FEAD + Collect Food Delivered to Agreed Orgs(kg)</source>
+        <target>FEAD + Opgehaald voedsel geleverd aan erkende verenigingen(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">268</context>
+          <context context-type="linenumber">369</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="StatFoodDeliveriesYearCurrent" datatype="html">
-        <source>Food Delivered in <x id="PH" equiv-text="currentYear"/>(kg)</source>
-        <target>Voedsel bezorgd in <x id="PH" equiv-text="currentYear"/>(kg)</target>
+      <trans-unit id="StatFoodDeliveriesCurrent" datatype="html">
+        <source>Food Delivered in <x id="PH" equiv-text="this.currentPeriod"/>(kg)</source>
+        <target>Voedsel geleverd in <x id="PH" equiv-text="this.currentPeriod"/>(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">273</context>
+          <context context-type="linenumber">374</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="StatFoodDeliveriesYearPrevious" datatype="html">
-        <source>Food Delivered in <x id="PH" equiv-text="previousYear"/>(kg)</source>
-        <target>Voedsel bezorgd in <x id="PH" equiv-text="previousYear"/>(kg)</target>
+      <trans-unit id="StatFoodDeliveriesPrevious" datatype="html">
+        <source>Food Delivered in <x id="PH" equiv-text="this.previousPeriod"/>(kg)</source>
+        <target>Voedsel geleverd in <x id="PH" equiv-text="this.previousPeriod"/>(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">278</context>
+          <context context-type="linenumber">379</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="StatFoodDeliveriesYearPrevious1" datatype="html">
-        <source>Food Delivered in <x id="PH" equiv-text="previousYear2"/>(kg)</source>
-        <target>Voedsel bezorgd in <x id="PH" equiv-text="previousYear2"/>(kg)</target>
+      <trans-unit id="StatFoodDeliveriesPrevious1" datatype="html">
+        <source>Food Delivered in <x id="PH" equiv-text="this.previousPeriod2"/>(kg)</source>
+        <target>Voedsel geleverd in <x id="PH" equiv-text="this.previousPeriod2"/>(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">283</context>
+          <context context-type="linenumber">384</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="StatFoodDeliveriesYearPrevious2" datatype="html">
-        <source>Food Delivered in <x id="PH" equiv-text="previousYear3"/>(kg)</source>
-        <target>Voedsel bezorgd in <x id="PH" equiv-text="previousYear3"/>(kg)</target>
+      <trans-unit id="StatFoodDeliveriesPrevious2" datatype="html">
+        <source>Food Delivered in <x id="PH" equiv-text="this.previousPeriod3"/>(kg)</source>
+        <target>Voedsel geleverd in <x id="PH" equiv-text="this.previousPeriod3"/>(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">288</context>
+          <context context-type="linenumber">389</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="StatFoodDeliveriesYearPreviousTotal" datatype="html">
-        <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesYearPrevious)"/> kg</source>
-        <target>Totaal: <x id="PH" equiv-text="this.totalFoodDeliveriesYearPrevious"/> kg</target>
+      <trans-unit id="StatFoodDeliveriesPreviousTotal" datatype="html">
+        <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious)"/> kg</source>
+        <target>Totaal: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious)"/> kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">298</context>
+          <context context-type="linenumber">397</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="StatFoodDeliveriesYearPrevious1Total" datatype="html">
-        <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesYearPrevious1)"/> kg</source>
-        <target>Totaal: <x id="PH" equiv-text="this.totalFoodDeliveriesYearPrevious1"/> kg</target>
+      <trans-unit id="StatFoodDeliveriesPrevious1Total" datatype="html">
+        <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious1)"/> kg</source>
+        <target>Totaal: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious1)"/> kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">301</context>
+          <context context-type="linenumber">400</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="StatFoodDeliveriesYearPrevious2Total" datatype="html">
-        <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesYearPrevious2)"/> kg</source>
-        <target>Totaal: <x id="PH" equiv-text="this.totalFoodDeliveriesYearPrevious2"/> kg</target>
+      <trans-unit id="StatFoodDeliveriesPrevious2Total" datatype="html">
+        <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious2)"/> kg</source>
+        <target>Totaal: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious2)"/> kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">304</context>
+          <context context-type="linenumber">403</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="StatFoodDeliveriesYearCurrentTotal" datatype="html">
-        <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesYearCurrent)"/> kg</source>
-        <target>Totaal: <x id="PH" equiv-text="this.totalFoodDeliveriesYearCurrent"/> kg</target>
+      <trans-unit id="StatFoodDeliveriesCurrentTotal" datatype="html">
+        <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesCurrent)"/> kg</source>
+        <target>Totaal: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesCurrent)"/> kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">307</context>
+          <context context-type="linenumber">406</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesNonFEADTotal" datatype="html">
@@ -5219,7 +5227,7 @@
         <target>Totaal: <x id="PH" equiv-text="this.totalFoodDeliveriesNonFEAD"/> kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">310</context>
+          <context context-type="linenumber">409</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADNonAgreedTotal" datatype="html">
@@ -5227,7 +5235,7 @@
         <target>Totaal: <x id="PH" equiv-text="this.totalFoodDeliveriesFEADNonAgreed"/> kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">313</context>
+          <context context-type="linenumber">412</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADAgreedCollectTotal" datatype="html">
@@ -5235,7 +5243,7 @@
         <target>Totaal: <x id="PH" equiv-text="this.totalFoodDeliveriesFEADAgreedCollect"/> kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">316</context>
+          <context context-type="linenumber">415</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prev" datatype="html">
@@ -8393,18 +8401,6 @@
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">552</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="DonateurName">
-        <source/>
-        <target>Naam</target>
-      </trans-unit>
-      <trans-unit id="DonateurNameFirst">
-        <source/>
-        <target>Voornaam</target>
-      </trans-unit>
-      <trans-unit id="DonateurTitle">
-        <source/>
-        <target>Titel</target>
       </trans-unit>
     </body>
   </file>
