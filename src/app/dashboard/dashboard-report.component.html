@@ -8,31 +8,25 @@
 
                     <div *ngFor="let item of dashboardBankItems" class="p-fluid p-formgrid p-grid">
                         <div class="p-field p-col-12 p-md-3">
-                            {{item.type}}
-                        </div>
-                        <div class="p-field p-col-12 p-md-3">
-                            {{item.subtype}}
-                        </div>
-                        <div class="p-field p-col-12 p-md-3">
                             {{item.key}}
                         </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            {{labelCategory(item.category)}}
+                        </div>
                         <div class="p-field p-col-12 p-md-3">
-                            {{item.value}}
+                            {{formatQuantity(item.quantity)}}
                         </div>
 
                     </div>
                     <div *ngFor="let item of dashboardOrgItems" class="p-fluid p-formgrid p-grid">
                         <div class="p-field p-col-12 p-md-3">
-                            {{item.type}}
+                            {{item.day}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            {{item.orgname}}
                         </div>
                         <div class="p-field p-col-12 p-md-3">
-                            {{item.subtype}}
-                        </div>
-                        <div class="p-field p-col-12 p-md-3">
-                            {{item.key}}
-                        </div>
-                        <div class="p-field p-col-12 p-md-3">
-                            {{item.value}}
+                            {{formatQuantity(item.quantity)}}
                         </div>
 
                     </div>

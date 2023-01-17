@@ -12,7 +12,7 @@ import {MovementReport} from '../movements/model/movementReport';
 import {formatDate} from '@angular/common';
 import {ExcelService} from '../services/excel.service';
 import * as moment from 'moment';
-import {DashboardMovement} from './model/dashboardMovement';
+
 @Component({
     selector: 'app-dashboard-report',
     templateUrl: './dashboard-report.component.html',
@@ -23,8 +23,8 @@ export class DashboardReportComponent implements OnInit {
     bankOptions: any[];
     booIsLoaded: boolean;
     bankShortName: string;
-    dashboardBankItems: DashboardItem[];
-    dashboardOrgItems: DashboardItem[];
+    dashboardBankItems: MovementReport[];
+    dashboardOrgItems: MovementReport[];
 
     constructor(
         private movementReportHttpService: MovementReportHttpService,
@@ -86,14 +86,7 @@ export class DashboardReportComponent implements OnInit {
                 const movementsRecords = response;
                 this.dashboardBankItems = [];
                 for (let i = 0; i < movementsRecords.length; i++) {
-                    console.log(` ${movementsRecords[i].key} ${movementsRecords[i].bankShortName} ${movementsRecords[i].idOrg} ${movementsRecords[i].orgname} ${movementsRecords[i].category} ${movementsRecords[i].quantity} ${movementsRecords[i].lastupdated}`);
-                    const dashboardItem = new DashboardItem();
-                    dashboardItem.bankShortName = movementsRecords[i].bankShortName;
-                    dashboardItem.type = $localize`:@@DasnboardTitleMovement:Food Supplied in kg `
-                    dashboardItem.subtype = movementsRecords[i].category;
-                    dashboardItem.key = movementsRecords[i].key;
-                    dashboardItem.value = movementsRecords[i].quantity.toString();
-                    this.dashboardBankItems.push(dashboardItem);
+                    this.dashboardBankItems.push(movementsRecords[i]);
                 }
 
             });
@@ -103,17 +96,27 @@ export class DashboardReportComponent implements OnInit {
                 const movementsRecords = response;
                 this.dashboardOrgItems = [];
                 for (let i = 0; i < movementsRecords.length; i++) {
-                    console.log(` ${movementsRecords[i].day} ${movementsRecords[i].bankShortName} ${movementsRecords[i].idOrg} ${movementsRecords[i].orgname} ${movementsRecords[i].category} ${movementsRecords[i].quantity} ${movementsRecords[i].lastupdated}`);
-                    const dashboardItem = new DashboardMovement();
-                    dashboardItem.bankShortName = movementsRecords[i].bankShortName;
-                    dashboardItem.type = $localize`:@@DasnboardTitleMovement:Food Supplied in kg `
-                    dashboardItem.subtype = movementsRecords[i].orgname;
-                    dashboardItem.key = movementsRecords[i].day;
-                    dashboardItem.value = movementsRecords[i].quantity.toString();
-                    this.dashboardOrgItems.push(dashboardItem);
+                    this.dashboardOrgItems.push(movementsRecords[i]);
                 }
 
             });
     }
+    labelCategory(category: string) {
+        switch (category) {
+            case "AGREEDFEADCOLLECT":
+                return $localize`:@@MovementCategoryFeadCollect:FEAD and Collect day food deliveries for Agreed Associations`;
+            case "NOFEADNONAGREED":
+                return $localize`:@@MovementCategoryNoFeadNotAgreed: non-FEAD day food deliveries for Not Agreed Associations`;
+            case "FEADNONAGREED":
+                return $localize`:@@MovementCategoryFeadNotAgreed: FEAD day food deliveries for Not Agreed Associations`;
+            default:
+                return category;
+        }
+    }
+    formatQuantity(quantity: number) {
+        return `${quantity.toFixed(0)} kg`;
+    }
+
+
 
 }

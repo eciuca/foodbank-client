@@ -1,5 +1,0 @@
-export class DashboardMovement {
-      day: string; // day of the movement
-      entity: string;
-      quantity: number;
-}
