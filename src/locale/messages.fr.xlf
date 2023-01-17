@@ -5224,7 +5224,7 @@
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesCurrent" datatype="html">
         <source>Food Delivered in <x id="PH" equiv-text="this.currentPeriod"/>(kg) <x id="PH_1" equiv-text="mthPercentage"/>% of <x id="PH_2" equiv-text="this.previousPeriod"/></source>
-        <target>Nourriture livrée en <x id="PH" equiv-text="this.currentPeriod"/>(kg)</target>
+        <target>Nourriture livrée en <x id="PH" equiv-text="this.currentPeriod"/>(kg) <x id="PH_1" equiv-text="mthPercentage"/> % de <x id="PH_2" equiv-text="this.previousPeriod"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
           <context context-type="linenumber">382</context>
@@ -5232,7 +5232,7 @@
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious" datatype="html">
         <source>Food Delivered in <x id="PH" equiv-text="this.previousPeriod"/>(kg) <x id="PH_1" equiv-text="growthPercentage"/>% growth vs <x id="PH_2" equiv-text="this.previousPeriod1"/></source>
-        <target>Nourriture livrée en <x id="PH" equiv-text="this.previousPeriod"/>(kg)</target>
+        <target>Nourriture livrée en <x id="PH" equiv-text="this.previousPeriod"/>(kg) <x id="PH_1" equiv-text="growthPercentage"/> % de croissance par rapport à <x id="PH_2" equiv-text="this.previousPeriod1"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
           <context context-type="linenumber">389</context>
