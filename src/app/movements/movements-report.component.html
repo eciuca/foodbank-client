@@ -4,6 +4,9 @@
             <label i18n="@@ShowDaily" for="daily">Show Daily?</label>
             <p-checkbox [value]="booShowDaily" binary="true" name="daily" id="daily" (onChange)="changePeriodFilter($event)"></p-checkbox>
         </div>
+        <div class="p-field p-col-12 p-md-3">
+            <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Distributions" i18n-label="@@ExportDistributions"></button>
+        </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">
         <div *ngIf="chartDataFoodDeliveriesPrevious1" class="p-field p-col-12 p-md-4 card">

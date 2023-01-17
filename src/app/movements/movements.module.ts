@@ -10,6 +10,7 @@ import {appEntityMetadata} from '../app-entity.metadata';
 import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {PanelModule} from 'primeng/panel';
 import {CheckboxModule} from 'primeng/checkbox';
+import {ButtonModule} from 'primeng/button';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
         TooltipModule,
         PanelModule,
         CheckboxModule,
+        ButtonModule,
         ChartModule
 
     ],

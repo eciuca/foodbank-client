@@ -12,6 +12,7 @@ import {MovementReport} from './model/movementReport';
 import {formatDate} from '@angular/common';
 import {ExcelService} from '../services/excel.service';
 import * as moment from 'moment';
+import {forEach} from '@angular-devkit/schematics';
 @Component({
     selector: 'app-movements-report',
     templateUrl: './movements-report.component.html',
@@ -26,7 +27,7 @@ export class MovementReportComponent implements OnInit {
     pieOptions: any;
     booShowDaily: boolean;
     titleMovementsEvolution: string;
-    movementsRecords: MovementReport[];
+    movementReports: MovementReport[];
     titleFoodDeliveriesNonFEADEvolution: string;
     chartDataFoodDeliveriesNonFEADHistory: { labels: any[]; datasets: any[]; };
     titleFoodDeliveriesFEADNonAgreedEvolution: string;
@@ -41,7 +42,7 @@ export class MovementReportComponent implements OnInit {
     titleFoodDeliveriesPrevious: string;
     titleFoodDeliveriesPrevious1: string;
     titleFoodDeliveriesPrevious2: string;
-    totalFoodDeliveriesNonFEAD: number ;
+    totalFoodDeliveriesNonFEAD: number;
     totalFoodDeliveriesFEADNonAgreed: number;
     totalFoodDeliveriesFEADAgreedCollect: number;
     totalFoodDeliveriesCurrent: number;
@@ -72,7 +73,7 @@ export class MovementReportComponent implements OnInit {
         private store: Store<AppState>
     ) {
         this.booShowDaily = false;
-        this.backgroundColors = ['magenta','violet','indigo','blue','x0080ff','cyan','green','olive','yellow','orange','red','darkred', 'black','silver'];
+        this.backgroundColors = ['magenta', 'violet', 'indigo', 'blue', 'x0080ff', 'cyan', 'green', 'olive', 'yellow', 'orange', 'red', 'darkred', 'black', 'silver'];
         // x0080ff dodger blue
         this.basicOptions = {
             tooltips: {
@@ -119,13 +120,14 @@ export class MovementReportComponent implements OnInit {
             )
             .subscribe();
     }
+
     private initializeDependingOnUserRights(authState: AuthState) {
 
-        const classicBanks = { 'classicBanks': '1' };
+        const classicBanks = {'classicBanks': '1'};
         this.banqueService.getWithQuery(classicBanks)
             .subscribe((banquesEntities) => {
                 this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
-                if (! this.booIsLoaded) {
+                if (!this.booIsLoaded) {
                     this.report();
                 }
                 this.booIsLoaded = true;
@@ -133,56 +135,57 @@ export class MovementReportComponent implements OnInit {
 
 
     }
+
     report() {
 
-       this.reportMovementsHistoryMonthly();
+        this.reportMovementsHistoryMonthly();
     }
 
     changePeriodFilter($event) {
         this.booShowDaily = $event.checked;
         if (this.booShowDaily) {
             this.reportMovementsHistoryDaily();
-        }
-        else {
+        } else {
             this.reportMovementsHistoryMonthly();
         }
     }
+
     reportMovementsHistoryMonthly() {
 
         this.initializeChart();
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken,"monthly",null).subscribe(
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly", null).subscribe(
             (response: MovementReport[]) => {
-                this.movementsRecords = response;
+                this.movementReports = response;
 
                 this.currentPeriod = new Date().getFullYear();
                 this.previousPeriod = this.currentPeriod - 1;
-                this.previousPeriod2 = this.currentPeriod - 2;
+                this.previousPeriod1 = this.currentPeriod - 2;
 
-                for (let i = 0; i < this.movementsRecords.length; i++) {
-                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.movementsRecords[i].bankShortName);
+                for (let i = 0; i < this.movementReports.length; i++) {
+                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
                     if (bankOptionIndex === -1) continue;
-                    const movementYear = this.movementsRecords[i].key.substr(0,4);
-                    if (movementYear <  this.previousPeriod2) continue;
+                    const movementYear = this.movementReports[i].key.substr(0, 4);
+                    if (movementYear < this.previousPeriod2) continue;
                     switch (movementYear) {
                         case this.currentPeriod.toString():
-                            this.reportDataSetsCurrent[0].data[bankOptionIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesCurrent += this.movementsRecords[i].quantity;
-                        break;
+                            this.reportDataSetsCurrent[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
+                            break;
                         case this.previousPeriod.toString():
-                            this.reportDataSetsPrevious[0].data[bankOptionIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesPrevious += this.movementsRecords[i].quantity;
-                        break;
-                        case this.previousPeriod2.toString():
-                            this.reportDataSetsPrevious1[0].data[bankOptionIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesPrevious1 += this.movementsRecords[i].quantity;
-                        break;
+                            this.reportDataSetsPrevious[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;
+                            break;
+                        case this.previousPeriod1.toString():
+                            this.reportDataSetsPrevious1[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesPrevious1 += this.movementReports[i].quantity;
+                            break;
 
                         default:
 
                     }
-                    if (!this.reportLabels.includes(this.movementsRecords[i].key)) {
-                        this.reportLabels.push(this.movementsRecords[i].key);
-                        for (let i=0; i < this.bankOptions.length; i++ ) {
+                    if (!this.reportLabels.includes(this.movementReports[i].key)) {
+                        this.reportLabels.push(this.movementReports[i].key);
+                        for (let i = 0; i < this.bankOptions.length; i++) {
                             this.reportDataSetsNonFEAD[i].data.push(0);
                             this.reportDataSetsFEADnonAgreed[i].data.push(0);
                             this.reportDataSetsFEADAgreedCollect[i].data.push(0);
@@ -191,21 +194,21 @@ export class MovementReportComponent implements OnInit {
                     const dataIndex = this.reportLabels.length;
 
 
-                    switch (this.movementsRecords[i].category) {
+                    switch (this.movementReports[i].category) {
                         case 'NOFEADNONAGREED':
-                            this.reportDataSetsNonFEAD[bankOptionIndex].data[dataIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesNonFEAD += this.movementsRecords[i].quantity;
+                            this.reportDataSetsNonFEAD[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesNonFEAD += this.movementReports[i].quantity;
                             break;
                         case 'FEADNONAGREED':
-                            this.reportDataSetsFEADnonAgreed[bankOptionIndex].data[dataIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesFEADNonAgreed += this.movementsRecords[i].quantity;
+                            this.reportDataSetsFEADnonAgreed[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesFEADNonAgreed += this.movementReports[i].quantity;
                             break;
                         case 'AGREEDFEADCOLLECT':
-                            this.reportDataSetsFEADAgreedCollect[bankOptionIndex].data[dataIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesFEADAgreedCollect += this.movementsRecords[i].quantity;
+                            this.reportDataSetsFEADAgreedCollect[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesFEADAgreedCollect += this.movementReports[i].quantity;
                             break;
                         default:
-                            console.log('Unknown movement category: ' + this.movementsRecords[i].category);
+                            console.log('Unknown movement category: ' + this.movementReports[i].category);
                     }
                 }
                 this.createReportData();
@@ -213,40 +216,41 @@ export class MovementReportComponent implements OnInit {
             });
 
     }
+
     reportMovementsHistoryDaily() {
-       this.initializeChart()
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken,"daily",null).subscribe(
+        this.initializeChart()
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "daily", null).subscribe(
             (response: MovementReport[]) => {
-                this.movementsRecords = response;
+                this.movementReports = response;
 
                 this.currentPeriod = moment().format('YYYY-MM');
                 this.previousPeriod = moment().subtract(1, 'months').format('YYYY-MM');
-                this.previousPeriod2 = moment().subtract(2, 'months').format('YYYY-MM');
+                this.previousPeriod1 = moment().subtract(2, 'months').format('YYYY-MM');
 
-                for (let i = 0; i < this.movementsRecords.length; i++) {
-                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.movementsRecords[i].bankShortName);
+                for (let i = 0; i < this.movementReports.length; i++) {
+                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
                     if (bankOptionIndex === -1) continue;
-                    const movementMonth = this.movementsRecords[i].key.substr(0,7);
+                    const movementMonth = this.movementReports[i].key.substr(0, 7);
                     switch (movementMonth) {
                         case this.currentPeriod.toString():
-                            this.reportDataSetsCurrent[0].data[bankOptionIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesCurrent += this.movementsRecords[i].quantity;
+                            this.reportDataSetsCurrent[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
                             break;
                         case this.previousPeriod.toString():
-                            this.reportDataSetsPrevious[0].data[bankOptionIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesPrevious += this.movementsRecords[i].quantity;
+                            this.reportDataSetsPrevious[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;
                             break;
-                        case this.previousPeriod2.toString():
-                            this.reportDataSetsPrevious1[0].data[bankOptionIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesPrevious1 += this.movementsRecords[i].quantity;
+                        case this.previousPeriod1.toString():
+                            this.reportDataSetsPrevious1[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesPrevious1 += this.movementReports[i].quantity;
                             break;
 
                         default:
-                            console.log('Movements Report Obsolete month',movementMonth);
+
                     }
-                    if (!this.reportLabels.includes(this.movementsRecords[i].key)) {
-                        this.reportLabels.push(this.movementsRecords[i].key);
-                        for (let i=0; i < this.bankOptions.length; i++ ) {
+                    if (!this.reportLabels.includes(this.movementReports[i].key)) {
+                        this.reportLabels.push(this.movementReports[i].key);
+                        for (let i = 0; i < this.bankOptions.length; i++) {
                             this.reportDataSetsNonFEAD[i].data.push(0);
                             this.reportDataSetsFEADnonAgreed[i].data.push(0);
                             this.reportDataSetsFEADAgreedCollect[i].data.push(0);
@@ -255,32 +259,33 @@ export class MovementReportComponent implements OnInit {
                     const dataIndex = this.reportLabels.length;
 
 
-                    switch (this.movementsRecords[i].category) {
+                    switch (this.movementReports[i].category) {
                         case 'NOFEADNONAGREED':
-                            this.reportDataSetsNonFEAD[bankOptionIndex].data[dataIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesNonFEAD += this.movementsRecords[i].quantity;
+                            this.reportDataSetsNonFEAD[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesNonFEAD += this.movementReports[i].quantity;
                             break;
                         case 'FEADNONAGREED':
-                            this.reportDataSetsFEADnonAgreed[bankOptionIndex].data[dataIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesFEADNonAgreed += this.movementsRecords[i].quantity;
+                            this.reportDataSetsFEADnonAgreed[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesFEADNonAgreed += this.movementReports[i].quantity;
                             break;
                         case 'AGREEDFEADCOLLECT':
-                            this.reportDataSetsFEADAgreedCollect[bankOptionIndex].data[dataIndex] += this.movementsRecords[i].quantity;
-                            this.totalFoodDeliveriesFEADAgreedCollect += this.movementsRecords[i].quantity;
+                            this.reportDataSetsFEADAgreedCollect[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.totalFoodDeliveriesFEADAgreedCollect += this.movementReports[i].quantity;
                             break;
                         default:
-                            console.log('Unknown movement category: ' + this.movementsRecords[i].category);
+                            console.log('Unknown movement category: ' + this.movementReports[i].category);
                     }
                 }
 
 
-              this.createReportData();
-             
+                this.createReportData();
+
             });
 
     }
+
     initializeChart() {
-        this.totalFoodDeliveriesNonFEAD = 0 ;
+        this.totalFoodDeliveriesNonFEAD = 0;
         this.totalFoodDeliveriesFEADNonAgreed = 0;
         this.totalFoodDeliveriesFEADAgreedCollect = 0;
         this.totalFoodDeliveriesCurrent = 0;
@@ -291,38 +296,38 @@ export class MovementReportComponent implements OnInit {
         this.reportDataSetsNonFEAD = [];
         this.reportDataSetsFEADnonAgreed = [];
         this.reportDataSetsFEADAgreedCollect = [];
-        this.reportDataSetsCurrent= [
+        this.reportDataSetsCurrent = [
             {
                 data: [],
                 backgroundColor: this.backgroundColors,
             }
         ];
-        this.reportDataSetsPrevious= [
+        this.reportDataSetsPrevious = [
             {
                 data: [],
                 backgroundColor: this.backgroundColors,
             }
         ];
-        this.reportDataSetsPrevious1= [
+        this.reportDataSetsPrevious1 = [
             {
                 data: [],
                 backgroundColor: this.backgroundColors,
             }
         ];
-        this.reportDataSetsPrevious2= [
+        this.reportDataSetsPrevious2 = [
             {
                 data: [],
                 backgroundColor: this.backgroundColors,
             }
         ];
-        for (let i=0; i < this.bankOptions.length; i++ ) {
+        for (let i = 0; i < this.bankOptions.length; i++) {
             this.reportDataSetsCurrent[0].data.push(0);
             this.reportDataSetsPrevious[0].data.push(0);
             this.reportDataSetsPrevious1[0].data.push(0);
             this.reportDataSetsPrevious2[0].data.push(0);
         }
-        let colorIndex =0;
-        for (let i=0; i < this.bankOptions.length; i++ ) {
+        let colorIndex = 0;
+        for (let i = 0; i < this.bankOptions.length; i++) {
             this.reportDataSetsNonFEAD.push(
                 {
                     type: 'bar',
@@ -348,12 +353,13 @@ export class MovementReportComponent implements OnInit {
             colorIndex++;
             if (colorIndex >= this.backgroundColors.length) {
                 console.log('Not enough colors in backgroundColors array');
-                colorIndex=0;
+                colorIndex = 0;
             }
 
         }
 
     }
+
     createReportData() {
         this.titleFoodDeliveriesNonFEADEvolution = $localize`:@@StatFoodDeliveriesNonFEADHistory:Food Delivered to Non FEAD Orgs(kg)`;
         this.chartDataFoodDeliveriesNonFEADHistory = {
@@ -371,47 +377,72 @@ export class MovementReportComponent implements OnInit {
             labels: this.reportLabels,
             datasets: this.reportDataSetsFEADAgreedCollect
         }
-        this.titleFoodDeliveriesCurrent = $localize`:@@StatFoodDeliveriesCurrent:Food Delivered in ${this.currentPeriod}(kg)`;
+        const mthPercentage = this.totalFoodDeliveriesPrevious > 0 ? ((this.totalFoodDeliveriesCurrent  * 100) / this.totalFoodDeliveriesPrevious  ).toFixed(2) : 0;
+
+        this.titleFoodDeliveriesCurrent = $localize`:@@StatFoodDeliveriesCurrent:Food Delivered in ${this.currentPeriod}(kg) ${mthPercentage}% of ${this.previousPeriod}`;
         this.chartDataFoodDeliveriesCurrent = {
             labels: this.bankOptions.map(({label}) => label),
             datasets: this.reportDataSetsCurrent
         }
-        this.titleFoodDeliveriesPrevious = $localize`:@@StatFoodDeliveriesPrevious:Food Delivered in ${this.previousPeriod}(kg)`;
+        const growthPercentage = this.totalFoodDeliveriesPrevious1 > 0 ? (((this.totalFoodDeliveriesPrevious - this.totalFoodDeliveriesPrevious1) * 100 )/ this.totalFoodDeliveriesPrevious1).toFixed(2) : 0;
+
+        this.titleFoodDeliveriesPrevious = $localize`:@@StatFoodDeliveriesPrevious:Food Delivered in ${this.previousPeriod}(kg) ${growthPercentage}% growth vs ${this.previousPeriod1}`;
         this.chartDataFoodDeliveriesPrevious = {
             labels: this.bankOptions.map(({label}) => label),
             datasets: this.reportDataSetsPrevious
         }
-        this.titleFoodDeliveriesPrevious1 = $localize`:@@StatFoodDeliveriesPrevious1:Food Delivered in ${this.previousPeriod2}(kg)`;
+        this.titleFoodDeliveriesPrevious1 = $localize`:@@StatFoodDeliveriesPrevious1:Food Delivered in ${this.previousPeriod1}(kg)`;
         this.chartDataFoodDeliveriesPrevious1 = {
             labels: this.bankOptions.map(({label}) => label),
             datasets: this.reportDataSetsPrevious1
         }
-        this.titleFoodDeliveriesPrevious2 = $localize`:@@StatFoodDeliveriesPrevious2:Food Delivered in ${this.previousPeriod3}(kg)`;
+        this.titleFoodDeliveriesPrevious2 = $localize`:@@StatFoodDeliveriesPrevious2:Food Delivered in ${this.previousPeriod2}(kg)`;
         this.chartDataFoodDeliveriesPrevious2 = {
             labels: this.bankOptions.map(({label}) => label),
             datasets: this.reportDataSetsPrevious2
         }
     }
 
-        getTotalFoodDeliveriesPrevious() {
+    getTotalFoodDeliveriesPrevious() {
         return $localize`:@@StatFoodDeliveriesPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesPrevious)} kg`;
     }
+
     getTotalFoodDeliveriesPrevious1() {
         return $localize`:@@StatFoodDeliveriesPrevious1Total:Total: ${Math.round(this.totalFoodDeliveriesPrevious1)} kg`;
     }
+
     getTotalFoodDeliveriesPrevious2() {
         return $localize`:@@StatFoodDeliveriesPrevious2Total:Total: ${Math.round(this.totalFoodDeliveriesPrevious2)} kg`;
     }
+
     getTotalFoodDeliveriesCurrent() {
         return $localize`:@@StatFoodDeliveriesCurrentTotal:Total: ${Math.round(this.totalFoodDeliveriesCurrent)} kg`;
     }
+
     getTotalFoodDeliveriesNonFEAD() {
         return $localize`:@@StatFoodDeliveriesNonFEADTotal:Total: ${this.totalFoodDeliveriesNonFEAD} kg`;
     }
+
     getTotalFoodDeliveriesFEADNonAgreed() {
         return $localize`:@@StatFoodDeliveriesFEADNonAgreedTotal:Total: ${this.totalFoodDeliveriesFEADNonAgreed} kg`;
     }
+
     getTotalFoodDeliveriesFEADAgreedCollect() {
         return $localize`:@@StatFoodDeliveriesFEADAgreedCollectTotal:Total: ${this.totalFoodDeliveriesFEADAgreedCollect} kg`;
     }
+
+    exportAsXLSX() {
+
+        const exportListMovements = [];
+        this.chartDataFoodDeliveriesFEADAgreedCollectHistory.labels.unshift('Category')
+        exportListMovements.push(this.chartDataFoodDeliveriesFEADAgreedCollectHistory.labels);
+        this.chartDataFoodDeliveriesFEADAgreedCollectHistory.datasets[0].data.unshift('FEAD and Collect from US');
+        exportListMovements.push(this.chartDataFoodDeliveriesFEADAgreedCollectHistory.datasets[0].data);
+        this.chartDataFoodDeliveriesFEADNonAgreedHistory.datasets[0].data.unshift('FEAD to Non-Agreed Orgs');
+        exportListMovements.push(this.chartDataFoodDeliveriesFEADNonAgreedHistory.datasets[0].data);
+        this.chartDataFoodDeliveriesNonFEADHistory.datasets[0].data.unshift('Non-FEAD');
+        exportListMovements.push(this.chartDataFoodDeliveriesNonFEADHistory.datasets[0].data);
+        this.excelService.exportAsExcelFile(exportListMovements, 'foodit.movementStatistics.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+    }
+
 }

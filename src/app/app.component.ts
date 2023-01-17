@@ -423,8 +423,13 @@ export class AppComponent implements OnInit {
                     ]
                 },
                 {label: $localize`:@@menuEntityChanges:Entity Changes`, icon: 'pi pi-fw pi-map', routerLink: [`/audits/entitychanges`]},
-                {label: $localize`:@@menuDashboard:Dashboard`, icon: 'pi pi-fw pi-map', routerLink: [`/dashboard`]},
-            ]
+              ];
+            // temporarily show only dashboard in test
+            if (this.baseurl.includes('localhost') || this.baseurl.toLowerCase().includes('dev')) {
+                reportItems.push(
+                    {label: $localize`:@@menuDashboard:Dashboard`, icon: 'pi pi-fw pi-map', routerLink: [`/dashboard`]},
+                )
+            }
             if (['Admin_FBBA', 'admin'].includes(authState.user.rights)) {
                 reportItems.push(
                     {label: $localize`:@@menuReportOrgs:ReportOrgs`, icon: 'pi pi-fw pi-map', routerLink: [`/banques/bankreports`]},

@@ -276,16 +276,17 @@ export class BeneficiariesReportComponent implements OnInit {
             if(!this.populationRecords[i].n1824) {
                 this.populationRecords[i].n1824 = 0;
             }
-            const line = [this.populationRecords[i].dateStat];
+            const line:any[] =[] ;
+            line.push(this.populationRecords[i].dateStat);
             line.push(this.bankOptions[bankOptionIndex].label);
-            line.push(this.populationRecords[i].nFam.toString());
-            line.push(this.populationRecords[i].nPers.toString());
-            line.push(this.populationRecords[i].nNour.toString());
-            line.push(this.populationRecords[i].nBebe.toString());
-            line.push(this.populationRecords[i].nEnf.toString());
-            line.push(this.populationRecords[i].nAdo.toString());
-            line.push(this.populationRecords[i].n1824.toString());
-            line.push(this.populationRecords[i].nSen.toString());
+            line.push(this.populationRecords[i].nFam);
+            line.push(this.populationRecords[i].nPers);
+            line.push(this.populationRecords[i].nNour);
+            line.push(this.populationRecords[i].nBebe);
+            line.push(this.populationRecords[i].nEnf);
+            line.push(this.populationRecords[i].nAdo);
+            line.push(this.populationRecords[i].n1824);
+            line.push(this.populationRecords[i].nSen);
             exportListHistory.push(line);
         }
         this.excelService.exportAsExcelFile( exportListHistory, 'foodit.beneficiaryHistoryStatistics.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
