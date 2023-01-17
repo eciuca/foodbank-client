@@ -1,24 +1,51 @@
-<p-table #dt [value]="dashboardItems" [rowHover]="true" [paginator]="true" [rows]="10" [responsive]="true">
-    <p-header>
-        <div class="ui-helper-clearfix" style="line-height:1.87em">DashBoard</div>
-    </p-header>
+<p-panel>
     <ng-template pTemplate="header">
-        <tr>
-            <th i18n="@@BankSorted" pSortableColumn="bankShortName" >Bank<p-sortIcon field="bankShortName"></p-sortIcon></th>
-            <th i18n="@@Type" pSortableColumn="type" >Type<p-sortIcon field="type"></p-sortIcon></th>
-            <th i18n="@@Subtype" pSortableColumn="subtype" >Category<p-sortIcon field="subtype  "></p-sortIcon></th>
-            <th i18n="@@Key" pSortableColumn="key" >Entity<p-sortIcon field="key"></p-sortIcon></th>
-            <th i18n="@@Value" pSortableColumn="value" >Value<p-sortIcon field="value"></p-sortIcon></th>
-        </tr>
+        <h1>Dashboard</h1>
     </ng-template>
-    <ng-template pTemplate="body" let-item let-i="rowIndex">
-        <tr>
-            <td>{{item.bankShortName}}</td>
-            <td>{{item.type}}</td>
-            <td>{{item.subtype}}</td>
-            <td>{{item.key}}</td>
-            <td>{{item.value}}</td>
-        </tr>
+    <ng-template pTemplate="body">
+        <p-accordion>
+            <p-accordionTab i18n-header="@@DistributionActivity" header="Recent Distribution Activity"  [selected]="true">
+
+                    <div *ngFor="let item of dashboardBankItems" class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-3">
+                            {{item.type}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                            {{item.subtype}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                            {{item.key}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                            {{item.value}}
+                        </div>
+
+                    </div>
+                    <div *ngFor="let item of dashboardOrgItems" class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-3">
+                            {{item.type}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                            {{item.subtype}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                            {{item.key}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                            {{item.value}}
+                        </div>
+
+                    </div>
+
+
+                </p-accordionTab>
+            <p-accordionTab header="Beneficiaries">
+                Content 2
+            </p-accordionTab>
+            <p-accordionTab header="Organisations">
+                Content 3
+            </p-accordionTab>
+        </p-accordion>
     </ng-template>
-</p-table>
+</p-panel>
 

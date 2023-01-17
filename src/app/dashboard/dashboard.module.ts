@@ -11,6 +11,7 @@ import {PanelModule} from 'primeng/panel';
 import {CheckboxModule} from 'primeng/checkbox';
 import {DashboardReportComponent} from './dashboard-report.component';
 import {TableModule} from 'primeng/table';
+import {AccordionModule} from 'primeng/accordion';
 
 
 const routes: Routes = [
@@ -25,9 +26,10 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes),
         TooltipModule,
-        TableModule,
+        PanelModule,
         CheckboxModule,
-        ChartModule
+        PanelModule,
+        AccordionModule
 
     ],
   providers: [

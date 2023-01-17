@@ -12,7 +12,7 @@ import {MovementReport} from '../movements/model/movementReport';
 import {formatDate} from '@angular/common';
 import {ExcelService} from '../services/excel.service';
 import * as moment from 'moment';
-import {DashboardItem} from './model/dashboardItem';
+import {DashboardMovement} from './model/dashboardMovement';
 @Component({
     selector: 'app-dashboard-report',
     templateUrl: './dashboard-report.component.html',
@@ -23,7 +23,8 @@ export class DashboardReportComponent implements OnInit {
     bankOptions: any[];
     booIsLoaded: boolean;
     bankShortName: string;
-    dashboardItems: DashboardItem[];
+    dashboardBankItems: DashboardItem[];
+    dashboardOrgItems: DashboardItem[];
 
     constructor(
         private movementReportHttpService: MovementReportHttpService,
@@ -35,7 +36,8 @@ export class DashboardReportComponent implements OnInit {
     ) {
     this.bankShortName = '';
     this.booIsLoaded = false;
-    this.dashboardItems = [];
+    this.dashboardBankItems = [];
+    this.dashboardOrgItems = [];
     }
 
     ngOnInit(): void {
@@ -76,14 +78,13 @@ export class DashboardReportComponent implements OnInit {
     }
 
     report() {
-        const yesterday = moment().subtract(21, 'days').format('YYYY-MM-DD');
-        const daybeforeYesterday = moment().subtract(25, 'days').format('YYYY-MM-DD');
+        const lastDays = '20';
 
         this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken,
-            "daily", this.bankShortName,  daybeforeYesterday, yesterday).subscribe(
+            "daily", this.bankShortName, null,null,lastDays).subscribe(
             (response: MovementReport[]) => {
                 const movementsRecords = response;
-                this.dashboardItems = [];
+                this.dashboardBankItems = [];
                 for (let i = 0; i < movementsRecords.length; i++) {
                     console.log(` ${movementsRecords[i].key} ${movementsRecords[i].bankShortName} ${movementsRecords[i].idOrg} ${movementsRecords[i].orgname} ${movementsRecords[i].category} ${movementsRecords[i].quantity} ${movementsRecords[i].lastupdated}`);
                     const dashboardItem = new DashboardItem();
@@ -92,7 +93,24 @@ export class DashboardReportComponent implements OnInit {
                     dashboardItem.subtype = movementsRecords[i].category;
                     dashboardItem.key = movementsRecords[i].key;
                     dashboardItem.value = movementsRecords[i].quantity.toString();
-                    this.dashboardItems.push(dashboardItem);
+                    this.dashboardBankItems.push(dashboardItem);
+                }
+
+            });
+        this.movementReportHttpService.getMovementDailyReport(this.authService.accessToken,
+             this.bankShortName, null,null,lastDays).subscribe(
+            (response: MovementReport[]) => {
+                const movementsRecords = response;
+                this.dashboardOrgItems = [];
+                for (let i = 0; i < movementsRecords.length; i++) {
+                    console.log(` ${movementsRecords[i].day} ${movementsRecords[i].bankShortName} ${movementsRecords[i].idOrg} ${movementsRecords[i].orgname} ${movementsRecords[i].category} ${movementsRecords[i].quantity} ${movementsRecords[i].lastupdated}`);
+                    const dashboardItem = new DashboardMovement();
+                    dashboardItem.bankShortName = movementsRecords[i].bankShortName;
+                    dashboardItem.type = $localize`:@@DasnboardTitleMovement:Food Supplied in kg `
+                    dashboardItem.subtype = movementsRecords[i].orgname;
+                    dashboardItem.key = movementsRecords[i].day;
+                    dashboardItem.value = movementsRecords[i].quantity.toString();
+                    this.dashboardOrgItems.push(dashboardItem);
                 }
 
             });
