@@ -13,16 +13,20 @@ export class BanqueReportService {
 
     constructor(private http: HttpClient) {
     }
-    getOrgClientReport(accesstoken: string): Observable<BanqueClientReport[]> {
-        const baseUrl = '/api/banqueOrgClientReport';
+    getOrgClientReport(accesstoken: string,bankShortName:string=null): Observable<BanqueClientReport[]> {
+        let baseUrl = '/api/banqueOrgClientReport/';
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
                 Authorization: 'Bearer ' + accesstoken
             }),
         };
+        if (bankShortName) {
+            baseUrl += '?bankShortName=' + bankShortName;
 
-        return this.http.get<BanqueClientReport[]>(`${baseUrl}/`, requestOptions);
+        }
+
+        return this.http.get<BanqueClientReport[]>(`${baseUrl}`, requestOptions);
     }
     getOrgFeadReport(accesstoken: string): Observable<BanqueFeadReport[]> {
         const baseUrl = '/api/banqueOrgFeadReport';

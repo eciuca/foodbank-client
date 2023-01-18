@@ -22,6 +22,8 @@ import {ExcelService} from '../../services/excel.service';
 export class BeneficiariesReportComponent implements OnInit {
     booIsLoaded: boolean;
     bankOptions: any[];
+    bankShortName: string;
+    bankId: number;
     backgroundColors: any[];
     basicOptions: any;
     stackedOptions: any;
@@ -84,16 +86,32 @@ export class BeneficiariesReportComponent implements OnInit {
           .subscribe();
   }
   private initializeDependingOnUserRights(authState: AuthState) {
+      switch (authState.user.rights) {
+          case 'Bank':
+          case 'Admin_Banq':
+              this.bankShortName = authState.banque.bankShortName;
+              this.bankId = authState.banque.bankId;
+              this.bankOptions = [{'label': this.bankShortName, 'value': this.bankId}];
+              if (! this.booIsLoaded) {
+                  this.report();
+              }
+              this.booIsLoaded = true;
+              break;
+          case 'admin':
+          case 'Admin_FBBA':
+              const classicBanks = { 'classicBanks': '1' };
+              this.banqueService.getWithQuery(classicBanks)
+                  .subscribe((banquesEntities) => {
+                      this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId}));
+                      if (! this.booIsLoaded) {
+                          this.report();
+                      }
+                      this.booIsLoaded = true;
+                  });
+              break;
+          default:
+      }
 
-      const classicBanks = { 'classicBanks': '1' };
-      this.banqueService.getWithQuery(classicBanks)
-        .subscribe((banquesEntities) => {
-          this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId}));
-          if (! this.booIsLoaded) {
-            this.report();
-          }
-          this.booIsLoaded = true;
-        });
 
 
   }
@@ -102,9 +120,9 @@ export class BeneficiariesReportComponent implements OnInit {
       this.reportBeneficiariesHistory();
   }
     reportBeneficiaries() {
-        this.banqueReportService.getOrgClientReport(this.authService.accessToken).subscribe(
+        this.banqueReportService.getOrgClientReport(this.authService.accessToken,this.bankShortName).subscribe(
             (response: BanqueClientReport[]) => {
-                const banqueOrgReportRecords:  BanqueClientReport[] = response;
+                const banqueOrgReportRecords: BanqueClientReport[] = response;
 
                 let reportLabels = [];
                 let reportDataSetsByFamily = [
@@ -143,7 +161,7 @@ export class BeneficiariesReportComponent implements OnInit {
                     },
                     {
                         type: 'bar',
-                        label:  $localize`:@@OrgStatTeenagers:Teenagers(14-18 years)`,
+                        label: $localize`:@@OrgStatTeenagers:Teenagers(14-18 years)`,
                         backgroundColor: '#ADD8E6', // light blue
                         data: []
                     },
@@ -162,19 +180,21 @@ export class BeneficiariesReportComponent implements OnInit {
 
                 ];
 
+
                 this.bankOptions.map((option) => {
                     reportLabels.push(option.label);
                 })
                 reportDataSetsByAge.map((dataSetitem) => {
-                    for (let i=0; i < this.bankOptions.length; i++ ) {
-                        dataSetitem.data.push(0);
-                    }
+                for (let i = 0; i < this.bankOptions.length; i++) {
+                    dataSetitem.data.push(0);
+                }
                 })
                 reportDataSetsByFamily.map((dataSetitem) => {
-                    for (let i=0; i < this.bankOptions.length; i++ ) {
-                        dataSetitem.data.push(0);
-                    }
+                for (let i = 0; i < this.bankOptions.length; i++) {
+                    dataSetitem.data.push(0);
+                }
                 })
+
                 for (let i=0; i < banqueOrgReportRecords.length; i++ ) {
 
                     const indexLabel = reportLabels.indexOf(banqueOrgReportRecords[i].bankShortName);
@@ -207,13 +227,14 @@ export class BeneficiariesReportComponent implements OnInit {
 
     reportBeneficiariesHistory() {
 
-    this.beneficiaireHttpService.getPopulationReport(this.authService.accessToken).subscribe(
+    this.beneficiaireHttpService.getPopulationReport(this.authService.accessToken,this.bankId).subscribe(
           (response: Population[]) => {
               this.populationRecords = response;
               let reportLabels = [];
               let reportDataSetsPerson = [];
               let reportDataSetsFamily = [];
               let colorIndex =0;
+
               for (let i=0; i < this.bankOptions.length; i++ ) {
                   reportDataSetsPerson.push(
                       {

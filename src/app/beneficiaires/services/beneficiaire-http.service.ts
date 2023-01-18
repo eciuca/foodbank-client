@@ -29,14 +29,20 @@ export class BeneficiaireHttpService {
 
         }
     }
-    getPopulationReport(accesstoken: string): Observable<Population[]> {
+    getPopulationReport(accesstoken: string,lienBanque:number=null): Observable<Population[]> {
+        let baseUrl = '/api/populationReport/';
         const requestOptions = {
             headers: new HttpHeaders( {
                 responseType: 'json',
                 Authorization:  'Bearer ' + accesstoken
             }),
         };
+        if (lienBanque) {
+            baseUrl += '?lienBanque=' + lienBanque;
+
+        }
+
         // tslint:disable-next-line:max-line-length
-        return this.http.get<Population[]>(`/api/populationReport/`, requestOptions);
+        return this.http.get<Population[]>(`${baseUrl}`, requestOptions);
     }
 }
