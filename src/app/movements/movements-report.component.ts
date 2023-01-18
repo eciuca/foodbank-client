@@ -21,6 +21,7 @@ import {forEach} from '@angular-devkit/schematics';
 export class MovementReportComponent implements OnInit {
     booIsLoaded: boolean;
     bankOptions: any[];
+    bankShortName: string;
     backgroundColors: any[];
     basicOptions: any;
     stackedOptions: any;
@@ -123,16 +124,35 @@ export class MovementReportComponent implements OnInit {
 
     private initializeDependingOnUserRights(authState: AuthState) {
 
-        const classicBanks = {'classicBanks': '1'};
-        this.banqueService.getWithQuery(classicBanks)
-            .subscribe((banquesEntities) => {
-                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
-                if (!this.booIsLoaded) {
-                    this.report();
-                }
-                this.booIsLoaded = true;
-            });
-
+        if (authState.user) {
+            switch (authState.user.rights) {
+                case 'Bank':
+                case 'Admin_Banq':
+                    this.bankShortName = authState.banque.bankShortName;
+                    this.bankOptions = [{'label': this.bankShortName, 'value': this.bankShortName}];
+                    if (!this.booIsLoaded) {
+                        this.report();
+                    }
+                    this.booIsLoaded = true;
+                    break;
+                case 'admin':
+                case 'Admin_FBBA':
+                    const classicBanks = {'classicBanks': '1'};
+                    this.banqueService.getWithQuery(classicBanks)
+                        .subscribe((banquesEntities) => {
+                            this.bankOptions = banquesEntities.map(({bankShortName}) => ({
+                                'label': bankShortName,
+                                'value': bankShortName
+                            }));
+                            if (!this.booIsLoaded) {
+                                this.report();
+                            }
+                            this.booIsLoaded = true;
+                        });
+                    break;
+                default:
+            }
+        }
 
     }
 
@@ -153,7 +173,7 @@ export class MovementReportComponent implements OnInit {
     reportMovementsHistoryMonthly() {
 
         this.initializeChart();
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly", null).subscribe(
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly", this.bankShortName).subscribe(
             (response: MovementReport[]) => {
                 this.movementReports = response;
 
@@ -219,7 +239,7 @@ export class MovementReportComponent implements OnInit {
 
     reportMovementsHistoryDaily() {
         this.initializeChart()
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "daily", null).subscribe(
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "daily", this.bankShortName).subscribe(
             (response: MovementReport[]) => {
                 this.movementReports = response;
 

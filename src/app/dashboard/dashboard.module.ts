@@ -12,6 +12,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {DashboardReportComponent} from './dashboard-report.component';
 import {TableModule} from 'primeng/table';
 import {AccordionModule} from 'primeng/accordion';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
         PanelModule,
         CheckboxModule,
         PanelModule,
+        DropdownModule,
         AccordionModule
 
     ],

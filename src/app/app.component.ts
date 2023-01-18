@@ -436,6 +436,7 @@ export class AppComponent implements OnInit {
                 reportItems.push(
                     {label: $localize`:@@menuDashboard:Dashboard`, icon: 'pi pi-fw pi-map', routerLink: [`/dashboard`]},
                     {label: $localize`:@@menuReportBenefs:ReportBenefs`, icon: 'pi pi-fw pi-map', routerLink: [`/beneficiaires/reports`]},
+                    {label: $localize`:@@menuReportMovements:ReportMovements`, icon: 'pi pi-fw pi-map', routerLink: [`/movements`]},
                 )
             }
             this.menuLoggedInItems.push(

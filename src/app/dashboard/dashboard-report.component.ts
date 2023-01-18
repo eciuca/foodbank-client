@@ -21,10 +21,16 @@ import * as moment from 'moment';
 export class DashboardReportComponent implements OnInit {
 
     bankOptions: any[];
+    days: string[];
+    selectedDay: string;
+    booIsLoadedBankItems: boolean;
+    booisLoadedOrgItems: boolean;
     booIsLoaded: boolean;
     bankShortName: string;
     dashboardBankItems: MovementReport[];
     dashboardOrgItems: MovementReport[];
+    selectedBankItems: MovementReport[];
+    selectedOrgItems: MovementReport[];
 
     constructor(
         private movementReportHttpService: MovementReportHttpService,
@@ -36,8 +42,12 @@ export class DashboardReportComponent implements OnInit {
     ) {
     this.bankShortName = '';
     this.booIsLoaded = false;
+    this.booIsLoadedBankItems = false;
+    this.booisLoadedOrgItems = false;
     this.dashboardBankItems = [];
     this.dashboardOrgItems = [];
+    this.selectedBankItems = [];
+    this.selectedOrgItems = [];
     }
 
     ngOnInit(): void {
@@ -78,7 +88,7 @@ export class DashboardReportComponent implements OnInit {
     }
 
     report() {
-        const lastDays = '20';
+        const lastDays = '7';
 
         this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken,
             "daily", this.bankShortName, null,null,lastDays).subscribe(
@@ -87,6 +97,11 @@ export class DashboardReportComponent implements OnInit {
                 this.dashboardBankItems = [];
                 for (let i = 0; i < movementsRecords.length; i++) {
                     this.dashboardBankItems.push(movementsRecords[i]);
+                }
+                this.booIsLoadedBankItems = true;
+                this.selectedBankItems = this.dashboardBankItems;
+                if (this.booisLoadedOrgItems) {
+                    this.setDropdownDays();
                 }
 
             });
@@ -97,6 +112,10 @@ export class DashboardReportComponent implements OnInit {
                 this.dashboardOrgItems = [];
                 for (let i = 0; i < movementsRecords.length; i++) {
                     this.dashboardOrgItems.push(movementsRecords[i]);
+                }
+                this.booisLoadedOrgItems = true;
+                if (this.booIsLoadedBankItems) {
+                    this.setDropdownDays();
                 }
 
             });
@@ -116,7 +135,18 @@ export class DashboardReportComponent implements OnInit {
     formatQuantity(quantity: number) {
         return `${quantity.toFixed(0)} kg`;
     }
-
+    setDropdownDays() {
+        var bankDays = this.dashboardBankItems.map(x => x.key); // beware of the key is 'key' for aggregated bank items
+        var orgDays = this.dashboardOrgItems.map(x => x.day); // beware of the key is 'day' for org items
+        var allDays = bankDays.concat(orgDays).filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
+        this.days = allDays.sort().reverse();
+        this.filterDay(allDays[0]);
+    }
+    filterDay(myDay: string) {
+        this.selectedDay = myDay;
+        this.selectedBankItems = this.dashboardBankItems.filter(x => x.key === myDay);
+        this.selectedOrgItems = this.dashboardOrgItems.filter(x => x.day === myDay);
+    }
 
 
 }

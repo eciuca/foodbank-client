@@ -86,31 +86,36 @@ export class BeneficiariesReportComponent implements OnInit {
           .subscribe();
   }
   private initializeDependingOnUserRights(authState: AuthState) {
-      switch (authState.user.rights) {
-          case 'Bank':
-          case 'Admin_Banq':
-              this.bankShortName = authState.banque.bankShortName;
-              this.bankId = authState.banque.bankId;
-              this.bankOptions = [{'label': this.bankShortName, 'value': this.bankId}];
-              if (! this.booIsLoaded) {
-                  this.report();
-              }
-              this.booIsLoaded = true;
-              break;
-          case 'admin':
-          case 'Admin_FBBA':
-              const classicBanks = { 'classicBanks': '1' };
-              this.banqueService.getWithQuery(classicBanks)
-                  .subscribe((banquesEntities) => {
-                      this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({'label': bankShortName, 'value': bankId}));
-                      if (! this.booIsLoaded) {
-                          this.report();
-                      }
-                      this.booIsLoaded = true;
-                  });
-              break;
-          default:
-      }
+        if (authState.user) {
+            switch (authState.user.rights) {
+                case 'Bank':
+                case 'Admin_Banq':
+                    this.bankShortName = authState.banque.bankShortName;
+                    this.bankId = authState.banque.bankId;
+                    this.bankOptions = [{'label': this.bankShortName, 'value': this.bankId}];
+                    if (!this.booIsLoaded) {
+                        this.report();
+                    }
+                    this.booIsLoaded = true;
+                    break;
+                case 'admin':
+                case 'Admin_FBBA':
+                    const classicBanks = {'classicBanks': '1'};
+                    this.banqueService.getWithQuery(classicBanks)
+                        .subscribe((banquesEntities) => {
+                            this.bankOptions = banquesEntities.map(({bankShortName, bankId}) => ({
+                                'label': bankShortName,
+                                'value': bankId
+                            }));
+                            if (!this.booIsLoaded) {
+                                this.report();
+                            }
+                            this.booIsLoaded = true;
+                        });
+                    break;
+                default:
+            }
+        }
 
 
 

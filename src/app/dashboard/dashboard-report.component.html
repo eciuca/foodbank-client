@@ -5,8 +5,10 @@
     <ng-template pTemplate="body">
         <p-accordion>
             <p-accordionTab i18n-header="@@DistributionActivity" header="Recent Distribution Activity"  [selected]="true">
+                <p-dropdown [ngModel]="selectedDay" [options]="days" (onChange)="filterDay($event.value)" >
+                </p-dropdown>
 
-                    <div *ngFor="let item of dashboardBankItems" class="p-fluid p-formgrid p-grid">
+                <div *ngFor="let item of selectedBankItems" class="p-fluid p-formgrid p-grid">
                         <div class="p-field p-col-12 p-md-3">
                             {{item.key}}
                         </div>
@@ -18,7 +20,7 @@
                         </div>
 
                     </div>
-                    <div *ngFor="let item of dashboardOrgItems" class="p-fluid p-formgrid p-grid">
+                    <div *ngFor="let item of selectedOrgItems" class="p-fluid p-formgrid p-grid">
                         <div class="p-field p-col-12 p-md-3">
                             {{item.day}}
                         </div>
