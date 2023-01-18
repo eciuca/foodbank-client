@@ -12,6 +12,8 @@ import {MovementReport} from '../movements/model/movementReport';
 import {formatDate} from '@angular/common';
 import {ExcelService} from '../services/excel.service';
 import * as moment from 'moment';
+import {BanqueClientReport} from '../banques/model/banqueClientReport';
+import {BanqueReportService} from '../banques/services/banque-report.service';
 
 @Component({
     selector: 'app-dashboard-report',
@@ -31,9 +33,19 @@ export class DashboardReportComponent implements OnInit {
     dashboardOrgItems: MovementReport[];
     selectedBankItems: MovementReport[];
     selectedOrgItems: MovementReport[];
+    banqueOrgReportRecords: BanqueClientReport[];
+    clientNFam: number;
+    clientNpers: number;
+    clientNNour: number;
+    clientNBebe: number;
+    clientNEnf: number;
+    clientNAdo: number;
+    clientN1824: number;
+    clientNSen: number;
 
     constructor(
         private movementReportHttpService: MovementReportHttpService,
+        private banqueReportService: BanqueReportService,
         private banqueService: BanqueEntityService,
         private excelService: ExcelService,
         private authService: AuthService,
@@ -119,6 +131,30 @@ export class DashboardReportComponent implements OnInit {
                 }
 
             });
+        this.banqueReportService.getOrgClientReport(this.authService.accessToken,this.bankShortName).subscribe(
+            (response: BanqueClientReport[]) => {
+                const banqueOrgReportRecords: BanqueClientReport[] = response;
+                this.clientNFam=0;
+                this.clientNpers=0;
+                this.clientNNour=0;
+                this.clientNBebe=0;
+                this.clientNEnf=0;
+                this.clientNAdo=0;
+                this.clientN1824=0;
+                this.clientNSen=0;
+                for (let i=0; i < banqueOrgReportRecords.length; i++ ) {
+
+                   this.clientNFam += banqueOrgReportRecords[i].nFam;
+                   this.clientNpers += banqueOrgReportRecords[i].nPers;
+                   this.clientNNour += banqueOrgReportRecords[i].nNour;
+                   this.clientNBebe += banqueOrgReportRecords[i].nBebe;
+                   this.clientNEnf += banqueOrgReportRecords[i].nEnf;
+                   this.clientNAdo += banqueOrgReportRecords[i].nAdo;
+                   this.clientN1824 += banqueOrgReportRecords[i].n1824;
+                   this.clientNSen += banqueOrgReportRecords[i].nSen;
+
+                }
+            });
     }
     labelCategory(category: string) {
         switch (category) {
@@ -147,6 +183,29 @@ export class DashboardReportComponent implements OnInit {
         this.selectedBankItems = this.dashboardBankItems.filter(x => x.key === myDay);
         this.selectedOrgItems = this.dashboardOrgItems.filter(x => x.day === myDay);
     }
-
+    labelClientNFam() {
+        return $localize`:@@ClientNFam:Families`;
+    }
+    labelClientNpers() {
+        return $localize`:@@ClientNpers:Persons`;
+    }
+    labelClientNNour() {
+        return $localize`:@@ClientNNour:Infants`;
+    }
+    labelClientNBebe() {
+        return $localize`:@@ClientNBebe:Babies`;
+    }
+    labelClientNEnf() {
+        return $localize`:@@ClientChild:Children`;
+    }
+    labelClientNAdo() {
+        return $localize`:@@ClientNAdo:Adolescents`;
+    }
+    labelClientN1824() {
+        return $localize`:@@ClientN1824:Young Adults`;
+    }
+    labelClientNSen() {
+        return $localize`:@@ClientSeniors:Seniors`;
+    }
 
 }
