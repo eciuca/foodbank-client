@@ -4,37 +4,72 @@
     </ng-template>
     <ng-template pTemplate="body">
         <p-accordion>
-            <p-accordionTab i18n-header="@@DistributionActivity" header="Recent Distribution Activity"  [selected]="true">
-                <p-dropdown [ngModel]="selectedDay" [options]="days" (onChange)="filterDay($event.value)" >
-                </p-dropdown>
-
-                <div *ngFor="let item of selectedBankItems" class="p-fluid p-formgrid p-grid">
-                        <div class="p-field p-col-12 p-md-3">
-                            {{item.key}}
-                        </div>
-                        <div class="p-field p-col-12 p-md-6">
-                            {{labelCategory(item.category)}}
-                        </div>
-                        <div class="p-field p-col-12 p-md-3">
-                            {{formatQuantity(item.quantity)}}
-                        </div>
-
+            <p-accordionTab header="Organisations" [selected]="true">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelOrgCount()}}
                     </div>
-                    <div *ngFor="let item of selectedOrgItems" class="p-fluid p-formgrid p-grid">
-                        <div class="p-field p-col-12 p-md-3">
-                            {{item.day}}
-                        </div>
-                        <div class="p-field p-col-12 p-md-6">
-                            {{item.orgname}}
-                        </div>
-                        <div class="p-field p-col-12 p-md-3">
-                            {{formatQuantity(item.quantity)}}
-                        </div>
-
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgCount}}
                     </div>
-
-
-                </p-accordionTab>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelOrgFeadCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgFeadCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelOrgFeadFromUsCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgFeadFromUsCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelOrgAgreedCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgAgreedCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelUserBankCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{userBankCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelUserOrgCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{userOrgCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelMemberBankCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{memberBankCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelMemberOrgCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{memberOrgCount}}
+                    </div>
+                </div>
+            </p-accordionTab>
             <p-accordionTab header="Beneficiaries">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
@@ -101,71 +136,37 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab header="Organisations">
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
-                        {{labelOrgCount()}}
+
+            <p-accordionTab i18n-header="@@DistributionActivity" header="Recent Distribution Activity"  >
+                <p-dropdown [ngModel]="selectedDay" [options]="days" (onChange)="filterDay($event.value)" >
+                </p-dropdown>
+
+                <div *ngFor="let item of selectedBankItems" class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        {{item.key}}
                     </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        {{orgCount}}
+                    <div class="p-field p-col-12 p-md-6">
+                        {{labelCategory(item.category)}}
                     </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        {{formatQuantity(item.quantity)}}
+                    </div>
+
                 </div>
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
-                        {{labelOrgFeadCount()}}
+                <div *ngFor="let item of selectedOrgItems" class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        {{item.day}}
                     </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        {{orgFeadCount}}
+                    <div class="p-field p-col-12 p-md-6">
+                        {{item.orgname}}
                     </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        {{formatQuantity(item.quantity)}}
+                    </div>
+
                 </div>
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
-                        {{labelOrgFeadFromUsCount()}}
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        {{orgFeadFromUsCount}}
-                    </div>
-                </div>
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
-                        {{labelOrgAgreedCount()}}
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        {{orgAgreedCount}}
-                    </div>
-                </div>
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
-                        {{labelUserBankCount()}}
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        {{userBankCount}}
-                    </div>
-                </div>
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
-                        {{labelUserOrgCount()}}
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        {{userOrgCount}}
-                    </div>
-                </div>
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
-                        {{labelMemberBankCount()}}
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        {{memberBankCount}}
-                    </div>
-                </div>
-                <div class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-4">
-                        {{labelMemberOrgCount()}}
-                    </div>
-                    <div class="p-field p-col-12 p-md-2">
-                        {{memberOrgCount}}
-                    </div>
-                </div>
+
+
             </p-accordionTab>
         </p-accordion>
     </ng-template>

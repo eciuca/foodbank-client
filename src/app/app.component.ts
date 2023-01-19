@@ -432,7 +432,7 @@ export class AppComponent implements OnInit {
                     {label: $localize`:@@menuReportMovements:ReportMovements`, icon: 'pi pi-fw pi-map', routerLink: [`/movements`]},
                 )
             }
-            if (['Admin_Banq', 'Bank'].includes(authState.user.rights)) {
+            if ((['Admin_Banq', 'Bank'].includes(authState.user.rights)) && (this.baseurl.includes('localhost') || this.baseurl.toLowerCase().includes('dev'))) {
                 reportItems.push(
                     {label: $localize`:@@menuDashboard:Dashboard`, icon: 'pi pi-fw pi-map', routerLink: [`/dashboard`]},
                     {label: $localize`:@@menuReportBenefs:ReportBenefs`, icon: 'pi pi-fw pi-map', routerLink: [`/beneficiaires/reports`]},
