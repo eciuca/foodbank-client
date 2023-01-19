@@ -14,6 +14,8 @@ import {ExcelService} from '../services/excel.service';
 import * as moment from 'moment';
 import {BanqueClientReport} from '../banques/model/banqueClientReport';
 import {BanqueReportService} from '../banques/services/banque-report.service';
+import {BanqueFeadReport} from '../banques/model/banqueFeadReport';
+import {BanqueOrgCount} from '../banques/model/banqueOrgCount';
 
 @Component({
     selector: 'app-dashboard-report',
@@ -42,6 +44,14 @@ export class DashboardReportComponent implements OnInit {
     clientNAdo: number;
     clientN1824: number;
     clientNSen: number;
+    orgCount: number;
+    orgFeadCount: number;
+    orgAgreedCount: number;
+    orgFeadFromUsCount: number;
+    userBankCount: number;
+    userOrgCount: number;
+    memberBankCount: number;
+    memberOrgCount: number;
 
     constructor(
         private movementReportHttpService: MovementReportHttpService,
@@ -134,27 +144,36 @@ export class DashboardReportComponent implements OnInit {
         this.banqueReportService.getOrgClientReport(this.authService.accessToken,this.bankShortName).subscribe(
             (response: BanqueClientReport[]) => {
                 const banqueOrgReportRecords: BanqueClientReport[] = response;
-                this.clientNFam=0;
-                this.clientNpers=0;
-                this.clientNNour=0;
-                this.clientNBebe=0;
-                this.clientNEnf=0;
-                this.clientNAdo=0;
-                this.clientN1824=0;
-                this.clientNSen=0;
-                for (let i=0; i < banqueOrgReportRecords.length; i++ ) {
-
-                   this.clientNFam += banqueOrgReportRecords[i].nFam;
-                   this.clientNpers += banqueOrgReportRecords[i].nPers;
-                   this.clientNNour += banqueOrgReportRecords[i].nNour;
-                   this.clientNBebe += banqueOrgReportRecords[i].nBebe;
-                   this.clientNEnf += banqueOrgReportRecords[i].nEnf;
-                   this.clientNAdo += banqueOrgReportRecords[i].nAdo;
-                   this.clientN1824 += banqueOrgReportRecords[i].n1824;
-                   this.clientNSen += banqueOrgReportRecords[i].nSen;
-
-                }
+                this.clientNFam=banqueOrgReportRecords[0].nFam;
+                this.clientNpers=banqueOrgReportRecords[0].nPers;
+                this.clientNNour=banqueOrgReportRecords[0].nNour;
+                this.clientNBebe=banqueOrgReportRecords[0].nBebe;
+                this.clientNEnf=banqueOrgReportRecords[0].nEnf;
+                this.clientNAdo=banqueOrgReportRecords[0].nAdo;
+                this.clientN1824=banqueOrgReportRecords[0].n1824;
+                this.clientNSen=banqueOrgReportRecords[0].nSen;
             });
+        this.banqueReportService.getOrgFeadReport(this.authService.accessToken,this.bankShortName).subscribe(
+            (response: BanqueFeadReport[]) => {
+                const banqueOrgFeadRecords:  BanqueFeadReport[] = response;
+                this.orgCount= banqueOrgFeadRecords[0].orgCount;
+                this.orgFeadCount= banqueOrgFeadRecords[0].orgFeadCount;
+                this.orgAgreedCount= banqueOrgFeadRecords[0].orgAgreedCount;
+                this.orgFeadFromUsCount= banqueOrgFeadRecords[0].orgFeadFromUsCount;
+            });
+        this.banqueReportService.getMembreCountReport(this.authService.accessToken,this.bankShortName).subscribe(
+            (response: BanqueOrgCount[]) => {
+                const bankMemberCounts: BanqueOrgCount[] = response;
+                this.memberBankCount= bankMemberCounts[0].bankCount;
+                this.memberOrgCount= bankMemberCounts[0].orgCount;
+            });
+        this.banqueReportService.getUserCountReport(this.authService.accessToken,this.bankShortName).subscribe(
+            (response: BanqueOrgCount[]) => {
+                const bankUserCounts: BanqueOrgCount[] = response;
+                this.userBankCount= bankUserCounts[0].bankCount;
+                this.userOrgCount= bankUserCounts[0].orgCount;
+            });
+
     }
     labelCategory(category: string) {
         switch (category) {
@@ -207,5 +226,30 @@ export class DashboardReportComponent implements OnInit {
     labelClientNSen() {
         return $localize`:@@ClientSeniors:Seniors`;
     }
+    labelOrgCount() {
+        return $localize`:@@OrgCount:Number of Organisations of the Bank`;
+    }
+    labelOrgFeadCount() {
+        return $localize`:@@OrgFeadCount:Number of FEAD Organisations of the Bank`;
+    }
+    labelOrgAgreedCount() {
+        return $localize`:@@OrgAgreedCount:Number of Agreed Organisations of the Bank`;
+    }
+    labelOrgFeadFromUsCount() {
+        return $localize`:@@OrgFeadFromUsCount:Number of FEAD Organisations of the Bank receiving food from us`;
+    }
+    labelMemberBankCount() {
+        return $localize`:@@MemberBankCount:Number of Members of the Bank`;
+    }
+    labelMemberOrgCount() {
+        return $localize`:@@MemberorgCount:Number of Members of the Organisations of the Bank`;
+    }
+    labelUserBankCount() {
+        return $localize`:@@UserBankCount:Number of Users of the Bank`;
+    }
+    labelUserOrgCount() {
+        return $localize`:@@UserorgCount:Number of Users of the Organisations of the Bank`;
+    }
+
 
 }
