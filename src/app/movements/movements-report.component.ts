@@ -9,6 +9,8 @@ import {AuthState} from '../auth/reducers';
 import {MovementReportHttpService} from './services/movement-report-http.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {MovementReport} from './model/movementReport';
+import {ExportMovementDailyReport} from './model/exportMovementDailyReport';
+import {ExportMovementMonthlyReport} from './model/exportMovementMonthlyReport';
 import {formatDate} from '@angular/common';
 import {ExcelService} from '../services/excel.service';
 import * as moment from 'moment';
@@ -64,6 +66,8 @@ export class MovementReportComponent implements OnInit {
     previousPeriod1: any;
     previousPeriod2: any;
     previousPeriod3: any;
+    exportListMovementsMonthly:ExportMovementMonthlyReport[];
+    exportListMovementsDaily:ExportMovementDailyReport[]
 
     constructor(
         private movementReportHttpService: MovementReportHttpService,
@@ -451,18 +455,66 @@ export class MovementReportComponent implements OnInit {
         return $localize`:@@StatFoodDeliveriesFEADAgreedCollectTotal:Total: ${this.totalFoodDeliveriesFEADAgreedCollect} kg`;
     }
 
-    exportAsXLSX() {
+    exportAsXLSX(scope: string) {
 
-        const exportListMovements = [];
-        this.chartDataFoodDeliveriesFEADAgreedCollectHistory.labels.unshift('Category')
-        exportListMovements.push(this.chartDataFoodDeliveriesFEADAgreedCollectHistory.labels);
-        this.chartDataFoodDeliveriesFEADAgreedCollectHistory.datasets[0].data.unshift('FEAD and Collect from US');
-        exportListMovements.push(this.chartDataFoodDeliveriesFEADAgreedCollectHistory.datasets[0].data);
-        this.chartDataFoodDeliveriesFEADNonAgreedHistory.datasets[0].data.unshift('FEAD to Non-Agreed Orgs');
-        exportListMovements.push(this.chartDataFoodDeliveriesFEADNonAgreedHistory.datasets[0].data);
-        this.chartDataFoodDeliveriesNonFEADHistory.datasets[0].data.unshift('Non-FEAD');
-        exportListMovements.push(this.chartDataFoodDeliveriesNonFEADHistory.datasets[0].data);
-        this.excelService.exportAsExcelFile(exportListMovements, 'foodit.movementStatistics.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+        this.exportListMovementsMonthly =[];
+        this.exportListMovementsDaily=[];
+
+       // title gets added in the export service
+      /*  if (scope === 'month') {
+            const exportListMonthlyHeader =new ExportMovementMonthlyReport();
+            exportListMonthlyHeader.month = $localize`:@@Month:Month`;
+            exportListMonthlyHeader.bank = $localize`:@@Bank:Bank`;
+            exportListMonthlyHeader.category = $localize`:@@Category:Category`;
+            exportListMonthlyHeader.quantity = $localize`:@@Quantity:Quantity(kg)`
+            exportListMovementsMonthly.push(exportListMonthlyHeader);
+
+        } else {
+            const exportListDailyHeader =new ExportMovementDailyReport();
+            exportListDailyHeader.day = $localize`:@@Day:Day`;
+            exportListDailyHeader.bank = $localize`:@@Bank:Bank`;
+            exportListDailyHeader.idOrg = $localize`:@@OrganisationId :Organisation Id`;
+            exportListDailyHeader.orgname = $localize`:@@OrganisationName:Organisation Name`;
+            exportListDailyHeader.category = $localize`:@@Category:Category`;
+            exportListDailyHeader.quantity = $localize`:@@Quantity:Quantity(kg)`;
+            exportListMovementsDaily.push(exportListDailyHeader);
+        }
+
+*/
+        if (scope === 'month') {
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly", this.bankShortName).subscribe(
+            (response: MovementReport[]) => {
+                const movementReports = response;
+                for (let movementReport of movementReports) {
+                    const exportListMonthly = new ExportMovementMonthlyReport();
+                    exportListMonthly.month = movementReport.key;
+                    exportListMonthly.bank = movementReport.bankShortName;
+                    exportListMonthly.category = movementReport.category;
+                    exportListMonthly.quantity = movementReport.quantity.toFixed(0);
+                    this.exportListMovementsMonthly.push(exportListMonthly);
+                }
+                this.excelService.exportAsExcelFile(this.exportListMovementsMonthly, 'foodit.movementStatistics.month.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+
+            });
+        } else {
+            this.movementReportHttpService.getMovementDailyReport(this.authService.accessToken, this.bankShortName).subscribe(
+                (response: MovementReport[]) => {
+                    const movementReports = response;
+                    for (let movementReport of movementReports) {
+                        let exportListDaily = new ExportMovementDailyReport();
+                        exportListDaily.day = movementReport.day;
+                        exportListDaily.bank = movementReport.bankShortName;
+                        exportListDaily.idOrg = movementReport.idOrg;
+                        exportListDaily.orgname = movementReport.orgname;
+                        exportListDaily.category = movementReport.category;
+                        exportListDaily.quantity = movementReport.quantity.toFixed(0);
+                        this.exportListMovementsDaily.push(exportListDaily);
+                    }
+                    this.excelService.exportAsExcelFile(this.exportListMovementsDaily, 'foodit.movementStatistics.day.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                });
+        }
     }
+
+
 
 }

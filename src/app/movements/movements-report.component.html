@@ -5,7 +5,11 @@
             <p-checkbox [value]="booShowDaily" binary="true" name="daily" id="daily" (onChange)="changePeriodFilter($event)"></p-checkbox>
         </div>
         <div class="p-field p-col-12 p-md-3">
-            <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Distributions" i18n-label="@@ExportDistributions"></button>
+            <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX('month')" label="Export Monthly Statistics" i18n-label="@@ExportDistributionsMonthly"></button>
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+            <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX('day')" label="Export Daily Statistics" i18n-label="@@ExportDistributionsDaily"></button>
+
         </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">

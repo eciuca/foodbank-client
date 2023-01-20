@@ -26,10 +26,13 @@ export class DashboardReportComponent implements OnInit {
 
     bankOptions: any[];
     days: string[];
+    orgs: string[];
     selectedDay: string;
+    selectedOrg: string;
     booIsLoadedBankItems: boolean;
     booisLoadedOrgItems: boolean;
     booIsLoaded: boolean;
+    booIsLoadedMovements: boolean;
     bankShortName: string;
     dashboardBankItems: MovementReport[];
     dashboardOrgItems: MovementReport[];
@@ -64,6 +67,7 @@ export class DashboardReportComponent implements OnInit {
     ) {
     this.bankShortName = '';
     this.booIsLoaded = false;
+    this.booIsLoadedMovements = false;
     this.booIsLoadedBankItems = false;
     this.booisLoadedOrgItems = false;
     this.dashboardBankItems = [];
@@ -110,7 +114,7 @@ export class DashboardReportComponent implements OnInit {
     }
 
     report() {
-        const lastDays = '7';
+        const lastDays = '10';
 
         this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken,
             "daily", this.bankShortName, null,null,lastDays).subscribe(
@@ -122,9 +126,12 @@ export class DashboardReportComponent implements OnInit {
                 }
                 this.booIsLoadedBankItems = true;
                 this.selectedBankItems = this.dashboardBankItems;
-                if (this.booisLoadedOrgItems) {
+                if ((!this.booIsLoadedMovements) && this.booisLoadedOrgItems) {
                     this.setDropdownDays();
+                    this.setDropdownOrgs();
+                    this.booIsLoadedMovements = true;
                 }
+                this.booIsLoadedBankItems = true;
 
             });
         this.movementReportHttpService.getMovementDailyReport(this.authService.accessToken,
@@ -136,8 +143,10 @@ export class DashboardReportComponent implements OnInit {
                     this.dashboardOrgItems.push(movementsRecords[i]);
                 }
                 this.booisLoadedOrgItems = true;
-                if (this.booIsLoadedBankItems) {
+                if ((!this.booIsLoadedMovements) && this.booIsLoadedBankItems) {
                     this.setDropdownDays();
+                    this.setDropdownOrgs();
+                    this.booIsLoadedMovements = true;
                 }
 
             });
@@ -191,16 +200,33 @@ export class DashboardReportComponent implements OnInit {
         return `${quantity.toFixed(0)} kg`;
     }
     setDropdownDays() {
+        console.log("setDropdownDays with " + this.dashboardBankItems.length + " bank items" + this.dashboardOrgItems.length + " org items");
         var bankDays = this.dashboardBankItems.map(x => x.key); // beware of the key is 'key' for aggregated bank items
         var orgDays = this.dashboardOrgItems.map(x => x.day); // beware of the key is 'day' for org items
         var allDays = bankDays.concat(orgDays).filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
         this.days = allDays.sort().reverse();
+        console.log("setDropdownDays with " + this.days.length + " days");
         this.filterDay(allDays[0]);
+    }
+    setDropdownOrgs() {
+        console.log("setDropdownOrgs with " + this.dashboardOrgItems.length + " org items");
+        var orgs = this.dashboardOrgItems.map(x => x.idOrg + ' ' + x.orgname).filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
+
+        this.orgs = this.dashboardOrgItems.sort(({idOrg:a}, {idOrg:b}) => b-a).map(x => x.idOrg + ' ' + x.orgname).filter((v, i, a) => a.indexOf(v) === i);
+        this.orgs.unshift(" ");
+        console.log("setDropdownOrgs with " + this.orgs.length + " orgs");
     }
     filterDay(myDay: string) {
         this.selectedDay = myDay;
+        this.selectedOrg = " ";
         this.selectedBankItems = this.dashboardBankItems.filter(x => x.key === myDay);
         this.selectedOrgItems = this.dashboardOrgItems.filter(x => x.day === myDay);
+    }
+    filterOrg(myOrg: string) {
+        this.selectedOrg = myOrg;
+        this.selectedDay = " ";
+        this.selectedBankItems = [];
+        this.selectedOrgItems = this.dashboardOrgItems.filter(x => (x.idOrg + ' ' + x.orgname) === myOrg);
     }
     labelClientNFam() {
         return $localize`:@@ClientNFam:Families`;

@@ -3239,7 +3239,7 @@
         <target>FEAD et Ramasse du jour pour les associations Agréées</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">181</context>
+          <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MovementCategoryNoFeadNotAgreed" datatype="html">
@@ -3247,7 +3247,7 @@
         <target> Distributions deVivres du jour hors FEAD pour les associations non agréées</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">183</context>
+          <context context-type="linenumber">192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MovementCategoryFeadNotAgreed" datatype="html">
@@ -3255,7 +3255,7 @@
         <target> Distributions du jour du FEAD pour les associations non agréées</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">194</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNFam" datatype="html">
@@ -3263,7 +3263,7 @@
         <target>Familles</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">206</context>
+          <context context-type="linenumber">232</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNpers" datatype="html">
@@ -3271,7 +3271,7 @@
         <target>Beneficiaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">235</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNNour" datatype="html">
@@ -3279,7 +3279,7 @@
         <target>Nourrissons (0-6 mois)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">212</context>
+          <context context-type="linenumber">238</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNBebe" datatype="html">
@@ -3287,7 +3287,7 @@
         <target>Bébés (6-24 mois)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">215</context>
+          <context context-type="linenumber">241</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientChild" datatype="html">
@@ -3295,7 +3295,7 @@
         <target>Enfants (2-14 ans)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">244</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNAdo" datatype="html">
@@ -3303,7 +3303,7 @@
         <target>Adolescents</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">221</context>
+          <context context-type="linenumber">247</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientN1824" datatype="html">
@@ -3311,7 +3311,7 @@
         <target>Jeunes adultes (18-24 ans)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">224</context>
+          <context context-type="linenumber">250</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientSeniors" datatype="html">
@@ -3319,7 +3319,7 @@
         <target>Séniors (&gt; 65 ans)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">227</context>
+          <context context-type="linenumber">253</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCount" datatype="html">
@@ -3327,7 +3327,7 @@
         <target>Nombre d'organisations de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">256</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgFeadCount" datatype="html">
@@ -3335,7 +3335,7 @@
         <target>Nombre d'organisations FEAD de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">233</context>
+          <context context-type="linenumber">259</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgAgreedCount" datatype="html">
@@ -3343,7 +3343,7 @@
         <target>Nombre d'organisations agréées de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">262</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgFeadFromUsCount" datatype="html">
@@ -3351,7 +3351,7 @@
         <target>Nombre d'organisations FEAD de la Banque recevant de la nourriture de notre part</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">265</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberBankCount" datatype="html">
@@ -3359,7 +3359,7 @@
         <target>Nombre de collaborateurs de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">242</context>
+          <context context-type="linenumber">268</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberorgCount" datatype="html">
@@ -3367,7 +3367,7 @@
         <target>Nombre de collaborateurs des organisations de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">245</context>
+          <context context-type="linenumber">271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserBankCount" datatype="html">
@@ -3375,7 +3375,7 @@
         <target>Nombre d'utilisateurs de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">248</context>
+          <context context-type="linenumber">274</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserorgCount" datatype="html">
@@ -3383,7 +3383,7 @@
         <target>Nombre d'utilisateurs des organisations de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">251</context>
+          <context context-type="linenumber">277</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SaveDepotWithSync" datatype="html">
@@ -5310,12 +5310,20 @@
           <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ExportDistributions" datatype="html">
-        <source>Export Distributions</source>
-        <target>Exporter Distributions</target>
+      <trans-unit id="ExportDistributionsMonthly" datatype="html">
+        <source>Export Monthly Statistics</source>
+        <target>Exporter les statistiques mensuelles</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.html</context>
           <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ExportDistributionsDaily" datatype="html">
+        <source>Export Daily Statistics</source>
+        <target>Exporter les statistiques quotidiennes</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/movements/movements-report.component.html</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesNonFEADHistory" datatype="html">
@@ -5323,7 +5331,7 @@
         <target>Aliments livrés aux organisations non FEAD(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">384</context>
+          <context context-type="linenumber">388</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADNonAgreedHistory" datatype="html">
@@ -5331,7 +5339,7 @@
         <target>Aliments FEAD livrés à des organisations non agréées(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">393</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADAgreedCollectHistory" datatype="html">
@@ -5339,7 +5347,7 @@
         <target>FEAD + Collecte des aliments livrés aux organisations agréées(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">395</context>
+          <context context-type="linenumber">399</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesCurrent" datatype="html">
@@ -5347,7 +5355,7 @@
         <target>Nourriture livrée en <x id="PH" equiv-text="this.currentPeriod"/>(kg) <x id="PH_1" equiv-text="mthPercentage"/> % de <x id="PH_2" equiv-text="this.previousPeriod"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">402</context>
+          <context context-type="linenumber">406</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious" datatype="html">
@@ -5355,7 +5363,7 @@
         <target>Nourriture livrée en <x id="PH" equiv-text="this.previousPeriod"/>(kg) <x id="PH_1" equiv-text="growthPercentage"/> % de croissance par rapport à <x id="PH_2" equiv-text="this.previousPeriod1"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">409</context>
+          <context context-type="linenumber">413</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious1" datatype="html">
@@ -5363,7 +5371,7 @@
         <target>Nourriture livrée en <x id="PH" equiv-text="this.previousPeriod2"/>(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">414</context>
+          <context context-type="linenumber">418</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious2" datatype="html">
@@ -5371,7 +5379,7 @@
         <target>Nourriture livrée en <x id="PH" equiv-text="this.previousPeriod3"/>(kg)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">419</context>
+          <context context-type="linenumber">423</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPreviousTotal" datatype="html">
@@ -5379,7 +5387,7 @@
         <target>Total : <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious)"/>  kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">427</context>
+          <context context-type="linenumber">431</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious1Total" datatype="html">
@@ -5387,7 +5395,7 @@
         <target>Total : <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious1)"/>  kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">431</context>
+          <context context-type="linenumber">435</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious2Total" datatype="html">
@@ -5395,7 +5403,7 @@
         <target>Total : <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious2)"/>  kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">435</context>
+          <context context-type="linenumber">439</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesCurrentTotal" datatype="html">
@@ -5403,7 +5411,7 @@
         <target>Total : <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesCurrent)"/>  kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">439</context>
+          <context context-type="linenumber">443</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesNonFEADTotal" datatype="html">
@@ -5411,7 +5419,7 @@
         <target>Total : <x id="PH" equiv-text="this.totalFoodDeliveriesNonFEAD"/>  kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">443</context>
+          <context context-type="linenumber">447</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADNonAgreedTotal" datatype="html">
@@ -5419,7 +5427,7 @@
         <target>Total : <x id="PH" equiv-text="this.totalFoodDeliveriesFEADNonAgreed"/>  kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">447</context>
+          <context context-type="linenumber">451</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADAgreedCollectTotal" datatype="html">
@@ -5427,7 +5435,7 @@
         <target>Total : <x id="PH" equiv-text="this.totalFoodDeliveriesFEADAgreedCollect"/>  kg</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">451</context>
+          <context context-type="linenumber">455</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prev" datatype="html">
@@ -8593,6 +8601,10 @@
       <trans-unit id="DasnboardTitleMovement">
         <source/>
         <target>Nourriture fournie en kg</target>
+      </trans-unit>
+      <trans-unit id="ExportDistributions">
+        <source/>
+        <target>Exporter Distributions</target>
       </trans-unit>
       <trans-unit id="Key">
         <source/>

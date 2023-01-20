@@ -138,9 +138,16 @@
             </p-accordionTab>
 
             <p-accordionTab i18n-header="@@DistributionActivity" header="Recent Distribution Activity"  >
-                <p-dropdown [ngModel]="selectedDay" [options]="days" (onChange)="filterDay($event.value)" >
-                </p-dropdown>
-
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <p-dropdown [(ngModel)]="selectedDay" [options]="days" (onChange)="filterDay($event.value)" >
+                        </p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-dropdown [(ngModel)]="selectedOrg" [options]="orgs" (onChange)="filterOrg($event.value)" >
+                        </p-dropdown>
+                    </div>
+                </div>
                 <div *ngFor="let item of selectedBankItems" class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
                         {{item.key}}
@@ -158,7 +165,7 @@
                         {{item.day}}
                     </div>
                     <div class="p-field p-col-12 p-md-6">
-                        {{item.orgname}}
+                        {{item.idOrg}} {{item.orgname}}
                     </div>
                     <div class="p-field p-col-12 p-md-3">
                         {{formatQuantity(item.quantity)}}
