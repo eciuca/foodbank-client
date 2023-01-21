@@ -75,7 +75,9 @@ export class DashboardReportComponent implements OnInit {
     this.selectedBankItems = [];
     this.selectedOrgItems = [];
     }
-
+    calculateClientAdults() {
+        return this.clientNpers - this.clientNNour - this.clientNBebe - this.clientNEnf - this.clientNAdo - this.clientN1824 - this.clientNSen;
+    }
     ngOnInit(): void {
         this.store
             .pipe(
@@ -212,7 +214,7 @@ export class DashboardReportComponent implements OnInit {
         console.log("setDropdownOrgs with " + this.dashboardOrgItems.length + " org items");
         var orgs = this.dashboardOrgItems.map(x => x.idOrg + ' ' + x.orgname).filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
 
-        this.orgs = this.dashboardOrgItems.sort(({idOrg:a}, {idOrg:b}) => b-a).map(x => x.idOrg + ' ' + x.orgname).filter((v, i, a) => a.indexOf(v) === i);
+        this.orgs = this.dashboardOrgItems.sort(({idOrg:a}, {idOrg:b}) => a-b).map(x => x.idOrg + ' ' + x.orgname).filter((v, i, a) => a.indexOf(v) === i);
         this.orgs.unshift(" ");
         console.log("setDropdownOrgs with " + this.orgs.length + " orgs");
     }
@@ -233,6 +235,9 @@ export class DashboardReportComponent implements OnInit {
     }
     labelClientNpers() {
         return $localize`:@@ClientNpers:Persons`;
+    }
+    labelClientAdults() {
+        return $localize`:@@ClientAdults:Adults`;
     }
     labelClientNNour() {
         return $localize`:@@ClientNNour:Infants`;

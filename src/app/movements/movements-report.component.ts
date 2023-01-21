@@ -78,8 +78,7 @@ export class MovementReportComponent implements OnInit {
         private store: Store<AppState>
     ) {
         this.booShowDaily = false;
-        this.backgroundColors = ['magenta', 'violet', 'indigo', 'blue', 'x0080ff', 'cyan', 'green', 'olive', 'yellow', 'orange', 'red', 'darkred', 'black', 'silver'];
-        // x0080ff dodger blue
+
         this.basicOptions = {
             tooltips: {
                 mode: 'index',
@@ -134,6 +133,7 @@ export class MovementReportComponent implements OnInit {
                 case 'Admin_Banq':
                     this.bankShortName = authState.banque.bankShortName;
                     this.bankOptions = [{'label': this.bankShortName, 'value': this.bankShortName}];
+                    this.backgroundColors = ['blue'];
                     if (!this.booIsLoaded) {
                         this.report();
                     }
@@ -141,6 +141,8 @@ export class MovementReportComponent implements OnInit {
                     break;
                 case 'admin':
                 case 'Admin_FBBA':
+                    this.backgroundColors = ['magenta', 'violet', 'indigo', 'blue', 'x0080ff', 'cyan', 'green', 'olive', 'yellow', 'orange', 'red', 'darkred', 'black', 'silver'];
+                    // x0080ff dodger blue
                     const classicBanks = {'classicBanks': '1'};
                     this.banqueService.getWithQuery(classicBanks)
                         .subscribe((banquesEntities) => {
