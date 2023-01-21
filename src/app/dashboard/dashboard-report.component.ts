@@ -119,7 +119,7 @@ export class DashboardReportComponent implements OnInit {
         const lastDays = '10';
 
         this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken,
-            "daily", this.bankShortName, null,null,lastDays).subscribe(
+            "daily", 'bank',this.bankShortName, null,null,lastDays).subscribe(
             (response: MovementReport[]) => {
                 const movementsRecords = response;
                 this.dashboardBankItems = [];

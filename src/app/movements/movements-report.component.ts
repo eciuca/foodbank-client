@@ -15,6 +15,8 @@ import {formatDate} from '@angular/common';
 import {ExcelService} from '../services/excel.service';
 import * as moment from 'moment';
 import {forEach} from '@angular-devkit/schematics';
+import {DepotHttpService} from '../depots/services/depot-http.service';
+import {Depot} from '../depots/model/depot';
 @Component({
     selector: 'app-movements-report',
     templateUrl: './movements-report.component.html',
@@ -22,8 +24,10 @@ import {forEach} from '@angular-devkit/schematics';
 })
 export class MovementReportComponent implements OnInit {
     booIsLoaded: boolean;
-    bankOptions: any[];
+    categoryOptions: any[];
+    category: string;
     bankShortName: string;
+    bankId: number;
     backgroundColors: any[];
     basicOptions: any;
     stackedOptions: any;
@@ -72,12 +76,15 @@ export class MovementReportComponent implements OnInit {
     constructor(
         private movementReportHttpService: MovementReportHttpService,
         private banqueService: BanqueEntityService,
+        private depotHttpService: DepotHttpService,
         private excelService: ExcelService,
         private authService: AuthService,
         private http: HttpClient,
         private store: Store<AppState>
     ) {
         this.booShowDaily = false;
+        this.backgroundColors = ['magenta', 'violet', 'indigo', 'blue', 'x0080ff', 'cyan', 'green', 'olive', 'yellow', 'orange', 'red', 'darkred', 'black', 'silver'];
+        // x0080ff dodger blue
 
         this.basicOptions = {
             tooltips: {
@@ -132,21 +139,28 @@ export class MovementReportComponent implements OnInit {
                 case 'Bank':
                 case 'Admin_Banq':
                     this.bankShortName = authState.banque.bankShortName;
-                    this.bankOptions = [{'label': this.bankShortName, 'value': this.bankShortName}];
-                    this.backgroundColors = ['blue'];
-                    if (!this.booIsLoaded) {
-                        this.report();
-                    }
-                    this.booIsLoaded = true;
+                    this.bankId = authState.banque.bankId;
+                    this.category = 'Depot'
+                   this.depotHttpService.getDepotReport(this.authService.accessToken,this.bankId)
+                            .subscribe((depots:Depot[]) => {
+                                this.categoryOptions = depots.map(({idDepot, nom}) => ({
+                                    'value': idDepot,
+                                    'label': nom
+                                }));
+                                if (!this.booIsLoaded) {
+                                    this.report();
+                                }
+                                this.booIsLoaded = true;
+                            });
                     break;
                 case 'admin':
                 case 'Admin_FBBA':
-                    this.backgroundColors = ['magenta', 'violet', 'indigo', 'blue', 'x0080ff', 'cyan', 'green', 'olive', 'yellow', 'orange', 'red', 'darkred', 'black', 'silver'];
-                    // x0080ff dodger blue
+                    this.category = 'Bank'
+
                     const classicBanks = {'classicBanks': '1'};
                     this.banqueService.getWithQuery(classicBanks)
                         .subscribe((banquesEntities) => {
-                            this.bankOptions = banquesEntities.map(({bankShortName}) => ({
+                            this.categoryOptions = banquesEntities.map(({bankShortName}) => ({
                                 'label': bankShortName,
                                 'value': bankShortName
                             }));
@@ -179,30 +193,30 @@ export class MovementReportComponent implements OnInit {
     reportMovementsHistoryMonthly() {
 
         this.initializeChart();
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly", this.bankShortName).subscribe(
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly", this.category,this.bankShortName).subscribe(
             (response: MovementReport[]) => {
                 this.movementReports = response;
 
                 this.currentPeriod = new Date().getFullYear();
                 this.previousPeriod = this.currentPeriod - 1;
                 this.previousPeriod1 = this.currentPeriod - 2;
-
+                console.log(this.movementReports);
                 for (let i = 0; i < this.movementReports.length; i++) {
-                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
-                    if (bankOptionIndex === -1) continue;
+                    const categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
+                    if (categoryOptionIndex === -1) continue;
                     const movementYear = this.movementReports[i].key.substr(0, 4);
                     if (movementYear < this.previousPeriod2) continue;
                     switch (movementYear) {
                         case this.currentPeriod.toString():
-                            this.reportDataSetsCurrent[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsCurrent[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
                             break;
                         case this.previousPeriod.toString():
-                            this.reportDataSetsPrevious[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsPrevious[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;
                             break;
                         case this.previousPeriod1.toString():
-                            this.reportDataSetsPrevious1[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsPrevious1[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious1 += this.movementReports[i].quantity;
                             break;
 
@@ -211,7 +225,7 @@ export class MovementReportComponent implements OnInit {
                     }
                     if (!this.reportLabels.includes(this.movementReports[i].key)) {
                         this.reportLabels.push(this.movementReports[i].key);
-                        for (let i = 0; i < this.bankOptions.length; i++) {
+                        for (let i = 0; i < this.categoryOptions.length; i++) {
                             this.reportDataSetsNonFEAD[i].data.push(0);
                             this.reportDataSetsFEADnonAgreed[i].data.push(0);
                             this.reportDataSetsFEADAgreedCollect[i].data.push(0);
@@ -222,15 +236,15 @@ export class MovementReportComponent implements OnInit {
 
                     switch (this.movementReports[i].category) {
                         case 'NOFEADNONAGREED':
-                            this.reportDataSetsNonFEAD[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsNonFEAD[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesNonFEAD += this.movementReports[i].quantity;
                             break;
                         case 'FEADNONAGREED':
-                            this.reportDataSetsFEADnonAgreed[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsFEADnonAgreed[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesFEADNonAgreed += this.movementReports[i].quantity;
                             break;
                         case 'AGREEDFEADCOLLECT':
-                            this.reportDataSetsFEADAgreedCollect[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsFEADAgreedCollect[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesFEADAgreedCollect += this.movementReports[i].quantity;
                             break;
                         default:
@@ -245,7 +259,7 @@ export class MovementReportComponent implements OnInit {
 
     reportMovementsHistoryDaily() {
         this.initializeChart()
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "daily", this.bankShortName).subscribe(
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "daily", this.category,this.bankShortName).subscribe(
             (response: MovementReport[]) => {
                 this.movementReports = response;
 
@@ -254,20 +268,20 @@ export class MovementReportComponent implements OnInit {
                 this.previousPeriod1 = moment().subtract(2, 'months').format('YYYY-MM');
 
                 for (let i = 0; i < this.movementReports.length; i++) {
-                    const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
-                    if (bankOptionIndex === -1) continue;
+                    const categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
+                    if (categoryOptionIndex === -1) continue;
                     const movementMonth = this.movementReports[i].key.substr(0, 7);
                     switch (movementMonth) {
                         case this.currentPeriod.toString():
-                            this.reportDataSetsCurrent[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsCurrent[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
                             break;
                         case this.previousPeriod.toString():
-                            this.reportDataSetsPrevious[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsPrevious[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;
                             break;
                         case this.previousPeriod1.toString():
-                            this.reportDataSetsPrevious1[0].data[bankOptionIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsPrevious1[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious1 += this.movementReports[i].quantity;
                             break;
 
@@ -276,7 +290,7 @@ export class MovementReportComponent implements OnInit {
                     }
                     if (!this.reportLabels.includes(this.movementReports[i].key)) {
                         this.reportLabels.push(this.movementReports[i].key);
-                        for (let i = 0; i < this.bankOptions.length; i++) {
+                        for (let i = 0; i < this.categoryOptions.length; i++) {
                             this.reportDataSetsNonFEAD[i].data.push(0);
                             this.reportDataSetsFEADnonAgreed[i].data.push(0);
                             this.reportDataSetsFEADAgreedCollect[i].data.push(0);
@@ -287,15 +301,15 @@ export class MovementReportComponent implements OnInit {
 
                     switch (this.movementReports[i].category) {
                         case 'NOFEADNONAGREED':
-                            this.reportDataSetsNonFEAD[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsNonFEAD[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesNonFEAD += this.movementReports[i].quantity;
                             break;
                         case 'FEADNONAGREED':
-                            this.reportDataSetsFEADnonAgreed[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsFEADnonAgreed[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesFEADNonAgreed += this.movementReports[i].quantity;
                             break;
                         case 'AGREEDFEADCOLLECT':
-                            this.reportDataSetsFEADAgreedCollect[bankOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
+                            this.reportDataSetsFEADAgreedCollect[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesFEADAgreedCollect += this.movementReports[i].quantity;
                             break;
                         default:
@@ -346,32 +360,32 @@ export class MovementReportComponent implements OnInit {
                 backgroundColor: this.backgroundColors,
             }
         ];
-        for (let i = 0; i < this.bankOptions.length; i++) {
+        for (let i = 0; i < this.categoryOptions.length; i++) {
             this.reportDataSetsCurrent[0].data.push(0);
             this.reportDataSetsPrevious[0].data.push(0);
             this.reportDataSetsPrevious1[0].data.push(0);
             this.reportDataSetsPrevious2[0].data.push(0);
         }
         let colorIndex = 0;
-        for (let i = 0; i < this.bankOptions.length; i++) {
+        for (let i = 0; i < this.categoryOptions.length; i++) {
             this.reportDataSetsNonFEAD.push(
                 {
                     type: 'bar',
-                    label: this.bankOptions[i].label,
+                    label: this.categoryOptions[i].label,
                     backgroundColor: this.backgroundColors[colorIndex],
                     data: []
                 });
             this.reportDataSetsFEADnonAgreed.push(
                 {
                     type: 'bar',
-                    label: this.bankOptions[i].label,
+                    label: this.categoryOptions[i].label,
                     backgroundColor: this.backgroundColors[colorIndex],
                     data: []
                 });
             this.reportDataSetsFEADAgreedCollect.push(
                 {
                     type: 'bar',
-                    label: this.bankOptions[i].label,
+                    label: this.categoryOptions[i].label,
                     backgroundColor: this.backgroundColors[colorIndex],
                     data: []
                 });
@@ -407,24 +421,24 @@ export class MovementReportComponent implements OnInit {
 
         this.titleFoodDeliveriesCurrent = $localize`:@@StatFoodDeliveriesCurrent:Food Delivered in ${this.currentPeriod}(kg) ${mthPercentage}% of ${this.previousPeriod}`;
         this.chartDataFoodDeliveriesCurrent = {
-            labels: this.bankOptions.map(({label}) => label),
+            labels: this.categoryOptions.map(({label}) => label),
             datasets: this.reportDataSetsCurrent
         }
         const growthPercentage = this.totalFoodDeliveriesPrevious1 > 0 ? (((this.totalFoodDeliveriesPrevious - this.totalFoodDeliveriesPrevious1) * 100 )/ this.totalFoodDeliveriesPrevious1).toFixed(2) : 0;
 
         this.titleFoodDeliveriesPrevious = $localize`:@@StatFoodDeliveriesPrevious:Food Delivered in ${this.previousPeriod}(kg) ${growthPercentage}% growth vs ${this.previousPeriod1}`;
         this.chartDataFoodDeliveriesPrevious = {
-            labels: this.bankOptions.map(({label}) => label),
+            labels: this.categoryOptions.map(({label}) => label),
             datasets: this.reportDataSetsPrevious
         }
         this.titleFoodDeliveriesPrevious1 = $localize`:@@StatFoodDeliveriesPrevious1:Food Delivered in ${this.previousPeriod1}(kg)`;
         this.chartDataFoodDeliveriesPrevious1 = {
-            labels: this.bankOptions.map(({label}) => label),
+            labels: this.categoryOptions.map(({label}) => label),
             datasets: this.reportDataSetsPrevious1
         }
         this.titleFoodDeliveriesPrevious2 = $localize`:@@StatFoodDeliveriesPrevious2:Food Delivered in ${this.previousPeriod2}(kg)`;
         this.chartDataFoodDeliveriesPrevious2 = {
-            labels: this.bankOptions.map(({label}) => label),
+            labels: this.categoryOptions.map(({label}) => label),
             datasets: this.reportDataSetsPrevious2
         }
     }
@@ -484,7 +498,7 @@ export class MovementReportComponent implements OnInit {
 
 */
         if (scope === 'month') {
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly", this.bankShortName).subscribe(
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly",this.category, this.bankShortName).subscribe(
             (response: MovementReport[]) => {
                 const movementReports = response;
                 for (let movementReport of movementReports) {

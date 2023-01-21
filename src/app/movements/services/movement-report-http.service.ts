@@ -40,7 +40,7 @@ export class MovementReportHttpService {
 
         return this.http.get<MovementReport[]>(`${this.requestUrl}`, requestOptions);
     }
-    getMovementReportByBank(accesstoken: string, scope: string, idCompany: string, lowRange:string=null, highRange:string=null,lastDays:string=null): Observable<MovementReport[]> {
+    getMovementReportByBank(accesstoken: string, scope: string,category:string, idCompany: string, lowRange:string=null, highRange:string=null,lastDays:string=null): Observable<MovementReport[]> {
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
@@ -48,11 +48,21 @@ export class MovementReportHttpService {
             }),
         };
         let parmContinuationChar = '?';
-        if (scope === 'monthly') {
-            this.requestUrl = '/api/movementsmonthlybank/';
+        if (category === 'Depot') {
+            if (scope === 'monthly') {
+                this.requestUrl = '/api/movementsmonthlybankdepot/';
+            } else {
+                this.requestUrl = '/api/movementsdailybankdepot/';
+            }
         } else {
-            this.requestUrl = '/api/movementsdailybank/';
+            if (scope === 'monthly') {
+                this.requestUrl = '/api/movementsmonthlybank/';
+            }
+            else {
+                this.requestUrl = '/api/movementsdailybank/';
+            }
         }
+
         if (idCompany) {
             this.requestUrl += '?idCompany=' + idCompany;
             parmContinuationChar = '&';
