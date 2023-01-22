@@ -148,11 +148,13 @@
             <p-accordionTab i18n-header="@@DistributionActivity" header="Recent Distribution Activity"  >
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
-                        <p-dropdown [(ngModel)]="selectedDay" [options]="days" (onChange)="filterDay($event.value)" >
+                        <label i18n="@@FilterDay" for="selectedDay">Filter day?</label>
+                        <p-dropdown [(ngModel)]="selectedDay" id="selectedDay" name="selectedDay" [options]="days" (onChange)="filterDay($event.value)" >
                         </p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-6">
-                        <p-dropdown [(ngModel)]="selectedOrg" [options]="orgs" (onChange)="filterOrg($event.value)" >
+                        <label i18n="@@FilterOrg" for="selectedOrg">Filter Org?</label>
+                        <p-dropdown [(ngModel)]="selectedOrg"   id="selectedOrg" name="selectedOrg" [options]="orgs" (onChange)="filterOrg($event.value)" >
                         </p-dropdown>
                     </div>
                 </div>

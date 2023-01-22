@@ -10,7 +10,7 @@ export class DepotHttpService {
     private baseUrl = '/api/depots';
     constructor(private http: HttpClient) {
     }
-    getDepotReport(accesstoken: string, lienBanque: number): Observable<Depot[]> {
+    getDepotReport(accesstoken: string, idCompany:string): Observable<Depot[]> {
         const requestOptions = {
             headers: new HttpHeaders( {
                 responseType: 'json',
@@ -18,6 +18,6 @@ export class DepotHttpService {
             }),
         };
         // tslint:disable-next-line:max-line-length
-        return this.http.get<Depot[]>(`${this.baseUrl}/?lienBanque=${lienBanque.toString()}&offset=0&rows=999&sortOrder=1&sortField=nom`, requestOptions);
+        return this.http.get<Depot[]>(`${this.baseUrl}/?actif=1&idCompany=${idCompany}&offset=0&rows=999&sortOrder=1&sortField=nom`, requestOptions);
     }
 }

@@ -304,7 +304,7 @@ export class DepotsComponent implements OnInit {
     }
   }
   exportAsXLSX(): void {
-    this.depotHttpService.getDepotReport(this.authService.accessToken, this.lienBanque).subscribe(
+    this.depotHttpService.getDepotReport(this.authService.accessToken, this.bankShortName).subscribe(
         (depots: any[] ) => {
           const cleanedList = depots.map(({ actif, isNew, totalRecords, ...item }) => item);
           this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.depots.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');

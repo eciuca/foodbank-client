@@ -141,10 +141,10 @@ export class MovementReportComponent implements OnInit {
                     this.bankShortName = authState.banque.bankShortName;
                     this.bankId = authState.banque.bankId;
                     this.category = 'Depot'
-                   this.depotHttpService.getDepotReport(this.authService.accessToken,this.bankId)
+                   this.depotHttpService.getDepotReport(this.authService.accessToken,this.bankShortName)
                             .subscribe((depots:Depot[]) => {
                                 this.categoryOptions = depots.map(({idDepot, nom}) => ({
-                                    'value': idDepot,
+                                    'value': nom,
                                     'label': nom
                                 }));
                                 if (!this.booIsLoaded) {
@@ -202,7 +202,13 @@ export class MovementReportComponent implements OnInit {
                 this.previousPeriod1 = this.currentPeriod - 2;
                 console.log(this.movementReports);
                 for (let i = 0; i < this.movementReports.length; i++) {
-                    const categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
+                    let categoryOptionIndex = -1;
+                    if(this.category == 'Depot') {
+                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].orgname);
+                    }
+                    else {
+                         categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
+                    }
                     if (categoryOptionIndex === -1) continue;
                     const movementYear = this.movementReports[i].key.substr(0, 4);
                     if (movementYear < this.previousPeriod2) continue;
@@ -268,10 +274,16 @@ export class MovementReportComponent implements OnInit {
                 this.previousPeriod1 = moment().subtract(2, 'months').format('YYYY-MM');
 
                 for (let i = 0; i < this.movementReports.length; i++) {
-                    const categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
+                    let categoryOptionIndex = -1;
+                    if(this.category == 'Depot') {
+                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].orgname);
+                    }
+                    else {
+                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
+                    }
                     if (categoryOptionIndex === -1) continue;
-                    const movementMonth = this.movementReports[i].key.substr(0, 7);
-                    switch (movementMonth) {
+                    const movementDay = this.movementReports[i].key.substr(0, 7);
+                    switch (movementDay) {
                         case this.currentPeriod.toString():
                             this.reportDataSetsCurrent[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
