@@ -17,6 +17,7 @@ import * as moment from 'moment';
 import {forEach} from '@angular-devkit/schematics';
 import {DepotHttpService} from '../depots/services/depot-http.service';
 import {Depot} from '../depots/model/depot';
+import {OrgSummary} from '../organisations/model/orgsummary';
 @Component({
     selector: 'app-movements-report',
     templateUrl: './movements-report.component.html',
@@ -28,6 +29,7 @@ export class MovementReportComponent implements OnInit {
     category: string;
     bankShortName: string;
     bankId: number;
+    depotOptions: any[];
     backgroundColors: any[];
     basicOptions: any;
     stackedOptions: any;
@@ -72,6 +74,7 @@ export class MovementReportComponent implements OnInit {
     previousPeriod3: any;
     exportListMovementsMonthly:ExportMovementMonthlyReport[];
     exportListMovementsDaily:ExportMovementDailyReport[]
+    depotId: string;
 
     constructor(
         private movementReportHttpService: MovementReportHttpService,
@@ -147,6 +150,8 @@ export class MovementReportComponent implements OnInit {
                                     'value': nom,
                                     'label': nom
                                 }));
+                                this.depotOptions = depots.map(({idDepot, nom}) => ({'value': idDepot, 'label': nom}));
+                                this.depotOptions.unshift({'value': null, 'label': 'Any'});
                                 if (!this.booIsLoaded) {
                                     this.report();
                                 }
@@ -189,11 +194,21 @@ export class MovementReportComponent implements OnInit {
             this.reportMovementsHistoryMonthly();
         }
     }
+    filterDepot(depotId) {
+        this.depotId = depotId;
+        if (this.booShowDaily) {
+            this.reportMovementsHistoryDaily();
+        } else {
+            this.reportMovementsHistoryMonthly();
+        }
+
+    }
+
 
     reportMovementsHistoryMonthly() {
 
         this.initializeChart();
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly", this.category,this.bankShortName).subscribe(
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly", this.category,this.bankShortName,this.depotId).subscribe(
             (response: MovementReport[]) => {
                 this.movementReports = response;
 
@@ -265,7 +280,7 @@ export class MovementReportComponent implements OnInit {
 
     reportMovementsHistoryDaily() {
         this.initializeChart()
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "daily", this.category,this.bankShortName).subscribe(
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "daily", this.category,this.bankShortName,this.depotId).subscribe(
             (response: MovementReport[]) => {
                 this.movementReports = response;
 

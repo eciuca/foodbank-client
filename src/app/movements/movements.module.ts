@@ -11,6 +11,7 @@ import {EntityDataService, EntityDefinitionService} from '@ngrx/data';
 import {PanelModule} from 'primeng/panel';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ButtonModule} from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
         TooltipModule,
         PanelModule,
         CheckboxModule,
+        DropdownModule,
         ButtonModule,
         ChartModule
 

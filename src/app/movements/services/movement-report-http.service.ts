@@ -40,7 +40,7 @@ export class MovementReportHttpService {
 
         return this.http.get<MovementReport[]>(`${this.requestUrl}`, requestOptions);
     }
-    getMovementReportByBank(accesstoken: string, scope: string,category:string, idCompany: string, lowRange:string=null, highRange:string=null,lastDays:string=null): Observable<MovementReport[]> {
+    getMovementReportByBank(accesstoken: string, scope: string,category:string, idCompany: string,idDepot:string=null, lowRange:string=null, highRange:string=null,lastDays:string=null): Observable<MovementReport[]> {
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
@@ -65,6 +65,10 @@ export class MovementReportHttpService {
 
         if (idCompany) {
             this.requestUrl += '?idCompany=' + idCompany;
+            parmContinuationChar = '&';
+        }
+        if (idDepot) {
+            this.requestUrl += parmContinuationChar + 'idDepot=' + idDepot;
             parmContinuationChar = '&';
         }
 

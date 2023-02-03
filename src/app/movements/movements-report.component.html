@@ -4,6 +4,10 @@
             <label i18n="@@ShowDaily" for="daily">Show Daily?</label>
             <p-checkbox [value]="booShowDaily" binary="true" name="daily" id="daily" (onChange)="changePeriodFilter($event)"></p-checkbox>
         </div>
+        <div *ngIf="category=='Depot'" class="p-field p-col-12 p-md-2">
+            <label i18n="@@Depot" for="depot">Depot</label>
+            <p-dropdown  id="depot" name="depot" [ngModel]="value" [options]="depotOptions" (onChange)="filterDepot($event.value)" placeholder="Any" [showClear]="true"></p-dropdown>
+        </div>
         <div class="p-field p-col-12 p-md-3">
             <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX('month')" label="Export Monthly Statistics" i18n-label="@@ExportDistributionsMonthly"></button>
         </div>
