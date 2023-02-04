@@ -150,7 +150,7 @@ export class MovementReportComponent implements OnInit {
                    this.depotHttpService.getDepotReport(this.authService.accessToken,this.bankShortName)
                             .subscribe((depots:Depot[]) => {
                                 this.depotOptions = depots.map(({idDepot, nom}) => ({'value': idDepot, 'label': nom}));
-                                this.categoryOptions ={...this.depotOptions};
+                                this.categoryOptions =[...this.depotOptions];
                                 this.categoryOptions.push({label: 'OTHER', value: null});
                                 this.depotOptions.unshift({'value': null, 'label': 'Any'});
                                 if (!this.booIsLoaded) {
@@ -171,7 +171,7 @@ export class MovementReportComponent implements OnInit {
                                 'label': bankShortName,
                                 'value': bankShortName
                             }));
-                            this.categoryOptions ={...this.bankOptions};
+                            this.categoryOptions =[...this.bankOptions];
                             this.categoryOptions.push({label: 'OTHER', value: null});
                            this.bankOptions.unshift({'value': null, 'label': 'Any'});
                             if (!this.booIsLoaded) {
@@ -208,7 +208,7 @@ export class MovementReportComponent implements OnInit {
            }
         }
         else {
-            this.categoryOptions ={...this.depotOptions};
+            this.categoryOptions =[...this.depotOptions];
             this.categoryOptions.push({label: 'OTHER', value: null});
         }
         if (this.booShowDaily) {
@@ -353,7 +353,25 @@ export class MovementReportComponent implements OnInit {
                     else {
                         categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
                     }
-                    if (categoryOptionIndex === -1) continue;
+                    if (categoryOptionIndex === -1) {
+                        if (this.depotId) {
+                            for (let i = 0; i < 9; i++) {
+                                if (!this.categoryOptions[i].value
+                                ) {
+                                    this.categoryOptions[i]={label: this.movementReports[i].orgname, value: this.movementReports[i].orgname};
+                                    categoryOptionIndex = i;
+                                    break;
+                                }
+                            }
+                            if (categoryOptionIndex === -1) {
+                                this.categoryOptions[9]={label: 'OTHER', value: null};
+                                categoryOptionIndex = 9;
+                            }
+                        }
+                        else {
+                            categoryOptionIndex = this.categoryOptions.length - 1;
+                        }
+                    }
                     const movementDay = this.movementReports[i].key.substr(0, 7);
                     switch (movementDay) {
                         case this.currentPeriod.toString():

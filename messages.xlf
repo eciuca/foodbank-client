@@ -4877,98 +4877,98 @@
         <source>Food Delivered to Non FEAD Orgs(kg)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">488</context>
+          <context context-type="linenumber">506</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADNonAgreedHistory" datatype="html">
         <source>FEAD Food Delivered to Non Agreed Orgs(kg)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">493</context>
+          <context context-type="linenumber">511</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADAgreedCollectHistory" datatype="html">
         <source>FEAD + Collect Food Delivered to Agreed Orgs(kg)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">499</context>
+          <context context-type="linenumber">517</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesCurrent" datatype="html">
         <source>Food Delivered in <x id="PH" equiv-text="this.currentPeriod"/>(kg) <x id="PH_1" equiv-text="mthPercentage"/>% of <x id="PH_2" equiv-text="this.previousPeriod"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">506</context>
+          <context context-type="linenumber">524</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious" datatype="html">
         <source>Food Delivered in <x id="PH" equiv-text="this.previousPeriod"/>(kg) <x id="PH_1" equiv-text="growthPercentage"/>% growth vs <x id="PH_2" equiv-text="this.previousPeriod1"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">513</context>
+          <context context-type="linenumber">531</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious1" datatype="html">
         <source>Food Delivered in <x id="PH" equiv-text="this.previousPeriod1"/>(kg)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">518</context>
+          <context context-type="linenumber">536</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious2" datatype="html">
         <source>Food Delivered in <x id="PH" equiv-text="this.previousPeriod2"/>(kg)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">523</context>
+          <context context-type="linenumber">541</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPreviousTotal" datatype="html">
         <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious)"/> kg</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">531</context>
+          <context context-type="linenumber">549</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious1Total" datatype="html">
         <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious1)"/> kg</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">535</context>
+          <context context-type="linenumber">553</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesPrevious2Total" datatype="html">
         <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesPrevious2)"/> kg</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">539</context>
+          <context context-type="linenumber">557</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesCurrentTotal" datatype="html">
         <source>Total: <x id="PH" equiv-text="Math.round(this.totalFoodDeliveriesCurrent)"/> kg</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">543</context>
+          <context context-type="linenumber">561</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesNonFEADTotal" datatype="html">
         <source>Total: <x id="PH" equiv-text="this.totalFoodDeliveriesNonFEAD"/> kg</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">547</context>
+          <context context-type="linenumber">565</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADNonAgreedTotal" datatype="html">
         <source>Total: <x id="PH" equiv-text="this.totalFoodDeliveriesFEADNonAgreed"/> kg</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">551</context>
+          <context context-type="linenumber">569</context>
         </context-group>
       </trans-unit>
       <trans-unit id="StatFoodDeliveriesFEADAgreedCollectTotal" datatype="html">
         <source>Total: <x id="PH" equiv-text="this.totalFoodDeliveriesFEADAgreedCollect"/> kg</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/movements/movements-report.component.ts</context>
-          <context context-type="linenumber">555</context>
+          <context context-type="linenumber">573</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prev" datatype="html">
