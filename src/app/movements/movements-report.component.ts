@@ -24,11 +24,13 @@ import {OrgSummary} from '../organisations/model/orgsummary';
     styleUrls: ['./movements-report.component.css']
 })
 export class MovementReportComponent implements OnInit {
+    isAdmin: boolean;
     booIsLoaded: boolean;
     categoryOptions: any[];
     category: string;
     bankShortName: string;
     bankId: number;
+    bankOptions: any[];
     depotOptions: any[];
     backgroundColors: any[];
     basicOptions: any;
@@ -85,6 +87,7 @@ export class MovementReportComponent implements OnInit {
         private http: HttpClient,
         private store: Store<AppState>
     ) {
+        this.isAdmin = false;
         this.booShowDaily = false;
         this.backgroundColors = ['magenta', 'violet', 'indigo', 'blue', 'x0080ff', 'cyan', 'green', 'olive', 'yellow', 'orange', 'red', 'darkred', 'black', 'silver'];
         // x0080ff dodger blue
@@ -146,11 +149,9 @@ export class MovementReportComponent implements OnInit {
                     this.category = 'Depot'
                    this.depotHttpService.getDepotReport(this.authService.accessToken,this.bankShortName)
                             .subscribe((depots:Depot[]) => {
-                                this.categoryOptions = depots.map(({idDepot, nom}) => ({
-                                    'value': nom,
-                                    'label': nom
-                                }));
                                 this.depotOptions = depots.map(({idDepot, nom}) => ({'value': idDepot, 'label': nom}));
+                                this.categoryOptions ={...this.depotOptions};
+                                this.categoryOptions.push({label: 'OTHER', value: null});
                                 this.depotOptions.unshift({'value': null, 'label': 'Any'});
                                 if (!this.booIsLoaded) {
                                     this.report();
@@ -160,15 +161,19 @@ export class MovementReportComponent implements OnInit {
                     break;
                 case 'admin':
                 case 'Admin_FBBA':
+                    this.isAdmin = true;
                     this.category = 'Bank'
 
                     const classicBanks = {'classicBanks': '1'};
                     this.banqueService.getWithQuery(classicBanks)
                         .subscribe((banquesEntities) => {
-                            this.categoryOptions = banquesEntities.map(({bankShortName}) => ({
+                            this.bankOptions = banquesEntities.map(({bankShortName}) => ({
                                 'label': bankShortName,
                                 'value': bankShortName
                             }));
+                            this.categoryOptions ={...this.bankOptions};
+                            this.categoryOptions.push({label: 'OTHER', value: null});
+                           this.bankOptions.unshift({'value': null, 'label': 'Any'});
                             if (!this.booIsLoaded) {
                                 this.report();
                             }
@@ -196,12 +201,46 @@ export class MovementReportComponent implements OnInit {
     }
     filterDepot(depotId) {
         this.depotId = depotId;
+        if (this.depotId) {
+           this.categoryOptions = [];
+           for (let i = 0; i < 10; i++) {
+                 this.categoryOptions.push({label: 'OTHER', value: null});
+           }
+        }
+        else {
+            this.categoryOptions ={...this.depotOptions};
+            this.categoryOptions.push({label: 'OTHER', value: null});
+        }
         if (this.booShowDaily) {
             this.reportMovementsHistoryDaily();
         } else {
             this.reportMovementsHistoryMonthly();
         }
+    }
+    filterBank(bankShortName) {
+        this.bankShortName = bankShortName;
+        if (this.bankShortName) {
+            this.depotHttpService.getDepotReport(this.authService.accessToken,this.bankShortName)
+                .subscribe((depots:Depot[]) => {
+                    this.depotOptions = depots.map(({idDepot, nom}) => ({'value': idDepot, 'label': nom}));
+                    this.depotOptions.unshift({'value': null, 'label': 'Any'});
+                    this.category='Depot';
+                    if (this.booShowDaily) {
+                        this.reportMovementsHistoryDaily();
+                    } else {
+                        this.reportMovementsHistoryMonthly();
+                    }
+                });
 
+        }
+        else {
+            this.category = 'Bank';
+            if (this.booShowDaily) {
+                this.reportMovementsHistoryDaily();
+            } else {
+                this.reportMovementsHistoryMonthly();
+            }
+        }
     }
 
 
@@ -224,7 +263,25 @@ export class MovementReportComponent implements OnInit {
                     else {
                          categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
                     }
-                    if (categoryOptionIndex === -1) continue;
+                    if (categoryOptionIndex === -1) {
+                        if (this.depotId) {
+                           for (let i = 0; i < 9; i++) {
+                                if (!this.categoryOptions[i].value
+                                ) {
+                                    this.categoryOptions[i]={label: this.movementReports[i].orgname, value: this.movementReports[i].orgname};
+                                    categoryOptionIndex = i;
+                                    break;
+                                }
+                            }
+                            if (categoryOptionIndex === -1) {
+                                this.categoryOptions[9]={label: 'OTHER', value: null};
+                                categoryOptionIndex = 9;
+                            }
+                        }
+                        else {
+                            categoryOptionIndex = this.categoryOptions.length - 1;
+                        }
+                    }
                     const movementYear = this.movementReports[i].key.substr(0, 4);
                     if (movementYear < this.previousPeriod2) continue;
                     switch (movementYear) {

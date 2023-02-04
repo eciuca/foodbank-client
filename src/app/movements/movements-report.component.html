@@ -1,8 +1,12 @@
 <p-panel>
     <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12 p-md-3">
+        <div class="p-field p-col-12 p-md-2">
             <label i18n="@@ShowDaily" for="daily">Show Daily?</label>
             <p-checkbox [value]="booShowDaily" binary="true" name="daily" id="daily" (onChange)="changePeriodFilter($event)"></p-checkbox>
+        </div>
+        <div *ngIf="isAdmin" class="p-field p-col-12 p-md-2">
+            <label i18n="@@Bank" for="bank">Bank</label>
+            <p-dropdown  id="bank" name="bank" [ngModel]="value" [options]="bankOptions" (onChange)="filterBank($event.value)" placeholder="Any" [showClear]="true"></p-dropdown>
         </div>
         <div *ngIf="category=='Depot'" class="p-field p-col-12 p-md-2">
             <label i18n="@@Depot" for="depot">Depot</label>
