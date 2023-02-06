@@ -268,30 +268,30 @@ export class MovementReportComponent implements OnInit {
      createCategoryOptionsForOrgs() {
            this.movementReports.forEach(movementReport => {
                if (this.categoryOptions.length < 9) {
-                   this.categoryOptions.push([{label: movementReport.orgname.replace(/[^0-9a-z]/gi , ''), value: movementReport.idOrg}]);
+                   this.categoryOptions.push({value: movementReport.idOrg, label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
                } else if (this.categoryOptions.length == 9) {
-                   this.categoryOptions.push({label: 'OTHER', value: null});
+                   this.categoryOptions.push({value: null,label: 'OTHER'});
                }
                switch (movementReport.category) {
                    case 'NOFEADNONAGREED':
                        if (this.categoryOptionsNonFEAD.length < 9) {
-                           this.categoryOptionsNonFEAD.push([{label: movementReport.orgname.replace(/[^0-9a-z]/gi , ''), value: movementReport.idOrg.toString()}]);
+                           this.categoryOptionsNonFEAD.push({value: movementReport.idOrg, label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
                        } else if (this.categoryOptionsNonFEAD.length == 9) {
-                           this.categoryOptionsNonFEAD.push({label: 'OTHER', value: null});
+                           this.categoryOptionsNonFEAD.push({value: null,label: 'OTHER'});
                        }
                        break;
                    case 'FEADNONAGREED':
                        if (this.categoryOptionsFEADNonAgreed.length < 9) {
-                           this.categoryOptionsFEADNonAgreed.push([{label: movementReport.orgname.replace(/[^0-9a-z]/gi , ''), value: movementReport.idOrg.toString()}]);
+                           this.categoryOptionsFEADNonAgreed.push({value: movementReport.idOrg, label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
                        } else if (this.categoryOptionsFEADNonAgreed.length == 9) {
-                           this.categoryOptionsFEADNonAgreed.push({label: 'OTHER', value: null});
+                           this.categoryOptionsFEADNonAgreed.push({value: null,label: 'OTHER'});
                        }
                        break;
                    case 'AGREEDFEADCOLLECT':
                        if (this.categoryOptionsFEADAgreedCollect.length < 9) {
-                           this.categoryOptionsFEADAgreedCollect.push([{label: movementReport.orgname.replace(/[^0-9a-z]/gi , ''), value: movementReport.idOrg.toString()}]);
+                           this.categoryOptionsFEADAgreedCollect.push({value: movementReport.idOrg, label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
                        } else if (this.categoryOptionsFEADAgreedCollect.length == 9) {
-                           this.categoryOptionsFEADAgreedCollect.push({label: 'OTHER', value: null});
+                           this.categoryOptionsFEADAgreedCollect.push({value: null,label: 'OTHER'});
                        }
                        break;
                    default:
@@ -312,7 +312,11 @@ export class MovementReportComponent implements OnInit {
                 if (this.depotId) {
                     this.createCategoryOptionsForOrgs();
                 }
+                this.iniializeCategoryReportDatasets();
                 for (let i = 0; i < this.movementReports.length; i++) {
+                    if ( this.movementReports[i].orgname) {
+                        this.movementReports[i].orgname = this.movementReports[i].orgname.replace(/[^0-9a-z]/gi, '');
+                    }
                     let categoryOptionIndex = -1;
                     if(this.category == 'Depot') {
                         categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].idOrg.toString());
@@ -321,8 +325,7 @@ export class MovementReportComponent implements OnInit {
                          categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.label === this.movementReports[i].bankShortName);
                     }
                     if (categoryOptionIndex === -1) {
-                        console.log('could not find category in options',this.movementReports[i],this.categoryOptions);
-                            categoryOptionIndex = this.categoryOptions.length - 1;
+                         categoryOptionIndex = this.categoryOptions.length - 1;
                     }
                     const movementYear = this.movementReports[i].key.substr(0, 4);
                     if (movementYear < this.previousPeriod2) continue;
@@ -343,7 +346,7 @@ export class MovementReportComponent implements OnInit {
                         default:
 
                     }
-                    this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i],categoryOptionIndex);
+                    this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i]);
 
                 }
                 this.createReportData();
@@ -363,8 +366,11 @@ export class MovementReportComponent implements OnInit {
                 if (this.depotId) {
                     this.createCategoryOptionsForOrgs();
                 }
-
+                this.iniializeCategoryReportDatasets();
                 for (let i = 0; i < this.movementReports.length; i++) {
+                    if ( this.movementReports[i].orgname) {
+                        this.movementReports[i].orgname = this.movementReports[i].orgname.replace(/[^0-9a-z]/gi, '');
+                    }
                     let categoryOptionIndex = -1;
                     if (this.category == 'Depot') {
                         categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].idOrg.toString());
@@ -392,7 +398,7 @@ export class MovementReportComponent implements OnInit {
                         default:
 
                     }
-                    this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i], categoryOptionIndex);
+                    this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i]);
 
                 }
                 this.createReportData();
@@ -400,42 +406,55 @@ export class MovementReportComponent implements OnInit {
             });
 
     }
-    addMovementReportToSubCategoryReportDataSets(movementReport,categoryOptionIndex) {
-        if (this.depotId) {
-            this.updateSubCategoryDataForOrgs(movementReport);
-        } else {
-            this.pushReportDatasetsForBanksAndDepots();
+    addMovementReportToSubCategoryReportDataSets(movementReport) {
 
             if (!this.reportLabels.includes(movementReport.key)) {
                 this.reportLabels.push(movementReport.key);
-                for (let i = 0; i < this.categoryOptions.length; i++) {
+                for (let i = 0; i < this.categoryOptionsNonFEAD.length; i++) {
                     this.reportDataSetsNonFEAD[i].data.push(0);
+                }
+                for (let i = 0; i < this.categoryOptionsFEADNonAgreed.length; i++) {
                     this.reportDataSetsFEADnonAgreed[i].data.push(0);
+                }
+                for (let i = 0; i < this.categoryOptionsFEADAgreedCollect.length; i++) {
                     this.reportDataSetsFEADAgreedCollect[i].data.push(0);
                 }
             }
             const dataIndex = this.reportLabels.length -1;
+            let categoryOptionIndex =0;
             switch (movementReport.category) {
                 case 'NOFEADNONAGREED':
+                    categoryOptionIndex = this.categoryOptionsNonFEAD.findIndex(obj => obj.value == movementReport.idOrg.toString());
+                    if (categoryOptionIndex  === -1) {
+                        categoryOptionIndex = this.categoryOptionsNonFEAD.length -1;
+                    }
                     this.reportDataSetsNonFEAD[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
                     this.totalFoodDeliveriesNonFEAD += movementReport.quantity;
                     break;
                 case 'FEADNONAGREED':
+                    categoryOptionIndex = this.categoryOptionsFEADNonAgreed.findIndex(obj => obj.value == movementReport.idOrg.toString());
+                    if (categoryOptionIndex  === -1) {
+                        categoryOptionIndex = this.categoryOptionsFEADNonAgreed.length -1;
+                    }
                     this.reportDataSetsFEADnonAgreed[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
                     this.totalFoodDeliveriesFEADNonAgreed += movementReport.quantity;
                     break;
                 case 'AGREEDFEADCOLLECT':
+                    categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.findIndex(obj => obj.value == movementReport.idOrg.toString());
+                   if (categoryOptionIndex  === -1) {
+                       categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.length -1;
+                   }
                     this.reportDataSetsFEADAgreedCollect[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
                     this.totalFoodDeliveriesFEADAgreedCollect += movementReport.quantity;
                     break;
                 default:
                     console.log('Unknown movement category: ' + movementReport.category);
             }
-        }
+
     }
-    pushReportDatasetsForBanksAndDepots() {
+    iniializeCategoryReportDatasets() {
         let colorIndex = 0;
-        this.categoryOptions.forEach((categoryOption) => {
+        this.categoryOptionsNonFEAD.forEach((categoryOption) => {
             this.reportDataSetsNonFEAD.push(
                 {
                     type: 'bar',
@@ -443,6 +462,14 @@ export class MovementReportComponent implements OnInit {
                     backgroundColor: this.backgroundColors[colorIndex],
                     data: []
                 });
+            colorIndex++;
+            if (colorIndex >= this.backgroundColors.length) {
+                console.log('Not enough colors in backgroundColors array');
+                colorIndex = 0;
+            }
+        })
+        colorIndex =0;
+        this.categoryOptionsFEADNonAgreed.forEach((categoryOption) => {
             this.reportDataSetsFEADnonAgreed.push(
                 {
                     type: 'bar',
@@ -450,6 +477,14 @@ export class MovementReportComponent implements OnInit {
                     backgroundColor: this.backgroundColors[colorIndex],
                     data: []
                 });
+            colorIndex++;
+            if (colorIndex >= this.backgroundColors.length) {
+                console.log('Not enough colors in backgroundColors array');
+                colorIndex = 0;
+            }
+        })
+        colorIndex =0;
+        this.categoryOptionsFEADAgreedCollect.forEach((categoryOption) => {
 
             this.reportDataSetsFEADAgreedCollect.push(
                 {
@@ -458,51 +493,16 @@ export class MovementReportComponent implements OnInit {
                     backgroundColor: this.backgroundColors[colorIndex],
                     data: []
                 });
-
             colorIndex++;
             if (colorIndex >= this.backgroundColors.length) {
                 console.log('Not enough colors in backgroundColors array');
                 colorIndex = 0;
             }
-        });
+        })
+
+
     }
 
-    updateSubCategoryDataForOrgs(movementReport: MovementReport) {
-
-        const dataIndex = this.reportLabels.length -1;
-        switch (movementReport.category) {
-
-            case 'AGREEDFEADCOLLECT':
-                let categoryOptionIndex = -1;
-                categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.findIndex(obj => obj.value === movementReport.idOrg.toString());
-                if (categoryOptionIndex === -1) {
-                    categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.length - 1;
-                }
-                this.reportDataSetsFEADAgreedCollect[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
-                this.totalFoodDeliveriesFEADAgreedCollect += movementReport.quantity;
-                break;
-
-            case  'FEADNONAGREED':
-                categoryOptionIndex = this.categoryOptionsFEADNonAgreed.findIndex(obj => obj.value === movementReport.idOrg.toString());
-                if (categoryOptionIndex === -1) {
-                   categoryOptionIndex = this.categoryOptionsFEADNonAgreed.length -1;
-                }
-                this.reportDataSetsFEADnonAgreed[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
-                this.totalFoodDeliveriesFEADNonAgreed += movementReport.quantity;
-                break;
-
-            case 'NOFEADNONAGREED':
-                categoryOptionIndex = this.categoryOptionsNonFEAD.findIndex(obj => obj.value === movementReport.idOrg.toString());
-                if (categoryOptionIndex === -1) {
-                   categoryOptionIndex = this.categoryOptionsNonFEAD.length - 1;
-                }
-                this.reportDataSetsNonFEAD[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
-                this.totalFoodDeliveriesNonFEAD += movementReport.quantity;
-                break;
-            default:
-                console.log('Error in reportMovementsHistoryMonthly movement category not found');
-        }
-    }
 
 
 
@@ -515,9 +515,6 @@ export class MovementReportComponent implements OnInit {
         this.totalFoodDeliveriesPrevious1 = 0;
         this.totalFoodDeliveriesPrevious2 = 0;
         this.reportLabels = [];
-        this.categoryOptionsNonFEAD = [];
-        this.categoryOptionsFEADNonAgreed = [];
-        this.categoryOptionsFEADAgreedCollect = [];
         this.reportDataSetsNonFEAD = [];
         this.reportDataSetsFEADnonAgreed = [];
         this.reportDataSetsFEADAgreedCollect = [];
@@ -572,6 +569,7 @@ export class MovementReportComponent implements OnInit {
             labels: this.reportLabels,
             datasets: this.reportDataSetsFEADAgreedCollect
         }
+        console.log('chart data', this.chartDataFoodDeliveriesFEADAgreedCollectHistory);
         const mthPercentage = this.totalFoodDeliveriesPrevious > 0 ? ((this.totalFoodDeliveriesCurrent  * 100) / this.totalFoodDeliveriesPrevious  ).toFixed(2) : 0;
 
         this.titleFoodDeliveriesCurrent = $localize`:@@StatFoodDeliveriesCurrent:Food Delivered in ${this.currentPeriod}(kg) ${mthPercentage}% of ${this.previousPeriod}`;
