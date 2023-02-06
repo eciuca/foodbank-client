@@ -27,6 +27,9 @@ export class MovementReportComponent implements OnInit {
     isAdmin: boolean;
     booIsLoaded: boolean;
     categoryOptions: any[];
+    categoryOptionsNonFEAD: any[];
+    categoryOptionsFEADNonAgreed: any[];
+    categoryOptionsFEADAgreedCollect: any[];
     category: string;
     bankShortName: string;
     bankId: number;
@@ -152,6 +155,9 @@ export class MovementReportComponent implements OnInit {
                                 this.depotOptions = depots.map(({idDepot, nom}) => ({'value': idDepot, 'label': nom}));
                                 this.categoryOptions =[...this.depotOptions];
                                 this.categoryOptions.push({label: 'OTHER', value: null});
+                                this.categoryOptionsFEADAgreedCollect = [...this.categoryOptions];
+                                this.categoryOptionsFEADNonAgreed = [...this.categoryOptions];
+                                this.categoryOptionsNonFEAD  = [...this.categoryOptions];
                                 this.depotOptions.unshift({'value': null, 'label': 'Any'});
                                 if (!this.booIsLoaded) {
                                     this.report();
@@ -173,6 +179,9 @@ export class MovementReportComponent implements OnInit {
                             }));
                             this.categoryOptions =[...this.bankOptions];
                             this.categoryOptions.push({label: 'OTHER', value: null});
+                            this.categoryOptionsFEADAgreedCollect = [...this.categoryOptions];
+                            this.categoryOptionsFEADNonAgreed = [...this.categoryOptions];
+                            this.categoryOptionsNonFEAD  = [...this.categoryOptions];
                            this.bankOptions.unshift({'value': null, 'label': 'Any'});
                             if (!this.booIsLoaded) {
                                 this.report();
@@ -202,15 +211,16 @@ export class MovementReportComponent implements OnInit {
     filterDepot(depotId) {
         this.depotId = depotId;
         if (this.depotId) {
-           this.categoryOptions = [];
-           for (let i = 0; i < 10; i++) {
-                 this.categoryOptions.push({label: 'OTHER', value: null});
-           }
+           this.categoryOptions =[];
         }
         else {
             this.categoryOptions =[...this.depotOptions];
+            this.categoryOptions.pop();
             this.categoryOptions.push({label: 'OTHER', value: null});
         }
+        this.categoryOptionsFEADAgreedCollect = [...this.categoryOptions];
+        this.categoryOptionsFEADNonAgreed = [...this.categoryOptions];
+        this.categoryOptionsNonFEAD  = [...this.categoryOptions];
         if (this.booShowDaily) {
             this.reportMovementsHistoryDaily();
         } else {
@@ -219,10 +229,17 @@ export class MovementReportComponent implements OnInit {
     }
     filterBank(bankShortName) {
         this.bankShortName = bankShortName;
+        this.depotId = null;
         if (this.bankShortName) {
+            this.category = 'Depot'
             this.depotHttpService.getDepotReport(this.authService.accessToken,this.bankShortName)
                 .subscribe((depots:Depot[]) => {
                     this.depotOptions = depots.map(({idDepot, nom}) => ({'value': idDepot, 'label': nom}));
+                    this.categoryOptions =[...this.depotOptions];
+                    this.categoryOptions.push({label: 'OTHER', value: null});
+                    this.categoryOptionsFEADAgreedCollect = [...this.categoryOptions];
+                    this.categoryOptionsFEADNonAgreed = [...this.categoryOptions];
+                    this.categoryOptionsNonFEAD  = [...this.categoryOptions];
                     this.depotOptions.unshift({'value': null, 'label': 'Any'});
                     this.category='Depot';
                     if (this.booShowDaily) {
@@ -235,6 +252,12 @@ export class MovementReportComponent implements OnInit {
         }
         else {
             this.category = 'Bank';
+            this.categoryOptions =[...this.bankOptions];
+            this.categoryOptions.pop();
+            this.categoryOptions.push({label: 'OTHER', value: null});
+            this.categoryOptionsFEADAgreedCollect = [...this.categoryOptions];
+            this.categoryOptionsFEADNonAgreed = [...this.categoryOptions];
+            this.categoryOptionsNonFEAD  = [...this.categoryOptions];
             if (this.booShowDaily) {
                 this.reportMovementsHistoryDaily();
             } else {
@@ -242,8 +265,40 @@ export class MovementReportComponent implements OnInit {
             }
         }
     }
-
-
+     createCategoryOptionsForOrgs() {
+           this.movementReports.forEach(movementReport => {
+               if (this.categoryOptions.length < 9) {
+                   this.categoryOptions.push([{label: movementReport.orgname.replace(/[^0-9a-z]/gi , ''), value: movementReport.idOrg}]);
+               } else if (this.categoryOptions.length == 9) {
+                   this.categoryOptions.push({label: 'OTHER', value: null});
+               }
+               switch (movementReport.category) {
+                   case 'NOFEADNONAGREED':
+                       if (this.categoryOptionsNonFEAD.length < 9) {
+                           this.categoryOptionsNonFEAD.push([{label: movementReport.orgname.replace(/[^0-9a-z]/gi , ''), value: movementReport.idOrg.toString()}]);
+                       } else if (this.categoryOptionsNonFEAD.length == 9) {
+                           this.categoryOptionsNonFEAD.push({label: 'OTHER', value: null});
+                       }
+                       break;
+                   case 'FEADNONAGREED':
+                       if (this.categoryOptionsFEADNonAgreed.length < 9) {
+                           this.categoryOptionsFEADNonAgreed.push([{label: movementReport.orgname.replace(/[^0-9a-z]/gi , ''), value: movementReport.idOrg.toString()}]);
+                       } else if (this.categoryOptionsFEADNonAgreed.length == 9) {
+                           this.categoryOptionsFEADNonAgreed.push({label: 'OTHER', value: null});
+                       }
+                       break;
+                   case 'AGREEDFEADCOLLECT':
+                       if (this.categoryOptionsFEADAgreedCollect.length < 9) {
+                           this.categoryOptionsFEADAgreedCollect.push([{label: movementReport.orgname.replace(/[^0-9a-z]/gi , ''), value: movementReport.idOrg.toString()}]);
+                       } else if (this.categoryOptionsFEADAgreedCollect.length == 9) {
+                           this.categoryOptionsFEADAgreedCollect.push({label: 'OTHER', value: null});
+                       }
+                       break;
+                   default:
+                       console.log('Unknown movement category: ' + movementReport.category);
+               }
+           });
+     }
     reportMovementsHistoryMonthly() {
 
         this.initializeChart();
@@ -254,33 +309,20 @@ export class MovementReportComponent implements OnInit {
                 this.currentPeriod = new Date().getFullYear();
                 this.previousPeriod = this.currentPeriod - 1;
                 this.previousPeriod1 = this.currentPeriod - 2;
-                console.log(this.movementReports);
+                if (this.depotId) {
+                    this.createCategoryOptionsForOrgs();
+                }
                 for (let i = 0; i < this.movementReports.length; i++) {
                     let categoryOptionIndex = -1;
                     if(this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].orgname);
+                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].idOrg.toString());
                     }
                     else {
-                         categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
+                         categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.label === this.movementReports[i].bankShortName);
                     }
                     if (categoryOptionIndex === -1) {
-                        if (this.depotId) {
-                           for (let i = 0; i < 9; i++) {
-                                if (!this.categoryOptions[i].value
-                                ) {
-                                    this.categoryOptions[i]={label: this.movementReports[i].orgname, value: this.movementReports[i].orgname};
-                                    categoryOptionIndex = i;
-                                    break;
-                                }
-                            }
-                            if (categoryOptionIndex === -1) {
-                                this.categoryOptions[9]={label: 'OTHER', value: null};
-                                categoryOptionIndex = 9;
-                            }
-                        }
-                        else {
+                        console.log('could not find category in options',this.movementReports[i],this.categoryOptions);
                             categoryOptionIndex = this.categoryOptions.length - 1;
-                        }
                     }
                     const movementYear = this.movementReports[i].key.substr(0, 4);
                     if (movementYear < this.previousPeriod2) continue;
@@ -301,40 +343,14 @@ export class MovementReportComponent implements OnInit {
                         default:
 
                     }
-                    if (!this.reportLabels.includes(this.movementReports[i].key)) {
-                        this.reportLabels.push(this.movementReports[i].key);
-                        for (let i = 0; i < this.categoryOptions.length; i++) {
-                            this.reportDataSetsNonFEAD[i].data.push(0);
-                            this.reportDataSetsFEADnonAgreed[i].data.push(0);
-                            this.reportDataSetsFEADAgreedCollect[i].data.push(0);
-                        }
-                    }
-                    const dataIndex = this.reportLabels.length;
+                    this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i],categoryOptionIndex);
 
-
-                    switch (this.movementReports[i].category) {
-                        case 'NOFEADNONAGREED':
-                            this.reportDataSetsNonFEAD[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
-                            this.totalFoodDeliveriesNonFEAD += this.movementReports[i].quantity;
-                            break;
-                        case 'FEADNONAGREED':
-                            this.reportDataSetsFEADnonAgreed[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
-                            this.totalFoodDeliveriesFEADNonAgreed += this.movementReports[i].quantity;
-                            break;
-                        case 'AGREEDFEADCOLLECT':
-                            this.reportDataSetsFEADAgreedCollect[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
-                            this.totalFoodDeliveriesFEADAgreedCollect += this.movementReports[i].quantity;
-                            break;
-                        default:
-                            console.log('Unknown movement category: ' + this.movementReports[i].category);
-                    }
                 }
                 this.createReportData();
 
             });
 
     }
-
     reportMovementsHistoryDaily() {
         this.initializeChart()
         this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "daily", this.category,this.bankShortName,this.depotId).subscribe(
@@ -344,33 +360,19 @@ export class MovementReportComponent implements OnInit {
                 this.currentPeriod = moment().format('YYYY-MM');
                 this.previousPeriod = moment().subtract(1, 'months').format('YYYY-MM');
                 this.previousPeriod1 = moment().subtract(2, 'months').format('YYYY-MM');
+                if (this.depotId) {
+                    this.createCategoryOptionsForOrgs();
+                }
 
                 for (let i = 0; i < this.movementReports.length; i++) {
                     let categoryOptionIndex = -1;
-                    if(this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].orgname);
-                    }
-                    else {
-                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].bankShortName);
+                    if (this.category == 'Depot') {
+                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].idOrg.toString());
+                    } else {
+                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.label === this.movementReports[i].bankShortName);
                     }
                     if (categoryOptionIndex === -1) {
-                        if (this.depotId) {
-                            for (let i = 0; i < 9; i++) {
-                                if (!this.categoryOptions[i].value
-                                ) {
-                                    this.categoryOptions[i]={label: this.movementReports[i].orgname, value: this.movementReports[i].orgname};
-                                    categoryOptionIndex = i;
-                                    break;
-                                }
-                            }
-                            if (categoryOptionIndex === -1) {
-                                this.categoryOptions[9]={label: 'OTHER', value: null};
-                                categoryOptionIndex = 9;
-                            }
-                        }
-                        else {
                             categoryOptionIndex = this.categoryOptions.length - 1;
-                        }
                     }
                     const movementDay = this.movementReports[i].key.substr(0, 7);
                     switch (movementDay) {
@@ -390,41 +392,119 @@ export class MovementReportComponent implements OnInit {
                         default:
 
                     }
-                    if (!this.reportLabels.includes(this.movementReports[i].key)) {
-                        this.reportLabels.push(this.movementReports[i].key);
-                        for (let i = 0; i < this.categoryOptions.length; i++) {
-                            this.reportDataSetsNonFEAD[i].data.push(0);
-                            this.reportDataSetsFEADnonAgreed[i].data.push(0);
-                            this.reportDataSetsFEADAgreedCollect[i].data.push(0);
-                        }
-                    }
-                    const dataIndex = this.reportLabels.length;
+                    this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i], categoryOptionIndex);
 
-
-                    switch (this.movementReports[i].category) {
-                        case 'NOFEADNONAGREED':
-                            this.reportDataSetsNonFEAD[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
-                            this.totalFoodDeliveriesNonFEAD += this.movementReports[i].quantity;
-                            break;
-                        case 'FEADNONAGREED':
-                            this.reportDataSetsFEADnonAgreed[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
-                            this.totalFoodDeliveriesFEADNonAgreed += this.movementReports[i].quantity;
-                            break;
-                        case 'AGREEDFEADCOLLECT':
-                            this.reportDataSetsFEADAgreedCollect[categoryOptionIndex].data[dataIndex] += this.movementReports[i].quantity;
-                            this.totalFoodDeliveriesFEADAgreedCollect += this.movementReports[i].quantity;
-                            break;
-                        default:
-                            console.log('Unknown movement category: ' + this.movementReports[i].category);
-                    }
                 }
-
-
                 this.createReportData();
 
             });
 
     }
+    addMovementReportToSubCategoryReportDataSets(movementReport,categoryOptionIndex) {
+        if (this.depotId) {
+            this.updateSubCategoryDataForOrgs(movementReport);
+        } else {
+            this.pushReportDatasetsForBanksAndDepots();
+
+            if (!this.reportLabels.includes(movementReport.key)) {
+                this.reportLabels.push(movementReport.key);
+                for (let i = 0; i < this.categoryOptions.length; i++) {
+                    this.reportDataSetsNonFEAD[i].data.push(0);
+                    this.reportDataSetsFEADnonAgreed[i].data.push(0);
+                    this.reportDataSetsFEADAgreedCollect[i].data.push(0);
+                }
+            }
+            const dataIndex = this.reportLabels.length -1;
+            switch (movementReport.category) {
+                case 'NOFEADNONAGREED':
+                    this.reportDataSetsNonFEAD[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
+                    this.totalFoodDeliveriesNonFEAD += movementReport.quantity;
+                    break;
+                case 'FEADNONAGREED':
+                    this.reportDataSetsFEADnonAgreed[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
+                    this.totalFoodDeliveriesFEADNonAgreed += movementReport.quantity;
+                    break;
+                case 'AGREEDFEADCOLLECT':
+                    this.reportDataSetsFEADAgreedCollect[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
+                    this.totalFoodDeliveriesFEADAgreedCollect += movementReport.quantity;
+                    break;
+                default:
+                    console.log('Unknown movement category: ' + movementReport.category);
+            }
+        }
+    }
+    pushReportDatasetsForBanksAndDepots() {
+        let colorIndex = 0;
+        this.categoryOptions.forEach((categoryOption) => {
+            this.reportDataSetsNonFEAD.push(
+                {
+                    type: 'bar',
+                    label: categoryOption.label,
+                    backgroundColor: this.backgroundColors[colorIndex],
+                    data: []
+                });
+            this.reportDataSetsFEADnonAgreed.push(
+                {
+                    type: 'bar',
+                    label: categoryOption.label,
+                    backgroundColor: this.backgroundColors[colorIndex],
+                    data: []
+                });
+
+            this.reportDataSetsFEADAgreedCollect.push(
+                {
+                    type: 'bar',
+                    label: categoryOption.label,
+                    backgroundColor: this.backgroundColors[colorIndex],
+                    data: []
+                });
+
+            colorIndex++;
+            if (colorIndex >= this.backgroundColors.length) {
+                console.log('Not enough colors in backgroundColors array');
+                colorIndex = 0;
+            }
+        });
+    }
+
+    updateSubCategoryDataForOrgs(movementReport: MovementReport) {
+
+        const dataIndex = this.reportLabels.length -1;
+        switch (movementReport.category) {
+
+            case 'AGREEDFEADCOLLECT':
+                let categoryOptionIndex = -1;
+                categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.findIndex(obj => obj.value === movementReport.idOrg.toString());
+                if (categoryOptionIndex === -1) {
+                    categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.length - 1;
+                }
+                this.reportDataSetsFEADAgreedCollect[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
+                this.totalFoodDeliveriesFEADAgreedCollect += movementReport.quantity;
+                break;
+
+            case  'FEADNONAGREED':
+                categoryOptionIndex = this.categoryOptionsFEADNonAgreed.findIndex(obj => obj.value === movementReport.idOrg.toString());
+                if (categoryOptionIndex === -1) {
+                   categoryOptionIndex = this.categoryOptionsFEADNonAgreed.length -1;
+                }
+                this.reportDataSetsFEADnonAgreed[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
+                this.totalFoodDeliveriesFEADNonAgreed += movementReport.quantity;
+                break;
+
+            case 'NOFEADNONAGREED':
+                categoryOptionIndex = this.categoryOptionsNonFEAD.findIndex(obj => obj.value === movementReport.idOrg.toString());
+                if (categoryOptionIndex === -1) {
+                   categoryOptionIndex = this.categoryOptionsNonFEAD.length - 1;
+                }
+                this.reportDataSetsNonFEAD[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
+                this.totalFoodDeliveriesNonFEAD += movementReport.quantity;
+                break;
+            default:
+                console.log('Error in reportMovementsHistoryMonthly movement category not found');
+        }
+    }
+
+
 
     initializeChart() {
         this.totalFoodDeliveriesNonFEAD = 0;
@@ -435,6 +515,9 @@ export class MovementReportComponent implements OnInit {
         this.totalFoodDeliveriesPrevious1 = 0;
         this.totalFoodDeliveriesPrevious2 = 0;
         this.reportLabels = [];
+        this.categoryOptionsNonFEAD = [];
+        this.categoryOptionsFEADNonAgreed = [];
+        this.categoryOptionsFEADAgreedCollect = [];
         this.reportDataSetsNonFEAD = [];
         this.reportDataSetsFEADnonAgreed = [];
         this.reportDataSetsFEADAgreedCollect = [];
@@ -468,41 +551,11 @@ export class MovementReportComponent implements OnInit {
             this.reportDataSetsPrevious1[0].data.push(0);
             this.reportDataSetsPrevious2[0].data.push(0);
         }
-        let colorIndex = 0;
-        for (let i = 0; i < this.categoryOptions.length; i++) {
-            this.reportDataSetsNonFEAD.push(
-                {
-                    type: 'bar',
-                    label: this.categoryOptions[i].label,
-                    backgroundColor: this.backgroundColors[colorIndex],
-                    data: []
-                });
-            this.reportDataSetsFEADnonAgreed.push(
-                {
-                    type: 'bar',
-                    label: this.categoryOptions[i].label,
-                    backgroundColor: this.backgroundColors[colorIndex],
-                    data: []
-                });
-            this.reportDataSetsFEADAgreedCollect.push(
-                {
-                    type: 'bar',
-                    label: this.categoryOptions[i].label,
-                    backgroundColor: this.backgroundColors[colorIndex],
-                    data: []
-                });
-
-            colorIndex++;
-            if (colorIndex >= this.backgroundColors.length) {
-                console.log('Not enough colors in backgroundColors array');
-                colorIndex = 0;
-            }
-
-        }
 
     }
 
     createReportData() {
+        console.log('previous report dataset',this.reportDataSetsPrevious);
         this.titleFoodDeliveriesNonFEADEvolution = $localize`:@@StatFoodDeliveriesNonFEADHistory:Food Delivered to Non FEAD Orgs(kg)`;
         this.chartDataFoodDeliveriesNonFEADHistory = {
             labels: this.reportLabels,
