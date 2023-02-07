@@ -216,8 +216,9 @@ export class MovementReportComponent implements OnInit {
         }
         else {
             this.categoryOptions =[...this.depotOptions];
-            this.categoryOptions.pop();
+            this.categoryOptions.shift();
             this.categoryOptions.push({label: 'OTHER', value: null});
+            console.log('depot options',this.depotOptions, 'category options',this.categoryOptions);
         }
         this.categoryOptionsFEADAgreedCollect = [...this.categoryOptions];
         this.categoryOptionsFEADNonAgreed = [...this.categoryOptions];
@@ -254,7 +255,7 @@ export class MovementReportComponent implements OnInit {
         else {
             this.category = 'Bank';
             this.categoryOptions =[...this.bankOptions];
-            this.categoryOptions.pop();
+            this.categoryOptions.shift();
             this.categoryOptions.push({label: 'OTHER', value: null});
             this.categoryOptionsFEADAgreedCollect = [...this.categoryOptions];
             this.categoryOptionsFEADNonAgreed = [...this.categoryOptions];
@@ -328,7 +329,6 @@ export class MovementReportComponent implements OnInit {
                     }
                     if (categoryOptionIndex === -1) {
                          categoryOptionIndex = this.categoryOptions.length - 1;
-                         console.log('cannot find category option', this.movementReports[i]);
                     }
                     const movementYear = this.movementReports[i].key.substr(0, 4);
                     if (movementYear < this.previousPeriod2) continue;
