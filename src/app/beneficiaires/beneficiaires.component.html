@@ -31,7 +31,7 @@
             </div>
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 p-md-3">
-                    <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Beneficiaries" i18n-label="@@ExportBeneficiaries"></button>
+                    <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX()" label="Export Beneficiaries" i18n-label="@@ExportBeneficiaries"></button>
                 </div>
                 <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-3">
                     <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddBeneficiary" label="Add Beneficiary"></button>

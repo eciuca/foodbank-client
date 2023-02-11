@@ -504,12 +504,37 @@ export class MembresComponent implements OnInit {
             }
         }
     }
-    exportAsXLSX(): void {
-        let lienBanque = null;
-        if (!this.bankOptions) {
-            lienBanque = this.bankid;
+    exportAsXLSX(onlySelection:boolean): void {
+        let excelQueryParams = {...this.loadPageSubject$.getValue()};
+        let label ="";
+        if (onlySelection) {
+            delete excelQueryParams['rows'];
+            delete excelQueryParams['offset'];
+            delete excelQueryParams['sortOrder'];
+            delete excelQueryParams['sortField'];
+            label = "filtered.";
+
         }
-        this.membreHttpService.getMembreReport(this.authService.accessToken, lienBanque,this.idOrg,this.depotIdDis).subscribe(
+        else {
+            excelQueryParams = { 'actif':'1'};
+            let lienBanque = null;
+            if (!this.bankOptions) {
+                excelQueryParams['lienBanque'] = this.bankid;
+            }
+            if(this.idOrg > 0) {
+                excelQueryParams['lienDis'] = this.idOrg;
+            }
+            if(this.depotIdDis > 0) {
+                excelQueryParams['lienDepot'] = this.depotIdDis;
+            }
+
+        }
+        let params = new URLSearchParams();
+        for(let key in excelQueryParams){
+            params.set(key, excelQueryParams[key])
+        }
+
+        this.membreHttpService.getMembreReport(this.authService.accessToken, params.toString()).subscribe(
             (membres: any[]) => {
                 const cleanedList = [];
                 membres.map((item) => {
@@ -521,7 +546,6 @@ export class MembresComponent implements OnInit {
                     cleanedItem[$localize`:@@Name:Name`] = item.nom;
                     cleanedItem[$localize`:@@FirstName:First Name`] =item.prenom;
                     cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
-                    cleanedItem[$localize`:@@Active:Active`] = labelActive(item.actif);
                     cleanedItem[$localize`:@@Language:Language`] = labelLanguage(item.langue)
                     cleanedItem[$localize`:@@Address:Address`] = item.address;
                     cleanedItem[$localize`:@@ZipCode:Zip Code`] =item.zip;
@@ -534,13 +558,13 @@ export class MembresComponent implements OnInit {
                     cleanedList.push( cleanedItem);
                 });
                 if (this.idOrg > 0) {
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.members.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 }
                 else {
                     if (!this.bankOptions) {
-                        this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                        this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.members.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                     } else {
-                        this.excelService.exportAsExcelFile(cleanedList, 'foodit.members.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                        this.excelService.exportAsExcelFile(cleanedList, 'foodit.members.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                     }
                 }
             });

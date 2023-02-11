@@ -13,10 +13,10 @@
             <p-dropdown  id="depot" name="depot" [ngModel]="value" [options]="depotOptions" (onChange)="filterDepot($event.value)" placeholder="Any" [showClear]="true"></p-dropdown>
         </div>
         <div class="p-field p-col-12 p-md-3">
-            <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX('month')" label="Export Monthly Statistics" i18n-label="@@ExportDistributionsMonthly"></button>
+            <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX('month')" label="Export Monthly Statistics" i18n-label="@@ExportDistributionsMonthly"></button>
         </div>
         <div class="p-field p-col-12 p-md-3">
-            <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX('day')" label="Export Daily Statistics" i18n-label="@@ExportDistributionsDaily"></button>
+            <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX('day')" label="Export Daily Statistics" i18n-label="@@ExportDistributionsDaily"></button>
 
         </div>
     </div>

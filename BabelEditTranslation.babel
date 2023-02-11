@@ -1600,26 +1600,6 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>BankSorted</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
                         <name>BankUserExisting</name>
                         <description/>
                         <comment/>
@@ -2701,26 +2681,6 @@
                     </concept_node>
                     <concept_node>
                         <name>CurrentPageReportbyPage</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>DasnboardTitleMovement</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -4104,6 +4064,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>ExportAllMembers</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>ExportBeneficiaries</name>
                         <description/>
                         <comment/>
@@ -4125,26 +4105,6 @@
                     </concept_node>
                     <concept_node>
                         <name>ExportDepots</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>ExportDistributions</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -4264,26 +4224,6 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>ExportMembres</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
                         <name>ExportOrganisations</name>
                         <description/>
                         <comment/>
@@ -4305,6 +4245,26 @@
                     </concept_node>
                     <concept_node>
                         <name>ExportReport</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ExportSelectedMembers</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -5245,26 +5205,6 @@
                     </concept_node>
                     <concept_node>
                         <name>JobNamesSelected</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>Key</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -11944,26 +11884,6 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>Subtype</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
                         <name>Sunday</name>
                         <description/>
                         <comment/>
@@ -13184,26 +13104,6 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>Type</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
                         <name>Usage</name>
                         <description/>
                         <comment/>
@@ -13805,26 +13705,6 @@
                     </concept_node>
                     <concept_node>
                         <name>Uses Fead</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>Value</name>
                         <description/>
                         <comment/>
                         <default_text/>

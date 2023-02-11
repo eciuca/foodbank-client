@@ -4,7 +4,7 @@
 >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Dons" i18n-label="@@ExportDons"></button>
+            <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX()" label="Export Dons" i18n-label="@@ExportDons"></button>
             <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Don" i18n-label="@@AddDon"></button>
         </div>
     </ng-template>
