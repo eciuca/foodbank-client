@@ -295,19 +295,48 @@ export class BeneficiairesComponent implements OnInit {
       return 'Coeff ' + coeff;
     }
   }
-  exportAsXLSX(): void {
-    this.beneficiaireHttpService.getBeneficiaireReport(this.authService.accessToken, this.bankid,this.idOrg).subscribe(
+  exportAsXLSX(onlySelection:boolean): void {
+    let excelQueryParams = {...this.loadPageSubject$.getValue()};
+    let label ="";
+    if (onlySelection) {
+      delete excelQueryParams['rows'];
+      delete excelQueryParams['offset'];
+      delete excelQueryParams['sortOrder'];
+      delete excelQueryParams['sortField'];
+      label = "filtered.";
+
+    }
+    else {
+      excelQueryParams = { 'actif':'1'};
+
+      if(this.idOrg > 0) {
+        excelQueryParams['lienDis'] = this.idOrg;
+      }
+      if(this.bankid > 0) {
+        excelQueryParams['lienBanque'] = this.bankid;
+      }
+    }
+    let params = new URLSearchParams();
+    for(let key in excelQueryParams){
+      params.set(key, excelQueryParams[key])
+    }
+    this.beneficiaireHttpService.getBeneficiaireReport(this.authService.accessToken,  params.toString()).subscribe(
         (beneficiaires: any[] ) => {
           const cleanedList = [];
           beneficiaires.map((item) => {
+            let nbParents = 1;
+            if (item.nomconj) {
+              nbParents =2;
+            }
+            const nbFamily = nbParents + item.nbDep;
             cleanedList.push({  gender: labelCivilite(item.civilite), name: item.nom ,firstname: item.prenom, address: item.adresse, city: item.localite,
-              zip: item.cp, org: item.societe, active: labelActive(item.actif), tel: item.tel, gsm: item.gsm, email: item.email ,dependents: item.nbDep})
+              zip: item.cp, org: item.societe,  birthDate: item.daten, tel: item.tel, gsm: item.gsm, email: item.email ,parents: nbParents, dependents: item.nbDep, family: nbFamily})
           });
           if (this.idOrg > 0) {
-            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.beneficiaries.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.beneficiaries.'  + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
           }
           else {
-            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.beneficiaries.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.beneficiaries.'  + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
           }
 
           });

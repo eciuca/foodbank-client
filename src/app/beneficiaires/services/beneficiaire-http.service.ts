@@ -11,18 +11,15 @@ export class BeneficiaireHttpService {
     private baseUrl = '/api/beneficiairesall';
     constructor(private http: HttpClient) {
     }
-    getBeneficiaireReport(accesstoken: string, lienBanque: number, lienDis: number): Observable<Beneficiaire[]> {
+    getBeneficiaireReport(accesstoken: string,  queryParams: string): Observable<Beneficiaire[]> {
         const requestOptions = {
             headers: new HttpHeaders( {
                 responseType: 'json',
                 Authorization:  'Bearer ' + accesstoken
             }),
         };
-        if(lienDis > 0) {
-            return this.http.get<Beneficiaire[]>(`${this.baseUrl}/?lienDis=${lienDis.toString()}`, requestOptions);
-        }
-        if (lienBanque) {
-            return this.http.get<Beneficiaire[]>(`${this.baseUrl}/?lienBanque=${lienBanque.toString()}`, requestOptions);
+        if(queryParams)  {
+            return this.http.get<Beneficiaire[]>(`${this.baseUrl}/?${queryParams}`, requestOptions);
         }
         else {
             return this.http.get<Beneficiaire[]>(`${this.baseUrl}/`, requestOptions);

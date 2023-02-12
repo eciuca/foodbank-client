@@ -30,10 +30,13 @@
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-3">
-                    <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX()" label="Export Beneficiaries" i18n-label="@@ExportBeneficiaries"></button>
+                <div *ngIf="!booShowArchived" class="p-field p-col-12 p-md-3">
+                    <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX(false)" label="Export Beneficiaries" i18n-label="@@ExportBeneficiaries"></button>
                 </div>
-                <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-3">
+                <div *ngIf="!booShowArchived" class="p-field p-col-12 p-md-3">
+                    <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX(true)" label="Export Selected Beneficiaries" i18n-label="@@ExportSelectedBeneficiaries"></button>
+                </div>
+                <div *ngIf="!booShowArchived && booCanCreate" class="p-field p-col-12 p-md-3">
                     <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddBeneficiary" label="Add Beneficiary"></button>
                 </div>
             </div>
