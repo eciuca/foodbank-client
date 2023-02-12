@@ -73,10 +73,43 @@
             <p-accordionTab header="Beneficiaries">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{labelOrgsTotal()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{labelOrgsAgreed()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{labelOrgsGestBen()}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientNbOfOrgs()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNbofOrgs}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNbofOrgsAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNbofOrgsGestBen}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
                         {{labelClientNFam()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         {{clientNFam}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNFamAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNFamGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -86,13 +119,25 @@
                     <div class="p-field p-col-12 p-md-2">
                         {{clientNpers}}
                     </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNpersAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNpersGestBen}}
+                    </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
                         {{labelClientAdults()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{calculateClientAdults()}}
+                        {{clientNAdults}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNAdultsAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNAdultsGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -102,6 +147,12 @@
                     <div class="p-field p-col-12 p-md-2">
                         {{clientNNour}}
                     </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNNourAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNNourGestBen}}
+                    </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
@@ -109,6 +160,12 @@
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         {{clientNBebe}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNBebeAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNBebeGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -118,6 +175,12 @@
                     <div class="p-field p-col-12 p-md-2">
                         {{clientNEnf}}
                     </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNEnfAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNEnfGestBen}}
+                    </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
@@ -125,6 +188,12 @@
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         {{clientNAdo}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNAdoAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNAdoGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -134,6 +203,12 @@
                     <div class="p-field p-col-12 p-md-2">
                         {{clientN1824}}
                     </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientN1824Agreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientN1824GestBen}}
+                    </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
@@ -141,6 +216,12 @@
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         {{clientNSen}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNSenAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{clientNSenGestBen}}
                     </div>
                 </div>
             </p-accordionTab>

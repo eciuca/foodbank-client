@@ -47,6 +47,28 @@ export class DashboardReportComponent implements OnInit {
     clientNAdo: number;
     clientN1824: number;
     clientNSen: number;
+    clientNAdults: number;
+    clientNFamAgreed: number;
+    clientNpersAgreed: number;
+    clientNNourAgreed: number;
+    clientNBebeAgreed: number;
+    clientNEnfAgreed: number;
+    clientNAdoAgreed: number;
+    clientN1824Agreed: number;
+    clientNSenAgreed: number;
+    clientNAdultsAgreed: number;
+    clientNFamGestBen: number;
+    clientNpersGestBen: number;
+    clientNNourGestBen: number;
+    clientNBebeGestBen: number;
+    clientNEnfGestBen: number;
+    clientNAdoGestBen: number;
+    clientN1824GestBen: number;
+    clientNSenGestBen: number;
+    clientNAdultsGestBen: number;
+    clientNbofOrgs: number;
+    clientNbofOrgsAgreed: number;
+    clientNbofOrgsGestBen: number;
     orgCount: number;
     orgFeadCount: number;
     orgAgreedCount: number;
@@ -75,9 +97,7 @@ export class DashboardReportComponent implements OnInit {
     this.selectedBankItems = [];
     this.selectedOrgItems = [];
     }
-    calculateClientAdults() {
-        return this.clientNpers - this.clientNNour - this.clientNBebe - this.clientNEnf - this.clientNAdo - this.clientN1824 - this.clientNSen;
-    }
+
     ngOnInit(): void {
         this.store
             .pipe(
@@ -152,17 +172,75 @@ export class DashboardReportComponent implements OnInit {
                 }
 
             });
+        this.clientNFam=0
+        this.clientNpers=0;
+        this.clientNNour=0;
+        this.clientNBebe=0;
+        this.clientNEnf=0;
+        this.clientNAdo=0;
+        this.clientN1824=0;
+        this.clientNSen=0;
+        this.clientNAdults=0;
+        this.clientNFamAgreed=0
+        this.clientNpersAgreed=0;
+        this.clientNNourAgreed=0;
+        this.clientNBebeAgreed=0;
+        this.clientNEnfAgreed=0;
+        this.clientNAdoAgreed=0;
+        this.clientN1824Agreed=0;
+        this.clientNSenAgreed=0;
+        this.clientNAdultsAgreed=0;
+        this.clientNFamGestBen=0
+        this.clientNpersGestBen=0;
+        this.clientNNourGestBen=0;
+        this.clientNBebeGestBen=0;
+        this.clientNEnfGestBen=0;
+        this.clientNAdoGestBen=0;
+        this.clientN1824GestBen=0;
+        this.clientNSenGestBen=0;
+        this.clientNAdultsGestBen=0;
+        this.clientNbofOrgs=0;
+        this.clientNbofOrgsAgreed=0;
+        this.clientNbofOrgsGestBen=0;
         this.banqueReportService.getOrgClientReport(this.authService.accessToken,this.bankShortName).subscribe(
             (response: BanqueClientReport[]) => {
                 const banqueOrgReportRecords: BanqueClientReport[] = response;
-                this.clientNFam=banqueOrgReportRecords[0].nFam;
-                this.clientNpers=banqueOrgReportRecords[0].nPers;
-                this.clientNNour=banqueOrgReportRecords[0].nNour;
-                this.clientNBebe=banqueOrgReportRecords[0].nBebe;
-                this.clientNEnf=banqueOrgReportRecords[0].nEnf;
-                this.clientNAdo=banqueOrgReportRecords[0].nAdo;
-                this.clientN1824=banqueOrgReportRecords[0].n1824;
-                this.clientNSen=banqueOrgReportRecords[0].nSen;
+                for (let i = 0; i < banqueOrgReportRecords.length; i++) {
+                    this.clientNbofOrgs+=  banqueOrgReportRecords[i].orgCount;
+                    this.clientNFam += banqueOrgReportRecords[i].nFam;
+                    this.clientNpers += banqueOrgReportRecords[i].nPers;
+                    this.clientNNour += banqueOrgReportRecords[i].nNour;
+                    this.clientNBebe += banqueOrgReportRecords[i].nBebe;
+                    this.clientNEnf += banqueOrgReportRecords[i].nEnf;
+                    this.clientNAdo += banqueOrgReportRecords[i].nAdo;
+                    this.clientN1824 += banqueOrgReportRecords[i].n1824;
+                    this.clientNSen += banqueOrgReportRecords[i].nSen;
+                    if (banqueOrgReportRecords[i].nonAgreed == 0) {
+                        this.clientNbofOrgsAgreed+=  banqueOrgReportRecords[i].orgCount;
+                        this.clientNFamAgreed += banqueOrgReportRecords[i].nFam;
+                        this.clientNpersAgreed += banqueOrgReportRecords[i].nPers;
+                        this.clientNNourAgreed += banqueOrgReportRecords[i].nNour;
+                        this.clientNBebeAgreed += banqueOrgReportRecords[i].nBebe;
+                        this.clientNEnfAgreed += banqueOrgReportRecords[i].nEnf;
+                        this.clientNAdoAgreed += banqueOrgReportRecords[i].nAdo;
+                        this.clientN1824Agreed += banqueOrgReportRecords[i].n1824;
+                        this.clientNSenAgreed += banqueOrgReportRecords[i].nSen;
+                    }
+                    if (banqueOrgReportRecords[i].gestBen == 1) {
+                        this.clientNbofOrgsGestBen+=  banqueOrgReportRecords[i].orgCount;
+                        this.clientNFamGestBen += banqueOrgReportRecords[i].nFam;
+                        this.clientNpersGestBen += banqueOrgReportRecords[i].nPers;
+                        this.clientNNourGestBen += banqueOrgReportRecords[i].nNour;
+                        this.clientNBebeGestBen += banqueOrgReportRecords[i].nBebe;
+                        this.clientNEnfGestBen += banqueOrgReportRecords[i].nEnf;
+                        this.clientNAdoGestBen += banqueOrgReportRecords[i].nAdo;
+                        this.clientN1824GestBen += banqueOrgReportRecords[i].n1824;
+                        this.clientNSenGestBen += banqueOrgReportRecords[i].nSen;
+                    }
+                }
+                this.clientNAdults = this.clientNpers - this.clientNNour - this.clientNBebe - this.clientNEnf - this.clientNAdo - this.clientN1824 - this.clientNSen;
+                this.clientNAdultsAgreed = this.clientNpersAgreed - this.clientNNourAgreed - this.clientNBebeAgreed - this.clientNEnfAgreed - this.clientNAdoAgreed - this.clientN1824Agreed - this.clientNSenAgreed;
+                this.clientNAdultsGestBen = this.clientNpersGestBen - this.clientNNourGestBen - this.clientNBebeGestBen - this.clientNEnfGestBen - this.clientNAdoGestBen - this.clientN1824GestBen - this.clientNSenGestBen;
             });
         this.banqueReportService.getOrgFeadReport(this.authService.accessToken,this.bankShortName).subscribe(
             (response: BanqueFeadReport[]) => {
@@ -230,6 +308,9 @@ export class DashboardReportComponent implements OnInit {
         this.selectedBankItems = [];
         this.selectedOrgItems = this.dashboardOrgItems.filter(x => (x.idOrg + ' ' + x.orgname) === myOrg);
     }
+    labelClientNbOfOrgs() {
+        return $localize`:@@ClientNbOfOrgs:Number of Organizations`;
+    }
     labelClientNFam() {
         return $localize`:@@ClientNFam:Families`;
     }
@@ -256,6 +337,15 @@ export class DashboardReportComponent implements OnInit {
     }
     labelClientNSen() {
         return $localize`:@@ClientSeniors:Seniors`;
+    }
+    labelOrgsTotal() {
+        return $localize`:@@OrgsTotal:All Organisations`;
+    }
+    labelOrgsAgreed() {
+        return $localize`:@@OrgsAgreed:Agreed Organisations`;
+    }
+    labelOrgsGestBen() {
+        return $localize`:@@OrgsGestBen:Organisations Recording Beneficiaries`;
     }
     labelOrgCount() {
         return $localize`:@@OrgCount:Number of Organisations of the Bank`;

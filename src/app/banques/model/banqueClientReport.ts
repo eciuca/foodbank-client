@@ -1,5 +1,8 @@
 export interface BanqueClientReport {
     bankShortName: string;
+    isDepot: number;
+    nonAgreed: number;
+    gestBen: number;
     orgCount: number;
     nFam: number;
     nPers: number;
