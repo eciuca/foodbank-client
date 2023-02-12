@@ -309,7 +309,7 @@ export class DashboardReportComponent implements OnInit {
         this.selectedOrgItems = this.dashboardOrgItems.filter(x => (x.idOrg + ' ' + x.orgname) === myOrg);
     }
     labelClientNbOfOrgs() {
-        return $localize`:@@ClientNbOfOrgs:Number of Organizations`;
+        return $localize`:@@ClientNbOfOrgs:Number of Organisations(including Depots)`;
     }
     labelClientNFam() {
         return $localize`:@@ClientNFam:Families`;

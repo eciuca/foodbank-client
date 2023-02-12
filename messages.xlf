@@ -875,6 +875,10 @@
           <context context-type="sourcefile">src/app/banques/bankreports/bankreports.component.ts</context>
           <context context-type="linenumber">266</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="UsersBank" datatype="html">
         <source>Bank Users</source>
@@ -2965,6 +2969,17 @@
           <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="Beneficiaries" datatype="html">
+        <source>Beneficiaries</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
+          <context context-type="linenumber">307</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="DistributionActivity" datatype="html">
         <source>Recent Distribution Activity</source>
         <context-group purpose="location">
@@ -3008,7 +3023,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNbOfOrgs" datatype="html">
-        <source>Number of Organizations</source>
+        <source>Number of Organisations(including Depots)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
           <context context-type="linenumber">312</context>
@@ -6254,13 +6269,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
           <context context-type="linenumber">57</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="Beneficiaries" datatype="html">
-        <source>Beneficiaries</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
-          <context context-type="linenumber">307</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Infants" datatype="html">
