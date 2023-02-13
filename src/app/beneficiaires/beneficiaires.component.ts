@@ -15,7 +15,7 @@ import {AuthService} from '../auth/auth.service';
 import {ExcelService} from '../services/excel.service';
 import {BeneficiaireHttpService} from './services/beneficiaire-http.service';
 import {formatDate} from '@angular/common';
-import {labelActive, labelCivilite} from '../shared/functions';
+import {labelCivilite} from '../shared/functions';
 
 
 @Component({
@@ -329,8 +329,25 @@ export class BeneficiairesComponent implements OnInit {
               nbParents =2;
             }
             const nbFamily = nbParents + item.nbDep;
-            cleanedList.push({  gender: labelCivilite(item.civilite), name: item.nom ,firstname: item.prenom, address: item.adresse, city: item.localite,
-              zip: item.cp, org: item.societe,  birthDate: item.daten, tel: item.tel, gsm: item.gsm, email: item.email ,parents: nbParents, dependents: item.nbDep, family: nbFamily})
+            const cleanedItem = {};
+            cleanedItem[$localize`:@@Gender:Gender`] = labelCivilite(item.civilite),
+            cleanedItem[$localize`:@@Name:Name`] = item.nom;
+            cleanedItem[$localize`:@@FirstName:First Name`] = item.prenom;
+            cleanedItem[$localize`:@@NamePartner:Name Partner`] = item.nomconj;
+            cleanedItem[$localize`:@@FirstNamePartner:First Name Partner`] = item.prenomconj;
+            cleanedItem[$localize`:@@Address:Address`] = item.adresse;
+            cleanedItem[$localize`:@@ZipCode:Zip Code`] =item.cp;
+            cleanedItem[$localize`:@@City:City`] =item.localite;
+            cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
+            cleanedItem[$localize`:@@BirthDate:Birth Date`] =item.daten;
+            cleanedItem[$localize`:@@Phone:Telephone`] =item.tel;
+            cleanedItem[$localize`:@@Gsm:Gsm`] =item.gsm;
+            cleanedItem[$localize`:@@Email:E-mail`] =item.email;
+            cleanedItem[$localize`:@@Suspect:Suspect`] =this.getSuspectStatus(item.coeff);
+            cleanedItem[$localize`:@@Parents:Parents`] =nbParents;
+            cleanedItem[$localize`:@@Dependents:Dependents`] =item.nbDep;
+            cleanedItem[$localize`:@@Family:Family Size`] =nbFamily;
+            cleanedList.push( cleanedItem);
           });
           if (this.idOrg > 0) {
             this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.beneficiaries.'  + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');

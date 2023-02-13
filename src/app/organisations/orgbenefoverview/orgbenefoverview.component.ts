@@ -287,12 +287,28 @@ export class OrgbenefoverviewComponent implements OnInit {
     }
     this.loadPageSubject$.next(latestQueryParams);
   }
-  exportAsXLSX(): void {
-     const reportOption = this.lienBanque;
-    this.organisationHttpService.getOrganisationReport(this.authService.accessToken, reportOption).subscribe(
+  exportAsXLSX(onlySelection:boolean): void {
+    let excelQueryParams = {...this.loadPageSubject$.getValue()};
+    let label ="";
+    if (onlySelection) {
+      delete excelQueryParams['rows'];
+      delete excelQueryParams['offset'];
+      delete excelQueryParams['sortOrder'];
+      delete excelQueryParams['sortField'];
+      label = "filtered.";
+
+    }
+    else {
+      excelQueryParams = {'actif': '1'};
+      excelQueryParams['lienBanque'] = this.lienBanque;
+    }
+    let params = new URLSearchParams();
+    for(let key in excelQueryParams){
+      params.set(key, excelQueryParams[key])
+    }
+    this.organisationHttpService.getOrganisationReport(this.authService.accessToken, params.toString()).subscribe(
         (organisations: any[]) => {
           const cleanedList = [
-
           ];
           organisations.map((item) => {
             const cleanedItem = {};
@@ -315,7 +331,7 @@ export class OrgbenefoverviewComponent implements OnInit {
             cleanedList.push( cleanedItem);
           });
 
-            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.beneficiaries.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.beneficiaries.' + label  + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
 
         });
   }

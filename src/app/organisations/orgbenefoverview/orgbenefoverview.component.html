@@ -33,8 +33,11 @@
                         </ng-template>
                     </p-dropdown>
                 </div>
-                <div class="p-field p-col-12 p-md-2">
-                    <button  class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX()" label="Export Benef Statistics" i18n-label="@@BenefSummaryExport"></button>
+                <div class="p-field p-col-12 p-md-3">
+                    <button  class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX(false)" label="Export Benef Statistics" i18n-label="@@BenefSummaryExport"></button>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <button  class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX(true)" label="Export Selected Benef Statistics" i18n-label="@@BenefSummaryExportSelected"></button>
                 </div>
             </div>
         </div>

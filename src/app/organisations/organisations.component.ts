@@ -401,12 +401,29 @@ export class OrganisationsComponent implements OnInit {
         }
         this.loadPageSubject$.next(latestQueryParams);
     }
-    exportAsXLSX(): void {
-        let reportOption = null;
-        if (!this.bankOptions) {
-            reportOption = this.lienBanque;
+    exportAsXLSX(onlySelection:boolean): void {
+        let excelQueryParams = {...this.loadPageSubject$.getValue()};
+        let label ="";
+        if (onlySelection) {
+            delete excelQueryParams['rows'];
+            delete excelQueryParams['offset'];
+            delete excelQueryParams['sortOrder'];
+            delete excelQueryParams['sortField'];
+            label = "filtered.";
+
         }
-        this.organisationHttpService.getOrganisationReport(this.authService.accessToken, reportOption).subscribe(
+        else {
+            excelQueryParams = {'actif': '1'};
+
+            if (!this.bankOptions) {
+                excelQueryParams['lienBanque'] = this.lienBanque;
+            }
+        }
+        let params = new URLSearchParams();
+        for(let key in excelQueryParams){
+            params.set(key, excelQueryParams[key])
+        }
+        this.organisationHttpService.getOrganisationReport(this.authService.accessToken, params.toString()).subscribe(
             (organisations: any[]) => {
                 const cleanedList = [];
                 organisations.map((item) => {
@@ -431,10 +448,10 @@ export class OrganisationsComponent implements OnInit {
                     cleanedList.push( cleanedItem);
                 });
                 if (!this.bankOptions) {
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 }
                 else {
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.organisations.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.organisations.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 }
             });
     }

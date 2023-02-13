@@ -51,11 +51,14 @@
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-2">
-                    <button  i18n="@@OrganisationExport" class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX()" label="Export Organisations" i18n-label="@@ExportOrganisations"></button>
+                <div *ngIf="!booShowArchived" class="p-field p-col-12 p-md-2">
+                    <button  class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX(false)" label="Export All Organisations" i18n-label="@@ExportOrganisations"></button>
+                </div>
+                <div *ngIf="!booShowArchived" class="p-field p-col-12 p-md-2">
+                    <button  class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX(true)" label="Export Selected Organisations" i18n-label="@@ExportOrganisationsSelected"></button>
                 </div>
                 <div class="p-field p-col-12 p-md-2">
-                    <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Organisation" i18n-label="@@AddOrganisation" ></button>
+                    <button *ngIf="!booShowArchived  && booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Organisation" i18n-label="@@AddOrganisation" ></button>
                 </div>
             </div>
         </div>
