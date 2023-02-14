@@ -471,12 +471,36 @@ export class UsersComponent implements OnInit {
             }
         }
     }
-    exportAsXLSX(): void {
-        let lienBanque = null;
-        if (!this.bankOptions) {
-            lienBanque = this.bankid;
+    exportAsXLSX(onlySelection:boolean): void {
+        let excelQueryParams = {...this.loadPageSubject$.getValue()};
+        let label ="";
+        if (onlySelection) {
+            delete excelQueryParams['rows'];
+            delete excelQueryParams['offset'];
+            delete excelQueryParams['sortOrder'];
+            delete excelQueryParams['sortField'];
+            label = "filtered.";
+
         }
-        this.userHttpService.getUserReport(this.authService.accessToken, lienBanque,this.idOrg,this.depotIdDis).subscribe(
+        else {
+
+            excelQueryParams = { 'actif':'1'};
+            if (!this.bankOptions) {
+                excelQueryParams['lienBanque'] = this.bankid;
+            }
+            if(this.idOrg > 0) {
+                excelQueryParams['lienDis'] = this.idOrg;
+            }
+            if(this.depotIdDis > 0) {
+                excelQueryParams['lienDepot'] = this.depotIdDis;
+            }
+
+        }
+        let params = new URLSearchParams();
+        for(let key in excelQueryParams){
+            params.set(key, excelQueryParams[key])
+        }
+        this.userHttpService.getUserReport(this.authService.accessToken,  params.toString()).subscribe(
         (users: any[]) => {
             const cleanedList = [];
             users.map((item) => {
@@ -494,13 +518,13 @@ export class UsersComponent implements OnInit {
                 cleanedList.push( cleanedItem);
             });
             if (this.idOrg > 0) {
-                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.users.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
             }
             else {
                 if (!this.bankOptions) {
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.users.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 } else {
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.users.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 }
             }
         });

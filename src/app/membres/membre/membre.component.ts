@@ -159,7 +159,12 @@ export class MembreComponent implements OnInit {
                       }
 
                       if (membre.nbUsers > 0 ) {
-                          this.userHttpService.getUserReport(this.authService.accessToken, null, null, null,membre.batId).subscribe(
+                         let queryParams = { 'actif':'1', 'lienBat': membre.batId.toString() };
+                          let params = new URLSearchParams();
+                          for(let key in queryParams){
+                              params.set(key, queryParams[key])
+                          }
+                          this.userHttpService.getUserReport(this.authService.accessToken, params.toString()).subscribe(
                               (users: User[]) => {
                                   users.map((user) => {
                                       this.userIds += user.idUser + ' ';
