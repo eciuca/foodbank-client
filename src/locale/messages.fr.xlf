@@ -751,7 +751,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">516</context>
+          <context context-type="linenumber">515</context>
         </context-group>
       </trans-unit>
       <trans-unit id="LoginDateFilter" datatype="html">
@@ -3621,10 +3621,6 @@
           <context context-type="sourcefile">src/app/users/user/user.component.html</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">514</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="Uses Fead" datatype="html">
         <source>Uses Fead ?</source>
@@ -4067,7 +4063,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">515</context>
+          <context context-type="linenumber">514</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Importance" datatype="html">
@@ -6759,7 +6755,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">601</context>
+          <context context-type="linenumber">600</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotMissing" datatype="html">
@@ -8711,7 +8707,7 @@
         <target>Aucun collaborateur affecté à l'utilisateur</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">537</context>
+          <context context-type="linenumber">536</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentMemberName" datatype="html">
@@ -8719,7 +8715,7 @@
         <target>Le nom d'utilisateur '<x id="PH" equiv-text="user.userName"/>' diffère du nom du collaborateur '<x id="PH_1" equiv-text="user.membreNom"/> <x id="PH_2" equiv-text="user.membrePrenom"/>'</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">544</context>
+          <context context-type="linenumber">543</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentMemberNameLight" datatype="html">
@@ -8727,7 +8723,7 @@
         <target>Le nom d'utilisateur '<x id="PH" equiv-text="user.userName"/>' diffère du nom du collaborateur '<x id="PH_1" equiv-text="user.membreNom"/> <x id="PH_2" equiv-text="user.membrePrenom"/>' uniquement par des espaces ou des caractères spéciaux.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">547</context>
+          <context context-type="linenumber">546</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentMemberEmail" datatype="html">
@@ -8735,7 +8731,7 @@
         <target>L'e-mail de l'utilisateur '<x id="PH" equiv-text="user.email"/>' diffère de l'e-mail du collaborateur '<x id="PH_1" equiv-text="user.membreEmail"/>'</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">551</context>
+          <context context-type="linenumber">550</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentMemberActif" datatype="html">
@@ -8743,7 +8739,7 @@
         <target>L'utilisateur pointe vers un membre archivé !!!'</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">554</context>
+          <context context-type="linenumber">553</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentMemberBank" datatype="html">
@@ -8751,7 +8747,7 @@
         <target>La banque de l utilisateur '<x id="PH" equiv-text="user.idCompany"/>' diffère de la banque du collaborateur '<x id="PH_1" equiv-text="user.membreBankShortname"/>'</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">557</context>
+          <context context-type="linenumber">556</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentLanguage" datatype="html">
@@ -8759,7 +8755,7 @@
         <target>La langue de l'utilisateur '<x id="PH" equiv-text="userLanguage"/>' diffère de la langue du collaborateur '<x id="PH_1" equiv-text="memberLanguage"/>'</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">564</context>
+          <context context-type="linenumber">563</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserAnomalyDifferentLienBanque" datatype="html">
@@ -8767,7 +8763,7 @@
         <target>champ lien_banque dans la table t_user '<x id="PH" equiv-text="user.lienBanque"/>'  banque <x id="PH_1" equiv-text="idCompanyFromLienBanque"/> diffère de la banque utilisateur '<x id="PH_2" equiv-text="user.idCompany"/>'</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">571</context>
+          <context context-type="linenumber">570</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipUserOK" datatype="html">
@@ -8775,7 +8771,7 @@
         <target>Cliquez ici pour afficher ou modifier les détails de l'utilisateur</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">576</context>
+          <context context-type="linenumber">575</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReportBenefs">

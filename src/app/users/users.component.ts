@@ -511,7 +511,6 @@ export class UsersComponent implements OnInit {
                 cleanedItem['idUser'] =item.idUser;
                 cleanedItem[$localize`:@@Name:Name`] =item.userName;
                 cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
-                cleanedItem[$localize`:@@Active:Active`] =labelActive(item.actif);
                 cleanedItem[$localize`:@@Language:Language`] =item.idLanguage;
                 cleanedItem[$localize`:@@Rights:Rights`] = labelRights(item.rights);
                 cleanedItem['email'] =item.email;
