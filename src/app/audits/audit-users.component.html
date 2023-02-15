@@ -1,0 +1,102 @@
+<p-table #dt [value]="auditUsers"  [rowHover]="true" [lazy]="true" (onLazyLoad)="nextPage($event)" [sortOrder]="0"
+         [rows]="10" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [loading]="loading" [(first)]="first"
+         [paginator]="true" i18n-currentPageReportTemplate="@@CurrentPageReportbyPage" currentPageReportTemplate="'Page {currentPage} of {totalPages}'"
+>
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <div class="p-fluid p-formgrid p-grid">
+
+                <div class="p-field p-col-12 p-md-2">
+                    <label i18n="@@DateFilter" for="onselect">Filter on Date?</label>
+                    <p-checkbox [(ngModel)]="booRangeFilter" binary="true" name="onselect" id="onselect" (onUser)="userSetRangeFilter($event)"></p-checkbox>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy" (onSelect)="userDateRangeFilter()"></p-calendar>
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" (onSelect)="userDateRangeFilter()"></p-calendar>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngIf="bankOptions" i18n="@@BankNameShortSorted" pSortableColumn="bankShortName">Bank<p-sortIcon field="bankShortName"></p-sortIcon></th>
+            <th i18n="@@UserIdSorted" pSortableColumn="user">User Id<p-sortIcon field="user"></p-sortIcon></th>
+            <th i18n="@@UserNameSorted" pSortableColumn="userName">Name<p-sortIcon field="userName"></p-sortIcon></th>
+            <th i18n="@@IdDisSorted" pSortableColumn="idDis" >Id Org<p-sortIcon field="idDis"></p-sortIcon></th>
+            <th colspan="2" i18n="@@SocieteSorted" pSortableColumn="societe">Organisation<p-sortIcon field="societe"></p-sortIcon></th>
+            <th>Rights</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th *ngIf="bankOptions">
+                <p-columnFilter field="bankShortName" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="bankOptions" (onUser)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="user" matchMode="contains" [showMenu]="false" ></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="userName" [showMenu]="false">
+                </p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="idDis" matchMode="equals" [showMenu]="false"></p-columnFilter>
+            </th>
+            <th colspan="2">
+                <p-columnFilter type="text" field="societe" matchMode="contains" [showMenu]="false"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="rights" matchMode="contains" [showMenu]="false"></p-columnFilter>
+            <th>
+                Logins PHP
+            </th>
+            <th>
+                Logins FBIT
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-auditUser>
+        <tr>
+
+            <td *ngIf="bankOptions" >
+                {{auditUser.bankShortName}}
+            </td>
+            <td>
+                {{auditUser.idUser}}
+            </td>
+            <td >
+                {{auditUser.userName}}
+            </td>
+            <td>
+                {{auditUser.idDis}}
+            </td>
+            <td colspan="2">
+                {{auditUser.societe}}
+            </td>
+            <td>
+                {{auditUser.rights}}
+            </td>
+            <td>
+                {{auditUser.loginCountPHP}}
+            </td>
+            <td>
+                {{auditUser.loginCountFBIT}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div i18n="@@AuditUsersSelected" class="p-d-flex p-ai-center p-jc-between">
+            There are {{totalRecords}} users in the selection.
+        </div>
+    </ng-template>
+</p-table>

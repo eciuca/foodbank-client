@@ -419,6 +419,7 @@ export class AppComponent implements OnInit {
                             icon: 'pi pi-fw pi-users',
                             routerLink: [`/audits/auditreports`]
                         },
+                        {label: 'Users', icon: 'pi pi-fw pi-users', routerLink: ['/audits/auditusers']},
                         {label: 'Details', icon: 'pi pi-fw pi-users', routerLink: ['/audits']},
                     ]
                 },

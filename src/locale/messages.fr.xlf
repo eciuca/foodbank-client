@@ -395,7 +395,7 @@
         <target>MAJ Entités</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">425</context>
+          <context context-type="linenumber">426</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReportOrgs" datatype="html">
@@ -403,7 +403,7 @@
         <target>Organisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">430</context>
+          <context context-type="linenumber">431</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReportMovements" datatype="html">
@@ -411,11 +411,11 @@
         <target>Livraisons Vivres</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">432</context>
+          <context context-type="linenumber">433</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">439</context>
+          <context context-type="linenumber">440</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
@@ -423,7 +423,7 @@
         <target>Tableau de bord</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">437</context>
+          <context context-type="linenumber">438</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReports" datatype="html">
@@ -431,7 +431,7 @@
         <target>Rapports</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">444,443</context>
+          <context context-type="linenumber">445,444</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuFEADApplication" datatype="html">
@@ -439,7 +439,7 @@
         <target>Vers la Gestion du Stock</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">455,454</context>
+          <context context-type="linenumber">456,455</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
@@ -447,7 +447,7 @@
         <target>Déconnecter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">469</context>
+          <context context-type="linenumber">470</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReportbyPage" datatype="html">
@@ -455,6 +455,10 @@
         <target>&quot;Page {currentPage} sur {totalPages}&quot;</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-changes.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
         <context-group purpose="location">
@@ -521,6 +525,10 @@
           <context context-type="sourcefile">src/app/audits/audit-changes.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="ChangeTime" datatype="html">
         <source>Change Time<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;dateIn&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
@@ -536,6 +544,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-changes.component.html</context>
           <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
@@ -562,6 +574,10 @@
           <context context-type="linenumber">26</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
@@ -578,6 +594,10 @@
           <context context-type="linenumber">27</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
           <context context-type="linenumber">27</context>
         </context-group>
@@ -590,6 +610,10 @@
           <context context-type="linenumber">28</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
           <context context-type="linenumber">29</context>
         </context-group>
@@ -600,6 +624,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-changes.component.html</context>
           <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
@@ -752,6 +780,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">515</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuditUsersSelected" datatype="html">
+        <source> There are <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> users in the selection. </source>
+        <target> Il y a <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/>  utilisateurs dans la sélection.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
+          <context context-type="linenumber">98,100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="LoginDateFilter" datatype="html">
