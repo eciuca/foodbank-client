@@ -1,7 +1,7 @@
 export interface AuditUser {
     idUser: string;
     userName: string;
-    idCompany: string;
+    bankShortName: string;
     idOrg: number;
     societe: string;
     email: string;

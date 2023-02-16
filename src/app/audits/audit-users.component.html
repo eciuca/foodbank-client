@@ -35,7 +35,7 @@
             <th *ngIf="bankOptions">
                 <p-columnFilter field="bankShortName" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown [ngModel]="value" [options]="bankOptions" (onUser)="filter($event.value)" placeholder="Any" [showClear]="true">
+                        <p-dropdown [ngModel]="value" [options]="bankOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
                             <ng-template let-option pTemplate="item">
                                 <span>{{option.label}}</span>
                             </ng-template>
