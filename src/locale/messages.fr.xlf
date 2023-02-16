@@ -787,7 +787,7 @@
         <target> Il y a <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/>  utilisateurs dans la sélection.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
-          <context context-type="linenumber">98,100</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="LoginDateFilter" datatype="html">

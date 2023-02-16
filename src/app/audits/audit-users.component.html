@@ -8,7 +8,7 @@
 
                 <div class="p-field p-col-12 p-md-2">
                     <label i18n="@@DateFilter" for="onselect">Filter on Date?</label>
-                    <p-checkbox [(ngModel)]="booRangeFilter" binary="true" name="onselect" id="onselect" (onUser)="userSetRangeFilter($event)"></p-checkbox>
+                    <p-checkbox [(ngModel)]="booRangeFilter" binary="true" name="onselect" id="onselect" (onChange)="userSetRangeFilter($event)"></p-checkbox>
                 </div>
                 <div class="p-field p-col-12 p-md-3">
                     <p-calendar [(ngModel)]="fromDate" dateFormat="dd/mm/yy" (onSelect)="userDateRangeFilter()"></p-calendar>
@@ -27,8 +27,9 @@
             <th i18n="@@IdDisSorted" pSortableColumn="idDis" >Id Org<p-sortIcon field="idDis"></p-sortIcon></th>
             <th colspan="2" i18n="@@SocieteSorted" pSortableColumn="societe">Organisation<p-sortIcon field="societe"></p-sortIcon></th>
             <th>Rights</th>
-            <th></th>
-            <th></th>
+            <th>E-Mail</th>
+            <th pSortableColumn="loginCountPHP" >Logins PHP<p-sortIcon field="loginCountPHP"></p-sortIcon></th>
+            <th pSortableColumn="loginCountFBIT" >Logins FBIT<p-sortIcon field="loginCountFBIT"></p-sortIcon></th>
         </tr>
         <tr>
             <th *ngIf="bankOptions">
@@ -56,12 +57,15 @@
                 <p-columnFilter type="text" field="societe" matchMode="contains" [showMenu]="false"></p-columnFilter>
             </th>
             <th>
-                <p-columnFilter type="text" field="rights" matchMode="contains" [showMenu]="false"></p-columnFilter>
+
             <th>
-                Logins PHP
+            <th>
+
+            <th>
+
             </th>
             <th>
-                Logins FBIT
+
             </th>
         </tr>
     </ng-template>
@@ -85,6 +89,9 @@
             </td>
             <td>
                 {{auditUser.rights}}
+            </td>
+            <td>
+                {{auditUser.email}}
             </td>
             <td>
                 {{auditUser.loginCountPHP}}
