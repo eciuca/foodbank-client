@@ -218,6 +218,12 @@ export class BeneficiariesReportComponent implements OnInit {
                             backgroundColor: 'Yellow',
                             data: []
                         },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgAdults:Adults`,
+                            backgroundColor: 'Brown',
+                            data: []
+                        },
 
                     ];
                     let reportDataSetsByAgeAgreed = [
@@ -257,6 +263,12 @@ export class BeneficiariesReportComponent implements OnInit {
                             backgroundColor: 'Yellow',
                             data: []
                         },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgAdults:Adults`,
+                            backgroundColor: 'Brown',
+                            data: []
+                        },
 
                     ];
                     let reportDataSetsByAgeGestBen = [
@@ -294,6 +306,12 @@ export class BeneficiariesReportComponent implements OnInit {
                             type: 'bar',
                             label: $localize`:@@OrgSeniors:Seniors(> 65 years)`,
                             backgroundColor: 'Yellow',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgAdults:Adults`,
+                            backgroundColor: 'Brown',
                             data: []
                         },
                     ];
@@ -348,6 +366,7 @@ export class BeneficiariesReportComponent implements OnInit {
                         reportDataSetsByAge[3].data[indexLabel] += banqueOrgReportRecords[i].nAdo;
                         reportDataSetsByAge[4].data[indexLabel] += banqueOrgReportRecords[i].n1824;
                         reportDataSetsByAge[5].data[indexLabel] += banqueOrgReportRecords[i].nSen;
+                        reportDataSetsByAge[6].data[indexLabel] += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nNour - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
                         if (banqueOrgReportRecords[i].nonAgreed == 0) {
                             reportDataSetsByFamilyAgreed[0].data[indexLabel] += banqueOrgReportRecords[i].nFam;
                             reportDataSetsByFamilyAgreed[1].data[indexLabel] += banqueOrgReportRecords[i].nPers;
@@ -357,6 +376,7 @@ export class BeneficiariesReportComponent implements OnInit {
                             reportDataSetsByAgeAgreed[3].data[indexLabel] += banqueOrgReportRecords[i].nAdo;
                             reportDataSetsByAgeAgreed[4].data[indexLabel] += banqueOrgReportRecords[i].n1824;
                             reportDataSetsByAgeAgreed[5].data[indexLabel] += banqueOrgReportRecords[i].nSen;
+                            reportDataSetsByAgeAgreed[6].data[indexLabel] += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nNour - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
                         }
                         if (banqueOrgReportRecords[i].gestBen == 1) {
                             reportDataSetsByFamilyGestBen[0].data[indexLabel] += banqueOrgReportRecords[i].nFam;
@@ -367,6 +387,7 @@ export class BeneficiariesReportComponent implements OnInit {
                             reportDataSetsByAgeGestBen[3].data[indexLabel] += banqueOrgReportRecords[i].nAdo;
                             reportDataSetsByAgeGestBen[4].data[indexLabel] += banqueOrgReportRecords[i].n1824;
                             reportDataSetsByAgeGestBen[5].data[indexLabel] += banqueOrgReportRecords[i].nSen;
+                            reportDataSetsByAgeGestBen[6].data[indexLabel] += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nNour - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
                         }
 
                     }
