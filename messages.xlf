@@ -2477,14 +2477,14 @@
         <source>Poverty Index: <x id="PH" equiv-text="this.povertyIndex"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">330</context>
+          <context context-type="linenumber">331</context>
         </context-group>
       </trans-unit>
       <trans-unit id="povertyIndexTooltip" datatype="html">
         <source>Poverty Index is calculated for <x id="PH" equiv-text="this.nbAdults"/> Adult Dependents and <x id="PH_1" equiv-text="this.nbChildren"/> Children based on the rates updated on 25/06/2021</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">334</context>
+          <context context-type="linenumber">335</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BeneficiariesHeader" datatype="html">

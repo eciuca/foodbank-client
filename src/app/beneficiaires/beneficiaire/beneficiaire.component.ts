@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {Beneficiaire, DefaultBeneficiaire} from '../model/beneficiaire';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmCountry, enmGender, enmStatutFead, enmSupplyDay} from '../../shared/enums';
+import {enmCountry, enmGender, enmStatutFead} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
@@ -310,6 +310,7 @@ export class BeneficiaireComponent implements OnInit {
         this.nbAdults = 0;
       if (this.beneficiaire.nomconj) {
             this.nbAdults = 1;
+            this.povertyIndex += this.povertyRevenueDependentAdult;
       }
         this.nbChildren = 0;
         this.dependents.forEach( (dependent) => {
