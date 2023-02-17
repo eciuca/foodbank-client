@@ -5,13 +5,31 @@
         </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">
-        <div *ngIf="chartDataBeneficiaryByFamily" class="p-field p-col-12 p-md-6 card">
-                <h3>{{ titleBenefiariesByFamily }}</h3>
+        <div *ngIf="chartDataBeneficiaryByFamily" class="p-field p-col-12 p-md-4 card">
+                <h3>{{ titleBeneficiariesByFamily }}</h3>
                 <p-chart type="bar" [data]="chartDataBeneficiaryByFamily" [options]="basicOptions"></p-chart>
         </div>
-        <div *ngIf="chartDataBeneficiaryByAge" class="p-field p-col-12 p-md-6 card">
-                <h3>{{ titleBenefiariesByAge }}</h3>
+        <div *ngIf="chartDataBeneficiaryByFamilyAgreed" class="p-field p-col-12 p-md-4 card">
+                <h3>{{ titleBeneficiariesByFamilyAgreed }}</h3>
+                <p-chart type="bar" [data]="chartDataBeneficiaryByFamilyAgreed" [options]="basicOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataBeneficiaryByFamilyGestBen" class="p-field p-col-12 p-md-4 card">
+                <h3>{{ titleBeneficiariesByFamilyGestBen }}</h3>
+                <p-chart type="bar" [data]="chartDataBeneficiaryByFamilyGestBen" [options]="basicOptions"></p-chart>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="chartDataBeneficiaryByAge" class="p-field p-col-12 p-md-4 card">
+                <h3>{{ titleBeneficiariesByAge }}</h3>
                 <p-chart type="bar" [data]="chartDataBeneficiaryByAge" [options]="stackedOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataBeneficiaryByAgeAgreed" class="p-field p-col-12 p-md-4 card">
+                <h3>{{ titleBeneficiariesByAgeAgreed }}</h3>
+                <p-chart type="bar" [data]="chartDataBeneficiaryByAgeAgreed" [options]="stackedOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataBeneficiaryByAgeGestBen" class="p-field p-col-12 p-md-4 card">
+                <h3>{{ titleBeneficiariesByAgeGestBen }}</h3>
+                <p-chart type="bar" [data]="chartDataBeneficiaryByAgeGestBen" [options]="stackedOptions"></p-chart>
         </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">

@@ -27,15 +27,24 @@ export class BeneficiariesReportComponent implements OnInit {
     backgroundColors: any[];
     basicOptions: any;
     stackedOptions: any;
-    titleBenefiariesByAge: string;
-    titleBenefiariesByFamily: string;
+    titleBeneficiariesByAge: string;
+    titleBeneficiariesByFamily: string;
+    titleBeneficiariesByAgeAgreed: string;
+    titleBeneficiariesByFamilyAgreed: string;
+    titleBeneficiariesByAgeGestBen: string;
+    titleBeneficiariesByFamilyGestBen: string;
     titleBeneficiariesEvolution: string;
     titleBeneficiariesFamilyEvolution: string;
     chartDataBeneficiaryByAge: any;
     chartDataBeneficiaryByFamily: any;
+    chartDataBeneficiaryByAgeAgreed: any;
+    chartDataBeneficiaryByFamilyAgreed: any;
+    chartDataBeneficiaryByAgeGestBen: any;
+    chartDataBeneficiaryByFamilyGestBen: any;
     chartDataBeneficiariesHistory: any;
     chartDataBeneficiariesFamilyHistory: any;
     populationRecords: Population[];
+
 
     constructor(
       private beneficiaireHttpService: BeneficiaireHttpService,
@@ -125,107 +134,275 @@ export class BeneficiariesReportComponent implements OnInit {
       this.reportBeneficiariesHistory();
   }
     reportBeneficiaries() {
+
         this.banqueReportService.getOrgClientReport(this.authService.accessToken,this.bankShortName).subscribe(
             (response: BanqueClientReport[]) => {
                 const banqueOrgReportRecords: BanqueClientReport[] = response;
 
-                let reportLabels = [];
-                let reportDataSetsByFamily = [
-                    {
-                        type: 'bar',
-                        label: $localize`:@@OrgStatFamilies:Families`,
-                        backgroundColor: 'Red',
-                        data: []
-                    },
-                    {
-                        type: 'bar',
-                        label: $localize`:@@OrgStatPersons:Persons`,
-                        backgroundColor: 'Blue',
-                        data: []
-                    },
-                ];
+                    let reportLabels = [];
+                    let reportDataSetsByFamily = [
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatFamilies:Families`,
+                            backgroundColor: 'Red',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatPersons:Persons`,
+                            backgroundColor: 'Blue',
+                            data: []
+                        },
+                    ];
+                    let reportDataSetsByFamilyAgreed = [
+                        { type: 'bar',
+                            label: $localize`:@@OrgStatFamilies:Families`,
+                            backgroundColor: 'Red',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatPersons:Persons`,
+                            backgroundColor: 'Blue',
+                            data: []
+                        },
+                    ];
+                    let reportDataSetsByFamilyGestBen = [
+                        {   type: 'bar',
+                            label: $localize`:@@OrgStatFamilies:Families`,
+                            backgroundColor: 'Red',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatPersons:Persons`,
+                            backgroundColor: 'Blue',
+                            data: []
+                        },
+                    ];
 
-                let reportDataSetsByAge = [
-                    {
-                        type: 'bar',
-                        label: $localize`:@@OrgStatInfants:Infants(0-6 months)`,
-                        backgroundColor: 'Red',
-                        data: []
-                    },
-                    {
-                        type: 'bar',
-                        label: $localize`:@@OrgStatBabies:Babies(6-24 months)`,
-                        backgroundColor: 'Orange',
-                        data: []
-                    },
-                    {
-                        type: 'bar',
-                        label: $localize`:@@OrgStatChildren:Children(2-14 years)`,
-                        backgroundColor: 'Blue',
-                        data: []
-                    },
-                    {
-                        type: 'bar',
-                        label: $localize`:@@OrgStatTeenagers:Teenagers(14-18 years)`,
-                        backgroundColor: '#ADD8E6', // light blue
-                        data: []
-                    },
-                    {
-                        type: 'bar',
-                        label: $localize`:@@OrgStatYoungAdults:Young Adults(18-24 years)`,
-                        backgroundColor: 'Green',
-                        data: []
-                    },
-                    {
-                        type: 'bar',
-                        label: $localize`:@@OrgSeniors:Seniors(> 65 years)`,
-                        backgroundColor: 'Yellow',
-                        data: []
-                    },
+                    let reportDataSetsByAge = [
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatInfants:Infants(0-6 months)`,
+                            backgroundColor: 'Red',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatBabies:Babies(6-24 months)`,
+                            backgroundColor: 'Orange',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatChildren:Children(2-14 years)`,
+                            backgroundColor: 'Blue',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatTeenagers:Teenagers(14-18 years)`,
+                            backgroundColor: '#ADD8E6', // light blue
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatYoungAdults:Young Adults(18-24 years)`,
+                            backgroundColor: 'Green',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgSeniors:Seniors(> 65 years)`,
+                            backgroundColor: 'Yellow',
+                            data: []
+                        },
 
-                ];
+                    ];
+                    let reportDataSetsByAgeAgreed = [
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatInfants:Infants(0-6 months)`,
+                            backgroundColor: 'Red',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatBabies:Babies(6-24 months)`,
+                            backgroundColor: 'Orange',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatChildren:Children(2-14 years)`,
+                            backgroundColor: 'Blue',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatTeenagers:Teenagers(14-18 years)`,
+                            backgroundColor: '#ADD8E6', // light blue
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatYoungAdults:Young Adults(18-24 years)`,
+                            backgroundColor: 'Green',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgSeniors:Seniors(> 65 years)`,
+                            backgroundColor: 'Yellow',
+                            data: []
+                        },
+
+                    ];
+                    let reportDataSetsByAgeGestBen = [
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatInfants:Infants(0-6 months)`,
+                            backgroundColor: 'Red',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatBabies:Babies(6-24 months)`,
+                            backgroundColor: 'Orange',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatChildren:Children(2-14 years)`,
+                            backgroundColor: 'Blue',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatTeenagers:Teenagers(14-18 years)`,
+                            backgroundColor: '#ADD8E6', // light blue
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgStatYoungAdults:Young Adults(18-24 years)`,
+                            backgroundColor: 'Green',
+                            data: []
+                        },
+                        {
+                            type: 'bar',
+                            label: $localize`:@@OrgSeniors:Seniors(> 65 years)`,
+                            backgroundColor: 'Yellow',
+                            data: []
+                        },
+                    ];
 
 
-                this.bankOptions.map((option) => {
-                    reportLabels.push(option.label);
-                })
-                reportDataSetsByAge.map((dataSetitem) => {
-                for (let i = 0; i < this.bankOptions.length; i++) {
-                    dataSetitem.data.push(0);
-                }
-                })
-                reportDataSetsByFamily.map((dataSetitem) => {
-                for (let i = 0; i < this.bankOptions.length; i++) {
-                    dataSetitem.data.push(0);
-                }
-                })
 
-                for (let i=0; i < banqueOrgReportRecords.length; i++ ) {
+                    this.bankOptions.map((option) => {
+                        reportLabels.push(option.label);
+                    })
+                    reportDataSetsByAge.map((dataSetitem) => {
+                        for (let i = 0; i < this.bankOptions.length; i++) {
+                            dataSetitem.data.push(0);
+                        }
+                    })
+                    reportDataSetsByAgeAgreed.map((dataSetitem) => {
+                        for (let i = 0; i < this.bankOptions.length; i++) {
+                            dataSetitem.data.push(0);
+                        }
+                    })
+                    reportDataSetsByAgeGestBen.map((dataSetitem) => {
+                        for (let i = 0; i < this.bankOptions.length; i++) {
+                            dataSetitem.data.push(0);
+                        }
+                    })
 
-                    const indexLabel = reportLabels.indexOf(banqueOrgReportRecords[i].bankShortName);
-                    if (indexLabel === -1) continue;
-                    reportDataSetsByFamily[0].data[indexLabel] += banqueOrgReportRecords[i].nFam;
-                    reportDataSetsByFamily[1].data[indexLabel] += banqueOrgReportRecords[i].nPers;
-                    reportDataSetsByAge[0].data[indexLabel] += banqueOrgReportRecords[i].nNour;
-                    reportDataSetsByAge[1].data[indexLabel] += banqueOrgReportRecords[i].nBebe;
-                    reportDataSetsByAge[2].data[indexLabel] += banqueOrgReportRecords[i].nEnf;
-                    reportDataSetsByAge[3].data[indexLabel] += banqueOrgReportRecords[i].nAdo;
-                    reportDataSetsByAge[4].data[indexLabel] += banqueOrgReportRecords[i].n1824;
-                    reportDataSetsByAge[5].data[indexLabel] += banqueOrgReportRecords[i].nSen;
+                    reportDataSetsByFamily.map((dataSetitem) => {
+                        for (let i = 0; i < this.bankOptions.length; i++) {
+                            dataSetitem.data.push(0);
+                        }
+                    })
+                    reportDataSetsByFamilyAgreed.map((dataSetitem) => {
+                        for (let i = 0; i < this.bankOptions.length; i++) {
+                            dataSetitem.data.push(0);
+                        }
+                    })
+                    reportDataSetsByFamilyGestBen.map((dataSetitem) => {
+                        for (let i = 0; i < this.bankOptions.length; i++) {
+                            dataSetitem.data.push(0);
+                        }
+                    })
 
-                }
 
-                this.titleBenefiariesByFamily = $localize`:@@OrgStatBenefByFamily:Beneficiaries Statistics by Family`;
-                this.chartDataBeneficiaryByFamily = {
-                    labels: reportLabels,
-                    datasets: reportDataSetsByFamily
-                }
+                    for (let i = 0; i < banqueOrgReportRecords.length; i++) {
 
-                this.titleBenefiariesByAge = $localize`:@@OrgStatBenefByAge:Beneficiaries Statistics by Age Group`;
-                this.chartDataBeneficiaryByAge = {
-                    labels: reportLabels,
-                    datasets: reportDataSetsByAge
-                }
+                        const indexLabel = reportLabels.indexOf(banqueOrgReportRecords[i].bankShortName);
+                        if (indexLabel === -1) continue;
+                        reportDataSetsByFamily[0].data[indexLabel] += banqueOrgReportRecords[i].nFam;
+                        reportDataSetsByFamily[1].data[indexLabel] += banqueOrgReportRecords[i].nPers;
+                        reportDataSetsByAge[0].data[indexLabel] += banqueOrgReportRecords[i].nNour;
+                        reportDataSetsByAge[1].data[indexLabel] += banqueOrgReportRecords[i].nBebe;
+                        reportDataSetsByAge[2].data[indexLabel] += banqueOrgReportRecords[i].nEnf;
+                        reportDataSetsByAge[3].data[indexLabel] += banqueOrgReportRecords[i].nAdo;
+                        reportDataSetsByAge[4].data[indexLabel] += banqueOrgReportRecords[i].n1824;
+                        reportDataSetsByAge[5].data[indexLabel] += banqueOrgReportRecords[i].nSen;
+                        if (banqueOrgReportRecords[i].nonAgreed == 0) {
+                            reportDataSetsByFamilyAgreed[0].data[indexLabel] += banqueOrgReportRecords[i].nFam;
+                            reportDataSetsByFamilyAgreed[1].data[indexLabel] += banqueOrgReportRecords[i].nPers;
+                            reportDataSetsByAgeAgreed[0].data[indexLabel] += banqueOrgReportRecords[i].nNour;
+                            reportDataSetsByAgeAgreed[1].data[indexLabel] += banqueOrgReportRecords[i].nBebe;
+                            reportDataSetsByAgeAgreed[2].data[indexLabel] += banqueOrgReportRecords[i].nEnf;
+                            reportDataSetsByAgeAgreed[3].data[indexLabel] += banqueOrgReportRecords[i].nAdo;
+                            reportDataSetsByAgeAgreed[4].data[indexLabel] += banqueOrgReportRecords[i].n1824;
+                            reportDataSetsByAgeAgreed[5].data[indexLabel] += banqueOrgReportRecords[i].nSen;
+                        }
+                        if (banqueOrgReportRecords[i].gestBen == 1) {
+                            reportDataSetsByFamilyGestBen[0].data[indexLabel] += banqueOrgReportRecords[i].nFam;
+                            reportDataSetsByFamilyGestBen[1].data[indexLabel] += banqueOrgReportRecords[i].nPers;
+                            reportDataSetsByAgeGestBen[0].data[indexLabel] += banqueOrgReportRecords[i].nNour;
+                            reportDataSetsByAgeGestBen[1].data[indexLabel] += banqueOrgReportRecords[i].nBebe;
+                            reportDataSetsByAgeGestBen[2].data[indexLabel] += banqueOrgReportRecords[i].nEnf;
+                            reportDataSetsByAgeGestBen[3].data[indexLabel] += banqueOrgReportRecords[i].nAdo;
+                            reportDataSetsByAgeGestBen[4].data[indexLabel] += banqueOrgReportRecords[i].n1824;
+                            reportDataSetsByAgeGestBen[5].data[indexLabel] += banqueOrgReportRecords[i].nSen;
+                        }
+
+                    }
+
+                    this.titleBeneficiariesByFamily = $localize`:@@OrgStatBenefByFamily:Beneficiaries Statistics by Family`;
+                    this.chartDataBeneficiaryByFamily = {
+                        labels: reportLabels,
+                        datasets: reportDataSetsByFamily
+                    }
+                    this.titleBeneficiariesByFamilyAgreed = $localize`:@@OrgStatBenefByFamilyAgreed:Beneficiaries Statistics by Family (Agreed)`;
+                    this.chartDataBeneficiaryByFamilyAgreed = {
+                        labels: reportLabels,
+                        datasets: reportDataSetsByFamilyAgreed
+                    }
+                    this.titleBeneficiariesByFamilyGestBen = $localize`:@@OrgStatBenefByFamilyGestBen:Beneficiaries Statistics by Family (GestBen)`;
+                    this.chartDataBeneficiaryByFamilyGestBen = {
+                        labels: reportLabels,
+                        datasets: reportDataSetsByFamilyGestBen
+                    }
+
+                    this.titleBeneficiariesByAge = $localize`:@@OrgStatBenefByAge:Beneficiaries Statistics by Age Group`;
+                    this.chartDataBeneficiaryByAge = {
+                        labels: reportLabels,
+                        datasets: reportDataSetsByAge
+                    }
+                    this.titleBeneficiariesByAgeAgreed = $localize`:@@OrgStatBenefByAgeAgreed:Beneficiaries Statistics by Age Group (Agreed)`;
+                    this.chartDataBeneficiaryByAgeAgreed = {
+                        labels: reportLabels,
+                        datasets: reportDataSetsByAgeAgreed
+                    }
+                    this.titleBeneficiariesByAgeGestBen = $localize`:@@OrgStatBenefByAgeGestBen:Beneficiaries Statistics by Age Group (GestBen)`;
+                    this.chartDataBeneficiaryByAgeGestBen = {
+                        labels: reportLabels,
+                        datasets: reportDataSetsByAgeGestBen
+                    }
+
 
             });
     }
