@@ -353,10 +353,11 @@ export class BeneficiairesComponent implements OnInit {
             cleanedItem[$localize`:@@Suspect:Suspect`] =this.getSuspectStatus(item.coeff);
             cleanedItem[$localize`:@@Parents:Parents`] =nbParents;
             cleanedItem[$localize`:@@Dependents:Dependents`] =item.nbDep;
-            cleanedItem[$localize`:@@Family:Family Size`] =nbFamily;
+            cleanedItem[$localize`:@@Families:Families`] =nbFamily;
             cleanedList.push( cleanedItem);
           });
-          cleanedList.push( {[$localize`:@@TotalParents:Total Parents`]: totalParents, [$localize`:@@TotalDependents:Total Dependents`]: totalDep, [$localize`:@@TotalFamily:Total Family`]: totalFamily});
+            cleanedList.push({}); // add empty line
+            cleanedList.push( {[$localize`:@@Parents:Parents`]: totalParents, [$localize`:@@Dependents:Dependents`]: totalDep, [$localize`:@@Families:Families`]: totalFamily});
           if (this.idOrg > 0) {
             this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.beneficiaries.'  + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
           }
