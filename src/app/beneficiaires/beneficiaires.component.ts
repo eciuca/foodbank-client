@@ -323,11 +323,18 @@ export class BeneficiairesComponent implements OnInit {
     this.beneficiaireHttpService.getBeneficiaireReport(this.authService.accessToken,  params.toString()).subscribe(
         (beneficiaires: any[] ) => {
           const cleanedList = [];
+          let totalParents = 0;
+          let totalDep = 0;
+          let totalFamily = 0;
           beneficiaires.map((item) => {
             let nbParents = 1;
             if (item.nomconj) {
               nbParents =2;
             }
+            totalParents += nbParents;
+            totalDep += item.nbDep;
+            totalFamily += nbParents + item.nbDep;
+
             const nbFamily = nbParents + item.nbDep;
             const cleanedItem = {};
             cleanedItem[$localize`:@@Gender:Gender`] = labelCivilite(item.civilite),
@@ -349,6 +356,7 @@ export class BeneficiairesComponent implements OnInit {
             cleanedItem[$localize`:@@Family:Family Size`] =nbFamily;
             cleanedList.push( cleanedItem);
           });
+          cleanedList.push( {[$localize`:@@TotalParents:Total Parents`]: totalParents, [$localize`:@@TotalDependents:Total Dependents`]: totalDep, [$localize`:@@TotalFamily:Total Family`]: totalFamily});
           if (this.idOrg > 0) {
             this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.beneficiaries.'  + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
           }

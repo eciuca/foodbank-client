@@ -328,11 +328,10 @@ export class BeneficiaireComponent implements OnInit {
 
     }
     getPovertyIndex() {
-        return $localize`:@@povertyIndex:Poverty Index: ${this.povertyIndex}`;
+        return $localize`:@@povertyIndex:Poverty Index: ${this.povertyIndex} (${this.nbAdults} Adult Dependents and ${this.nbChildren} Children)`;
     }
 
     getPovertyIndexTooltip(): string {
-        return $localize`:@@povertyIndexTooltip:Poverty Index is calculated for ${this.nbAdults} Adult Dependents and ${this.nbChildren} Children based on the rates updated on 25/06/2021`;
-
+        return $localize`:@@povertyIndexTooltip:Poverty Index of ${this.povertyRevenueIndexDate} is calculated as follows: Single Beneficiary: ${this.povertyRevenueSingleBeneficiary} € + ${this.povertyRevenueDependentAdult} € * nb of Dependent Adults +  ${this.povertyRevenueDependentChild} € * nb of Dependent Children`;
     }
 }
