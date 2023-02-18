@@ -328,7 +328,7 @@ export class BeneficiaireComponent implements OnInit {
 
     }
     getPovertyIndex() {
-        return $localize`:@@povertyIndex:Poverty Index: ${this.povertyIndex} (${this.nbAdults} Adult Dependents and ${this.nbChildren} Children)`;
+        return $localize`:@@povertyIndex:Poverty Index: ${this.povertyIndex} € (${this.nbAdults} Adult Dependents and ${this.nbChildren} Children)`;
     }
 
     getPovertyIndexTooltip(): string {

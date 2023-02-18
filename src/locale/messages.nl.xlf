@@ -2683,8 +2683,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="povertyIndex" datatype="html">
-        <source>Poverty Index: <x id="PH" equiv-text="this.povertyIndex"/> (<x id="PH_1" equiv-text="this.nbAdults"/> Adult Dependents and <x id="PH_2" equiv-text="this.nbChildren"/> Children)</source>
-        <target>Armoede Grens: <x id="PH" equiv-text="this.povertyIndex"/> (<x id="PH_1" equiv-text="this.nbAdults"/> volwassen personen ten laste en <x id="PH_2" equiv-text="this.nbChildren"/> kinderen)</target>
+        <source>Poverty Index: <x id="PH" equiv-text="this.povertyIndex"/> € (<x id="PH_1" equiv-text="this.nbAdults"/> Adult Dependents and <x id="PH_2" equiv-text="this.nbChildren"/> Children)</source>
+        <target>Armoede Grens: <x id="PH" equiv-text="this.povertyIndex"/> € (<x id="PH_1" equiv-text="this.nbAdults"/> volwassen personen ten laste en <x id="PH_2" equiv-text="this.nbChildren"/> kinderen)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
           <context context-type="linenumber">331</context>
