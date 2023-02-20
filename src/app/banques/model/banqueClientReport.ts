@@ -1,6 +1,6 @@
 export interface BanqueClientReport {
     bankShortName: string;
-    isDepot: number;
+    lienDepot: number;
     nonAgreed: number;
     gestBen: number;
     orgCount: number;

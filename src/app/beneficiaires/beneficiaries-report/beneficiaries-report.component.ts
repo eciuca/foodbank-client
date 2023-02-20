@@ -13,6 +13,8 @@ import {BanqueClientReport} from '../../banques/model/banqueClientReport';
 import {BanqueReportService} from '../../banques/services/banque-report.service';
 import {formatDate} from '@angular/common';
 import {ExcelService} from '../../services/excel.service';
+import {Depot} from '../../depots/model/depot';
+import {DepotHttpService} from '../../depots/services/depot-http.service';
 
 @Component({
   selector: 'app-beneficiaries-report',
@@ -20,8 +22,14 @@ import {ExcelService} from '../../services/excel.service';
   styleUrls: ['./beneficiaries-report.component.css']
 })
 export class BeneficiariesReportComponent implements OnInit {
+    isAdmin: boolean;
     booIsLoaded: boolean;
+    category: string;
     bankOptions: any[];
+    depotOptions: any[];
+    categoryOptions: any[];
+    categoryOptionsAgreed: any[];
+    categoryOptionsGestBen: any[];
     bankShortName: string;
     bankId: number;
     backgroundColors: any[];
@@ -48,6 +56,7 @@ export class BeneficiariesReportComponent implements OnInit {
 
     constructor(
       private beneficiaireHttpService: BeneficiaireHttpService,
+      private depotHttpService: DepotHttpService,
       private banqueService: BanqueEntityService,
       private banqueReportService: BanqueReportService,
       private excelService: ExcelService,
@@ -55,6 +64,7 @@ export class BeneficiariesReportComponent implements OnInit {
       private http: HttpClient,
       private store: Store<AppState>
   ) {
+        this.isAdmin = false;
       this.backgroundColors = ['magenta','violet','indigo','blue','x0080ff','cyan','green','olive','yellow','orange','red','darkred', 'black','silver'];
       // x0080ff dodger blue
       this.basicOptions = {
@@ -101,21 +111,37 @@ export class BeneficiariesReportComponent implements OnInit {
                 case 'Admin_Banq':
                     this.bankShortName = authState.banque.bankShortName;
                     this.bankId = authState.banque.bankId;
-                    this.bankOptions = [{'label': this.bankShortName, 'value': this.bankId}];
-                    if (!this.booIsLoaded) {
-                        this.report();
-                    }
-                    this.booIsLoaded = true;
+                    this.category = 'Depot';
+                    this.depotHttpService.getDepotReport(this.authService.accessToken,this.bankShortName)
+                        .subscribe((depots:Depot[]) => {
+                            this.depotOptions = depots.map(({idDepot, nom}) => ({'value': idDepot, 'label': nom}));
+                            this.categoryOptions =[...this.depotOptions];
+                            this.categoryOptions.push({label: 'OTHER', value: null});
+                            this.categoryOptionsAgreed = [...this.categoryOptions];
+                            this.categoryOptionsGestBen = [...this.categoryOptions];
+                            this.depotOptions.unshift({'value': null, 'label': ' '});
+                            if (!this.booIsLoaded) {
+                                this.report();
+                            }
+                            this.booIsLoaded = true;
+                        });
                     break;
                 case 'admin':
                 case 'Admin_FBBA':
+                    this.isAdmin = true;
+                    this.category = 'Bank';
                     const classicBanks = {'classicBanks': '1'};
                     this.banqueService.getWithQuery(classicBanks)
                         .subscribe((banquesEntities) => {
-                            this.bankOptions = banquesEntities.map(({bankShortName, bankId}) => ({
+                            this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({
                                 'label': bankShortName,
                                 'value': bankId
                             }));
+                            this.categoryOptions =[...this.bankOptions];
+                            this.categoryOptions.push({label: 'OTHER', value: null});
+                            this.categoryOptionsAgreed = [...this.categoryOptions];
+                            this.categoryOptionsGestBen = [...this.categoryOptions];
+                            this.bankOptions.unshift({'value': null, 'label': ' '});
                             if (!this.booIsLoaded) {
                                 this.report();
                             }
@@ -129,6 +155,39 @@ export class BeneficiariesReportComponent implements OnInit {
 
 
   }
+    filterBank(bankId: any) {
+        console.log('change event vale',bankId);
+
+        if (bankId) {
+            this.bankId = bankId;
+            this.bankShortName = this.bankOptions.find(({value}) => value === bankId).label;
+            this.category = 'Depot'
+            this.depotHttpService.getDepotReport(this.authService.accessToken,this.bankShortName)
+                .subscribe((depots:Depot[]) => {
+                    this.depotOptions = depots.map(({idDepot, nom}) => ({'value': idDepot, 'label': nom}));
+                    this.categoryOptions =[...this.depotOptions];
+                    this.categoryOptions.push({label: 'OTHER', value: null});
+                    this.categoryOptionsAgreed = [...this.categoryOptions];
+                    this.categoryOptionsGestBen = [...this.categoryOptions];
+                    this.depotOptions.unshift({'value': null, 'label': ' '});
+                    this.category='Depot';
+                    this.report();
+                });
+
+        }
+        else {
+            this.bankId = null;
+            this.bankShortName = null;
+            this.category = 'Bank';
+            this.categoryOptions =[...this.bankOptions];
+            this.categoryOptions.shift();
+            this.categoryOptions.push({label: 'OTHER', value: null});
+            this.categoryOptionsAgreed = [...this.categoryOptions];
+            this.categoryOptionsGestBen = [...this.categoryOptions];
+            this.report();
+
+        }
+    }
   report() {
       this.reportBeneficiaries();
       this.reportBeneficiariesHistory();
@@ -318,46 +377,53 @@ export class BeneficiariesReportComponent implements OnInit {
 
 
 
-                    this.bankOptions.map((option) => {
+                    this.categoryOptions.map((option) => {
                         reportLabels.push(option.label);
                     })
                     reportDataSetsByAge.map((dataSetitem) => {
-                        for (let i = 0; i < this.bankOptions.length; i++) {
+                        for (let i = 0; i < this.categoryOptions.length; i++) {
                             dataSetitem.data.push(0);
                         }
                     })
                     reportDataSetsByAgeAgreed.map((dataSetitem) => {
-                        for (let i = 0; i < this.bankOptions.length; i++) {
+                        for (let i = 0; i < this.categoryOptions.length; i++) {
                             dataSetitem.data.push(0);
                         }
                     })
                     reportDataSetsByAgeGestBen.map((dataSetitem) => {
-                        for (let i = 0; i < this.bankOptions.length; i++) {
+                        for (let i = 0; i < this.categoryOptions.length; i++) {
                             dataSetitem.data.push(0);
                         }
                     })
 
                     reportDataSetsByFamily.map((dataSetitem) => {
-                        for (let i = 0; i < this.bankOptions.length; i++) {
+                        for (let i = 0; i < this.categoryOptions.length; i++) {
                             dataSetitem.data.push(0);
                         }
                     })
                     reportDataSetsByFamilyAgreed.map((dataSetitem) => {
-                        for (let i = 0; i < this.bankOptions.length; i++) {
+                        for (let i = 0; i < this.categoryOptions.length; i++) {
                             dataSetitem.data.push(0);
                         }
                     })
                     reportDataSetsByFamilyGestBen.map((dataSetitem) => {
-                        for (let i = 0; i < this.bankOptions.length; i++) {
+                        for (let i = 0; i < this.categoryOptions.length; i++) {
                             dataSetitem.data.push(0);
                         }
                     })
 
 
                     for (let i = 0; i < banqueOrgReportRecords.length; i++) {
-
-                        const indexLabel = reportLabels.indexOf(banqueOrgReportRecords[i].bankShortName);
-                        if (indexLabel === -1) continue;
+                        let indexLabel = -1;
+                        if (this.category == 'Depot') {
+                            indexLabel = this.categoryOptions.findIndex(obj => obj.value === banqueOrgReportRecords[i].lienDepot.toString());
+                        }
+                        else {
+                            indexLabel = this.categoryOptions.findIndex(obj => obj.label === banqueOrgReportRecords[i].bankShortName);
+                        }
+                        if (indexLabel === -1) {
+                            indexLabel = this.categoryOptions.length - 1;
+                        }
                         reportDataSetsByFamily[0].data[indexLabel] += banqueOrgReportRecords[i].nFam;
                         reportDataSetsByFamily[1].data[indexLabel] += banqueOrgReportRecords[i].nPers;
                         reportDataSetsByAge[0].data[indexLabel] += banqueOrgReportRecords[i].nNour;
@@ -437,38 +503,65 @@ export class BeneficiariesReportComponent implements OnInit {
               let reportDataSetsPerson = [];
               let reportDataSetsFamily = [];
               let colorIndex =0;
+              if (this.category == 'Bank') {
+                  for (let i = 0; i < this.categoryOptions.length; i++) {
+                      reportDataSetsPerson.push(
+                          {
+                              type: 'bar',
+                              label: this.categoryOptions[i].label,
+                              backgroundColor: this.backgroundColors[colorIndex],
+                              data: []
+                          });
+                      reportDataSetsFamily.push(
+                          {
+                              type: 'bar',
+                              label: this.categoryOptions[i].label,
+                              backgroundColor: this.backgroundColors[colorIndex],
+                              data: []
+                          });
+                      colorIndex++;
+                      if (colorIndex >= this.backgroundColors.length) {
+                          console.log('Not enough colors in backgroundColors array');
+                          colorIndex = 0;
+                      }
 
-              for (let i=0; i < this.bankOptions.length; i++ ) {
-                  reportDataSetsPerson.push(
-                      {
-                          type: 'bar',
-                          label: this.bankOptions[i].label,
-                          backgroundColor: this.backgroundColors[colorIndex],
-                          data: []
-                      });
-                  reportDataSetsFamily.push(
-                      {
-                          type: 'bar',
-                          label: this.bankOptions[i].label,
-                          backgroundColor: this.backgroundColors[colorIndex],
-                          data: []
-                      });
-                  colorIndex++;
-                  if (colorIndex >= this.backgroundColors.length) {
-                      console.log('Not enough colors in backgroundColors array');
-                      colorIndex=0;
                   }
-
               }
-
+              else {
+                    reportDataSetsPerson.push(
+                        {
+                            type: 'bar',
+                            label: this.bankShortName,
+                            backgroundColor: 'blue',
+                            data: []
+                        });
+                    reportDataSetsFamily.push(
+                        {
+                            type: 'bar',
+                            label: this.bankShortName,
+                            backgroundColor: 'blue',
+                            data: []
+                        });
+              }
               for (let i = 0; i < this.populationRecords.length; i++) {
-                  const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.populationRecords[i].lienBanque);
-                  if (bankOptionIndex === -1) continue;
+                  let bankOptionIndex = 0;
+                  if (this.category == 'Bank') {
+                      bankOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.populationRecords[i].lienBanque);
+                      if (bankOptionIndex === -1) {
+                          bankOptionIndex = this.categoryOptions.length - 1;
+                      }
+                  }
                   if (!reportLabels.includes(this.populationRecords[i].dateStat)) {
                       reportLabels.push(this.populationRecords[i].dateStat);
-                      for (let i=0; i < this.bankOptions.length; i++ ) {
-                          reportDataSetsPerson[i].data.push(0);
-                          reportDataSetsFamily[i].data.push(0);
+                      if (this.category == 'Bank') {
+                          for (let i = 0; i < this.categoryOptions.length; i++) {
+                              reportDataSetsPerson[i].data.push(0);
+                              reportDataSetsFamily[i].data.push(0);
+                          }
+                      }
+                      else {
+                          reportDataSetsPerson[0].data.push(0);
+                          reportDataSetsFamily[0].data.push(0);
                       }
                   }
                   const dataIndex = reportLabels.length;
@@ -495,14 +588,25 @@ export class BeneficiariesReportComponent implements OnInit {
             $localize`:@@OrgStatYoungAdults:Young Adults(18-24 years)`, $localize`:@@OrgSeniors:Seniors(> 65 years)`]
         );
         for (let i=0; i < this.populationRecords.length; i++ ) {
-            const bankOptionIndex = this.bankOptions.findIndex(obj => obj.value === this.populationRecords[i].lienBanque);
-            if (bankOptionIndex === -1) continue;
+            let bankOptionIndex = 0;
+             if (this.category == 'Bank') {
+                bankOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.populationRecords[i].lienBanque);
+                 if (bankOptionIndex === -1) {
+                     bankOptionIndex = this.categoryOptions.length - 1;
+                 }
+             }
+
             if(!this.populationRecords[i].n1824) {
                 this.populationRecords[i].n1824 = 0;
             }
             const line:any[] =[] ;
             line.push(this.populationRecords[i].dateStat);
-            line.push(this.bankOptions[bankOptionIndex].label);
+            if (this.category == 'Bank') {
+            line.push(this.categoryOptions[bankOptionIndex].label);
+            }
+            else {
+                line.push(this.bankShortName);
+            }
             line.push(this.populationRecords[i].nFam);
             line.push(this.populationRecords[i].nPers);
             line.push(this.populationRecords[i].nNour);

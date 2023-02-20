@@ -168,7 +168,7 @@ export class MovementReportComponent implements OnInit {
                 case 'admin':
                 case 'Admin_FBBA':
                     this.isAdmin = true;
-                    this.category = 'Bank'
+                    this.category = 'Bank';
 
                     const classicBanks = {'classicBanks': '1'};
                     this.banqueService.getWithQuery(classicBanks)
