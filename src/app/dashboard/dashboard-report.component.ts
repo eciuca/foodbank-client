@@ -16,6 +16,9 @@ import {BanqueClientReport} from '../banques/model/banqueClientReport';
 import {BanqueReportService} from '../banques/services/banque-report.service';
 import {BanqueFeadReport} from '../banques/model/banqueFeadReport';
 import {BanqueOrgCount} from '../banques/model/banqueOrgCount';
+import {Depot} from '../depots/model/depot';
+import {DepotHttpService} from '../depots/services/depot-http.service';
+import {forEach} from '@angular-devkit/schematics';
 
 @Component({
     selector: 'app-dashboard-report',
@@ -23,8 +26,7 @@ import {BanqueOrgCount} from '../banques/model/banqueOrgCount';
     styleUrls: ['./dashboard-report.component.css']
 })
 export class DashboardReportComponent implements OnInit {
-
-    bankOptions: any[];
+    
     days: string[];
     orgs: string[];
     selectedDay: string;
@@ -33,42 +35,79 @@ export class DashboardReportComponent implements OnInit {
     booisLoadedOrgItems: boolean;
     booIsLoaded: boolean;
     booIsLoadedMovements: boolean;
+    category: string;
+    bankOptions: any[];
+    depotOptions: any[];
+    categoryOptions: any[];
+    categoryOptionsAgreed: any[];
+    categoryOptionsGestBen: any[];
     bankShortName: string;
+    bankId: number;
     dashboardBankItems: MovementReport[];
     dashboardOrgItems: MovementReport[];
     selectedBankItems: MovementReport[];
     selectedOrgItems: MovementReport[];
     banqueOrgReportRecords: BanqueClientReport[];
-    clientNFam: number;
-    clientNpers: number;
-    clientNNour: number;
-    clientNBebe: number;
-    clientNEnf: number;
-    clientNAdo: number;
-    clientN1824: number;
-    clientNSen: number;
-    clientNAdults: number;
-    clientNFamAgreed: number;
-    clientNpersAgreed: number;
-    clientNNourAgreed: number;
-    clientNBebeAgreed: number;
-    clientNEnfAgreed: number;
-    clientNAdoAgreed: number;
-    clientN1824Agreed: number;
-    clientNSenAgreed: number;
-    clientNAdultsAgreed: number;
-    clientNFamGestBen: number;
-    clientNpersGestBen: number;
-    clientNNourGestBen: number;
-    clientNBebeGestBen: number;
-    clientNEnfGestBen: number;
-    clientNAdoGestBen: number;
-    clientN1824GestBen: number;
-    clientNSenGestBen: number;
-    clientNAdultsGestBen: number;
-    clientNbofOrgs: number;
-    clientNbofOrgsAgreed: number;
-    clientNbofOrgsGestBen: number;
+    clientNFam: number[];
+    clientNpers: number[];
+    clientNNour: number[];
+    clientNBebe: number[];
+    clientNEnf: number[];
+    clientNAdo: number[];
+    clientN1824: number[];
+    clientNSen: number[];
+    clientNAdults: number[];
+    clientNFamAgreed: number[];
+    clientNpersAgreed: number[];
+    clientNNourAgreed: number[];
+    clientNBebeAgreed: number[];
+    clientNEnfAgreed: number[];
+    clientNAdoAgreed: number[];
+    clientN1824Agreed: number[];
+    clientNSenAgreed: number[];
+    clientNAdultsAgreed: number[];
+    clientNFamGestBen: number[];
+    clientNpersGestBen: number[];
+    clientNNourGestBen: number[];
+    clientNBebeGestBen: number[];
+    clientNEnfGestBen: number[];
+    clientNAdoGestBen: number[];
+    clientN1824GestBen: number[];
+    clientNSenGestBen: number[];
+    clientNAdultsGestBen: number[];
+    clientNbofOrgs: number[];
+    clientNbofOrgsAgreed: number[];
+    clientNbofOrgsGestBen: number[];
+    totalClientNFam: number;
+    totalClientNpers: number;
+    totalClientNNour: number;
+    totalClientNBebe: number;
+    totalClientNEnf: number;
+    totalClientNAdo: number;
+    totalClientN1824: number;
+    totalClientNSen: number;
+    totalClientNAdults: number;
+    totalClientNFamAgreed: number;
+    totalClientNpersAgreed: number;
+    totalClientNNourAgreed: number;
+    totalClientNBebeAgreed: number;
+    totalClientNEnfAgreed: number;
+    totalClientNAdoAgreed: number;
+    totalClientN1824Agreed: number;
+    totalClientNSenAgreed: number;
+    totalClientNAdultsAgreed: number;
+    totalClientNFamGestBen: number;
+    totalClientNpersGestBen: number;
+    totalClientNNourGestBen: number;
+    totalClientNBebeGestBen: number;
+    totalClientNEnfGestBen: number;
+    totalClientNAdoGestBen: number;
+    totalClientN1824GestBen: number;
+    totalClientNSenGestBen: number;
+    totalClientNAdultsGestBen: number;
+    totalClientNbofOrgs: number;
+    totalClientNbofOrgsAgreed: number;
+    totalClientNbofOrgsGestBen: number;
     orgCount: number;
     orgFeadCount: number;
     orgAgreedCount: number;
@@ -81,6 +120,7 @@ export class DashboardReportComponent implements OnInit {
     constructor(
         private movementReportHttpService: MovementReportHttpService,
         private banqueReportService: BanqueReportService,
+        private depotHttpService: DepotHttpService,
         private banqueService: BanqueEntityService,
         private excelService: ExcelService,
         private authService: AuthService,
@@ -113,18 +153,41 @@ export class DashboardReportComponent implements OnInit {
         switch (authState.user.rights) {
 
             case 'Admin_Banq':
-                this.bankShortName = authState.user.idCompany;
-                if (!this.booIsLoaded) {
-                    this.report();
-                }
-                this.booIsLoaded = true;
+            case 'Bank':
+                this.bankShortName = authState.banque.bankShortName;
+                this.bankId = authState.banque.bankId;
+                this.category = 'Depot';
+                this.depotHttpService.getDepotReport(this.authService.accessToken,this.bankShortName)
+                    .subscribe((depots:Depot[]) => {
+                        this.depotOptions = depots.map(({idDepot, nom}) => ({'value': idDepot, 'label': nom}));
+                        this.categoryOptions =[...this.depotOptions];
+                        this.categoryOptions.push({label: 'OTHER', value: null});
+                        this.categoryOptionsAgreed = [...this.categoryOptions];
+                        this.categoryOptionsGestBen = [...this.categoryOptions];
+                        this.depotOptions.unshift({'value': null, 'label': ' '});
+                        if (!this.booIsLoaded) {
+                            this.report();
+                        }
+                        this.booIsLoaded = true;
+                    });
                 break;
             case 'admin':
             case 'Admin_FBBA':
                 const classicBanks = {'classicBanks': '1'};
                 this.banqueService.getWithQuery(classicBanks)
                     .subscribe((banquesEntities) => {
-                        this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                        this.bankOptions = banquesEntities.map(({bankShortName,bankId}) => ({
+                            'label': bankShortName,
+                            'value': bankId
+                        }));
+                        this.categoryOptions =[...this.bankOptions];
+                        this.categoryOptions.push({label: 'OTHER', value: null});
+                        this.categoryOptionsAgreed = [...this.categoryOptions];
+                        this.categoryOptionsGestBen = [...this.categoryOptions];
+                        this.bankOptions.unshift({'value': null, 'label': ' '});
+                        if (!this.booIsLoaded) {
+                            this.report();
+                        }
                         this.booIsLoaded = true;
                     });
                 break;
@@ -134,7 +197,71 @@ export class DashboardReportComponent implements OnInit {
 
 
     }
+initializeClientsArrays() {
+    this.clientNFam= [];
+    this.clientNpers= [];
+    this.clientNNour= [];
+    this.clientNBebe= [];
+    this.clientNEnf= [];
+    this.clientNAdo= [];
+    this.clientN1824= [];
+    this.clientNSen= [];
+    this.clientNAdults= [];
+    this.clientNFamAgreed= [];
+    this.clientNpersAgreed= [];
+    this.clientNNourAgreed= [];
+    this.clientNBebeAgreed= [];
+    this.clientNEnfAgreed= [];
+    this.clientNAdoAgreed= [];
+    this.clientN1824Agreed= [];
+    this.clientNSenAgreed= [];
+    this.clientNAdultsAgreed= [];
+    this.clientNFamGestBen= [];
+    this.clientNpersGestBen= [];
+    this.clientNNourGestBen= [];
+    this.clientNBebeGestBen= [];
+    this.clientNEnfGestBen= [];
+    this.clientNAdoGestBen= [];
+    this.clientN1824GestBen= [];
+    this.clientNSenGestBen= [];
+    this.clientNAdultsGestBen= [];
+    this.clientNbofOrgs= [];
+    this.clientNbofOrgsAgreed= [];
+    this.clientNbofOrgsGestBen= [];
 
+    this.categoryOptions.forEach((category) => {
+        this.clientNFam.push(0);
+        this.clientNpers.push(0);
+        this.clientNNour.push(0);
+        this.clientNBebe.push(0);
+        this.clientNEnf.push(0);
+        this.clientNAdo.push(0);
+        this.clientN1824.push(0);
+        this.clientNSen.push(0);
+        this.clientNAdults.push(0);
+        this.clientNFamAgreed.push(0);
+        this.clientNpersAgreed.push(0);
+        this.clientNNourAgreed.push(0);
+        this.clientNBebeAgreed.push(0);
+        this.clientNEnfAgreed.push(0);
+        this.clientNAdoAgreed.push(0);
+        this.clientN1824Agreed.push(0);
+        this.clientNSenAgreed.push(0);
+        this.clientNAdultsAgreed.push(0);
+        this.clientNFamGestBen.push(0);
+        this.clientNpersGestBen.push(0);
+        this.clientNNourGestBen.push(0);
+        this.clientNBebeGestBen.push(0);
+        this.clientNEnfGestBen.push(0);
+        this.clientNAdoGestBen.push(0);
+        this.clientN1824GestBen.push(0);
+        this.clientNSenGestBen.push(0);
+        this.clientNAdultsGestBen.push(0);
+        this.clientNbofOrgs.push(0);
+        this.clientNbofOrgsAgreed.push(0);
+        this.clientNbofOrgsGestBen.push(0);
+    })
+}
     report() {
         const lastDays = '10';
 
@@ -172,75 +299,121 @@ export class DashboardReportComponent implements OnInit {
                 }
 
             });
-        this.clientNFam=0
-        this.clientNpers=0;
-        this.clientNNour=0;
-        this.clientNBebe=0;
-        this.clientNEnf=0;
-        this.clientNAdo=0;
-        this.clientN1824=0;
-        this.clientNSen=0;
-        this.clientNAdults=0;
-        this.clientNFamAgreed=0
-        this.clientNpersAgreed=0;
-        this.clientNNourAgreed=0;
-        this.clientNBebeAgreed=0;
-        this.clientNEnfAgreed=0;
-        this.clientNAdoAgreed=0;
-        this.clientN1824Agreed=0;
-        this.clientNSenAgreed=0;
-        this.clientNAdultsAgreed=0;
-        this.clientNFamGestBen=0
-        this.clientNpersGestBen=0;
-        this.clientNNourGestBen=0;
-        this.clientNBebeGestBen=0;
-        this.clientNEnfGestBen=0;
-        this.clientNAdoGestBen=0;
-        this.clientN1824GestBen=0;
-        this.clientNSenGestBen=0;
-        this.clientNAdultsGestBen=0;
-        this.clientNbofOrgs=0;
-        this.clientNbofOrgsAgreed=0;
-        this.clientNbofOrgsGestBen=0;
+        this.totalClientNFam=0
+        this.totalClientNpers=0;
+        this.totalClientNNour=0;
+        this.totalClientNBebe=0;
+        this.totalClientNEnf=0;
+        this.totalClientNAdo=0;
+        this.totalClientN1824=0;
+        this.totalClientNSen=0;
+        this.totalClientNAdults=0;
+        this.totalClientNFamAgreed=0
+        this.totalClientNpersAgreed=0;
+        this.totalClientNNourAgreed=0;
+        this.totalClientNBebeAgreed=0;
+        this.totalClientNEnfAgreed=0;
+        this.totalClientNAdoAgreed=0;
+        this.totalClientN1824Agreed=0;
+        this.totalClientNSenAgreed=0;
+        this.totalClientNAdultsAgreed=0;
+        this.totalClientNFamGestBen=0
+        this.totalClientNpersGestBen=0;
+        this.totalClientNNourGestBen=0;
+        this.totalClientNBebeGestBen=0;
+        this.totalClientNEnfGestBen=0;
+        this.totalClientNAdoGestBen=0;
+        this.totalClientN1824GestBen=0;
+        this.totalClientNSenGestBen=0;
+        this.totalClientNAdultsGestBen=0;
+        this.totalClientNbofOrgs=0;
+        this.totalClientNbofOrgsAgreed=0;
+        this.totalClientNbofOrgsGestBen=0;
+        this.initializeClientsArrays();
         this.banqueReportService.getOrgClientReport(this.authService.accessToken,this.bankShortName).subscribe(
             (response: BanqueClientReport[]) => {
                 const banqueOrgReportRecords: BanqueClientReport[] = response;
                 for (let i = 0; i < banqueOrgReportRecords.length; i++) {
-                    this.clientNbofOrgs+=  banqueOrgReportRecords[i].orgCount;
-                    this.clientNFam += banqueOrgReportRecords[i].nFam;
-                    this.clientNpers += banqueOrgReportRecords[i].nPers;
-                    this.clientNNour += banqueOrgReportRecords[i].nNour;
-                    this.clientNBebe += banqueOrgReportRecords[i].nBebe;
-                    this.clientNEnf += banqueOrgReportRecords[i].nEnf;
-                    this.clientNAdo += banqueOrgReportRecords[i].nAdo;
-                    this.clientN1824 += banqueOrgReportRecords[i].n1824;
-                    this.clientNSen += banqueOrgReportRecords[i].nSen;
+                    let indexLabel = -1;
+                    if (this.category == 'Depot') {
+                        indexLabel = this.categoryOptions.findIndex(obj => obj.value === banqueOrgReportRecords[i].lienDepot.toString());
+                    }
+                    else {
+                        indexLabel = this.categoryOptions.findIndex(obj => obj.label === banqueOrgReportRecords[i].bankShortName);
+                    }
+                    if (indexLabel === -1) {
+                        indexLabel = this.categoryOptions.length - 1;
+                    }
+
+                    this.totalClientNbofOrgs+=  banqueOrgReportRecords[i].orgCount;
+                    this.totalClientNFam += banqueOrgReportRecords[i].nFam;
+                    this.totalClientNpers += banqueOrgReportRecords[i].nPers;
+                    this.totalClientNNour += banqueOrgReportRecords[i].nNour;
+                    this.totalClientNBebe += banqueOrgReportRecords[i].nBebe;
+                    this.totalClientNEnf += banqueOrgReportRecords[i].nEnf;
+                    this.totalClientNAdo += banqueOrgReportRecords[i].nAdo;
+                    this.totalClientN1824 += banqueOrgReportRecords[i].n1824;
+                    this.totalClientNSen += banqueOrgReportRecords[i].nSen;
+                    this.clientNbofOrgs[indexLabel] += banqueOrgReportRecords[i].orgCount;
+                    this.clientNFam[indexLabel] += banqueOrgReportRecords[i].nFam;
+                    this.clientNpers[indexLabel] += banqueOrgReportRecords[i].nPers;
+                    this.clientNNour[indexLabel] += banqueOrgReportRecords[i].nNour;
+                    this.clientNBebe[indexLabel] += banqueOrgReportRecords[i].nBebe;
+                    this.clientNEnf[indexLabel] += banqueOrgReportRecords[i].nEnf;
+                    this.clientNAdo[indexLabel] += banqueOrgReportRecords[i].nAdo;
+                    this.clientN1824[indexLabel] += banqueOrgReportRecords[i].n1824;
+                    this.clientNSen[indexLabel] += banqueOrgReportRecords[i].nSen;
+                    this.clientNAdults[indexLabel] += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
+
+
                     if (banqueOrgReportRecords[i].nonAgreed == 0) {
-                        this.clientNbofOrgsAgreed+=  banqueOrgReportRecords[i].orgCount;
-                        this.clientNFamAgreed += banqueOrgReportRecords[i].nFam;
-                        this.clientNpersAgreed += banqueOrgReportRecords[i].nPers;
-                        this.clientNNourAgreed += banqueOrgReportRecords[i].nNour;
-                        this.clientNBebeAgreed += banqueOrgReportRecords[i].nBebe;
-                        this.clientNEnfAgreed += banqueOrgReportRecords[i].nEnf;
-                        this.clientNAdoAgreed += banqueOrgReportRecords[i].nAdo;
-                        this.clientN1824Agreed += banqueOrgReportRecords[i].n1824;
-                        this.clientNSenAgreed += banqueOrgReportRecords[i].nSen;
+                        this.totalClientNbofOrgsAgreed+=  banqueOrgReportRecords[i].orgCount;
+                        this.totalClientNFamAgreed += banqueOrgReportRecords[i].nFam;
+                        this.totalClientNpersAgreed += banqueOrgReportRecords[i].nPers;
+                        this.totalClientNNourAgreed += banqueOrgReportRecords[i].nNour;
+                        this.totalClientNBebeAgreed += banqueOrgReportRecords[i].nBebe;
+                        this.totalClientNEnfAgreed += banqueOrgReportRecords[i].nEnf;
+                        this.totalClientNAdoAgreed += banqueOrgReportRecords[i].nAdo;
+                        this.totalClientN1824Agreed += banqueOrgReportRecords[i].n1824;
+                        this.totalClientNSenAgreed += banqueOrgReportRecords[i].nSen;
+                        this.clientNbofOrgsAgreed[indexLabel] += banqueOrgReportRecords[i].orgCount;
+                        this.clientNFamAgreed[indexLabel] += banqueOrgReportRecords[i].nFam;
+                        this.clientNpersAgreed[indexLabel] += banqueOrgReportRecords[i].nPers;
+                        this.clientNNourAgreed[indexLabel] += banqueOrgReportRecords[i].nNour;
+                        this.clientNBebeAgreed[indexLabel] += banqueOrgReportRecords[i].nBebe;
+                        this.clientNEnfAgreed[indexLabel] += banqueOrgReportRecords[i].nEnf;
+                        this.clientNAdoAgreed[indexLabel] += banqueOrgReportRecords[i].nAdo;
+                        this.clientN1824Agreed[indexLabel] += banqueOrgReportRecords[i].n1824;
+                        this.clientNSenAgreed[indexLabel] += banqueOrgReportRecords[i].nSen;
+                        this.clientNAdultsAgreed[indexLabel] += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
+
                     }
                     if (banqueOrgReportRecords[i].gestBen == 1) {
-                        this.clientNbofOrgsGestBen+=  banqueOrgReportRecords[i].orgCount;
-                        this.clientNFamGestBen += banqueOrgReportRecords[i].nFam;
-                        this.clientNpersGestBen += banqueOrgReportRecords[i].nPers;
-                        this.clientNNourGestBen += banqueOrgReportRecords[i].nNour;
-                        this.clientNBebeGestBen += banqueOrgReportRecords[i].nBebe;
-                        this.clientNEnfGestBen += banqueOrgReportRecords[i].nEnf;
-                        this.clientNAdoGestBen += banqueOrgReportRecords[i].nAdo;
-                        this.clientN1824GestBen += banqueOrgReportRecords[i].n1824;
-                        this.clientNSenGestBen += banqueOrgReportRecords[i].nSen;
+                        this.totalClientNbofOrgsGestBen+=  banqueOrgReportRecords[i].orgCount;
+                        this.totalClientNFamGestBen += banqueOrgReportRecords[i].nFam;
+                        this.totalClientNpersGestBen += banqueOrgReportRecords[i].nPers;
+                        this.totalClientNNourGestBen += banqueOrgReportRecords[i].nNour;
+                        this.totalClientNBebeGestBen += banqueOrgReportRecords[i].nBebe;
+                        this.totalClientNEnfGestBen += banqueOrgReportRecords[i].nEnf;
+                        this.totalClientNAdoGestBen += banqueOrgReportRecords[i].nAdo;
+                        this.totalClientN1824GestBen += banqueOrgReportRecords[i].n1824;
+                        this.totalClientNSenGestBen += banqueOrgReportRecords[i].nSen;
+                        this.clientNbofOrgsGestBen[indexLabel] += banqueOrgReportRecords[i].orgCount;
+                        this.clientNFamGestBen[indexLabel] += banqueOrgReportRecords[i].nFam;
+                        this.clientNpersGestBen[indexLabel] += banqueOrgReportRecords[i].nPers;
+                        this.clientNNourGestBen[indexLabel] += banqueOrgReportRecords[i].nNour;
+                        this.clientNBebeGestBen[indexLabel] += banqueOrgReportRecords[i].nBebe;
+                        this.clientNEnfGestBen[indexLabel] += banqueOrgReportRecords[i].nEnf;
+                        this.clientNAdoGestBen[indexLabel] += banqueOrgReportRecords[i].nAdo;
+                        this.clientN1824GestBen[indexLabel] += banqueOrgReportRecords[i].n1824;
+                        this.clientNSenGestBen[indexLabel] += banqueOrgReportRecords[i].nSen;
+                        this.clientNAdultsGestBen[indexLabel] += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
+
                     }
                 }
-                this.clientNAdults = this.clientNpers - this.clientNNour - this.clientNBebe - this.clientNEnf - this.clientNAdo - this.clientN1824 - this.clientNSen;
-                this.clientNAdultsAgreed = this.clientNpersAgreed - this.clientNNourAgreed - this.clientNBebeAgreed - this.clientNEnfAgreed - this.clientNAdoAgreed - this.clientN1824Agreed - this.clientNSenAgreed;
-                this.clientNAdultsGestBen = this.clientNpersGestBen - this.clientNNourGestBen - this.clientNBebeGestBen - this.clientNEnfGestBen - this.clientNAdoGestBen - this.clientN1824GestBen - this.clientNSenGestBen;
+                this.totalClientNAdults = this.totalClientNpers - this.totalClientNNour - this.totalClientNBebe - this.totalClientNEnf - this.totalClientNAdo - this.totalClientN1824 - this.totalClientNSen;
+                this.totalClientNAdultsAgreed = this.totalClientNpersAgreed - this.totalClientNNourAgreed - this.totalClientNBebeAgreed - this.totalClientNEnfAgreed - this.totalClientNAdoAgreed - this.totalClientN1824Agreed - this.totalClientNSenAgreed;
+                this.totalClientNAdultsGestBen = this.totalClientNpersGestBen - this.totalClientNNourGestBen - this.totalClientNBebeGestBen - this.totalClientNEnfGestBen - this.totalClientNAdoGestBen - this.totalClientN1824GestBen - this.totalClientNSenGestBen;
             });
         this.banqueReportService.getOrgFeadReport(this.authService.accessToken,this.bankShortName).subscribe(
             (response: BanqueFeadReport[]) => {

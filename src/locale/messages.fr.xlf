@@ -3510,6 +3510,14 @@
           <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="DashBoard" datatype="html">
+        <source>Dashboard</source>
+        <target>Tableau de bord</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="Beneficiaries" datatype="html">
         <source>Beneficiaries</source>
         <target>Bénéficiaires</target>
@@ -3527,7 +3535,7 @@
         <target>Activités de distribution récentes</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.html</context>
-          <context context-type="linenumber">229</context>
+          <context context-type="linenumber">389</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FilterDay" datatype="html">
@@ -3535,7 +3543,7 @@
         <target>Filtrer sur le Jour?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.html</context>
-          <context context-type="linenumber">232</context>
+          <context context-type="linenumber">392</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FilterOrg" datatype="html">
@@ -3543,7 +3551,7 @@
         <target>Filtrer sur une organisation ?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.html</context>
-          <context context-type="linenumber">237</context>
+          <context context-type="linenumber">397</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MovementCategoryFeadCollect" datatype="html">
@@ -3551,7 +3559,7 @@
         <target>FEAD et Ramasse du jour pour les associations Agréées</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">270</context>
+          <context context-type="linenumber">443</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MovementCategoryNoFeadNotAgreed" datatype="html">
@@ -3559,7 +3567,7 @@
         <target> Distributions deVivres du jour hors FEAD pour les associations non agréées</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">272</context>
+          <context context-type="linenumber">445</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MovementCategoryFeadNotAgreed" datatype="html">
@@ -3567,7 +3575,7 @@
         <target> Distributions du jour du FEAD pour les associations non agréées</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">274</context>
+          <context context-type="linenumber">447</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNbOfOrgs" datatype="html">
@@ -3575,7 +3583,7 @@
         <target>Nombre d'organisations(Depots Inclus)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">312</context>
+          <context context-type="linenumber">485</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNFam" datatype="html">
@@ -3583,7 +3591,7 @@
         <target>Familles</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">315</context>
+          <context context-type="linenumber">488</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNpers" datatype="html">
@@ -3591,7 +3599,7 @@
         <target>Beneficiaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">318</context>
+          <context context-type="linenumber">491</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientAdults" datatype="html">
@@ -3599,7 +3607,7 @@
         <target>Adultes</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">321</context>
+          <context context-type="linenumber">494</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNNour" datatype="html">
@@ -3607,7 +3615,7 @@
         <target>Nourrissons (0-6 mois)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">324</context>
+          <context context-type="linenumber">497</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNBebe" datatype="html">
@@ -3615,7 +3623,7 @@
         <target>Bébés (6-24 mois)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">327</context>
+          <context context-type="linenumber">500</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientChild" datatype="html">
@@ -3623,7 +3631,7 @@
         <target>Enfants (2-14 ans)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">330</context>
+          <context context-type="linenumber">503</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNAdo" datatype="html">
@@ -3631,7 +3639,7 @@
         <target>Adolescents</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">333</context>
+          <context context-type="linenumber">506</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientN1824" datatype="html">
@@ -3639,7 +3647,7 @@
         <target>Jeunes adultes (18-24 ans)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">336</context>
+          <context context-type="linenumber">509</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientSeniors" datatype="html">
@@ -3647,7 +3655,7 @@
         <target>Séniors (&gt; 65 ans)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">339</context>
+          <context context-type="linenumber">512</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgsTotal" datatype="html">
@@ -3655,7 +3663,7 @@
         <target>Toutes les organisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">342</context>
+          <context context-type="linenumber">515</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgsAgreed" datatype="html">
@@ -3663,7 +3671,7 @@
         <target>Organisations agréées</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">345</context>
+          <context context-type="linenumber">518</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgsGestBen" datatype="html">
@@ -3671,7 +3679,7 @@
         <target>Organisations enregistrant les bénéficiaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">348</context>
+          <context context-type="linenumber">521</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCount" datatype="html">
@@ -3679,7 +3687,7 @@
         <target>Nombre d'organisations de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">351</context>
+          <context context-type="linenumber">524</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgFeadCount" datatype="html">
@@ -3687,7 +3695,7 @@
         <target>Nombre d'organisations FEAD de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">354</context>
+          <context context-type="linenumber">527</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgAgreedCount" datatype="html">
@@ -3695,7 +3703,7 @@
         <target>Nombre d'organisations agréées de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">357</context>
+          <context context-type="linenumber">530</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgFeadFromUsCount" datatype="html">
@@ -3703,7 +3711,7 @@
         <target>Nombre d'organisations FEAD de la Banque recevant de la nourriture de notre part</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">360</context>
+          <context context-type="linenumber">533</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberBankCount" datatype="html">
@@ -3711,7 +3719,7 @@
         <target>Nombre de collaborateurs de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">363</context>
+          <context context-type="linenumber">536</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberorgCount" datatype="html">
@@ -3719,7 +3727,7 @@
         <target>Nombre de collaborateurs des organisations de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">366</context>
+          <context context-type="linenumber">539</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserBankCount" datatype="html">
@@ -3727,7 +3735,7 @@
         <target>Nombre d'utilisateurs de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">369</context>
+          <context context-type="linenumber">542</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserorgCount" datatype="html">
@@ -3735,7 +3743,7 @@
         <target>Nombre d'utilisateurs des organisations de la Banque</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">545</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SaveDepotWithSync" datatype="html">

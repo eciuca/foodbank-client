@@ -1,6 +1,6 @@
 <p-panel>
-    <ng-template pTemplate="header">
-        <h1>Dashboard</h1>
+    <ng-template pTemplate="header" >
+        <p class="p-panel-title" i18n="@@DashBoard" >Dashboard</p>
     </ng-template>
     <ng-template pTemplate="body">
         <p-accordion>
@@ -71,8 +71,10 @@
                 </div>
             </p-accordionTab>
             <p-accordionTab header="Beneficiaries" i18n-header="@@Beneficiaries">
-                <div class="p-fluid p-formgrid p-grid">
+                <div class="p-fluid p-formgrid p-grid p-text-bold">
+
                     <div class="p-field p-col-12 p-md-4">
+                        {{bankShortName}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         {{labelOrgsTotal()}}
@@ -89,13 +91,13 @@
                         {{labelClientNbOfOrgs()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNbofOrgs}}
+                        {{totalClientNbofOrgs}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNbofOrgsAgreed}}
+                        {{totalClientNbofOrgsAgreed}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNbofOrgsGestBen}}
+                        {{totalClientNbofOrgsGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -103,13 +105,13 @@
                         {{labelClientNFam()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNFam}}
+                        {{totalClientNFam}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNFamAgreed}}
+                        {{totalClientNFamAgreed}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNFamGestBen}}
+                        {{totalClientNFamGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -117,13 +119,13 @@
                         {{labelClientNpers()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNpers}}
+                        {{totalClientNpers}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNpersAgreed}}
+                        {{totalClientNpersAgreed}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNpersGestBen}}
+                        {{totalClientNpersGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -131,13 +133,13 @@
                         {{labelClientAdults()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNAdults}}
+                        {{totalClientNAdults}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNAdultsAgreed}}
+                        {{totalClientNAdultsAgreed}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNAdultsGestBen}}
+                        {{totalClientNAdultsGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -145,13 +147,13 @@
                         {{labelClientNNour()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNNour}}
+                        {{totalClientNNour}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNNourAgreed}}
+                        {{totalClientNNourAgreed}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNNourGestBen}}
+                        {{totalClientNNourGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -159,13 +161,13 @@
                         {{labelClientNBebe()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNBebe}}
+                        {{totalClientNBebe}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNBebeAgreed}}
+                        {{totalClientNBebeAgreed}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNBebeGestBen}}
+                        {{totalClientNBebeGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -173,13 +175,13 @@
                         {{labelClientNEnf()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNEnf}}
+                        {{totalClientNEnf}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNEnfAgreed}}
+                        {{totalClientNEnfAgreed}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNEnfGestBen}}
+                        {{totalClientNEnfGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -187,13 +189,13 @@
                         {{labelClientNAdo()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNAdo}}
+                        {{totalClientNAdo}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNAdoAgreed}}
+                        {{totalClientNAdoAgreed}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNAdoGestBen}}
+                        {{totalClientNAdoGestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -201,13 +203,13 @@
                         {{labelClientN1824()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientN1824}}
+                        {{totalClientN1824}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientN1824Agreed}}
+                        {{totalClientN1824Agreed}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientN1824GestBen}}
+                        {{totalClientN1824GestBen}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -215,15 +217,173 @@
                         {{labelClientNSen()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNSen}}
+                        {{totalClientNSen}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNSenAgreed}}
+                        {{totalClientNSenAgreed}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        {{clientNSenGestBen}}
+                        {{totalClientNSenGestBen}}
                     </div>
                 </div>
+                    <div *ngFor="let item of categoryOptions;let i=index;">
+                        <div class="p-fluid p-formgrid p-grid p-text-bold">
+
+                            <div class="p-field p-col-12 p-md-4">
+                                {{item.label}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{labelOrgsTotal()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{labelOrgsAgreed()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{labelOrgsGestBen()}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNbOfOrgs()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNbofOrgs[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNbofOrgsAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNbofOrgsGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNFam()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNFam[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNFamAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNFamGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNpers()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpers[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpersAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpersGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientAdults()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpers[i] - clientNNour[i] - clientNBebe[i]- clientNEnf[i] - clientNAdo[i] - clientN1824[i] - clientNSen[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpersAgreed[i]- clientNNourAgreed[i] - clientNBebeAgreed[i]- clientNEnfAgreed[i] - clientNAdoAgreed[i] - clientN1824Agreed[i] - clientNSenAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpersGestBen[i]- clientNNourGestBen[i] - clientNBebeGestBen[i]- clientNEnfGestBen[i] - clientNAdoGestBen[i] - clientN1824GestBen[i] - clientNSenGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNNour()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNNour[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNNourAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNNourGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNBebe()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNBebe[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNBebeAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNBebeGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNEnf()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNEnf[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNEnfAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNEnfGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNAdo()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNAdo[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNAdoAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNAdoGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientN1824()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientN1824[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientN1824Agreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientN1824GestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNSen()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNSen[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNSenAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNSenGestBen[i]}}
+                            </div>
+                        </div>
+
+                    </div>
             </p-accordionTab>
 
             <p-accordionTab i18n-header="@@DistributionActivity" header="Recent Distribution Activity"  >
