@@ -411,6 +411,37 @@ export class BeneficiariesReportComponent implements OnInit {
                             dataSetitem.data.push(0);
                         }
                     })
+                    let totalOrganisations = 0;
+                    let totalOrganisationsAgreed = 0;
+                    let totalOrganisationsGestBen = 0;
+                    let totalFamilies = 0;
+                    let totalFamiliesAgreed = 0;
+                    let totalFamiliesGestBen = 0;
+                    let totalPersons = 0;
+                    let totalPersonsAgreed = 0;
+                    let totalPersonsGestBen = 0;
+                    let totalNour = 0;
+                    let totalNourAgreed = 0;
+                    let totalNourGestBen = 0;
+                    let totalBabies = 0;
+                    let totalBabiesAgreed = 0;
+                    let totalBabiesGestBen = 0;
+                    let totalChildren = 0;
+                    let totalChildrenAgreed = 0;
+                    let totalChildrenGestBen = 0;
+                    let totalTeenagers = 0;
+                    let totalTeenagersAgreed = 0;
+                    let totalTeenagersGestBen = 0;
+                    let totalYoungAdults = 0;
+                    let totalYoungAdultsAgreed = 0;
+                    let totalYoungAdultsGestBen = 0;
+                    let totalAdults = 0;
+                    let totalAdultsAgreed = 0;
+                    let totalAdultsGestBen = 0;
+                    let totalSeniors = 0;
+                    let totalSeniorsAgreed = 0;
+                    let totalSeniorsGestBen = 0;
+
 
 
                     for (let i = 0; i < banqueOrgReportRecords.length; i++) {
@@ -433,6 +464,16 @@ export class BeneficiariesReportComponent implements OnInit {
                         reportDataSetsByAge[4].data[indexLabel] += banqueOrgReportRecords[i].n1824;
                         reportDataSetsByAge[5].data[indexLabel] += banqueOrgReportRecords[i].nSen;
                         reportDataSetsByAge[6].data[indexLabel] += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nNour - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
+                        totalOrganisations += banqueOrgReportRecords[i].orgCount;
+                        totalFamilies += banqueOrgReportRecords[i].nFam;
+                        totalPersons += banqueOrgReportRecords[i].nPers;
+                        totalNour += banqueOrgReportRecords[i].nNour;
+                        totalBabies += banqueOrgReportRecords[i].nBebe;
+                        totalChildren += banqueOrgReportRecords[i].nEnf;
+                        totalTeenagers += banqueOrgReportRecords[i].nAdo;
+                        totalYoungAdults += banqueOrgReportRecords[i].n1824;
+                        totalSeniors+= banqueOrgReportRecords[i].nSen;
+                        totalAdults += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nNour - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
                         if (banqueOrgReportRecords[i].nonAgreed == 0) {
                             reportDataSetsByFamilyAgreed[0].data[indexLabel] += banqueOrgReportRecords[i].nFam;
                             reportDataSetsByFamilyAgreed[1].data[indexLabel] += banqueOrgReportRecords[i].nPers;
@@ -443,6 +484,16 @@ export class BeneficiariesReportComponent implements OnInit {
                             reportDataSetsByAgeAgreed[4].data[indexLabel] += banqueOrgReportRecords[i].n1824;
                             reportDataSetsByAgeAgreed[5].data[indexLabel] += banqueOrgReportRecords[i].nSen;
                             reportDataSetsByAgeAgreed[6].data[indexLabel] += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nNour - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
+                            totalOrganisationsAgreed += banqueOrgReportRecords[i].orgCount;
+                            totalFamiliesAgreed += banqueOrgReportRecords[i].nFam;
+                            totalPersonsAgreed += banqueOrgReportRecords[i].nPers;
+                            totalNourAgreed += banqueOrgReportRecords[i].nNour;
+                            totalBabiesAgreed += banqueOrgReportRecords[i].nBebe;
+                            totalChildrenAgreed += banqueOrgReportRecords[i].nEnf;
+                            totalTeenagersAgreed += banqueOrgReportRecords[i].nAdo;
+                            totalYoungAdultsAgreed += banqueOrgReportRecords[i].n1824;
+                            totalSeniorsAgreed += banqueOrgReportRecords[i].nSen;
+                            totalAdultsAgreed += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nNour - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
                         }
                         if (banqueOrgReportRecords[i].gestBen == 1) {
                             reportDataSetsByFamilyGestBen[0].data[indexLabel] += banqueOrgReportRecords[i].nFam;
@@ -454,43 +505,51 @@ export class BeneficiariesReportComponent implements OnInit {
                             reportDataSetsByAgeGestBen[4].data[indexLabel] += banqueOrgReportRecords[i].n1824;
                             reportDataSetsByAgeGestBen[5].data[indexLabel] += banqueOrgReportRecords[i].nSen;
                             reportDataSetsByAgeGestBen[6].data[indexLabel] += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nNour - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
+                            totalOrganisationsGestBen += banqueOrgReportRecords[i].orgCount;
+                            totalFamiliesGestBen += banqueOrgReportRecords[i].nFam;
+                            totalPersonsGestBen += banqueOrgReportRecords[i].nPers;
+                            totalNourGestBen += banqueOrgReportRecords[i].nNour;
+                            totalBabiesGestBen += banqueOrgReportRecords[i].nBebe;
+                            totalChildrenGestBen += banqueOrgReportRecords[i].nEnf;
+                            totalTeenagersGestBen += banqueOrgReportRecords[i].nAdo;
+                            totalYoungAdultsGestBen += banqueOrgReportRecords[i].n1824;
+                            totalSeniorsGestBen += banqueOrgReportRecords[i].nSen;
+                            totalAdultsGestBen += banqueOrgReportRecords[i].nPers - banqueOrgReportRecords[i].nNour - banqueOrgReportRecords[i].nBebe - banqueOrgReportRecords[i].nEnf - banqueOrgReportRecords[i].nAdo - banqueOrgReportRecords[i].n1824 - banqueOrgReportRecords[i].nSen;
                         }
 
                     }
 
-                    this.titleBeneficiariesByFamily = $localize`:@@OrgStatBenefByFamily:Beneficiaries Statistics by Family`;
+                    this.titleBeneficiariesByFamily = $localize`:@@OrgStatBenefByFamily:Orgs: ${totalOrganisations} Families: ${totalFamilies} Persons: ${totalPersons}`;
                     this.chartDataBeneficiaryByFamily = {
                         labels: reportLabels,
                         datasets: reportDataSetsByFamily
                     }
-                    this.titleBeneficiariesByFamilyAgreed = $localize`:@@OrgStatBenefByFamilyAgreed:Beneficiaries Statistics by Family (Agreed)`;
+                    this.titleBeneficiariesByFamilyAgreed = $localize`:@@OrgStatBenefByFamilyAgreed:Agreed Orgs: ${totalOrganisationsAgreed} Families: ${totalFamiliesAgreed} Persons: ${totalPersonsAgreed}`;
                     this.chartDataBeneficiaryByFamilyAgreed = {
                         labels: reportLabels,
                         datasets: reportDataSetsByFamilyAgreed
                     }
-                    this.titleBeneficiariesByFamilyGestBen = $localize`:@@OrgStatBenefByFamilyGestBen:Beneficiaries Statistics by Family (GestBen)`;
+                    this.titleBeneficiariesByFamilyGestBen = $localize`:@@OrgStatBenefByFamilyGestBen:GestBen Orgs: ${totalOrganisationsGestBen} Families: ${totalFamiliesGestBen} Persons: ${totalPersonsGestBen}`
                     this.chartDataBeneficiaryByFamilyGestBen = {
                         labels: reportLabels,
                         datasets: reportDataSetsByFamilyGestBen
                     }
 
-                    this.titleBeneficiariesByAge = $localize`:@@OrgStatBenefByAge:Beneficiaries Statistics by Age Group`;
+                    this.titleBeneficiariesByAge = $localize`:@@OrgStatBenefByAge:Orgs: ${totalOrganisations} Persons: ${totalPersons} Nour: ${totalNour} Babies: ${totalBabies} Children: ${totalChildren} Teenagers: ${totalTeenagers} Young Adults: ${totalYoungAdults} Adults: ${totalAdults} Seniors: ${totalSeniors}`;
                     this.chartDataBeneficiaryByAge = {
                         labels: reportLabels,
                         datasets: reportDataSetsByAge
                     }
-                    this.titleBeneficiariesByAgeAgreed = $localize`:@@OrgStatBenefByAgeAgreed:Beneficiaries Statistics by Age Group (Agreed)`;
+                    this.titleBeneficiariesByAgeAgreed = $localize`:@@OrgStatBenefByAgeAgreed:Agreed Orgs: ${totalOrganisationsAgreed} Persons: ${totalPersonsAgreed} Nour: ${totalNourAgreed} Babies: ${totalBabiesAgreed} Children: ${totalChildrenAgreed} Teenagers: ${totalTeenagersAgreed} Young Adults: ${totalYoungAdultsAgreed} Adults: ${totalAdultsAgreed} Seniors: ${totalSeniorsAgreed}`;
                     this.chartDataBeneficiaryByAgeAgreed = {
                         labels: reportLabels,
                         datasets: reportDataSetsByAgeAgreed
                     }
-                    this.titleBeneficiariesByAgeGestBen = $localize`:@@OrgStatBenefByAgeGestBen:Beneficiaries Statistics by Age Group (GestBen)`;
+                    this.titleBeneficiariesByAgeGestBen = $localize`:@@OrgStatBenefByAgeGestBen:GestBen Orgs: ${totalOrganisationsGestBen} Persons: ${totalPersonsGestBen} Nour: ${totalNourGestBen} Babies: ${totalBabiesGestBen} Children: ${totalChildrenGestBen} Teenagers: ${totalTeenagersGestBen} Young Adults: ${totalYoungAdultsGestBen} Adults: ${totalAdultsGestBen} Seniors: ${totalSeniorsGestBen}`;
                     this.chartDataBeneficiaryByAgeGestBen = {
                         labels: reportLabels,
                         datasets: reportDataSetsByAgeGestBen
                     }
-
-
             });
     }
 

@@ -638,11 +638,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">585</context>
+          <context context-type="linenumber">644</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">626</context>
+          <context context-type="linenumber">685</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membres.component.ts</context>
@@ -2865,11 +2865,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">585</context>
+          <context context-type="linenumber">644</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">626</context>
+          <context context-type="linenumber">685</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2937,11 +2937,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">586</context>
+          <context context-type="linenumber">645</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">627</context>
+          <context context-type="linenumber">686</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2964,11 +2964,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">586</context>
+          <context context-type="linenumber">645</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">627</context>
+          <context context-type="linenumber">686</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -2991,11 +2991,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">587</context>
+          <context context-type="linenumber">646</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">628</context>
+          <context context-type="linenumber">687</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3018,11 +3018,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">587</context>
+          <context context-type="linenumber">646</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">628</context>
+          <context context-type="linenumber">687</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3045,11 +3045,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">588</context>
+          <context context-type="linenumber">647</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">629</context>
+          <context context-type="linenumber">688</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3072,11 +3072,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">588</context>
+          <context context-type="linenumber">647</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">629</context>
+          <context context-type="linenumber">688</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3099,66 +3099,66 @@
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefByFamily" datatype="html">
-        <source>Beneficiaries Statistics by Family</source>
+        <source>Orgs: <x id="PH" equiv-text="totalOrganisations"/> Families: <x id="PH_1" equiv-text="totalFamilies"/> Persons: <x id="PH_2" equiv-text="totalPersons"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">461</context>
+          <context context-type="linenumber">522</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefByFamilyAgreed" datatype="html">
-        <source>Beneficiaries Statistics by Family (Agreed)</source>
+        <source>Agreed Orgs: <x id="PH" equiv-text="totalOrganisationsAgreed"/> Families: <x id="PH_1" equiv-text="totalFamiliesAgreed"/> Persons: <x id="PH_2" equiv-text="totalPersonsAgreed"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">466</context>
+          <context context-type="linenumber">527</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefByFamilyGestBen" datatype="html">
-        <source>Beneficiaries Statistics by Family (GestBen)</source>
+        <source>GestBen Orgs: <x id="PH" equiv-text="totalOrganisationsGestBen"/> Families: <x id="PH_1" equiv-text="totalFamiliesGestBen"/> Persons: <x id="PH_2" equiv-text="totalPersonsGestBen"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">471</context>
+          <context context-type="linenumber">532</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefByAge" datatype="html">
-        <source>Beneficiaries Statistics by Age Group</source>
+        <source>Orgs: <x id="PH" equiv-text="totalOrganisations"/> Persons: <x id="PH_1" equiv-text="totalPersons"/> Nour: <x id="PH_2" equiv-text="totalNour"/> Babies: <x id="PH_3" equiv-text="totalBabies"/> Children: <x id="PH_4" equiv-text="totalChildren"/> Teenagers: <x id="PH_5" equiv-text="totalTeenagers"/> Young Adults: <x id="PH_6" equiv-text="totalYoungAdults"/> Adults: <x id="PH_7" equiv-text="totalAdults"/> Seniors: <x id="PH_8" equiv-text="totalSeniors"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">477</context>
+          <context context-type="linenumber">538</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefByAgeAgreed" datatype="html">
-        <source>Beneficiaries Statistics by Age Group (Agreed)</source>
+        <source>Agreed Orgs: <x id="PH" equiv-text="totalOrganisationsAgreed"/> Persons: <x id="PH_1" equiv-text="totalPersonsAgreed"/> Nour: <x id="PH_2" equiv-text="totalNourAgreed"/> Babies: <x id="PH_3" equiv-text="totalBabiesAgreed"/> Children: <x id="PH_4" equiv-text="totalChildrenAgreed"/> Teenagers: <x id="PH_5" equiv-text="totalTeenagersAgreed"/> Young Adults: <x id="PH_6" equiv-text="totalYoungAdultsAgreed"/> Adults: <x id="PH_7" equiv-text="totalAdultsAgreed"/> Seniors: <x id="PH_8" equiv-text="totalSeniorsAgreed"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">482</context>
+          <context context-type="linenumber">543</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefByAgeGestBen" datatype="html">
-        <source>Beneficiaries Statistics by Age Group (GestBen)</source>
+        <source>GestBen Orgs: <x id="PH" equiv-text="totalOrganisationsGestBen"/> Persons: <x id="PH_1" equiv-text="totalPersonsGestBen"/> Nour: <x id="PH_2" equiv-text="totalNourGestBen"/> Babies: <x id="PH_3" equiv-text="totalBabiesGestBen"/> Children: <x id="PH_4" equiv-text="totalChildrenGestBen"/> Teenagers: <x id="PH_5" equiv-text="totalTeenagersGestBen"/> Young Adults: <x id="PH_6" equiv-text="totalYoungAdultsGestBen"/> Adults: <x id="PH_7" equiv-text="totalAdultsGestBen"/> Seniors: <x id="PH_8" equiv-text="totalSeniorsGestBen"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">487</context>
+          <context context-type="linenumber">548</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefHistory" datatype="html">
         <source>Evolution of Nb of Beneficiaries by Bank</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">571</context>
+          <context context-type="linenumber">630</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgStatBenefFamilyHistory" datatype="html">
         <source>Evolution of Nb of Beneficiary Families by Bank</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">576</context>
+          <context context-type="linenumber">635</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Date" datatype="html">
         <source>Date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">585</context>
+          <context context-type="linenumber">644</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/trips/trips.component.html</context>
@@ -3169,11 +3169,11 @@
         <source>Persons</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">585</context>
+          <context context-type="linenumber">644</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-report/beneficiaries-report.component.ts</context>
-          <context context-type="linenumber">626</context>
+          <context context-type="linenumber">685</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDependentDeleted" datatype="html">
