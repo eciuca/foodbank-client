@@ -2480,6 +2480,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>ClientReferencedBy</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>ClientSeniors</name>
                         <description/>
                         <comment/>
@@ -2661,6 +2681,26 @@
                     </concept_node>
                     <concept_node>
                         <name>Cpas</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasOfReference</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -5285,6 +5325,26 @@
                     </concept_node>
                     <concept_node>
                         <name>InformationTechnology</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>InternalId</name>
                         <description/>
                         <comment/>
                         <default_text/>

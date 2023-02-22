@@ -9,12 +9,16 @@
             <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(beneficiaire, beneficiaireForm.value)" [disabled] = "beneficiaireForm.invalid" i18n-label="@@Save" label="Save"></button>
             <button type="button" pButton icon="pi pi-check" (click)="quit($event, beneficiaire, beneficiaireForm, beneficiaireForm.dirty)" i18n-label="@@Return" label="Return" ></button>
         </div>
-        <div *ngIf="lienDis ==0"class="p-fluid p-formgrid p-grid" >
+        <div *ngIf="lienDis ==0" class="p-fluid p-formgrid p-grid" >
             <div class="p-field p-col-12 p-md-12">
                 {{ generateTooltipRightsBankUsers() }}
             </div>
         </div>
         <div class="p-fluid p-formgrid p-grid" >
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@InternalId" for="idInt">Internal ID</label>
+                <input pInputText id="idInt" name="idInt"  maxlength="7" [disabled] ="lienDis==0" [ngModel]="beneficiaire.idInt" />
+            </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@Gender" for="civilite">Gender</label>
                 <p-dropdown [options]="civilites" id="civilite" name="civilite" [disabled] ="lienDis==0" [ngModel]="beneficiaire.civilite" ></p-dropdown>
@@ -35,13 +39,14 @@
                        [disabled] ="lienDis==0" [ngModel]="beneficiaire.daten"/>
                 <p-message i18n-text="@@BirthDateIsMandatory" *ngIf="datenais.invalid && beneficiaireForm.touched" severity="error" text="Birth date is required and must in format dd/mm/yyyy"></p-message>
             </div>
+
+        </div>
+        <div class="p-fluid p-formgrid p-grid" >
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@IsActif" for="actif">Actif?</label>
                 <p-inputSwitch id="actif" name="actif"
                                [disabled] ="lienDis==0" [ngModel]="beneficiaire.actif"></p-inputSwitch>
             </div>
-        </div>
-        <div class="p-fluid p-formgrid p-grid" >
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@GenderPartner" for="civiliteconj">Gender Partner</label>
                 <p-dropdown [options]="civilites" id="civiliteconj" name="civiliteconj" [disabled] ="lienDis==0" [ngModel]="beneficiaire.civiliteconj" ></p-dropdown>
@@ -78,17 +83,7 @@
                 <label i18n="@@Country" for="pays">Country</label>
                 <p-dropdown [options]="countries" id="pays" name="pays" [disabled] ="lienDis==0" [ngModel]="beneficiaire.pays" ></p-dropdown>
             </div>
-            <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@Cpas" for="selectedCpas">Cpas</label>
-                <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" (completeMethod)="filterCpas($event)"
-                                 [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true" [disabled] ="lienDis==0">
-                    <ng-template let-cpas pTemplate="item">
-                        <div class="cpas-item">
-                            <div> {{cpas.cpasName}}</div>
-                        </div>
-                    </ng-template>
-                </p-autoComplete>
-            </div>
+           
         </div>
         <div class="p-fluid p-formgrid p-grid" >
             <div class="p-field p-col-12 p-md-2">
@@ -98,6 +93,31 @@
             <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@Email" for="email">E-mail</label>
                 <input pInputText id="email"  name="email" maxlength="50" [disabled] ="lienDis==0" [ngModel]="beneficiaire.email" />
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="tel">Tel</label>
+                <input pInputText id="tel" name="tel" maxlength="20" [disabled] ="lienDis==0" [ngModel]="beneficiaire.tel" />
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label for="gsm">Gsm</label>
+                <input pInputText id="gsm" name="gsm" maxlength="20" [disabled] ="lienDis==0" [ngModel]="beneficiaire.gsm" />
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@ClientReferencedBy" for="connu">Referenced By</label>
+                <input pInputText id="connu" name="connu" maxlength="50" [disabled] ="lienDis==0" [ngModel]="beneficiaire.connu" />
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid" >
+            <div class="p-field p-col-12 p-md-3">
+                <label i18n="@@CpasOfReference" for="selectedCpas">Cpas</label>
+                <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" (completeMethod)="filterCpas($event)"
+                                 [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true" [disabled] ="lienDis==0">
+                    <ng-template let-cpas pTemplate="item">
+                        <div class="cpas-item">
+                            <div> {{cpas.cpasName}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@FeadStatus" for="birb">Fead Status</label>

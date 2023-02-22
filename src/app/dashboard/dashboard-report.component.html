@@ -227,7 +227,7 @@
                     </div>
                 </div>
                     <div *ngFor="let item of categoryOptions;let i=index;">
-                        <div class="p-fluid p-formgrid p-grid p-text-bold">
+                        <div *ngIf="clientNbofOrgs[i] > 0" class="p-fluid p-formgrid p-grid p-text-bold">
 
                             <div class="p-field p-col-12 p-md-4">
                                 {{item.label}}
