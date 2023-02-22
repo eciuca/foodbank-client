@@ -18,6 +18,8 @@ import {AuditChangeEntityService} from '../../audits/services/auditChange-entity
 import {Dependent} from '../model/dependent';
 import {DependentEntityService} from '../services/dependent-entity.service';
 import * as moment from 'moment';
+import {BeneficiaireHttpService} from '../services/beneficiaire-http.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-beneficiaire',
@@ -54,25 +56,30 @@ export class BeneficiaireComponent implements OnInit {
     title: string;
     userId: string;
     userName: string;
+    userLanguage: string;
     dependentQuery: any;
     dependents: Dependent[];
     nbAdults: number;
     nbChildren: number;
     povertyIndex: number;
+    feadEligibility: string;
   constructor(
       private beneficiairesService: BeneficiaireEntityService,
+      private beneficiaireHttpService: BeneficiaireHttpService,
       private dependentService: DependentEntityService,
       private cpassService: CpasEntityService,
       private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
       private router: Router,
       private store: Store<AppState>,
+      private authService: AuthService,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
     this.civilites =  enmGender;
     this.countries = enmCountry;
     this.feadStatuses = enmStatutFead;
+    this.feadEligibility = '';
       this.booCalledFromTable = true;
       this.booCanSave = false;
       this.lienDis = 0;
@@ -97,7 +104,38 @@ export class BeneficiaireComponent implements OnInit {
 
           if (beneficiaire) {
               this.beneficiaire = beneficiaire;
-
+             /* this.feadEligibility = '';
+              switch (this.beneficiaire.birb) {
+                  case 0:
+                      if (this.userLanguage === 'fr') {
+                        this.feadEligibility = 'Refusé';
+                      } else {
+                            this.feadEligibility = 'Geweigerd';
+                      }
+                      break;
+                    case 2:
+                        if (this.userLanguage === 'fr') {
+                            this.feadEligibility = 'En examen';
+                        } else {
+                            this.feadEligibility = 'In onderzoek';
+                        }
+                        break;
+                  case 1:
+                    this.beneficiaireHttpService.getBirbCat(this.authService.accessToken,this.beneficiaire.critBirb)
+                          .subscribe(birbCat => {
+                        if (birbCat) {
+                            if (this.userLanguage === 'fr') {
+                                this.feadEligibility = birbCat.catName;
+                            } else {
+                                this.feadEligibility = birbCat.catNameNl;
+                            }
+                        }
+                        });
+                        break;
+                  default:
+                      // do nothing
+              }
+              */
               this.title = $localize`:@@OrgBeneficiaryExisting:Beneficiary for organisation ${beneficiaire.societe} Updated On ${ beneficiaire.dateUpd}`;
               if (beneficiaire.lcpas && beneficiaire.lcpas !== 0) {
                   this.cpassService.getByKey(beneficiaire.lcpas)
@@ -160,6 +198,7 @@ export class BeneficiaireComponent implements OnInit {
                   if (authState.user) {
                       this.userId= authState.user.idUser;
                       this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
+                        this.userLanguage = authState.user.idLanguage
                       switch (authState.user.rights) {
                           case 'Admin_Banq':
                           case 'Bank':

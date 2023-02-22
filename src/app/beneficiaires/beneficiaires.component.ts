@@ -337,7 +337,8 @@ export class BeneficiairesComponent implements OnInit {
 
             const nbFamily = nbParents + item.nbDep;
             const cleanedItem = {};
-            cleanedItem[$localize`:@@Gender:Gender`] = labelCivilite(item.civilite),
+            cleanedItem[$localize`:@@InternalId:Internal ID`] = item.idInt;
+            cleanedItem[$localize`:@@Gender:Gender`] = labelCivilite(item.civilite);
             cleanedItem[$localize`:@@Name:Name`] = item.nom;
             cleanedItem[$localize`:@@FirstName:First Name`] = item.prenom;
             cleanedItem[$localize`:@@NamePartner:Name Partner`] = item.nomconj;
@@ -353,7 +354,7 @@ export class BeneficiairesComponent implements OnInit {
             cleanedItem[$localize`:@@Suspect:Suspect`] =this.getSuspectStatus(item.coeff);
             cleanedItem[$localize`:@@Parents:Parents`] =nbParents;
             cleanedItem[$localize`:@@Dependents:Dependents`] =item.nbDep;
-            cleanedItem[$localize`:@@Families:Families`] =nbFamily;
+            cleanedItem[$localize`:@@Family:Family`] =nbFamily;
             cleanedList.push( cleanedItem);
           });
             cleanedList.push({}); // add empty line

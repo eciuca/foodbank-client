@@ -3,15 +3,18 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Beneficiaire} from '../model/beneficiaire';
 import {Population} from '../model/population';
+import {BirbCat} from '../model/birbcat';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BeneficiaireHttpService {
-    private baseUrl = '/api/beneficiairesall';
+
     constructor(private http: HttpClient) {
     }
     getBeneficiaireReport(accesstoken: string,  queryParams: string): Observable<Beneficiaire[]> {
+        const baseUrl = '/api/beneficiairesall';
+
         const requestOptions = {
             headers: new HttpHeaders( {
                 responseType: 'json',
@@ -19,10 +22,10 @@ export class BeneficiaireHttpService {
             }),
         };
         if(queryParams)  {
-            return this.http.get<Beneficiaire[]>(`${this.baseUrl}/?${queryParams}`, requestOptions);
+            return this.http.get<Beneficiaire[]>(`${baseUrl}/?${queryParams}`, requestOptions);
         }
         else {
-            return this.http.get<Beneficiaire[]>(`${this.baseUrl}/`, requestOptions);
+            return this.http.get<Beneficiaire[]>(`${baseUrl}/`, requestOptions);
 
         }
     }
@@ -41,5 +44,23 @@ export class BeneficiaireHttpService {
 
         // tslint:disable-next-line:max-line-length
         return this.http.get<Population[]>(`${baseUrl}`, requestOptions);
+    }
+
+    getBirbCat(accesstoken: string,critBirb: number): Observable<BirbCat> {
+
+        const requestOptions = {
+            headers: new HttpHeaders( {
+                responseType: 'json',
+                Authorization:  'Bearer ' + accesstoken
+            }),
+        };
+      try {
+          return this.http.get<BirbCat>(`/api/birbcat/${critBirb.toString()}`, requestOptions);
+      }
+      catch (e) {
+          console.log('BirbCat not found', e);
+          return null;
+      }
+
     }
 }

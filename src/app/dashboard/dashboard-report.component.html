@@ -227,7 +227,8 @@
                     </div>
                 </div>
                     <div *ngFor="let item of categoryOptions;let i=index;">
-                        <div *ngIf="clientNbofOrgs[i] > 0" class="p-fluid p-formgrid p-grid p-text-bold">
+                        <div *ngIf="clientNbofOrgs[i] > 0">
+                        <div  class="p-fluid p-formgrid p-grid p-text-bold">
 
                             <div class="p-field p-col-12 p-md-4">
                                 {{item.label}}
@@ -382,6 +383,7 @@
                                 {{clientNSenGestBen[i]}}
                             </div>
                         </div>
+                        </div>
 
                     </div>
             </p-accordionTab>
@@ -390,12 +392,12 @@
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@FilterDay" for="selectedDay">Filter day?</label>
-                        <p-dropdown [(ngModel)]="selectedDay" id="selectedDay" name="selectedDay" [options]="days" (onChange)="filterDay($event.value)" >
+                        <p-dropdown  id="selectedDay" name="selectedDay" [options]="days" (onChange)="filterDay($event.value)" >
                         </p-dropdown>
                     </div>
                     <div class="p-field p-col-12 p-md-6">
                         <label i18n="@@FilterOrg" for="selectedOrg">Filter Org?</label>
-                        <p-dropdown [(ngModel)]="selectedOrg"   id="selectedOrg" name="selectedOrg" [options]="orgs" (onChange)="filterOrg($event.value)" >
+                        <p-dropdown id="selectedOrg" name="selectedOrg" [options]="orgs" (onChange)="filterOrg($event.value)" >
                         </p-dropdown>
                     </div>
                 </div>
