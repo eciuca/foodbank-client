@@ -6,6 +6,7 @@ export interface BanqueClientReport {
     orgCount: number;
     nFam: number;
     nPers: number;
+    nEq: number;
     nNour: number;
     nBebe: number;
     nEnf: number;

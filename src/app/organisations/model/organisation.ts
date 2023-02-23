@@ -243,6 +243,7 @@ export interface Organisation {
     totalTeens: number;
     totalYoungAdults: number;
     totalSeniors: number;
+    totalEq: number;
 
 
 
@@ -390,6 +391,7 @@ export class DefaultOrganisation implements Organisation {
     totalTeens: number;
     totalYoungAdults: number;
     totalSeniors: number;
+    totalEq: number;
 
 
     constructor() {
@@ -523,6 +525,7 @@ export class DefaultOrganisation implements Organisation {
         this.totalTeens = 0;
         this.totalYoungAdults = 0;
         this.totalSeniors = 0;
+        this.totalEq = 0;
 
     }
 }

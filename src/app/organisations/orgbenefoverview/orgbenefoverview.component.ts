@@ -42,6 +42,7 @@ export class OrgbenefoverviewComponent implements OnInit {
   totalTeens: number;
   totalYoungAdults: number;
   totalSeniors: number;
+  totalEq: number;
   loading: boolean;
   filterBase: any;
   regions: any[];
@@ -89,6 +90,7 @@ export class OrgbenefoverviewComponent implements OnInit {
             this.totalRecords = loadedOrganisations[0].totalRecords;
             this.totalFamilies = loadedOrganisations[0].totalFamilies;
             this.totalPersons = loadedOrganisations[0].totalPersons;
+            this.totalEq = loadedOrganisations[0].totalEq;
             this.totalInfants = loadedOrganisations[0].totalInfants;
             this.totalBabies = loadedOrganisations[0].totalBabies;
             this.totalChildren = loadedOrganisations[0].totalChildren;
@@ -99,6 +101,7 @@ export class OrgbenefoverviewComponent implements OnInit {
             this.totalRecords = 0;
             this.totalFamilies = 0;
             this.totalPersons = 0;
+            this.totalEq = 0;
             this.totalInfants = 0;
             this.totalBabies = 0;
             this.totalChildren = 0;
@@ -180,8 +183,8 @@ export class OrgbenefoverviewComponent implements OnInit {
     this.loadPageSubject$.next(queryParms);
   }
   private initializeDependingOnUserRights(authState: AuthState) {
-    // exfilter all depots
-    this.filterBase = { 'isDepot': '0' };
+    // don't exfilter all depots
+    this.filterBase = {  };
     if (authState.banque) {
       this.lienBanque = authState.banque.bankId;
       this.filterBase['lienBanque'] = authState.banque.bankId;
@@ -327,8 +330,23 @@ export class OrgbenefoverviewComponent implements OnInit {
             cleanedItem[$localize`:@@TeenAgers:TeenAgers`] =item.nAdo;
             cleanedItem[$localize`:@@YoungAdults:YoungAdults`] =item.n1824;
             cleanedItem['Seniors'] =item.nSen;
-
+            cleanedItem['Equivalents'] =item.nEq;
             cleanedList.push( cleanedItem);
+          });
+
+          cleanedList.push({}); // add empty line
+
+          cleanedList.push({
+            [$localize`:@@Organisation:Organisation`]: organisations.length,
+            [$localize`:@@Families:Families`]: this.totalFamilies,
+            [$localize`:@@Beneficiaries:Beneficiaries`]: this.totalPersons,
+            [$localize`:@@Infants:Infants`]: this.totalInfants,
+            [$localize`:@@Babies:Babies`]: this.totalBabies,
+            [$localize`:@@Children:Children`]: this.totalChildren,
+            [$localize`:@@TeenAgers:TeenAgers`]: this.totalTeens,
+            [$localize`:@@YoungAdults:YoungAdults`]: this.totalYoungAdults,
+            ['Seniors']: this.totalSeniors,
+            ['Equivalents']: this.totalEq
           });
 
             this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.beneficiaries.' + label  + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
@@ -372,7 +390,7 @@ export class OrgbenefoverviewComponent implements OnInit {
   }
   getTotalStatistics() {
 
-    return $localize`:@@OrgTotalStatistics:Total for selection ${this.totalFamilies} families, ${this.totalPersons} persons,${this.totalInfants} infants,${this.totalBabies} babies,${this.totalChildren} children,${this.totalTeens} teenagers,${this.totalYoungAdults} young adults,${this.totalSeniors} seniors`;
+    return $localize`:@@OrgTotalStatistics:Total for selection ${this.totalFamilies} families, ${this.totalPersons} persons,${this.totalEq} equivalents,${this.totalInfants} infants,${this.totalBabies} babies,${this.totalChildren} children,${this.totalTeens} teenagers,${this.totalYoungAdults} young adults,${this.totalSeniors} seniors`;
   }
 }
 
