@@ -37,6 +37,8 @@ import {ChartModule} from 'primeng/chart';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 import {TooltipModule} from 'primeng/tooltip';
+import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
+import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
 
 
 const routes: Routes = [
@@ -89,6 +91,8 @@ const routes: Routes = [
         DependentsDataService,
       BanquesDataService,
       BanqueEntityService,
+      OrganisationsDataService,
+      OrganisationEntityService,
         OrgSummariesDataService,
         CpassDataService,
         BeneficiaireEntityService,
@@ -108,10 +112,12 @@ export class BeneficiairesModule {
       private beneficiairesDataService: BeneficiairesDataService,
       private banquesDataService: BanquesDataService,
       private cpassDataService: CpassDataService,
+      private organisationsDataService: OrganisationsDataService,
       private orgSummariesDataService: OrgSummariesDataService,
       private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
+    entityDataService.registerService('Organisation', organisationsDataService);
     entityDataService.registerService('Beneficiaire', beneficiairesDataService);
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('Cpas', cpassDataService);

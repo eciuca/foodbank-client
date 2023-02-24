@@ -16,6 +16,8 @@ import {ExcelService} from '../services/excel.service';
 import {BeneficiaireHttpService} from './services/beneficiaire-http.service';
 import {formatDate} from '@angular/common';
 import {labelCivilite} from '../shared/functions';
+import {Organisation} from '../organisations/model/organisation';
+import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
 
 
 @Component({
@@ -35,6 +37,7 @@ export class BeneficiairesComponent implements OnInit {
   filterBase: any;
   booCanCreate: boolean;
   booShowArchived: boolean;
+  currentOrganisation: Organisation;
   filteredOrganisation: any;
   filteredOrganisations: any[];
   filteredOrganisationsPrepend: any[];
@@ -50,6 +53,7 @@ export class BeneficiairesComponent implements OnInit {
   duplicateFilter: any;
 
   constructor(private beneficiaireService: BeneficiaireEntityService,
+              private organisationsService: OrganisationEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private authService: AuthService,
               private excelService: ExcelService,
@@ -235,6 +239,12 @@ export class BeneficiairesComponent implements OnInit {
           {
             this.booCanCreate = true;
           }
+          this.organisationsService.getByKey(this.idOrg).subscribe(
+              (org: Organisation) => {
+                if (org) {
+                  this.currentOrganisation = org;
+                }
+              });
           break;
         case 'Admin_CPAS':
           this.filterBase = { 'cp': authState.organisation.cp};
@@ -326,10 +336,24 @@ export class BeneficiairesComponent implements OnInit {
           let totalParents = 0;
           let totalDep = 0;
           let totalFamily = 0;
+          let totalParentsMale = 0;
+          let totalParentsFemale = 0;
           beneficiaires.map((item) => {
             let nbParents = 1;
             if (item.nomconj) {
               nbParents =2;
+              if (item.civiliteconj === 1) {
+                totalParentsMale++;
+              }
+              else {
+                totalParentsFemale++;
+              }
+            }
+            if (item.civilite === 1) {
+                totalParentsMale++;
+            }
+            else {
+                totalParentsFemale++;
             }
             totalParents += nbParents;
             totalDep += item.nbDep;
@@ -359,6 +383,35 @@ export class BeneficiairesComponent implements OnInit {
           });
             cleanedList.push({}); // add empty line
             cleanedList.push( {[$localize`:@@Parents:Parents`]: totalParents, [$localize`:@@Dependents:Dependents`]: totalDep, [$localize`:@@Families:Families`]: totalFamily});
+        let summaryText = null;
+         if (this.currentOrganisation) {
+           const parentsLabelMale = $localize`:@@ParentsMale:Parents Male`;
+           const parentsLabelFemale = $localize`:@@ParentsFemale:Parents Female`;
+           const labelInfants = $localize`:@@Infants:Infants`;
+           const labelBabies = $localize`:@@Babies:Babies`;
+           const labelChildren = $localize`:@@Children:Children`;
+           const labelTeenAgers = $localize`:@@TeenAgers:TeenAgers`;
+           const labelYoungAdults = $localize`:@@YoungAdults:YoungAdults`;
+           const labelAdults = $localize`:@@Adults:Adults`;
+           const labelSeniors = $localize`:@@Seniors:Seniors`;
+           const labelEquivalents = $localize`:@@Equivalents:Equivalents`;
+           const nbOfAdtults = this.currentOrganisation.nPers - this.currentOrganisation.nNour - this.currentOrganisation.nBebe
+               - this.currentOrganisation.nEnf - this.currentOrganisation.nAdo - this.currentOrganisation.n1824
+            - this.currentOrganisation.nSen;
+           summaryText =  `${parentsLabelMale}: ${totalParentsMale}, ${parentsLabelFemale}: ${totalParentsFemale} `
+           + `${labelInfants} : ${this.currentOrganisation.nNour} `
+           + `${labelBabies} : ${this.currentOrganisation.nBebe} `
+           + `${labelChildren} : ${this.currentOrganisation.nEnf} `
+           + `${labelTeenAgers} : ${this.currentOrganisation.nAdo} `
+           + `${labelYoungAdults} : ${this.currentOrganisation.n1824} `
+           + `${labelAdults} : ${nbOfAdtults} `
+           + `${labelSeniors} : ${this.currentOrganisation.nSen} `
+           + `${labelEquivalents} : ${this.currentOrganisation.nEq}`
+           ;
+           cleanedList.push({}); // add empty line
+           cleanedList.push({[$localize`:@@InternalId:Internal ID`] : summaryText});
+
+         }
           if (this.idOrg > 0) {
             this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.beneficiaries.'  + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
           }
