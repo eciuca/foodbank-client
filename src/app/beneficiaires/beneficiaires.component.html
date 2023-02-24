@@ -8,6 +8,9 @@
                 <div i18n="@@BeneficiariesHeader" class="p-field p-col-12 p-md-12">
                     Beneficiaries of {{bankName}} {{orgName}}
                 </div>
+                <div *ngIf="summaryMessage" class="p-field p-col-12 p-md-12 p-text-bold">
+                    {{summaryMessage}}
+                </div>
                 <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-5">
                     <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                      (onSelect)="filterOrganisationBeneficiaries($event.idDis);"

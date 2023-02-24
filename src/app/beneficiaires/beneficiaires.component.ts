@@ -51,6 +51,7 @@ export class BeneficiairesComponent implements OnInit {
   YNOptions:  any[];
   duplicatesOptions: any[];
   duplicateFilter: any;
+  summaryMessage: string;
 
   constructor(private beneficiaireService: BeneficiaireEntityService,
               private organisationsService: OrganisationEntityService,
@@ -243,6 +244,7 @@ export class BeneficiairesComponent implements OnInit {
               (org: Organisation) => {
                 if (org) {
                   this.currentOrganisation = org;
+                  this.summaryMessage = this.createSummaryText(false); // no need to show parents male or female
                 }
               });
           break;
@@ -383,34 +385,11 @@ export class BeneficiairesComponent implements OnInit {
           });
             cleanedList.push({}); // add empty line
             cleanedList.push( {[$localize`:@@Parents:Parents`]: totalParents, [$localize`:@@Dependents:Dependents`]: totalDep, [$localize`:@@Families:Families`]: totalFamily});
-        let summaryText = null;
+
          if (this.currentOrganisation) {
-           const parentsLabelMale = $localize`:@@ParentsMale:Parents Male`;
-           const parentsLabelFemale = $localize`:@@ParentsFemale:Parents Female`;
-           const labelInfants = $localize`:@@Infants:Infants`;
-           const labelBabies = $localize`:@@Babies:Babies`;
-           const labelChildren = $localize`:@@Children:Children`;
-           const labelTeenAgers = $localize`:@@TeenAgers:TeenAgers`;
-           const labelYoungAdults = $localize`:@@YoungAdults:YoungAdults`;
-           const labelAdults = $localize`:@@Adults:Adults`;
-           const labelSeniors = $localize`:@@Seniors:Seniors`;
-           const labelEquivalents = $localize`:@@Equivalents:Equivalents`;
-           const nbOfAdtults = this.currentOrganisation.nPers - this.currentOrganisation.nNour - this.currentOrganisation.nBebe
-               - this.currentOrganisation.nEnf - this.currentOrganisation.nAdo - this.currentOrganisation.n1824
-            - this.currentOrganisation.nSen;
-           summaryText =  `${parentsLabelMale}: ${totalParentsMale}, ${parentsLabelFemale}: ${totalParentsFemale} `
-           + `${labelInfants} : ${this.currentOrganisation.nNour} `
-           + `${labelBabies} : ${this.currentOrganisation.nBebe} `
-           + `${labelChildren} : ${this.currentOrganisation.nEnf} `
-           + `${labelTeenAgers} : ${this.currentOrganisation.nAdo} `
-           + `${labelYoungAdults} : ${this.currentOrganisation.n1824} `
-           + `${labelAdults} : ${nbOfAdtults} `
-           + `${labelSeniors} : ${this.currentOrganisation.nSen} `
-           + `${labelEquivalents} : ${this.currentOrganisation.nEq}`
-           ;
+          const summaryText = this.createSummaryText(true, totalParentsMale, totalParentsFemale);
            cleanedList.push({}); // add empty line
            cleanedList.push({[$localize`:@@InternalId:Internal ID`] : summaryText});
-
          }
           if (this.idOrg > 0) {
             this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.beneficiaries.'  + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
@@ -420,6 +399,40 @@ export class BeneficiairesComponent implements OnInit {
           }
 
           });
+  }
+  createSummaryText(booForExcel: boolean,totalParentsMale: number = 0, totalParentsFemale: number = 0): string
+  { let summaryText = '';
+   const labelFamilies = $localize`:@@Families:Families`;
+   const labelBeneficiaries = $localize`:@@Beneficiaries:Beneficiaries`;
+    const labelInfants = $localize`:@@Infants:Infants`;
+    const labelBabies = $localize`:@@Babies:Babies`;
+    const labelChildren = $localize`:@@Children:Children`;
+    const labelTeenAgers = $localize`:@@TeenAgers:TeenAgers`;
+    const labelYoungAdults = $localize`:@@YoungAdults:YoungAdults`;
+    const labelAdults = $localize`:@@Adults:Adults`;
+    const labelSeniors = $localize`:@@Seniors:Seniors`;
+    const labelEquivalents = $localize`:@@Equivalents:Equivalents`;
+    const nbOfAdtults = this.currentOrganisation.nPers - this.currentOrganisation.nNour - this.currentOrganisation.nBebe
+        - this.currentOrganisation.nEnf - this.currentOrganisation.nAdo - this.currentOrganisation.n1824
+        - this.currentOrganisation.nSen;
+    summaryText = `${labelFamilies} : ${this.currentOrganisation.nFam} `
+        + `${labelBeneficiaries} : ${this.currentOrganisation.nPers} `
+    if (booForExcel) {
+      const parentsLabelMale = $localize`:@@ParentsMale:Parents Male`;
+      const parentsLabelFemale = $localize`:@@ParentsFemale:Parents Female`;
+      summaryText += `${parentsLabelMale}: ${totalParentsMale}, ${parentsLabelFemale}: ${totalParentsFemale} `;
+    }
+    summaryText += `${labelInfants} : ${this.currentOrganisation.nNour} `
+          + `${labelBabies} : ${this.currentOrganisation.nBebe} `
+          + `${labelChildren} : ${this.currentOrganisation.nEnf} `
+          + `${labelTeenAgers} : ${this.currentOrganisation.nAdo} `
+          + `${labelYoungAdults} : ${this.currentOrganisation.n1824} `
+          + `${labelAdults} : ${nbOfAdtults} `
+          + `${labelSeniors} : ${this.currentOrganisation.nSen} `
+          + `${labelEquivalents} : ${this.currentOrganisation.nEq}`
+      ;
+
+    return summaryText;
   }
 
 }
