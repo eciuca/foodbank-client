@@ -402,7 +402,7 @@ export class BeneficiairesComponent implements OnInit {
   }
   createSummaryText(booForExcel: boolean,totalParentsMale: number = 0, totalParentsFemale: number = 0): string
   { let summaryText = '';
-   const labelFamilies = $localize`:@@Families:Families`;
+   const labelFamilies = $localize`:@@Family:Family`;
    const labelBeneficiaries = $localize`:@@Beneficiaries:Beneficiaries`;
     const labelInfants = $localize`:@@Infants:Infants`;
     const labelBabies = $localize`:@@Babies:Babies`;

@@ -325,7 +325,7 @@ export class BeneficiaireComponent implements OnInit {
         }
     }
     filterCpas(event ) {
-        const  queryCpasParms: QueryParams = {};
+        const  queryCpasParms: QueryParams = {'lienBanque':this.lienBanque.toString()};
         const query = event.query;
         queryCpasParms['offset'] = '0';
         queryCpasParms['rows'] = '10';
