@@ -73,6 +73,8 @@
             <th colspan="2" i18n="@@NomDepotSorted" pSortableColumn="nomDepot">Depot<p-sortIcon field="nomDepot"></p-sortIcon></th>
             <th colspan="2" i18n="@@NomDepotRamasseSorted" pSortableColumn="nomDepotRamasse">Depot Ramasse<p-sortIcon field="nomDepotRamasse"></p-sortIcon></th>
             <th i18n="@@OrgAgreedSorted" pSortableColumn="agreed" pTooltip="{{generateTooltipAgreed()}}">Agreed<p-sortIcon field="agreed"></p-sortIcon></th>
+            <th i18n="@@OrgGestBenSorted" pSortableColumn="agreed" pTooltip="{{generateTooltipGestBen()}}">Record Beneficiaries<p-sortIcon field="gestBen"></p-sortIcon></th>
+
             <th pSortableColumn="birbCode" pTooltip="{{generateTooltipUsesFEAD()}}">FEAD<p-sortIcon field="birbCode"></p-sortIcon></th>
             <th  i18n="@@NbLoginsSorted"  pTooltip="{{generateLoginTooltip()}}" pSortableColumn="nbLogins" >Logins<p-sortIcon field="nbLogins"></p-sortIcon></th>
         </tr>
@@ -108,6 +110,18 @@
             </th>
             <th>
                 <p-columnFilter field="agreed" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{option.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+
+            <th>
+                <p-columnFilter field="gestBen" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                         <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
                             <ng-template let-option pTemplate="item">
@@ -163,6 +177,9 @@
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.agreed, 'false-icon pi-times-circle': !organisation.agreed}"></i>
+            </td>
+            <td>
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.gestBen, 'false-icon pi-times-circle': !organisation.gestBen}"></i>
             </td>
             <td *ngIf="organisation.birbCode==1" pTooltip="{{organisation.antenneOrgName}}" >
                Antenne

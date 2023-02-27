@@ -177,6 +177,9 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.agreed && event.filters.agreed.value != null) {
                 queryParms['agreed'] = event.filters.agreed.value;
             }
+            if (event.filters.gestBen && event.filters.gestBen.value != null) {
+                queryParms['gestBen'] = event.filters.gestBen.value;
+            }
             if (event.filters.nomDepot && event.filters.nomDepot.value) {
                 queryParms['nomDepot'] = event.filters.nomDepot.value;
             }
@@ -518,6 +521,10 @@ export class OrganisationsComponent implements OnInit {
             message += $localize`:@@ToolTipDepotRamasseDifferent:this organisation has a different depot for the ramasse`;
         }
         return message;
+    }
+
+    generateTooltipGestBen() {
+        return $localize`:@@OrgToolTipGestBen:Does Organisation Manage Beneficiaries?`;
     }
 }
 

@@ -380,6 +380,13 @@ export class AppComponent implements OnInit {
                 {
                     label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart', routerLink: ['/beneficiaires']
                 })
+            if (this.baseurl.includes('localhost') || this.baseurl.toLowerCase().includes('dev'))
+            {
+                this.menuLoggedInItems.push(
+                    {
+                        label: 'Beneficiaries List', icon: 'pi pi-fw pi-heart', routerLink: ['/beneficiaires/list']
+                    })
+            }
 
         }
             // Add Donateurs

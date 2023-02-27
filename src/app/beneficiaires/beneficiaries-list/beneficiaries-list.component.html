@@ -1,0 +1,45 @@
+<p-table #dt [value]="beneficiaires" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            <div class="p-fluid p-formgrid p-grid">
+                <div i18n="@@BeneficiariesOrgHeader" class="p-field p-col-12 p-md-12">
+                    Beneficiaries of  {{orgName}}
+                </div>
+                <div *ngIf="summaryMessage" class="p-field p-col-12 p-md-12 p-text-bold">
+                    {{summaryMessage}}
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th i18n="@@InternalId">Internal ID</th>
+            <th i18n="@@Name" >Name</th>
+            <th i18n="@@Address" >Address</th>
+            <th i18n="@@BirthDate">Birth Date</th>
+            <th i18n="@@NbDependents">Nb Dependents</th>
+        </tr>
+
+    </ng-template>
+
+    <ng-template pTemplate="body" let-beneficiaire>
+        <tr>
+            <td>
+                {{beneficiaire.idInt}}
+            </td>
+            <td >
+                {{ beneficiaire.nom }}  {{beneficiaire.prenom}}
+            </td>
+
+            <td>
+                {{beneficiaire.adresse}} {{beneficiaire.cp}} {{beneficiaire.localite}}
+            </td>
+            <td>
+                {{beneficiaire.daten}}
+            </td>
+            <td>
+                {{beneficiaire.nbDep}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

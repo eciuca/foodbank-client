@@ -39,6 +39,7 @@ import {AuditChangeEntityService} from '../audits/services/auditChange-entity.se
 import {TooltipModule} from 'primeng/tooltip';
 import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
 import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
+import {BeneficiariesListComponent} from './beneficiaries-list/beneficiaries-list.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,10 @@ const routes: Routes = [
         component: BeneficiariesReportComponent,
     },
     {
+        path: 'list',
+        component: BeneficiariesListComponent,
+    },
+    {
         path: '',
         component: BeneficiairesComponent,
     },
@@ -66,7 +71,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [BeneficiairesComponent, BeneficiaireComponent, DependentsComponent, DependentComponent, BeneficiariesReportComponent],
+  declarations: [BeneficiairesComponent, BeneficiaireComponent, DependentsComponent, DependentComponent, BeneficiariesReportComponent,BeneficiariesListComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),

@@ -41,9 +41,11 @@
                     </div>
 
                     <div class="p-field p-col-12 p-md-2">
-                        <label  i18n="@@OrganisationRegion" for="statut">Region</label>
+                        <label  i18n="@@OrganisationRegion" for="region">Region</label>
                         <p-dropdown [options]="regions" id="region" name="region" [ngModel]="organisation.region"></p-dropdown>
                     </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@OrganisationNumber" for="tva">Nr/Vat Enterprise</label>
                         <input pInputText id="tva" name="tva" maxlength="50" [ngModel]="organisation.tva" />
@@ -70,6 +72,8 @@
                         <label i18n="@@OrgCategory" for="classeFbba3">Category</label>
                         <p-dropdown [options]="orgCategories" id="classeFbba3" name="classeFbba3" [ngModel]="organisation.classeFbba3"  ></p-dropdown>
                     </div>
+                    </div>
+                <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
                         <label  i18n="@@OrganisationStatus" for="statut">Status Company</label>
                         <p-dropdown [options]="statuts" id="statut" name="statut" [ngModel]="organisation.statut"></p-dropdown>
@@ -90,7 +94,8 @@
                         <label i18n="@@Country" for="pays">Country</label>
                         <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="organisation.pays"  ></p-dropdown>
                     </div>
-
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@Email" for="email">E-mail</label>
                         <input pInputText id="email" name="email" maxlength="100" [ngModel]="organisation.email" />
@@ -111,7 +116,8 @@
                         <label i18n="@@Website" for="website">Web Site</label>
                         <input pInputText id="website" name="website"  [ngModel]="organisation.website" />
                     </div>
-
+                    </div>
+                <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
                         <label i18n="@@OrganisationHeadQuarters" for="adresse2">Headquarters Address</label>
                         <input pInputText id="adresse2" name="adresse2" maxlength="100" [ngModel]="organisation.adresse2" />
@@ -128,6 +134,8 @@
                         <label i18n="@@Country" for="pays2">Country</label>
                         <p-dropdown [options]="countries" id="pays2" name="pays2" [ngModel]="organisation.pays2"  ></p-dropdown>
                     </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@Bank" for="banque">Bank</label>
                         <input pInputText id="banque" name="banque" maxlength="50" [ngModel]="organisation.banque" />
@@ -152,6 +160,10 @@
                     <div class="p-field p-col-12 p-md-1">
                         <label i18n="@@Active" for="actif">Active</label>
                         <p-inputSwitch id="actif" name="actif" [ngModel]="organisation.actif"></p-inputSwitch>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@GestBen" for="gestBen">Manage Beneficiaries</label>
+                        <p-inputSwitch id="gestBen" name="gestBen" [ngModel]="organisation.gestBen"></p-inputSwitch>
                     </div>
                 </div>
             </p-accordionTab>
