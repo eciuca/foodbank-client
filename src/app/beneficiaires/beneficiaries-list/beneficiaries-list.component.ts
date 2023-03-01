@@ -83,6 +83,7 @@ export class BeneficiariesListComponent implements OnInit {
                                                     this.totalParentsFemale++;
                                                 }
                                             }
+                                            item.nbParents = nbParents;
                                             if (item.civilite === 1) {
                                                 this.totalParentsMale++;
                                             } else {
@@ -92,7 +93,7 @@ export class BeneficiariesListComponent implements OnInit {
                                             totalDep += item.nbDep;
                                             totalFamily += nbParents + item.nbDep;
 
-                                            const nbFamily = nbParents + item.nbDep;
+                                            item.nbFamily = nbParents + item.nbDep;
                                         });
                                         this.summaryMessage = this.createSummaryText(); // no need to show parents male or female
                                     });
@@ -144,5 +145,9 @@ export class BeneficiariesListComponent implements OnInit {
 
     getPrintTitle() {
         return $localize`:@@BeneficiariesList:Beneficiaries List`;
+    }
+
+    getTitle() {
+        return $localize`:@@BeneficiariesOrgHeader:Beneficiaries of ${this.orgName} at ${new Date().toLocaleDateString()}`;
     }
 }

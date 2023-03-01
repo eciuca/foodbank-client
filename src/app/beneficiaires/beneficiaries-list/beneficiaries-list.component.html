@@ -2,8 +2,8 @@
     <ng-template pTemplate="caption">
         <div class="table-header">
             <div class="p-fluid p-formgrid p-grid">
-                <div i18n="@@BeneficiariesOrgHeader" class="p-field p-col-12 p-md-12">
-                    Beneficiaries of  {{orgName}}
+                <div  class="p-field p-col-12 p-md-12">
+                    {{getTitle()}}
                 </div>
                 <div *ngIf="summaryMessage" class="p-field p-col-12 p-md-12 p-text-bold">
                     {{summaryMessage}}
@@ -17,7 +17,9 @@
             <th i18n="@@Name" >Name</th>
             <th i18n="@@Address" >Address</th>
             <th i18n="@@BirthDate">Birth Date</th>
+            <th i18n="@@Parents">Parents</th>
             <th i18n="@@NbDependents">Nb Dependents</th>
+            <th i18n="@@Family">Family</th>
         </tr>
 
     </ng-template>
@@ -38,7 +40,13 @@
                 {{beneficiaire.daten}}
             </td>
             <td>
+                {{beneficiaire.nbParents}}
+            </td>
+            <td>
                 {{beneficiaire.nbDep}}
+            </td>
+            <td>
+                {{beneficiaire.nbFamily}}
             </td>
         </tr>
     </ng-template>
