@@ -40,6 +40,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
 import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
 import {BeneficiariesListComponent} from './beneficiaries-list/beneficiaries-list.component';
+import {NgxPrintModule} from 'ngx-print';
 
 
 const routes: Routes = [
@@ -89,7 +90,8 @@ const routes: Routes = [
         CheckboxModule,
         InputNumberModule,
         TooltipModule,
-        ChartModule
+        ChartModule,
+        NgxPrintModule
     ],
   providers: [
         BeneficiairesDataService,

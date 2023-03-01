@@ -60,7 +60,7 @@ export class BeneficiariesListComponent implements OnInit {
                             if (org) {
                                 this.currentOrganisation = org;
                                 let params = new URLSearchParams();
-                                const benefQueryParams = {'idOrg': this.idOrg.toString(), 'actif': '1'};
+                                const benefQueryParams = {'lienDis': this.idOrg.toString(), 'actif': '1'};
                                 for (let key in benefQueryParams) {
                                     params.set(key, benefQueryParams[key])
                                 }
@@ -142,4 +142,7 @@ export class BeneficiariesListComponent implements OnInit {
         return summaryText;
     }
 
+    getPrintTitle() {
+        return $localize`:@@BeneficiariesList:Beneficiaries List`;
+    }
 }

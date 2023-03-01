@@ -374,20 +374,23 @@ export class AppComponent implements OnInit {
             }
         if (( authState.user.rights === 'Admin_Asso' && authState.organisation.gestBen)
             || (authState.user.rights === 'Asso' && authState.organisation.gestBen && authState.user.gestBen)
-        )
-        {
+        ) {
             this.menuLoggedInItems.push(
-                {
-                    label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart', routerLink: ['/beneficiaires']
-                })
-            if (this.baseurl.includes('localhost') || this.baseurl.toLowerCase().includes('dev'))
             {
-                this.menuLoggedInItems.push(
+                label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',
+                items: [
                     {
-                        label: 'Beneficiaries List', icon: 'pi pi-fw pi-heart', routerLink: ['/beneficiaires/list']
-                    })
-            }
-
+                        label: $localize`:@@List:List`,
+                        icon: 'pi pi-fw pi-heart',
+                        routerLink: ['/beneficiaires/list']
+                    },
+                    {
+                        label: $localize`:@@Management:Management`,
+                        icon: 'pi pi-fw pi-heart',
+                        routerLink: ['/beneficiaires']
+                    }
+                ]
+            });
         }
             // Add Donateurs
         if (( authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestDon))) {
