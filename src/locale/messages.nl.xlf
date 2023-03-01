@@ -3399,8 +3399,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="BeneficiariesOrgHeader" datatype="html">
-        <source>Beneficiaries of <x id="PH" equiv-text="this.orgName"/> at <x id="PH_1" equiv-text="new Date().toLocaleDateString()"/></source>
-        <target>Begunstigden van <x id="PH" equiv-text="this.orgName"/> bij <x id="PH_1" equiv-text="new Date().toLocaleDateString()"/></target>
+        <source>Beneficiaries of <x id="PH" equiv-text="this.orgName"/> at <x id="PH_1" equiv-text="new Date().toLocaleDateString('fr-FR')"/></source>
+        <target>Begunstigden van <x id="PH" equiv-text="this.orgName"/> op <x id="PH_1" equiv-text="new Date().toLocaleDateString('fr-FR')"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
           <context context-type="linenumber">151</context>
