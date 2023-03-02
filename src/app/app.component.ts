@@ -363,7 +363,12 @@ export class AppComponent implements OnInit {
                                     routerLink: ['/organisations/orgbenefoverview/']
                                 },
                                 {
-                                    label: 'Details',
+                                    label: $localize`:@@List:List`,
+                                    icon: 'pi pi-fw pi-heart',
+                                    routerLink: ['/organisations/orgbeneflist/']
+                                },
+                                {
+                                    label: $localize`:@@Management:Management`,
                                     icon: 'pi pi-fw pi-heart',
                                     routerLink: ['/beneficiaires']
                                 }
