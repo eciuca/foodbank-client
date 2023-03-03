@@ -42,6 +42,7 @@ export class OrgbenefoverviewComponent implements OnInit {
   totalTeens: number;
   totalYoungAdults: number;
   totalSeniors: number;
+  totalAdults: number;
   totalEq: number;
   loading: boolean;
   filterBase: any;
@@ -97,6 +98,7 @@ export class OrgbenefoverviewComponent implements OnInit {
             this.totalTeens = loadedOrganisations[0].totalTeens;
             this.totalYoungAdults = loadedOrganisations[0].totalYoungAdults;
             this.totalSeniors = loadedOrganisations[0].totalSeniors;
+            this.totalAdults = this.totalPersons - this.totalInfants - this.totalBabies - this.totalChildren - this.totalTeens - this.totalYoungAdults - this.totalSeniors;
           }  else {
             this.totalRecords = 0;
             this.totalFamilies = 0;
@@ -108,6 +110,7 @@ export class OrgbenefoverviewComponent implements OnInit {
             this.totalTeens = 0;
             this.totalYoungAdults = 0;
             this.totalSeniors = 0;
+            this.totalAdults = 0;
           }
           this.organisations  = loadedOrganisations;
           this.loading = false;
@@ -330,6 +333,7 @@ export class OrgbenefoverviewComponent implements OnInit {
             cleanedItem[$localize`:@@TeenAgers:TeenAgers`] =item.nAdo;
             cleanedItem[$localize`:@@YoungAdults:YoungAdults`] =item.n1824;
             cleanedItem['Seniors'] =item.nSen;
+            cleanedItem[$localize`:@@Adults:Adults`] =item.nPers - item.nNour - item.nBebe - item.nEnf - item.nAdo - item.n1824 - item.nSen;
             cleanedItem['Equivalents'] =item.nEq;
             cleanedList.push( cleanedItem);
           });
@@ -345,6 +349,7 @@ export class OrgbenefoverviewComponent implements OnInit {
             [$localize`:@@Children:Children`]: this.totalChildren,
             [$localize`:@@TeenAgers:TeenAgers`]: this.totalTeens,
             [$localize`:@@YoungAdults:YoungAdults`]: this.totalYoungAdults,
+            [$localize`:@@Adults:Adults`]: this.totalAdults,
             ['Seniors']: this.totalSeniors,
             ['Equivalents']: this.totalEq
           });
@@ -389,8 +394,7 @@ export class OrgbenefoverviewComponent implements OnInit {
     return $localize`:@@OrgSeniors:Seniors(> 65 years)`;
   }
   getTotalStatistics() {
-
-    return $localize`:@@OrgTotalStatistics:Total for selection ${this.totalFamilies} families, ${this.totalPersons} persons,${this.totalEq} equivalents,${this.totalInfants} infants,${this.totalBabies} babies,${this.totalChildren} children,${this.totalTeens} teenagers,${this.totalYoungAdults} young adults,${this.totalSeniors} seniors`;
+    return $localize`:@@OrgTotalStatistics:Total for selection ${this.totalFamilies} families, ${this.totalPersons} persons,${this.totalEq} equivalents,${this.totalInfants} infants,${this.totalBabies} babies,${this.totalChildren} children,${this.totalTeens} teenagers,${this.totalYoungAdults} young adults,${this.totalAdults} adults,${this.totalSeniors} seniors`;
   }
 }
 
