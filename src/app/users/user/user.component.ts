@@ -117,7 +117,11 @@ export class UserComponent implements OnInit {
                         this.rights = enmUserRolesAsso;
                         this.title = $localize`:@@OrgUserExisting:User ${user.idUser} for organisation  ${user.societe}`;
                     } else {
-                        this.rights = enmUserRolesBank;
+                        if (this.currentFilteredBankShortName == 'SPP') {
+                            this.rights = [{label: $localize`:@@RoleFEADAdmin:FEAD Admin`, value: 'Admin_FEAD'}]
+                        } else {
+                            this.rights = enmUserRolesBank;
+                        }
                         this.title = $localize`:@@BankUserExisting:User ${user.idUser} for bank ${this.user.idCompany}`;
                         this.loadDepotOptions(this.user.idCompany);
                     }
@@ -215,7 +219,6 @@ export class UserComponent implements OnInit {
                       switch (authState.user.rights) {
                           case 'admin':
                           case 'Admin_FBBA':
-                              this.rights = enmUserRoles;
                               this.isAdmin = true;
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
@@ -223,12 +226,10 @@ export class UserComponent implements OnInit {
                               }
                               break;
                           case 'Bank_FBBA':
-                              this.rights = enmUserRoles;
                               break;
                           case 'Bank':
                           case 'Admin_Banq':
                               this.filterMemberBase['lienBanque'] = authState.banque.bankId;
-                              this.rights = enmUserRolesBankAsso;
                               if (authState.user.rights === 'Admin_Banq') {
                                   this.booCanSave = true;
                                   if (this.booCalledFromTable) {
@@ -249,7 +250,6 @@ export class UserComponent implements OnInit {
                                   this.filterMemberBase['lienDis'] = this.idOrg;
                               }
                               this.booIsOrganisation = true;
-                              this.rights = enmUserRolesAsso;
                               if  (authState.user.rights === 'Admin_Asso') {
                                   this.booCanSave = true;
                                   if (this.booCalledFromTable) {

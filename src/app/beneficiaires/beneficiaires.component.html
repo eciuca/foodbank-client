@@ -54,7 +54,7 @@
              <th i18n="@@CitySorted" pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
              <th i18n="@@BirthDateSorted" pSortableColumn="daten">Birth Date<p-sortIcon field="daten"></p-sortIcon></th>
              <th i18n="@@NbDependentsSorted" pSortableColumn="nbDep">Nb Dependents<p-sortIcon field="nbDep"></p-sortIcon></th>
-             <th i18n="@@BeneficiarySuspect" pSortableColumn="coeff">Suspect<p-sortIcon field="coeff"></p-sortIcon></th>
+             <th *ngIf="idOrg==0" i18n="@@BeneficiaryCoeffSorted" pSortableColumn="coeff">Coeff<p-sortIcon field="coeff"></p-sortIcon></th>
          </tr>
          <tr>
              <th>
@@ -78,7 +78,7 @@
              </th>
              <th>
              </th>
-             <th>
+             <th *ngIf="idOrg==0" >
                  <p-columnFilter field="suspect" matchMode="equals" [showMenu]="false">
                      <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                          <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
@@ -115,7 +115,7 @@
             <td>
                 {{beneficiaire.nbDep}}
             </td>
-            <td>
+            <td *ngIf="idOrg==0">
                 {{ getSuspectStatus(beneficiaire.coeff) }}
             </td>
         </tr>

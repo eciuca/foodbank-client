@@ -27,6 +27,7 @@ export class OrgBenefListComponent implements OnInit {
     totalYoungAdults: number;
     totalSeniors: number;
     totalEq: number;
+    totalAdults: number;
     totalStatistics: string;
 
 
@@ -87,6 +88,7 @@ export class OrgBenefListComponent implements OnInit {
         this.totalTeens = 0;
         this.totalYoungAdults = 0;
         this.totalSeniors = 0;
+        this.totalAdults = 0;
         this.organisationHttpService.getOrganisationReport(this.authService.accessToken, params.toString()).subscribe(
             (loadedOrganisations: any[]) => {
 
@@ -105,6 +107,7 @@ export class OrgBenefListComponent implements OnInit {
                 }
                 );
                 this.organisations= loadedOrganisations;
+                this.totalAdults = this.totalPersons - this.totalInfants - this.totalBabies - this.totalChildren - this.totalTeens - this.totalYoungAdults - this.totalSeniors;
                this.totalStatistics = this.getTotalStatistics();
 
               
@@ -113,7 +116,7 @@ export class OrgBenefListComponent implements OnInit {
     }
 
     getTotalStatistics() {
-        return $localize`:@@OrgTotalAgreedStatistics:Total ${this.totalFamilies} families, ${this.totalPersons} persons,${this.totalEq} equivalents,${this.totalInfants} infants,${this.totalBabies} babies,${this.totalChildren} children,${this.totalTeens} teenagers,${this.totalYoungAdults} young adults,${this.totalSeniors} seniors`;
+        return $localize`:@@OrgTotalAgreedStatistics:Total ${this.totalFamilies} families, ${this.totalPersons} persons,${this.totalEq} equivalents,${this.totalInfants} infants,${this.totalBabies} babies,${this.totalChildren} children,${this.totalTeens} teenagers,${this.totalYoungAdults} young adults,${this.totalAdults} adults,${this.totalSeniors} seniors`;
     }
 
 

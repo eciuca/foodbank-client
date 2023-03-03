@@ -377,7 +377,9 @@ export class BeneficiairesComponent implements OnInit {
             cleanedItem[$localize`:@@Phone:Telephone`] =item.tel;
             cleanedItem[$localize`:@@Gsm:Gsm`] =item.gsm;
             cleanedItem[$localize`:@@Email:E-mail`] =item.email;
-            cleanedItem[$localize`:@@Suspect:Suspect`] =this.getSuspectStatus(item.coeff);
+            if (this.idOrg === 0) {
+              cleanedItem[$localize`:@@Suspect:Suspect`] = this.getSuspectStatus(item.coeff);
+            }
             cleanedItem[$localize`:@@Parents:Parents`] =nbParents;
             cleanedItem[$localize`:@@Dependents:Dependents`] =item.nbDep;
             cleanedItem[$localize`:@@Family:Family`] =nbFamily;
