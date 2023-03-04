@@ -339,7 +339,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">385,384</context>
+          <context context-type="linenumber">390,389</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBenefOverview" datatype="html">
@@ -350,16 +350,20 @@
           <context context-type="linenumber">361,360</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="List" datatype="html">
-        <source>List</source>
-        <target>Liste</target>
+      <trans-unit id="BenefListByOrg" datatype="html">
+        <source>Listing of Organisations</source>
+        <target>Tableau par Organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">366,365</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="BenefList" datatype="html">
+        <source>Listing of Beneficiaries</source>
+        <target>Liste des bénéficiaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">388,387</context>
+          <context context-type="linenumber">371,370</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Management" datatype="html">
@@ -367,15 +371,23 @@
         <target>Gestion</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">371,370</context>
+          <context context-type="linenumber">376,375</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">393,392</context>
+          <context context-type="linenumber">398,397</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
           <context context-type="linenumber">170</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="List" datatype="html">
+        <source>List</source>
+        <target>Liste</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">393,392</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuDonations" datatype="html">
@@ -383,7 +395,7 @@
         <target>Donations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">403</context>
+          <context context-type="linenumber">408</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuDonators" datatype="html">
@@ -391,7 +403,7 @@
         <target>Donateurs</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">405</context>
+          <context context-type="linenumber">410</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuGifts" datatype="html">
@@ -399,7 +411,7 @@
         <target>Dons</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">406</context>
+          <context context-type="linenumber">411</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuMailings" datatype="html">
@@ -407,7 +419,7 @@
         <target>Mailings</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">422</context>
+          <context context-type="linenumber">427</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOverview" datatype="html">
@@ -415,7 +427,7 @@
         <target>Sommaire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">433,432</context>
+          <context context-type="linenumber">438,437</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuEntityChanges" datatype="html">
@@ -423,7 +435,7 @@
         <target>MAJ Entités</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">441</context>
+          <context context-type="linenumber">446</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReportOrgs" datatype="html">
@@ -431,7 +443,7 @@
         <target>Organisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">446</context>
+          <context context-type="linenumber">451</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReportBenefs" datatype="html">
@@ -439,11 +451,11 @@
         <target>Bénéficiaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">447</context>
+          <context context-type="linenumber">452</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">454</context>
+          <context context-type="linenumber">459</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReportMovements" datatype="html">
@@ -451,11 +463,11 @@
         <target>Livraisons Vivres</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">448</context>
+          <context context-type="linenumber">453</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">455</context>
+          <context context-type="linenumber">460</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
@@ -463,7 +475,7 @@
         <target>Tableau de bord</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">453</context>
+          <context context-type="linenumber">458</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReports" datatype="html">
@@ -471,7 +483,7 @@
         <target>Rapports</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">460,459</context>
+          <context context-type="linenumber">465,464</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuFEADApplication" datatype="html">
@@ -479,7 +491,7 @@
         <target>Vers la Gestion du Stock</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">471,470</context>
+          <context context-type="linenumber">476,475</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
@@ -487,7 +499,7 @@
         <target>Déconnecter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">485</context>
+          <context context-type="linenumber">490</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReportbyPage" datatype="html">
@@ -2251,7 +2263,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Gender" datatype="html">
@@ -2459,7 +2471,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.html</context>
@@ -2895,7 +2907,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbeneflist/orgbeneflist.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3047,7 +3059,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">43</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependents.component.html</context>
@@ -3095,7 +3107,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependents.component.html</context>
@@ -3151,7 +3163,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Dependents" datatype="html">
@@ -3179,11 +3191,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">48</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Families" datatype="html">
@@ -3203,7 +3215,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbeneflist/orgbeneflist.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3223,7 +3235,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">155</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.html</context>
@@ -3247,7 +3259,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">156</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3267,7 +3279,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">157</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3287,7 +3299,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">158</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3307,7 +3319,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">159</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3327,7 +3339,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">160</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3347,7 +3359,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">161</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3367,7 +3379,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Equivalents" datatype="html">
@@ -3379,7 +3391,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ParentsMale" datatype="html">
@@ -3391,7 +3403,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ParentsFemale" datatype="html">
@@ -3403,10 +3415,10 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="Printeport" datatype="html">
+      <trans-unit id="PrintReport" datatype="html">
         <source>Print this Report</source>
         <target>Imprimer ce rapport</target>
         <context-group purpose="location">
@@ -3415,7 +3427,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbeneflist/orgbeneflist.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OrganisationFilter" datatype="html">
+        <source>Choose Organisation</source>
+        <target>Choisissez l'organisation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="NbDependents" datatype="html">
@@ -3423,7 +3443,7 @@
         <target>Nb de personnes à charge</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BeneficiariesOrgHeader" datatype="html">
@@ -3431,7 +3451,7 @@
         <target>Bénéficiaires de <x id="PH" equiv-text="this.orgName"/> le <x id="PH_1" equiv-text="new Date().toLocaleDateString('fr-FR')"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ExportHistoryReport" datatype="html">
@@ -3755,7 +3775,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbeneflist/orgbeneflist.component.html</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDependentDeleted" datatype="html">
@@ -7435,7 +7455,7 @@
         <target>Localité</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbeneflist/orgbeneflist.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BIRBCode" datatype="html">
@@ -7443,7 +7463,7 @@
         <target>FEAD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbeneflist/orgbeneflist.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgTotalAgreedStatistics" datatype="html">
@@ -7451,7 +7471,7 @@
         <target>Total <x id="PH" equiv-text="this.totalFamilies"/> familles, <x id="PH_1" equiv-text="this.totalPersons"/> personnes,<x id="PH_2" equiv-text="this.totalEq"/> équivalents,<x id="PH_3" equiv-text="this.totalInfants"/> nourrissons,<x id="PH_4" equiv-text="this.totalBabies"/> bébés,<x id="PH_5" equiv-text="this.totalChildren"/> enfants,<x id="PH_6" equiv-text="this.totalTeens"/> adolescents,<x id="PH_7" equiv-text="this.totalYoungAdults"/> jeunes adultes,<x id="PH_8" equiv-text="this.totalAdults"/> adultes,<x id="PH_9" equiv-text="this.totalSeniors"/> séniors</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbeneflist/orgbeneflist.component.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">160</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankOrgsTitleBeneficiariesDepot" datatype="html">
@@ -7459,7 +7479,7 @@
         <target>Bénéficiaires de <x id="PH" equiv-text="this.depotName"/> au <x id="PH_1" equiv-text="new Date().toLocaleDateString('fr-FR')"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbeneflist/orgbeneflist.component.ts</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">167</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankOrgsTitleBeneficiariesBank" datatype="html">
@@ -7467,7 +7487,7 @@
         <target>Bénéficiaires de la banque au <x id="PH" equiv-text="new Date().toLocaleDateString('fr-FR')"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbeneflist/orgbeneflist.component.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserRightsManageBeneficiaries" datatype="html">
@@ -9305,6 +9325,10 @@
       <trans-unit id="BeneficiariesList">
         <source/>
         <target>Liste des bénéficiaires</target>
+      </trans-unit>
+      <trans-unit id="Printeport">
+        <source/>
+        <target>Imprimer ce rapport</target>
       </trans-unit>
     </body>
   </file>

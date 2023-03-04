@@ -1,11 +1,27 @@
 <p-panel>
     <ng-template pTemplate="header">
-        <div class="p-grid">
-            <div class="p-col-12 p-md-9">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-9">
                 <h3 >{{ getTitle() }}</h3>
             </div>
-            <div class="p-col-12 p-md-3">
-                <button i18n="@@Printeport" class="p-button p-text-center"  printSectionId="print-section" printTitle="{{getTitle()}}"  [printStyle]="{td : {'border': 'solid 1px'}, th: {'border': 'solid 1px'}}" ngxPrint>Print this Report</button>
+            <div class="p-field p-col-12 p-md-3">
+                <button i18n="@@PrintReport" class="p-button p-text-center"  printSectionId="print-section" printTitle="{{getTitle()}}"  [printStyle]="{td : {'border': 'solid 1px'}, th: {'border': 'solid 1px'}}" ngxPrint>Print this Report</button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template  pTemplate="content">
+        <div *ngIf="organisations" class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-5">
+                <label for="filteredOrganisation" i18n="@@OrganisationFilter">Choose Organisation</label>
+                <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
+                                 (onSelect)="loadOrganisationBeneficiaries($event);"
+                                 [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">
+                    <ng-template let-organisation pTemplate="item">
+                        <div class="organisation-item">
+                            <div> {{organisation.fullname}} </div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
             </div>
         </div>
     </ng-template>

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Beneficiaire} from '../model/beneficiaire';
-import {AuthState} from '../../auth/reducers';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {map} from 'rxjs/operators';
@@ -10,6 +9,8 @@ import {HttpClient} from '@angular/common/http';
 import {AppState} from '../../reducers';
 import {Organisation} from '../../organisations/model/organisation';
 import {OrganisationEntityService} from '../../organisations/services/organisation-entity.service';
+import {QueryParams} from '@ngrx/data';
+import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
 
 @Component({
     selector: 'app-beneficiaries-list',
@@ -19,9 +20,14 @@ import {OrganisationEntityService} from '../../organisations/services/organisati
 
 export class BeneficiariesListComponent implements OnInit {
     beneficiaires: Beneficiaire[]; // liste des bénéficiaires
+    lienBanque: number;
+    bankShortName: string;
     idOrg: number; // id de l'organisation
     orgName: string; // nom de l'organisation
     booIsLoaded: boolean;
+    organisations: any[];
+    filteredOrganisation: any;
+    filteredOrganisations: any[];
     currentOrganisation: Organisation;
     summaryMessage: string;
     totalParentsMale: number;
@@ -29,6 +35,7 @@ export class BeneficiariesListComponent implements OnInit {
     constructor(
         private beneficiaireHttpService: BeneficiaireHttpService,
         private organisationsService: OrganisationEntityService,
+        private orgsummaryService: OrgSummaryEntityService,
         private authService: AuthService,
         private http: HttpClient,
         private store: Store<AppState>
@@ -38,75 +45,109 @@ export class BeneficiariesListComponent implements OnInit {
     }
     
     ngOnInit(): void {
-        this.booIsLoaded = false;
         this.store
             .pipe(
                 select(globalAuthState),
                 map((authState) => {
-                    this.loadBeneficiaries(authState);
+                    if (!this.booIsLoaded && authState.user) {
+                        switch (authState.user.rights) {
+                            case 'Asso':
+                            case 'Admin_Asso':
+                                this.idOrg = authState.organisation.idDis;
+                                this.orgName = authState.organisation.societe;
+                                this.loadBeneficiaries();
+                                break;
+                            case 'Admin_Banq':
+                            case 'Bank':
+                            case 'Admin_CPAS':
+                                this.lienBanque = authState.banque.bankId;
+                                this.bankShortName = authState.banque.bankShortName;
+                                const  queryOrganisationParms: QueryParams = {'lienBanque': this.lienBanque.toString(), 'gestBen': '1'};
+                               if (authState.user.rights === 'Admin_CPAS' ) {
+                                   queryOrganisationParms['cp'] = authState.organisation.cp;
+                               }
+                                this.orgsummaryService.getWithQuery(queryOrganisationParms)
+                                    .subscribe(organisations => {
+                                        this.organisations =organisations.map((organisation) =>
+                                            Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
+                                        )
+                                        if (this.organisations.length > 0) {
+                                            this.idOrg = this.organisations[0].idDis;
+                                            this.orgName = this.organisations[0].societe;
+                                            this.loadBeneficiaries();
+                                        }
+                                    });
+                                break;
+                            default:
+                        }
+                    }
                 })
             )
             .subscribe();
     }
-    private loadBeneficiaries(authState: AuthState) {
-        if (!this.booIsLoaded && authState.user) {
-            switch (authState.user.rights) {
-                case 'Asso':
-                case 'Admin_Asso':
-                    this.idOrg = authState.organisation.idDis;
-                    this.orgName = authState.organisation.societe;
-                    this.organisationsService.getByKey(this.idOrg).subscribe(
-                        (org: Organisation) => {
-                            if (org) {
-                                this.currentOrganisation = org;
-                                let params = new URLSearchParams();
-                                const benefQueryParams = {'lienDis': this.idOrg.toString(), 'actif': '1'};
-                                for (let key in benefQueryParams) {
-                                    params.set(key, benefQueryParams[key])
-                                }
-                                this.beneficiaireHttpService.getBeneficiaireReport(this.authService.accessToken, params.toString()).subscribe(
-                                    (beneficiaires: any[]) => {
-                                        this.beneficiaires = beneficiaires;
-                                        this.booIsLoaded = true;
-                                        let totalParents = 0;
-                                        let totalDep = 0;
-                                        let totalFamily = 0;
-                                        this.totalParentsMale = 0;
-                                        this.totalParentsFemale = 0;
-                                        beneficiaires.map((item) => {
-                                            let nbParents = 1;
-                                            if (item.nomconj) {
-                                                nbParents = 2;
-                                                if (item.civiliteconj === 1) {
-                                                    this.totalParentsMale++;
-                                                } else {
-                                                    this.totalParentsFemale++;
-                                                }
-                                            }
-                                            item.nbParents = nbParents;
-                                            if (item.civilite === 1) {
-                                                this.totalParentsMale++;
-                                            } else {
-                                                this.totalParentsFemale++;
-                                            }
-                                            totalParents += nbParents;
-                                            totalDep += item.nbDep;
-                                            totalFamily += nbParents + item.nbDep;
-
-                                            item.nbFamily = nbParents + item.nbDep;
-                                        });
-                                        this.summaryMessage = this.createSummaryText(); // no need to show parents male or female
-                                    });
-                            }
-
-                        });
-
-                  
-                    break;
-                default:
-                    this.booIsLoaded = true; // to avoid infinite loop - we should not be here
-            }
+    filterOrganisation(event ) {
+        console.log('filterOrganisation', event);
+        const  queryOrganisationParms: QueryParams =  {'lienBanque': this.lienBanque.toString(), 'gestBen': '1'};
+        if (event && event.query && event.query.length > 0) {
+            console.log('filter content', event.query.toLowerCase());
+            queryOrganisationParms['societe'] = event.query.toLowerCase();
         }
+        this.orgsummaryService.getWithQuery(queryOrganisationParms)
+            .subscribe(filteredOrganisations => {
+                this.filteredOrganisations = filteredOrganisations.map((organisation) =>
+                    Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
+                );
+            });
+    }
+    private loadBeneficiaries() {
+
+        this.organisationsService.getByKey(this.idOrg).subscribe(
+        (org: Organisation) => {
+            if (org) {
+                this.currentOrganisation = org;
+                let params = new URLSearchParams();
+                const benefQueryParams = {'lienDis': this.idOrg.toString(), 'actif': '1'};
+                for (let key in benefQueryParams) {
+                    params.set(key, benefQueryParams[key])
+                }
+                this.beneficiaireHttpService.getBeneficiaireReport( this.authService.accessToken,params.toString()).subscribe(
+                    (beneficiaires: any[]) => {
+                        this.beneficiaires = beneficiaires;
+                        this.booIsLoaded = true;
+                        let totalParents = 0;
+                        let totalDep = 0;
+                        let totalFamily = 0;
+                        this.totalParentsMale = 0;
+                        this.totalParentsFemale = 0;
+                        beneficiaires.map((item) => {
+                            let nbParents = 1;
+                            if (item.nomconj) {
+                                nbParents = 2;
+                                if (item.civiliteconj === 1) {
+                                    this.totalParentsMale++;
+                                } else {
+                                    this.totalParentsFemale++;
+                                }
+                            }
+                            item.nbParents = nbParents;
+                            if (item.civilite === 1) {
+                                this.totalParentsMale++;
+                            } else {
+                                this.totalParentsFemale++;
+                            }
+                            totalParents += nbParents;
+                            totalDep += item.nbDep;
+                            totalFamily += nbParents + item.nbDep;
+
+                            item.nbFamily = nbParents + item.nbDep;
+                        });
+                        this.summaryMessage = this.createSummaryText(); // no need to show parents male or female
+                        this.booIsLoaded = true;
+                    });
+            }
+
+        });
+
     }
     createSummaryText(): string
     { let summaryText = '';
@@ -146,5 +187,11 @@ export class BeneficiariesListComponent implements OnInit {
 
     getTitle() {
         return $localize`:@@BeneficiariesOrgHeader:Beneficiaries of ${this.orgName} at ${new Date().toLocaleDateString('fr-FR')}`;
+    }
+
+    loadOrganisationBeneficiaries(event) {
+        this.idOrg = event.idDis;
+        this.orgName = event.societe;
+        this.loadBeneficiaries();
     }
 }

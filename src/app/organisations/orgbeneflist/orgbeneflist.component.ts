@@ -31,6 +31,7 @@ export class OrgBenefListComponent implements OnInit {
     totalEq: number;
     totalAdults: number;
     totalStatistics: string;
+    title: string;
 
 
     bankName: string;
@@ -74,6 +75,9 @@ export class OrgBenefListComponent implements OnInit {
         if (authState.banque) {
             this.lienBanque = authState.banque.bankId;
             this.orgQueryParams= {'actif': '1','lienBanque': authState.banque.bankId.toString(),'agreed': '1','isDepot': '0'};
+            if (authState.user.rights === 'Admin_CPAS' ) {
+                this.orgQueryParams['cp'] = authState.organisation.cp;
+            }
             this.bankName = authState.banque.bankName;
             this.bankShortName = authState.banque.bankShortName;
             const  queryDepotParms: QueryParams = {};
@@ -85,7 +89,7 @@ export class OrgBenefListComponent implements OnInit {
             queryDepotParms['actif'] = '1';
             this.depotService.getWithQuery(queryDepotParms)
                 .subscribe(depots => {
-                    this.depots = [{ value: null, label: ''}];
+                    this.depots = [{ value: null, label: ' '}];
                     depots.map((depot) =>
                         this.depots.push({value: depot.idDepot, label: depot.nom})
                     );
@@ -93,12 +97,14 @@ export class OrgBenefListComponent implements OnInit {
             this.loadOrganisations();
         }
     }
-    filterDepot(idDepot) {
-        this.depotSelected = idDepot;
+    filterDepot(event) {
+        this.depotSelected = event.value;
 
         if (this.depotSelected) {
-            this.orgQueryParams['lienDepot'] = idDepot;
+            this.depotName = this.depots.find((depot) => depot.value === this.depotSelected).label;
+            this.orgQueryParams['lienDepot'] = this.depotSelected;
         } else {
+            this.depotName = null;
             // delete idDepot entry
             if (this.orgQueryParams.hasOwnProperty('lienDepot')) {
                 delete this.orgQueryParams['lienDepot'];
@@ -143,6 +149,7 @@ export class OrgBenefListComponent implements OnInit {
                 this.organisations= loadedOrganisations;
                 this.totalAdults = this.totalPersons - this.totalInfants - this.totalBabies - this.totalChildren - this.totalTeens - this.totalYoungAdults - this.totalSeniors;
                this.totalStatistics = this.getTotalStatistics();
+                this.title = this.getTitle();
 
               
                 
@@ -156,7 +163,7 @@ export class OrgBenefListComponent implements OnInit {
 
 
     getTitle() {
-        if(this.depotName) {
+        if (this.depotSelected) {
             return $localize`:@@BankOrgsTitleBeneficiariesDepot:Beneficiaries of ${this.depotName} at ${new Date().toLocaleDateString('fr-FR')}`;
         }
          return $localize`:@@BankOrgsTitleBeneficiariesBank:Beneficiaries of the bank at ${new Date().toLocaleDateString('fr-FR')}`;
