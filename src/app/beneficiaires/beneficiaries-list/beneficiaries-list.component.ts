@@ -143,9 +143,6 @@ export class BeneficiariesListComponent implements OnInit {
         return summaryText;
     }
 
-    getPrintTitle() {
-        return $localize`:@@BeneficiariesList:Beneficiaries List`;
-    }
 
     getTitle() {
         return $localize`:@@BeneficiariesOrgHeader:Beneficiaries of ${this.orgName} at ${new Date().toLocaleDateString('fr-FR')}`;

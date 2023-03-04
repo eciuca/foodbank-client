@@ -7,6 +7,8 @@ import {AppState} from '../../reducers';
 import {AuthState} from '../../auth/reducers';
 import {AuthService} from '../../auth/auth.service';
 import {OrganisationHttpService} from '../services/organisation-http.service';
+import {QueryParams} from '@ngrx/data';
+import {DepotEntityService} from '../../depots/services/depot-entity.service';
 
 @Component({
     selector: 'app-orgBeneflist',
@@ -35,9 +37,14 @@ export class OrgBenefListComponent implements OnInit {
     lienBanque: number;
     bankShortName: string;
 
+    depots: any[];
+    depotName: string;
+    depotSelected: string;
+
     orgQueryParams: any;
 
     constructor( private organisationHttpService: OrganisationHttpService,
+                 private depotService: DepotEntityService,
                 private authService: AuthService,
                 private store: Store<AppState>
     ) {
@@ -66,11 +73,38 @@ export class OrgBenefListComponent implements OnInit {
     private initializeDependingOnUserRights(authState: AuthState) {
         if (authState.banque) {
             this.lienBanque = authState.banque.bankId;
-            this.orgQueryParams= {'actif': '1','lienBanque': authState.banque.bankId.toString(),'agreed': '1'};
+            this.orgQueryParams= {'actif': '1','lienBanque': authState.banque.bankId.toString(),'agreed': '1','isDepot': '0'};
             this.bankName = authState.banque.bankName;
             this.bankShortName = authState.banque.bankShortName;
+            const  queryDepotParms: QueryParams = {};
+            queryDepotParms['offset'] = '0';
+            queryDepotParms['rows'] = '999';
+            queryDepotParms['sortField'] = 'idDepot';
+            queryDepotParms['sortOrder'] = '1';
+            queryDepotParms['idCompany'] = this.bankShortName;
+            queryDepotParms['actif'] = '1';
+            this.depotService.getWithQuery(queryDepotParms)
+                .subscribe(depots => {
+                    this.depots = [{ value: null, label: ''}];
+                    depots.map((depot) =>
+                        this.depots.push({value: depot.idDepot, label: depot.nom})
+                    );
+                });
             this.loadOrganisations();
         }
+    }
+    filterDepot(idDepot) {
+        this.depotSelected = idDepot;
+
+        if (this.depotSelected) {
+            this.orgQueryParams['lienDepot'] = idDepot;
+        } else {
+            // delete idDepot entry
+            if (this.orgQueryParams.hasOwnProperty('lienDepot')) {
+                delete this.orgQueryParams['lienDepot'];
+            }
+        }
+        this.loadOrganisations();
     }
 
     loadOrganisations(): void {
@@ -122,7 +156,10 @@ export class OrgBenefListComponent implements OnInit {
 
 
     getTitle() {
-         return $localize`:@@BankOrgsTitleBeneficiaries:Beneficiaries of Agreed Organisations at ${new Date().toLocaleDateString('fr-FR')}`;
+        if(this.depotName) {
+            return $localize`:@@BankOrgsTitleBeneficiariesDepot:Beneficiaries of ${this.depotName} at ${new Date().toLocaleDateString('fr-FR')}`;
+        }
+         return $localize`:@@BankOrgsTitleBeneficiariesBank:Beneficiaries of the bank at ${new Date().toLocaleDateString('fr-FR')}`;
     }
 }
 

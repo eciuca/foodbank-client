@@ -4,6 +4,14 @@
             <div class="p-col-12 p-md-9">
                 <h3 >{{ getTitle() }}</h3>
             </div>
+            <div *ngIf="!depotName" class="p-field p-col-12 p-md-2">
+                <label i18n="@@OrgDepot" for="depots">Depot</label>
+                <p-dropdown id ="depots" [options]="depots" (onChange)="filterDepot($event.value)"  >
+                    <ng-template let-option pTemplate="item">
+                        <span>{{option.label}}</span>
+                    </ng-template>
+                </p-dropdown>
+            </div>
             <div class="p-col-12 p-md-3">
                 <button i18n="@@Printeport" class="p-button p-text-center"  printSectionId="print-section" printTitle="{{getTitle()}}"  [printStyle]="{td : {'border': 'solid 1px'}, th: {'border': 'solid 1px'}}" ngxPrint>Print this Report</button>
             </div>
