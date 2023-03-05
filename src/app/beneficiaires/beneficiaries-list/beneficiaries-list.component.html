@@ -5,7 +5,11 @@
                 <h3 >{{ getTitle() }}</h3>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <button i18n="@@PrintReport" class="p-button p-text-center"  printSectionId="print-section" printTitle="{{getTitle()}}"  [printStyle]="{td : {'border': 'solid 1px'}, th: {'border': 'solid 1px'}}" ngxPrint>Print this Report</button>
+                <label i18n="@@ShowSimpler" for="booShowSimpler">Vue Simplifiée ?</label>
+                <p-checkbox  [(ngModel)]="booShowSimpler" binary="true" name="booShowSimpler" id="booShowSimpler" ></p-checkbox>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+                <button i18n="@@PrintReport" class="p-button p-text-center"  printSectionId="print-section" printTitle="{{orgName}}"  [printStyle]="{td : {'border': 'solid 1px'}, th: {'border': 'solid 1px'}}" ngxPrint>Print this Report</button>
             </div>
         </div>
     </ng-template>
@@ -29,7 +33,7 @@
 
 <p-table id="print-section" #dt [value]="beneficiaires" styleClass="p-datatable-gridlines" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="caption">
-        <div class="table-header">
+        <div *ngIf ="!booShowSimpler" class="table-header">
             <div class="p-fluid p-formgrid p-grid">
                 <div *ngIf="summaryMessage" class="p-field p-col-12 p-md-12 p-text-bold">
                     {{summaryMessage}}
@@ -39,20 +43,21 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th i18n="@@InternalId">Internal ID</th>
+            <th *ngIf ="!booShowSimpler" i18n="@@InternalId">Internal ID</th>
             <th i18n="@@Name" >Name</th>
             <th i18n="@@Address" >Address</th>
-            <th i18n="@@BirthDate">Birth Date</th>
-            <th i18n="@@Parents">Parents</th>
-            <th i18n="@@NbDependents">Nb Dependents</th>
-            <th i18n="@@Family">Family</th>
+            <th i18n="@@Tel" >Tel</th>
+            <th *ngIf ="!booShowSimpler" i18n="@@BirthDate">Birth Date</th>
+            <th *ngIf ="!booShowSimpler" i18n="@@Parents">Parents</th>
+            <th *ngIf ="!booShowSimpler" i18n="@@NbDependents">Nb Dependents</th>
+            <th *ngIf ="!booShowSimpler" i18n="@@Family">Family</th>
         </tr>
 
     </ng-template>
 
     <ng-template pTemplate="body" let-beneficiaire>
         <tr>
-            <td>
+            <td *ngIf ="!booShowSimpler">
                 {{beneficiaire.idInt}}
             </td>
             <td >
@@ -63,15 +68,18 @@
                 {{beneficiaire.adresse}} {{beneficiaire.cp}} {{beneficiaire.localite}}
             </td>
             <td>
+                {{beneficiaire.gsm}} {{beneficiaire.tel}}
+            </td>
+            <td *ngIf ="!booShowSimpler">
                 {{beneficiaire.daten}}
             </td>
-            <td>
+            <td *ngIf ="!booShowSimpler">
                 {{beneficiaire.nbParents}}
             </td>
-            <td>
+            <td *ngIf ="!booShowSimpler">
                 {{beneficiaire.nbDep}}
             </td>
-            <td>
+            <td *ngIf ="!booShowSimpler">
                 {{beneficiaire.nbFamily}}
             </td>
         </tr>

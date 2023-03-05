@@ -32,6 +32,7 @@ export class BeneficiariesListComponent implements OnInit {
     summaryMessage: string;
     totalParentsMale: number;
     totalParentsFemale: number;
+    booShowSimpler: boolean;
     constructor(
         private beneficiaireHttpService: BeneficiaireHttpService,
         private organisationsService: OrganisationEntityService,
@@ -42,6 +43,7 @@ export class BeneficiariesListComponent implements OnInit {
     ) {
         this.beneficiaires = [];
         this.booIsLoaded = false;
+        this.booShowSimpler = false;
     }
     
     ngOnInit(): void {
