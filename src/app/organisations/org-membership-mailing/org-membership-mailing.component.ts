@@ -51,6 +51,7 @@ export class OrgMembershipMailingComponent implements OnInit {
     cotYears: any[];
   mailing: Mailing;
     mailingSubject: string;
+    mailingLanguage: string;
     mailingText: string;
     // variables for file upload
     attachmentFileNames: string[];
@@ -151,6 +152,7 @@ export class OrgMembershipMailingComponent implements OnInit {
       this.due = Math.round(cotreal * this.organisation.nPers) / 100;
       cotreal = Math.round(cotreal) / 100 ;
       if (this.organisation.langue === 2 ) {
+          this.mailingLanguage = 'nl';
           this.mailingSubject = `Bijdrage voor ${this.cotYear} te betalen aan de Voedselbank` ;
           if (this.isYearlyMail) {
               this.typeMembership = 'jaarlijkse ledenbijdrage';
@@ -166,6 +168,7 @@ export class OrgMembershipMailingComponent implements OnInit {
           this.mailingText += `Adres: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
           this.mailingText += '<br><br><i>Nota: Factuur te verkrijgen op aanvraag</i>';
       } else {
+          this.mailingLanguage = 'fr';
           this.mailingSubject = `Cotisation ${this.cotYear} payable à la Banque Alimentaire - Note de débit` ;
           this.typeMembership = 'cotisation annuelle';
           if (this.isYearlyMail) {
@@ -246,7 +249,7 @@ export class OrgMembershipMailingComponent implements OnInit {
                 this.mailing.subject = this.mailingSubject;
                 this.mailing.from = this.bankMail;
                 this.mailing.to = mailListArray.join(',');
-                // this.mailing.bodyText = 'Hello World';
+                this.mailing.language=this.mailingLanguage;
                 this.mailing.bodyText = this.mailingText;
                 this.mailing.attachmentFileNames = this.attachmentFileNames.toString();
                 this.mailingService.add(this.mailing)

@@ -39,6 +39,7 @@ export class MailingsComponent implements OnInit {
   bankName: string;
   userId: string;
   userName: string;
+  userLanguage: string;
   senderFullEmail: string;
   orgId: number;
   orgName: string;
@@ -166,6 +167,7 @@ export class MailingsComponent implements OnInit {
       this.bankName = authState.banque.bankName;
       this.userId= authState.user.idUser;
       this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
+      this.userLanguage = authState.user.idLanguage;
       this.senderFullEmail = `${authState.user.membrePrenom} ${authState.user.membreNom}<${authState.user.membreEmail}>` ;
       this.filterBase = {'actif': '1', isDepot: '0'};
       switch (authState.user.rights) {
@@ -273,7 +275,7 @@ export class MailingsComponent implements OnInit {
         this.mailing.subject = this.mailingSubject;
         this.mailing.from = this.senderFullEmail;
         this.mailing.to = mailListArray.join(',');
-        // this.mailing.bodyText = 'Hello World';
+        this.mailing.language = this.userLanguage;
         this.mailing.bodyText = this.mailingText;
         this.mailing.attachmentFileNames = this.attachmentFileNames.toString();
         this.mailing.bccMode = this.bccMode;
