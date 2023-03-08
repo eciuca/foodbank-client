@@ -12,7 +12,7 @@ import {globalAuthState} from '../../../auth/auth.selectors';
 import {NgForm} from '@angular/forms';
 import {Donateur} from '../../model/donateur';
 import {DonateurEntityService} from '../../services/donateur-entity.service';
-
+import {AuditChangeEntityService} from '../../../audits/services/auditChange-entity.service';
 @Component({
   selector: 'app-don',
   templateUrl: './don.component.html',
@@ -25,6 +25,8 @@ export class DonComponent implements OnInit {
   filteredDonateurs: Donateur[];
   filterDonateurBase: any;
   lienBanque: number;
+  userId: string;
+  userName: string;
   @Output() onDonUpdate = new EventEmitter<Don>();
   @Output() onDonCreate = new EventEmitter<Don>();
   @Output() onDonDelete = new EventEmitter<Don>();
@@ -37,6 +39,7 @@ export class DonComponent implements OnInit {
   constructor(
       private donsService: DonEntityService,
       private donateursService: DonateurEntityService,
+      private auditChangeEntityService: AuditChangeEntityService,
       private store: Store<AppState>,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
@@ -78,6 +81,8 @@ export class DonComponent implements OnInit {
             map((authState) => {
               if (authState.user) {
                 this.lienBanque = authState.banque.bankId;
+                this.userId= authState.user.idUser;
+                this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
                 this.filterDonateurBase = { 'lienBanque': authState.banque.bankId};
                 switch (authState.user.rights) {
                   case 'Bank':
@@ -109,6 +114,8 @@ export class DonComponent implements OnInit {
             .subscribe(() => {
                   this.messageService.add(myMessage);
                   this.onDonDelete.emit(don);
+                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Don',
+                      don.donateurNom + ' ' + don.donateurPrenom, 'Delete' );
                 },
                 (dataserviceerrorFn: () => DataServiceError) => { 
                     const dataserviceerror = dataserviceerrorFn();
@@ -138,6 +145,8 @@ export class DonComponent implements OnInit {
                   detail: `The don ${modifiedDon.donateurNom} ${modifiedDon.donateurPrenom}  was updated`
                 });
                 this.onDonUpdate.emit(modifiedDon);
+                this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Don',
+                    modifiedDon.donateurNom + ' ' + modifiedDon.donateurPrenom, 'Update' );
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
                 const dataserviceerror = dataserviceerrorFn();
@@ -157,6 +166,8 @@ export class DonComponent implements OnInit {
                   detail: `The don ${newDon.donateurNom} ${newDon.donateurPrenom}  has been created`
                 });
                 this.onDonCreate.emit(newDon);
+                this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Don',
+                    newDon.donateurNom + ' ' + newDon.donateurPrenom, 'Create' );
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
                 const dataserviceerror = dataserviceerrorFn();

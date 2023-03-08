@@ -10,6 +10,7 @@ import {enmCountry} from '../../../shared/enums';
 import {map} from 'rxjs/operators';
 import {globalAuthState} from '../../../auth/auth.selectors';
 import {NgForm} from '@angular/forms';
+import {AuditChangeEntityService} from '../../../audits/services/auditChange-entity.service';
 
 @Component({
   selector: 'app-donateur',
@@ -20,6 +21,8 @@ export class DonateurComponent implements OnInit {
   @ViewChild('donateurForm') myform: NgForm;
   @Input() donateurId$: Observable<number>;
   lienBanque: number;
+  userId: string;
+  userName: string;
   @Output() onDonateurUpdate = new EventEmitter<Donateur>();
   @Output() onDonateurCreate = new EventEmitter<Donateur>();
   @Output() onDonateurDelete = new EventEmitter<Donateur>();
@@ -31,6 +34,7 @@ export class DonateurComponent implements OnInit {
   countries: any[];
   constructor(
       private donateursService: DonateurEntityService,
+      private auditChangeEntityService: AuditChangeEntityService,
       private store: Store<AppState>,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
@@ -64,6 +68,8 @@ export class DonateurComponent implements OnInit {
             map((authState) => {
               if (authState.user) {
                 this.lienBanque = authState.banque.bankId;
+                  this.userId= authState.user.idUser;
+                  this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
                 switch (authState.user.rights) {
                   case 'Bank':
                     break;
@@ -94,6 +100,8 @@ export class DonateurComponent implements OnInit {
             .subscribe(() => {
                   this.messageService.add(myMessage);
                   this.onDonateurDelete.emit(donateur);
+                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Donateur',
+                        donateur.nom + ' ' + donateur.prenom, 'Delete' );
                 },
                 (dataserviceerrorFn: () => DataServiceError) => { 
                     const dataserviceerror = dataserviceerrorFn();
@@ -120,6 +128,8 @@ export class DonateurComponent implements OnInit {
                   detail: `The donateur ${modifiedDonateur.nom} ${modifiedDonateur.prenom}  was updated`
                 });
                 this.onDonateurUpdate.emit(modifiedDonateur);
+                this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Donateur',
+                      modifiedDonateur.nom + ' ' + modifiedDonateur.prenom, 'Update' );
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
                 const dataserviceerror = dataserviceerrorFn();
@@ -140,6 +150,8 @@ export class DonateurComponent implements OnInit {
                   detail: `The donateur ${newDonateur.nom} ${newDonateur.prenom}  has been created`
                 });
                 this.onDonateurCreate.emit(newDonateur);
+                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Donateur',
+                      newDonateur.nom + ' ' + newDonateur.prenom, 'Create' );
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
                 const dataserviceerror = dataserviceerrorFn();

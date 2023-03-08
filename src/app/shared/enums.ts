@@ -191,6 +191,8 @@ export let enmDbChangeEntities = [
     {label: $localize`:@@DbChangeEntityBank:Bank` , value: 'Bank'},
     {label: $localize`:@@DbChangeEntityDepot:Depot` , value: 'Depot'},
     {label: $localize`:@@DbChangeEntityClient:Client` , value: 'Client'},
+    {label: 'Donateur' , value: 'Donateur'},
+    {label: $localize`:@@DbChangeEntityGift:Gift` , value: 'Don'},
     {label: 'Email' , value: 'Email'},
 
 ];
