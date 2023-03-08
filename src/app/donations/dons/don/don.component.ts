@@ -163,11 +163,11 @@ export class DonComponent implements OnInit {
                 this.messageService.add({
                   severity: 'success',
                   summary: 'Creation',
-                  detail: `The don ${newDon.donateurNom} ${newDon.donateurPrenom}  has been created`
+                  detail: `The don ${modifiedDon.donateurNom} ${modifiedDon.donateurPrenom}  has been created`
                 });
                 this.onDonCreate.emit(newDon);
                 this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Don',
-                    newDon.donateurNom + ' ' + newDon.donateurPrenom, 'Create' );
+                    modifiedDon.donateurNom + ' ' + modifiedDon.donateurPrenom, 'Create' );
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
                 const dataserviceerror = dataserviceerrorFn();

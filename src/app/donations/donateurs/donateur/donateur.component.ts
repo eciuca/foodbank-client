@@ -147,11 +147,11 @@ export class DonateurComponent implements OnInit {
                 this.messageService.add({
                   severity: 'success',
                   summary: 'Creation',
-                  detail: `The donateur ${newDonateur.nom} ${newDonateur.prenom}  has been created`
+                  detail: `The donateur ${modifiedDonateur.nom} ${modifiedDonateur.prenom}  has been created`
                 });
                 this.onDonateurCreate.emit(newDonateur);
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Donateur',
-                      newDonateur.nom + ' ' + newDonateur.prenom, 'Create' );
+                      modifiedDonateur.nom + ' ' + modifiedDonateur.prenom, 'Create' );
               },
               (dataserviceerrorFn: () => DataServiceError) => { 
                 const dataserviceerror = dataserviceerrorFn();
