@@ -623,7 +623,7 @@ export class BeneficiariesReportComponent implements OnInit {
                           reportDataSetsFamily[0].data.push(0);
                       }
                   }
-                  const dataIndex = reportLabels.length;
+                  const dataIndex = reportLabels.length - 1;
                   reportDataSetsPerson[bankOptionIndex].data[dataIndex] = this.populationRecords[i].nPers;
                   reportDataSetsFamily[bankOptionIndex].data[dataIndex] = this.populationRecords[i].nFam;
               }
