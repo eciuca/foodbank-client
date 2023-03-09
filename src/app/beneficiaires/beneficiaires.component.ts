@@ -342,6 +342,13 @@ export class BeneficiairesComponent implements OnInit {
           let totalParentsFemale = 0;
           beneficiaires.map((item) => {
             let nbParents = 1;
+
+            if (item.civilite === 1) {
+                totalParentsMale++;
+            }
+            else {
+                totalParentsFemale++;
+            }
             if (item.nomconj) {
               nbParents =2;
               if (item.civiliteconj === 1) {
@@ -351,17 +358,10 @@ export class BeneficiairesComponent implements OnInit {
                 totalParentsFemale++;
               }
             }
-            if (item.civilite === 1) {
-                totalParentsMale++;
-            }
-            else {
-                totalParentsFemale++;
-            }
             totalParents += nbParents;
             totalDep += item.nbDep;
-            totalFamily += nbParents + item.nbDep;
+            totalFamily+= (item.nbDep +1);
 
-            const nbFamily = nbParents + item.nbDep;
             const cleanedItem = {};
             cleanedItem[$localize`:@@InternalId:Internal ID`] = item.idInt;
             cleanedItem[$localize`:@@Gender:Gender`] = labelCivilite(item.civilite);
@@ -378,11 +378,11 @@ export class BeneficiairesComponent implements OnInit {
             cleanedItem[$localize`:@@Gsm:Gsm`] =item.gsm;
             cleanedItem[$localize`:@@Email:E-mail`] =item.email;
             if (this.idOrg === 0) {
-              cleanedItem[$localize`:@@Suspect:Suspect`] = this.getSuspectStatus(item.coeff);
+              cleanedItem[$localize`:@@Coeff:Coeff`] = this.getSuspectStatus(item.coeff);
             }
             cleanedItem[$localize`:@@Parents:Parents`] =nbParents;
             cleanedItem[$localize`:@@Dependents:Dependents`] =item.nbDep;
-            cleanedItem[$localize`:@@Family:Family`] =nbFamily;
+            cleanedItem[$localize`:@@Family:Family`] =(item.nbDep + 1)
             cleanedList.push( cleanedItem);
           });
             cleanedList.push({}); // add empty line

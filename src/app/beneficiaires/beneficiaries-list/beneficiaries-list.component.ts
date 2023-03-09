@@ -139,9 +139,9 @@ export class BeneficiariesListComponent implements OnInit {
                             }
                             totalParents += nbParents;
                             totalDep += item.nbDep;
-                            totalFamily += nbParents + item.nbDep;
+                            totalFamily += (item.nbDep +1);
 
-                            item.nbFamily = nbParents + item.nbDep;
+                            item.nbFamily = item.nbDep +1;
                         });
                         this.summaryMessage = this.createSummaryText(); // no need to show parents male or female
                         this.booIsLoaded = true;
