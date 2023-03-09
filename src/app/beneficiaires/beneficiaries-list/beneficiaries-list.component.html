@@ -48,7 +48,7 @@
             <th i18n="@@Address" >Address</th>
             <th i18n="@@Tel" >Tel</th>
             <th *ngIf ="!booShowSimpler" i18n="@@BirthDate">Birth Date</th>
-            <th *ngIf ="!booShowSimpler" i18n="@@Parents">Parents</th>
+            <th *ngIf ="!booShowSimpler" i18n="@@Couple?">Couple?</th>
             <th *ngIf ="!booShowSimpler" i18n="@@NbDependents">Nb Dependents</th>
             <th *ngIf ="!booShowSimpler" i18n="@@Family">Family</th>
         </tr>
@@ -74,7 +74,7 @@
                 {{beneficiaire.daten}}
             </td>
             <td *ngIf ="!booShowSimpler">
-                {{beneficiaire.nbParents}}
+                {{labelParents(beneficiaire.nbParents)}}
             </td>
             <td *ngIf ="!booShowSimpler">
                 {{beneficiaire.nbDep}}

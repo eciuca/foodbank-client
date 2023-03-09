@@ -196,4 +196,14 @@ export class BeneficiariesListComponent implements OnInit {
         this.orgName = event.societe;
         this.loadBeneficiaries();
     }
+
+    labelParents(nbParents: any) {
+        if (nbParents === 1) {
+            return $localize`:@@Single:Single`;
+        }
+        else {
+            return $localize`:@@Couple:Couple`;
+        }
+
+    }
 }
