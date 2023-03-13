@@ -36,6 +36,8 @@ import {AuditChangeEntityService} from '../audits/services/auditChange-entity.se
 import {DepotsDataService} from '../depots/services/depots-data.service';
 import {DepotEntityService} from '../depots/services/depot-entity.service';
 import { DropdownModule } from 'primeng/dropdown';
+import {CpassDataService} from '../cpass/services/cpass-data.service';
+import {CpasEntityService} from '../cpass/services/cpas-entity.service';
 
 const routes: Routes = [
   { path: '',
@@ -83,6 +85,8 @@ const routes: Routes = [
         OrgSummaryEntityService,
         DepotsDataService,
         DepotEntityService,
+        CpassDataService,
+        CpasEntityService,
         AuditChangesDataService,
         AuditChangeEntityService,
         ConfirmationService
@@ -97,6 +101,7 @@ export class UsersModule {
       private banquesDataService: BanquesDataService,
       private orgSummariesDataService: OrgSummariesDataService,
       private depotsDataService: DepotsDataService,
+      private cpassDataService: CpassDataService,
       private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
@@ -105,6 +110,7 @@ export class UsersModule {
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
     entityDataService.registerService('Depot', depotsDataService);
+    entityDataService.registerService('Cpas', cpassDataService);
     entityDataService.registerService('AuditChange', auditChangesDataService);
   }
 

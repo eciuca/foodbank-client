@@ -93,10 +93,13 @@ export let enmUserRolesBankAsso = [
     {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
     {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
     {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleCPASAdmin:CPAS Admin`, value: 'Admin_CPAS' },
+    {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'}
 ];
 export let enmUserRolesBank = [
     {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
     {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleCPASAdmin:CPAS Admin`, value: 'Admin_CPAS' },
     {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'}
 ];
 export let enmUserRolesAsso = [

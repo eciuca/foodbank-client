@@ -352,7 +352,7 @@ export class AppComponent implements OnInit {
 
         }
           // Add Beneficiaries
-        if (['Admin_Banq', 'Admin_CPAS'].includes(authState.user.rights) || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
+        if (['Admin_Banq'].includes(authState.user.rights) || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
                     this.menuLoggedInItems.push(
                         {
                             label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',
@@ -382,6 +382,27 @@ export class AppComponent implements OnInit {
                     );
 
             }
+        if (['Admin_CPAS'].includes(authState.user.rights)) {
+            this.menuLoggedInItems.push(
+                {
+                    label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',
+                    items: [
+
+                        {
+                            label: $localize`:@@BenefList:Listing of Beneficiaries`,
+                            icon: 'pi pi-fw pi-heart',
+                            routerLink: ['/beneficiaires/list']
+                        },
+                        {
+                            label: $localize`:@@Management:Management`,
+                            icon: 'pi pi-fw pi-heart',
+                            routerLink: ['/beneficiaires']
+                        }
+                    ]
+                }
+            );
+        }
+
         if (( authState.user.rights === 'Admin_Asso' && authState.organisation.gestBen)
             || (authState.user.rights === 'Asso' && authState.organisation.gestBen && authState.user.gestBen)
         ) {

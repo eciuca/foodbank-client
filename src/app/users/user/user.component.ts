@@ -23,6 +23,7 @@ import {combineLatest, Observable, of} from 'rxjs';
 import {Organisation} from '../../organisations/model/organisation';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 import {DepotEntityService} from '../../depots/services/depot-entity.service';
+import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
 
 @Component({
   selector: 'app-user',
@@ -55,11 +56,14 @@ export class UserComponent implements OnInit {
   rights: any[];
     filterMemberBase: any;
     lienDepot: number;
+    lienCpas: number;
     depotName: string;
+    cpasName: string;
     isAdmin: boolean;
     title: string;
     orgName: string;
     depotOptions: any[];
+    cpasOptions: any[];
     loggedInUserId: string;
     loggedInUserName: string;
     loggedInUserRights: string;
@@ -68,6 +72,7 @@ export class UserComponent implements OnInit {
       private usersService: UserEntityService,
       private membresService: MembreEntityService,
       private depotService: DepotEntityService,
+      private cpasService: CpasEntityService,
       private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
       private router: Router,
@@ -86,7 +91,9 @@ export class UserComponent implements OnInit {
       this.idOrg = 0;
       this.idCompany = '';
       this.lienDepot = 0;
+      this.lienCpas = 0;
       this.depotName = '';
+      this.cpasName = '';
       this.booIsOrganisation = false;
       this.booIsCreate = false;
       this.title = '';
@@ -124,6 +131,7 @@ export class UserComponent implements OnInit {
                         }
                         this.title = $localize`:@@BankUserExisting:User ${user.idUser} for bank ${this.user.idCompany}`;
                         this.loadDepotOptions(this.user.idCompany);
+                        this.loadCpasOptions();
                     }
                     this.booIsCreate = false;
                     this.membresService.getByKey(user.lienBat)
@@ -148,6 +156,7 @@ export class UserComponent implements OnInit {
                         else {
                             this.user.idOrg = 0;
                             this.loadDepotOptions(this.user.idCompany);
+                            this.loadCpasOptions();
                             this.rights = enmUserRolesBank;
                             this.title =  $localize`:@@BankUserNew1:New User for bank ${this.currentFilteredBankShortName} `;
                             if (this.currentFilteredBankShortName == 'FBBA') {
@@ -185,6 +194,7 @@ export class UserComponent implements OnInit {
                                 } else {
                                     this.rights = enmUserRolesBank;
                                     this.loadDepotOptions(this.idCompany);
+                                    this.loadCpasOptions();
                                     this.title = $localize`:@@BankUserNew1:New User for bank ${this.idCompany} `;
                                 }
                             }
@@ -205,6 +215,7 @@ export class UserComponent implements OnInit {
                       this.loggedInUserName = authState.user.userName;
                       this.loggedInUserId = authState.user.idUser;
                       this.loggedInUserRights = authState.user.rights
+                      this.lienCpas = authState.user.lienCpas;
                       this.membresService.getByKey(authState.user.lienBat)
                           .subscribe(
                           membre => {
@@ -397,6 +408,22 @@ export class UserComponent implements OnInit {
                 );
             });
     }
+    loadCpasOptions() {
+        const  queryCpasParms: QueryParams = {};
+        queryCpasParms['offset'] = '0';
+        queryCpasParms['rows'] = '999';
+        queryCpasParms['sortField'] = 'cpasZip';
+        queryCpasParms['sortOrder'] = '1';
+        queryCpasParms['lienBanque'] = this.lienBanque.toString();
+        queryCpasParms['actif'] = '1';
+        this.cpasService.getWithQuery(queryCpasParms)
+            .subscribe(cpases => {
+                this.cpasOptions = [];
+                cpases.map((cpas) =>
+                    this.cpasOptions.push({value: cpas.cpasId, label: cpas.cpasName})
+                );
+            });
+    }
     updateUserInfoFromMember(user:User,membre:Membre) {
         user.userName = membre.nom + ' ' + membre.prenom;
         user.email = membre.batmail;
@@ -465,5 +492,9 @@ export class UserComponent implements OnInit {
     }
     setSelectedMembre(membre: Membre) {
         this.selectedMembre = membre;
+    }
+
+    generateTooltipAssociatedCpas() {
+        return $localize`:@@OrgToolTipAssociatedCpas:Which is the Cpas the user manages?`;
     }
 }

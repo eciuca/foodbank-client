@@ -47,6 +47,7 @@ export class BeneficiairesComponent implements OnInit {
   bankName: string;
   bankShortName: string;
   idOrg: number;
+  lienCpas: number;
   orgName: string; // if logging in with asso role we need to display the organisation
   YNOptions:  any[];
   duplicatesOptions: any[];
@@ -71,6 +72,7 @@ export class BeneficiairesComponent implements OnInit {
     this.bankShortName = '';
     this.idOrg = 0;
     this.orgName = '';
+    this.lienCpas = 0;
     this.filteredOrganisationsPrepend = [
           {idDis: null, fullname: $localize`:@@organisations:Organisations` },
     ];
@@ -249,9 +251,8 @@ export class BeneficiairesComponent implements OnInit {
               });
           break;
         case 'Admin_CPAS':
-          this.filterBase = { 'cp': authState.organisation.cp};
-          this.idOrg = authState.organisation.idDis;
-          this.orgName = authState.organisation.idDis + ' ' + authState.organisation.societe;
+          this.filterBase = { 'lienCpas': authState.user.lienCpas};
+          this.lienCpas = authState.user.lienCpas;
           break;
         default:
       }
@@ -261,6 +262,9 @@ export class BeneficiairesComponent implements OnInit {
   filterOrganisation(event ) {
     const  queryOrganisationParms: QueryParams = {};
     queryOrganisationParms['lienBanque'] = this.bankid.toString();
+    if (this.lienCpas >0) {
+        queryOrganisationParms['lienCpas'] = this.lienCpas.toString();
+    }
     if (event.query.length > 0) {
       queryOrganisationParms['societe'] = event.query.toLowerCase();
     }

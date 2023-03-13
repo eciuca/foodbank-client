@@ -21,6 +21,7 @@ import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-e
 export class BeneficiariesListComponent implements OnInit {
     beneficiaires: Beneficiaire[]; // liste des bénéficiaires
     lienBanque: number;
+    lienCpas: number;
     bankShortName: string;
     idOrg: number; // id de l'organisation
     orgName: string; // nom de l'organisation
@@ -44,6 +45,7 @@ export class BeneficiariesListComponent implements OnInit {
         this.beneficiaires = [];
         this.booIsLoaded = false;
         this.booShowSimpler = false;
+        this.lienCpas = 0;
     }
     
     ngOnInit(): void {
@@ -64,9 +66,12 @@ export class BeneficiariesListComponent implements OnInit {
                             case 'Admin_CPAS':
                                 this.lienBanque = authState.banque.bankId;
                                 this.bankShortName = authState.banque.bankShortName;
+                                if (authState.user.rights === 'Admin_CPAS' ) {
+                                    this.lienCpas = authState.user.lienCpas;
+                                }
                                 const  queryOrganisationParms: QueryParams = {'lienBanque': this.lienBanque.toString(), 'gestBen': '1'};
                                if (authState.user.rights === 'Admin_CPAS' ) {
-                                   queryOrganisationParms['cp'] = authState.organisation.cp;
+                                   queryOrganisationParms['cp'] = this.lienCpas.toString();
                                }
                                 this.orgsummaryService.getWithQuery(queryOrganisationParms)
                                     .subscribe(organisations => {
@@ -90,6 +95,10 @@ export class BeneficiariesListComponent implements OnInit {
     filterOrganisation(event ) {
         console.log('filterOrganisation', event);
         const  queryOrganisationParms: QueryParams =  {'lienBanque': this.lienBanque.toString(), 'gestBen': '1'};
+        if (this.lienCpas >0) {
+            queryOrganisationParms['lienCpas'] = this.lienCpas.toString();
+        }
+
         if (event && event.query && event.query.length > 0) {
             console.log('filter content', event.query.toLowerCase());
             queryOrganisationParms['societe'] = event.query.toLowerCase();
