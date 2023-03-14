@@ -251,6 +251,7 @@ export class BeneficiairesComponent implements OnInit {
               });
           break;
         case 'Admin_CPAS':
+          console.log('Admin CPAS', authState.user);
           this.filterBase = { 'lienCpas': authState.user.lienCpas};
           this.lienCpas = authState.user.lienCpas;
           break;
@@ -330,6 +331,9 @@ export class BeneficiairesComponent implements OnInit {
       }
       if(this.bankid > 0) {
         excelQueryParams['lienBanque'] = this.bankid;
+      }
+      if (this.lienCpas >0) {
+        excelQueryParams['lienCpas'] = this.lienCpas.toString();
       }
     }
     let params = new URLSearchParams();

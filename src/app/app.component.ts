@@ -303,7 +303,7 @@ export class AppComponent implements OnInit {
                     ]
                 }
             );
-        } else if ( ['Asso', 'Admin_Asso','Admin_CPAS'].includes(authState.user.rights)) {
+        } else if ( ['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
             if (authState.organisation && authState.organisation.depyN === true) {
                 // organisation is depot
                 this.menuLoggedInItems.push(
@@ -318,7 +318,7 @@ export class AppComponent implements OnInit {
         }
        
         // handle members and users
-        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso','admin','Admin_FBBA','Bank_FBBA','Admin_CPAS'].includes(authState.user.rights)) {
+        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso','admin','Admin_FBBA','Bank_FBBA'].includes(authState.user.rights)) {
             const commonSubItems = [
                 {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
                 {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},

@@ -50,8 +50,8 @@
                 <p-dropdown [options]="depotOptions" id="depot" name="depot" [ngModel]="user.depot"></p-dropdown>
             </div>
             <div *ngIf="user.rights =='Admin_CPAS'" pTooltip="{{generateTooltipAssociatedCpas()}}" class="p-field p-col-12 p-md-6">
-                <label i18n="@@UserCPAS" for="cpas">Associated CPAS?</label>
-                <p-dropdown [options]="cpasOptions" id="cpas" name="cpas" [ngModel]="user.lienCpas"></p-dropdown>
+                <label i18n="@@UserCPAS" for="lienCpas">Associated CPAS?</label>
+                <p-dropdown [options]="cpasOptions" id="lienCpas" name="lienCpas" [ngModel]="user.lienCpas"></p-dropdown>
             </div>
         </div>
         <div class="p-fluid p-formgrid p-grid">

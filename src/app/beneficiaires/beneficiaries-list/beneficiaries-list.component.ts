@@ -71,7 +71,7 @@ export class BeneficiariesListComponent implements OnInit {
                                 }
                                 const  queryOrganisationParms: QueryParams = {'lienBanque': this.lienBanque.toString(), 'gestBen': '1'};
                                if (authState.user.rights === 'Admin_CPAS' ) {
-                                   queryOrganisationParms['cp'] = this.lienCpas.toString();
+                                   queryOrganisationParms['lienCpas'] = this.lienCpas.toString();
                                }
                                 this.orgsummaryService.getWithQuery(queryOrganisationParms)
                                     .subscribe(organisations => {
@@ -118,6 +118,9 @@ export class BeneficiariesListComponent implements OnInit {
                 this.currentOrganisation = org;
                 let params = new URLSearchParams();
                 const benefQueryParams = {'lienDis': this.idOrg.toString(), 'actif': '1'};
+                if (this.lienCpas >0) {
+                    benefQueryParams['lienCpas'] = this.lienCpas.toString();
+                }
                 for (let key in benefQueryParams) {
                     params.set(key, benefQueryParams[key])
                 }
