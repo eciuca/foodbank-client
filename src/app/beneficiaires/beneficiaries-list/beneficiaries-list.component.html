@@ -27,6 +27,10 @@
                     </ng-template>
                 </p-autoComplete>
             </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@FeadStatus" for="birbFilter">Fead Status</label>
+                <p-dropdown [options]="feadStatuses" id="birbFilter" name="birbFilter"  [ngModel]="birbFilter" (onChange)="FilterBirb($event.value)"></p-dropdown>
+            </div>
         </div>
     </ng-template>
 </p-panel>
@@ -45,12 +49,11 @@
         <tr>
             <th *ngIf ="!booShowSimpler" i18n="@@InternalId">Internal ID</th>
             <th i18n="@@Name" >Name</th>
+            <th *ngIf ="!booShowSimpler" i18n="@@Partner">Partner</th>
             <th i18n="@@Address" >Address</th>
             <th i18n="@@Tel" >Tel</th>
-            <th *ngIf ="!booShowSimpler" i18n="@@BirthDate">Birth Date</th>
-            <th *ngIf ="!booShowSimpler" i18n="@@Couple?">Couple?</th>
+            <th *ngIf ="!booShowSimpler" >FEAD</th>
             <th *ngIf ="!booShowSimpler" i18n="@@NbDependents">Nb Dependents</th>
-            <th *ngIf ="!booShowSimpler" i18n="@@Family">Family</th>
         </tr>
 
     </ng-template>
@@ -63,22 +66,20 @@
             <td >
                 {{ beneficiaire.nom }}  {{beneficiaire.prenom}}
             </td>
-
+            <td *ngIf ="!booShowSimpler">
+                {{beneficiaire.nomconj}} {{beneficiaire.prenomconj}}
+            </td>
             <td>
                 {{beneficiaire.adresse}} {{beneficiaire.cp}} {{beneficiaire.localite}}
             </td>
             <td>
                 {{beneficiaire.gsm}} {{beneficiaire.tel}}
             </td>
+
             <td *ngIf ="!booShowSimpler">
-                {{beneficiaire.daten}}
+                {{labelBirb(beneficiaire.birb)}}
             </td>
-            <td *ngIf ="!booShowSimpler">
-                {{labelParents(beneficiaire.nbParents)}}
-            </td>
-            <td *ngIf ="!booShowSimpler">
-                {{beneficiaire.nbDep}}
-            </td>
+
             <td *ngIf ="!booShowSimpler">
                 {{beneficiaire.nbFamily}}
             </td>

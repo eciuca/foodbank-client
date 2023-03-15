@@ -10,7 +10,7 @@ import {AuthState} from '../auth/reducers';
 import {LazyLoadEvent} from 'primeng/api';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
-import {enmYn} from '../shared/enums';
+import {enmStatutFead, enmYn} from '../shared/enums';
 import {AuthService} from '../auth/auth.service';
 import {ExcelService} from '../services/excel.service';
 import {BeneficiaireHttpService} from './services/beneficiaire-http.service';
@@ -53,6 +53,7 @@ export class BeneficiairesComponent implements OnInit {
   duplicatesOptions: any[];
   duplicateFilter: any;
   summaryMessage: string;
+  feadStatuses: any[];
 
   constructor(private beneficiaireService: BeneficiaireEntityService,
               private organisationsService: OrganisationEntityService,
@@ -78,6 +79,7 @@ export class BeneficiairesComponent implements OnInit {
     ];
     this.filteredOrganisation = this.filteredOrganisationsPrepend[0];
     this.YNOptions = enmYn;
+    this.feadStatuses = enmStatutFead;
     this.duplicatesOptions = [
       {label: ' ', value: null },
       {label: $localize`:@@ClientDuplicateNames:Beneficiaries with Duplicate Names`, value: 'name'},
@@ -198,6 +200,9 @@ export class BeneficiairesComponent implements OnInit {
       if (event.filters.daten && event.filters.daten.value) {
         queryParms['daten'] = event.filters.daten.value;
       }
+      if (event.filters.birb && event.filters.birb.value !== null) {
+        queryParms['birb'] = event.filters.birb.value;
+      }
       if (event.filters.suspect && event.filters.suspect.value !== null) {
         queryParms['suspect'] = event.filters.suspect.value;
       }
@@ -254,6 +259,7 @@ export class BeneficiairesComponent implements OnInit {
           console.log('Admin CPAS', authState.user);
           this.filterBase = { 'lienCpas': authState.user.lienCpas};
           this.lienCpas = authState.user.lienCpas;
+          this.booShowOrganisations = true;
           break;
         default:
       }
@@ -445,4 +451,13 @@ export class BeneficiairesComponent implements OnInit {
     return summaryText;
   }
 
+  labelBirb(birb: number) {
+    let birbLabel = "?"
+
+    const indexItem = enmStatutFead.map(e => e.value).indexOf(birb);
+    if (indexItem > -1) {
+      birbLabel = enmStatutFead[indexItem ].label;
+    }
+    return birbLabel;
+  }
 }

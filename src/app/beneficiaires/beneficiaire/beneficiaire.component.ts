@@ -63,6 +63,8 @@ export class BeneficiaireComponent implements OnInit {
     nbChildren: number;
     povertyIndex: number;
     feadEligibility: string;
+    isAdminCPAS: boolean;
+    updateRestricted: boolean;
   constructor(
       private beneficiairesService: BeneficiaireEntityService,
       private beneficiaireHttpService: BeneficiaireHttpService,
@@ -90,6 +92,8 @@ export class BeneficiaireComponent implements OnInit {
       this.depotName = '';
       this.title = '';
       this.dependentQuery = {};
+      this.isAdminCPAS = false;
+      this.updateRestricted = false;
   }
 
   ngOnInit(): void {
@@ -202,10 +206,17 @@ export class BeneficiaireComponent implements OnInit {
                       switch (authState.user.rights) {
                           case 'Admin_Banq':
                           case 'Bank':
+                          case 'Admin_CPAS':
                               this.lienBanque = authState.banque.bankId;
                               this.idCompany = authState.banque.bankShortName;
-                              if  ((authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
+                              if  ((authState.user.rights === 'Admin_CPAS') || (authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
                                   this.booCanSave = true;
+                              }
+                              if  (authState.user.rights === 'Admin_CPAS') {
+                                    this.isAdminCPAS = true;
+                              }
+                              else {
+                                  this.updateRestricted = true;
                               }
                               break;
                           case 'Admin_Asso':

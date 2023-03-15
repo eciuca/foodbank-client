@@ -54,6 +54,7 @@
              <th i18n="@@CitySorted" pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
              <th i18n="@@BirthDateSorted" pSortableColumn="daten">Birth Date<p-sortIcon field="daten"></p-sortIcon></th>
              <th i18n="@@NbDependentsSorted" pSortableColumn="nbDep">Nb Dependents<p-sortIcon field="nbDep"></p-sortIcon></th>
+             <th i18n="@@FEAD" pSortableColumn="birb">FEAD<p-sortIcon field="birb"></p-sortIcon></th>
              <th *ngIf="idOrg==0" i18n="@@BeneficiaryCoeffSorted" pSortableColumn="coeff">Coeff<p-sortIcon field="coeff"></p-sortIcon></th>
          </tr>
          <tr>
@@ -77,6 +78,14 @@
                  <p-columnFilter type="text" field="daten" matchMode="contains" [showMenu]="false"></p-columnFilter>
              </th>
              <th>
+             </th>
+             <th>
+                 <p-columnFilter field="birb" matchMode="equals" [showMenu]="false">
+                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                         <p-dropdown [ngModel]="value" [options]="feadStatuses" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
+                         </p-dropdown>
+                     </ng-template>
+                 </p-columnFilter>
              </th>
              <th *ngIf="idOrg==0" >
                  <p-columnFilter field="suspect" matchMode="equals" [showMenu]="false">
@@ -114,6 +123,9 @@
             </td>
             <td>
                 {{beneficiaire.nbDep}}
+            </td>
+            <td>
+                {{labelBirb(beneficiaire.birb)}}
             </td>
             <td *ngIf="idOrg==0">
                 {{ getSuspectStatus(beneficiaire.coeff) }}

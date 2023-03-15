@@ -11,6 +11,7 @@ import {Organisation} from '../../organisations/model/organisation';
 import {OrganisationEntityService} from '../../organisations/services/organisation-entity.service';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
+import {enmStatutFead} from '../../shared/enums';
 
 @Component({
     selector: 'app-beneficiaries-list',
@@ -33,7 +34,9 @@ export class BeneficiariesListComponent implements OnInit {
     summaryMessage: string;
     totalParentsMale: number;
     totalParentsFemale: number;
+    feadStatuses: any[];
     booShowSimpler: boolean;
+    birbFilter: any;
     constructor(
         private beneficiaireHttpService: BeneficiaireHttpService,
         private organisationsService: OrganisationEntityService,
@@ -46,6 +49,8 @@ export class BeneficiariesListComponent implements OnInit {
         this.booIsLoaded = false;
         this.booShowSimpler = false;
         this.lienCpas = 0;
+        this.feadStatuses = enmStatutFead;
+        this.feadStatuses.unshift({'value': null, 'label': ' '});
     }
     
     ngOnInit(): void {
@@ -120,6 +125,9 @@ export class BeneficiariesListComponent implements OnInit {
                 const benefQueryParams = {'lienDis': this.idOrg.toString(), 'actif': '1'};
                 if (this.lienCpas >0) {
                     benefQueryParams['lienCpas'] = this.lienCpas.toString();
+                }
+                if (this.birbFilter >0) {
+                    benefQueryParams['birb'] = this.birbFilter.toString();
                 }
                 for (let key in benefQueryParams) {
                     params.set(key, benefQueryParams[key])
@@ -217,5 +225,20 @@ export class BeneficiariesListComponent implements OnInit {
             return $localize`:@@Couple:Couple`;
         }
 
+    }
+
+    FilterBirb(birbValue: number) {
+        console.log('FilterBirb', birbValue);
+        this.birbFilter = birbValue;
+        this.loadBeneficiaries();
+    }
+    labelBirb(birb: number) {
+        let birbLabel = "?"
+
+        const indexItem = enmStatutFead.map(e => e.value).indexOf(birb);
+        if (indexItem > -1) {
+            birbLabel = enmStatutFead[indexItem ].label;
+        }
+        return birbLabel;
     }
 }
