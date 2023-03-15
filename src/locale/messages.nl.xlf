@@ -3462,6 +3462,14 @@
           <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="Partner" datatype="html">
+        <source>Partner</source>
+        <target>Partner</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="NbDependents" datatype="html">
         <source>Nb Dependents</source>
         <target>Nb afhankelijken</target>
@@ -9393,26 +9401,6 @@
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">575</context>
         </context-group>
-      </trans-unit>
-      <trans-unit id="BankOrgsTitleBeneficiaries">
-        <source/>
-        <target>Begunstigden van erkende organisaties op <x id="PH" equiv-text="new Date().toLocaleDateString('fr-FR')"/></target>
-      </trans-unit>
-      <trans-unit id="BeneficiariesList">
-        <source/>
-        <target>Begunstigden lijst</target>
-      </trans-unit>
-      <trans-unit id="Couple?">
-        <source/>
-        <target>Paar?</target>
-      </trans-unit>
-      <trans-unit id="Printeport">
-        <source/>
-        <target>Druk dit rapport af</target>
-      </trans-unit>
-      <trans-unit id="Suspect">
-        <source/>
-        <target>Verdacht</target>
       </trans-unit>
     </body>
   </file>
