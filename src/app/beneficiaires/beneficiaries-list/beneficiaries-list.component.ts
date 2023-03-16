@@ -282,7 +282,7 @@ export class BeneficiariesListComponent implements OnInit {
     getTitle() {
         let subtitle = '';
         if (this.orgName) {
-            subtitle = ' of ' + this.orgName;
+            subtitle = ' ' + this.orgName;
         }
         return $localize`:@@BeneficiariesOrgHeader:Beneficiaries ${subtitle} at ${new Date().toLocaleDateString('fr-FR')}`;
     }

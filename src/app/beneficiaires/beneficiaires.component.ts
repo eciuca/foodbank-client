@@ -462,7 +462,7 @@ export class BeneficiairesComponent implements OnInit {
   }
 
   getFamilySize(beneficiaire: Beneficiaire) {
-    let familySize = beneficiaire.nbDep + 1;
+    let familySize = beneficiaire.nbDep;
     if (beneficiaire.nomconj) {
       familySize++;
     }
