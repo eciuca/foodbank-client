@@ -9,7 +9,7 @@
             <button  *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(beneficiaire, beneficiaireForm.value)" [disabled] = "beneficiaireForm.invalid" i18n-label="@@Save" label="Save"></button>
             <button type="button" pButton icon="pi pi-check" (click)="quit($event, beneficiaire, beneficiaireForm, beneficiaireForm.dirty)" i18n-label="@@Return" label="Return" ></button>
         </div>
-        <div *ngIf="lienDis ==0" class="p-fluid p-formgrid p-grid" >
+        <div *ngIf="updateRestricted" class="p-fluid p-formgrid p-grid" >
             <div class="p-field p-col-12 p-md-12">
                 {{ generateTooltipRightsBankUsers() }}
             </div>

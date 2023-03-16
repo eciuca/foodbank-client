@@ -53,7 +53,7 @@
              <th i18n="@@ZipCodeSorted" pSortableColumn="cp">Zip Code<p-sortIcon field="cp"></p-sortIcon></th>
              <th i18n="@@CitySorted" pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
              <th i18n="@@BirthDateSorted" pSortableColumn="daten">Birth Date<p-sortIcon field="daten"></p-sortIcon></th>
-             <th i18n="@@NbDependentsSorted" pSortableColumn="nbDep">Nb Dependents<p-sortIcon field="nbDep"></p-sortIcon></th>
+             <th i18n="@@NbDependentsSorted" pSortableColumn="nbDep" [pTooltip]="getDependentsTooltip()">Nb Dependents<p-sortIcon field="nbDep"></p-sortIcon></th>
              <th i18n="@@FEAD" pSortableColumn="birb">FEAD<p-sortIcon field="birb"></p-sortIcon></th>
              <th *ngIf="idOrg==0" i18n="@@BeneficiaryCoeffSorted" pSortableColumn="coeff">Coeff<p-sortIcon field="coeff"></p-sortIcon></th>
          </tr>
@@ -121,8 +121,8 @@
             <td>
                 {{beneficiaire.daten}}
             </td>
-            <td>
-                {{beneficiaire.nbDep}}
+            <td [pTooltip]="getDependentsTooltip()">
+                {{getFamilySize(beneficiaire)}}
             </td>
             <td>
                 {{labelBirb(beneficiaire.birb)}}

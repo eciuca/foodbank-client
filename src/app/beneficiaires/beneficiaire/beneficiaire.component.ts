@@ -353,7 +353,7 @@ export class BeneficiaireComponent implements OnInit {
         return this.title;
     }
     generateTooltipRightsBankUsers() {
-           return $localize`:@@BenefRightsBankUsers:Bank Users can only modify Beneficiary Suspician Coefficient and delete Duplicates who have a suspicion coefficient > 1`;
+           return $localize`:@@BenefRightsBankUsers:Bank Users can only modify Beneficiary Coefficient and delete Duplicates who have a suspicion coefficient > 1`;
     }
     setPovertyIndex() {
       this.povertyIndex = this.povertyRevenueSingleBeneficiary;

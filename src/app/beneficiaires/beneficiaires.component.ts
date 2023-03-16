@@ -460,4 +460,17 @@ export class BeneficiairesComponent implements OnInit {
     }
     return birbLabel;
   }
+
+  getFamilySize(beneficiaire: Beneficiaire) {
+    let familySize = beneficiaire.nbDep + 1;
+    if (beneficiaire.nomconj) {
+      familySize++;
+    }
+    return familySize;
+
+  }
+
+  getDependentsTooltip() {
+    return $localize`:@@BenefDependentsTooltip:This includes the beneficiary himself, eventually his partner, and his children`;
+  }
 }
