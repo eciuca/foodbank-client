@@ -75,6 +75,21 @@ export class ZipcodesComponent implements OnInit {
         } else {
             queryParms['sortField'] = 'zipCode';
         }
+        if (event.filters) {
+            if (event.filters.zipCode && event.filters.zipCode.value) {
+                queryParms['zipCode'] = event.filters.zipCode.value;
+            }
+            if (event.filters.city && event.filters.city.value) {
+                queryParms['city'] = event.filters.city.value;
+            }
+            if (event.filters.zipCodeCpas && event.filters.zipCodeCpas.value) {
+                queryParms['zipCodeCpas'] = event.filters.zipCodeCpas.value;
+            }
+            if (event.filters.cityCpas && event.filters.cityCpas.value) {
+                queryParms['cityCpas'] = event.filters.cityCpas.value;
+            }
+
+        }
         this.zipcodeEntityService.getWithQuery(queryParms)
             .subscribe(loadedZipcodes => {
                 console.log('Loaded zipcodes from nextpage: ' + loadedZipcodes.length);
@@ -92,7 +107,7 @@ export class ZipcodesComponent implements OnInit {
     showDialogToAdd() {
         this.zipcode = new DefaultZipcode();
 
-        this.zipcodeEntityService.add(this.zipcode);
+       //  this.zipcodeEntityService.add(this.zipcode);
     }
 
     handleSelect(cpas: any) {
