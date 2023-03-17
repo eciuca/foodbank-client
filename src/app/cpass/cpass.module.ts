@@ -17,8 +17,16 @@ import {appEntityMetadata} from '../app-entity.metadata';
 import {MessageModule} from 'primeng/message';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
+import { ZipcodesComponent } from './zipcodes/zipcodes.component';
+import {ZipcodesDataService} from './zipcodes/services/zipcodes-data.service';
+import {ZipcodeEntityService} from './zipcodes/services/zipcode-entity.service';
+
 
 const routes: Routes = [
+  {
+      path: 'zipcodes',
+      component: ZipcodesComponent,
+  },
   { path: '',
     component: CpassComponent,
   },
@@ -29,7 +37,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CpassComponent, CpasComponent],
+  declarations: [CpassComponent, CpasComponent, ZipcodesComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -46,6 +54,8 @@ const routes: Routes = [
   providers: [
         CpassDataService,
         CpasEntityService,
+        ZipcodesDataService,
+        ZipcodeEntityService,
         ConfirmationService
   ],
 })
@@ -53,10 +63,13 @@ export class CpassModule {
   constructor(
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
-      private cpassDataService: CpassDataService
+      private cpassDataService: CpassDataService,
+      private zipcodesDataService: ZipcodesDataService,
+        private zipcodeEntityService: ZipcodeEntityService
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Cpas', cpassDataService);
+    entityDataService.registerService('Zipcode', zipcodesDataService);
   }
 
 }

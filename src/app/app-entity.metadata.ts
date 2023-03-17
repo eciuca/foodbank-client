@@ -25,6 +25,7 @@ import {compareMembreFunctions, MembreFunction} from './membres/model/membreFunc
 import {compareMembreEmploiTypes, MembreEmploiType} from './membres/model/membreEmploiType';
 import {AuditChange, compareAuditChanges} from './audits/model/auditChange';
 import {AuditUser, compareAuditUsers} from './audits/model/auditUser';
+import {compareZipcodes, Zipcode} from './cpass/model/zipcode';
 
 
 export const appEntityMetadata: EntityMetadataMap = {
@@ -157,6 +158,11 @@ export const appEntityMetadata: EntityMetadataMap = {
     Trip: {
         sortComparer: compareTrips,
         selectId: (trip: Trip) => trip.tripId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
+    },
+    Zipcode: {
+        sortComparer: compareZipcodes,
+        selectId: (zipcode: Zipcode) => zipcode.zipCode,
         entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
     },
 };

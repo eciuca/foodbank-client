@@ -439,6 +439,7 @@ export class AppComponent implements OnInit {
             if ( authState.user.rights === 'admin') {
                 this.menuLoggedInItems.push(
                     {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
+                    {label: 'ZipCodes', icon: 'pi pi-fw pi-map',  routerLink: ['/cpass/zipcodes']},
                     {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
                  );
             }
