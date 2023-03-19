@@ -278,13 +278,13 @@ export class BeneficiaireComponent implements OnInit {
       }
       if (modifiedBeneficiaire.hasOwnProperty('idClient')) {
     this.beneficiairesService.update(modifiedBeneficiaire)
-        .subscribe( ()  => {
+        .subscribe( (upDatedBeneficiaire)  => {
           this.messageService.add({
               severity: 'success',
               summary: 'Update',
-              detail: $localize`:@@messageBeneficiaryUpdated:The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was updated`});
-            this.onBeneficiaireUpdate.emit(modifiedBeneficiaire);
-            this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedBeneficiaire.lbanque,modifiedBeneficiaire.lienDis,'Client',
+              detail: $localize`:@@messageBeneficiaryUpdated:The beneficiary ${upDatedBeneficiaire.nom} ${upDatedBeneficiaire.prenom}  was updated`});
+            this.onBeneficiaireUpdate.emit(upDatedBeneficiaire);
+            this.auditChangeEntityService.logDbChange(this.userId,this.userName,upDatedBeneficiaire.lbanque,upDatedBeneficiaire.lienDis,'Client',
                     modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Update' );
         },
             (dataserviceerrorFn: () => DataServiceError) => { 
@@ -298,14 +298,14 @@ export class BeneficiaireComponent implements OnInit {
         });
       } else {
           this.beneficiairesService.add(modifiedBeneficiaire)
-              .subscribe(() => {
+              .subscribe((createdBeneficiaire) => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: $localize`:@@messageBeneficiaryCreated:The beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom}  was created`
+                      detail: $localize`:@@messageBeneficiaryCreated:The beneficiary ${createdBeneficiaire.nom} ${createdBeneficiaire.prenom}  was created`
                   });
-                  this.onBeneficiaireCreate.emit(modifiedBeneficiaire);
-                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedBeneficiaire.lbanque,modifiedBeneficiaire.lienDis,'Client',
+                  this.onBeneficiaireCreate.emit(createdBeneficiaire);
+                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,createdBeneficiaire.lbanque,createdBeneficiaire.lienDis,'Client',
                           modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Create' );
               },
                   (dataserviceerrorFn: () => DataServiceError) => { 

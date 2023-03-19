@@ -401,6 +401,10 @@
           <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">414,413</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">445,444</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="menuDonations" datatype="html">
         <source>Donations</source>
@@ -426,12 +430,28 @@
           <context context-type="linenumber">432</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="menuCpas" datatype="html">
+        <source>Cpas</source>
+        <target>OCMW</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">442,441</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ZipCodes" datatype="html">
+        <source>ZipCodes</source>
+        <target>Postcodes</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">450,449</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="menuMailings" datatype="html">
         <source>Mailings</source>
         <target>Mailings</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">449</context>
+          <context context-type="linenumber">462</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOverview" datatype="html">
@@ -439,7 +459,7 @@
         <target>Overzicht</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">460,459</context>
+          <context context-type="linenumber">473,472</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuEntityChanges" datatype="html">
@@ -447,7 +467,7 @@
         <target>DB Updates</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">468</context>
+          <context context-type="linenumber">481</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReportOrgs" datatype="html">
@@ -455,7 +475,7 @@
         <target>Organisaties</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">473</context>
+          <context context-type="linenumber">486</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReportBenefs" datatype="html">
@@ -463,11 +483,11 @@
         <target>Begunstigden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">474</context>
+          <context context-type="linenumber">487</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">481</context>
+          <context context-type="linenumber">494</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReportMovements" datatype="html">
@@ -475,11 +495,11 @@
         <target>Voedsel Leveringen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">475</context>
+          <context context-type="linenumber">488</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">482</context>
+          <context context-type="linenumber">495</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
@@ -487,7 +507,7 @@
         <target>Dashboard</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">480</context>
+          <context context-type="linenumber">493</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReports" datatype="html">
@@ -495,7 +515,7 @@
         <target>Grafieken</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">487,486</context>
+          <context context-type="linenumber">500,499</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuFEADApplication" datatype="html">
@@ -503,7 +523,7 @@
         <target>Naar de Stock Toepassing</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">498,497</context>
+          <context context-type="linenumber">511,510</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
@@ -511,7 +531,7 @@
         <target>Uitloggen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">512</context>
+          <context context-type="linenumber">525</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReportbyPage" datatype="html">
@@ -1122,6 +1142,10 @@
           <context context-type="linenumber">4</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
@@ -1192,6 +1216,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.html</context>
           <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.html</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.html</context>
@@ -1276,6 +1304,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.html</context>
           <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.html</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.html</context>
@@ -1606,6 +1638,10 @@
           <context context-type="linenumber">148</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateur/donateur.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
@@ -1616,6 +1652,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
           <context context-type="linenumber">150</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.html</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Tel" datatype="html">
@@ -2118,6 +2158,10 @@
           <context context-type="linenumber">136</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.ts</context>
+          <context context-type="linenumber">174</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
           <context context-type="linenumber">175</context>
         </context-group>
@@ -2518,6 +2562,10 @@
           <context context-type="linenumber">35</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.html</context>
           <context context-type="linenumber">48</context>
         </context-group>
@@ -2739,7 +2787,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="messageBeneficiaryUpdated" datatype="html">
-        <source>The beneficiary <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/>  was updated</source>
+        <source>The beneficiary <x id="PH" equiv-text="upDatedBeneficiaire.nom"/> <x id="PH_1" equiv-text="upDatedBeneficiaire.prenom"/>  was updated</source>
         <target>De begunstigde <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/> is bijgewerkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
@@ -2755,7 +2803,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="messageBeneficiaryCreated" datatype="html">
-        <source>The beneficiary <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/>  was created</source>
+        <source>The beneficiary <x id="PH" equiv-text="createdBeneficiaire.nom"/> <x id="PH_1" equiv-text="createdBeneficiaire.prenom"/>  was created</source>
         <target>De begunstigde <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/> is aangemaakt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
@@ -3900,6 +3948,86 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependents.component.html</context>
           <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Cpas" datatype="html">
+        <source>Cpas</source>
+        <target>OCMW</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
+          <context context-type="linenumber">317</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageZipCodeDeleted" datatype="html">
+        <source>The zipCode <x id="PH" equiv-text="zipCode.zipCode"/> was deleted</source>
+        <target>De postcode <x id="PH" equiv-text="zipCode.zipCode"/> is verwijderd</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.ts</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageZipCodeDeleteError" datatype="html">
+        <source>The zipCode <x id="PH" equiv-text="zipCode.zipCode"/> could not be deleted: error: <x id="PH_1" equiv-text="dataserviceerror.message"/></source>
+        <target>De postcode <x id="PH" equiv-text="zipCode.zipCode"/> kon niet worden verwijderd: fout: <x id="PH_1" equiv-text="dataserviceerror.message"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.ts</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageZipCodeUpdated" datatype="html">
+        <source>The zipCode <x id="PH" equiv-text="upDatedZipCode.zipCode"/>  was updated</source>
+        <target>De postcode <x id="PH" equiv-text="upDatedZipCode.zipCode"/> is bijgewerkt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.ts</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageZipCodeUpdateError" datatype="html">
+        <source>The zipCode <x id="PH" equiv-text="modifiedZipCode.zipCode"/> could not be updated: error: <x id="PH_1" equiv-text="dataserviceerror.message"/></source>
+        <target>De postcode <x id="PH" equiv-text="modifiedZipCode.zipCode"/> kon niet worden bijgewerkt: fout: <x id="PH_1" equiv-text="dataserviceerror.message"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.ts</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageZipCodeCreated" datatype="html">
+        <source>The zipCode <x id="PH" equiv-text="createdZipCode.zipCode"/>   was created</source>
+        <target>De postcode <x id="PH" equiv-text="createdZipCode.zipCode"/> is aangemaakt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.ts</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="messageZipCodeCreateError" datatype="html">
+        <source>The zipCode <x id="PH" equiv-text="modifiedZipCode.zipCode"/> could not be created: error: <x id="PH_1" equiv-text="dataserviceerror.message"/></source>
+        <target>De postcode <x id="PH" equiv-text="modifiedZipCode.zipCode"/> kon niet worden aangemaakt: fout: <x id="PH_1" equiv-text="dataserviceerror.message"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.ts</context>
+          <context context-type="linenumber">162</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ZipCodeLink" datatype="html">
+        <source>ZipCode link with CPAS</source>
+        <target>Postcode koppeling met OCMW</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcode/zipcode.component.ts</context>
+          <context context-type="linenumber">199</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcodes.component.ts</context>
+          <context context-type="linenumber">144</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ZipCodeDetails" datatype="html">
+        <source>ZipCode Details</source>
+        <target>Postcodegegevens</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcodes.component.html</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DashBoard" datatype="html">
@@ -5739,7 +5867,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeUpdated" datatype="html">
-        <source>The employee <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/>  was updated</source>
+        <source>The employee <x id="PH" equiv-text="updatedMembre.nom"/> <x id="PH_1" equiv-text="updatedMembre.prenom"/>  was updated</source>
         <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> is bijgewerkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
@@ -5755,7 +5883,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="messageEmployeeCreated" datatype="html">
-        <source>The employee <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/>  was created</source>
+        <source>The employee <x id="PH" equiv-text="createdMembre.nom"/> <x id="PH_1" equiv-text="createdMembre.prenom"/>  was created</source>
         <target>De medewerker <x id="PH" equiv-text="modifiedMembre.nom"/> <x id="PH_1" equiv-text="modifiedMembre.prenom"/> is aangemaakt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/membres/membre/membre.component.ts</context>
@@ -6844,14 +6972,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
           <context context-type="linenumber">313</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="Cpas" datatype="html">
-        <source>Cpas</source>
-        <target>OCMW</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
-          <context context-type="linenumber">317</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrganisationFead" datatype="html">

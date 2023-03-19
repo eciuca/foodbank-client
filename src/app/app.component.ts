@@ -438,8 +438,21 @@ export class AppComponent implements OnInit {
             // add cpass and depots for admin
             if ( authState.user.rights === 'admin') {
                 this.menuLoggedInItems.push(
-                    {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
-                    {label: 'ZipCodes', icon: 'pi pi-fw pi-map',  routerLink: ['/cpass/zipcodes']},
+                    {
+                        label: $localize`:@@menuCpas:Cpas`, icon: 'pi pi-fw pi-heart',
+                        items: [
+                            {
+                                label: $localize`:@@List:List`,
+                                icon: 'pi pi-fw pi-map',
+                                routerLink: ['/cpass']
+                            },
+                            {
+                                label: $localize`:@@ZipCodes:ZipCodes`,
+                                icon: 'pi pi-fw pi-map',
+                                routerLink: ['/cpass/zipcodes']
+                            }
+                        ]
+                    },
                     {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
                  );
             }

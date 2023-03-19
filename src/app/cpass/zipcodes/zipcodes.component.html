@@ -4,9 +4,16 @@
          [filterDelay]="0" >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            <button  class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Zipcode"></button>
-            <span class="p-input-icon-left">
-        </span>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                    {{ getTitle() }}
+                </div>
+                <div class="p-field p-col-12 p-md-3">
+                    <button  class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Zipcode"></button>
+                    <span class="p-input-icon-left">
+                    </span>
+                </div>
+            </div>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -84,3 +91,8 @@
         </div>
     </ng-template>
 </p-table>
+<p-dialog i18n-header="@@ZipCodeDetails" header="ZipCode Details" [(visible)]="displayDialog" [responsive]="true"  [modal]="true" [closable]="false" [contentStyle]="{'overflow': 'scroll'}">
+    <app-zipcode *ngIf="selectedZipcode$"
+                 [zipCode$]="selectedZipcode$"  (onZipCodeUpdate)="handleZipCodeUpdate($event)" (onZipCodeCreate)="handleZipCodeCreate($event)"
+                 (onZipCodeDelete)="handleZipCodeDeleted($event)" (onZipCodeQuit)="handleZipCodeQuit()"></app-zipcode>
+</p-dialog>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {DefaultZipcode, Zipcode} from '../model/zipcode';
+import {ZipCode} from '../model/zipCode';
 import {ZipcodeEntityService} from './services/zipcode-entity.service';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {filter, map, mergeMap} from 'rxjs/operators';
@@ -14,14 +14,15 @@ import {LazyLoadEvent} from 'primeng/api';
   templateUrl: './zipcodes.component.html',
   styleUrls: ['./zipcodes.component.css']
 })
-export class ZipcodesComponent implements OnInit {
+export class ZipCodesComponent implements OnInit {
   loadPageSubject$ = new BehaviorSubject(null);
   selectedZipcode$ = new BehaviorSubject(0);
-  zipcode: Zipcode = null;
-  zipcodes: Zipcode[];
+  zipcode: ZipCode = null;
+  zipcodes: ZipCode[];
   booIsAdmin: boolean;
   loading: boolean;
-    totalRecords: number;
+  totalRecords: number;
+    displayDialog: boolean;
   constructor(
       private zipcodeEntityService: ZipcodeEntityService,
       private authService: AuthService,
@@ -38,13 +39,13 @@ export class ZipcodesComponent implements OnInit {
               filter(queryParams => !!queryParams),
               mergeMap(queryParams => this.zipcodeEntityService.getWithQuery(queryParams))
           )
-          .subscribe(loadedZipcodes => {
-              console.log('Loaded zipcodes from nextpage: ' + loadedZipcodes.length);
-              this.zipcodes = loadedZipcodes;
+          .subscribe(loadedzipcodes => {
+              console.log('Loaded zipcodes from nextpage: ' + loadedzipcodes.length);
+              this.zipcodes = loadedzipcodes;
               this.loading = false;
               this.zipcodeEntityService.setLoaded(true);
-              if (loadedZipcodes.length > 0) {
-                  this.totalRecords = loadedZipcodes[0].totalRecords;
+              if (loadedzipcodes.length > 0) {
+                  this.totalRecords = loadedzipcodes[0].totalRecords;
               }  else {
                   this.totalRecords = 0;
               }
@@ -91,26 +92,55 @@ export class ZipcodesComponent implements OnInit {
 
         }
         this.zipcodeEntityService.getWithQuery(queryParms)
-            .subscribe(loadedZipcodes => {
-                console.log('Loaded zipcodes from nextpage: ' + loadedZipcodes.length);
-                if (loadedZipcodes.length > 0) {
-                    this.totalRecords = loadedZipcodes[0].totalRecords;
+            .subscribe(loadedzipcodes => {
+                console.log('Loaded zipcodes from nextpage: ' + loadedzipcodes.length);
+                if (loadedzipcodes.length > 0) {
+                    this.totalRecords = loadedzipcodes[0].totalRecords;
                 } else {
                     this.totalRecords = 0;
                 }
-                this.zipcodes  = loadedZipcodes;
+                this.zipcodes  = loadedzipcodes;
                 this.loading = false;
                 this.zipcodeEntityService.setLoaded(true);
             });
     }
 
     showDialogToAdd() {
-        this.zipcode = new DefaultZipcode();
-
-       //  this.zipcodeEntityService.add(this.zipcode);
+        this.selectedZipcode$.next(0);
+        this.displayDialog = true;
     }
 
-    handleSelect(cpas: any) {
+    handleSelect(zipCode) {
+        this.selectedZipcode$.next(zipCode.zipCode);
+        this.displayDialog = true;
+    }
+    handleZipCodeQuit() {
+        this.displayDialog = false;
+    }
+    handleZipCodeCreate(createdZipCode: ZipCode) {
+        this.zipcodes.push({...createdZipCode});
+        const latestQueryParams = this.loadPageSubject$.getValue();
+        this.loadPageSubject$.next(latestQueryParams);
+        this.displayDialog = false;
+    }
 
+    handleZipCodeUpdate(updatedZipCode) {
+        const index = this.zipcodes.findIndex(zipCode => zipCode.zipCode === updatedZipCode.zipCode);
+        this.zipcodes[index] = updatedZipCode;
+        const latestQueryParams = this.loadPageSubject$.getValue();
+        this.loadPageSubject$.next(latestQueryParams);
+        this.displayDialog = false;
+    }
+
+    handleZipCodeDeleted(deletedZipCode) {
+        const index = this.zipcodes.findIndex(zipCode => zipCode.zipCode === deletedZipCode.zipCode);
+        this.zipcodes.splice(index, 1);
+        const latestQueryParams = this.loadPageSubject$.getValue();
+        this.loadPageSubject$.next(latestQueryParams);
+        this.displayDialog = false;
+    }
+
+    getTitle() {
+        return $localize`:@@ZipCodeLink:ZipCode link with CPAS`;
     }
 }

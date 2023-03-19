@@ -1,12 +1,12 @@
 import {Cpas} from './cpas';
 
-export interface Zipcode {
+export interface ZipCode {
     totalRecords: number;
     zipCode: number;
 
     city: string;
 
-    lCpas: number;
+    lcpas: number;
 
     zipCodeCpas: number;
 
@@ -17,7 +17,7 @@ export interface Zipcode {
     remCpas: string;
 }
 
-export function compareZipcodes(c1: Zipcode, c2: Zipcode) {
+export function compareZipCodes(c1: ZipCode, c2: ZipCode) {
 
     const compare = c1.zipCode > c2.zipCode;
 
@@ -29,23 +29,25 @@ export function compareZipcodes(c1: Zipcode, c2: Zipcode) {
 
 
 }
-export class DefaultZipcode implements Zipcode {
+export class DefaultZipCode implements ZipCode {
     city: string;
     cityCpas: string;
-    lCpas: number;
+    lcpas: number;
     mailCpas: string;
     remCpas: string;
     zipCode: number;
     zipCodeCpas: number;
     totalRecords: number;
+    isNew: boolean; // calculated property to indicate we are creating a new zipcode
     constructor() {
         this.city = '';
         this.cityCpas = '';
-        this.lCpas = 0;
+        this.lcpas = 0;
         this.mailCpas = '';
         this.remCpas = '';
         this.zipCode = 0;
         this.zipCodeCpas = 0;
         this.totalRecords = 0;
+        this.isNew = true;
     }
 }

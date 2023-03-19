@@ -369,15 +369,15 @@ export class MembreComponent implements OnInit {
       if (modifiedMembre.hasOwnProperty('batId')) {
 
           this.membresService.update(modifiedMembre)
-              .subscribe(() => {
+              .subscribe((updatedMembre) => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Update',
-                      detail: $localize`:@@messageEmployeeUpdated:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was updated`
+                      detail: $localize`:@@messageEmployeeUpdated:The employee ${updatedMembre.nom} ${updatedMembre.prenom}  was updated`
                   });
-                  this.onMembreUpdate.emit(modifiedMembre);
-                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedMembre.lienBanque,modifiedMembre.lienDis,'Member',
-                      modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Update' );
+                  this.onMembreUpdate.emit(updatedMembre);
+                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,updatedMembre.lienBanque,updatedMembre.lienDis,'Member',
+                      updatedMembre.nom + ' ' + updatedMembre.prenom, 'Update' );
               },
                   (dataserviceerrorFn: () => DataServiceError) => { 
                     const dataserviceerror = dataserviceerrorFn();
@@ -394,15 +394,15 @@ export class MembreComponent implements OnInit {
               modifiedMembre.fonction = 26; // set general help function by default for new bank members
           }
           this.membresService.add(modifiedMembre)
-              .subscribe(() => {
+              .subscribe((createdMembre) => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: $localize`:@@messageEmployeeCreated:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was created`
+                      detail: $localize`:@@messageEmployeeCreated:The employee ${createdMembre.nom} ${createdMembre.prenom}  was created`
                   });
-                  this.onMembreCreate.emit(modifiedMembre);
-                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedMembre.lienBanque,modifiedMembre.lienDis,'Member',
-                          modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Create' );
+                  this.onMembreCreate.emit(createdMembre);
+                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,createdMembre.lienBanque,createdMembre.lienDis,'Member',
+                          createdMembre.nom + ' ' + createdMembre.prenom, 'Create' );
               },
                   (dataserviceerrorFn: () => DataServiceError) => { 
                     const dataserviceerror = dataserviceerrorFn();
