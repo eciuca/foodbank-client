@@ -31,9 +31,13 @@
                 <label i18n="@@FeadStatus" for="birbFilter">Fead Status</label>
                 <p-dropdown [options]="feadStatuses" id="birbFilter" name="birbFilter"  [ngModel]="birbFilter" (onChange)="FilterBirb($event.value)"></p-dropdown>
             </div>
-            <div class="p-field p-col-12 p-md-3">
+            <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@ZipCode" for="zipCodeFilter">Zip Code</label>
                 <p-dropdown [options]="zipcodeOptions" id="zipCodeFilter" name="zipCodeFilter"  [ngModel]="zipCodeFilter" (onChange)="FilterZipcode($event.value)"></p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@ShowDoubles" for="doubles">Show Doubles?</label>
+                <p-checkbox [value]="booShowDoubles" binary="true" name="doubles" id="doubles" (onChange)="filterDoubles($event.checked)"></p-checkbox>
             </div>
         </div>
     </ng-template>
@@ -58,6 +62,7 @@
             <th i18n="@@Tel" >Tel</th>
             <th *ngIf ="!booShowSimpler" >FEAD</th>
             <th *ngIf ="!booShowSimpler" i18n="@@NbDependents" [pTooltip]="getDependentsTooltip()">Nb Dependents</th>
+            <th *ngIf ="!booShowSimpler" [pTooltip]="getCoeffTooltip()">COEFF</th>
         </tr>
 
     </ng-template>
@@ -86,6 +91,9 @@
 
             <td *ngIf ="!booShowSimpler" [pTooltip]="getDependentsTooltip()">
                 {{beneficiaire.nbFamily}}
+            </td>
+            <td *ngIf ="!booShowSimpler" [pTooltip]="getCoeffTooltip()">
+                {{labelCoeff(beneficiaire.coeff)}}
             </td>
         </tr>
     </ng-template>

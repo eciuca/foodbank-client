@@ -11,6 +11,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {enmStatutFead, enmYn} from '../shared/enums';
+import {labelCoeff,getCoeffTooltip} from '../shared/functions';
 import {AuthService} from '../auth/auth.service';
 import {ExcelService} from '../services/excel.service';
 import {BeneficiaireHttpService} from './services/beneficiaire-http.service';
@@ -311,13 +312,6 @@ export class BeneficiairesComponent implements OnInit {
   }
 
 
-  getSuspectStatus(coeff: number) {
-    if (coeff === 1) {
-      return 'N';
-    } else {
-      return 'Coeff ' + coeff;
-    }
-  }
   exportAsXLSX(onlySelection:boolean): void {
     let excelQueryParams = {...this.loadPageSubject$.getValue()};
     let label ="";
@@ -392,7 +386,7 @@ export class BeneficiairesComponent implements OnInit {
             cleanedItem[$localize`:@@Gsm:Gsm`] =item.gsm;
             cleanedItem[$localize`:@@Email:E-mail`] =item.email;
             if (this.idOrg === 0) {
-              cleanedItem[$localize`:@@Coeff:Coeff`] = this.getSuspectStatus(item.coeff);
+              cleanedItem[$localize`:@@Coeff:Coeff`] = this.labelCoeff(item.coeff);
             }
             cleanedItem[$localize`:@@Parents:Parents`] =nbParents;
             cleanedItem[$localize`:@@Dependents:Dependents`] =item.nbDep;
@@ -472,5 +466,19 @@ export class BeneficiairesComponent implements OnInit {
 
   getDependentsTooltip() {
     return $localize`:@@BenefDependentsTooltip:This includes the beneficiary himself, eventually his partner, and his children`;
+  }
+
+
+
+  findDuplicatesTooltip() {
+    return $localize`:@@BenefDuplicatesTooltip:try to find duplicate beneficiaries in the database`;
+  }
+
+  getCoeffTooltip() {
+    return getCoeffTooltip();
+  }
+
+  labelCoeff(coeff: number) {
+    return labelCoeff(coeff);
   }
 }

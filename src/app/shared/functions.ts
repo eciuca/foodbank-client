@@ -70,4 +70,17 @@ export function labelActive(active: boolean) {
         return $localize`:@@No:No`;
     }
 }
+export function labelCoeff(coeff: number) {
+    let label = '0%'
+    if (coeff >0) {
+        const percentage = Math.round(100/coeff);
+        label = percentage + '%';
+    }
+    return label;
+
+}
+
+export function getCoeffTooltip() {
+    return $localize`:@@BenefCoeffTooltip:The coefficient shows the percentage of the beneficiary's needs that are covered by the food aid`;
+}
 

@@ -6,7 +6,7 @@ import {DependentEntityService} from '../../services/dependent-entity.service';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../reducers';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmGender} from '../../../shared/enums';
+import {enmDepPercentages, enmDepTypes, enmGender} from '../../../shared/enums';
 import {map} from 'rxjs/operators';
 import {globalAuthState} from '../../../auth/auth.selectors';
 import {NgForm} from '@angular/forms';
@@ -29,6 +29,8 @@ export class DependentComponent implements OnInit {
   booCanSave: boolean;
   booCanDelete: boolean;
   genders: any[];
+  depTypes: any[];
+  depPercentages: any[];
   lienBanque: number;
   lienDis: number;
 
@@ -39,6 +41,8 @@ export class DependentComponent implements OnInit {
       private confirmationService: ConfirmationService
   ) {
     this.genders = enmGender;
+    this.depTypes = enmDepTypes;
+    this.depPercentages = enmDepPercentages;
     this.booCanDelete = false;
     this.booCanSave = false;
     this.lienDis = 0;

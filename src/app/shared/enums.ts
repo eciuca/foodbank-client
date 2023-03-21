@@ -205,6 +205,21 @@ export let enmDbChangeActions = [
     {label: $localize`:@@DbChangeActionDelete:Delete` , value: 'Delete'},
 
 ];
+export let enmDepTypes = [
+    {label: $localize`:@@DepTypeChild:Child` , value: 1 },
+    {label: $localize`:@@DepTypeParent:Parent` , value: 2 },
+    {label: $localize`:@@DepTypeGrandParent:Grand Parent` , value: 3 },
+    {label: $localize`:@@DepTypeGrandChild:Grand Child` , value: 4 },
+    {label: $localize`:@@DepTypeOtherFamily:Other Family Link` , value: 5 },
+    {label: $localize`:@@DepTypeCoHabitant:CoHabitant` , value: 6 },
+    {label: $localize`:@@DepTypeOther:Other` , value: 7 },
+];
+export let enmDepPercentages = [
+    {label: '100%' , value: 1 },
+    {label: '50%' , value: 2 },
+    ];
+
+
 
 
 

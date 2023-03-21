@@ -6,6 +6,7 @@ import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {map} from 'rxjs/operators';
 import {labelCivilite} from '../../shared/functions';
+import {enmDepPercentages, enmDepTypes} from '../../shared/enums';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class DependentsComponent implements OnInit {
   selectedIdDep$ = new BehaviorSubject(0);
   dependents: Dependent[];
   dependent: Dependent = null;
+  depTypes: any[];
+  depPercentages: any[];
   displayDialog: boolean;
   loading: boolean;
   booCanCreate: boolean;
@@ -32,6 +35,8 @@ export class DependentsComponent implements OnInit {
     this.dependentQuery = {};
     this.booShowArchived = false;
     this.first = 0;
+    this.depTypes = enmDepTypes;
+    this.depPercentages = enmDepPercentages;
   }
   ngOnInit() {
     this.store
@@ -113,5 +118,13 @@ export class DependentsComponent implements OnInit {
                 this.loading = false;
                 this.dependentService.setLoaded(true);
             });
+    }
+
+    labelRelation(depTyp: number) {
+        return this.depTypes.find(depType => depType.value === depTyp).label;
+    }
+
+    labelDepPercentage(eq: number) {
+        return this.depPercentages.find(depPercentage => depPercentage.value === eq).label;
     }
 }

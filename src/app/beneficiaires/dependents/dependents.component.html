@@ -16,6 +16,8 @@
             <th i18n="@@Name">Name</th>
             <th i18n="@@NameFirst">First Name</th>
             <th i18n="@@BirthDate">Birth Date</th>
+            <th i18n="@@Relation">Relation</th>
+            <th i18n="@@DepPercentage">% Dependent</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-dependent>
@@ -31,6 +33,12 @@
             </td>
             <td>
                 {{dependent.datenais}}
+            </td>
+            <td>
+                {{labelRelation(dependent.depTyp)}}
+            </td>
+            <td>
+                {{labelDepPercentage(dependent.eq)}}
             </td>
          </tr>
     </ng-template>

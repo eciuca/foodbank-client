@@ -13,6 +13,7 @@ import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
 import {enmStatutFead} from '../../shared/enums';
 import {OrganisationHttpService} from '../../organisations/services/organisation-http.service';
+import {labelCoeff,getCoeffTooltip} from '../../shared/functions';
 
 @Component({
     selector: 'app-beneficiaries-list',
@@ -49,6 +50,7 @@ export class BeneficiariesListComponent implements OnInit {
     booShowSimpler: boolean;
     birbFilter: any;
     zipCodeFilter: any;
+    booShowDoubles: boolean;
 
 
     constructor(
@@ -64,6 +66,7 @@ export class BeneficiariesListComponent implements OnInit {
         this.beneficiaires = [];
         this.booIsLoaded = false;
         this.booShowSimpler = false;
+        this.booShowDoubles = false;
         this.lienCpas = 0;
         this.feadStatuses = enmStatutFead;
         this.feadStatuses.unshift({'value': null, 'label': 'Tous les Statuts'});
@@ -179,7 +182,9 @@ export class BeneficiariesListComponent implements OnInit {
         if (this.zipCodeFilter) {
             benefQueryParams['cp'] = this.zipCodeFilter;
         }
-
+        if (this.booShowDoubles) {
+            benefQueryParams['suspect'] = '1';
+        }
         for (let key in benefQueryParams) {
             params.set(key, benefQueryParams[key])
         }
@@ -319,4 +324,18 @@ export class BeneficiariesListComponent implements OnInit {
         return $localize`:@@BenefDependentsTooltip:This includes the beneficiary himself, eventually his partner, and his children`;
     }
 
+    filterDoubles(checked: boolean) {
+        console.log('filterDoubles', checked);
+        this.booShowDoubles  = checked;
+        this.loadBeneficiaries();
+    }
+
+
+    getCoeffTooltip() {
+        return getCoeffTooltip();
+    }
+
+    labelCoeff(coeff: number) {
+        return labelCoeff(coeff);
+    }
 }
