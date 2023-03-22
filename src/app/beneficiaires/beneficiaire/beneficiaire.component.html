@@ -121,11 +121,11 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@FeadStatus" for="birb">Fead Status</label>
-                <p-dropdown [options]="feadStatuses" id="birb" name="birb" [disabled] ="updateRestricted" [ngModel]="beneficiaire.birb" ></p-dropdown>
+                <p-dropdown [options]="feadStatuses" id="birb" name="birb"  [ngModel]="beneficiaire.birb" ></p-dropdown>
             </div>
-            <div *ngIf="lienDis==0" class="p-field p-col-12 p-md-2">
+            <div  class="p-field p-col-12 p-md-2">
                 <label i18n="@@BeneficiaryCoeff" for="coeff">Coeff</label>
-                <p-dropdown [options]="coeffPercentages" id="coeff" name="coeff" [ngModel]="beneficiaire.coeff" ></p-dropdown>
+                <p-dropdown  [options]="coeffPercentages" id="coeff" name="coeff" [ngModel]="beneficiaire.coeff" ></p-dropdown>
             </div>
             <div *ngIf="dependents" [pTooltip]="getPovertyIndexTooltip()" class="p-field p-col-12 p-md-3">
                 <p>{{ getPovertyIndex()}}</p>
