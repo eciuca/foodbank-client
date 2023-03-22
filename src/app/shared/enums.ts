@@ -218,6 +218,13 @@ export let enmDepPercentages = [
     {label: '100%' , value: 1 },
     {label: '50%' , value: 2 },
     ];
+export let enmCoeffs = [
+    {label: '100%' , value: 1 },
+    {label: '50%' , value: 2 },
+    {label: '33%' , value: 3 },
+    {label: '25%' , value: 4 },
+    {label: 'Invalid' , value: 0},
+];
 
 
 

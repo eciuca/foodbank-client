@@ -204,8 +204,8 @@ export class BeneficiairesComponent implements OnInit {
       if (event.filters.birb && event.filters.birb.value !== null) {
         queryParms['birb'] = event.filters.birb.value;
       }
-      if (event.filters.suspect && event.filters.suspect.value !== null) {
-        queryParms['suspect'] = event.filters.suspect.value;
+      if (event.filters.coeff && event.filters.coeff.value !== null) {
+        queryParms['coeff'] = event.filters.coeff.value;
       }
     }
     this.loadPageSubject$.next(queryParms);
@@ -456,12 +456,7 @@ export class BeneficiairesComponent implements OnInit {
   }
 
   getFamilySize(beneficiaire: Beneficiaire) {
-    let familySize = beneficiaire.nbDep;
-    if (beneficiaire.nomconj) {
-      familySize++;
-    }
-    return familySize;
-
+    return beneficiaire.nbDep + 1;
   }
 
   getDependentsTooltip() {

@@ -41,6 +41,8 @@ import {OrganisationsDataService} from '../organisations/services/organisations-
 import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
 import {BeneficiariesListComponent} from './beneficiaries-list/beneficiaries-list.component';
 import {NgxPrintModule} from 'ngx-print';
+import {ToastModule} from 'primeng/toast';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 
 const routes: Routes = [
@@ -86,6 +88,8 @@ const routes: Routes = [
         AutoCompleteModule,
         CalendarModule,
         MessageModule,
+        ToastModule,
+        ProgressSpinnerModule,
         InputSwitchModule,
         CheckboxModule,
         InputNumberModule,

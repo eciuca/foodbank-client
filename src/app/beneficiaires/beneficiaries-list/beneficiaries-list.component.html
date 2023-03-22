@@ -42,7 +42,7 @@
         </div>
     </ng-template>
 </p-panel>
-
+<p-progressSpinner *ngIf="!booIsLoaded"></p-progressSpinner>
 <p-table id="print-section" #dt [value]="beneficiaires" styleClass="p-datatable-gridlines" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="caption">
         <div *ngIf ="!booShowSimpler" class="table-header">

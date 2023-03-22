@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {Beneficiaire, DefaultBeneficiaire} from '../model/beneficiaire';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmCountry, enmGender, enmStatutFead} from '../../shared/enums';
+import {enmCoeffs, enmCountry, enmGender, enmStatutFead} from '../../shared/enums';
 import {NgForm} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
@@ -47,6 +47,7 @@ export class BeneficiaireComponent implements OnInit {
     civilites: any[];
     countries: any[];
     feadStatuses: any[];
+    coeffPercentages: any[];
     lienBanque: number;
     idCompany: string;
     lienDis: number;
@@ -81,6 +82,7 @@ export class BeneficiaireComponent implements OnInit {
     this.civilites =  enmGender;
     this.countries = enmCountry;
     this.feadStatuses = enmStatutFead;
+    this.coeffPercentages = enmCoeffs;
     this.feadEligibility = '';
       this.booCalledFromTable = true;
       this.booCanSave = false;

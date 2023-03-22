@@ -66,6 +66,7 @@ export class OrganisationComponent implements OnInit {
     lienBanque: number;
     userName: string;
     userId: string;
+    userAsso: boolean;
     gestBen: boolean;
 
   constructor(
@@ -98,6 +99,7 @@ export class OrganisationComponent implements OnInit {
       this.lienBanque = 0;
       this.userName = '' ;
       this.userId = '' ;
+      this.userAsso = false;
       this.gestBen = false;
   }
 
@@ -196,7 +198,10 @@ export class OrganisationComponent implements OnInit {
                               this.lienBanque = authState.banque.bankId;
                               regionQuery['lienBanque'] = this.lienBanque.toString();
                               this.booCanSave = true;
+                              this.userAsso = true;
                               break;
+                          case 'Asso':
+                              this.userAsso = true;
                           default:
                       }
                       this.regionService.getWithQuery(regionQuery)

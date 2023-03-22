@@ -125,8 +125,7 @@
             </div>
             <div *ngIf="lienDis==0" class="p-field p-col-12 p-md-2">
                 <label i18n="@@BeneficiaryCoeff" for="coeff">Coeff</label>
-                <p-inputNumber [ngModel]="beneficiaire.coeff" id="coeff" name="coeff" mode="decimal" [showButtons]="true" inputId="coeff" [min]="1" [max]="5">
-                </p-inputNumber>
+                <p-dropdown [options]="coeffPercentages" id="coeff" name="coeff" [ngModel]="beneficiaire.coeff" ></p-dropdown>
             </div>
             <div *ngIf="dependents" [pTooltip]="getPovertyIndexTooltip()" class="p-field p-col-12 p-md-3">
                 <p>{{ getPovertyIndex()}}</p>

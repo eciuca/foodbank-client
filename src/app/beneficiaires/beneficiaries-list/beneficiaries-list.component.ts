@@ -183,11 +183,12 @@ export class BeneficiariesListComponent implements OnInit {
             benefQueryParams['cp'] = this.zipCodeFilter;
         }
         if (this.booShowDoubles) {
-            benefQueryParams['suspect'] = '1';
+            benefQueryParams['coeff'] = '1';
         }
         for (let key in benefQueryParams) {
             params.set(key, benefQueryParams[key])
         }
+        this.booIsLoaded = false;
         this.beneficiaireHttpService.getBeneficiaireReport( this.authService.accessToken,params.toString()).subscribe(
             (beneficiaires: any[]) => {
                 this.beneficiaires = beneficiaires;
