@@ -68,7 +68,7 @@ export class BeneficiariesListComponent implements OnInit {
         this.booShowSimpler = false;
         this.booShowDoubles = false;
         this.lienCpas = 0;
-        this.feadStatuses = {...enmStatutFead};
+        this.feadStatuses = enmStatutFead.slice(); // clone because we add a null value
         this.feadStatuses.unshift({'value': null, 'label': ' '});
     }
     
