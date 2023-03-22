@@ -68,8 +68,8 @@ export class BeneficiariesListComponent implements OnInit {
         this.booShowSimpler = false;
         this.booShowDoubles = false;
         this.lienCpas = 0;
-        this.feadStatuses = enmStatutFead;
-        this.feadStatuses.unshift({'value': null, 'label': 'Tous les Statuts'});
+        this.feadStatuses = {...enmStatutFead};
+        this.feadStatuses.unshift({'value': null, 'label': ' '});
     }
     
     ngOnInit(): void {
