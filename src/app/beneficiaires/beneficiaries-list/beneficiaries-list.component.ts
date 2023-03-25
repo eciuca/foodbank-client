@@ -13,7 +13,7 @@ import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
 import {enmStatutFead} from '../../shared/enums';
 import {OrganisationHttpService} from '../../organisations/services/organisation-http.service';
-import {labelCoeff,getCoeffTooltip} from '../../shared/functions';
+import {labelCoeff,getCoeffTooltip,generateTooltipOrganisation} from '../../shared/functions';
 
 @Component({
     selector: 'app-beneficiaries-list',
@@ -156,8 +156,7 @@ export class BeneficiariesListComponent implements OnInit {
         }
 
         if (event && event.query && event.query.length > 0) {
-            console.log('filter content', event.query.toLowerCase());
-            queryOrganisationParms['societe'] = event.query.toLowerCase();
+           queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();
         }
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
@@ -338,5 +337,8 @@ export class BeneficiariesListComponent implements OnInit {
 
     labelCoeff(coeff: number) {
         return labelCoeff(coeff);
+    }
+    generateTooltipOrganisation() {
+        return generateTooltipOrganisation();
     }
 }

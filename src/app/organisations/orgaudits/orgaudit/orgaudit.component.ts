@@ -13,6 +13,7 @@ import {Membre} from '../../../membres/model/membre';
 import {MembreEntityService} from '../../../membres/services/membre-entity.service';
 import {OrgSummaryEntityService} from '../../services/orgsummary-entity.service';
 import {OrgSummary} from '../../model/orgsummary';
+import {generateTooltipOrganisation} from '../../../shared/functions';
 
 @Component({
   selector: 'app-orgaudit',
@@ -133,7 +134,7 @@ export class OrgauditComponent implements OnInit {
     queryOrganisationParms['lienBanque'] = this.lienBanque.toString();
     queryOrganisationParms['actif'] = '1';
     if (event.query.length > 0) {
-      queryOrganisationParms['societe'] = event.query.toLowerCase();
+      queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();
     }
     this.orgsummaryService.getWithQuery(queryOrganisationParms)
         .subscribe(filteredOrganisations => {
@@ -254,6 +255,9 @@ export class OrgauditComponent implements OnInit {
     } else {
       this.onOrgauditQuit.emit();
     }
+  }
+  generateTooltipOrganisation() {
+    return generateTooltipOrganisation();
   }
 }
 

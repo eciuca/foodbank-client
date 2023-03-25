@@ -16,7 +16,7 @@
     <ng-template  pTemplate="content">
         <div *ngIf="organisations" class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-5">
-                <label for="filteredOrganisation" i18n="@@OrganisationFilter">Choose Organisation</label>
+                <label pTooltip="{{generateTooltipOrganisation()}}" i18n="@@FilterOnOrganisations" for="filteredOrganisation">Filter on Organisations?</label>
                 <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                  (onSelect)="loadOrganisationBeneficiaries($event);"
                                  [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">

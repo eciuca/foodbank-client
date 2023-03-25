@@ -16,7 +16,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {MembreHttpService} from './services/membre-http.service';
 import {formatDate} from '@angular/common';
-import {labelActive, labelCivilite, labelLanguage} from '../shared/functions';
+import {labelActive, labelCivilite, labelLanguage,generateTooltipOrganisation} from '../shared/functions';
 import {MembreFunctionEntityService} from './services/membreFunction-entity.service';
 
 
@@ -377,7 +377,7 @@ export class MembresComponent implements OnInit {
             }
         }
         if (event.query.length > 0) {
-            queryOrganisationParms['societe'] = event.query.toLowerCase();
+            queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();
         }
 
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
@@ -597,6 +597,10 @@ export class MembresComponent implements OnInit {
         }
         return telgsm;
 
+    }
+
+    generateTooltipOrganisation() {
+        return generateTooltipOrganisation();
     }
 }
 

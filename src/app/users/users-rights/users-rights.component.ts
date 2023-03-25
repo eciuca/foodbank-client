@@ -11,7 +11,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {enmLanguage, enmUserRolesAsso, enmUserRolesBankAsso, enmYn} from '../../shared/enums';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
-import {labelRights} from '../../shared/functions';
+import {labelRights,generateTooltipOrganisation} from '../../shared/functions';
 
 
 @Component({
@@ -223,7 +223,7 @@ export class UsersRightsComponent implements OnInit {
       queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
     }
     if (event.query.length > 0) {
-      queryOrganisationParms['societe'] = event.query.toLowerCase();
+      queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();
     }
     this.orgsummaryService.getWithQuery(queryOrganisationParms)
         .subscribe(filteredOrganisations => {
@@ -276,6 +276,9 @@ export class UsersRightsComponent implements OnInit {
       } else {
         return $localize`:@@BankUsersRightsTitle:Rights of Users of bank ${this.bankName} `;
     }
+  }
+  generateTooltipOrganisation() {
+    return generateTooltipOrganisation();
   }
 }
 

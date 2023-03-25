@@ -22,6 +22,7 @@ import {AuditChangesDataService} from './services/auditChanges-data.service';
 import {AuditUsersDataService} from './services/audit-users-data.service';
 import {AuditUserEntityService} from './services/audit-user-entity.service';
 import {AuditUsersComponent} from './audit-users.component';
+import {TooltipModule} from 'primeng/tooltip';
 
 const routes: Routes = [
     {
@@ -55,6 +56,7 @@ const routes: Routes = [
         CalendarModule,
         CheckboxModule,
         PanelModule,
+        TooltipModule,
         ChartModule
     ],
   providers: [

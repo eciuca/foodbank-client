@@ -11,7 +11,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {enmStatutFead, enmYn} from '../shared/enums';
-import {labelCoeff,getCoeffTooltip} from '../shared/functions';
+import {labelCoeff,getCoeffTooltip,generateTooltipOrganisation} from '../shared/functions';
 import {AuthService} from '../auth/auth.service';
 import {ExcelService} from '../services/excel.service';
 import {BeneficiaireHttpService} from './services/beneficiaire-http.service';
@@ -274,7 +274,7 @@ export class BeneficiairesComponent implements OnInit {
         queryOrganisationParms['lienCpas'] = this.lienCpas.toString();
     }
     if (event.query.length > 0) {
-      queryOrganisationParms['societe'] = event.query.toLowerCase();
+      queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();
     }
     this.orgsummaryService.getWithQuery(queryOrganisationParms)
         .subscribe(filteredOrganisations => {
@@ -475,5 +475,8 @@ export class BeneficiairesComponent implements OnInit {
 
   labelCoeff(coeff: number) {
     return labelCoeff(coeff);
+  }
+  generateTooltipOrganisation() {
+    return generateTooltipOrganisation();
   }
 }

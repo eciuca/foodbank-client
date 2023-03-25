@@ -18,7 +18,7 @@
                         </p-dropdown>
                     </div>
                     <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-5">
-                        <label i18n="@@FilterOnOrganisations" for="filteredOrganisation">Filter on Organisations?</label>
+                        <label pTooltip="{{generateTooltipOrganisation()}}" i18n="@@FilterOnOrganisations" for="filteredOrganisation">Filter on Organisations?</label>
                         <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                          (onSelect)="filterOrganisationUsers($event.idDis);"
                                          [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">

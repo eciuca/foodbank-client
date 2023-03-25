@@ -84,3 +84,7 @@ export function getCoeffTooltip() {
     return $localize`:@@BenefCoeffTooltip:The coefficient shows the percentage of the beneficiary's needs that are covered by the food aid`;
 }
 
+export function generateTooltipOrganisation() {
+    return $localize`:@@OrganisationTooltip:Enter In the rectangle below either the id of the organisation, either a part of the organisation name to see and select the desired organisation`;
+}
+

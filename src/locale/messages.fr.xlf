@@ -903,7 +903,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.html</context>
@@ -2199,7 +2199,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgaudits/orgaudit/orgaudit.component.ts</context>
-          <context context-type="linenumber">247</context>
+          <context context-type="linenumber">248</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefdetail/orgbenefdetail.component.ts</context>
@@ -2211,7 +2211,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeaddetail/orgfeaddetail.component.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">124</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/regions/region/region.component.ts</context>
@@ -2850,12 +2850,36 @@
           <context context-type="linenumber">8,10</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="FilterOnOrganisations" datatype="html">
+        <source>Filter on Organisations?</source>
+        <target>Filtrer sur Organisations ?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/membres/membres.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/users/users.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="ShowArchived" datatype="html">
         <source>Show Archived?</source>
         <target>Afficher archivé?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependents.component.html</context>
@@ -2883,7 +2907,7 @@
         <target>Trouver des doublons ?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ExportBeneficiaries" datatype="html">
@@ -2891,7 +2915,7 @@
         <target>Exporter les Beneficiaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ExportSelectedBeneficiaries" datatype="html">
@@ -2899,7 +2923,7 @@
         <target>Exporter les bénéficiaires sélectionnés</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddBeneficiary" datatype="html">
@@ -2907,7 +2931,7 @@
         <target>Ajouter un bénéficiaire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="NameSorted" datatype="html">
@@ -2915,7 +2939,7 @@
         <target>Nom<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nom&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.html</context>
@@ -2951,7 +2975,7 @@
         <target>Organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.ts</context>
@@ -2991,7 +3015,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.html</context>
@@ -3007,7 +3031,7 @@
         <target>Adresse<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;address&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">53</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.html</context>
@@ -3031,7 +3055,7 @@
         <target>Code postal<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;zip&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateurs.component.html</context>
@@ -3047,7 +3071,7 @@
         <target>Commune<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;city&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.html</context>
@@ -3067,7 +3091,7 @@
         <target>Date de naissance<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;daten&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="NbDependentsSorted" datatype="html">
@@ -3075,7 +3099,7 @@
         <target>Bénéficiaires<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;nbDep&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FEAD" datatype="html">
@@ -3083,7 +3107,7 @@
         <target>FEAD<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;birb&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BeneficiaryCoeffSorted" datatype="html">
@@ -3091,7 +3115,7 @@
         <target>Coeff<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;coeff&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BeneficiariesSelected" datatype="html">
@@ -3099,7 +3123,7 @@
         <target> Il y a <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> bénéficiaires sélectionnés.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">132,134</context>
+          <context context-type="linenumber">133,135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BeneficiaryDetails" datatype="html">
@@ -3107,7 +3131,7 @@
         <target>Détails du bénéficiaire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaires.component.html</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">139</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
@@ -3263,7 +3287,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">229</context>
+          <context context-type="linenumber">228</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Families" datatype="html">
@@ -3303,7 +3327,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">229</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.html</context>
@@ -3327,7 +3351,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">230</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3347,7 +3371,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">232</context>
+          <context context-type="linenumber">231</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3367,7 +3391,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">233</context>
+          <context context-type="linenumber">232</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3387,7 +3411,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">234</context>
+          <context context-type="linenumber">233</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3407,7 +3431,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">235</context>
+          <context context-type="linenumber">234</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3427,7 +3451,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">235</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.ts</context>
@@ -3447,7 +3471,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">237</context>
+          <context context-type="linenumber">236</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Equivalents" datatype="html">
@@ -3459,7 +3483,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">237</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ParentsMale" datatype="html">
@@ -3471,7 +3495,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">238</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ParentsFemale" datatype="html">
@@ -3483,7 +3507,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">239</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BenefDependentsTooltip" datatype="html">
@@ -3495,7 +3519,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">325</context>
+          <context context-type="linenumber">324</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BenefDuplicatesTooltip" datatype="html">
@@ -3524,14 +3548,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbeneflist/orgbeneflist.component.html</context>
           <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="OrganisationFilter" datatype="html">
-        <source>Choose Organisation</source>
-        <target>Choisissez l'organisation</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.html</context>
-          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ShowDoubles" datatype="html">
@@ -3563,7 +3579,7 @@
         <target>Bénéficiaires <x id="PH" equiv-text="subtitle"/> au <x id="PH_1" equiv-text="new Date().toLocaleDateString('fr-FR')"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaries-list/beneficiaries-list.component.ts</context>
-          <context context-type="linenumber">293</context>
+          <context context-type="linenumber">292</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ExportHistoryReport" datatype="html">
@@ -5950,18 +5966,6 @@
           <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="FilterOnOrganisations" datatype="html">
-        <source>Filter on Organisations?</source>
-        <target>Filtrer sur Organisations ?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/membres/membres.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/users/users.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="ExportAllMembers" datatype="html">
         <source>Export All Members</source>
         <target>Exporter tous les collaborateurs</target>
@@ -6467,7 +6471,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeaddetail/orgfeaddetail.component.ts</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageOrganisationUpdateError" datatype="html">
@@ -6487,7 +6491,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeaddetail/orgfeaddetail.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgNbPersSorted" datatype="html">
@@ -7467,7 +7471,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeaddetail/orgfeaddetail.component.ts</context>
-          <context context-type="linenumber">163</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeadoverview.component.ts</context>
@@ -7495,7 +7499,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
-          <context context-type="linenumber">600</context>
+          <context context-type="linenumber">597</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotMissing" datatype="html">
@@ -7903,7 +7907,7 @@
         <target>Nb de bénéficiaires agréées par la FEAD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeaddetail/orgfeaddetail.component.ts</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">154</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeadoverview.component.ts</context>
@@ -7915,7 +7919,7 @@
         <target>Le FEAD est-il distribué par les Banques Alimentaires ?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeaddetail/orgfeaddetail.component.ts</context>
-          <context context-type="linenumber">171</context>
+          <context context-type="linenumber">158</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeadoverview.component.ts</context>
@@ -7927,7 +7931,7 @@
         <target>Code FEAD de l'organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeaddetail/orgfeaddetail.component.ts</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">162</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeadoverview.component.ts</context>
@@ -7939,7 +7943,7 @@
         <target>Cette organisation est-elle une antenne d'une autre organisation ?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeaddetail/orgfeaddetail.component.ts</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">166</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgToolTipAntenne" datatype="html">
@@ -7947,7 +7951,7 @@
         <target>Organisation mère de cette antenne</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgfeadoverview/orgfeaddetail/orgfeaddetail.component.ts</context>
-          <context context-type="linenumber">183</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgFEADFromUsSorted" datatype="html">
@@ -8890,6 +8894,14 @@
           <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="OrganisationTooltip" datatype="html">
+        <source>Enter In the rectangle below either the id of the organisation, either a part of the organisation name to see and select the desired organisation</source>
+        <target>Entrez dans le rectangle ci-dessous soit l'identifiant de l'organisation, soit une partie du nom de l'organisation pour voir et sélectionner l'organisation souhaitée</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/functions.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="TripDateMandatory" datatype="html">
         <source>Trip Date *</source>
         <target>Date du déplacement *</target>
@@ -9331,7 +9343,7 @@
         <target>Utilisateur<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;idUser&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.html</context>
@@ -9343,7 +9355,7 @@
         <target>Nom<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;membreNom&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ManageMembersSorted" datatype="html">
@@ -9351,7 +9363,7 @@
         <target>Gérer Collaborateurs<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;gestMemb&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ManageClientsSorted" datatype="html">
@@ -9359,7 +9371,7 @@
         <target>Gérer les Bénéficiaires<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;gestBen&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ManageFeadSorted" datatype="html">
@@ -9367,7 +9379,7 @@
         <target>Gérer FEAD<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;gestFead&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ManageGiftsSorted" datatype="html">
@@ -9375,7 +9387,7 @@
         <target>Gérer Dons<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;gestDon&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UsersSelected" datatype="html">
@@ -9383,7 +9395,7 @@
         <target> Il y a <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> utilisateurs sélectionnés.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
-          <context context-type="linenumber">139,141</context>
+          <context context-type="linenumber">140,142</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.html</context>
@@ -9395,7 +9407,7 @@
         <target>Détails de l'utilisateur</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users-rights/users-rights.component.html</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">147</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/users/users.component.html</context>
@@ -9629,6 +9641,10 @@
       <trans-unit id="Couple">
         <source/>
         <target>Couple</target>
+      </trans-unit>
+      <trans-unit id="OrganisationFilter">
+        <source/>
+        <target>Choisissez l'organisation</target>
       </trans-unit>
       <trans-unit id="Single">
         <source/>

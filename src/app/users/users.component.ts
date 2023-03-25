@@ -16,7 +16,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {UserHttpService} from './services/user-http.service';
 import {formatDate} from '@angular/common';
-import {labelActive, labelRights} from '../shared/functions';
+import {labelActive, labelRights,generateTooltipOrganisation} from '../shared/functions';
 import {MembreEntityService} from '../membres/services/membre-entity.service';
 
 
@@ -353,7 +353,7 @@ export class UsersComponent implements OnInit {
             }
         }
         if (event.query.length > 0) {
-            queryOrganisationParms['societe'] = event.query.toLowerCase();
+            queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();
         }
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
@@ -593,10 +593,10 @@ export class UsersComponent implements OnInit {
         const memberLanguage = memberLanguageObj ? memberLanguageObj.label : 'unknown';
         return userLanguage != memberLanguage;
     }
-
-
-
     generateLoginTooltip() {
         return $localize`:@@ToolTipNbLogins:Nb Of Logins since 2021`;
+    }
+    generateTooltipOrganisation() {
+        return generateTooltipOrganisation();
     }
 }

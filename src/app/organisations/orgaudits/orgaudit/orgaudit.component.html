@@ -18,7 +18,7 @@
                 </p-autoComplete>
             </div>
             <div  class="p-field p-col-12 p-md-4">
-                <label i18n="@@OrgAuditOrganisation" for="selectedOrganisation">Organisation</label>
+                <label pTooltip="{{generateTooltipOrganisation()}}"  i18n="@@OrgAuditOrganisation" for="selectedOrganisation">Organisation</label>
                 <p-autoComplete  [(ngModel)]="selectedOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                 [forceSelection]="true"  id="selectedOrganisation" name="selectedOrganisation" field="fullname" [dropdown]="true">
                 </p-autoComplete>

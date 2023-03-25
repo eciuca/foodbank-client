@@ -6,7 +6,6 @@ import {combineLatest, Observable} from 'rxjs';
 import {Organisation} from '../../model/organisation';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {NgForm} from '@angular/forms';
-
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../reducers';
@@ -133,19 +132,7 @@ export class OrgfeaddetailComponent implements OnInit {
       this.onOrganisationQuit.emit();
     }
   }
-  filterOrganisation(event ) {
-    const  queryOrganisationParms: QueryParams = {};
-    queryOrganisationParms['lienBanque'] = this.organisation.lienBanque.toString();
-    if (event.query.length > 0) {
-      queryOrganisationParms['societe'] = event.query.toLowerCase();
-    }
-    this.orgsummaryService.getWithQuery(queryOrganisationParms)
-        .subscribe(filteredOrganisations => {
-          this.filteredOrganisations = filteredOrganisations.map((organisation) =>
-              Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
-          );
-        });
-  }
+
     handleAntenneStatusChange(e: any) {
         if (e.checked) {
             this.organisation.birbCode = "1";
