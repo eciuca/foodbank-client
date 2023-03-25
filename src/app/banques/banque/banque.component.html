@@ -324,7 +324,13 @@
                         <input i18n-placeholder="@@BankActivityDescription" pInputText id="resunpm" name="resunpm" placeholder="Activity Description" [ngModel]="banqProg.resunpm" />
                     </div>
                 </div>
-
+                </form>
+            </p-accordionTab>
+    <p-accordionTab *ngIf="banqProg" i18n-header="@@BankMemberships" header="Bank Memberships">
+        <form #membershipForm="ngForm">
+            <div *ngIf="booCanSave" class="p-formgroup-inline">
+                <button  type="button" pButton icon="pi pi-check" (click)="saveDetails(banqProg, membershipForm.value)" i18n-label="@@Save" label="Save" ></button>
+            </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@BankMemberShipYearly?" for="cotAnnuelle">Yearly MemberShip?</label>
@@ -335,8 +341,7 @@
                         <p-inputNumber [ngModel]="banqProg.cotAmount" id="cotAmount" name="cotAmount" mode="decimal" [step]="0.1" [showButtons]="true" inputId="cotAmount" [min]="0">
                         </p-inputNumber>
                     </div>
-                    <div class="p-field p-col-12 p-md-4">
-                    </div>
+
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@BankMemberShipExtra?" for="cotSup">Extra MemberShip?</label>
                         <p-inputSwitch id="cotSup" name="cotSup" [ngModel]="banqProg.cotSup"></p-inputSwitch>
@@ -346,7 +351,56 @@
                         <p-inputNumber [ngModel]="banqProg.cotAmountSup" id="cotAmountSup" name="cotAmountSup" mode="decimal"  [step]="0.1" [showButtons]="true" inputId="cotAmountSup" [min]="0">
                         </p-inputNumber>
                     </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@BankMemberShipCustom?" for="cotTextCustom">Custom MemberShip Text?</label>
+                        <p-inputSwitch id="cotTextCustom" name="cotTextCustom" [ngModel]="banqProg.cotTextCustom"></p-inputSwitch>
+                    </div>
                 </div>
+            <div *ngIf="baseurl.includes('localhost') || baseurl.toLowerCase().includes('dev')" class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" i18n-placeholder="@@EnterYourMemberShipText" placeholder="Enter your MemberShip Text" name="mailingText" [style]="{'height':'320px'}">
+                    <p-header>
+                             <span class="ql-formats">
+                                <select class="ql-header" tabindex="-1">
+                                    <option value="1" tabindex="-1">Heading</option>
+                                    <option value="2" tabindex="-1">Subheading</option>
+                                    <option selected tabindex="-1">Normal</option>
+                                </select>
+                             <select class="ql-font" tabindex="-1">
+                                    <option selected tabindex="-1">Sans Serif</option>
+                                    <option value="serif" tabindex="-1">Serif</option>
+                                    <option value="monospace" tabindex="-1">Monospace</option>
+                                </select>
+                            </span>
+                        <span class="ql-formats">
+                                <button class="ql-bold" aria-label="Bold" tabindex="-1"></button>
+                                <button class="ql-italic" aria-label="Italic" tabindex="-1"></button>
+                                <button class="ql-underline" aria-label="Underline" tabindex="-1"></button>
+                            </span>
+                        <span class="ql-formats">
+                                <select class="ql-color" tabindex="-1"></select>
+                                <select class="ql-background" tabindex="-1"></select>
+                            </span>
+                        <span class="ql-formats">
+                                <button class="ql-list" value="ordered" aria-label="Ordered List" tabindex="-1"></button>
+                                <button class="ql-list" value="bullet" aria-label="Unordered List" tabindex="-1"></button>
+                                <select class="ql-align" tabindex="-1">
+                                    <option selected tabindex="-1"></option>
+                                    <option value="center" tabindex="-1"></option>
+                                    <option value="right" tabindex="-1"></option>
+                                    <option value="justify" tabindex="-1"></option>
+                                </select>
+                            </span>
+                        <span class="ql-formats">
+                                <button class="ql-link" aria-label="Insert Link" tabindex="-1"></button>
+                            </span>
+                        <span class="ql-formats">
+                                <button class="ql-clean" aria-label="Remove Styles" tabindex="-1"></button>
+                            </span>
+                    </p-header>
+                </p-editor>
+                    </div>
+            </div>
             </form>
         </p-accordionTab>
     </p-accordion>

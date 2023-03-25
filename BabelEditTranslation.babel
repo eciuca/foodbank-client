@@ -1360,6 +1360,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>BankMemberShipCustom?</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>BankMemberShipExtra?</name>
                         <description/>
                         <comment/>
@@ -1461,6 +1481,26 @@
                     </concept_node>
                     <concept_node>
                         <name>BankMembersTitleArchive</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BankMemberships</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -4485,6 +4525,26 @@
                     </concept_node>
                     <concept_node>
                         <name>EndndDateInvalid</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>EnterYourMemberShipText</name>
                         <description/>
                         <comment/>
                         <default_text/>

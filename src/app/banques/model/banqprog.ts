@@ -32,6 +32,9 @@ export interface BanqProg {
     cotAmount: string ;
     cotSup: boolean ;
     cotAmountSup: string ;
+    cotTextCustom: boolean ;
+    cotTextFr: string ;
+    cotTextNl: string ;
     bankShortName: string ;
 }
 
@@ -81,6 +84,9 @@ export class DefaultBanqProg implements BanqProg {
     tupm: boolean;
     weam: boolean;
     wepm: boolean;
+    cotTextCustom: boolean ;
+    cotTextFr: string ;
+    cotTextNl: string ;
     constructor() {
         // this.lienBanque= 0 ; omit key
 
@@ -117,6 +123,9 @@ export class DefaultBanqProg implements BanqProg {
         this.cotAmount = '';
         this.cotSup = false;
         this.cotAmountSup = '';
+        this.cotTextCustom = false ;
+        this.cotTextFr = '';
+        this.cotTextNl = '';
         this.bankShortName = '';
     }
 }

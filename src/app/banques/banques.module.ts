@@ -34,6 +34,7 @@ import {BankreportsComponent} from './bankreports/bankreports.component';
 import {ChartModule} from 'primeng/chart';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {EditorModule} from 'primeng/editor';
 
 const routes: Routes = [
     {
@@ -83,6 +84,7 @@ const routes: Routes = [
         AccordionModule,
         InputSwitchModule,
         InputNumberModule,
+        EditorModule,
         ChartModule
     ],
   providers: [

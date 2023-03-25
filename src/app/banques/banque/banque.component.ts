@@ -25,6 +25,7 @@ import {AuditChangeEntityService} from '../../audits/services/auditChange-entity
 export class BanqueComponent implements OnInit {
     @ViewChild('banqueForm') bankform: NgForm;
     @ViewChild('detailForm') detailform: NgForm;
+    @ViewChild('membershipForm') membershipForm: NgForm;
     @Input() bankId$: Observable<number>;
     @Output() onBanqueCreate = new EventEmitter<Banque>();
     @Output() onBanqueUpdate = new EventEmitter<Banque>();
@@ -56,6 +57,11 @@ export class BanqueComponent implements OnInit {
     selectedQuality: Membre;
 
     filteredMembres: Membre[];
+    mailingText: string;
+    mailingTextNl: string;
+    mailingTextFr: string;
+    baseurl: string;
+
 
   constructor(
       private banquesService: BanqueEntityService,
@@ -68,11 +74,32 @@ export class BanqueComponent implements OnInit {
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
+      this.baseurl = window.location.origin;
       this.booCalledFromTable = true;
       this.booCanDelete = false;
       this.booCanSave = false;
       this.booCanQuit = true;
       this.booIsCreate = false;
+      this.mailingTextNl = '';
+      this.mailingTextNl = `<Strong>DEBETNOTA<br>-----organisation.societe-----</strong><br>-----organisation.adresse-----<br>-----organisation.cp-----<br>-----organisation.localite-----<br><br>`;
+      this.mailingTextNl += `Geachte mevrouw/mijnheer,<br>Hierbij vindt u het verzoek tot betaling van de -----typeMembership-----`;
+      this.mailingTextNl +=  ` van uw liefdadigheidsvereniging aan onze Voedselbank. De basis bijdrage bedraagt -----cotreal-----  Euro voor -----organisation.cotMonths----- maand per minderbedeelde` ;
+      this.mailingTextNl += `<br>Het gemiddeld aantal begunstigden voor het voorbije jaar voor uw vereniging bedroeg -----organisation.nPers-----`;
+      this.mailingTextNl += `<br>Gelieve het bedrag van -----due----- € te willen storten op ons  rekeningnr -----bankAccount----- ten laatste tegen <b> -----dueDate----- </b> met melding <b>"LEDENBIJDRAGE -----cotYear-----"</b>.<br>`;
+      this.mailingTextNl += `<br>Met dank bij voorbaat.<br><br>De Penningmeester,<br>-----bankTreas-----<br>-----bankName-----<br>Bedrijfsnummer: -----bankEntNr----- `;
+      this.mailingTextNl += `Adres: -----bankAdress----- -----bankZip----- -----bankCity----- -----bankTel-----`;
+      this.mailingTextNl += '<br><br><i>Nota: Factuur te verkrijgen op aanvraag</i>';
+      this.mailingTextFr = '';
+      this.mailingTextFr = `<Strong>NOTE DE DEBIT<br>-----organisation.societe-----</strong><br>-----organisation.adresse-----<br>-----organisation.cp-----<br>-----organisation.localite-----<br><br>`;
+      this.mailingTextFr += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre -----typeMembership-----`;
+      this.mailingTextFr +=  ` de votre association soit -----cotreal-----  Euro pour -----organisation.cotMonths----- mois par bénéficiaire` ;
+      this.mailingTextFr += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de -----organisation.nPers----- personnes`;
+      this.mailingTextFr += `<br>Merci de verser le montant de  -----due----- € sur le compte -----bankAccount----- au plus tard le <b> -----dueDate----- </b> avec la mention <b>"COTISATION MEMBRES -----cotYear-----.</b><br>`;
+      this.mailingTextFr += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>-----bankTreas-----<br>-----bankName-----<br>N° Entreprise: -----bankEntNr----- `;
+      this.mailingTextFr += `Adresse: -----bankAdress----- -----bankZip----- -----bankCity----- -----bankTel-----`;
+      this.mailingTextFr += '<br><br><i>>Note: Facture sur demande</i>';
+
+      this.mailingText = this.mailingTextNl;
     }
 
   ngOnInit(): void {

@@ -1113,6 +1113,10 @@
           <context context-type="linenumber">211</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
+          <context context-type="linenumber">332</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
@@ -1898,81 +1902,102 @@
           <context context-type="linenumber">482</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="BankMemberships" datatype="html">
+        <source>Bank Memberships</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
+          <context context-type="linenumber">329</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="BankMemberShipYearly?" datatype="html">
         <source>Yearly MemberShip?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">330</context>
+          <context context-type="linenumber">336</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMemberShipAmount" datatype="html">
         <source>MemberShip Amount</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">334</context>
+          <context context-type="linenumber">340</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMemberShipExtra?" datatype="html">
         <source>Extra MemberShip?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">341</context>
+          <context context-type="linenumber">346</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BankMemberShipExtraAmount" datatype="html">
         <source>MemberShip Extra Amount</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">345</context>
+          <context context-type="linenumber">350</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BankMemberShipCustom?" datatype="html">
+        <source>Custom MemberShip Text?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
+          <context context-type="linenumber">355</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="EnterYourMemberShipText" datatype="html">
+        <source>Enter your MemberShip Text</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
+          <context context-type="linenumber">361</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankUpdated" datatype="html">
         <source>Bank <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/>  was updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">301</context>
+          <context context-type="linenumber">328</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankUpdateError" datatype="html">
         <source>The bank <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/> could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">312</context>
+          <context context-type="linenumber">339</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankCreated" datatype="html">
         <source>Bank <x id="PH" equiv-text="newBanque.bankName"/> was created</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">322</context>
+          <context context-type="linenumber">349</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankCreateError" datatype="html">
         <source>The bank <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/> could not be created: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">333</context>
+          <context context-type="linenumber">360</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDeleted" datatype="html">
         <source>Bank <x id="PH" equiv-text="banque.bankName"/> was deleted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">348</context>
+          <context context-type="linenumber">375</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDeleteError" datatype="html">
         <source>The bank <x id="PH" equiv-text="banque.bankId"/> <x id="PH_1" equiv-text="banque.bankShortName"/> <x id="PH_2" equiv-text="banque.bankName"/> could not be deleted: error: <x id="PH_3" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">362</context>
+          <context context-type="linenumber">389</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageChangesMayBeLost" datatype="html">
         <source>Your changes may be lost. Are you sure that you want to proceed?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">374</context>
+          <context context-type="linenumber">401</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
@@ -2059,14 +2084,14 @@
         <source>Bank  <x id="PH" equiv-text="this.banque.bankShortName"/> <x id="PH_1" equiv-text="this.banque.bankName"/>  details were updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">392</context>
+          <context context-type="linenumber">419</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDetailsUpdateError" datatype="html">
         <source>The bank  <x id="PH" equiv-text="this.banque.bankShortName"/> <x id="PH_1" equiv-text="this.banque.bankName"/> details could not be updated: error: <x id="PH_2" equiv-text="dataserviceerror.message"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">401</context>
+          <context context-type="linenumber">428</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReport" datatype="html">
