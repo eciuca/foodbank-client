@@ -331,7 +331,10 @@
             <div *ngIf="booCanSave" class="p-formgroup-inline">
                 <button  type="button" pButton icon="pi pi-check" (click)="saveDetails(banqProg, membershipForm.value)" i18n-label="@@Save" label="Save" ></button>
             </div>
+
                 <div class="p-fluid p-formgrid p-grid">
+
+
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@BankMemberShipYearly?" for="cotAnnuelle">Yearly MemberShip?</label>
                         <p-inputSwitch id="cotAnnuelle" name="cotAnnuelle" [ngModel]="banqProg.cotAnnuelle"></p-inputSwitch>
@@ -352,11 +355,20 @@
                         </p-inputNumber>
                     </div>
                     <div class="p-field p-col-12 p-md-2">
-                        <label i18n="@@BankMemberShipCustom?" for="cotTextCustom">Custom MemberShip Text?</label>
-                        <p-inputSwitch id="cotTextCustom" name="cotTextCustom" [ngModel]="banqProg.cotTextCustom"></p-inputSwitch>
+                        <label i18n="@@BankMemberShipCustom?" for="isCotCustomText">Custom MemberShip Text?</label>
+                        <p-inputSwitch id="isCotCustomText" name="isCotCustomText" [(ngModel)]="isCotCustomText"></p-inputSwitch>
                     </div>
                 </div>
-            <div *ngIf="baseurl.includes('localhost') || baseurl.toLowerCase().includes('dev')" class="p-fluid p-formgrid p-grid">
+            <div *ngIf="isCotCustomText && (baseurl.includes('localhost') || baseurl.toLowerCase().includes('dev'))" class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-2">
+                    <p-radioButton name="mailingchoice" value="fr" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event)" inputId="francais"></p-radioButton>
+                    <label for="francais" class="ml-2">Français"</label>
+                    <p-radioButton name="mailingchoice" value="nl" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event)"inputId="nederlands"></p-radioButton>
+                    <label for="nederlands" class="ml-2">Nederlands</label>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <button  type="button" pButton icon="pi pi-check" (click)="loadDefaultText()" i18n-label="@@LoadDefaultText" label="Load Default Text" ></button>
+                </div>
                 <div class="p-field p-col-12 p-md-12">
                 <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" i18n-placeholder="@@EnterYourMemberShipText" placeholder="Enter your MemberShip Text" name="mailingText" [style]="{'height':'320px'}">
                     <p-header>

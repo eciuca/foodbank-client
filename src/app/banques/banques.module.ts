@@ -35,6 +35,7 @@ import {ChartModule} from 'primeng/chart';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 import {EditorModule} from 'primeng/editor';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 const routes: Routes = [
     {
@@ -84,6 +85,7 @@ const routes: Routes = [
         AccordionModule,
         InputSwitchModule,
         InputNumberModule,
+        RadioButtonModule,
         EditorModule,
         ChartModule
     ],
