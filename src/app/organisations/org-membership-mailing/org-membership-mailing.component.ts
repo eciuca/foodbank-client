@@ -53,6 +53,8 @@ export class OrgMembershipMailingComponent implements OnInit {
     mailingSubject: string;
     mailingLanguage: string;
     mailingText: string;
+    mailingTextDefaultNl: string;
+    mailingTextDefaultFr: string;
     // variables for file upload
     attachmentFileNames: string[];
     isYearlyMail: boolean;
@@ -107,6 +109,16 @@ export class OrgMembershipMailingComponent implements OnInit {
       this.dueDate = '';
       this.maxAttachmentFileSize = 5000000; // max 5 MB file size
       this.isAttachmentUploadOngoing = false;
+      
+      this.mailingTextDefaultFr = '';
+      this.mailingTextDefaultFr = `<Strong>NOTE DE DEBIT<br>{{organisation.societe}}</strong><br>{{organisation.adresse}}<br>{{organisation.cp}}<br>{{organisation.localite}}<br><br>`;
+      this.mailingTextDefaultFr += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre {{typeMembership}}`;
+      this.mailingTextDefaultFr +=  ` de votre association soit {{cotreal}}  Euro pour {{organisation.cotMonths}} mois par bénéficiaire` ;
+      this.mailingTextDefaultFr += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de {{organisation.nPers}} personnes`;
+      this.mailingTextDefaultFr += `<br>Merci de verser le montant de  {{due}} € sur le compte {{bankAccount}} au plus tard le <b> {{dueDate}} </b> avec la mention <b>"COTISATION MEMBRES {{cotYear}}.</b><br>`;
+      this.mailingTextDefaultFr += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>{{bankTreas}}<br>{{bankName}}<br>N° Entreprise: {{bankEntNr}} `;
+      this.mailingTextDefaultFr += `Adresse: {{bankAdress}} {{bankZip}} {{bankCity}} {{bankTel}}`;
+      this.mailingTextDefaultFr += '<br><br><i>>Note: Facture sur demande</i>';
   }
 
   ngOnInit() {
@@ -159,14 +171,36 @@ export class OrgMembershipMailingComponent implements OnInit {
           } else {
               this.typeMembership = 'extra ledenbijdrage';
           }
-          this.mailingText = `<Strong>DEBETNOTA<br>${this.organisation.societe}</strong><br>${this.organisation.adresse}<br>${this.organisation.cp}<br>${this.organisation.localite}<br><br>`;
-          this.mailingText += `Geachte mevrouw/mijnheer,<br>Hierbij vindt u het verzoek tot betaling van de ${this.typeMembership}`;
-          this.mailingText +=  ` van uw liefdadigheidsvereniging aan onze Voedselbank. De basis bijdrage bedraagt ${cotreal}  Euro voor ${this.organisation.cotMonths} maand per minderbedeelde` ;
-          this.mailingText += `<br>Het gemiddeld aantal begunstigden voor het voorbije jaar voor uw vereniging bedroeg ${this.organisation.nPers}`;
-          this.mailingText += `<br>Gelieve het bedrag van ${this.due} € te willen storten op ons  rekeningnr ${this.bankAccount} ten laatste tegen <b> ${this.dueDate} </b> met melding <b>"LEDENBIJDRAGE ${this.cotYear}"</b>.<br>`;
-          this.mailingText += `<br>Met dank bij voorbaat.<br><br>De Penningmeester,<br>${this.bankTreas}<br>${this.bankName}<br>Bedrijfsnummer: ${this.bankEntNr} `;
-          this.mailingText += `Adres: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
-          this.mailingText += '<br><br><i>Nota: Factuur te verkrijgen op aanvraag</i>';
+          this.mailingTextDefaultNl = `<Strong>DEBETNOTA<br>{{organisatieNaam}}</strong><br>{{organisatieAdres}}<br>{{organisatiePostCode}}<br>{{organisatieGemeente}}<br><br>`;
+          this.mailingTextDefaultNl += `Geachte mevrouw/mijnheer,<br>Hierbij vindt u het verzoek tot betaling van de {{Type Bijdrage}}`;
+          this.mailingTextDefaultNl +=  ` van uw liefdadigheidsvereniging aan onze Voedselbank. De basis bijdrage bedraagt {{BijdrageBedrag}}  Euro voor {{Aantal Maanden}} maand per minderbedeelde` ;
+          this.mailingTextDefaultNl += `<br>Het gemiddeld aantal begunstigden voor het voorbije jaar voor uw vereniging bedroeg {{Aantal Personen}}`;
+          this.mailingTextDefaultNl += `<br>Gelieve het bedrag van {{Verschuldigd Bedrag}} € te willen storten op ons  rekeningnr {{Bank Rekening Nummer}} ten laatste tegen <b> {{Verval Datum}} </b> met melding <b>"LEDENBIJDRAGE {{Jaar Bijdrage}}"</b>.<br>`;
+          this.mailingTextDefaultNl += `<br>Met dank bij voorbaat.<br><br>De Penningmeester,<br>{{Schatbewaarder}}<br>{{Naam Voedselbank}}<br>Bedrijfsnummer: {{BedrijfsNummer Voedselbank}} `;
+          this.mailingTextDefaultNl += `Adres: {{Adres Voedselbank}} {{PostCode Voedselbank}} {{Gemeente Voedselbank}} {{Telefoon Voedselbank}}`;
+          this.mailingTextDefaultNl += '<br><br><i>Nota: Factuur te verkrijgen op aanvraag</i>';
+          this.mailingText = this.mailingTextDefaultNl;
+          this.mailingText = this.mailingText.replace(/{{organisatieNaam}}/g, this.organisation.societe);
+            this.mailingText = this.mailingText.replace(/{{organisatieAdres}}/g, this.organisation.adresse);
+            this.mailingText = this.mailingText.replace(/{{organisatiePostCode}}/g, this.organisation.cp);
+            this.mailingText = this.mailingText.replace(/{{organisatieGemeente}}/g, this.organisation.localite);
+            this.mailingText = this.mailingText.replace(/{{Type Bijdrage}}/g, this.typeMembership);
+            this.mailingText = this.mailingText.replace(/{{BijdrageBedrag}}/g, cotreal.toString());
+            this.mailingText = this.mailingText.replace(/{{Aantal Maanden}}/g, this.organisation.cotMonths.toString());
+            this.mailingText = this.mailingText.replace(/{{Aantal Personen}}/g, this.organisation.nPers.toString());           
+            
+            this.mailingText = this.mailingText.replace(/{{Bank Rekening Nummer}}/g, this.bankAccount);
+            this.mailingText = this.mailingText.replace(/{{Verschuldigd Bedrag}}/g, this.due.toString());
+            this.mailingText = this.mailingText.replace(/{{Verval Datum}}/g, this.dueDate);          
+            this.mailingText = this.mailingText.replace(/{{Jaar Bijdrage}}/g, this.cotYear.toString());
+          this.mailingText = this.mailingText.replace(/{{Schatbewaarder}}/g, this.bankTreas);
+          this.mailingText = this.mailingText.replace(/{{Naam Voedselbank}}/g, this.bankName);
+          this.mailingText = this.mailingText.replace(/{{BedrijfsNummer Voedselbank}}/g, this.bankEntNr);
+          this.mailingText = this.mailingText.replace(/{{Adres Voedselbank}}/g, this.bankAdress);
+          this.mailingText = this.mailingText.replace(/{{PostCode Voedselbank}}/g, this.bankZip);
+          this.mailingText = this.mailingText.replace(/{{Gemeente Voedselbank}}/g, this.bankCity);
+          this.mailingText = this.mailingText.replace(/{{Telefoon Voedselbank}}/g, this.bankTel);
+          
       } else {
           this.mailingLanguage = 'fr';
           this.mailingSubject = `Cotisation ${this.cotYear} payable à la Banque Alimentaire - Note de débit` ;
@@ -176,14 +210,34 @@ export class OrgMembershipMailingComponent implements OnInit {
           } else {
               this.typeMembership = 'cotisation annuelle supplémentaire';
           }
-          this.mailingText = `<Strong>NOTE DE DEBIT<br>${this.organisation.societe}</strong><br>${this.organisation.adresse}<br>${this.organisation.cp}<br>${this.organisation.localite}<br><br>`;
-          this.mailingText += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre ${this.typeMembership}`;
-          this.mailingText +=  ` de votre association soit ${cotreal}  Euro pour ${this.organisation.cotMonths} mois par bénéficiaire` ;
-          this.mailingText += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de ${this.organisation.nPers} personnes`;
-          this.mailingText += `<br>Merci de verser le montant de  ${this.due} € sur le compte ${this.bankAccount} au plus tard le <b> ${this.dueDate} </b> avec la mention <b>"COTISATION MEMBRES ${this.cotYear}.</b><br>`;
-          this.mailingText += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>${this.bankTreas}<br>${this.bankName}<br>N° Entreprise: ${this.bankEntNr} `;
-          this.mailingText += `Adresse: ${this.bankAdress} ${this.bankZip} ${this.bankCity} ${this.bankTel}`;
-          this.mailingText += '<br><br><i>>Note: Facture sur demande</i>';
+          this.mailingTextDefaultFr = `<Strong>NOTE DE DEBIT<br>{{Nom Organisation}}</strong><br>{{Adresse Organisation}}<br>{{Code Postal Organisation}}<br>{{Commune Organisation}}<br><br>`;
+          this.mailingTextDefaultFr += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre {{Type Bijdrage}}`;
+          this.mailingTextDefaultFr +=  ` de votre association soit {{Montant Cotisation}}  Euro pour {{Nb de Mois}} mois par bénéficiaire` ;
+          this.mailingTextDefaultFr += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de {{Nb de Personnes}} personnes`;
+          this.mailingTextDefaultFr += `<br>Merci de verser le montant de  {{Montant dû}} € sur le compte {{Numéro Compte Bancaire}} au plus tard le <b> {{Date échéance}} </b> avec la mention <b>"COTISATION MEMBRES {{Année de Cotisation}}.</b><br>`;
+          this.mailingTextDefaultFr += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>{{Trésorier}}<br>{{Nom Banque Alimentaire}}<br>N° Entreprise: {{N° Entreprise Banque Alimentaire}} `;
+          this.mailingTextDefaultFr += `Adresse: {{Adresse Banque Alimentaire}} {{Code Postal Banque Alimentaire}} {{Commune Banque Alimentaire}} {{Téléphone Banque Alimentaire}}`;
+          this.mailingTextDefaultFr += '<br><br><i>>Note: Facture sur demande</i>';
+          this.mailingText = this.mailingTextDefaultFr;
+          this.mailingText = this.mailingText.replace(/{{Nom Organisation}}/g, this.organisation.societe);
+          this.mailingText = this.mailingText.replace(/{{Adresse Organisation}}/g, this.organisation.adresse);
+          this.mailingText = this.mailingText.replace(/{{Code Postal Organisation}}/g, this.organisation.cp);
+          this.mailingText = this.mailingText.replace(/{{Commune Organisation}}/g, this.organisation.localite);
+          this.mailingText = this.mailingText.replace(/{{Type Bijdrage}}/g, this.typeMembership);
+          this.mailingText = this.mailingText.replace(/{{Montant Cotisation}}/g, cotreal.toString());
+          this.mailingText = this.mailingText.replace(/{{Nb de Mois}}/g, this.organisation.cotMonths.toString());
+          this.mailingText = this.mailingText.replace(/{{Nb de Personnes}}/g, this.organisation.nPers.toString());
+          this.mailingText = this.mailingText.replace(/{{Numéro Compte Bancaire}}/g, this.bankAccount);
+          this.mailingText = this.mailingText.replace(/{{Montant dû}}/g, this.due.toString());
+          this.mailingText = this.mailingText.replace(/{{Date échéance}}/g, this.dueDate);
+          this.mailingText = this.mailingText.replace(/{{Année de Cotisation}}/g, this.cotYear.toString());
+          this.mailingText = this.mailingText.replace(/{{Trésorier}}/g, this.bankTreas);
+          this.mailingText = this.mailingText.replace(/{{Nom Banque Alimentaire}}/g, this.bankName);
+          this.mailingText = this.mailingText.replace(/{{N° Entreprise Banque Alimentaire}}/g, this.bankEntNr);
+          this.mailingText = this.mailingText.replace(/{{Adresse Banque Alimentaire}}/g, this.bankAdress);
+          this.mailingText = this.mailingText.replace(/{{Code Postal Banque Alimentaire}}/g, this.bankZip);
+          this.mailingText = this.mailingText.replace(/{{Commune Banque Alimentaire}}/g, this.bankCity);
+          this.mailingText = this.mailingText.replace(/{{Téléphone Banque Alimentaire}}/g, this.bankTel);
       }
   }
   getOrganisation(idDis: number) {
