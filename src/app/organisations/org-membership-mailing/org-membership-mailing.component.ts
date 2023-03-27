@@ -54,8 +54,11 @@ export class OrgMembershipMailingComponent implements OnInit {
     mailingSubject: string;
     mailingLanguage: string;
     mailingText: string;
+    mailingTextNl: string;
+    mailingTextFr: string;
     mailingTextDefaultNl: string;
     mailingTextDefaultFr: string;
+    isCotCustomText: boolean;
     // variables for file upload
     attachmentFileNames: string[];
     isYearlyMail: boolean;
@@ -110,6 +113,10 @@ export class OrgMembershipMailingComponent implements OnInit {
       this.dueDate = '';
       this.maxAttachmentFileSize = 5000000; // max 5 MB file size
       this.isAttachmentUploadOngoing = false;
+      this.isCotCustomText = false;
+      this.mailingText = "";
+      this.mailingTextNl = "";
+      this.mailingTextFr = "";
       
       this.mailingTextDefaultFr = getMemberShipMailingTextDefaultFr();
       this.mailingTextDefaultNl = getMemberShipMailingTextDefaultNl();
@@ -144,6 +151,9 @@ export class OrgMembershipMailingComponent implements OnInit {
                             if (banqProg !== null) {
                                 this.bankCotAmount = +banqProg.cotAmount; // unary + operator converts to number
                                 this.bankCotExtraAmount = +banqProg.cotAmountSup;
+                                this.isCotCustomText = banqProg.cotTextCustom;
+                                this.mailingTextFr = banqProg.cotTextFr;
+                                this.mailingTextNl = banqProg.cotTextNl;
                             }
                         });
             })
@@ -166,8 +176,12 @@ export class OrgMembershipMailingComponent implements OnInit {
           } else {
               this.typeMembership = 'extra ledenbijdrage';
           }
-
+          if (this.isCotCustomText) {
+                this.mailingText = this.mailingTextNl;
+          }
+          else {
           this.mailingText = this.mailingTextDefaultNl;
+            }
           this.mailingText = this.mailingText.replace(/{{organisatieNaam}}/g, this.organisation.societe);
             this.mailingText = this.mailingText.replace(/{{organisatieAdres}}/g, this.organisation.adresse);
             this.mailingText = this.mailingText.replace(/{{organisatiePostCode}}/g, this.organisation.cp);
@@ -197,8 +211,12 @@ export class OrgMembershipMailingComponent implements OnInit {
           } else {
               this.typeMembership = 'cotisation annuelle supplémentaire';
           }
-
-          this.mailingText = this.mailingTextDefaultFr;
+          if (this.isCotCustomText) {
+              this.mailingText = this.mailingTextFr;
+          }
+          else {
+              this.mailingText = this.mailingTextDefaultFr;
+          }
           this.mailingText = this.mailingText.replace(/{{Nom Organisation}}/g, this.organisation.societe);
           this.mailingText = this.mailingText.replace(/{{Adresse Organisation}}/g, this.organisation.adresse);
           this.mailingText = this.mailingText.replace(/{{Code Postal Organisation}}/g, this.organisation.cp);

@@ -15,6 +15,7 @@ import {AppState} from '../../reducers';
 import {BanqProg} from '../model/banqprog';
 import {BanqProgEntityService} from '../services/banqprog-entity.service';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
+import {getMemberShipMailingTextDefaultFr, getMemberShipMailingTextDefaultNl} from '../../shared/functions';
 
 
 @Component({
@@ -87,24 +88,8 @@ export class BanqueComponent implements OnInit {
       this.booCanQuit = true;
       this.booIsCreate = false;
       this.isCotCustomText = false;
-      this.mailingTextDefaultNl = '';
-      this.mailingTextDefaultNl = `<Strong>DEBETNOTA<br>-----organisation.societe-----</strong><br>-----organisation.adresse-----<br>-----organisation.cp-----<br>-----organisation.localite-----<br><br>`;
-      this.mailingTextDefaultNl += `Geachte mevrouw/mijnheer,<br>Hierbij vindt u het verzoek tot betaling van de -----typeMembership-----`;
-      this.mailingTextDefaultNl +=  ` van uw liefdadigheidsvereniging aan onze Voedselbank. De basis bijdrage bedraagt -----cotreal-----  Euro voor -----organisation.cotMonths----- maand per minderbedeelde` ;
-      this.mailingTextDefaultNl += `<br>Het gemiddeld aantal begunstigden voor het voorbije jaar voor uw vereniging bedroeg -----organisation.nPers-----`;
-      this.mailingTextDefaultNl += `<br>Gelieve het bedrag van -----due----- € te willen storten op ons  rekeningnr -----bankAccount----- ten laatste tegen <b> -----dueDate----- </b> met melding <b>"LEDENBIJDRAGE -----cotYear-----"</b>.<br>`;
-      this.mailingTextDefaultNl += `<br>Met dank bij voorbaat.<br><br>De Penningmeester,<br>-----bankTreas-----<br>-----bankName-----<br>Bedrijfsnummer: -----bankEntNr----- `;
-      this.mailingTextDefaultNl += `Adres: -----bankAdress----- -----bankZip----- -----bankCity----- -----bankTel-----`;
-      this.mailingTextDefaultNl += '<br><br><i>Nota: Factuur te verkrijgen op aanvraag</i>';
-      this.mailingTextDefaultFr = '';
-      this.mailingTextDefaultFr = `<Strong>NOTE DE DEBIT<br>-----organisation.societe-----</strong><br>-----organisation.adresse-----<br>-----organisation.cp-----<br>-----organisation.localite-----<br><br>`;
-      this.mailingTextDefaultFr += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre -----typeMembership-----`;
-      this.mailingTextDefaultFr +=  ` de votre association soit -----cotreal-----  Euro pour -----organisation.cotMonths----- mois par bénéficiaire` ;
-      this.mailingTextDefaultFr += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de -----organisation.nPers----- personnes`;
-      this.mailingTextDefaultFr += `<br>Merci de verser le montant de  -----due----- € sur le compte -----bankAccount----- au plus tard le <b> -----dueDate----- </b> avec la mention <b>"COTISATION MEMBRES -----cotYear-----.</b><br>`;
-      this.mailingTextDefaultFr += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>-----bankTreas-----<br>-----bankName-----<br>N° Entreprise: -----bankEntNr----- `;
-      this.mailingTextDefaultFr += `Adresse: -----bankAdress----- -----bankZip----- -----bankCity----- -----bankTel-----`;
-      this.mailingTextDefaultFr += '<br><br><i>>Note: Facture sur demande</i>';
+      this.mailingTextDefaultFr = getMemberShipMailingTextDefaultFr();
+      this.mailingTextDefaultNl = getMemberShipMailingTextDefaultNl();
       this.mailingText = "";
       this.mailingTextNl = "";
       this.mailingTextFr = "";
@@ -141,8 +126,18 @@ export class BanqueComponent implements OnInit {
                           if (banqProg !== null) {
                               this.banqProg = banqProg;
                               this.isCotCustomText = banqProg.cotTextCustom;
-                              this.mailingTextFr = banqProg.cotTextFr;
-                              this.mailingTextNl = banqProg.cotTextNl;
+                              if (banqProg.cotTextFr === null || banqProg.cotTextFr === "") {
+                                    this.mailingTextFr = this.mailingTextDefaultFr;
+                              }
+                              else {
+                                  this.mailingTextFr = banqProg.cotTextFr;
+                              }
+                              if (banqProg.cotTextNl === null || banqProg.cotTextNl === "") {
+                                this.mailingTextNl = this.mailingTextDefaultNl;
+                              }
+                              else {
+                                this.mailingTextNl = banqProg.cotTextNl;
+                              }
                               this.mailingTextCurrentLanguage = "fr"
                               this.mailingText = this.mailingTextFr;
                           }
@@ -449,9 +444,9 @@ export class BanqueComponent implements OnInit {
                 });
     }
 
-    switchCotMailLanguage($event: any) {
-        console.log('switchCotMailLanguage',$event);
-        if ($event.value === 'fr') {
+    switchCotMailLanguage(language: string) {
+
+        if (language === 'fr') {
             this.mailingTextNl = this.mailingText;
             this.mailingText = this.mailingTextFr;
         }

@@ -359,11 +359,11 @@
                         <p-inputSwitch id="isCotCustomText" name="isCotCustomText" [(ngModel)]="isCotCustomText"></p-inputSwitch>
                     </div>
                 </div>
-            <div *ngIf="isCotCustomText && (baseurl.includes('localhost') || baseurl.toLowerCase().includes('dev'))" class="p-fluid p-formgrid p-grid">
+            <div *ngIf="isCotCustomText" class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 p-md-2">
-                    <p-radioButton name="mailingchoice" value="fr" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event)" inputId="francais"></p-radioButton>
+                    <p-radioButton name="mailingchoice" value="fr" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event.value)" inputId="francais"></p-radioButton>
                     <label for="francais" class="ml-2">Français"</label>
-                    <p-radioButton name="mailingchoice" value="nl" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event)"inputId="nederlands"></p-radioButton>
+                    <p-radioButton name="mailingchoice" value="nl" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event.value)"inputId="nederlands"></p-radioButton>
                     <label for="nederlands" class="ml-2">Nederlands</label>
                 </div>
                 <div class="p-field p-col-12 p-md-2">
