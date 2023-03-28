@@ -28,6 +28,7 @@ import {BanqProgsDataService} from './services/banqprogs-data.service';
 import {AccordionModule} from 'primeng/accordion';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputNumberModule} from 'primeng/inputnumber';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import {BankreportsComponent} from './bankreports/bankreports.component';
 import {ChartModule} from 'primeng/chart';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
@@ -76,6 +77,7 @@ const routes: Routes = [
         InputSwitchModule,
         InputNumberModule,
         RadioButtonModule,
+        OverlayPanelModule,
         EditorModule,
         ChartModule
     ],

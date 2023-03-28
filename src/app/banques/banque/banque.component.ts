@@ -422,8 +422,14 @@ export class BanqueComponent implements OnInit {
     saveDetails(oldBanqProg: BanqProg, banqProgForm: BanqProg) {
         const modifiedBanqProg = Object.assign({}, oldBanqProg, banqProgForm);
         modifiedBanqProg.cotTextCustom = this.isCotCustomText;
-        modifiedBanqProg.cotTextNl = this.mailingTextNl;
-        modifiedBanqProg.cotTextFr = this.mailingTextFr;
+        if (this.mailingTextCurrentLanguage === 'fr') {
+            modifiedBanqProg.cotTextNl = this.mailingTextNl;
+            modifiedBanqProg.cotTextFr = this.mailingText; // to pickup the changes made in the editor
+        }
+        if (this.mailingTextCurrentLanguage === 'nl') {
+            modifiedBanqProg.cotTextFr = this.mailingTextFr;
+            modifiedBanqProg.cotTextNl = this.mailingText; // to pickup the changes made in the editor
+        }
         this.banqProgService.update(modifiedBanqProg)
             .subscribe(() => {
                     this.messageService.add({
@@ -449,10 +455,12 @@ export class BanqueComponent implements OnInit {
         if (language === 'fr') {
             this.mailingTextNl = this.mailingText;
             this.mailingText = this.mailingTextFr;
+            this.mailingTextCurrentLanguage = 'fr';
         }
         else {
             this.mailingTextFr = this.mailingText;
             this.mailingText = this.mailingTextNl;
+            this.mailingTextCurrentLanguage = 'nl';
         }
     }
 
@@ -465,6 +473,24 @@ export class BanqueComponent implements OnInit {
             this.mailingTextNl = this.mailingTextDefaultNl;
             this.mailingText = this.mailingTextNl;
         }
+    }
+    getCotMailingRecommendationsfr() {
+        return `Choisissez la langue du texte que vous voulez adapter avec les boutons radio Français - Nederlands. \n
+        Commencez ou Recommencez par charger le texte par défaut avec le bouton "Charger le texte par défaut". \n
+        Modifiez le texte à votre guise mais veillez à ne rien changer dans les valeurs entre {{ }} . \n
+        Les valeurs entre {{ }} sont des valeurs qui seront remplacées lors de la création des mails pour une association. \n
+        Si vous modifiez le texte entre {{ }} la subsitution n'aura plus lieu. \n
+        Si vous ne tenez pas à afficher une valeur de substitution vous pouvez enlever cette valeur entre {{ }} du texte. \n
+        Enregistrez le texte avec le bouton "Sauver".` ;
+    }
+    getCotMailingRecommendationsnl() {
+        return `Kies de taal van de tekst die u wilt aanpassen met de radioknoppen Frans - Nederlands. \n
+        Begin of herlaad de standaard tekst met de knop "Laad de standaard tekst". \n
+        Pas de tekst naar eigen inzicht aan, maar zorg ervoor dat u niets verandert tussen {{ }} . \n
+        De waarden tussen {{ }} zijn waarden die worden vervangen bij het maken van de e-mails voor een vereniging. \n
+        Als u de tekst tussen {{ }} wijzigt, vindt de vervanging niet meer plaats. \n
+        Als u geen waarde voor vervanging wilt weergeven, kunt u deze waarde tussen {{ }} uit de tekst verwijderen. \n
+        Sla de tekst op met de knop "Opslaan"`;
     }
 }
 

@@ -1822,16 +1822,12 @@
           <context context-type="linenumber">203</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="BankDetails" datatype="html">
-        <source>Bank Details</source>
-        <target>Bank Details</target>
+      <trans-unit id="BankProgram" datatype="html">
+        <source>Bank Program</source>
+        <target>Bank Programma</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
           <context context-type="linenumber">208</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/banques/banques.component.html</context>
-          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MondayMorning" datatype="html">
@@ -2115,7 +2111,7 @@
         <target>Standaardtekst laden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">370</context>
+          <context context-type="linenumber">384</context>
         </context-group>
       </trans-unit>
       <trans-unit id="EnterYourMemberShipText" datatype="html">
@@ -2123,7 +2119,7 @@
         <target>Voer uw mail bijdrage text in</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
-          <context context-type="linenumber">373</context>
+          <context context-type="linenumber">387</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankUpdated" datatype="html">
@@ -2267,7 +2263,7 @@
         <target>De details van de voedselbank <x id="PH" equiv-text="this.banque.bankShortName"/> <x id="PH_1" equiv-text="this.banque.bankName"/> zijn bijgewerkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">432</context>
+          <context context-type="linenumber">438</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDetailsUpdateError" datatype="html">
@@ -2275,7 +2271,7 @@
         <target>De details van de voedselbank <x id="PH" equiv-text="this.banque.bankShortName"/> <x id="PH_1" equiv-text="this.banque.bankName"/> konden niet worden bijgewerkt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">441</context>
+          <context context-type="linenumber">447</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReport" datatype="html">
@@ -2340,6 +2336,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banques.component.html</context>
           <context context-type="linenumber">69,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BankDetails" datatype="html">
+        <source>Bank Details</source>
+        <target>Bank Details</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banques.component.html</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="InternalId" datatype="html">
@@ -7828,6 +7832,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
           <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="GestBenSorted" datatype="html">
+        <source>Manage Beneficiaries<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;gestBen&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Begunstigden beheren<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;gestBen&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/organisations/orgbenefoverview/orgbenefoverview.component.html</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="InfantsSorted" datatype="html">

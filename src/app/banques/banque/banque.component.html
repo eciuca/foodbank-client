@@ -205,7 +205,7 @@
         </div>
     </form>
             </p-accordionTab>
-            <p-accordionTab *ngIf="banqProg" i18n-header="@@BankDetails" header="Bank Details">
+            <p-accordionTab *ngIf="banqProg" i18n-header="@@BankProgram" header="Bank Program">
                 <form #detailForm="ngForm">
                 <div *ngIf="booCanSave" class="p-formgroup-inline">
                     <button  type="button" pButton icon="pi pi-check" (click)="saveDetails(banqProg, detailForm.value)" i18n-label="@@Save" label="Save" [disabled] = "detailForm.invalid"></button>
@@ -360,10 +360,24 @@
                     </div>
                 </div>
             <div *ngIf="isCotCustomText" class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                    <p-overlayPanel #op>
+                        <ng-template pTemplate>
+                            <div *ngIf="userLanguage=='fr'" class="p-d-flex p-flex-column">
+                                {{getCotMailingRecommendationsfr()}}
+
+                            </div>
+                            <div *ngIf="userLanguage=='nl'" class="p-d-flex p-flex-column">
+                                 {{getCotMailingRecommendationsnl()}}
+                            </div>
+                        </ng-template>
+                    </p-overlayPanel>
+                    <p-button (click)="op.toggle($event)" icon="pi pi-image" label="Guide to create your custom Membership mail Text"></p-button>
+                    </div>
                 <div class="p-field p-col-12 p-md-2">
                     <p-radioButton name="mailingchoice" value="fr" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event.value)" inputId="francais"></p-radioButton>
                     <label for="francais" class="ml-2">Français"</label>
-                    <p-radioButton name="mailingchoice" value="nl" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event.value)"inputId="nederlands"></p-radioButton>
+                    <p-radioButton name="mailingchoice" value="nl" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event.value)" inputId="nederlands"></p-radioButton>
                     <label for="nederlands" class="ml-2">Nederlands</label>
                 </div>
                 <div class="p-field p-col-12 p-md-2">
