@@ -1940,6 +1940,13 @@
           <context context-type="linenumber">358</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="CotTextGuide" datatype="html">
+        <source>Guide to create your custom Membership mail Text</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/banques/banque/banque.component.html</context>
+          <context context-type="linenumber">375</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="LoadDefaultText" datatype="html">
         <source>Load Default Text</source>
         <context-group purpose="location">

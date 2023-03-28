@@ -372,7 +372,7 @@
                             </div>
                         </ng-template>
                     </p-overlayPanel>
-                    <p-button (click)="op.toggle($event)" icon="pi pi-image" label="Guide to create your custom Membership mail Text"></p-button>
+                    <p-button i18n-label="@@CotTextGuide" (click)="op.toggle($event)" icon="pi pi-image" label="Guide to create your custom Membership mail Text"></p-button>
                     </div>
                 <div class="p-field p-col-12 p-md-2">
                     <p-radioButton name="mailingchoice" value="fr" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event.value)" inputId="francais"></p-radioButton>
