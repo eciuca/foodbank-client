@@ -422,7 +422,7 @@ export class OrgbenefoverviewComponent implements OnInit {
     }
     if (organisation.gestBen && organisation.latestClientUpdate !== null) {
       const dayDifference = - moment(organisation.latestClientUpdate, 'DD/MM/YYYY').diff(moment(),'days');
-      if (dayDifference > 30) {
+      if (dayDifference > 60) {
         return $localize`:@@OrgBenAnomaly3:Anomaly: the organisation says it records beneficiaries but has not updated its families for ${dayDifference} days`;
       }
     }
