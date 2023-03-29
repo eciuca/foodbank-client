@@ -221,7 +221,7 @@ export class OrgMembershipMailingComponent implements OnInit {
           this.mailingText = this.mailingText.replace(/{{Adresse Organisation}}/g, this.organisation.adresse);
           this.mailingText = this.mailingText.replace(/{{Code Postal Organisation}}/g, this.organisation.cp);
           this.mailingText = this.mailingText.replace(/{{Commune Organisation}}/g, this.organisation.localite);
-          this.mailingText = this.mailingText.replace(/{{Type Bijdrage}}/g, this.typeMembership);
+          this.mailingText = this.mailingText.replace(/{{Type Cotisation}}/g, this.typeMembership);
           this.mailingText = this.mailingText.replace(/{{Montant Cotisation}}/g, cotreal.toString());
           this.mailingText = this.mailingText.replace(/{{Nb de Mois}}/g, this.organisation.cotMonths.toString());
           this.mailingText = this.mailingText.replace(/{{Nb de Personnes}}/g, this.organisation.nPers.toString());

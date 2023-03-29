@@ -89,7 +89,7 @@ export function generateTooltipOrganisation() {
 }
 export function getMemberShipMailingTextDefaultFr() {
     let mailingTextDefaultFr  = `<Strong>NOTE DE DEBIT<br>{{Nom Organisation}}</strong><br>{{Adresse Organisation}}<br>{{Code Postal Organisation}}<br>{{Commune Organisation}}<br><br>`;
-    mailingTextDefaultFr += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre {{Type Bijdrage}}`;
+    mailingTextDefaultFr += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre {{Type Cotisation}}`;
     mailingTextDefaultFr +=  ` de votre association soit {{Montant Cotisation}}  Euro pour {{Nb de Mois}} mois par bénéficiaire` ;
     mailingTextDefaultFr += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de {{Nb de Personnes}} personnes`;
     mailingTextDefaultFr += `<br>Merci de verser le montant de  {{Montant dû}} € sur le compte {{Numéro Compte Bancaire}} au plus tard le <b> {{Date échéance}} </b> avec la mention <b>"COTISATION MEMBRES {{Année de Cotisation}}.</b><br>`;
