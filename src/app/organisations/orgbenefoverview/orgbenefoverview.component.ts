@@ -17,6 +17,7 @@ import {formatDate} from '@angular/common';
 import {ExcelService} from '../../services/excel.service';
 import {AuthService} from '../../auth/auth.service';
 import {OrganisationHttpService} from '../services/organisation-http.service';
+import * as moment from 'moment/moment';
 
 
 @Component({
@@ -395,6 +396,46 @@ export class OrgbenefoverviewComponent implements OnInit {
   }
   getTotalStatistics() {
     return $localize`:@@OrgTotalStatistics:Total for selection ${this.totalFamilies} families, ${this.totalPersons} persons,${this.totalEq} equivalents,${this.totalInfants} infants,${this.totalBabies} babies,${this.totalChildren} children,${this.totalTeens} teenagers,${this.totalYoungAdults} young adults,${this.totalAdults} adults,${this.totalSeniors} seniors`;
+  }
+
+  hasOrganisationAnomalies(organisation: Organisation) {
+    if (!organisation.gestBen && organisation.nbRegisteredClients > 0) {
+      return true;     }
+    if (organisation.gestBen && organisation.nbRegisteredClients === 0) {
+      return true;
+    }
+    if (organisation.gestBen && organisation.latestClientUpdate !== null) {
+      const dayDifference = - moment(organisation.latestClientUpdate, 'DD/MM/YYYY').diff(moment(),'days');
+      if (dayDifference > 30) {
+        return true;
+      }
+    }
+      return false;
+  }
+
+  generateToolTipMessageForOrganisationAnomalies(organisation: Organisation) {
+    if (!organisation.gestBen && organisation.nbRegisteredClients > 0) {
+      return $localize`:@@OrgBenAnomaly1:Anomaly: the organisation says it does not record beneficiaries but has encoded ${organisation.nbRegisteredClients} families`;
+    }
+    if (organisation.gestBen && organisation.nbRegisteredClients === 0) {
+      return $localize`:@@OrgBenAnomaly2:Anomaly: the organisation says it records beneficiaries but has not encoded any families`;
+    }
+    if (organisation.gestBen && organisation.latestClientUpdate !== null) {
+      const dayDifference = - moment(organisation.latestClientUpdate, 'DD/MM/YYYY').diff(moment(),'days');
+      if (dayDifference > 30) {
+        return $localize`:@@OrgBenAnomaly3:Anomaly: the organisation says it records beneficiaries but has not updated its families for ${dayDifference} days`;
+      }
+    }
+    return '';
+  }
+
+
+  generateTooltipRegisteredClients() {
+    return $localize`:@@OrgRegisteredClients:Nombre de familles encodées`;
+  }
+
+  generateTooltipLatestClientUpdate() {
+    return $localize`:@@OrgLatestClientUpdate:Date de dernière mise à jour des familles encodées`;
   }
 }
 

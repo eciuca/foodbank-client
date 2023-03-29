@@ -51,6 +51,8 @@
             <th pSortableColumn="idDis">Id<p-sortIcon field="idDis"></p-sortIcon></th>
             <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
             <th pSortableColumn="gestBen" i18n="@@GestBenSorted" pTooltip="{{generateTooltipGestBen()}}">Manage Beneficiaries<p-sortIcon field="gestBen"></p-sortIcon></th>
+            <th pSortableColumn="nbRegisteredClients" i18n="@@BenRegisteredClientsSorted" pTooltip="{{generateTooltipRegisteredClients()}}">Recorded Beneficiaries<p-sortIcon field="gestBen"></p-sortIcon></th>
+            <th pSortableColumn="latestClientUpdate" i18n="@@BenLatestClientUpdateSorted" pTooltip="{{generateTooltipLatestClientUpdate()}}">Last Update Beneficiaries<p-sortIcon field="latestClientUpdate"></p-sortIcon></th>
             <th pSortableColumn="nFam" pTooltip="{{generateTooltipBenFam()}}">Fam<p-sortIcon field="nFam"></p-sortIcon></th>
             <th pSortableColumn="nPers" pTooltip="{{generateTooltipBenPers()}}">Pers<p-sortIcon field="nPers"></p-sortIcon></th>
             <th i18n="@@InfantsSorted" pSortableColumn="nNour" pTooltip="{{generateTooltipBenInfants()}}">Infants<p-sortIcon field="nNour"></p-sortIcon></th>
@@ -84,7 +86,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-organisation>
 
-        <tr (click)="handleSelect(organisation)">
+        <tr [ngStyle]="hasOrganisationAnomalies(organisation) && {'background-color': 'yellow'}" pTooltip="{{generateToolTipMessageForOrganisationAnomalies(organisation)}}"(click)="handleSelect(organisation)">
             <td>
                 {{ organisation.idDis }}
             </td>
@@ -93,6 +95,12 @@
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.gestBen, 'false-icon pi-times-circle': !organisation.gestBen}"></i>
+            </td>
+            <td>
+                {{ organisation.nbRegisteredClients }}
+            </td>
+            <td>
+                {{ organisation.latestClientUpdate }}
             </td>
             <td>
                 {{ organisation.nFam }}

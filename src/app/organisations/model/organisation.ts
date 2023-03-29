@@ -233,6 +233,8 @@ export interface Organisation {
     lupdTs: string;
 
     nbLogins: number;
+    nbRegisteredClients: number;
+    latestClientUpdate: string;
     anomalies: string;
     totalRecords: number;
     totalFamilies: number;
@@ -381,6 +383,8 @@ export class DefaultOrganisation implements Organisation {
     webauthority: boolean;
     website: string;
     nbLogins: number;
+    nbRegisteredClients: number;
+    latestClientUpdate: string;
     anomalies: string;
     totalRecords: number;
     totalFamilies: number;
