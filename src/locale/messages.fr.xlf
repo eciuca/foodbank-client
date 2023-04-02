@@ -4054,6 +4054,54 @@
           <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="AddCpas" datatype="html">
+        <source>Add Cpas</source>
+        <target>Ajouter un CPAS</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/cpass.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CpasNameSorted" datatype="html">
+        <source>Name<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cpasName&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Nom&lt;x equiv-text=&quot;&amp;lt;p-sortIcon field=&amp;quot;cpasName&amp;quot;&gt;&quot;ctype =&quot; x-p_sorticon &quot;id =&quot; START_TAG_P_SORTICON &quot;/&gt;&lt;x equiv-text=&quot;&amp;lt;/p-sortIcon&gt;&quot; ctype = &quot;x-p_sorticon&quot; id = &quot;CLOSE_TAG_P_SORTICON&quot; /&gt;</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/cpass.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CpasZipSorted" datatype="html">
+        <source>Zip<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cpasZip&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Code postal<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cpasZip&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/cpass.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CpasStreetSorted" datatype="html">
+        <source>Street<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cpasStreet&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Rue<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cpasStreet&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/cpass.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CpasTelSorted" datatype="html">
+        <source>Tel<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cpasTel&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>Tél<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cpasTel&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/cpass.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CpasGsmSorted" datatype="html">
+        <source>Gsm<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cpasGsm&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <target>GSM<x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;cpasGsm&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/cpass.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="Cpas" datatype="html">
         <source>Cpas</source>
         <target>CPAS</target>
@@ -4124,6 +4172,22 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cpass/zipcodes/zipcodes.component.ts</context>
           <context context-type="linenumber">159</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AddZipCode" datatype="html">
+        <source>Add Zipcode</source>
+        <target>Ajouter un code postal</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcodes.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ZipcodesSelected" datatype="html">
+        <source> There are <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> zipcodes selected. </source>
+        <target> Il y a <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/>  codes postaux sélectionnés.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cpass/zipcodes/zipcodes.component.html</context>
+          <context context-type="linenumber">89,91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ZipCodeDetails" datatype="html">

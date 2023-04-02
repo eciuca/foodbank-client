@@ -9,7 +9,7 @@
                     {{ getTitle() }}
                 </div>
                 <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-3">
-                    <button  class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Zipcode"></button>
+                    <button  class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddZipCode" label="Add Zipcode"></button>
                     <span class="p-input-icon-left">
                     </span>
                 </div>
@@ -86,8 +86,8 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="summary">
-        <div class="p-d-flex p-ai-center p-jc-between">
-            Au total il y a {{totalRecords}} zipcodes dans la selection.
+        <div i18n="@@ZipcodesSelected" class="p-d-flex p-ai-center p-jc-between">
+            There are {{totalRecords}} zipcodes selected.
         </div>
     </ng-template>
 </p-table>

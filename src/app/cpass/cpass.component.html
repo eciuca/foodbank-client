@@ -4,65 +4,28 @@
          [filterDelay]="0" >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Cpas"></button>
+            <button *ngIf="booCanCreate" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddCpas" label="Add Cpas"></button>
             <span class="p-input-icon-left">
         </span>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>
-                <div class="p-d-flex p-jc-between p-ai-center">
-                 <input #icpasname pInputText type="text" placeholder="Search by Name" class="p-column-filter"  (change)="dt.reset()">
-                    <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(icpasname.value, 'cpasName', 'contains')"></p-button>
-                </div>
-            </th>
-             <th>
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    <input #icpaszip pInputText type="text" placeholder="Search by Zip" class="p-column-filter" (change)="dt.reset()">
-                    <p-button  icon="pi pi-filter" iconPos="left" (click)="dt.filter(icpaszip.value, 'cpasZip', 'startsWith')"></p-button>
-                </div>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <th>
-
-            </th>
+            <th i18n="@@CpasNameSorted" pSortableColumn="cpasName">Name<p-sortIcon field="cpasName"></p-sortIcon></th>
+            <th i18n="@@CpasZipSorted" pSortableColumn="cpasZip">Zip<p-sortIcon field="cpasZip"></p-sortIcon></th>
+            <th i18n="@@CpasStreetSorted" pSortableColumn="cpasStreet">Street<p-sortIcon field="cpasStreet"></p-sortIcon></th>
+            <th i18n="@@CpasTelSorted" pSortableColumn="cpasTel">Tel<p-sortIcon field="cpasTel"></p-sortIcon></th>
+            <th i18n="@@CpasGsmSorted" pSortableColumn="cpasGsm">Gsm<p-sortIcon field="cpasGsm"></p-sortIcon></th>
         </tr>
         <tr>
-            <th pSortableColumn="cpasName">
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    Nom
-                    <p-sortIcon field="cpasName"></p-sortIcon>
-                </div>
+            <th>
+                <p-columnFilter type="text" field="cpasName" matchMode="contains" [showMenu]="false" ></p-columnFilter>
             </th>
-            <th pSortableColumn="cpasZip">
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    Code Postal
-                    <p-sortIcon field="cpasZip"></p-sortIcon>
-                </div>
-            </th>
-            <th pSortableColumn="cpasStreet">
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    Adresse
-                    <p-sortIcon field="cpasStreet"></p-sortIcon>
-                </div>
-            </th>
-            <th pSortableColumn="cpasTel">
-                <div class="p-d-flex p-jc-between p-ai-center">
-                   Tel
-                    <p-sortIcon field="cpasTel"></p-sortIcon>
-                </div>
-            </th>
-            <th pSortableColumn="cpasGsm">
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    Gsm
-                    <p-sortIcon field="cpasGsm"></p-sortIcon>
-                </div>
+            <th>
+                <p-columnFilter type="text" field="cpasZip" matchMode="contains" [showMenu]="false" ></p-columnFilter>
             </th>
         </tr>
+
     </ng-template>
     <ng-template pTemplate="body" let-cpas>
         <tr (click)="handleSelect(cpas)">

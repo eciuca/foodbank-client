@@ -160,6 +160,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>AddCpas</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>AddDependent</name>
                         <description/>
                         <comment/>
@@ -341,6 +361,26 @@
                     </concept_node>
                     <concept_node>
                         <name>AddUser</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>AddZipCode</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -3060,7 +3100,107 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>CpasGsmSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasNameSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>CpasOfReference</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasStreetSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasTelSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasZipSorted</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -15925,6 +16065,26 @@
                     </concept_node>
                     <concept_node>
                         <name>ZipSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ZipcodesSelected</name>
                         <description/>
                         <comment/>
                         <default_text/>
