@@ -244,7 +244,7 @@ export class AppComponent implements OnInit {
             );
         }
         // Add Depots
-        if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+        if ( ['Bank', 'Admin_Banq','admin'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {label: 'Depots', icon: 'pi pi-fw pi-map', routerLink: ['/depots']}
             );
@@ -435,8 +435,8 @@ export class AppComponent implements OnInit {
                 );
             }
 
-            // add cpass and depots for admin
-            if ( authState.user.rights === 'admin') {
+            // add cpass
+        if ( ['Admin_Banq', 'Bank','admin'].includes(authState.user.rights)) {
                 this.menuLoggedInItems.push(
                     {
                         label: $localize`:@@menuCpas:Cpas`, icon: 'pi pi-fw pi-heart',
@@ -452,8 +452,7 @@ export class AppComponent implements OnInit {
                                 routerLink: ['/cpass/zipcodes']
                             }
                         ]
-                    },
-                    {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
+                    }
                  );
             }
             // add mailings

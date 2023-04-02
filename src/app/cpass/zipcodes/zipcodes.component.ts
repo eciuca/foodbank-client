@@ -23,6 +23,8 @@ export class ZipCodesComponent implements OnInit {
   loading: boolean;
   totalRecords: number;
     displayDialog: boolean;
+    filterBase: any;
+    booCanCreate: boolean;
   constructor(
       private zipcodeEntityService: ZipcodeEntityService,
       private authService: AuthService,
@@ -58,8 +60,21 @@ export class ZipCodesComponent implements OnInit {
             .pipe(
                 select(globalAuthState),
                 map((authState) => {
-                    if (authState.user.rights == 'admin') {
-                        this.booIsAdmin = true;
+                    if (authState.banque) {
+                        switch (authState.user.rights) {
+                            case 'Bank':
+                                this.filterBase = {'lienBanque': authState.banque.bankId};
+                                break;
+                            case 'Admin_Banq':
+                                this.filterBase = {'lienBanque': authState.banque.bankId};
+                                this.booCanCreate = true;
+                                break;
+                            case 'admin':
+                                this.filterBase = {};
+                                // this.booCanCreate = true;
+                                break;
+                            default:
+                        }
                     }
                 })
             )
@@ -67,7 +82,7 @@ export class ZipCodesComponent implements OnInit {
     }
     nextPage(event: LazyLoadEvent) {
         this.loading = true;
-        const queryParms = {};
+        const queryParms = {...this.filterBase};
         queryParms['offset'] = event.first.toString();
         queryParms['rows'] = event.rows.toString();
         queryParms['sortOrder'] = event.sortOrder.toString();

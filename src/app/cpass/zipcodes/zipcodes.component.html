@@ -8,7 +8,7 @@
                 <div class="p-field p-col-12 p-md-12">
                     {{ getTitle() }}
                 </div>
-                <div class="p-field p-col-12 p-md-3">
+                <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-3">
                     <button  class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Zipcode"></button>
                     <span class="p-input-icon-left">
                     </span>

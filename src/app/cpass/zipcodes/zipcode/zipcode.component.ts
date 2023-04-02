@@ -32,6 +32,7 @@ export class ZipCodeComponent implements OnInit {
     lienBanque: number;
     selectedCpas: Cpas;
     filteredCpass: Cpas[];
+    filterBase: any;
   constructor(
       private zipCodesService: ZipcodeEntityService,
       private messageService: MessageService,
@@ -39,7 +40,9 @@ export class ZipCodeComponent implements OnInit {
       private auditChangeEntityService: AuditChangeEntityService,
       private cpassService: CpasEntityService,
       private store: Store<AppState>,
-  ) { }
+  ) {
+      this.lienBanque = 0;
+  }
 
   ngOnInit(): void {
     const zipCode$ = combineLatest([this.zipCode$, this.zipCodesService.entities$])
@@ -62,6 +65,7 @@ export class ZipCodeComponent implements OnInit {
           } else {
             console.log(' We have a new zipCode ');
             this.zipCode = new DefaultZipCode();
+            this.zipCode.lienBanque = this.lienBanque;
               if (this.myform) {
                   this.myform.reset(this.zipCode);
               }
@@ -74,7 +78,9 @@ export class ZipCodeComponent implements OnInit {
                   if (authState.user) {
                       this.userId = authState.user.idUser;
                       this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
-                      this.lienBanque = authState.banque.bankId;
+                      if (authState.user.rights !== 'admin') {
+                          this.lienBanque = authState.banque.bankId;
+                      }
                   }
                   })
               )
@@ -184,6 +190,9 @@ export class ZipCodeComponent implements OnInit {
     }
     filterCpas(event ) {
         const  queryCpasParms: QueryParams = {};
+        if (this.lienBanque > 0) {
+            queryCpasParms['lienBanque'] = this.lienBanque.toString();
+        }
         const query = event.query;
         queryCpasParms['offset'] = '0';
         queryCpasParms['rows'] = '10';

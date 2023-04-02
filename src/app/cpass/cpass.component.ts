@@ -146,8 +146,16 @@ export class CpassComponent implements OnInit {
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.banque) {
       switch (authState.user.rights) {
+        case 'Bank':
+          this.filterBase = {'lienBanque': authState.banque.bankId};
+          break;
+        case 'Admin_Banq':
+          this.filterBase = {'lienBanque': authState.banque.bankId};
+          this.booCanCreate = true;
+          break;
         case 'admin':
-         this.booCanCreate = true;
+          this.filterBase = {};
+          // this.booCanCreate = true;
           break;
         default:
       }

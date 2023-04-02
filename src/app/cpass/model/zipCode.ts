@@ -3,7 +3,7 @@ import {Cpas} from './cpas';
 export interface ZipCode {
     totalRecords: number;
     zipCode: number;
-
+    lienBanque: number;
     city: string;
 
     lcpas: number;
@@ -33,6 +33,7 @@ export class DefaultZipCode implements ZipCode {
     city: string;
     cityCpas: string;
     lcpas: number;
+    lienBanque: number;
     mailCpas: string;
     remCpas: string;
     zipCode: number;
@@ -43,6 +44,7 @@ export class DefaultZipCode implements ZipCode {
         this.city = '';
         this.cityCpas = '';
         this.lcpas = 0;
+        this.lienBanque = 0;
         this.mailCpas = '';
         this.remCpas = '';
         this.zipCode = 0;

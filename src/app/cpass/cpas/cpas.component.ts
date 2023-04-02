@@ -23,6 +23,7 @@ export class CpasComponent implements OnInit {
     @Output() onCpasDelete = new EventEmitter<Cpas>();
     @Output() onCpasQuit = new EventEmitter<Cpas>();
     cpas: Cpas;
+    lienBanque: number;
     booCalledFromTable: boolean;
     booCanSave: boolean;
     booCanDelete: boolean;
@@ -37,6 +38,7 @@ export class CpasComponent implements OnInit {
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
+      this.lienBanque = 0;
       this.genders = enmGender;
       this.languages =  enmLanguage;
       this.booCalledFromTable = true;
@@ -67,6 +69,7 @@ export class CpasComponent implements OnInit {
                           this.cpas = cpas; // existing cpas
                       }  else {
                           this.cpas = new DefaultCpas();
+                          this.cpas.lBanque = this.lienBanque;
                       }
                   });
       this.store
@@ -75,12 +78,22 @@ export class CpasComponent implements OnInit {
               map((authState) => {
                   if (authState.user) {
                       switch (authState.user.rights) {
-                          case 'admin': // Only admin users can save or delete cpas
+                          case 'admin':
+                                this.booCanSave = true;
+                              if (this.booCalledFromTable ) {
+                                  this.booCanDelete = true;
+                              }
+                              break;
+                          case 'Admin_Banq':
+                              this.lienBanque = authState.banque.bankId;
                               this.booCanSave = true;
                               if (this.booCalledFromTable ) {
                                   this.booCanDelete = true;
                               }
                               break;
+                              case 'Bank':
+                                  this.lienBanque = authState.banque.bankId;
+                                  break;
                           default:
                       }
                   }
