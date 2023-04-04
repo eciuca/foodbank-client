@@ -14,6 +14,7 @@ import {globalAuthState} from '../../../auth/auth.selectors';
 import {AppState} from '../../../reducers';
 import {Cpas} from '../../model/cpas';
 import {CpasEntityService} from '../../services/cpas-entity.service';
+import { generateTooltipSuggestions } from '../../../shared/functions';
 @Component({
   selector: 'app-zipcode',
   templateUrl: './zipcode.component.html',
@@ -206,5 +207,8 @@ export class ZipCodeComponent implements OnInit {
 
     getZipCodeTitle() {
         return $localize`:@@ZipCodeLink:ZipCode link with CPAS`;
+    }
+    generateTooltipSuggestions() {
+        return generateTooltipSuggestions();
     }
 }

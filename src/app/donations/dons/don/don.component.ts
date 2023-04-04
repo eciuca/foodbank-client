@@ -13,6 +13,7 @@ import {NgForm} from '@angular/forms';
 import {Donateur} from '../../model/donateur';
 import {DonateurEntityService} from '../../services/donateur-entity.service';
 import {AuditChangeEntityService} from '../../../audits/services/auditChange-entity.service';
+import {generateTooltipSuggestions} from '../../../shared/functions';
 @Component({
   selector: 'app-don',
   templateUrl: './don.component.html',
@@ -213,6 +214,8 @@ export class DonComponent implements OnInit {
           );
         });
   }
+
+    protected readonly generateTooltipSuggestions = generateTooltipSuggestions;
 }
 
 

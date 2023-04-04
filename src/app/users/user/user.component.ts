@@ -24,6 +24,7 @@ import {Organisation} from '../../organisations/model/organisation';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
 import {DepotEntityService} from '../../depots/services/depot-entity.service';
 import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
+import {generateTooltipSuggestions} from '../../shared/functions';
 
 @Component({
   selector: 'app-user',
@@ -497,4 +498,7 @@ export class UserComponent implements OnInit {
     generateTooltipAssociatedCpas() {
         return $localize`:@@OrgToolTipAssociatedCpas:Which is the Cpas the user manages?`;
     }
+
+
+    protected readonly generateTooltipSuggestions = generateTooltipSuggestions;
 }

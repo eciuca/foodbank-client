@@ -14,6 +14,7 @@ import {AuthState} from '../../auth/reducers';
 import {formatDate} from '@angular/common';
 
 
+
 @Component({
   selector: 'app-dons',
   templateUrl: './dons.component.html',
@@ -181,7 +182,7 @@ export class DonsComponent implements OnInit {
   }
 
   getTotalStatistics() {
-
     return $localize`:@@DonTotalStatistics:Total amount gifts for selection ${this.totalAmount}  €`;
   }
+
 }

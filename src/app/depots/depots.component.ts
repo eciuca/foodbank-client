@@ -17,6 +17,7 @@ import {OrgSummaryEntityService} from '../organisations/services/orgsummary-enti
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 import {OrgSummary} from '../organisations/model/orgsummary';
+import {generateTooltipOrganisation } from '../shared/functions';
 
 
 @Component({
@@ -260,7 +261,7 @@ export class DepotsComponent implements OnInit {
       queryOrganisationParms['bankShortName'] = this.bankShortName;
     }
     if (event.query.length > 0) {
-      queryOrganisationParms['societe'] = event.query.toLowerCase();
+      queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();
     }
 
     this.orgsummaryService.getWithQuery(queryOrganisationParms)
@@ -300,6 +301,7 @@ export class DepotsComponent implements OnInit {
 
           break;
         default:
+            this.filterBase ['idCompany'] = '999';
       }
     }
   }
@@ -323,6 +325,9 @@ export class DepotsComponent implements OnInit {
   generateToolTipMessageForOrgsWithoutDepot() {
    return $localize`:@@ToolTipOrgsWithoutDepot:${this.candidateOrganisations.length} organisations without depot proposed`;
   }
+    generateTooltipOrganisation() {
+        return generateTooltipOrganisation();
+    }
 }
 
 

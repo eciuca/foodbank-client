@@ -29,6 +29,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {ChartModule} from 'primeng/chart';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {TooltipModule} from 'primeng/tooltip';
 
 const routes: Routes = [
   {
@@ -68,6 +69,7 @@ const routes: Routes = [
     InputSwitchModule,
     MessageModule,
     ToastModule,
+    TooltipModule,
     CheckboxModule,
     ChartModule
   ],

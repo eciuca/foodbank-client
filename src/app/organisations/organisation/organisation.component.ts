@@ -28,6 +28,7 @@ import {RegionEntityService} from '../services/region-entity.service';
 import {OrgProgramEntityService} from '../services/orgprogram-entity.service';
 import {DefaultOrgProgram, OrgProgram} from '../model/orgprogram';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
+import { generateTooltipSuggestions } from '../../shared/functions';
 
 @Component({
   selector: 'app-organisation',
@@ -408,6 +409,9 @@ export class OrganisationComponent implements OnInit {
                     );
             }
         });
+    }
+    generateTooltipSuggestions() {
+        return generateTooltipSuggestions();
     }
 }
 

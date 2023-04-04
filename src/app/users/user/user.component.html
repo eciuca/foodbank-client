@@ -15,7 +15,7 @@
                 <p-message i18n-text="@@UserLoginIsMandatory" *ngIf="myiduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@Employee" for="selectedMembre">Employee</label>
+                <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Employee" for="selectedMembre">Employee</label>
                 <p-autoComplete  [ngModel]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
                                 (onSelect)="setSelectedMembre($event);"
                                 [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">

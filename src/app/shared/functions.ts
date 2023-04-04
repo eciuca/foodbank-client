@@ -87,6 +87,9 @@ export function getCoeffTooltip() {
 export function generateTooltipOrganisation() {
     return $localize`:@@OrganisationTooltip:Enter In the rectangle below either the id of the organisation, either a part of the organisation name to see and select the desired organisation`;
 }
+export function generateTooltipSuggestions() {
+    return $localize`:@@SuggestionsTooltip:This is a suggestions List Box. To find the item, clear the text the rectangle below and enter  a part of the name to see and select the desired item`;
+}
 export function getMemberShipMailingTextDefaultFr() {
     let mailingTextDefaultFr  = `<Strong>NOTE DE DEBIT<br>{{Nom Organisation}}</strong><br>{{Adresse Organisation}}<br>{{Code Postal Organisation}}<br>{{Commune Organisation}}<br><br>`;
     mailingTextDefaultFr += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre {{Type Cotisation}}`;

@@ -131,6 +131,7 @@ export class UsersRightsComponent implements OnInit {
             break;
           default:
             console.log('Entering Users component with unsupported user rights, see complete authstate:', authState);
+            this.filterBase = {'lienBanque': 999};
         }
       }
         });

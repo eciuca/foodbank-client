@@ -11,6 +11,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../reducers';
 import {globalAuthState} from '../../../auth/auth.selectors';
 import {OrgSummaryEntityService} from '../../services/orgsummary-entity.service';
+import { generateTooltipSuggestions } from '../../../shared/functions';
 
 @Component({
   selector: 'app-orgfeaddetail',
@@ -168,6 +169,9 @@ export class OrgfeaddetailComponent implements OnInit {
 
     generateTooltipAntenne() {
         return $localize`:@@OrgToolTipAntenne:Parent Organisation of this Subsidiary`;
+    }
+    generateTooltipSuggestions() {
+        return generateTooltipSuggestions();
     }
 
 

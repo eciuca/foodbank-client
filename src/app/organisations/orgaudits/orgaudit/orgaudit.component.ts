@@ -13,7 +13,7 @@ import {Membre} from '../../../membres/model/membre';
 import {MembreEntityService} from '../../../membres/services/membre-entity.service';
 import {OrgSummaryEntityService} from '../../services/orgsummary-entity.service';
 import {OrgSummary} from '../../model/orgsummary';
-import {generateTooltipOrganisation} from '../../../shared/functions';
+import {generateTooltipOrganisation, generateTooltipSuggestions} from '../../../shared/functions';
 
 @Component({
   selector: 'app-orgaudit',
@@ -258,6 +258,9 @@ export class OrgauditComponent implements OnInit {
   }
   generateTooltipOrganisation() {
     return generateTooltipOrganisation();
+  }
+  generateTooltipSuggestions() {
+    return generateTooltipSuggestions();
   }
 }
 

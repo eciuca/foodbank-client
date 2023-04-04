@@ -158,6 +158,7 @@ export class CpassComponent implements OnInit {
           // this.booCanCreate = true;
           break;
         default:
+          this.filterBase = {'lienBanque': 999};
       }
     }
   }

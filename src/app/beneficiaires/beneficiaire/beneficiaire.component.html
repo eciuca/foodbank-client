@@ -109,7 +109,7 @@
         </div>
         <div class="p-fluid p-formgrid p-grid" >
             <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@CpasOfReference" for="selectedCpas">Cpas</label>
+                <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@CpasOfReference" for="selectedCpas">Cpas</label>
                 <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass" (completeMethod)="filterCpas($event)"
                                  [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true" [disabled] ="updateRestricted">
                     <ng-template let-cpas pTemplate="item">

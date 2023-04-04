@@ -15,7 +15,7 @@ import {AppState} from '../../reducers';
 import {BanqProg} from '../model/banqprog';
 import {BanqProgEntityService} from '../services/banqprog-entity.service';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
-import {getMemberShipMailingTextDefaultFr, getMemberShipMailingTextDefaultNl} from '../../shared/functions';
+import {generateTooltipSuggestions, getMemberShipMailingTextDefaultFr, getMemberShipMailingTextDefaultNl} from '../../shared/functions';
 
 
 @Component({
@@ -491,6 +491,9 @@ export class BanqueComponent implements OnInit {
         Als u de tekst tussen {{ }} wijzigt, vindt de vervanging niet meer plaats. \n
         Als u geen waarde voor vervanging wilt weergeven, kunt u deze waarde tussen {{ }} uit de tekst verwijderen. \n
         Sla de tekst op met de knop "Opslaan"`;
+    }
+    generateTooltipSuggestions() {
+        return generateTooltipSuggestions();
     }
 }
 

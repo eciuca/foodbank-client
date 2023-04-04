@@ -74,6 +74,7 @@ export class ZipCodesComponent implements OnInit {
                                 // this.booCanCreate = true;
                                 break;
                             default:
+                                this.filterBase = {'lienBanque': 999};
                         }
                     }
                 })

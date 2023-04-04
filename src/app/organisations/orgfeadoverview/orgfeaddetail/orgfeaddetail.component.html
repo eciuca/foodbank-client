@@ -28,7 +28,7 @@
                 <p-inputSwitch id="isAntenne" name="isAntenne" [ngModel]="isAntenne" (onChange)="handleAntenneStatusChange($event)" ></p-inputSwitch>
             </div>
             <div *ngIf="organisation.birbCode == '1' " class="p-field p-col-12 p-md-4" pTooltip="{{generateTooltipAntenne()}}">
-            <label i18n="@@AntenneParent" for="selectedAntenne">Antenne Parent</label>
+            <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@AntenneParent" for="selectedAntenne">Antenne Parent</label>
             <p-autoComplete [(ngModel)]="selectedAntenne" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                             [forceSelection]="true" id="selectedAntenne" name="selectedAntenne" field="fullname" [dropdown]="true">
             </p-autoComplete>

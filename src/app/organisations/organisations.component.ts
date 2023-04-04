@@ -276,6 +276,7 @@ export class OrganisationsComponent implements OnInit {
                     break;
 
                 default:
+                    this.filterBase['lienBanque'] = 999;
             }
             const  queryRegionParms: QueryParams = {};
             if (this.lienBanque) {

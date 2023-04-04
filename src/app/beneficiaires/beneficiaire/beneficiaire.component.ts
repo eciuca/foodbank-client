@@ -20,6 +20,7 @@ import {DependentEntityService} from '../services/dependent-entity.service';
 import * as moment from 'moment';
 import {BeneficiaireHttpService} from '../services/beneficiaire-http.service';
 import {AuthService} from '../../auth/auth.service';
+import { generateTooltipSuggestions } from '../../shared/functions';
 
 @Component({
   selector: 'app-beneficiaire',
@@ -355,7 +356,7 @@ export class BeneficiaireComponent implements OnInit {
         return this.title;
     }
     generateTooltipRightsBankUsers() {
-           return $localize`:@@BenefRightsBankUsers:Bank Users can only modify Beneficiary Coefficient and delete Duplicates who have a suspicion coefficient > 1`;
+           return $localize`:@@BenefRightsBankUsers:Bank Users can only modify Beneficiary Coefficient and delete Duplicates who have a coefficient > 1`;
     }
     setPovertyIndex() {
       this.povertyIndex = this.povertyRevenueSingleBeneficiary;
@@ -385,5 +386,8 @@ export class BeneficiaireComponent implements OnInit {
 
     getPovertyIndexTooltip(): string {
         return $localize`:@@povertyIndexTooltip:Poverty Index of ${this.povertyRevenueIndexDate} is calculated as follows: Single Beneficiary: ${this.povertyRevenueSingleBeneficiary} € + ${this.povertyRevenueDependentAdult} € * nb of Dependent Adults +  ${this.povertyRevenueDependentChild} € * nb of Dependent Children`;
+    }
+    generateTooltipSuggestions() {
+        return generateTooltipSuggestions();
     }
 }

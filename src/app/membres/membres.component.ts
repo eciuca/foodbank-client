@@ -348,6 +348,7 @@ export class MembresComponent implements OnInit {
                     }
                     break;
                 default:
+                    this.filterBase = { 'actif':'1','lienBanque': 999};
             }
 
         }

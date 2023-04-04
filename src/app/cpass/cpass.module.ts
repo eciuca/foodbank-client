@@ -24,6 +24,7 @@ import { ZipCodeComponent } from './zipcodes/zipcode/zipcode.component';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {TooltipModule} from 'primeng/tooltip';
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
         MessageModule,
         ConfirmPopupModule,
         InputTextareaModule,
+        TooltipModule,
     ],
   providers: [
         CpassDataService,

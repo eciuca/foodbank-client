@@ -20,7 +20,7 @@
                 <p-message i18n-text="@@CityIsMandatory" *ngIf="nom.invalid && zipCodeForm.touched" severity="error" text="City is required and must be minimum 3 chars long"></p-message>
             </div>
              <div class="p-field p-col-12 p-md-4">
-                    <label i18n="@@Cpas" for="selectedCpas">Cpas</label>
+                    <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Cpas" for="selectedCpas">Cpas</label>
                     <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass"  (completeMethod)="filterCpas($event)"
                                      [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true">
                     </p-autoComplete>
