@@ -237,7 +237,7 @@ export class BeneficiairesComponent implements OnInit {
       this.mailing.subject = 'Foodbanks - Configuration Error';
       this.mailing.from = 'contact@foodbanksit.be';
       this.mailing.to = 'alain.vandermeersch@gmail.com';
-      this.mailing.bodyText = `login ${this.loggedInUserId} ${this.loggedInUserName}  was denied access to beneficiaries due to an invalid right ${this.loggedInUserRights}`
+      this.mailing.bodyText = `login ${this.loggedInUserId} ${this.loggedInUserName}  with Org Id ${this.idOrg} was denied access to beneficiaries due to an invalid right ${this.loggedInUserRights}`
       this.mailingService.add(this.mailing)
           .subscribe((myMail: Mailing) => {
             this.messageService.add({
