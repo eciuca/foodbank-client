@@ -84,6 +84,7 @@ export class BeneficiariesListComponent implements OnInit {
                             case 'Asso':
                             case 'Admin_Asso':
                                 this.idOrg = authState.organisation.idDis;
+                                if(!this.idOrg || this.idOrg ===0) { this.idOrg = 999; }
                                 this.orgName = authState.organisation.societe;
                                 this.loadBeneficiaries();
                                 break;

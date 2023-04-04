@@ -43,6 +43,8 @@ import {BeneficiariesListComponent} from './beneficiaries-list/beneficiaries-lis
 import {NgxPrintModule} from 'ngx-print';
 import {ToastModule} from 'primeng/toast';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {MailingsDataService} from '../mailings/services/mailings-data.service';
+import {MailingEntityService} from '../mailings/services/mailing-entity.service';
 
 
 const routes: Routes = [
@@ -112,6 +114,8 @@ const routes: Routes = [
         CpasEntityService,
       AuditChangesDataService,
       AuditChangeEntityService,
+      MailingsDataService,
+      MailingEntityService,
         ConfirmationService
   ]
 
@@ -126,6 +130,7 @@ export class BeneficiairesModule {
       private organisationsDataService: OrganisationsDataService,
       private orgSummariesDataService: OrgSummariesDataService,
       private auditChangesDataService: AuditChangesDataService,
+      private mailingsDataService: MailingsDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Organisation', organisationsDataService);
@@ -134,5 +139,6 @@ export class BeneficiairesModule {
     entityDataService.registerService('Cpas', cpassDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
     entityDataService.registerService('AuditChange', auditChangesDataService);
+    entityDataService.registerService('Mailing', mailingsDataService);
   }
 }

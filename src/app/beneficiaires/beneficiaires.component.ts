@@ -7,7 +7,7 @@ import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {Router} from '@angular/router';
 import {AuthState} from '../auth/reducers';
-import {LazyLoadEvent} from 'primeng/api';
+import {LazyLoadEvent, MessageService} from 'primeng/api';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../organisations/services/orgsummary-entity.service';
 import {enmStatutFead, enmYn} from '../shared/enums';
@@ -19,6 +19,8 @@ import {formatDate} from '@angular/common';
 import {labelCivilite} from '../shared/functions';
 import {Organisation} from '../organisations/model/organisation';
 import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
+import {DefaultMailing, Mailing} from '../mailings/model/mailing';
+import {MailingEntityService} from '../mailings/services/mailing-entity.service';
 
 
 @Component({
@@ -30,6 +32,9 @@ import {OrganisationEntityService} from '../organisations/services/organisation-
 export class BeneficiairesComponent implements OnInit {
   loadPageSubject$ = new BehaviorSubject(null);
   selectedIdClient$ = new BehaviorSubject(0);
+  loggedInUserId: string;
+  loggedInUserName: string;
+  loggedInUserRights: string;
   beneficiaires: Beneficiaire[];
   beneficiaire: Beneficiaire = null;
   displayDialog: boolean;
@@ -55,16 +60,24 @@ export class BeneficiairesComponent implements OnInit {
   duplicateFilter: any;
   summaryMessage: string;
   feadStatuses: any[];
+  isValidConfig: boolean;
+  mailing: Mailing;
+
 
   constructor(private beneficiaireService: BeneficiaireEntityService,
               private organisationsService: OrganisationEntityService,
               private orgsummaryService: OrgSummaryEntityService,
               private authService: AuthService,
+              private messageService: MessageService,
+              private mailingService: MailingEntityService,
               private excelService: ExcelService,
               private beneficiaireHttpService: BeneficiaireHttpService,
               private router: Router,
               private store: Store
   ) {
+    this.loggedInUserId ="";
+    this.loggedInUserName ="";
+    this.loggedInUserRights ="";
     this.booCanCreate = false;
     this.booShowArchived = false;
     this.bankid = 0;
@@ -86,6 +99,8 @@ export class BeneficiairesComponent implements OnInit {
       {label: $localize`:@@ClientDuplicateNames:Beneficiaries with Duplicate Names`, value: 'name'},
       {label: $localize`:@@ClientDuplicateBirthDates:Beneficiaries with Duplicate BirthDates`, value: 'birthDate'},
     ];
+    this.isValidConfig = false;
+    this.mailing = new DefaultMailing();
   }
 
   ngOnInit() {
@@ -159,56 +174,79 @@ export class BeneficiairesComponent implements OnInit {
   }
 
   nextPage(event: LazyLoadEvent) {
-    this.loading = true;
-    if (event.sortField == null) {
-      setTimeout(() => {
-        console.log('waiting first 250ms for reset to take place');
-      }, 250);
+    if (this.isValidConfig) {
+      this.loading = true;
+      if (event.sortField == null) {
+        setTimeout(() => {
+          console.log('waiting first 250ms for reset to take place');
+        }, 250);
+      }
+      const queryParms = {...this.filterBase};
+      queryParms['offset'] = event.first.toString();
+      queryParms['rows'] = event.rows.toString();
+      queryParms['sortOrder'] = event.sortOrder.toString();
+      if (event.sortField) {
+        queryParms['sortField'] = event.sortField.toString();
+      } else {
+        queryParms['sortField'] = 'nom';
+      }
+      if (this.booShowArchived) {
+        queryParms['actif'] = '0';
+      } else {
+        queryParms['actif'] = '1';
+      }
+      if (this.duplicateFilter) {
+        queryParms['duplicate'] = this.duplicateFilter;
+      }
+      if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
+        queryParms['lienDis'] = this.filteredOrganisation.idDis;
+      }
+      if (event.filters) {
+        if (event.filters.nom && event.filters.nom.value) {
+          queryParms['nom'] = event.filters.nom.value;
+        }
+        if (event.filters.adresse && event.filters.adresse.value) {
+          queryParms['adresse'] = event.filters.adresse.value;
+        }
+        if (event.filters.cp && event.filters.cp.value) {
+          queryParms['cp'] = event.filters.cp.value;
+        }
+        if (event.filters.localite && event.filters.localite.value) {
+          queryParms['localite'] = event.filters.localite.value;
+        }
+        if (event.filters.daten && event.filters.daten.value) {
+          queryParms['daten'] = event.filters.daten.value;
+        }
+        if (event.filters.birb && event.filters.birb.value !== null) {
+          queryParms['birb'] = event.filters.birb.value;
+        }
+        if (event.filters.coeff && event.filters.coeff.value !== null) {
+          queryParms['coeff'] = event.filters.coeff.value;
+        }
+      }
+      this.loadPageSubject$.next(queryParms);
     }
-    const queryParms = {...this.filterBase};
-    queryParms['offset'] = event.first.toString();
-    queryParms['rows'] = event.rows.toString();
-    queryParms['sortOrder'] = event.sortOrder.toString();
-    if (event.sortField) {
-      queryParms['sortField'] = event.sortField.toString();
-    } else {
-      queryParms['sortField'] =  'nom';
+    else {
+
+      const  myMessage = {
+        severity: 'error',
+        summary: 'Configuration',
+        detail: $localize`:@@messageConfigurationError: Your login ${this.loggedInUserId} ${this.loggedInUserName}  with Org Id ${this.idOrg} has an invalid right ${this.loggedInUserRights} to access beneficiaries.`
+      };
+      this.messageService.add(myMessage);
+      this.mailing.subject = 'Foodbanks - Configuration Error';
+      this.mailing.from = 'contact@foodbanksit.be';
+      this.mailing.to = 'alain.vandermeersch@gmail.com';
+      this.mailing.bodyText = `login ${this.loggedInUserId} ${this.loggedInUserName}  was denied access to beneficiaries due to an invalid right ${this.loggedInUserRights}`
+      this.mailingService.add(this.mailing)
+          .subscribe((myMail: Mailing) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Creation',
+              detail: $localize`:@@HelpDeskNotified:The Help Desk has been notified of the error.`
+            });
+            });
     }
-    if (this.booShowArchived ) {
-      queryParms['actif'] = '0';
-    }  else {
-      queryParms['actif'] = '1';
-    }
-    if (this.duplicateFilter ) {
-      queryParms['duplicate'] = this.duplicateFilter;
-    }
-    if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
-      queryParms['lienDis'] = this.filteredOrganisation.idDis;
-    }
-    if (event.filters) {
-      if (event.filters.nom && event.filters.nom.value) {
-        queryParms['nom'] = event.filters.nom.value;
-      }
-      if (event.filters.adresse && event.filters.adresse.value) {
-        queryParms['adresse'] = event.filters.adresse.value;
-      }
-      if (event.filters.cp && event.filters.cp.value) {
-         queryParms['cp'] = event.filters.cp.value;
-      }
-      if (event.filters.localite && event.filters.localite.value) {
-         queryParms['localite'] = event.filters.localite.value;
-      }
-      if (event.filters.daten && event.filters.daten.value) {
-        queryParms['daten'] = event.filters.daten.value;
-      }
-      if (event.filters.birb && event.filters.birb.value !== null) {
-        queryParms['birb'] = event.filters.birb.value;
-      }
-      if (event.filters.coeff && event.filters.coeff.value !== null) {
-        queryParms['coeff'] = event.filters.coeff.value;
-      }
-    }
-    this.loadPageSubject$.next(queryParms);
   }
   changeDuplicatesFilter(value: any) {
     this.duplicateFilter = value;
@@ -230,19 +268,28 @@ export class BeneficiairesComponent implements OnInit {
       this.bankid = authState.banque.bankId;
       this.bankName = authState.banque.bankName;
       this.bankShortName = authState.banque.bankShortName;
+      this.loggedInUserName = authState.user.userName;
+      this.loggedInUserId = authState.user.idUser;
+      this.loggedInUserRights = authState.user.rights
+
       switch (authState.user.rights) {
         case 'Bank':
         case 'Admin_Banq':
           this.booShowOrganisations = true;
           this.filterBase = { 'lienBanque': authState.banque.bankId};
+          this.isValidConfig = true;
           // Only organisations can create beneficiaries
          // if  ((authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen)))
           // { this.booCanCreate = true; }
           break;
         case 'Asso':
         case 'Admin_Asso':
+          this.isValidConfig = true;
           this.filterBase = { 'lienDis': authState.organisation.idDis};
           this.idOrg = authState.organisation.idDis;
+          if (!this.idOrg || this.idOrg === 0) {
+            this.isValidConfig = false;
+          }
           this.orgName = authState.organisation.idDis + ' ' + authState.organisation.societe;
           if  ((authState.user.rights === 'Admin_Asso') || (( authState.user.rights === 'Asso') && (authState.user.gestBen)))
           {
@@ -257,14 +304,18 @@ export class BeneficiairesComponent implements OnInit {
               });
           break;
         case 'Admin_CPAS':
-          console.log('Admin CPAS', authState.user);
+          this.isValidConfig = true;
           this.filterBase = { 'lienCpas': authState.user.lienCpas};
           this.lienCpas = authState.user.lienCpas;
           this.booShowOrganisations = true;
           break;
         default:
+          this.filterBase = { 'lienBanque': 999};
       }
-
+      if (this.loggedInUserId === 'avdmless') {
+        this.isValidConfig = false;
+        this.filterBase = { 'lienBanque': 999};
+      }
     }
   }
   filterOrganisation(event ) {
