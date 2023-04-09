@@ -312,10 +312,7 @@ export class BeneficiairesComponent implements OnInit {
         default:
           this.filterBase = { 'lienBanque': 999};
       }
-      if (this.loggedInUserId === 'avdmless') {
-        this.isValidConfig = false;
-        this.filterBase = { 'lienBanque': 999};
-      }
+
     }
   }
   filterOrganisation(event ) {

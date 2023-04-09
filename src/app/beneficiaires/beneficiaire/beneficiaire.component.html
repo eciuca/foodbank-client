@@ -62,22 +62,27 @@
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@BirthDatePartner" for="datenConj">Birth Date Partner</label>
                 <input #datenconj="ngModel" pInputText id="datenConj" name="datenConj"  pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$"
-                       placeholder="dd/mm/yyyy" [disabled] ="updateRestricted" [ngModel]="beneficiaire.datenConj"/>
+                       placeholder="dd/mm/yyyy" [disabled] ="updateRestricted"  [ngModel]="beneficiaire.datenConj"/>
                 <p-message i18n-text="@@BirthDateNotValid" *ngIf="datenconj.invalid && beneficiaireForm.touched" severity="error" text="Birth Date must in format dd/mm/yyyy"></p-message>
             </div>
         </div>
         <div class="p-fluid p-formgrid p-grid" >
             <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@Address" for="adresse">Address</label>
-                <input pInputText id="adresse" name="adresse"  maxlength="50" [disabled] ="updateRestricted" [ngModel]="beneficiaire.adresse" />
+                <label i18n="@@AddressMandatory" for="adresse">Address *</label>
+                <input #adresse="ngModel" pInputText id="adresse" name="adresse" required maxlength="50" [disabled] ="updateRestricted" [ngModel]="beneficiaire.adresse" />
+                <p-message i18n-text="@@AddressIsMandatory" *ngIf="adresse.invalid && beneficiaireForm.touched" severity="error" text="Address is required and must be minimum 4 chars long"></p-message>
+
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label i18n="@@ZipCode" for="cp">Zip Code</label>
-                <input pInputText id="cp" name="cp"  maxlength="6" [disabled] ="updateRestricted" [ngModel]="beneficiaire.cp" />
+                <label i18n="@@ZipCodeMandatory" for="cp">Zip Code *</label>
+                <input #cp="ngModel" pInputText id="cp" name="cp"  pattern="^[0-9]+$" required minlength="4"   maxlength="4" [disabled] ="updateRestricted" [ngModel]="beneficiaire.cp" />
+                <p-message i18n-text="@@ZipCodeIsMandatory" *ngIf="cp.invalid && beneficiaireForm.touched" severity="error" text="Zip Code is required and must be 4 chars long"></p-message>
+
             </div>
             <div class="p-field p-col-12 p-md-2">
-                <label i18n="@@City" for="localite">City</label>
-                <input pInputText id="localite" name="localite"  maxlength="50" [disabled] ="updateRestricted" [ngModel]="beneficiaire.localite" />
+                <label i18n="@@CityMandatory" for="localite">City *</label>
+                <input #localite pInputText id="localite" name="localite" required maxlength="50" [disabled] ="updateRestricted" [ngModel]="beneficiaire.localite" />
+                <p-message i18n-text="@@CityIsMandatory" *ngIf="localite.invalid && beneficiaireForm.touched" severity="error" text="City is required"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@Country" for="pays">Country</label>

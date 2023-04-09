@@ -140,14 +140,14 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label  i18n="@@ZipCodeMandatory" for="cp">Zip Code *</label>
-                <input #zipcode="ngModel" pInputText id="cp" name="cp"  required minlength="4" maxLength="10" [ngModel]="banque.cp" />
-                <p-message i18n-text="@@ZipCodeIsMandatory" *ngIf="zipcode.invalid && banqueForm.touched" severity="error" text="Zip Code is required and must be minimum 4 chars long"></p-message>
+                <input #zipcode="ngModel" pInputText id="cp" name="cp"  pattern="^[0-9]+$" required minlength="4" maxlength="4" [ngModel]="banque.cp" />
+                <p-message i18n-text="@@ZipCodeIsMandatory" *ngIf="zipcode.invalid && banqueForm.touched" severity="error" text="Zip Code is required and must be 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@CityMandatory"  for="localite">City *</label>
-                <input #localite="ngModel" pInputText id="localite" name="localite"  required minlength="4" maxLength="30" [ngModel]="banque.localite" />
-                <p-message i18n-text="@@CityIsMandatory" *ngIf="localite.invalid && banqueForm.touched" severity="error" text="City is required and must be minimum 3 chars long"></p-message>
+                <input #localite="ngModel" pInputText id="localite" name="localite"  required  maxLength="30" [ngModel]="banque.localite" />
+                <p-message i18n-text="@@CityIsMandatory" *ngIf="localite.invalid && banqueForm.touched" severity="error" text="City is required"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@Tel" for="bankTel">Tel</label>

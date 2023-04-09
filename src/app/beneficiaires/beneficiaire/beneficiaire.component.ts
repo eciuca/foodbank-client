@@ -21,6 +21,11 @@ import * as moment from 'moment';
 import {BeneficiaireHttpService} from '../services/beneficiaire-http.service';
 import {AuthService} from '../../auth/auth.service';
 import { generateTooltipSuggestions } from '../../shared/functions';
+import {ZipcodeEntityService} from '../../cpass/zipcodes/services/zipcode-entity.service';
+import {User} from '../../users/model/user';
+import {DefaultMailing, Mailing} from '../../mailings/model/mailing';
+import {MailingEntityService} from '../../mailings/services/mailing-entity.service';
+import {UserHttpService} from '../../users/services/user-http.service';
 
 @Component({
   selector: 'app-beneficiaire',
@@ -59,6 +64,7 @@ export class BeneficiaireComponent implements OnInit {
     userId: string;
     userName: string;
     userLanguage: string;
+    userEmail: string;
     dependentQuery: any;
     dependents: Dependent[];
     nbAdults: number;
@@ -67,11 +73,15 @@ export class BeneficiaireComponent implements OnInit {
     feadEligibility: string;
     isAdminCPAS: boolean;
     updateRestricted: boolean;
+    mailing: Mailing;
   constructor(
       private beneficiairesService: BeneficiaireEntityService,
       private beneficiaireHttpService: BeneficiaireHttpService,
       private dependentService: DependentEntityService,
       private cpassService: CpasEntityService,
+      private zipCodesService: ZipcodeEntityService,
+      private userHttpService: UserHttpService,
+      private mailingService: MailingEntityService,
       private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
       private router: Router,
@@ -97,6 +107,7 @@ export class BeneficiaireComponent implements OnInit {
       this.dependentQuery = {};
       this.isAdminCPAS = false;
       this.updateRestricted = false;
+      this.mailing = new DefaultMailing();
   }
 
   ngOnInit(): void {
@@ -205,7 +216,8 @@ export class BeneficiaireComponent implements OnInit {
                   if (authState.user) {
                       this.userId= authState.user.idUser;
                       this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
-                        this.userLanguage = authState.user.idLanguage
+                      this.userLanguage = authState.user.idLanguage;
+                      this.userEmail= authState.user.email;
                       switch (authState.user.rights) {
                           case 'Admin_Banq':
                           case 'Bank':
@@ -275,9 +287,68 @@ export class BeneficiaireComponent implements OnInit {
     }
 
   save(oldBeneficiaire: Beneficiaire, beneficiaireForm: Beneficiaire) {
-    const modifiedBeneficiaire = Object.assign({}, oldBeneficiaire, beneficiaireForm);
+      const modifiedBeneficiaire = Object.assign({}, oldBeneficiaire, beneficiaireForm);
       if (this.selectedCpas) {
           modifiedBeneficiaire.lcpas = this.selectedCpas.cpasId;
+      }
+      let newCPASName: string = "";
+      let mailCPASAdmin: string = "";
+      this.zipCodesService.getByKey(modifiedBeneficiaire.cp)
+          .subscribe(
+              zipCode => {
+                  if (zipCode !== null) {
+                      modifiedBeneficiaire.localite= zipCode.city;
+                      if (modifiedBeneficiaire.lcpas != zipCode.lcpas) {
+                          modifiedBeneficiaire.lcpas = zipCode.lcpas;
+                          newCPASName = zipCode.cityCpas;
+                      }
+                  }
+                  const queryParams = {'rights':'Admin_CPAS','lienCpas': modifiedBeneficiaire.lcpas.toString()};
+                  let params = new URLSearchParams();
+                  for(let key in queryParams){
+                      params.set(key, queryParams[key])
+                  }
+                  this.userHttpService.getUserReport(this.authService.accessToken, params.toString())
+                      .subscribe(
+                          myUsers => {
+                            if (myUsers.length > 0) {
+                            mailCPASAdmin = myUsers[0].email;
+                      }
+                      this.updateBeneficiary(modifiedBeneficiaire,newCPASName,mailCPASAdmin);
+                  });
+
+
+              }
+              ,
+          (dataserviceerrorFn: () => DataServiceError) => {
+                console.log('could not find zipcode');
+              this.updateBeneficiary(modifiedBeneficiaire,newCPASName,mailCPASAdmin);
+            })
+     }
+  private notifyCPAS (modifiedBeneficiaire: Beneficiaire,mailCPASAdmin: string) {
+      if (this.userEmail == mailCPASAdmin) return; // ignore beneficiary creation by CPAS Admin
+      this.mailing.subject = $localize`:@@BeneficiaryNotificationCreation: A New Beneficiary was Registered`;
+      this.mailing.from = this.userEmail;
+      this.mailing.to = mailCPASAdmin;
+      console.log('mailcpasadmin',mailCPASAdmin);
+      // this.mailing.to ='clairevdm@gmail.com';
+      this.mailing.bodyText = $localize`:@@BeneficiaryNotificationCreationText: A new beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} was registered for organisation ${this.orgName}.
+      Please review its FEAD status`;
+      console.log('Notification mail',this.mailing);
+      this.mailingService.add(this.mailing)
+          .subscribe((myMail: Mailing) => {
+              this.messageService.add({
+                  severity: 'success',
+                  summary: 'Creation',
+                  detail: $localize`:@@CPASNotified:The CPAS Administrator ${mailCPASAdmin} has been notified.`
+              });
+          });
+
+  }
+  private updateBeneficiary(modifiedBeneficiaire: Beneficiaire, newCPASName: string,mailCPASAdmin: string) {
+      let messageAdditionalInfo ="";
+      if(newCPASName != "") {
+          messageAdditionalInfo = $localize`:@@BeneficiaryCPASChanged: the CPAS of reference was changed to ${newCPASName} for zipCode ${modifiedBeneficiaire.cp} ${modifiedBeneficiaire.localite}`;
       }
       if (modifiedBeneficiaire.hasOwnProperty('idClient')) {
     this.beneficiairesService.update(modifiedBeneficiaire)
@@ -285,7 +356,7 @@ export class BeneficiaireComponent implements OnInit {
           this.messageService.add({
               severity: 'success',
               summary: 'Update',
-              detail: $localize`:@@messageBeneficiaryUpdated:The beneficiary ${upDatedBeneficiaire.nom} ${upDatedBeneficiaire.prenom}  was updated`});
+              detail: $localize`:@@messageBeneficiaryUpdated:The beneficiary ${upDatedBeneficiaire.nom} ${upDatedBeneficiaire.prenom}  was updated. ${messageAdditionalInfo}`});
             this.onBeneficiaireUpdate.emit(upDatedBeneficiaire);
             this.auditChangeEntityService.logDbChange(this.userId,this.userName,upDatedBeneficiaire.lbanque,upDatedBeneficiaire.lienDis,'Client',
                     modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Update' );
@@ -305,11 +376,14 @@ export class BeneficiaireComponent implements OnInit {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: $localize`:@@messageBeneficiaryCreated:The beneficiary ${createdBeneficiaire.nom} ${createdBeneficiaire.prenom}  was created`
+                      detail: $localize`:@@messageBeneficiaryCreated:The beneficiary ${createdBeneficiaire.nom} ${createdBeneficiaire.prenom}  was created. ${messageAdditionalInfo}`
                   });
                   this.onBeneficiaireCreate.emit(createdBeneficiaire);
-                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,createdBeneficiaire.lbanque,createdBeneficiaire.lienDis,'Client',
+                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,createdBeneficiaire.lbanque,createdBeneficiaire.lienDis,'Client',
                           modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Create' );
+                  if (mailCPASAdmin != "") {
+                     this.notifyCPAS(modifiedBeneficiaire,mailCPASAdmin);
+                  }
               },
                   (dataserviceerrorFn: () => DataServiceError) => { 
                 const dataserviceerror = dataserviceerrorFn();

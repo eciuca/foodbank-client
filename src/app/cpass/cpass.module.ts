@@ -74,7 +74,6 @@ export class CpassModule {
       private entityDataService: EntityDataService,
       private cpassDataService: CpassDataService,
       private zipcodesDataService: ZipcodesDataService,
-      private zipcodeEntityService: ZipcodeEntityService,
       private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);

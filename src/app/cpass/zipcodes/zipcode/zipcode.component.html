@@ -16,8 +16,8 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@CityMandatory" for="city">City *</label>
-                <input #nom="ngModel"  pInputText id="city" name="city"  required minlength="3" maxlength="30" [ngModel]="zipCode.city" />
-                <p-message i18n-text="@@CityIsMandatory" *ngIf="nom.invalid && zipCodeForm.touched" severity="error" text="City is required and must be minimum 3 chars long"></p-message>
+                <input #nom="ngModel"  pInputText id="city" name="city"  required maxlength="30" [ngModel]="zipCode.city" />
+                <p-message i18n-text="@@CityIsMandatory" *ngIf="nom.invalid && zipCodeForm.touched" severity="error" text="City is required"></p-message>
             </div>
              <div class="p-field p-col-12 p-md-4">
                     <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Cpas" for="selectedCpas">Cpas</label>

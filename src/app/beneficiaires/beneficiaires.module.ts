@@ -45,6 +45,10 @@ import {ToastModule} from 'primeng/toast';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {MailingsDataService} from '../mailings/services/mailings-data.service';
 import {MailingEntityService} from '../mailings/services/mailing-entity.service';
+import {ZipcodesDataService} from '../cpass/zipcodes/services/zipcodes-data.service';
+import {ZipcodeEntityService} from '../cpass/zipcodes/services/zipcode-entity.service';
+import {UsersDataService} from '../users/services/users-data.service';
+import {UserEntityService} from '../users/services/user-entity.service';
 
 
 const routes: Routes = [
@@ -112,6 +116,10 @@ const routes: Routes = [
         DependentEntityService,
         OrgSummaryEntityService,
         CpasEntityService,
+      ZipcodesDataService,
+      ZipcodeEntityService,
+      UsersDataService,
+      UserEntityService,
       AuditChangesDataService,
       AuditChangeEntityService,
       MailingsDataService,
@@ -127,8 +135,10 @@ export class BeneficiairesModule {
       private beneficiairesDataService: BeneficiairesDataService,
       private banquesDataService: BanquesDataService,
       private cpassDataService: CpassDataService,
+      private zipcodesDataService: ZipcodesDataService,
       private organisationsDataService: OrganisationsDataService,
       private orgSummariesDataService: OrgSummariesDataService,
+      private usersDataService: UsersDataService,
       private auditChangesDataService: AuditChangesDataService,
       private mailingsDataService: MailingsDataService,
   ) {
@@ -137,7 +147,9 @@ export class BeneficiairesModule {
     entityDataService.registerService('Beneficiaire', beneficiairesDataService);
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('Cpas', cpassDataService);
+    entityDataService.registerService('Zipcode', zipcodesDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
+    entityDataService.registerService('User', usersDataService);
     entityDataService.registerService('AuditChange', auditChangesDataService);
     entityDataService.registerService('Mailing', mailingsDataService);
   }
