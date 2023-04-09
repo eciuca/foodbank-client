@@ -350,6 +350,7 @@ export class BeneficiaireComponent implements OnInit {
       if(newCPASName != "") {
           messageAdditionalInfo = $localize`:@@BeneficiaryCPASChanged: the CPAS of reference was changed to ${newCPASName} for zipCode ${modifiedBeneficiaire.cp} ${modifiedBeneficiaire.localite}`;
       }
+      console.log('NewCpasName', newCPASName,"additional info",messageAdditionalInfo );
       if (modifiedBeneficiaire.hasOwnProperty('idClient')) {
     this.beneficiairesService.update(modifiedBeneficiaire)
         .subscribe( (upDatedBeneficiaire)  => {
