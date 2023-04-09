@@ -2810,7 +2810,7 @@
       </trans-unit>
       <trans-unit id="messageBeneficiaryCreated" datatype="html">
         <source>The beneficiary <x id="PH" equiv-text="createdBeneficiaire.nom"/> <x id="PH_1" equiv-text="createdBeneficiaire.prenom"/>  was created. <x id="PH_2" equiv-text="messageAdditionalInfo"/></source>
-        <target>De begunstigde <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/> is aangemaakt</target>
+        <target>De begunstigde <x id="PH" equiv-text="createdBeneficiaire.nom"/> <x id="PH_1" equiv-text="createdBeneficiaire.prenom"/> is gemaakt. <x id="PH_2" equiv-text="messageAdditionalInfo"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
           <context context-type="linenumber">380</context>
