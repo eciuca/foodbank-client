@@ -316,10 +316,10 @@ export class BeneficiairesComponent implements OnInit {
     }
   }
   filterOrganisation(event ) {
-    const  queryOrganisationParms: QueryParams = {};
-    queryOrganisationParms['lienBanque'] = this.bankid.toString();
+    const  queryOrganisationParms: QueryParams = {'lienBanque': this.bankid.toString(),'actif': '1','gestBen': '1'};
     if (this.lienCpas >0) {
         queryOrganisationParms['lienCpas'] = this.lienCpas.toString();
+        queryOrganisationParms['birbyN'] = '1';
     }
     if (event.query.length > 0) {
       queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();

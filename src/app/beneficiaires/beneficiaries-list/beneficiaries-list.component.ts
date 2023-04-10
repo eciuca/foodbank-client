@@ -96,9 +96,10 @@ export class BeneficiariesListComponent implements OnInit {
                                 if (authState.user.rights === 'Admin_CPAS' ) {
                                     this.lienCpas = authState.user.lienCpas;
                                 }
-                                const  queryOrganisationParms = {'lienBanque': this.lienBanque.toString(), 'gestBen': '1'};
+                                const  queryOrganisationParms = {'lienBanque': this.lienBanque.toString(),'actif': '1', 'gestBen': '1'};
                                if (authState.user.rights === 'Admin_CPAS' ) {
                                    queryOrganisationParms['lienCpas'] = this.lienCpas.toString();
+                                   queryOrganisationParms['birbyN'] = '1';
                                }
                                this.zipcodeOptions = [];
                                 this.organisations = [];
@@ -151,9 +152,10 @@ export class BeneficiariesListComponent implements OnInit {
     }
     filterOrganisation(event ) {
         console.log('filterOrganisation', event);
-        const  queryOrganisationParms: QueryParams =  {'lienBanque': this.lienBanque.toString(), 'gestBen': '1'};
+        const  queryOrganisationParms: QueryParams =  {'lienBanque': this.lienBanque.toString(), 'actif': '1','gestBen': '1'};
         if (this.lienCpas >0) {
             queryOrganisationParms['lienCpas'] = this.lienCpas.toString();
+            queryOrganisationParms['birbyN'] = '1';
         }
 
         if (event && event.query && event.query.length > 0) {
