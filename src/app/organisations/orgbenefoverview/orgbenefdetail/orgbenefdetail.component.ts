@@ -123,6 +123,9 @@ export class OrgbenefdetailComponent implements OnInit {
       this.onOrganisationQuit.emit();
     }
   }
+    generateTooltipFEADManagedByCPAS() {
+        return $localize`:@@OrgCpasCooperation:Does the public authority validate the access of beneficiaries to FEAD ?`;
+    }
 
 }
 

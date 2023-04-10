@@ -51,6 +51,7 @@
             <th pSortableColumn="idDis">Id<p-sortIcon field="idDis"></p-sortIcon></th>
             <th colspan="2" i18n="@@NameSorted" pSortableColumn="societe">Name<p-sortIcon field="societe"></p-sortIcon></th>
             <th pSortableColumn="gestBen" i18n="@@GestBenSorted" pTooltip="{{generateTooltipGestBen()}}">Manage Beneficiaries<p-sortIcon field="gestBen"></p-sortIcon></th>
+            <th pSortableColumn="birbyN" i18n="@@FEADManagedByCPASSorted" pTooltip="{{generateTooltipFEADManagedByCPAS()}}">CPAS Manages FEAD<p-sortIcon field="birbyN"></p-sortIcon></th>
             <th pSortableColumn="nbRegisteredClients" i18n="@@BenRegisteredClientsSorted" pTooltip="{{generateTooltipRegisteredClients()}}">Recorded Beneficiaries<p-sortIcon field="gestBen"></p-sortIcon></th>
             <th pSortableColumn="latestClientUpdate" i18n="@@BenLatestClientUpdateSorted" pTooltip="{{generateTooltipLatestClientUpdate()}}">Last Update Beneficiaries<p-sortIcon field="latestClientUpdate"></p-sortIcon></th>
             <th pSortableColumn="nFam" pTooltip="{{generateTooltipBenFam()}}">Fam<p-sortIcon field="nFam"></p-sortIcon></th>
@@ -73,9 +74,14 @@
                 <p-columnFilter field="gestBen" matchMode="equals" [showMenu]="false">
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                         <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                            <ng-template let-option pTemplate="item">
-                                <span>{{option.label}}</span>
-                            </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="birbyN" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
                         </p-dropdown>
                     </ng-template>
                 </p-columnFilter>
@@ -95,6 +101,9 @@
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.gestBen, 'false-icon pi-times-circle': !organisation.gestBen}"></i>
+            </td>
+            <td>
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': organisation.birbyN, 'false-icon pi-times-circle': !organisation.birbyN}"></i>
             </td>
             <td>
                 {{ organisation.nbRegisteredClients }}

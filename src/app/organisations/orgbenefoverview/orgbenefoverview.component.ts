@@ -173,6 +173,9 @@ export class OrgbenefoverviewComponent implements OnInit {
       if (event.filters.gestBen && event.filters.gestBen.value !== null) {
         queryParms['gestBen'] = event.filters.gestBen.value;
       }
+      if (event.filters.birbyN && event.filters.birbyN.value !== null) {
+        queryParms['birbyN'] = event.filters.birbyN.value;
+      }
       if (this.regionSelected) {
         queryParms['regId'] = this.regionSelected;
       }
@@ -436,6 +439,10 @@ export class OrgbenefoverviewComponent implements OnInit {
 
   generateTooltipLatestClientUpdate() {
     return $localize`:@@OrgLatestClientUpdate:Date de dernière mise à jour des familles encodées`;
+  }
+
+  generateTooltipFEADManagedByCPAS() {
+    return $localize`:@@OrgCpasCooperation:Does the public authority validate the access of beneficiaries to FEAD ?`;
   }
 }
 

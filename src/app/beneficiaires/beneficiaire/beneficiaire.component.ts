@@ -74,6 +74,7 @@ export class BeneficiaireComponent implements OnInit {
     isAdminCPAS: boolean;
     updateRestricted: boolean;
     mailing: Mailing;
+    isCPASHandlingFeadStatus: boolean;
   constructor(
       private beneficiairesService: BeneficiaireEntityService,
       private beneficiaireHttpService: BeneficiaireHttpService,
@@ -108,6 +109,7 @@ export class BeneficiaireComponent implements OnInit {
       this.isAdminCPAS = false;
       this.updateRestricted = false;
       this.mailing = new DefaultMailing();
+      this.isCPASHandlingFeadStatus = false;
   }
 
   ngOnInit(): void {
@@ -239,6 +241,7 @@ export class BeneficiaireComponent implements OnInit {
                               this.lienBanque = authState.banque.bankId;
                               this.lienDis = authState.user.idOrg;
                               this.orgName = authState.organisation.societe;
+                              this.isCPASHandlingFeadStatus = authState.organisation.birbyN;
                               if (authState.organisation.depyN === true) {
                                   this.lienDepot = authState.organisation.idDis;
                                   this.depotName = authState.organisation.societe;
@@ -293,6 +296,7 @@ export class BeneficiaireComponent implements OnInit {
       }
       let newCPASName: string = "";
       let mailCPASAdmin: string = "";
+
       this.zipCodesService.getByKey(modifiedBeneficiaire.cp)
           .subscribe(
               zipCode => {
@@ -329,11 +333,10 @@ export class BeneficiaireComponent implements OnInit {
       if (this.userEmail == mailCPASAdmin) return; // ignore beneficiary creation by CPAS Admin
       this.mailing.subject = $localize`:@@BeneficiaryNotificationCreation: A New Beneficiary was Registered`;
       this.mailing.from = this.userEmail;
-      this.mailing.to = mailCPASAdmin;
+      // this.mailing.to = mailCPASAdmin;
       console.log('mailcpasadmin',mailCPASAdmin);
-      // this.mailing.to ='clairevdm@gmail.com';
-      this.mailing.bodyText = $localize`:@@BeneficiaryNotificationCreationText: A new beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} was registered for organisation ${this.orgName}.
-      Please review its FEAD status`;
+      this.mailing.to ='alain.vandermeersch@gmail.com';
+      this.mailing.bodyText = $localize`:@@BeneficiaryNotificationCreationText: A new beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} was registered for organisation ${this.orgName}.<br>Please review its FEAD status`;
       console.log('Notification mail',this.mailing);
       this.mailingService.add(this.mailing)
           .subscribe((myMail: Mailing) => {
@@ -382,7 +385,7 @@ export class BeneficiaireComponent implements OnInit {
                   this.onBeneficiaireCreate.emit(createdBeneficiaire);
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,createdBeneficiaire.lbanque,createdBeneficiaire.lienDis,'Client',
                           modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Create' );
-                  if (mailCPASAdmin != "") {
+                  if (this.isCPASHandlingFeadStatus && (mailCPASAdmin != "")) {
                      this.notifyCPAS(modifiedBeneficiaire,mailCPASAdmin);
                   }
               },
@@ -443,7 +446,6 @@ export class BeneficiaireComponent implements OnInit {
         this.nbChildren = 0;
         this.dependents.forEach( (dependent) => {
             const dayDifference = - moment(dependent.datenais, 'DD/MM/YYYY').diff(moment(),'days');
-            console.log('dayDifference', dayDifference);
             if (dayDifference < 6205) { // 6205 days = 17 years old
                 this.nbChildren++;
                 this.povertyIndex += this.povertyRevenueDependentChild;
