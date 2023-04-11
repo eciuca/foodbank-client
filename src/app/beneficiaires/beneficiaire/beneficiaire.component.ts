@@ -71,7 +71,6 @@ export class BeneficiaireComponent implements OnInit {
     nbChildren: number;
     povertyIndex: number;
     feadEligibility: string;
-    isAdminCPAS: boolean;
     updateRestricted: boolean;
     mailing: Mailing;
     isCPASHandlingFeadStatus: boolean;
@@ -106,7 +105,6 @@ export class BeneficiaireComponent implements OnInit {
       this.depotName = '';
       this.title = '';
       this.dependentQuery = {};
-      this.isAdminCPAS = false;
       this.updateRestricted = false;
       this.mailing = new DefaultMailing();
       this.isCPASHandlingFeadStatus = false;
@@ -229,11 +227,8 @@ export class BeneficiaireComponent implements OnInit {
                               if  ((authState.user.rights === 'Admin_CPAS') || (authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
                                   this.booCanSave = true;
                               }
-                              if  (authState.user.rights === 'Admin_CPAS') {
-                                    this.isAdminCPAS = true;
-                              }
-                              else {
-                                  this.updateRestricted = true;
+                              if  (authState.user.rights != 'Admin_CPAS') {
+                                   this.updateRestricted = true;
                               }
                               break;
                           case 'Admin_Asso':
