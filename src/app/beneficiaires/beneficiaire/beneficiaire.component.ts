@@ -327,9 +327,8 @@ export class BeneficiaireComponent implements OnInit {
   private notifyCPAS (modifiedBeneficiaire: Beneficiaire,mailCPASAdmin: string) {
       this.mailing.subject = $localize`:@@BeneficiaryNotificationCreation: A New Beneficiary was Registered`;
       this.mailing.from = this.userEmail;
-      // this.mailing.to = mailCPASAdmin;
+      this.mailing.to = mailCPASAdmin;
       console.log('mailcpasadmin',mailCPASAdmin);
-      this.mailing.to ='alain.vandermeersch@gmail.com';
       this.mailing.bodyText = $localize`:@@BeneficiaryNotificationCreationText: A new beneficiary ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} was registered for organisation ${this.orgName}.<br>Please review its FEAD status`;
       console.log('Notification mail',this.mailing);
       this.mailingService.add(this.mailing)

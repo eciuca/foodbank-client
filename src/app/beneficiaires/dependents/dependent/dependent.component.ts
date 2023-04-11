@@ -158,10 +158,9 @@ export class DependentComponent implements OnInit {
     private notifyCPAS (modifiedDependent: Dependent,mailCPASAdmin: string) {
         this.mailing.subject = $localize`:@@DependentNotificationCreation: A New Dependent was Registered`;
         this.mailing.from = this.userEmail;
-        // this.mailing.to = mailCPASAdmin;
+        this.mailing.to = mailCPASAdmin;
         console.log('mailcpasadmin',mailCPASAdmin);
-        this.mailing.to ='alain.vandermeersch@gmail.com';
-        this.mailing.bodyText = $localize`:@@DependentNotificationCreationText: A new dependent ${modifiedDependent.nom} ${modifiedDependent.prenom} was registered for beneficiary ${this.beneficiaire.nom} ${this.beneficiaire.prenom}in organisation ${this.orgName}.<br>Please review its FEAD status`;
+        this.mailing.bodyText = $localize`:@@DependentNotificationCreationText: A new dependent ${modifiedDependent.nom} ${modifiedDependent.prenom} was registered for beneficiary ${this.beneficiaire.nom} ${this.beneficiaire.prenom} in organisation ${this.orgName}.<br>Please review its FEAD status`;
         console.log('Notification mail',this.mailing);
         this.mailingService.add(this.mailing)
             .subscribe((myMail: Mailing) => {

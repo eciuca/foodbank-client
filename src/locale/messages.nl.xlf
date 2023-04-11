@@ -4081,7 +4081,7 @@
       </trans-unit>
       <trans-unit id="DependentNotificationCreationText" datatype="html">
         <source> A new dependent <x id="PH" equiv-text="modifiedDependent.nom"/> <x id="PH_1" equiv-text="modifiedDependent.prenom"/> was registered for beneficiary <x id="PH_2" equiv-text="this.beneficiaire.nom"/> <x id="PH_3" equiv-text="this.beneficiaire.prenom"/>in organisation <x id="PH_4" equiv-text="this.orgName"/>.&lt;br&gt;Please review its FEAD status</source>
-        <target> Een nieuwe persoon ten laste <x id="PH" equiv-text="modifiedDependent.nom"/> <x id="PH_1" equiv-text="modifiedDependent.prenom"/> is geregistreerd voor begunstigde <x id="PH_2" equiv-text="this.beneficiaire.nom"/> <x id="PH_3" equiv-text="this.beneficiaire.prenom"/>in organisatie <x id="PH_4" equiv-text="this.orgName"/>.&lt;br&gt;Controleer de FEAD-status</target>
+        <target> Een nieuwe persoon ten laste <x id="PH" equiv-text="modifiedDependent.nom"/> <x id="PH_1" equiv-text="modifiedDependent.prenom"/> is geregistreerd voor begunstigde <x id="PH_2" equiv-text="this.beneficiaire.nom"/> <x id="PH_3" equiv-text="this.beneficiaire.prenom"/> in organisatie <x id="PH_4" equiv-text="this.orgName"/>.&lt;br&gt;Controleer de FEAD-status</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
           <context context-type="linenumber">164</context>
