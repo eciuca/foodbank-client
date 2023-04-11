@@ -325,7 +325,6 @@ export class BeneficiaireComponent implements OnInit {
             })
      }
   private notifyCPAS (modifiedBeneficiaire: Beneficiaire,mailCPASAdmin: string) {
-      if (this.userEmail == mailCPASAdmin) return; // ignore beneficiary creation by CPAS Admin
       this.mailing.subject = $localize`:@@BeneficiaryNotificationCreation: A New Beneficiary was Registered`;
       this.mailing.from = this.userEmail;
       // this.mailing.to = mailCPASAdmin;

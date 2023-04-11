@@ -156,7 +156,6 @@ export class DependentComponent implements OnInit {
     });
   }
     private notifyCPAS (modifiedDependent: Dependent,mailCPASAdmin: string) {
-        if (this.userEmail == mailCPASAdmin) return; // ignore beneficiary creation by CPAS Admin
         this.mailing.subject = $localize`:@@DependentNotificationCreation: A New Dependent was Registered`;
         this.mailing.from = this.userEmail;
         // this.mailing.to = mailCPASAdmin;

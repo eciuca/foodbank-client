@@ -2223,11 +2223,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">403</context>
+          <context context-type="linenumber">402</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
-          <context context-type="linenumber">248</context>
+          <context context-type="linenumber">247</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/cpass/cpas/cpas.component.ts</context>
@@ -2763,7 +2763,7 @@
         <target> Er is een nieuwe begunstigde geregistreerd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">329</context>
+          <context context-type="linenumber">328</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BeneficiaryNotificationCreationText" datatype="html">
@@ -2772,7 +2772,7 @@
       Controleer de FEAD-status ervan</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">334</context>
+          <context context-type="linenumber">333</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CPASNotified" datatype="html">
@@ -2780,11 +2780,11 @@
         <target>De OCMW-beheerder <x id="PH" equiv-text="mailCPASAdmin"/> is op de hoogte gebracht.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">341</context>
+          <context context-type="linenumber">340</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BeneficiaryCPASChanged" datatype="html">
@@ -2792,7 +2792,7 @@
         <target>Het OCMW van referentie werd gewijzigd in <x id="PH" equiv-text="newCPASName"/> voor postcode <x id="PH_1" equiv-text="modifiedBeneficiaire.cp"/> <x id="PH_2" equiv-text="modifiedBeneficiaire.localite"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">349</context>
+          <context context-type="linenumber">348</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBeneficiaryUpdated" datatype="html">
@@ -2800,7 +2800,7 @@
         <target>De begunstigde <x id="PH" equiv-text="upDatedBeneficiaire.nom"/> <x id="PH_1" equiv-text="upDatedBeneficiaire.prenom"/> is bijgewerkt. <x id="PH_2" equiv-text="messageAdditionalInfo"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">358</context>
+          <context context-type="linenumber">357</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBeneficiaryUpdateError" datatype="html">
@@ -2808,7 +2808,7 @@
         <target>De begunstigde <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/> kan niet worden bijgewerkt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">368</context>
+          <context context-type="linenumber">367</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBeneficiaryCreated" datatype="html">
@@ -2816,7 +2816,7 @@
         <target>De begunstigde <x id="PH" equiv-text="createdBeneficiaire.nom"/> <x id="PH_1" equiv-text="createdBeneficiaire.prenom"/> is gemaakt. <x id="PH_2" equiv-text="messageAdditionalInfo"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">377</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBeneficiaryCreateError" datatype="html">
@@ -2824,7 +2824,7 @@
         <target>De begunstigde <x id="PH" equiv-text="modifiedBeneficiaire.nom"/> <x id="PH_1" equiv-text="modifiedBeneficiaire.prenom"/> kan niet worden aangemaakt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">392</context>
+          <context context-type="linenumber">391</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BenefRightsBankUsers" datatype="html">
@@ -2832,7 +2832,7 @@
         <target>Bankgebruikers kunnen alleen Begunstigde Coëfficiënt wijzigen en Duplicaten verwijderen met een coëfficiënt &gt; 1</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">432</context>
+          <context context-type="linenumber">431</context>
         </context-group>
       </trans-unit>
       <trans-unit id="povertyIndex" datatype="html">
@@ -2840,7 +2840,7 @@
         <target>Armoede Grens: <x id="PH" equiv-text="this.povertyIndex"/> € (<x id="PH_1" equiv-text="this.nbAdults"/> volwassen personen ten laste en <x id="PH_2" equiv-text="this.nbChildren"/> kinderen)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">456</context>
+          <context context-type="linenumber">455</context>
         </context-group>
       </trans-unit>
       <trans-unit id="povertyIndexTooltip" datatype="html">
@@ -2848,7 +2848,7 @@
         <target>Armoede-index van <x id="PH" equiv-text="this.povertyRevenueIndexDate"/> wordt als volgt berekend: Alleenstaande begunstigde: <x id="PH_1" equiv-text="this.povertyRevenueSingleBeneficiary"/> € + <x id="PH_2" equiv-text="this.povertyRevenueDependentAdult"/> € * aantal afhankelijke volwassenen + <x id="PH_3" equiv-text="this.povertyRevenueDependentChild"/> € * aantal afhankelijke kinderen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
-          <context context-type="linenumber">460</context>
+          <context context-type="linenumber">459</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BeneficiariesHeader" datatype="html">
@@ -4076,7 +4076,7 @@
         <target> Een nieuwe afhankelijke persoon  werd geregistreerd</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DependentNotificationCreationText" datatype="html">
@@ -4084,7 +4084,7 @@
         <target> Een nieuwe persoon ten laste <x id="PH" equiv-text="modifiedDependent.nom"/> <x id="PH_1" equiv-text="modifiedDependent.prenom"/> is geregistreerd voor begunstigde <x id="PH_2" equiv-text="this.beneficiaire.nom"/> <x id="PH_3" equiv-text="this.beneficiaire.prenom"/>in organisatie <x id="PH_4" equiv-text="this.orgName"/>.&lt;br&gt;Controleer de FEAD-status</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">164</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDependentUpdated" datatype="html">
@@ -4092,7 +4092,7 @@
         <target>De afhankelijke <x id="PH" equiv-text="modifiedDependent.nom"/> <x id="PH_1" equiv-text="modifiedDependent.prenom"/> is bijgewerkt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
-          <context context-type="linenumber">205</context>
+          <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDependentUpdateError" datatype="html">
@@ -4100,7 +4100,7 @@
         <target>De afhankelijke <x id="PH" equiv-text="modifiedDependent.nom"/> <x id="PH_1" equiv-text="modifiedDependent.prenom"/> kan niet worden bijgewerkt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">213</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDependentCreated" datatype="html">
@@ -4108,7 +4108,7 @@
         <target>De afhankelijke <x id="PH" equiv-text="newDependent.nom"/> <x id="PH_1" equiv-text="newDependent.prenom"/> is aangemaakt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
-          <context context-type="linenumber">224</context>
+          <context context-type="linenumber">223</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDependentCreateError" datatype="html">
@@ -4116,7 +4116,7 @@
         <target>De afhankelijke <x id="PH" equiv-text="modifiedDependent.nom"/> <x id="PH_1" equiv-text="modifiedDependent.prenom"/> kan niet worden gemaakt: fout: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/dependents/dependent/dependent.component.ts</context>
-          <context context-type="linenumber">236</context>
+          <context context-type="linenumber">235</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddDependent" datatype="html">
