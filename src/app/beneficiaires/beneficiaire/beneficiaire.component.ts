@@ -368,6 +368,10 @@ export class BeneficiaireComponent implements OnInit {
                 this.messageService.add(errMessage) ;
         });
       } else {
+          if (this.isCPASHandlingFeadStatus && (mailCPASAdmin != "")) {
+              modifiedBeneficiaire.birb = 2; // under study see enmStatutFead
+              messageAdditionalInfo += $localize`:@@BeneficiaryFEADStatusSetUnderStudy: The FEAD Status has been set to Under Study.`;
+          }
           this.beneficiairesService.add(modifiedBeneficiaire)
               .subscribe((createdBeneficiaire) => {
                   this.messageService.add({
