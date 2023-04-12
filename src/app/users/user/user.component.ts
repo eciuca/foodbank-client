@@ -132,7 +132,7 @@ export class UserComponent implements OnInit {
                         }
                         this.title = $localize`:@@BankUserExisting:User ${user.idUser} for bank ${this.user.idCompany}`;
                         this.loadDepotOptions(this.user.idCompany);
-                        this.loadCpasOptions();
+                        this.loadCpasOptions(this.user.lienBanque);
                     }
                     this.booIsCreate = false;
                     this.membresService.getByKey(user.lienBat)
@@ -157,7 +157,7 @@ export class UserComponent implements OnInit {
                         else {
                             this.user.idOrg = 0;
                             this.loadDepotOptions(this.user.idCompany);
-                            this.loadCpasOptions();
+                            this.loadCpasOptions(this.user.lienBanque);
                             this.rights = enmUserRolesBank;
                             this.title =  $localize`:@@BankUserNew1:New User for bank ${this.currentFilteredBankShortName} `;
                             if (this.currentFilteredBankShortName == 'FBBA') {
@@ -195,7 +195,7 @@ export class UserComponent implements OnInit {
                                 } else {
                                     this.rights = enmUserRolesBank;
                                     this.loadDepotOptions(this.idCompany);
-                                    this.loadCpasOptions();
+                                    this.loadCpasOptions(this.lienBanque);
                                     this.title = $localize`:@@BankUserNew1:New User for bank ${this.idCompany} `;
                                 }
                             }
@@ -409,13 +409,13 @@ export class UserComponent implements OnInit {
                 );
             });
     }
-    loadCpasOptions() {
+    loadCpasOptions(lienBanque) {
         const  queryCpasParms: QueryParams = {};
         queryCpasParms['offset'] = '0';
         queryCpasParms['rows'] = '999';
         queryCpasParms['sortField'] = 'cpasZip';
         queryCpasParms['sortOrder'] = '1';
-        queryCpasParms['lienBanque'] = this.lienBanque.toString();
+        queryCpasParms['lienBanque'] = lienBanque;
         queryCpasParms['actif'] = '1';
         this.cpasService.getWithQuery(queryCpasParms)
             .subscribe(cpases => {
