@@ -18,10 +18,12 @@
             <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator Name is required"></p-message>
         </div>
         <div class="p-field p-col-12 p-md-4">
-            <label i18n="@@NameFirstMandatory" for="prenom">First Name *</label>
-            <input #prenom="ngModel" pInputText id="prenom" name="prenom" required maxlength="30" [ngModel]="donateur.prenom" />
+            <label i18n="@@NameFirst" for="prenom">First Name</label>
+            <input #prenom="ngModel" pInputText id="prenom" name="prenom"  maxlength="30" [ngModel]="donateur.prenom" />
             <p-message *ngIf="prenom.invalid && donateurForm.touched" severity="error" text="Donator First Name is required"></p-message>
         </div>
+        </div>
+    <div class="p-fluid p-formgrid p-grid" style="min-height:200px">
         <div class="p-field p-col-12 p-md-5">
             <label i18n="@@AdresseMandatory" for="adresse">Address *</label>
             <input #nom="ngModel" pInputText id="adresse" name="adresse" required  maxlength="100" [ngModel]="donateur.adresse" />
