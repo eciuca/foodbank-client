@@ -174,6 +174,9 @@ export class OrganisationsComponent implements OnInit {
             if (event.filters.adresse && event.filters.adresse.value) {
                 queryParms['adresse'] = event.filters.adresse.value;
             }
+            if (event.filters.msonac && event.filters.msonac.value != null) {
+                queryParms['guestHouse'] = event.filters.msonac.value; // guestHouse is the query parameter for field msonac
+            }
             if (event.filters.agreed && event.filters.agreed.value != null) {
                 queryParms['agreed'] = event.filters.agreed.value;
             }
@@ -526,6 +529,10 @@ export class OrganisationsComponent implements OnInit {
 
     generateTooltipGestBen() {
         return $localize`:@@OrgToolTipGestBen:Does Organisation Manage Beneficiaries?`;
+    }
+
+    generateTooltipGuestHouse() {
+        return $localize`:@@OrgToolTipGuestHouse:Is Organisation a Guest House?`;
     }
 }
 
