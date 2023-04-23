@@ -8,9 +8,9 @@
     <div class="p-fluid p-formgrid p-grid">
 
         <div class="p-field p-col-12 p-md-2">
-            <label i18n="@@TitleMandatory" for="titre">Title *</label>
-            <input #nom="ngModel" pInputText id="titre" name="titre" required maxlength="40" [ngModel]="donateur.titre" />
-            <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator Title is required"></p-message>
+            <label i18n="@@Title" for="titre">Title</label>
+            <input #titre="ngModel" pInputText id="titre" name="titre" maxlength="40" [ngModel]="donateur.titre" />
+            <p-message *ngIf="titre.invalid && donateurForm.touched" severity="error" text="Donator Title is required"></p-message>
         </div>
         <div class="p-field p-col-12 p-md-6">
             <label i18n="@@NameMandatory" for="nom">Name *</label>
@@ -25,18 +25,18 @@
     <div class="p-fluid p-formgrid p-grid" style="min-height:200px">
         <div class="p-field p-col-12 p-md-5">
             <label i18n="@@AdresseMandatory" for="adresse">Address *</label>
-            <input #nom="ngModel" pInputText id="adresse" name="adresse" required  maxlength="100" [ngModel]="donateur.adresse" />
-            <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator Address is required"></p-message>
+            <input #adresse="ngModel" pInputText id="adresse" name="adresse" required  maxlength="100" [ngModel]="donateur.adresse" />
+            <p-message *ngIf="adresse.invalid && donateurForm.touched" severity="error" text="Donator Address is required"></p-message>
         </div>
         <div class="p-field p-col-12 p-md-3">
             <label i18n="@@CityMandatory" for="city">City *</label>
-            <input #nom="ngModel" pInputText id="city" name="city" required  maxlength="50" [ngModel]="donateur.city" />
-            <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator City is required"></p-message>
+            <input #city="ngModel" pInputText id="city" name="city" required  maxlength="50" [ngModel]="donateur.city" />
+            <p-message *ngIf="city.invalid && donateurForm.touched" severity="error" text="Donator City is required"></p-message>
         </div>
         <div class="p-field p-col-12 p-md-2">
             <label i18n="@@ZipCodeMandatory" for="cp">Zip Code *</label>
-            <input #nom="ngModel" pInputText id="cp" name="cp" required  maxlength="8"  pattern ="^[0-9]+$" [ngModel]="donateur.cp" />
-            <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator Zip Code is required and must be numeric"></p-message>
+            <input #cp="ngModel" pInputText id="cp" name="cp" required  maxlength="8"  pattern ="^[0-9]+$" [ngModel]="donateur.cp" />
+            <p-message *ngIf="cp.invalid && donateurForm.touched" severity="error" text="Donator Zip Code is required and must be numeric"></p-message>
         </div>
         <div class="p-field p-col-12 p-md-2">
             <label i18n="@@Country" for="pays">Country</label>

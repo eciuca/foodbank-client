@@ -4379,8 +4379,8 @@
           <context context-type="linenumber">326</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="TitleMandatory" datatype="html">
-        <source>Title *</source>
+      <trans-unit id="Title" datatype="html">
+        <source>Title</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateur/donateur.component.html</context>
           <context context-type="linenumber">11</context>

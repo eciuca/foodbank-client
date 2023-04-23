@@ -4767,9 +4767,9 @@
           <context context-type="linenumber">326</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="TitleMandatory" datatype="html">
-        <source>Title *</source>
-        <target>Titel *</target>
+      <trans-unit id="Title" datatype="html">
+        <source>Title</source>
+        <target>Titel</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateur/donateur.component.html</context>
           <context context-type="linenumber">11</context>
@@ -9958,6 +9958,10 @@
           <context context-type="sourcefile">src/app/users/users.component.ts</context>
           <context context-type="linenumber">576</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="TitleMandatory">
+        <source/>
+        <target>Titel *</target>
       </trans-unit>
     </body>
   </file>
