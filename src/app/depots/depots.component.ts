@@ -110,73 +110,45 @@ export class DepotsComponent implements OnInit {
   addNewDepotFromOrg(idDis: number) {
    this.selectedIdDis = idDis;
    this.candidateOrganisation = null;
-   this.depotService.getByKey(this.selectedIdDis.toString())
-       .subscribe( existingDepot => {
 
-           const  errMessage = {severity: 'error', summary: 'Create',
-             // tslint:disable-next-line:max-line-length
-             detail: $localize`:@@messageDepotCreationError1:The depot ${existingDepot.idDepot} ${existingDepot.nom} exists already`,
-             life: 6000 };
-           this.messageService.add(errMessage) ;
-         },
-           (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-             console.log('depot', dataserviceerror.message);
-             this.orgsummaryService.getByKey(this.selectedIdDis)
-               .subscribe(
-                   orgsummary => {
+   const newDepot = new DefaultDepot();
+   newDepot.idDepot = this.selectedIdDis.toString();
+   newDepot.lienBanque = this.lienBanque;
+ if (this.filteredBankShortName) {
+   newDepot.idCompany = this.filteredBankShortName;
+ }
+ else {
+   newDepot.idCompany = this.bankShortName;
+ }
+   console.log('Creating Depot with content:', newDepot);
+   this.depotService.add(newDepot)
+       .subscribe((createdDepot) => {
+               this.messageService.add({
+                   severity: 'success',
+                   summary: 'Creation',
+                   detail: $localize`:@@messageDepotCreated:The depot ${createdDepot.idDepot} ${createdDepot.nom}  has been created`
+               });
 
-                       const newDepot = new DefaultDepot();
-                       newDepot.idDepot = this.selectedIdDis.toString();
-                       newDepot.lienBanque = this.lienBanque;
-                     if (this.filteredBankShortName) {
-                       newDepot.idCompany = this.filteredBankShortName;
-                     }
-                     else {
-                       newDepot.idCompany = this.bankShortName;
-                     }
-                       console.log('Creating Depot with content:', newDepot);
-                       this.depotService.add(newDepot)
-                           .subscribe((createdDepot) => {
-                                 this.messageService.add({
-                                   severity: 'success',
-                                   summary: 'Creation',
-                                   detail: $localize`:@@messageDepotCreated:The depot ${createdDepot.idDepot} ${createdDepot.nom}  has been created`
-                                 });
-
-                                 this.auditChangeEntityService.logDbChange(this.userId, this.userName, createdDepot.lienBanque, 0, 'Depot',
-                                     createdDepot.idDepot + ' ' + createdDepot.nom, 'Create');
-                                 const latestQueryParams = this.loadPageSubject$.getValue();
-                                 this.loadPageSubject$.next(latestQueryParams);
-                               },
-                               (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                                 console.log('Error creating depot', dataserviceerror.message);
-                                 const errMessage = {
-                                   severity: 'error', summary: 'Create',
-                                   // tslint:disable-next-line:max-line-length
-                                   detail: $localize`:@@messageDepotNotCreated:The depot  ${newDepot.idDepot} ${newDepot.nom} could not be created: error: ${dataserviceerror.message}`,
-                                   life: 6000
-                                 };
-                                 this.messageService.add(errMessage);
-                               });
-                     },
-                   (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                     console.log('Error finding org for depot', dataserviceerror.message);
-                       const  errMessage = {severity: 'error', summary: 'Create',
-                         // tslint:disable-next-line:max-line-length
-                         detail: $localize`:@@messageDepotCreationError2:There is no organisation with id ${this.selectedIdDis}`,
-                         life: 6000 };
-                       this.messageService.add(errMessage) ;
-
-                   });
+               this.auditChangeEntityService.logDbChange(this.userId, this.userName, createdDepot.lienBanque, 0, 'Depot',
+                   createdDepot.idDepot + ' ' + createdDepot.nom, 'Create');
+               const latestQueryParams = this.loadPageSubject$.getValue();
+               this.loadPageSubject$.next(latestQueryParams);
+           },
+           (dataserviceerrorFn: () => DataServiceError) => {
+            const dataserviceerror = dataserviceerrorFn();
+            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+             console.log('Error creating depot', dataserviceerror.message);
+             const errMessage = {
+               severity: 'error', summary: 'Create',
+               // tslint:disable-next-line:max-line-length
+               detail: $localize`:@@messageDepotNotCreated:The depot  ${newDepot.idDepot} ${newDepot.nom} could not be created: error: ${dataserviceerror.message}`,
+               life: 6000
+             };
+             this.messageService.add(errMessage);
+           });
 
 
-       })
+
   }
 
   handleDepotQuit() {
@@ -325,7 +297,7 @@ export class DepotsComponent implements OnInit {
   generateToolTipMessageForOrgsWithoutDepot() {
    return $localize`:@@ToolTipOrgsWithoutDepot:${this.candidateOrganisations.length} organisations without depot proposed`;
   }
-    generateTooltipOrganisation() {
+  generateTooltipOrganisation() {
         return generateTooltipOrganisation();
     }
 }

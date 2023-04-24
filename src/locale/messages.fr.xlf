@@ -4727,20 +4727,12 @@
           <context context-type="linenumber">87,89</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="messageDepotCreationError1" datatype="html">
-        <source>The depot <x id="PH" equiv-text="existingDepot.idDepot"/> <x id="PH_1" equiv-text="existingDepot.nom"/> exists already</source>
-        <target>Le dépôt <x id="PH" equiv-text="existingDepot.idDepot"/> <x id="PH_1" equiv-text="existingDepot.nom"/> existe déjà</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">118</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="messageDepotCreated" datatype="html">
         <source>The depot <x id="PH" equiv-text="createdDepot.idDepot"/> <x id="PH_1" equiv-text="createdDepot.nom"/>  has been created</source>
         <target>Le dépôt <x id="PH" equiv-text="newDepot.idDepot"/> <x id="PH_1" equiv-text="newDepot.nom"/> a été créé</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDepotNotCreated" datatype="html">
@@ -4748,15 +4740,7 @@
         <target>Le dépôt <x id="PH" equiv-text="modifiedDepot.idDepot"/> <x id="PH_1" equiv-text="modifiedDepot.nom"/> n'a pas pu être créé : erreur : <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">160</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="messageDepotCreationError2" datatype="html">
-        <source>There is no organisation with id <x id="PH" equiv-text="this.selectedIdDis"/></source>
-        <target>Il n'y a pas d'organisation avec l'identifiant <x id="PH" equiv-text="this.selectedIdDis"/></target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotNoAnomalies" datatype="html">
@@ -4764,7 +4748,7 @@
         <target>Les informations sur le dépôt sont cohérentes avec ses informations sur l'organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">322</context>
+          <context context-type="linenumber">294</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotAnomalies" datatype="html">
@@ -4772,7 +4756,7 @@
         <target>Les informations sur le dépôt ne sont pas cohérentes avec les informations sur l'organisation - voir les détails du dépôt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">323</context>
+          <context context-type="linenumber">295</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipOrgsWithoutDepot" datatype="html">
@@ -4780,7 +4764,7 @@
         <target><x id="PH" equiv-text="this.candidateOrganisations.length"/> organisations sans dépôt proposées</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">326</context>
+          <context context-type="linenumber">298</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Title" datatype="html">
@@ -10014,6 +9998,14 @@
       <trans-unit id="TitleMandatory">
         <source/>
         <target>Titre *</target>
+      </trans-unit>
+      <trans-unit id="messageDepotCreationError1">
+        <source/>
+        <target>Le dépôt <x id="PH" equiv-text="existingDepot.idDepot"/> <x id="PH_1" equiv-text="existingDepot.nom"/> existe déjà</target>
+      </trans-unit>
+      <trans-unit id="messageDepotCreationError2">
+        <source/>
+        <target>Il n'y a pas d'organisation avec l'identifiant <x id="PH" equiv-text="this.selectedIdDis"/></target>
       </trans-unit>
     </body>
   </file>
