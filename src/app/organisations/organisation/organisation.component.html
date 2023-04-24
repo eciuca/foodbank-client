@@ -35,7 +35,7 @@
                                         [forceSelection]="true" id="selectedDepotRamasse" name="selectedDepotRamasse" field="societe" [dropdown]="true">
                         </p-autoComplete>
                     </div>
-                    <div *ngif="!userAsso" class="p-field p-col-12 p-md-1">
+                    <div *ngIf="!userAsso" class="p-field p-col-12 p-md-1">
                         <label for="depyN">Depot?</label>
                         <p-inputSwitch id="depyN" name="depyN" [ngModel]="organisation.depyN"></p-inputSwitch>
                     </div>

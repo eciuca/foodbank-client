@@ -22,7 +22,7 @@
             <input #prenom="ngModel" pInputText id="prenom" name="prenom"  maxlength="30" [ngModel]="donateur.prenom" />
         </div>
         </div>
-    <div class="p-fluid p-formgrid p-grid" style="min-height:200px">
+    <div class="p-fluid p-formgrid p-grid" style="min-height:100px">
         <div class="p-field p-col-12 p-md-5">
             <label i18n="@@AdresseMandatory" for="adresse">Address *</label>
             <input #adresse="ngModel" pInputText id="adresse" name="adresse" required  maxlength="100" [ngModel]="donateur.adresse" />
@@ -42,6 +42,13 @@
             <label i18n="@@Country" for="pays">Country</label>
             <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="donateur.pays" ></p-dropdown>
         </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+     <div class="p-field p-col-12 p-md-6">
+        <label i18n="@@EMail" for="email">E-mail</label>
+        <input #email="ngModel" pInputText id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxLength="60" [ngModel]="donateur.email" />
+        <p-message i18n-text="@@EmailNotValid" *ngIf="email.invalid && donateurForm.touched" severity="error" text="E-mail must be lowercase and valid"></p-message>
+     </div>
     </div>
     <p-confirmPopup></p-confirmPopup>
 </form>

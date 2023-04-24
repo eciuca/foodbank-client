@@ -16,6 +16,7 @@
             <th i18n="@@AddressSorted"  pSortableColumn="adresse" >Address<p-sortIcon field="adresse"></p-sortIcon></th>
             <th i18n="@@ZipCodeSorted" pSortableColumn="cp">Zip Code<p-sortIcon field="cp"></p-sortIcon></th>
             <th i18n="@@CitySorted" pSortableColumn="city">City<p-sortIcon field="city"></p-sortIcon></th>
+            <th i18n="@@EMailSorted" pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
             <th i18n="@@TotalDonsSorted" pSortableColumn="totalDons">Total Gifts<p-sortIcon field="totalDons"></p-sortIcon></th>
         </tr>
         <tr>
@@ -34,6 +35,9 @@
             </th>
             <th>
                 <p-columnFilter type="text" field="city" matchMode="contains" [showMenu]="false"></p-columnFilter>
+            </th>
+            <th>
+
             </th>
             <th></th>
         </tr>
@@ -58,6 +62,9 @@
             </td>
             <td>
                 {{donateur.city}}
+            </td>
+            <td>
+                {{donateur.email}}
             </td>
             <td>
                 {{donateur.totalDons}}

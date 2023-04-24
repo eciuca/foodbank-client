@@ -9,16 +9,15 @@ import {AuthState} from '../auth/reducers';
 import {MovementReportHttpService} from '../movements/services/movement-report-http.service';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {MovementReport} from '../movements/model/movementReport';
-import {formatDate} from '@angular/common';
 import {ExcelService} from '../services/excel.service';
-import * as moment from 'moment';
 import {BanqueClientReport} from '../banques/model/banqueClientReport';
 import {BanqueReportService} from '../banques/services/banque-report.service';
-import {BanqueFeadReport} from '../banques/model/banqueFeadReport';
 import {BanqueOrgCount} from '../banques/model/banqueOrgCount';
 import {Depot} from '../depots/model/depot';
 import {DepotHttpService} from '../depots/services/depot-http.service';
-import {forEach} from '@angular-devkit/schematics';
+import {OrganisationHttpService} from '../organisations/services/organisation-http.service';
+import {Organisation} from '../organisations/model/organisation';
+import {enmStatusCompany} from '../shared/enums';
 
 @Component({
     selector: 'app-dashboard-report',
@@ -109,17 +108,26 @@ export class DashboardReportComponent implements OnInit {
     totalClientNbofOrgsAgreed: number;
     totalClientNbofOrgsGestBen: number;
     orgCount: number;
+    orgDepotCount: number;
     orgFeadCount: number;
     orgAgreedCount: number;
     orgFeadFromUsCount: number;
+    orgGuestHouseCount: number;
+    orgOCMWCpasCount: number;
+    orgVZWSPRLCount:number;
+    orgPublicAuxiliaryCount:number;
+    orgOnePersonCount:number;
+    orgUnregisteredCount: number;
     userBankCount: number;
     userOrgCount: number;
     memberBankCount: number;
     memberOrgCount: number;
+    statuts: any[];
 
     constructor(
         private movementReportHttpService: MovementReportHttpService,
         private banqueReportService: BanqueReportService,
+        private organisationHttpService: OrganisationHttpService,
         private depotHttpService: DepotHttpService,
         private banqueService: BanqueEntityService,
         private excelService: ExcelService,
@@ -136,6 +144,7 @@ export class DashboardReportComponent implements OnInit {
     this.dashboardOrgItems = [];
     this.selectedBankItems = [];
     this.selectedOrgItems = [];
+    this.statuts = enmStatusCompany;
     }
 
     ngOnInit(): void {
@@ -415,14 +424,68 @@ initializeClientsArrays() {
                 this.totalClientNAdultsAgreed = this.totalClientNpersAgreed - this.totalClientNNourAgreed - this.totalClientNBebeAgreed - this.totalClientNEnfAgreed - this.totalClientNAdoAgreed - this.totalClientN1824Agreed - this.totalClientNSenAgreed;
                 this.totalClientNAdultsGestBen = this.totalClientNpersGestBen - this.totalClientNNourGestBen - this.totalClientNBebeGestBen - this.totalClientNEnfGestBen - this.totalClientNAdoGestBen - this.totalClientN1824GestBen - this.totalClientNSenGestBen;
             });
-        this.banqueReportService.getOrgFeadReport(this.authService.accessToken,this.bankShortName).subscribe(
-            (response: BanqueFeadReport[]) => {
-                const banqueOrgFeadRecords:  BanqueFeadReport[] = response;
-                this.orgCount= banqueOrgFeadRecords[0].orgCount;
-                this.orgFeadCount= banqueOrgFeadRecords[0].orgFeadCount;
-                this.orgAgreedCount= banqueOrgFeadRecords[0].orgAgreedCount;
-                this.orgFeadFromUsCount= banqueOrgFeadRecords[0].orgFeadFromUsCount;
-            });
+        const queryParams = {'actif': '1','lienBanque':this.bankId };
+        let params = new URLSearchParams();
+        for(let key in queryParams){
+            params.set(key, queryParams[key])
+        }
+        this.orgCount= 0;
+        this.orgDepotCount = 0;
+        this.orgFeadCount=0;
+        this.orgAgreedCount = 0;
+        this.orgFeadFromUsCount = 0;
+        this.orgGuestHouseCount = 0;
+        this.orgOCMWCpasCount = 0;
+        this.orgVZWSPRLCount = 0;
+        this.orgUnregisteredCount =0;
+        this.orgPublicAuxiliaryCount = 0;
+        this.orgOnePersonCount = 0;
+
+        this.organisationHttpService.getOrganisationReport(this.authService.accessToken, params.toString()).subscribe(
+            (organisations: Organisation[]) => {
+               organisations.map((org) => {
+                   if (org.depyN) {
+                       this.orgDepotCount++;
+                   }
+                   else {
+                       this.orgCount++;
+                       if (org.agreed) {
+                           this.orgAgreedCount++;
+                       }
+                       if (org.birbCode > "0") {
+                           this.orgFeadCount++;
+                       }
+                       if (org.feadN) {
+                           this.orgFeadFromUsCount++;
+                       }
+                       if (org.msonac) {
+                           this.orgGuestHouseCount++;
+                       }
+                       switch (org.statut) {
+                           case '1':
+                               this.orgVZWSPRLCount++;
+                               break;
+                           case '2':
+                               this.orgUnregisteredCount++;
+                               break;
+                           case '3':
+                               this.orgOCMWCpasCount++;
+                               break;
+                           case '4':
+                               this.orgPublicAuxiliaryCount++;
+                               break;
+                           case '0':
+                               this.orgOnePersonCount++;
+                               break;
+                           default:
+                       }
+
+                   }
+
+
+                })
+            })
+
         this.banqueReportService.getMembreCountReport(this.authService.accessToken,this.bankShortName).subscribe(
             (response: BanqueOrgCount[]) => {
                 const bankMemberCounts: BanqueOrgCount[] = response;
@@ -463,8 +526,6 @@ initializeClientsArrays() {
     }
     setDropdownOrgs() {
         console.log("setDropdownOrgs with " + this.dashboardOrgItems.length + " org items");
-        var orgs = this.dashboardOrgItems.map(x => x.idOrg + ' ' + x.orgname).filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
-
         this.orgs = this.dashboardOrgItems.sort(({idOrg:a}, {idOrg:b}) => a-b).map(x => x.idOrg + ' ' + x.orgname).filter((v, i, a) => a.indexOf(v) === i);
         this.orgs.unshift(" ");
         console.log("setDropdownOrgs with " + this.orgs.length + " orgs");
@@ -544,6 +605,14 @@ initializeClientsArrays() {
     labelUserOrgCount() {
         return $localize`:@@UserorgCount:Number of Users of the Organisations of the Bank`;
     }
+    labelGuestHouseCount() {
+        return $localize`:@@OrgGuestHousesCount:Number of Guest Houses`;
+    }
 
-
+    labelDepotCount() {
+        return $localize`:@@OrgDepots:Number of Depots of the Bank`;
+    }
+    labelStatus(status: string) {
+        return this.statuts.find(statut => statut.value === status).label;
+    }
 }

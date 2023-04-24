@@ -68,7 +68,7 @@
              <div class="p-field p-col-12 p-md-4">
                  <label for="ccAdress">Cc: </label>
                  <input #cc="ngModel" pInputText id="ccAdress" name="ccAdress" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="50" [(ngModel)]="ccAdress" />
-                 <p-message i18n-text="@@EmailNotValid" *ngIf="cc.invalid && orgMembershipForm.touched" severity="error" text="E-mail must be valid"></p-message>
+                 <p-message i18n-text="@@EmailNotValid" *ngIf="cc.invalid && orgMembershipForm.touched" severity="error" text="E-mail must be lowercase and valid"></p-message>
              </div>
              
         </div>

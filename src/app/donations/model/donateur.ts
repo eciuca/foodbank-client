@@ -6,6 +6,7 @@ export interface Donateur {
     cp: string;
     city: string;
     pays: number;
+    email: string;
     donateurId: number;
     lienBanque: number;
     totalDons: number;
@@ -28,6 +29,7 @@ export class DefaultDonateur implements Donateur {
     cp: string;
     city: string;
     pays: number;
+    email: string;
     titre: string;
     totalDons: number;
     totalRecords: number;
@@ -40,6 +42,7 @@ export class DefaultDonateur implements Donateur {
         this.city = '';
         this.pays = 1; // see enmCountry Belgium
         this.titre = '';
+        this.email = '';
         this.totalDons = 0;
         this.totalRecords = 0;
     }

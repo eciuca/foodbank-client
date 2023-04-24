@@ -7,10 +7,26 @@
             <p-accordionTab header="Organisations" i18n-header="@@Organisations" [selected]="true">
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-4">
+                        {{labelDepotCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgDepotCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
                         {{labelOrgCount()}}
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         {{orgCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelGuestHouseCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgGuestHouseCount}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
@@ -35,6 +51,46 @@
                     </div>
                     <div class="p-field p-col-12 p-md-2">
                         {{orgAgreedCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelStatus('1')}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgVZWSPRLCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelStatus('2')}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgUnregisteredCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelStatus('3')}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgOCMWCpasCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelStatus('4')}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgPublicAuxiliaryCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelStatus('0')}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgOnePersonCount}}
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
