@@ -108,7 +108,7 @@ const routes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'}),
+        RouterModule.forRoot(routes, {}),
         MenubarModule,
         OverlayPanelModule,
         ProgressSpinnerModule,
