@@ -346,9 +346,9 @@ export class MembreComponent implements OnInit {
                         this.auditChangeEntityService.logDbChange(this.userId,this.userName,membre.lienBanque,membre.lienDis,'Member',
                                 membre.nom + ' ' + membre.prenom, 'Delete' );
                     },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
-                            const dataserviceerror = dataserviceerrorFn();
-                            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                        ( dataserviceerror) => { 
+                             
+                             
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageEmployeeDeleteError:The employee ${membre.prenom} ${membre.nom} could not be deleted: error: ${dataserviceerror.message}`,
@@ -379,9 +379,9 @@ export class MembreComponent implements OnInit {
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,updatedMembre.lienBanque,updatedMembre.lienDis,'Member',
                       updatedMembre.nom + ' ' + updatedMembre.prenom, 'Update' );
               },
-                  (dataserviceerrorFn: () => DataServiceError) => { 
-                    const dataserviceerror = dataserviceerrorFn();
-                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                  ( dataserviceerror) => { 
+                     
+                     
                     const  errMessage = {severity: 'error', summary: 'Update',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageEmployeeUpdateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be updated: error: ${dataserviceerror.message}`,
@@ -404,9 +404,9 @@ export class MembreComponent implements OnInit {
                       this.auditChangeEntityService.logDbChange(this.userId,this.userName,createdMembre.lienBanque,createdMembre.lienDis,'Member',
                           createdMembre.nom + ' ' + createdMembre.prenom, 'Create' );
               },
-                  (dataserviceerrorFn: () => DataServiceError) => { 
-                    const dataserviceerror = dataserviceerrorFn();
-                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                  ( dataserviceerror) => { 
+                     
+                     
                     const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageEmployeeCreateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${dataserviceerror.message}`,

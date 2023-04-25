@@ -103,9 +103,9 @@ export class DonateurComponent implements OnInit {
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Donateur',
                         donateur.nom + ' ' + donateur.prenom, 'Delete' );
                 },
-                (dataserviceerrorFn: () => DataServiceError) => { 
-                    const dataserviceerror = dataserviceerrorFn();
-                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                ( dataserviceerror) => { 
+                     
+                     
                     const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: `The donateur  ${donateur.nom} ${donateur.prenom} could not be deleted: error: ${dataserviceerror.message}`,
@@ -131,9 +131,9 @@ export class DonateurComponent implements OnInit {
                 this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Donateur',
                       modifiedDonateur.nom + ' ' + modifiedDonateur.prenom, 'Update' );
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: `The donateur  ${modifiedDonateur.nom} ${modifiedDonateur.prenom} could not be updated: error: ${dataserviceerror.message}`,
@@ -153,9 +153,9 @@ export class DonateurComponent implements OnInit {
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Donateur',
                       modifiedDonateur.nom + ' ' + modifiedDonateur.prenom, 'Create' );
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: `The donateur  ${modifiedDonateur.nom} ${modifiedDonateur.prenom} could not be created: error: ${dataserviceerror.message}`,

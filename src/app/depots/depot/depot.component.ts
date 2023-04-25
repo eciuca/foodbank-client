@@ -116,10 +116,8 @@ export class DepotComponent implements OnInit {
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,depot.lienBanque,0,'Depot',
                                 depot.idDepot + ' ' + depot.nom, 'Update' );
                         },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
-                            const dataserviceerror = dataserviceerrorFn();
-                            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            let  errMessage = {severity: 'error', summary: 'Delete',
+                        (dataserviceerror) => {
+                           let  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageDepotNotDeleted:The depot  ${depot.idDepot} ${depot.nom}  could not be deleted: error: ${dataserviceerror.message}`,
                                 life: 6000 };
@@ -153,9 +151,9 @@ export class DepotComponent implements OnInit {
                         this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedDepot.lienBanque,0,'Depot',
                             modifiedDepot.idDepot + ' ' + modifiedDepot.nom, 'Update' );
                     },
-                    (dataserviceerrorFn: () => DataServiceError) => { 
-                        const dataserviceerror = dataserviceerrorFn();
-                        if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                    ( dataserviceerror) => { 
+                         
+                         
                         const  errMessage = {severity: 'error', summary: 'Update',
                             // tslint:disable-next-line:max-line-length
                             detail: $localize`:@@messageDepotNotUpdated:The depot  ${modifiedDepot.idDepot} ${modifiedDepot.nom} could not be updated: error: ${dataserviceerror.message}`,

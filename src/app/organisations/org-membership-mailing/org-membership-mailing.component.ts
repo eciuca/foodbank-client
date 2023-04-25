@@ -312,9 +312,9 @@ export class OrgMembershipMailingComponent implements OnInit {
                                 detail: $localize`:@@messageSent:Message has been sent`
                             });
                         },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
-                        const dataserviceerror = dataserviceerrorFn();
-                        if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                        ( dataserviceerror) => { 
+                         
+                         
                             const errMessage = {
                                 severity: 'error', summary: 'Send',
                                 // tslint:disable-next-line:max-line-length

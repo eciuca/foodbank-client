@@ -294,9 +294,9 @@ export class UserComponent implements OnInit {
                       this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,user.lienBanque,user.idOrg,'User',
                               user.idUser, 'Delete' );
                   },
-                      (dataserviceerrorFn: () => DataServiceError) => { 
-                        const dataserviceerror = dataserviceerrorFn();
-                        if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                      ( dataserviceerror) => { 
+                         
+                         
                               const  errMessage = {severity: 'error', summary: 'Delete',
                               // tslint:disable-next-line:max-line-length
                               detail: $localize`:@@messageUserDeleteError:The user ${user.idUser} ${user.userName} could not be deleted: error: ${dataserviceerror.message}`,
@@ -323,9 +323,9 @@ export class UserComponent implements OnInit {
             this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,modifiedUser.lienBanque,modifiedUser.idOrg,'User',
                     modifiedUser.idUser, 'Update' );
         } ,
-            (dataserviceerrorFn: () => DataServiceError) => { 
-            const dataserviceerror = dataserviceerrorFn();
-            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+            ( dataserviceerror) => { 
+             
+             
                 const  errMessage = {severity: 'error', summary: 'Update',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageUserUpdateError:The user ${modifiedUser.idUser} ${modifiedUser.userName} could not be updated: error: ${dataserviceerror.message}`,
@@ -353,8 +353,8 @@ export class UserComponent implements OnInit {
                                       this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,modifiedUser.lienBanque,modifiedUser.idOrg,'User',
                                           modifiedUser.idUser, 'Create' );
                                   },
-                                  (dataserviceerrorFn: () => DataServiceError) => {
-                                      const dataserviceerror = dataserviceerrorFn();
+                                  ( dataserviceerror) => {
+                                       
                                       if (!dataserviceerror.message) {
                                           dataserviceerror.message = dataserviceerror.error().message
                                       }

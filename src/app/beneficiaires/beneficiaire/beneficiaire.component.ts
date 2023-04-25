@@ -271,9 +271,9 @@ export class BeneficiaireComponent implements OnInit {
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,beneficiaire.lbanque,beneficiaire.lienDis,'Client',
                                 beneficiaire.nom + ' ' + beneficiaire.prenom, 'Update' );
                     },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
-                            const dataserviceerror = dataserviceerrorFn();
-                            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                        ( dataserviceerror) => { 
+                             
+                             
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageBeneficiaryDeleteError:The beneficiary  ${beneficiaire.nom} ${beneficiaire.prenom} could not be deleted: error: ${dataserviceerror.message}`,
@@ -319,7 +319,7 @@ export class BeneficiaireComponent implements OnInit {
 
               }
               ,
-          (dataserviceerrorFn: () => DataServiceError) => {
+          ( dataserviceerror) => {
                 console.log('could not find zipcode');
               this.updateBeneficiary(modifiedBeneficiaire,newCPASName,mailCPASAdmin);
             })
@@ -359,9 +359,9 @@ export class BeneficiaireComponent implements OnInit {
             this.auditChangeEntityService.logDbChange(this.userId,this.userName,upDatedBeneficiaire.lbanque,upDatedBeneficiaire.lienDis,'Client',
                     modifiedBeneficiaire.nom + ' ' + modifiedBeneficiaire.prenom, 'Update' );
         },
-            (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+            ( dataserviceerror) => { 
+                 
+                 
                const  errMessage = {severity: 'error', summary: 'Update',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageBeneficiaryUpdateError:The beneficiary  ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} could not be updated: error: ${dataserviceerror.message}`,
@@ -387,9 +387,9 @@ export class BeneficiaireComponent implements OnInit {
                      this.notifyCPAS(modifiedBeneficiaire,mailCPASAdmin);
                   }
               },
-                  (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                  ( dataserviceerror) => { 
+                 
+                 
                      const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageBeneficiaryCreateError:The beneficiary  ${modifiedBeneficiaire.nom} ${modifiedBeneficiaire.prenom} could not be created: error: ${dataserviceerror.message}`,

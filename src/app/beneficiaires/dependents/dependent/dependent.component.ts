@@ -143,9 +143,9 @@ export class DependentComponent implements OnInit {
               this.messageService.add(myMessage);
               this.onDependentDelete.emit(dependent);
             },
-                (dataserviceerrorFn: () => DataServiceError) => { 
-                    const dataserviceerror = dataserviceerrorFn();
-                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                ( dataserviceerror) => { 
+                     
+                     
                     const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageDependentDeleteError:The dependent  ${dependent.nom} ${dependent.prenom} could not be deleted: error: ${dataserviceerror.message}`,
@@ -205,9 +205,9 @@ export class DependentComponent implements OnInit {
             });
             this.onDependentUpdate.emit(modifiedDependent);
           },
-              (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageDependentUpdateError:The dependent  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be updated: error: ${dataserviceerror.message}`,
@@ -227,9 +227,9 @@ export class DependentComponent implements OnInit {
                       this.notifyCPAS(modifiedDependent,mailCPASAdmin);
                   }
           },
-              (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageDependentCreateError:The dependent  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be created: error: ${dataserviceerror.message}`,

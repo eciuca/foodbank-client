@@ -97,9 +97,9 @@ export class OrgcontactComponent implements OnInit {
               this.messageService.add(myMessage);
               this.onOrgcontactDelete.emit(orgcontact);
             },
-                (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: `The contact  ${orgcontact.nom} ${orgcontact.prenom} could not be deleted: error: ${dataserviceerror.message}`,
@@ -123,9 +123,9 @@ export class OrgcontactComponent implements OnInit {
             });
             this.onOrgcontactUpdate.emit(modifiedOrgcontact);
           },
-              (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: `The contact  ${modifiedOrgcontact.nom} ${modifiedOrgcontact.prenom} could not be updated: error: ${dataserviceerror.message}`,
@@ -143,9 +143,9 @@ export class OrgcontactComponent implements OnInit {
             });
             this.onOrgcontactCreate.emit(newOrgcontact);
           },
-              (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Create',
                   detail: `The contact  ${modifiedOrgcontact.nom} ${modifiedOrgcontact.prenom} could not be created: error: ${dataserviceerror.message}`,
                   life: 6000 };

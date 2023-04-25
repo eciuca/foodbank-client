@@ -242,9 +242,9 @@ export class OrganisationComponent implements OnInit {
                       this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedOrganisation.lienBanque,modifiedOrganisation.idDis,'Org',
                            ' ' , 'Update' );
               },
-                  (dataserviceerrorFn: () => DataServiceError) => { 
-                    const dataserviceerror = dataserviceerrorFn();
-                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                  ( dataserviceerror) => { 
+                     
+                     
                       const  errMessage = {severity: 'error', summary: 'Update',
                        detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
                        life: 6000 };
@@ -263,9 +263,9 @@ export class OrganisationComponent implements OnInit {
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,newOrganisation.lienBanque,newOrganisation.idDis,'Org',
                           ' ' , 'Create' );
               },
-                  (dataserviceerrorFn: () => DataServiceError) => { 
-                    const dataserviceerror = dataserviceerrorFn();
-                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                  ( dataserviceerror) => { 
+                     
+                     
                       const  errMessage = {severity: 'error', summary: 'Creation',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageOrganisationCreateError:The organisation ${modifiedOrganisation.societe} could not be created: error: ${dataserviceerror.message}`,
@@ -288,9 +288,9 @@ export class OrganisationComponent implements OnInit {
                         ' ', 'Update' );
 
                 },
-                (dataserviceerrorFn: () => DataServiceError) => { 
-                    const dataserviceerror = dataserviceerrorFn();
-                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                ( dataserviceerror) => { 
+                     
+                     
                     const  errMessage = {severity: 'error', summary: 'Update',
                         // tslint:disable-next-line:max-line-length
                         detail: $localize`:@@messageOrgDetailsUpdateError:Org Program for organisation  ${this.organisation.idDis} ${this.organisation.societe} could not be updated: error: ${dataserviceerror.message}`,
@@ -315,9 +315,9 @@ export class OrganisationComponent implements OnInit {
                         this.auditChangeEntityService.logDbChange(this.userId,this.userName,organisation.lienBanque,organisation.idDis,'Org',
                                 ' ' , 'Delete' );
                     },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
-                        const dataserviceerror = dataserviceerrorFn();
-                        if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                        ( dataserviceerror) => { 
+                         
+                         
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageOrganisationDeleteError:The organisation ${organisation.idDis} ${organisation.societe} could not be deleted: error: ${dataserviceerror.message}`,
@@ -397,9 +397,9 @@ export class OrganisationComponent implements OnInit {
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.organisation.lienBanque,this.organisation.idDis,'OrgProgram',
                                 ' ', 'Delete' );
                         },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
-                        const dataserviceerror = dataserviceerrorFn();
-                        if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                        ( dataserviceerror) => { 
+                         
+                         
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageOrgProgramDeleteError:The org program for organisation  ${this.organisation.idDis} ${this.organisation.societe} could not be deleted: error: ${dataserviceerror.message}`,

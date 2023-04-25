@@ -177,9 +177,9 @@ export class OrgauditComponent implements OnInit {
                   this.messageService.add(myMessage);
                   this.onOrgauditDelete.emit(orgaudit);
                 },
-                (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                ( dataserviceerror) => { 
+                 
+                 
                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: `The audit for ${orgaudit.societe} could not be deleted: error: ${dataserviceerror.message}`,
@@ -209,9 +209,9 @@ export class OrgauditComponent implements OnInit {
                 });
                 this.onOrgauditUpdate.emit(modifiedOrgaudit);
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                   detail: `The audit  for ${modifiedOrgaudit.societe} could not be updated: error: ${dataserviceerror.message}`,
                   life: 6000 };
@@ -228,9 +228,9 @@ export class OrgauditComponent implements OnInit {
                 });
                 this.onOrgauditCreate.emit(newOrgaudit);
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+              ( dataserviceerror) => { 
+                 
+                 
                   const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: `The audit  for ${modifiedOrgaudit.societe} could not be created: error: ${dataserviceerror.message}`,

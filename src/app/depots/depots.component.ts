@@ -134,9 +134,7 @@ export class DepotsComponent implements OnInit {
                const latestQueryParams = this.loadPageSubject$.getValue();
                this.loadPageSubject$.next(latestQueryParams);
            },
-           (dataserviceerrorFn: () => DataServiceError) => {
-            const dataserviceerror = dataserviceerrorFn();
-            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+           (dataserviceerror) => {
              console.log('Error creating depot', dataserviceerror.message);
              const errMessage = {
                severity: 'error', summary: 'Create',

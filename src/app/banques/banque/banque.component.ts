@@ -341,10 +341,8 @@ export class BanqueComponent implements OnInit {
                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedBanque.bankId,0,'Bank',
                      modifiedBanque.bankShortName , 'Update' );
              },
-                 (dataserviceerrorFn: () => DataServiceError) => { 
-                 const dataserviceerror = dataserviceerrorFn();
-                 if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                    const  errMessage = {severity: 'error', summary: 'Update',
+                 (dataserviceerror) => {
+                      const  errMessage = {severity: 'error', summary: 'Update',
                          // tslint:disable-next-line:max-line-length
                          detail: $localize`:@@messageBankUpdateError:The bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName} could not be updated: error: ${dataserviceerror.message}`,
                          life: 6000 };
@@ -362,9 +360,7 @@ export class BanqueComponent implements OnInit {
                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,newBanque.bankId,0,'Bank',
                          newBanque.bankShortName, 'Create' );
              },
-                 (dataserviceerrorFn: () => DataServiceError) => { 
-                    const dataserviceerror = dataserviceerrorFn();
-                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                 ( dataserviceerror) => {
                       const  errMessage = {severity: 'error', summary: 'Create',
                          // tslint:disable-next-line:max-line-length
                          detail: $localize`:@@messageBankCreateError:The bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName} could not be created: error: ${dataserviceerror.message}`,
@@ -391,9 +387,9 @@ export class BanqueComponent implements OnInit {
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,banque.bankId,0,'Bank',
                                 banque.bankShortName , 'Delete' );
                     },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
-                            const dataserviceerror = dataserviceerrorFn();
-                            if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                        ( dataserviceerror) => { 
+                             
+                             
                                 const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageBankDeleteError:The bank ${banque.bankId} ${banque.bankShortName} ${banque.bankName} could not be deleted: error: ${dataserviceerror.message}`,
@@ -439,9 +435,9 @@ export class BanqueComponent implements OnInit {
                     });
                     this.onBanqueUpdate.emit();
                 },
-                (dataserviceerrorFn: () => DataServiceError) => { 
-                    const dataserviceerror = dataserviceerrorFn();
-                    if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                ( dataserviceerror) => { 
+                     
+                     
                     const  errMessage = {severity: 'error', summary: 'Update',
                         // tslint:disable-next-line:max-line-length
                         detail: $localize`:@@messageBankDetailsUpdateError:The bank  ${this.banque.bankShortName} ${this.banque.bankName} details could not be updated: error: ${dataserviceerror.message}`,

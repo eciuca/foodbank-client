@@ -100,9 +100,9 @@ export class MembreFunctionComponent implements OnInit {
                   this.messageService.add(myMessage);
                   this.onMembreFunctionDelete.emit(membreFunction);
                 },
-                (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                ( dataserviceerror) => { 
+   
+  
                    const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageFunctionDeleteError:The function could not be deleted: error: ${dataserviceerror.message}`,
@@ -126,9 +126,9 @@ export class MembreFunctionComponent implements OnInit {
                 });
                 this.onMembreFunctionUpdate.emit(modifiedMembreFunction);
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageFunctionUpdateError:The function could not be updated: error: ${dataserviceerror.message}`,
@@ -146,9 +146,9 @@ export class MembreFunctionComponent implements OnInit {
                 });
                 this.onMembreFunctionCreate.emit(newMembreFunction);
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageFunctionCreateError:The function could not be created: error: ${dataserviceerror.message}`,

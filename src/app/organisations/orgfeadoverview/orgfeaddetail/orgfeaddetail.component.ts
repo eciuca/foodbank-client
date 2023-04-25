@@ -106,9 +106,9 @@ export class OrgfeaddetailComponent implements OnInit {
               });
               this.onOrganisationUpdate.emit(modifiedOrganisation);
             },
-            (dataserviceerrorFn: () => DataServiceError) => { 
-                const dataserviceerror = dataserviceerrorFn();
-                if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+            ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                 // tslint:disable-next-line:max-line-length
                 detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
