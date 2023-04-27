@@ -12,7 +12,8 @@ import {globalAuthState} from '../../../auth/auth.selectors';
 import {NgForm} from '@angular/forms';
 import {Donateur} from '../../model/donateur';
 import {DonateurEntityService} from '../../services/donateur-entity.service';
-
+import {AuditChangeEntityService} from '../../../audits/services/auditChange-entity.service';
+import {generateTooltipSuggestions} from '../../../shared/functions';
 @Component({
   selector: 'app-don',
   templateUrl: './don.component.html',
@@ -25,6 +26,8 @@ export class DonComponent implements OnInit {
   filteredDonateurs: Donateur[];
   filterDonateurBase: any;
   lienBanque: number;
+  userId: string;
+  userName: string;
   @Output() onDonUpdate = new EventEmitter<Don>();
   @Output() onDonCreate = new EventEmitter<Don>();
   @Output() onDonDelete = new EventEmitter<Don>();
@@ -37,6 +40,7 @@ export class DonComponent implements OnInit {
   constructor(
       private donsService: DonEntityService,
       private donateursService: DonateurEntityService,
+      private auditChangeEntityService: AuditChangeEntityService,
       private store: Store<AppState>,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
@@ -56,16 +60,12 @@ export class DonComponent implements OnInit {
     don$.subscribe(don => {
       if (don) {
         this.don = don;
-        console.log('our don:', this.don);
         this.donateursService.getByKey(don.donateurId)
             .subscribe(
                 donateur => {
                   if (donateur != null) {
                     this.selectedDonateur = Object.assign({}, donateur, {fullname: donateur.nom + ' ' + donateur.prenom});
-                    console.log('our don donateur:', this.selectedDonateur);
-                  } else {
-                    console.log('There is no donateur for this don!');
-                  }
+                 }
                 });
       } else {
         this.don = new DefaultDon();
@@ -73,7 +73,6 @@ export class DonComponent implements OnInit {
         if (this.myform) {
           this.myform.reset(this.don);
         }
-        console.log('we have a new default don');
       }
     });
 
@@ -83,6 +82,8 @@ export class DonComponent implements OnInit {
             map((authState) => {
               if (authState.user) {
                 this.lienBanque = authState.banque.bankId;
+                this.userId= authState.user.idUser;
+                this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
                 this.filterDonateurBase = { 'lienBanque': authState.banque.bankId};
                 switch (authState.user.rights) {
                   case 'Bank':
@@ -114,20 +115,18 @@ export class DonComponent implements OnInit {
             .subscribe(() => {
                   this.messageService.add(myMessage);
                   this.onDonDelete.emit(don);
+                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Don',
+                      don.donateurNom + ' ' + don.donateurPrenom, 'Delete' );
                 },
-                (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                  console.log('Error deleting don', dataserviceerror.message);
-                  const  errMessage = {severity: 'error', summary: 'Delete',
+                ( dataserviceerror) => { 
+                     
+                     
+                    const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: `The don  ${don.donateurNom} ${don.donateurPrenom} could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
                 });
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
@@ -147,11 +146,12 @@ export class DonComponent implements OnInit {
                   detail: `The don ${modifiedDon.donateurNom} ${modifiedDon.donateurPrenom}  was updated`
                 });
                 this.onDonUpdate.emit(modifiedDon);
+                this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Don',
+                    modifiedDon.donateurNom + ' ' + modifiedDon.donateurPrenom, 'Update' );
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating don', dataserviceerror.message);
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: `The don  ${modifiedDon.donateurNom} ${modifiedDon.donateurPrenom} could not be updated: error: ${dataserviceerror.message}`,
@@ -159,21 +159,20 @@ export class DonComponent implements OnInit {
                 this.messageService.add(errMessage) ;
               });
     } else {
-
-      console.log('Creating Don with content:', modifiedDon);
       this.donsService.add(modifiedDon)
           .subscribe((newDon) => {
                 this.messageService.add({
                   severity: 'success',
                   summary: 'Creation',
-                  detail: `The don ${newDon.donateurNom} ${newDon.donateurPrenom}  has been created`
+                  detail: `The don ${modifiedDon.donateurNom} ${modifiedDon.donateurPrenom}  has been created`
                 });
                 this.onDonCreate.emit(newDon);
+                this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.lienBanque,0,'Don',
+                    modifiedDon.donateurNom + ' ' + modifiedDon.donateurPrenom, 'Create' );
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error creating don', dataserviceerror.message);
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: `The don  ${modifiedDon.donateurNom} ${modifiedDon.donateurPrenom} could not be created: error: ${dataserviceerror.message}`,
@@ -192,15 +191,10 @@ export class DonComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           donForm.reset(oldDon); // reset in-memory object for next open
-          console.log('We have reset the don form to its original value');
           this.onDonQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
       this.onDonQuit.emit();
     }
   }
@@ -220,6 +214,8 @@ export class DonComponent implements OnInit {
           );
         });
   }
+
+    protected readonly generateTooltipSuggestions = generateTooltipSuggestions;
 }
 
 

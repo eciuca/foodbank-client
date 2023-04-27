@@ -58,7 +58,6 @@ export class MembreFunctionComponent implements OnInit {
         if((this.membreFunction.lienBanque > 0) && (this.isGlobalAdmin == false)) {
           this.booCanUpdate = true;
         }
-        console.log('our membreFunction:', this.membreFunction);
       } else {
         this.membreFunction = new DefaultMembreFunction();
         this.membreFunction.lienBanque = this.lienBanque;
@@ -66,7 +65,6 @@ export class MembreFunctionComponent implements OnInit {
           this.myform.reset(this.membreFunction);
         }
         this.booCanUpdate = true;
-        console.log('we have a new default membreFunction');
       }
     });
 
@@ -102,18 +100,15 @@ export class MembreFunctionComponent implements OnInit {
                   this.messageService.add(myMessage);
                   this.onMembreFunctionDelete.emit(membreFunction);
                 },
-                (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
+                ( dataserviceerror) => { 
+   
+  
                    const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageFunctionDeleteError:The function could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
                 });
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
@@ -131,10 +126,9 @@ export class MembreFunctionComponent implements OnInit {
                 });
                 this.onMembreFunctionUpdate.emit(modifiedMembreFunction);
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating contact', dataserviceerror.message);
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageFunctionUpdateError:The function could not be updated: error: ${dataserviceerror.message}`,
@@ -143,7 +137,6 @@ export class MembreFunctionComponent implements OnInit {
               });
     } else {
       modifiedMembreFunction.lienBanque = this.lienBanque;
-      console.log('Creating MembreFunction with content:', modifiedMembreFunction);
       this.membreFunctionsService.add(modifiedMembreFunction)
           .subscribe((newMembreFunction) => {
                 this.messageService.add({
@@ -153,10 +146,9 @@ export class MembreFunctionComponent implements OnInit {
                 });
                 this.onMembreFunctionCreate.emit(newMembreFunction);
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error creating contact', dataserviceerror.message);
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageFunctionCreateError:The function could not be created: error: ${dataserviceerror.message}`,
@@ -175,15 +167,10 @@ export class MembreFunctionComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           membreFunctionForm.reset(oldMembreFunction); // reset in-memory object for next open
-          console.log('We have reset the contact form to its original value');
           this.onMembreFunctionQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
       this.onMembreFunctionQuit.emit();
     }
   }

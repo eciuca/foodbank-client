@@ -1,0 +1,490 @@
+<p-panel>
+    <ng-template pTemplate="header" >
+        <p class="p-panel-title" i18n="@@DashBoard" >Dashboard</p>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <p-accordion>
+            <p-accordionTab header="Organisations" i18n-header="@@Organisations" [selected]="true">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelDepotCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgDepotCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelOrgCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelGuestHouseCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgGuestHouseCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelOrgFeadCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgFeadCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelOrgFeadFromUsCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgFeadFromUsCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelOrgAgreedCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgAgreedCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelStatus('1')}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgVZWSPRLCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelStatus('2')}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgUnregisteredCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelStatus('3')}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgOCMWCpasCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelStatus('4')}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgPublicAuxiliaryCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelStatus('0')}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{orgOnePersonCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelUserBankCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{userBankCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelUserOrgCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{userOrgCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelMemberBankCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{memberBankCount}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelMemberOrgCount()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{memberOrgCount}}
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Beneficiaries" i18n-header="@@Beneficiaries">
+                <div class="p-fluid p-formgrid p-grid p-text-bold">
+
+                    <div class="p-field p-col-12 p-md-4">
+                        {{bankShortName}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{labelOrgsTotal()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{labelOrgsAgreed()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{labelOrgsGestBen()}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientNbOfOrgs()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNbofOrgs}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNbofOrgsAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNbofOrgsGestBen}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientNFam()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNFam}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNFamAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNFamGestBen}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientNpers()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNpers}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNpersAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNpersGestBen}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientAdults()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNAdults}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNAdultsAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNAdultsGestBen}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientNNour()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNNour}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNNourAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNNourGestBen}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientNBebe()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNBebe}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNBebeAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNBebeGestBen}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientNEnf()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNEnf}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNEnfAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNEnfGestBen}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientNAdo()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNAdo}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNAdoAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNAdoGestBen}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientN1824()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientN1824}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientN1824Agreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientN1824GestBen}}
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        {{labelClientNSen()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNSen}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNSenAgreed}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalClientNSenGestBen}}
+                    </div>
+                </div>
+                    <div *ngFor="let item of categoryOptions;let i=index;">
+                        <div *ngIf="clientNbofOrgs[i] > 0">
+                        <div  class="p-fluid p-formgrid p-grid p-text-bold">
+
+                            <div class="p-field p-col-12 p-md-4">
+                                {{item.label}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{labelOrgsTotal()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{labelOrgsAgreed()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{labelOrgsGestBen()}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNbOfOrgs()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNbofOrgs[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNbofOrgsAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNbofOrgsGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNFam()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNFam[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNFamAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNFamGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNpers()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpers[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpersAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpersGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientAdults()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpers[i] - clientNNour[i] - clientNBebe[i]- clientNEnf[i] - clientNAdo[i] - clientN1824[i] - clientNSen[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpersAgreed[i]- clientNNourAgreed[i] - clientNBebeAgreed[i]- clientNEnfAgreed[i] - clientNAdoAgreed[i] - clientN1824Agreed[i] - clientNSenAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNpersGestBen[i]- clientNNourGestBen[i] - clientNBebeGestBen[i]- clientNEnfGestBen[i] - clientNAdoGestBen[i] - clientN1824GestBen[i] - clientNSenGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNNour()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNNour[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNNourAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNNourGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNBebe()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNBebe[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNBebeAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNBebeGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNEnf()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNEnf[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNEnfAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNEnfGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNAdo()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNAdo[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNAdoAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNAdoGestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientN1824()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientN1824[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientN1824Agreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientN1824GestBen[i]}}
+                            </div>
+                        </div>
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+                                {{labelClientNSen()}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNSen[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNSenAgreed[i]}}
+                            </div>
+                            <div class="p-field p-col-12 p-md-2">
+                                {{clientNSenGestBen[i]}}
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+            </p-accordionTab>
+
+            <p-accordionTab i18n-header="@@DistributionActivity" header="Recent Distribution Activity"  >
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        <label i18n="@@FilterDay" for="selectedDay">Filter day?</label>
+                        <p-dropdown  id="selectedDay" name="selectedDay" [options]="days" (onChange)="filterDay($event.value)" >
+                        </p-dropdown>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label i18n="@@FilterOrg" for="selectedOrg">Filter Org?</label>
+                        <p-dropdown id="selectedOrg" name="selectedOrg" [options]="orgs" (onChange)="filterOrg($event.value)" >
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div *ngFor="let item of selectedBankItems" class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        {{item.key}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        {{labelCategory(item.category)}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        {{formatQuantity(item.quantity)}}
+                    </div>
+
+                </div>
+                <div *ngFor="let item of selectedOrgItems" class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-3">
+                        {{item.day}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        {{item.idOrg}} {{item.orgname}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-3">
+                        {{formatQuantity(item.quantity)}}
+                    </div>
+
+                </div>
+
+
+            </p-accordionTab>
+        </p-accordion>
+    </ng-template>
+</p-panel>
+

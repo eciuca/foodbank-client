@@ -1,0 +1,33 @@
+<p-panel *ngIf="zipCode">
+    <ng-template pTemplate="header">
+        {{ getZipCodeTitle() }}
+    </ng-template>
+
+    <form   #zipCodeForm="ngForm" style="padding: 1em">
+        <div class="p-formgroup-inline">
+            <button type="button" pButton icon="pi pi-times" (click)="delete($event,zipCode)" i18n-label="@@Delete" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save(zipCode, zipCodeForm.value)" i18n-label="@@Save" label="Save" [disabled] = "zipCodeForm.invalid"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="quit($event, zipCode, zipCodeForm,zipCodeForm.dirty)" i18n-label="@@Return" label="Return" ></button>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@ZipCode" for="zipCode">Zip Code</label>
+                <input type="number" id="zipCode" name="zipCode" min="1000" max="9999" pInputText [ngModel]="zipCode.zipCode" required>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@CityMandatory" for="city">City *</label>
+                <input #nom="ngModel"  pInputText id="city" name="city"  required maxlength="30" [ngModel]="zipCode.city" />
+                <p-message i18n-text="@@CityIsMandatory" *ngIf="nom.invalid && zipCodeForm.touched" severity="error" text="City is required"></p-message>
+            </div>
+             <div class="p-field p-col-12 p-md-4">
+                    <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Cpas" for="selectedCpas">Cpas</label>
+                    <p-autoComplete  [(ngModel)]="selectedCpas" [suggestions]="filteredCpass"  (completeMethod)="filterCpas($event)"
+                                     [forceSelection]="true"  id="selectedCpas" name="selectedCpas" field="cpasName" [dropdown]="true">
+                    </p-autoComplete>
+            </div>
+        </div>
+        <p-confirmPopup></p-confirmPopup>
+    </form>
+
+
+</p-panel>

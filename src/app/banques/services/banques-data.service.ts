@@ -6,7 +6,6 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class BanquesDataService extends DefaultDataService<Banque> {
     constructor( http: HttpClient, httpUrlGenerator: HttpUrlGenerator, config: DefaultDataServiceConfig) {
-        console.log('Alain - DefaultDataServiceConfig', config);
        super('Banque', http, httpUrlGenerator, config);
     }
 }

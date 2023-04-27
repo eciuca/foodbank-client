@@ -48,7 +48,7 @@ export class MembreEmploiTypesComponent implements OnInit {
     const queryParms = { 'actif': '1' ,'lienBanque': this.lienBanque.toString(), 'language': this.userLanguage };
     this.membreEmploiTypeEntityService.getWithQuery(queryParms)
         .subscribe((membreEmploiTypes) => {
-          console.log('Membre emploitypes now loaded:', membreEmploiTypes);
+          console.log('Membre emploitypes now loaded:', membreEmploiTypes.length);
           this.membreEmploiTypes = membreEmploiTypes;
           this.totalRecords = membreEmploiTypes.length;
           this.first = 0;
@@ -56,7 +56,6 @@ export class MembreEmploiTypesComponent implements OnInit {
   }
 
   handleSelect(membreEmploiType: MembreEmploiType) {
-    console.log('MembreEmploiType was selected',membreEmploiType );
     this.selectedMembreEmploiTypeId$.next(membreEmploiType.jobNr);
     this.displayDialog = true;
   }

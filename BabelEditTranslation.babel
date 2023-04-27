@@ -160,6 +160,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>AddCpas</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>AddDependent</name>
                         <description/>
                         <comment/>
@@ -360,6 +380,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>AddZipCode</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>Address</name>
                         <description/>
                         <comment/>
@@ -441,6 +481,26 @@
                     </concept_node>
                     <concept_node>
                         <name>AdresseMandatory</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Adults</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -600,7 +660,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>Antenne</name>
+                        <name>AntenneParent</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -780,6 +840,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>AuditUsersSelected</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>AuditView</name>
                         <description/>
                         <comment/>
@@ -821,6 +901,26 @@
                     </concept_node>
                     <concept_node>
                         <name>Author</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BIRBCode</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -1300,6 +1400,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>BankMemberShipCustom?</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>BankMemberShipExtra?</name>
                         <description/>
                         <comment/>
@@ -1401,6 +1521,26 @@
                     </concept_node>
                     <concept_node>
                         <name>BankMembersTitleArchive</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BankMemberships</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -1540,6 +1680,46 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>BankOrgsTitleBeneficiariesBank</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BankOrgsTitleBeneficiariesDepot</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>BankOrgsTitleMembershipActive</name>
                         <description/>
                         <comment/>
@@ -1561,6 +1741,26 @@
                     </concept_node>
                     <concept_node>
                         <name>BankOrgsTitleMembershipMailing</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BankProgram</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -1760,7 +1960,187 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>BenLatestClientUpdateSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BenRegisteredClientsSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BenefCoeffTooltip</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BenefDependentsTooltip</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BenefDuplicatesTooltip</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BenefList</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BenefListByOrg</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BenefRightsBankUsers</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>BenefSummaryExport</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BenefSummaryExportSelected</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -1820,6 +2200,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>BeneficiariesOrgHeader</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>BeneficiariesSelected</name>
                         <description/>
                         <comment/>
@@ -1840,7 +2240,47 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>BeneficiaryCoeffSuspicion</name>
+                        <name>BeneficiaryCPASChanged</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BeneficiaryCoeff</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BeneficiaryCoeffSorted</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -1880,7 +2320,47 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>BeneficiarySuspect</name>
+                        <name>BeneficiaryFEADStatusSetUnderStudy</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BeneficiaryNotificationCreation</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BeneficiaryNotificationCreationText</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -2001,6 +2481,66 @@
                     </concept_node>
                     <concept_node>
                         <name>BirthDatePartner</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BirthDateSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CPASNotified</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CPASsSelected</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -2180,6 +2720,286 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>ClientAdults</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientChild</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientDuplicateBirthDates</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientDuplicateNames</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientN1824</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientNAdo</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientNBebe</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientNFam</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientNNour</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientNbOfOrgs</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientNpers</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientReferencedBy</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ClientSeniors</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Coeff</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>CompanyCPAS</name>
                         <description/>
                         <comment/>
@@ -2320,6 +3140,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>CotTextGuide</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>Country</name>
                         <description/>
                         <comment/>
@@ -2341,6 +3181,126 @@
                     </concept_node>
                     <concept_node>
                         <name>Cpas</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasGsmSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasNameSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasOfReference</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasStreetSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasTelSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>CpasZipSorted</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -2421,6 +3381,26 @@
                     </concept_node>
                     <concept_node>
                         <name>CurrentPageReportbyPage</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>DashBoard</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -2640,6 +3620,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>DbChangeEntityGift</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>DbChangeEntityMember</name>
                         <description/>
                         <comment/>
@@ -2800,6 +3800,166 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>DepPercentage</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>DepTypeChild</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>DepTypeCoHabitant</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>DepTypeGrandChild</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>DepTypeGrandParent</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>DepTypeOther</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>DepTypeOtherFamily</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>DepTypeParent</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>Departure</name>
                         <description/>
                         <comment/>
@@ -2821,6 +3981,66 @@
                     </concept_node>
                     <concept_node>
                         <name>DependentDetails</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>DependentNotificationCreation</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>DependentNotificationCreationText</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Dependents</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -3220,6 +4440,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>DistributionActivity</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>DonAmount</name>
                         <description/>
                         <comment/>
@@ -3340,67 +4580,27 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>DonTotalStatistics</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>Donateur</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>DonateurName</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>DonateurNameFirst</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>DonateurTitle</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -3460,7 +4660,47 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>EMail</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>EMailMandatory</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>EMailSorted</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -3704,6 +4944,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>EnterYourMemberShipText</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>EnterYourMessage</name>
                         <description/>
                         <comment/>
@@ -3804,7 +5064,47 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>Equivalents</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>Everyday</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ExportAllMembers</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -3845,6 +5145,46 @@
                     </concept_node>
                     <concept_node>
                         <name>ExportDepots</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ExportDistributionsDaily</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ExportDistributionsMonthly</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -3924,7 +5264,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>ExportMembres</name>
+                        <name>ExportOrganisations</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -3944,7 +5284,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>ExportOrganisations</name>
+                        <name>ExportOrganisationsSelected</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -3984,6 +5324,46 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>ExportSelectedBeneficiaries</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ExportSelectedMembers</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>ExportUsers</name>
                         <description/>
                         <comment/>
@@ -4004,7 +5384,67 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>FEADAndMgt</name>
+                        <name>ExportUsersSelected</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>FEAD</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>FEADManagedByCPAS</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>FEADManagedByCPASSorted</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -4025,6 +5465,26 @@
                     </concept_node>
                     <concept_node>
                         <name>Families</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Family</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -4224,6 +5684,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>FilterDay</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>FilterDepotOrganisations</name>
                         <description/>
                         <comment/>
@@ -4265,6 +5745,26 @@
                     </concept_node>
                     <concept_node>
                         <name>FilterOnOrganisations</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>FilterOrg</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -4584,7 +6084,87 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>GestBen</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>GestBenSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>GiftDateIsMandatory</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Gsm</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>HelpDeskNotified</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -4804,6 +6384,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>InternalId</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>IsActif</name>
                         <description/>
                         <comment/>
@@ -4905,6 +6505,66 @@
                     </concept_node>
                     <concept_node>
                         <name>Language</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>List</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>LoadDefaultText</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Location</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -5344,6 +7004,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>MemberBankCount</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>MemberBeginDate</name>
                         <description/>
                         <comment/>
@@ -5764,6 +7444,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>MemberorgCount</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>MembersBank</name>
                         <description/>
                         <comment/>
@@ -5944,6 +7644,86 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>Month</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>MovementCategoryFeadCollect</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>MovementCategoryFeadNotAgreed</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>MovementCategoryNoFeadNotAgreed</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>Name</name>
                         <description/>
                         <comment/>
@@ -6025,6 +7805,26 @@
                     </concept_node>
                     <concept_node>
                         <name>NameFirstMandatory</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>NameFirstSorted</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -6145,6 +7945,26 @@
                     </concept_node>
                     <concept_node>
                         <name>NationalNumber</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>NbDependents</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -6364,6 +8184,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgActivities</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrgActivity2ndHandClothes</name>
                         <description/>
                         <comment/>
@@ -6484,7 +8324,47 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgAdults</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrgAgreed</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgAgreedCount</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -6705,6 +8585,66 @@
                     </concept_node>
                     <concept_node>
                         <name>OrgAuditorSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgBenAnomaly1</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgBenAnomaly2</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgBenAnomaly3</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -7164,6 +9104,46 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgCount</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgCpasCooperation</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrgDepot</name>
                         <description/>
                         <comment/>
@@ -7185,6 +9165,66 @@
                     </concept_node>
                     <concept_node>
                         <name>OrgDepotNameSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgDepots</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgDistributionDescription</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgDistributionSchedule</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -7304,7 +9344,27 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>OrgFeadFromUs</name>
+                        <name>OrgFeadCount</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgFeadFromUsCount</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -7344,7 +9404,87 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgGestBenSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgGuestHouseSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgGuestHousesCount</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrgIdSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgIsAntenne</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -7405,6 +9545,26 @@
                     </concept_node>
                     <concept_node>
                         <name>OrgIsMembershipSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgLatestClientUpdate</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -7904,6 +10064,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgRegisteredClients</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrgSeniors</name>
                         <description/>
                         <comment/>
@@ -7984,7 +10164,87 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgStatBenefByAgeAgreed</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgStatBenefByAgeGestBen</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrgStatBenefByFamily</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgStatBenefByFamilyAgreed</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgStatBenefByFamilyGestBen</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -8244,6 +10504,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgSupplyNonFeadProgram</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrgSuspEndDate</name>
                         <description/>
                         <comment/>
@@ -8265,6 +10545,46 @@
                     </concept_node>
                     <concept_node>
                         <name>OrgSuspended</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgToolTipAntenne</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgToolTipAssociatedCpas</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -8344,6 +10664,46 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgToolTipGestBen</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgToolTipGuestHouse</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrgToolTipIsAgreed</name>
                         <description/>
                         <comment/>
@@ -8364,7 +10724,87 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgToolTipIsAntenne</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgToolTipManageDepot</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrgToolTipUsesFEAD</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgTotalAgreedStatistics</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgTotalStatistics</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -8744,26 +11184,6 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>OrganisationDistribProgram</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
                         <name>OrganisationFamilies</name>
                         <description/>
                         <comment/>
@@ -8985,26 +11405,6 @@
                     </concept_node>
                     <concept_node>
                         <name>OrganisationName</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>OrganisationNbFEADBeneficiaries</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -9424,6 +11824,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrganisationTooltip</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>OrganisationTreasEmail</name>
                         <description/>
                         <comment/>
@@ -9724,6 +12144,146 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>OrgsAgreed</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgsGestBen</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgsTotal</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Parents</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ParentsFemale</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ParentsMale</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Partner</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>PersonTitleLady</name>
                         <description/>
                         <comment/>
@@ -9884,6 +12444,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>PrintReport</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>PublicRelations</name>
                         <description/>
                         <comment/>
@@ -9965,6 +12545,26 @@
                     </concept_node>
                     <concept_node>
                         <name>RegionNameMandatory</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Relation</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -10684,7 +13284,47 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>SelectFunction</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>SendEmail</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Seniors</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -10744,6 +13384,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>ShowDaily</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>ShowDepots</name>
                         <description/>
                         <comment/>
@@ -10764,7 +13424,47 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>ShowDuplicates</name>
+                        <name>ShowDoubles</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ShowSimpler</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Showduplicates</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -10785,6 +13485,286 @@
                     </concept_node>
                     <concept_node>
                         <name>SocieteSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesCurrent</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesCurrentTotal</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesFEADAgreedCollectHistory</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesFEADAgreedCollectTotal</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesFEADNonAgreedHistory</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesFEADNonAgreedTotal</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesNonFEADHistory</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesNonFEADTotal</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesPrevious</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesPrevious1</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesPrevious1Total</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesPrevious2</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesPrevious2Total</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesPreviousTotal</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -10904,6 +13884,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>SuggestionsTooltip</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>Sunday</name>
                         <description/>
                         <comment/>
@@ -10965,46 +13965,6 @@
                     </concept_node>
                     <concept_node>
                         <name>Supply</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>SupplyProgram</name>
-                        <description/>
-                        <comment/>
-                        <default_text/>
-                        <translations>
-                            <translation>
-                                <language>en-US</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>fr-FR</language>
-                                <approved>true</approved>
-                            </translation>
-                            <translation>
-                                <language>nl-NL</language>
-                                <approved>true</approved>
-                            </translation>
-                        </translations>
-                    </concept_node>
-                    <concept_node>
-                        <name>SupplyRemarks</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -11125,6 +14085,26 @@
                     </concept_node>
                     <concept_node>
                         <name>ThursdayMorning</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>Title</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -11744,6 +14724,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>TotalDonsSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>TourneeEvenMonth</name>
                         <description/>
                         <comment/>
@@ -12244,6 +15244,46 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>UserBankCount</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>UserCPAS</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>UserDetails</name>
                         <description/>
                         <comment/>
@@ -12464,6 +15504,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>UserRightsDepot</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>UserRightsManageBeneficiaries</name>
                         <description/>
                         <comment/>
@@ -12605,6 +15665,26 @@
                     </concept_node>
                     <concept_node>
                         <name>UserStatUsers</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>UserorgCount</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -13204,7 +16284,47 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>ZipCodeDetails</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>ZipCodeIsMandatory</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ZipCodeLink</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -13264,7 +16384,47 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>ZipCodes</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>ZipSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ZipcodesSelected</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -13705,6 +16865,46 @@
                     </concept_node>
                     <concept_node>
                         <name>menuBeneficiaries</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>menuCpas</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>menuDashboard</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -14224,6 +17424,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>menuReportMovements</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>menuReportOrgs</name>
                         <description/>
                         <comment/>
@@ -14605,6 +17825,26 @@
                     </concept_node>
                     <concept_node>
                         <name>messageChangesMayBeLost</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>messageConfigurationError</name>
                         <description/>
                         <comment/>
                         <default_text/>
@@ -15944,6 +19184,126 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>messageZipCodeCreateError</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>messageZipCodeCreated</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>messageZipCodeDeleteError</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>messageZipCodeDeleted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>messageZipCodeUpdateError</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>messageZipCodeUpdated</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>next</name>
                         <description/>
                         <comment/>
@@ -15965,6 +19325,46 @@
                     </concept_node>
                     <concept_node>
                         <name>organisations</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>povertyIndex</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>povertyIndexTooltip</name>
                         <description/>
                         <comment/>
                         <default_text/>

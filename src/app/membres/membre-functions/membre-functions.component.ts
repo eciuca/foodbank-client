@@ -58,7 +58,7 @@ export class MembreFunctionsComponent implements OnInit {
       const queryParms = { 'actif': '1' ,'lienBanque': this.lienBanque.toString(), 'language': this.userLanguage };
       this.membreFunctionEntityService.getWithQuery(queryParms)
           .subscribe((membreFunctions) => {
-              console.log('Membre functions now loaded:', membreFunctions);
+              console.log('Membre functions now loaded:', membreFunctions.length);
               this.membreFunctions = membreFunctions;
               this.totalRecords = membreFunctions.length;
               this.first = 0;
@@ -66,7 +66,6 @@ export class MembreFunctionsComponent implements OnInit {
   }
 
     handleSelect(membreFunction: MembreFunction) {
-        console.log('MembreFunction was selected',membreFunction );
         this.selectedMembreFunctionId$.next(membreFunction.funcId);
         this.displayDialog = true;
     }
@@ -93,7 +92,6 @@ export class MembreFunctionsComponent implements OnInit {
     handleMembreFunctionDeleted(deletedMembreFunction) {
         const index = this.membreFunctions.findIndex(membreFunction => membreFunction.funcId === deletedMembreFunction.funcId);
         this.membreFunctions.splice(index, 1);
-        console.log('spliced index', index);
         this.reload();
         this.displayDialog = false;
     }

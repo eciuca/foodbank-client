@@ -3,6 +3,7 @@ export interface Mailing {
     to: string;
     subject: string;
     bodyText: string;
+    language: string;
     sentDate: string;
     attachmentFileNames: string;
     bccMode: boolean;
@@ -21,6 +22,7 @@ export class DefaultMailing implements Mailing {
     bodyText: string;
     from: string;
     subject: string;
+    language: string;
     to: string;
     sentDate: string;
     attachmentFileNames: string;
@@ -29,6 +31,7 @@ export class DefaultMailing implements Mailing {
         this.to = '';
         this.from = '';
         this.subject = '';
+        this.language = 'en';
         this.bodyText = '';
         this.attachmentFileNames = '';
         this.sentDate = new Date().toISOString();

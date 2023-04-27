@@ -17,6 +17,7 @@ import {OrgSummaryEntityService} from '../organisations/services/orgsummary-enti
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
 import {OrgSummary} from '../organisations/model/orgsummary';
+import {generateTooltipOrganisation } from '../shared/functions';
 
 
 @Component({
@@ -103,81 +104,49 @@ export class DepotsComponent implements OnInit {
         .subscribe();
   }
   handleSelect(depot) {
-    console.log( 'Depot was selected', depot);
     this.selectedIdDepot$.next(depot.idDepot);
     this.displayDialog = true;
   }
   addNewDepotFromOrg(idDis: number) {
    this.selectedIdDis = idDis;
    this.candidateOrganisation = null;
-   console.log("new depot for organisation", this.selectedIdDis);
-   this.depotService.getByKey(this.selectedIdDis.toString())
-       .subscribe( existingDepot => {
 
-           const  errMessage = {severity: 'error', summary: 'Create',
-             // tslint:disable-next-line:max-line-length
-             detail: $localize`:@@messageDepotCreationError1:The depot ${existingDepot.idDepot} ${existingDepot.nom} exists already`,
-             life: 6000 };
-           this.messageService.add(errMessage) ;
-         },
-           (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-             console.log('depot', dataserviceerror.message);
-             this.orgsummaryService.getByKey(this.selectedIdDis)
-               .subscribe(
-                   orgsummary => {
+   const newDepot = new DefaultDepot();
+   newDepot.idDepot = this.selectedIdDis.toString();
+   newDepot.lienBanque = this.lienBanque;
+ if (this.filteredBankShortName) {
+   newDepot.idCompany = this.filteredBankShortName;
+ }
+ else {
+   newDepot.idCompany = this.bankShortName;
+ }
+   console.log('Creating Depot with content:', newDepot);
+   this.depotService.add(newDepot)
+       .subscribe((createdDepot) => {
+               this.messageService.add({
+                   severity: 'success',
+                   summary: 'Creation',
+                   detail: $localize`:@@messageDepotCreated:The depot ${createdDepot.idDepot} ${createdDepot.nom}  has been created`
+               });
 
-                       const newDepot = new DefaultDepot();
-                       newDepot.idDepot = this.selectedIdDis.toString();
-                       newDepot.lienBanque = this.lienBanque;
-                     if (this.filteredBankShortName) {
-                       newDepot.idCompany = this.filteredBankShortName;
-                     }
-                     else {
-                       newDepot.idCompany = this.bankShortName;
-                     }
-                       console.log('Creating Depot with content:', newDepot);
-                       this.depotService.add(newDepot)
-                           .subscribe((createdDepot) => {
-                                 this.messageService.add({
-                                   severity: 'success',
-                                   summary: 'Creation',
-                                   detail: $localize`:@@messageDepotCreated:The depot ${createdDepot.idDepot} ${createdDepot.nom}  has been created`
-                                 });
-
-                                 this.auditChangeEntityService.logDbChange(this.userId, this.userName, createdDepot.lienBanque, 0, 'Depot',
-                                     createdDepot.idDepot + ' ' + createdDepot.nom, 'Create');
-                                 const latestQueryParams = this.loadPageSubject$.getValue();
-                                 this.loadPageSubject$.next(latestQueryParams);
-                               },
-                               (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                                 console.log('Error creating depot', dataserviceerror.message);
-                                 const errMessage = {
-                                   severity: 'error', summary: 'Create',
-                                   // tslint:disable-next-line:max-line-length
-                                   detail: $localize`:@@messageDepotNotCreated:The depot  ${newDepot.idDepot} ${newDepot.nom} could not be created: error: ${dataserviceerror.message}`,
-                                   life: 6000
-                                 };
-                                 this.messageService.add(errMessage);
-                               });
-                     },
-                   (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                     console.log('Error finding org for depot', dataserviceerror.message);
-                       const  errMessage = {severity: 'error', summary: 'Create',
-                         // tslint:disable-next-line:max-line-length
-                         detail: $localize`:@@messageDepotCreationError2:There is no organisation with id ${this.selectedIdDis}`,
-                         life: 6000 };
-                       this.messageService.add(errMessage) ;
-
-                   });
+               this.auditChangeEntityService.logDbChange(this.userId, this.userName, createdDepot.lienBanque, 0, 'Depot',
+                   createdDepot.idDepot + ' ' + createdDepot.nom, 'Create');
+               const latestQueryParams = this.loadPageSubject$.getValue();
+               this.loadPageSubject$.next(latestQueryParams);
+           },
+           (dataserviceerror) => {
+             console.log('Error creating depot', dataserviceerror.message);
+             const errMessage = {
+               severity: 'error', summary: 'Create',
+               // tslint:disable-next-line:max-line-length
+               detail: $localize`:@@messageDepotNotCreated:The depot  ${newDepot.idDepot} ${newDepot.nom} could not be created: error: ${dataserviceerror.message}`,
+               life: 6000
+             };
+             this.messageService.add(errMessage);
+           });
 
 
-       })
+
   }
 
   handleDepotQuit() {
@@ -201,7 +170,7 @@ export class DepotsComponent implements OnInit {
     this.displayDialog = false;
   }
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
+    
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();
@@ -224,8 +193,7 @@ export class DepotsComponent implements OnInit {
      if (event.filters.idCompany && event.filters.idCompany.value) {
         this.filteredBankShortName= event.filters.idCompany.value;
         queryParms['idCompany'] = this.filteredBankShortName;
-        console.log('CurrentFilteredBankShortName', this.filteredBankShortName,this.bankOptions);
-      } else {
+     } else {
           this.filteredBankShortName = null;
       }
     }
@@ -233,12 +201,10 @@ export class DepotsComponent implements OnInit {
   }
 
   changeArchiveFilter($event) {
-    console.log('Archive is now:', $event);
     this.booShowArchived = $event.checked;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Query Parms', latestQueryParams);
-    // when we switch from active to archived list and vice versa , we need to restart from first page
+     // when we switch from active to archived list and vice versa , we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (this.booShowArchived ) {
       latestQueryParams['actif'] = '0';
@@ -265,7 +231,7 @@ export class DepotsComponent implements OnInit {
       queryOrganisationParms['bankShortName'] = this.bankShortName;
     }
     if (event.query.length > 0) {
-      queryOrganisationParms['societe'] = event.query.toLowerCase();
+      queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();
     }
 
     this.orgsummaryService.getWithQuery(queryOrganisationParms)
@@ -273,7 +239,6 @@ export class DepotsComponent implements OnInit {
           this.candidateOrganisations = filteredOrganisations.map((organisation) =>
               Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
           );
-          console.log('Proposed Organisations', this.candidateOrganisations);
         });
 
   }
@@ -301,17 +266,17 @@ export class DepotsComponent implements OnInit {
           const classicBanks = { 'classicBanks': '1' };
           this.banqueService.getWithQuery(classicBanks)
               .subscribe((banquesEntities) => {
-                    console.log('Banques now loaded:', banquesEntities);
-                    this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+                  this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
               });
 
           break;
         default:
+            this.filterBase ['idCompany'] = '999';
       }
     }
   }
   exportAsXLSX(): void {
-    this.depotHttpService.getDepotReport(this.authService.accessToken, this.lienBanque).subscribe(
+    this.depotHttpService.getDepotReport(this.authService.accessToken, this.bankShortName).subscribe(
         (depots: any[] ) => {
           const cleanedList = depots.map(({ actif, isNew, totalRecords, ...item }) => item);
           this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.depots.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
@@ -330,6 +295,9 @@ export class DepotsComponent implements OnInit {
   generateToolTipMessageForOrgsWithoutDepot() {
    return $localize`:@@ToolTipOrgsWithoutDepot:${this.candidateOrganisations.length} organisations without depot proposed`;
   }
+  generateTooltipOrganisation() {
+        return generateTooltipOrganisation();
+    }
 }
 
 

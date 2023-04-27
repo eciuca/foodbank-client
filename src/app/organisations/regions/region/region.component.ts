@@ -86,23 +86,18 @@ export class RegionComponent implements OnInit {
               this.messageService.add(myMessage);
               this.onRegionDelete.emit(region);
             });
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
   save(oldRegion: Region, regionForm: Region) {
     const modifiedRegion = Object.assign({}, oldRegion, regionForm);
     if (modifiedRegion.hasOwnProperty('regId')) {
-      console.log('Modifying Region with content:', modifiedRegion);
       this.regionsService.update(modifiedRegion)
           .subscribe( ()  => {
             this.messageService.add({severity: 'success', summary: 'Update', detail: `Region ${modifiedRegion.regName} was updated`});
             this.onRegionUpdate.emit(modifiedRegion);
           });
     } else {
-      console.log('Creating Region with content:', modifiedRegion);
       modifiedRegion.bankLink = this.bankLink;
       this.regionsService.add(modifiedRegion)
           .subscribe((newRegion) => {
@@ -124,16 +119,11 @@ export class RegionComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           regionForm.reset( oldRegion); // reset in-memory object for next open
-          console.log('We have reset the form to its original value');
-          this.onRegionQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
+           this.onRegionQuit.emit();
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
-      this.onRegionQuit.emit();
+       this.onRegionQuit.emit();
     }
   }
 }

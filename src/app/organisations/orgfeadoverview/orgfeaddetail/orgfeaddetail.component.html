@@ -19,12 +19,16 @@
                 <p-inputNumber [ngModel]="organisation.nrFead" id="nrFead" name="nrFead" mode="decimal" [showButtons]="true" inputId="nrFead" [min]="0" >
                 </p-inputNumber>
             </div>
-            <div class="p-field p-col-12 p-md-2">
+            <div *ngIf="organisation.birbCode != '1'" class="p-field p-col-12 p-md-2">
                 <label for="birbCode" pTooltip="{{generateTooltipFEADCode()}}">FEAD Code</label>
                 <input pInputText id="birbCode" name="birbCode" maxlength="10" [ngModel]="organisation.birbCode" />
             </div>
-            <div *ngIf="organisation.birbCode == '1' " class="p-field p-col-12 p-md-4">
-            <label i18n="@@Antenne" for="selectedAntenne">Antenne</label>
+            <div class="p-field p-col-12 p-md-2" pTooltip="{{generateTooltipIsAntenne()}}">
+                <label i18n="@@OrgIsAntenne"  for="isantenne">Is Antenne?</label>
+                <p-inputSwitch id="isAntenne" name="isAntenne" [ngModel]="isAntenne" (onChange)="handleAntenneStatusChange($event)" ></p-inputSwitch>
+            </div>
+            <div *ngIf="organisation.birbCode == '1' " class="p-field p-col-12 p-md-4" pTooltip="{{generateTooltipAntenne()}}">
+            <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@AntenneParent" for="selectedAntenne">Antenne Parent</label>
             <p-autoComplete [(ngModel)]="selectedAntenne" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                             [forceSelection]="true" id="selectedAntenne" name="selectedAntenne" field="fullname" [dropdown]="true">
             </p-autoComplete>

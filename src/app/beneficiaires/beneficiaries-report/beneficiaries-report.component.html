@@ -1,17 +1,39 @@
 <p-panel>
     <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="isAdmin" class="p-field p-col-12 p-md-2">
+            <label i18n="@@Bank" for="bank">Bank</label>
+            <p-dropdown  id="bank" name="bank"  [options]="bankOptions" (onChange)="filterBank($event.value)" placeholder="Any" [showClear]="true"></p-dropdown>
+        </div>
         <div class="p-field p-col-12 p-md-3">
-            <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Report" i18n-label="@@ExportReport"></button>
+            <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX()" label="Export Report" i18n-label="@@ExportReport"></button>
         </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">
-        <div *ngIf="chartDataBeneficiaryByFamily" class="p-field p-col-12 p-md-6 card">
-                <h3>{{ titleBenefiariesByFamily }}</h3>
+        <div *ngIf="chartDataBeneficiaryByFamily" class="p-field p-col-12 p-md-4 card">
+                <h4>{{ titleBeneficiariesByFamily }}</h4>
                 <p-chart type="bar" [data]="chartDataBeneficiaryByFamily" [options]="basicOptions"></p-chart>
         </div>
-        <div *ngIf="chartDataBeneficiaryByAge" class="p-field p-col-12 p-md-6 card">
-                <h3>{{ titleBenefiariesByAge }}</h3>
+        <div *ngIf="chartDataBeneficiaryByFamilyAgreed" class="p-field p-col-12 p-md-4 card">
+                <h4>{{ titleBeneficiariesByFamilyAgreed }}</h4>
+                <p-chart type="bar" [data]="chartDataBeneficiaryByFamilyAgreed" [options]="basicOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataBeneficiaryByFamilyGestBen" class="p-field p-col-12 p-md-4 card">
+                <h4>{{ titleBeneficiariesByFamilyGestBen }}</h4>
+                <p-chart type="bar" [data]="chartDataBeneficiaryByFamilyGestBen" [options]="basicOptions"></p-chart>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="chartDataBeneficiaryByAge" class="p-field p-col-12 p-md-4 card">
+                <h4>{{ titleBeneficiariesByAge }}</h4>
                 <p-chart type="bar" [data]="chartDataBeneficiaryByAge" [options]="stackedOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataBeneficiaryByAgeAgreed" class="p-field p-col-12 p-md-4 card">
+                <h4>{{ titleBeneficiariesByAgeAgreed }}</h4>
+                <p-chart type="bar" [data]="chartDataBeneficiaryByAgeAgreed" [options]="stackedOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataBeneficiaryByAgeGestBen" class="p-field p-col-12 p-md-4 card">
+                <h4>{{ titleBeneficiariesByAgeGestBen }}</h4>
+                <p-chart type="bar" [data]="chartDataBeneficiaryByAgeGestBen" [options]="stackedOptions"></p-chart>
         </div>
     </div>
     <div class="p-fluid p-formgrid p-grid">

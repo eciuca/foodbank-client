@@ -4,11 +4,14 @@
 >
     <ng-template pTemplate="caption">
         <div class="table-header">
-            <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Dons" i18n-label="@@ExportDons"></button>
+            <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX()" label="Export Dons" i18n-label="@@ExportDons"></button>
             <button *ngIf="booIsAdmin" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add Don" i18n-label="@@AddDon"></button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
+        <tr>
+            <th  colspan="12" >{{getTotalStatistics()}}</th>
+        </tr>
         <tr>
             <th i18n="@@DonDateSorted" pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
             <th i18n="@@NameDonatorSorted" pSortableColumn="donateurNom" colspan="2">Name Donator<p-sortIcon field="donateurNom"></p-sortIcon></th>

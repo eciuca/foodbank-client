@@ -27,6 +27,9 @@ import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ChartModule} from 'primeng/chart';
+import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
+import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {TooltipModule} from 'primeng/tooltip';
 
 const routes: Routes = [
   {
@@ -66,6 +69,7 @@ const routes: Routes = [
     InputSwitchModule,
     MessageModule,
     ToastModule,
+    TooltipModule,
     CheckboxModule,
     ChartModule
   ],
@@ -74,7 +78,9 @@ const routes: Routes = [
     DonateurEntityService,
     DonsDataService,
     DonEntityService,
-    ConfirmationService
+    ConfirmationService,
+    AuditChangesDataService,
+    AuditChangeEntityService,
   ]
 })
 export class DonationsModule {
@@ -83,12 +89,12 @@ export class DonationsModule {
       private entityDataService: EntityDataService,
       private donateursDataService: DonateursDataService,
       private donsDataService: DonsDataService,
-
+      private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Donation', donateursDataService);
     entityDataService.registerService('Don', donsDataService);
-
+    entityDataService.registerService('AuditChange', auditChangesDataService);
   }
 }
 

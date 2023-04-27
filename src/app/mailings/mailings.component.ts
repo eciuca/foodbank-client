@@ -39,6 +39,7 @@ export class MailingsComponent implements OnInit {
   bankName: string;
   userId: string;
   userName: string;
+  userLanguage: string;
   senderFullEmail: string;
   orgId: number;
   orgName: string;
@@ -150,7 +151,6 @@ export class MailingsComponent implements OnInit {
   }
 
   loadAddresses() {
-    console.log('Entering loadAddresses');
     this.loading = true;
     this.latestAddressQueryParams = {...this.filterBase};
     this.latestAddressQueryParams['mailGroup'] = '0';
@@ -167,6 +167,7 @@ export class MailingsComponent implements OnInit {
       this.bankName = authState.banque.bankName;
       this.userId= authState.user.idUser;
       this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
+      this.userLanguage = authState.user.idLanguage;
       this.senderFullEmail = `${authState.user.membrePrenom} ${authState.user.membreNom}<${authState.user.membreEmail}>` ;
       this.filterBase = {'actif': '1', isDepot: '0'};
       switch (authState.user.rights) {
@@ -209,7 +210,6 @@ export class MailingsComponent implements OnInit {
         delete this.latestOrgQueryParams['societe'];
       }
     }
-   console.log( 'My org Query parms are:', this.latestOrgQueryParams);
     this.loadOrganisationSubject$.next(this.latestOrgQueryParams);
 
   }
@@ -231,7 +231,6 @@ export class MailingsComponent implements OnInit {
     this.setRegionFilter();
     this.setMailGroupFilter();
     this.setLanguageFilter();
-    // console.log('IdDis:', idDis, 'My latest Query parms are:', latestQueryParams);
     this.loadAddressSubject$.next(this.latestAddressQueryParams);
   }
 
@@ -276,14 +275,12 @@ export class MailingsComponent implements OnInit {
         this.mailing.subject = this.mailingSubject;
         this.mailing.from = this.senderFullEmail;
         this.mailing.to = mailListArray.join(',');
-        // this.mailing.bodyText = 'Hello World';
+        this.mailing.language = this.userLanguage;
         this.mailing.bodyText = this.mailingText;
         this.mailing.attachmentFileNames = this.attachmentFileNames.toString();
         this.mailing.bccMode = this.bccMode;
-        console.log( 'bccMode', this.bccMode, this.mailing)
         this.mailingService.add(this.mailing)
             .subscribe((myMail: Mailing) => {
-                  console.log('Returned mailing', myMail);
                   this.messageService.add({
                     severity: 'success',
                     summary: 'Creation',
@@ -300,7 +297,6 @@ export class MailingsComponent implements OnInit {
                       mailGroupLabel + "("+ mailListArray.length + " dest)", 'Create' );
                 },
                 (error: Error) => {
-                  console.log('Error Sending Message', error);
                   const errMessage = {
                     severity: 'error', summary: 'Send',
                     // tslint:disable-next-line:max-line-length
@@ -310,19 +306,12 @@ export class MailingsComponent implements OnInit {
                   this.messageService.add(errMessage);
                 }
             );
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
 
   storeMailAttachment(event: any,uploader: FileUpload) {
-  console.log('Entering storeMailAttachment', event );
-  console.log('Current Files Selection', this.attachmentFileNames);
     const newFiles : File[] = event.files.filter(item => !this.attachmentFileNames.includes( item.name));
-    console.log('New Files:',newFiles);
-
     if (newFiles.length > 0) {
       const file = newFiles[0];
       const i = event.files.findIndex(x => x.name === file.name);
@@ -371,14 +360,11 @@ export class MailingsComponent implements OnInit {
   }
 
   removeMailAttachment(event: any) {
-    console.log('Entering removeMailAttachment', event );
     const file: File | null = event.file;
     this.attachmentFileNames = this.attachmentFileNames.filter(item => item !== file.name);
   }
 
   loadTextAreaWidget() {
-    // console.log('Select mail event', event, this.selectedMembres);
-    // tslint:disable-next-line:max-line-length
     this.mailingToList = Array.prototype.map.call(this.selectedMailadresses, function (item) {
       if (item.email && item.email.length > 0) {
         return item.nom + ' ' + item.prenom + '<' + item.email + '>';
@@ -402,7 +388,6 @@ export class MailingsComponent implements OnInit {
   }
 
   filterLanguage(language) {
-    console.log('Language filter is now:', language);
     this.languageSelected = language;
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
 
@@ -422,11 +407,9 @@ export class MailingsComponent implements OnInit {
     }
   }
   filterRegion(regId) {
-    console.log('Region filter is now:', regId);
     this.regionSelected = regId;
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
     this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
-    console.log('Latest Region Query Parms', this.latestAddressQueryParams);
     // when we switch , we need to restart from first page
     this.first = 0;
     this.setRegionFilter();
@@ -449,11 +432,9 @@ export class MailingsComponent implements OnInit {
   }
 
   filterAgreed(agreed) {
-    console.log('Agreed filter is now:', agreed);
     this.booOnlyAgreed = agreed.checked;
     this.latestAddressQueryParams = {...this.loadAddressSubject$.getValue()};
     this.latestOrgQueryParams = {...this.loadOrganisationSubject$.getValue()};
-    console.log('Latest Agreed Query Parms', this.latestAddressQueryParams);
     // when we switch , we need to restart from first page
     this.first = 0;
    this.setAgreedFilter();

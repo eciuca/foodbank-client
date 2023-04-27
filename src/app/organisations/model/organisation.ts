@@ -233,8 +233,21 @@ export interface Organisation {
     lupdTs: string;
 
     nbLogins: number;
+    nbRegisteredClients: number;
+    latestClientUpdate: string;
     anomalies: string;
     totalRecords: number;
+    totalFamilies: number;
+    totalPersons: number;
+    totalInfants: number;
+    totalBabies: number;
+    totalChildren: number;
+    totalTeens: number;
+    totalYoungAdults: number;
+    totalSeniors: number;
+    totalEq: number;
+
+
 
 }
 
@@ -370,8 +383,20 @@ export class DefaultOrganisation implements Organisation {
     webauthority: boolean;
     website: string;
     nbLogins: number;
+    nbRegisteredClients: number;
+    latestClientUpdate: string;
     anomalies: string;
     totalRecords: number;
+    totalFamilies: number;
+    totalPersons: number;
+    totalInfants: number;
+    totalBabies: number;
+    totalChildren: number;
+    totalTeens: number;
+    totalYoungAdults: number;
+    totalSeniors: number;
+    totalEq: number;
+
 
     constructor() {
         this.actComp1 = 0;
@@ -496,5 +521,15 @@ export class DefaultOrganisation implements Organisation {
         this.nbLogins = 0;
         this.anomalies ='';
         this.totalRecords = 0;
+        this.totalFamilies = 0;
+        this.totalPersons = 0;
+        this.totalInfants = 0;
+        this.totalBabies = 0;
+        this.totalChildren = 0;
+        this.totalTeens = 0;
+        this.totalYoungAdults = 0;
+        this.totalSeniors = 0;
+        this.totalEq = 0;
+
     }
 }

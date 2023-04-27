@@ -104,7 +104,6 @@ export class MembreComponent implements OnInit {
       // or sometimes via a router link via the Main Menu
       if (!this.batId$) {
           // we must come from the menu
-          console.log('We initialize a new membre object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
           this.route.paramMap
@@ -113,8 +112,7 @@ export class MembreComponent implements OnInit {
                   map(batIdString => Number(batIdString)),
                   switchMap(batId => this.membresService.getByKey(batId))
               ).subscribe(membre => {
-              console.log('Membre from Link : ', membre);
-              this.membre = membre;
+               this.membre = membre;
           });
       }  else {
          const membre$ = combineLatest([this.batId$, this.membresService.entities$])
@@ -125,28 +123,34 @@ export class MembreComponent implements OnInit {
           membre$.subscribe(
               membre => {
                   this.userIds = '';
+                  console.log( ' We have a membre ' + JSON.stringify(membre));
                   if (membre) {
-                      console.log('Existing Membre : ', membre);
-                      if((!membre.bankShortName) && (membre.lienDis > 0)) {
-                          this.organisationsService.getByKey(membre.lienDis).subscribe(
+                      this.membre = membre;
+                      console.log( ' We have a existing membre ' );
+                     if(membre.lienDis > 0) {
+                         console.log( ' We have a existing org membre ' );
+                          this.organisationsService.getByKey(this.membre.lienDis).subscribe(
                               (org: Organisation) => {
                                   if (org) {
-                                      membre.lienBanque = org.lienBanque;
-                                      membre.bankShortName = org.bankShortName;
+                                      this.membre.lienBanque = org.lienBanque;
+                                      this.membre.bankShortName = org.bankShortName;
                                       console.log('Correcting membre bank info from org info with content:', membre);
                                   }
-                                  this.membre = membre;
-                                  this.selectedFunction = this.membre.fonction;
-                                  this.selectedEmploiType= this.membre.typEmploi;
-                                  this.selectedDepot= this.membre.ldep;
+
+
+
                           });
                       }
                       else {
-                          this.membre = membre;
-                          this.selectedFunction = this.membre.fonction;
-                          this.selectedEmploiType= this.membre.typEmploi;
-                          this.selectedDepot= this.membre.ldep;
-                      }
+                         console.log( ' We have a existing bank membre ' );
+
+
+                         this.loadFunctions(this.membre.lienBanque);
+                         this.loadEmploiTypes(this.membre.lienBanque);
+                         this.loadDepots(this.membre.lienBanque);
+
+                     }
+
                       if (membre.societe) {
                           this.title = $localize`:@@OrgMemberExisting:Member for organisation ${membre.societe} Updated On ${ membre.lastVisit}`;
                       } else {
@@ -155,7 +159,12 @@ export class MembreComponent implements OnInit {
                       }
 
                       if (membre.nbUsers > 0 ) {
-                          this.userHttpService.getUserReport(this.authService.accessToken, null, null, membre.batId).subscribe(
+                         let queryParams = { 'actif':'1', 'lienBat': membre.batId.toString() };
+                          let params = new URLSearchParams();
+                          for(let key in queryParams){
+                              params.set(key, queryParams[key])
+                          }
+                          this.userHttpService.getUserReport(this.authService.accessToken, params.toString()).subscribe(
                               (users: User[]) => {
                                   users.map((user) => {
                                       this.userIds += user.idUser + ' ';
@@ -163,7 +172,11 @@ export class MembreComponent implements OnInit {
                               });
                       }
                   } else {
+                      console.log( ' We have a new membre ' );
                       this.membre = new DefaultMembre();
+                      this.selectedEmploiType= null;
+                      this.selectedFunction= null;
+                      this.selectedDepot= null;
                       const userLanguageObj  = enmLanguageLegacy.find(obj => obj.value === this.userLanguage);
                       if (userLanguageObj) {
                           const newMemberLanguageObj  = enmLanguage.find(obj => obj.label === userLanguageObj.label);
@@ -173,10 +186,10 @@ export class MembreComponent implements OnInit {
                           }
                       }
                    
-                      console.log('CurrentFilteredBankAndOrg', this.currentFilteredBankShortName,this.currentFilteredOrg);
                       if (this.isAdmin) {
                           // currentFilteredBankId should always be filled in cfr GUI
                             this.membre.lienBanque = this.currentFilteredBankId;
+                          console.log('Setting new member bank to current bankid', this.currentFilteredBankId);
                             if ( this.currentFilteredOrg && this.currentFilteredOrg.idDis != 999 && this.currentFilteredOrg.idDis != 0 ) {
                                 // must be org
                                 this.membre.lienDis = this.currentFilteredOrg.idDis;
@@ -184,7 +197,11 @@ export class MembreComponent implements OnInit {
                             }
                             else {
                                 this.membre.lienDis = 0;
+                                console.log('Setting new member bank to current bankshortname', this.currentFilteredBankShortName);
                                 this.title =  $localize`:@@BankMemberNew1:New Member for bank ${this.currentFilteredBankShortName} `;
+                                this.loadFunctions(this.membre.lienBanque);
+                                this.loadEmploiTypes(this.membre.lienBanque);
+                                this.loadDepots(this.membre.lienBanque);
                             }
                       }
                       else {
@@ -211,14 +228,16 @@ export class MembreComponent implements OnInit {
                                   } else {
                                       // must be bank
                                       this.title = $localize`:@@BankMemberNew1:New Member for bank ${this.idCompany} `;
+                                      this.loadFunctions(this.membre.lienBanque);
+                                      this.loadEmploiTypes(this.membre.lienBanque);
+                                      this.loadDepots(this.membre.lienBanque);
 
                                   }
                               }
                           }
                       }
-                      if (this.myform) {
-                          this.myform.reset(this.membre);
-                      }
+
+
 
                   }
               });
@@ -239,9 +258,6 @@ export class MembreComponent implements OnInit {
                           if (this.booCalledFromTable) {
                               this.booCanDelete = true;
                           }
-                          this.loadFunctions(null);
-                          this.loadEmploiTypes(null);
-                          this.loadDepots(null);
                           break;
                       case 'Bank':
                       case 'Admin_Banq':
@@ -253,9 +269,6 @@ export class MembreComponent implements OnInit {
                                   this.booCanDelete = true;
                               }
                           }
-                          this.loadFunctions(this.lienBanque);
-                          this.loadEmploiTypes(this.lienBanque);
-                          this.loadDepots(this.lienBanque);
                           break;
                       case 'Asso':
                       case 'Admin_Asso':
@@ -283,13 +296,12 @@ export class MembreComponent implements OnInit {
       .subscribe();
   }
   loadFunctions(lienBanque: number) {
-      const queryParms = { 'actif': '1' , 'language': this.userLanguage };
-       if (lienBanque) {
-           queryParms['lienBanque'] = lienBanque.toString();
-       }
+        if (!lienBanque) return;
+      const queryParms = { 'actif': '1' , 'language': this.userLanguage,'lienBanque': lienBanque.toString() };
+      this.membreFunctions = [{ value: 0, label: $localize`:@@SelectFunction:Select Function` }];
       this.membreFunctionEntityService.getWithQuery(queryParms)
           .subscribe((membreFunctions) => {
-              console.log('Membre functions now loaded:', membreFunctions);
+              console.log('Membre functions now loaded');
               membreFunctions.map((membreFunction) => {
                   if(this.userLanguage == 'fr') {
                       this.membreFunctions.push({label: membreFunction.bankShortName + ' ' + membreFunction.fonctionName, value: membreFunction.funcId});
@@ -298,17 +310,16 @@ export class MembreComponent implements OnInit {
                       this.membreFunctions.push({label: membreFunction.bankShortName + ' ' + membreFunction.fonctionNameNl, value: membreFunction.funcId});
                   }
             });
+              this.selectedFunction = this.membre.fonction;
           })
   }
   loadEmploiTypes(lienBanque: number) {
-      const queryParms = { 'actif': '1' , 'language': this.userLanguage };
-      if (lienBanque) {
-          queryParms['lienBanque'] = lienBanque.toString();
-      }
-
+      if (!lienBanque) return;
+      const queryParms = { 'actif': '1' , 'language': this.userLanguage,'lienBanque': lienBanque.toString() };
+      this.membreEmploiTypes= [{label: 'Select', value: 0}];
       this.membreEmploiTypeEntityService.getWithQuery(queryParms)
           .subscribe((membreEmploiTypes) => {
-              console.log('Membre emploitypes now loaded:', membreEmploiTypes);
+              console.log('Membre emploitypes now loaded');
               membreEmploiTypes.map((membreEmploiType) => {
                   if(this.userLanguage == 'fr') {
                       this.membreEmploiTypes.push({label: membreEmploiType.bankShortName + ' ' + membreEmploiType.jobNameFr, value: membreEmploiType.jobNr});
@@ -317,7 +328,7 @@ export class MembreComponent implements OnInit {
                       this.membreEmploiTypes.push({label: membreEmploiType.bankShortName + ' ' + membreEmploiType.jobNameNl, value: membreEmploiType.jobNr});
                   }
               });
-
+              this.selectedEmploiType= this.membre.typEmploi;
           })
   }
     delete(event: Event, membre: Membre) {
@@ -330,16 +341,14 @@ export class MembreComponent implements OnInit {
                     detail: $localize`:@@messageEmployeeDeleted:The employee ${membre.prenom} ${membre.nom} was deleted`};
                 this.membresService.delete(membre)
                     .subscribe( () => {
-                        console.log('successfully deleted employee');
                         this.messageService.add(myMessage);
                         this.onMembreDelete.emit(membre);
                         this.auditChangeEntityService.logDbChange(this.userId,this.userName,membre.lienBanque,membre.lienDis,'Member',
                                 membre.nom + ' ' + membre.prenom, 'Delete' );
                     },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error deleting employee', dataserviceerror.message);
+                        ( dataserviceerror) => { 
+                             
+                             
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageEmployeeDeleteError:The employee ${membre.prenom} ${membre.nom} could not be deleted: error: ${dataserviceerror.message}`,
@@ -347,41 +356,37 @@ export class MembreComponent implements OnInit {
                                 this.messageService.add(errMessage) ;
                         }
                     );
-            },
-            reject: () => {
-                console.log('We do nothing');
             }
+
         });
     }
 
   save(oldMembre: Membre, membreForm: Membre) {
     const modifiedMembre = Object.assign({}, oldMembre, membreForm);
-    // console.log('Selected Function', this.selectedFunction);
       modifiedMembre.fonction = this.selectedFunction;
       modifiedMembre.typEmploi = this.selectedEmploiType;
       modifiedMembre.ldep= this.selectedDepot;
       if (modifiedMembre.hasOwnProperty('batId')) {
 
           this.membresService.update(modifiedMembre)
-              .subscribe(() => {
+              .subscribe((updatedMembre) => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Update',
-                      detail: $localize`:@@messageEmployeeUpdated:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was updated`
+                      detail: $localize`:@@messageEmployeeUpdated:The employee ${updatedMembre.nom} ${updatedMembre.prenom}  was updated`
                   });
-                  this.onMembreUpdate.emit(modifiedMembre);
-                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedMembre.lienBanque,modifiedMembre.lienDis,'Member',
-                      modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Update' );
+                  this.onMembreUpdate.emit(updatedMembre);
+                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,updatedMembre.lienBanque,updatedMembre.lienDis,'Member',
+                      updatedMembre.nom + ' ' + updatedMembre.prenom, 'Update' );
               },
-                  (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                      console.log('Error updating membre', dataserviceerror.message);
-                      const  errMessage = {severity: 'error', summary: 'Update',
+                  ( dataserviceerror) => { 
+                     
+                     
+                    const  errMessage = {severity: 'error', summary: 'Update',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageEmployeeUpdateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be updated: error: ${dataserviceerror.message}`,
                           life: 6000 };
-                      this.messageService.add(errMessage) ;
+                    this.messageService.add(errMessage) ;
                   }
               );
       } else {
@@ -389,26 +394,24 @@ export class MembreComponent implements OnInit {
               modifiedMembre.fonction = 26; // set general help function by default for new bank members
           }
           this.membresService.add(modifiedMembre)
-              .subscribe(() => {
+              .subscribe((createdMembre) => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: $localize`:@@messageEmployeeCreated:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom}  was created`
+                      detail: $localize`:@@messageEmployeeCreated:The employee ${createdMembre.nom} ${createdMembre.prenom}  was created`
                   });
-                  this.onMembreCreate.emit(modifiedMembre);
-                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedMembre.lienBanque,modifiedMembre.lienDis,'Member',
-                          modifiedMembre.nom + ' ' + modifiedMembre.prenom, 'Create' );
+                  this.onMembreCreate.emit(createdMembre);
+                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,createdMembre.lienBanque,createdMembre.lienDis,'Member',
+                          createdMembre.nom + ' ' + createdMembre.prenom, 'Create' );
               },
-                  (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-
-                      console.log('Error creating membre', dataserviceerror);
-                      const  errMessage = {severity: 'error', summary: 'Create',
+                  ( dataserviceerror) => { 
+                     
+                     
+                    const  errMessage = {severity: 'error', summary: 'Create',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageEmployeeCreateError:The employee ${modifiedMembre.nom} ${modifiedMembre.prenom} could not be created: error: ${dataserviceerror.message}`,
                           life: 6000 };
-                      this.messageService.add(errMessage) ;
+                    this.messageService.add(errMessage) ;
                   }
               );
       }
@@ -422,15 +425,10 @@ export class MembreComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     membreForm.reset(oldMembre); // reset in-memory object for next open
-                    console.log('We have reset the membre form to its original value');
                     this.onMembreQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
             this.onMembreQuit.emit();
         }
     }
@@ -455,6 +453,7 @@ export class MembreComponent implements OnInit {
                 filteredDepots.map((orgSummary) => {
                     this.depots.push({label: orgSummary.societe, value: orgSummary.idDis});
                 });
+                this.selectedDepot= this.membre.ldep;
             })
     }
     generateTooltipFunction() {

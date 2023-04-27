@@ -1,0 +1,91 @@
+<p-panel>
+    <ng-template pTemplate="header">
+       <h3 >{{ getTitle() }}</h3>
+    </ng-template>
+    <ng-template  pTemplate="content">
+        <div class="p-fluid p-formgrid p-grid">
+            <div  class="p-field p-col-12 p-md-3">
+                <label i18n="@@OrgDepot" for="depots">Depot</label>
+                <p-dropdown id ="depots" [options]="depots" (onChange)="filterDepot($event)" [showClear] = "true" >
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <button i18n="@@PrintReport" class="p-button p-text-center"  printSectionId="print-section" printTitle="{{getTitle()}}"  [printStyle]="{td : {'border': 'solid 1px'}, th: {'border': 'solid 1px'}}" ngxPrint>Print this Report</button>
+            </div>
+    </div>
+    </ng-template>
+</p-panel>
+
+<p-table *ngIf="organisations" id="print-section" [value]="organisations" styleClass="p-datatable-gridlines"
+              [tableStyle]="{'min-width': '30rem','max-width': '90rem'}">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+                {{ totalStatistics }}
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th   i18n="@@Organisation">Organisation</th>
+            <th>NR</th>
+            <th i18n="@@Location">Location</th>
+            <th i18n="@@BIRBCode">FEAD</th>
+            <th i18n="@@Families">Families</th>
+            <th i18n="@@Persons">Persons</th>
+            <th>0-6m</th>
+            <th>6m-2y</th>
+            <th>2-14 y</th>
+            <th>14-18y</th>
+            <th>18-24y</th>
+            <th>24-65y</th>
+            <th>65y+</th>
+            <th>Eq</th>
+        </tr>
+    </ng-template>
+<ng-template pTemplate="body" let-organisation>
+
+    <tr>
+
+        <td  [style.width]="'10%'" >
+            {{ organisation.societe }}
+        </td>
+        <td>
+            {{ organisation.idDis }}
+        </td>
+        <td>
+            {{ organisation.localite }}
+        </td>
+        <td>
+            {{ organisation.birbCode }}
+        </td>
+        <td>
+            {{ organisation.nFam }}
+        </td>
+        <td>
+            {{ organisation.nPers }}
+        </td>
+        <td>
+            {{ organisation.nNour }}
+        </td>
+        <td>
+            {{ organisation.nBebe }}
+        </td>
+        <td>
+            {{ organisation.nEnf }}
+        </td>
+        <td>
+            {{ organisation.nAdo }}
+        </td>
+        <td>
+            {{ organisation.n1824 }}
+        </td>
+        <td>
+            {{ organisation.nPers - organisation.nNour - organisation.nBebe - organisation.nEnf - organisation.nAdo - organisation.n1824 - organisation.nSen }}
+        <td>
+            {{ organisation.nSen }}
+        </td>
+        <td>
+            {{ organisation.nEq }}
+        </td>
+    </tr>
+</ng-template>
+</p-table>

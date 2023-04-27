@@ -14,32 +14,32 @@
 
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@President" for="selectedPresident">President</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@President" for="selectedPresident">President</label>
                 <p-autoComplete  [(ngModel)]="selectedPresident" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedPresident" name="selectedPresident" field="fullname" [dropdown]="true">
 
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@VicePresident" for="selectedVicePresident">VicePresident</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@VicePresident" for="selectedVicePresident">VicePresident</label>
                 <p-autoComplete  [(ngModel)]="selectedVicePresident" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedVicePresident" name="selectedVicePresident" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="selectedCEO">CEO</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" for="selectedCEO">CEO</label>
                 <p-autoComplete  [(ngModel)]="selectedCEO" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedCEO" name="selectedCEO" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@Secretary" for="selectedSecretary">Secretary</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Secretary" for="selectedSecretary">Secretary</label>
                 <p-autoComplete  [(ngModel)]="selectedSecretary" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedSecretary" name="selectedSecretary" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@Treasurer" for="selectedTreasurer">Treasurer</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Treasurer" for="selectedTreasurer">Treasurer</label>
                 <p-autoComplete  [(ngModel)]="selectedTreasurer" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedTreasurer" name="selectedTreasurer" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -50,61 +50,61 @@
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@HumanResources" for="selectedHR">Human Resources</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@HumanResources" for="selectedHR">Human Resources</label>
                 <p-autoComplete  [(ngModel)]="selectedHR" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedHR" name="selectedHR" field="fullname" [dropdown]="true">
                  </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@Logistics" for="selectedLogistics">Logistics</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Logistics" for="selectedLogistics">Logistics</label>
                 <p-autoComplete  [(ngModel)]="selectedLogistics" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedLogistics" name="selectedLogistics" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@SecHygiene" for="selectedSecHygiene">Security & Hygiene</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@SecHygiene" for="selectedSecHygiene">Security & Hygiene</label>
                 <p-autoComplete  [(ngModel)]="selectedSecHygiene" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedSecHygiene" name="selectedSecHygiene" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@InformationTechnology" for="selectedIT">Information Technology</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@InformationTechnology" for="selectedIT">Information Technology</label>
                 <p-autoComplete  [(ngModel)]="selectedIT" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedIT" name="selectedIT" field="fullname" [dropdown]="true">
                  </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@Supply" for="selectedSupply">Supply</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Supply" for="selectedSupply">Supply</label>
                 <p-autoComplete  [(ngModel)]="selectedSupply" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedSupply" name="selectedSupply" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@Press" for="selectedPress">Press</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Press" for="selectedPress">Press</label>
                 <p-autoComplete  [(ngModel)]="selectedPress" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedPress" name="selectedPress" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@AssocRelations" for="selectedAssocRel">Relations with Banks</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@AssocRelations" for="selectedAssocRel">Relations with Banks</label>
                 <p-autoComplete  [(ngModel)]="selectedAssocRel" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedAssocRel" name="selectedAssocRel" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@PublicRelations" for="selectedPubRel">Public Relations</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@PublicRelations" for="selectedPubRel">Public Relations</label>
                 <p-autoComplete  [(ngModel)]="selectedPubRel" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedPubRel" name="selectedPubRel" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@FeadRelations" for="selectedFEAD">FEAD Relation</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@FeadRelations" for="selectedFEAD">FEAD Relation</label>
                 <p-autoComplete  [(ngModel)]="selectedFEAD" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedFEAD" name="selectedFEAD" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@Quality" for="selectedQuality">Quality</label>
+                <label  pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Quality" for="selectedQuality">Quality</label>
                 <p-autoComplete  [(ngModel)]="selectedQuality" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedQuality" name="selectedQuality" field="fullname" [dropdown]="true">
                 </p-autoComplete>
@@ -140,14 +140,14 @@
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label  i18n="@@ZipCodeMandatory" for="cp">Zip Code *</label>
-                <input #zipcode="ngModel" pInputText id="cp" name="cp"  required minlength="4" maxLength="10" [ngModel]="banque.cp" />
-                <p-message i18n-text="@@ZipCodeIsMandatory" *ngIf="zipcode.invalid && banqueForm.touched" severity="error" text="Zip Code is required and must be minimum 4 chars long"></p-message>
+                <input #zipcode="ngModel" pInputText id="cp" name="cp"  pattern="^[0-9]+$" required minlength="4" maxlength="4" [ngModel]="banque.cp" />
+                <p-message i18n-text="@@ZipCodeIsMandatory" *ngIf="zipcode.invalid && banqueForm.touched" severity="error" text="Zip Code is required and must be 4 chars long"></p-message>
 
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@CityMandatory"  for="localite">City *</label>
-                <input #localite="ngModel" pInputText id="localite" name="localite"  required minlength="4" maxLength="30" [ngModel]="banque.localite" />
-                <p-message i18n-text="@@CityIsMandatory" *ngIf="localite.invalid && banqueForm.touched" severity="error" text="City is required and must be minimum 3 chars long"></p-message>
+                <input #localite="ngModel" pInputText id="localite" name="localite"  required  maxLength="30" [ngModel]="banque.localite" />
+                <p-message i18n-text="@@CityIsMandatory" *ngIf="localite.invalid && banqueForm.touched" severity="error" text="City is required"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-2">
                 <label i18n="@@Tel" for="bankTel">Tel</label>
@@ -205,7 +205,7 @@
         </div>
     </form>
             </p-accordionTab>
-            <p-accordionTab *ngIf="banqProg" i18n-header="@@BankDetails" header="Bank Details">
+            <p-accordionTab *ngIf="banqProg" i18n-header="@@BankProgram" header="Bank Program">
                 <form #detailForm="ngForm">
                 <div *ngIf="booCanSave" class="p-formgroup-inline">
                     <button  type="button" pButton icon="pi pi-check" (click)="saveDetails(banqProg, detailForm.value)" i18n-label="@@Save" label="Save" [disabled] = "detailForm.invalid"></button>
@@ -324,8 +324,17 @@
                         <input i18n-placeholder="@@BankActivityDescription" pInputText id="resunpm" name="resunpm" placeholder="Activity Description" [ngModel]="banqProg.resunpm" />
                     </div>
                 </div>
+                </form>
+            </p-accordionTab>
+    <p-accordionTab *ngIf="banqProg" i18n-header="@@BankMemberships" header="Bank Memberships">
+        <form #membershipForm="ngForm">
+            <div *ngIf="booCanSave" class="p-formgroup-inline">
+                <button  type="button" pButton icon="pi pi-check" (click)="saveDetails(banqProg, membershipForm.value)" i18n-label="@@Save" label="Save" ></button>
+            </div>
 
                 <div class="p-fluid p-formgrid p-grid">
+
+
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@BankMemberShipYearly?" for="cotAnnuelle">Yearly MemberShip?</label>
                         <p-inputSwitch id="cotAnnuelle" name="cotAnnuelle" [ngModel]="banqProg.cotAnnuelle"></p-inputSwitch>
@@ -335,8 +344,7 @@
                         <p-inputNumber [ngModel]="banqProg.cotAmount" id="cotAmount" name="cotAmount" mode="decimal" [step]="0.1" [showButtons]="true" inputId="cotAmount" [min]="0">
                         </p-inputNumber>
                     </div>
-                    <div class="p-field p-col-12 p-md-4">
-                    </div>
+
                     <div class="p-field p-col-12 p-md-2">
                         <label i18n="@@BankMemberShipExtra?" for="cotSup">Extra MemberShip?</label>
                         <p-inputSwitch id="cotSup" name="cotSup" [ngModel]="banqProg.cotSup"></p-inputSwitch>
@@ -346,7 +354,79 @@
                         <p-inputNumber [ngModel]="banqProg.cotAmountSup" id="cotAmountSup" name="cotAmountSup" mode="decimal"  [step]="0.1" [showButtons]="true" inputId="cotAmountSup" [min]="0">
                         </p-inputNumber>
                     </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <label i18n="@@BankMemberShipCustom?" for="isCotCustomText">Custom MemberShip Text?</label>
+                        <p-inputSwitch id="isCotCustomText" name="isCotCustomText" [(ngModel)]="isCotCustomText"></p-inputSwitch>
+                    </div>
                 </div>
+            <div *ngIf="isCotCustomText" class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-12">
+                    <p-overlayPanel #op>
+                        <ng-template pTemplate>
+                            <div *ngIf="userLanguage=='fr'" class="p-d-flex p-flex-column">
+                                {{getCotMailingRecommendationsfr()}}
+
+                            </div>
+                            <div *ngIf="userLanguage=='nl'" class="p-d-flex p-flex-column">
+                                 {{getCotMailingRecommendationsnl()}}
+                            </div>
+                        </ng-template>
+                    </p-overlayPanel>
+                    <p-button i18n-label="@@CotTextGuide" (click)="op.toggle($event)" icon="pi pi-image" label="Guide to create your custom Membership mail Text"></p-button>
+                    </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <p-radioButton name="mailingchoice" value="fr" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event.value)" inputId="francais"></p-radioButton>
+                    <label for="francais" class="ml-2">Français"</label>
+                    <p-radioButton name="mailingchoice" value="nl" [(ngModel)]="mailingTextCurrentLanguage" (onClick)="switchCotMailLanguage($event.value)" inputId="nederlands"></p-radioButton>
+                    <label for="nederlands" class="ml-2">Nederlands</label>
+                </div>
+                <div class="p-field p-col-12 p-md-2">
+                    <button  type="button" pButton icon="pi pi-check" (click)="loadDefaultText()" i18n-label="@@LoadDefaultText" label="Load Default Text" ></button>
+                </div>
+                <div class="p-field p-col-12 p-md-12">
+                <p-editor #idmailingtext="ngModel" [(ngModel)]="mailingText" i18n-placeholder="@@EnterYourMemberShipText" placeholder="Enter your MemberShip Text" name="mailingText" [style]="{'height':'320px'}">
+                    <p-header>
+                             <span class="ql-formats">
+                                <select class="ql-header" tabindex="-1">
+                                    <option value="1" tabindex="-1">Heading</option>
+                                    <option value="2" tabindex="-1">Subheading</option>
+                                    <option selected tabindex="-1">Normal</option>
+                                </select>
+                             <select class="ql-font" tabindex="-1">
+                                    <option selected tabindex="-1">Sans Serif</option>
+                                    <option value="serif" tabindex="-1">Serif</option>
+                                    <option value="monospace" tabindex="-1">Monospace</option>
+                                </select>
+                            </span>
+                        <span class="ql-formats">
+                                <button class="ql-bold" aria-label="Bold" tabindex="-1"></button>
+                                <button class="ql-italic" aria-label="Italic" tabindex="-1"></button>
+                                <button class="ql-underline" aria-label="Underline" tabindex="-1"></button>
+                            </span>
+                        <span class="ql-formats">
+                                <select class="ql-color" tabindex="-1"></select>
+                                <select class="ql-background" tabindex="-1"></select>
+                            </span>
+                        <span class="ql-formats">
+                                <button class="ql-list" value="ordered" aria-label="Ordered List" tabindex="-1"></button>
+                                <button class="ql-list" value="bullet" aria-label="Unordered List" tabindex="-1"></button>
+                                <select class="ql-align" tabindex="-1">
+                                    <option selected tabindex="-1"></option>
+                                    <option value="center" tabindex="-1"></option>
+                                    <option value="right" tabindex="-1"></option>
+                                    <option value="justify" tabindex="-1"></option>
+                                </select>
+                            </span>
+                        <span class="ql-formats">
+                                <button class="ql-link" aria-label="Insert Link" tabindex="-1"></button>
+                            </span>
+                        <span class="ql-formats">
+                                <button class="ql-clean" aria-label="Remove Styles" tabindex="-1"></button>
+                            </span>
+                    </p-header>
+                </p-editor>
+                    </div>
+            </div>
             </form>
         </p-accordionTab>
     </p-accordion>

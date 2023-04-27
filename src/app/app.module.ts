@@ -81,6 +81,14 @@ const routes: Routes = [
         loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule),
         canActivate: [AuthGuardWithForcedLogin]
     },
+    { path: 'movements',
+        loadChildren: () => import('./movements/movements.module').then(m => m.MovementsModule),
+        canActivate: [AuthGuardWithForcedLogin]
+    },
+    { path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+        canActivate: [AuthGuardWithForcedLogin]
+    },
     { path: 'documentation', component: DocumentationComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     {
@@ -100,7 +108,7 @@ const routes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'}),
+        RouterModule.forRoot(routes, {}),
         MenubarModule,
         OverlayPanelModule,
         ProgressSpinnerModule,

@@ -44,14 +44,12 @@ export class MembreEmploiTypeComponent implements OnInit {
     membreEmploiType$.subscribe(membreEmploiType => {
       if (membreEmploiType) {
         this.membreEmploiType = membreEmploiType;
-        console.log('our membreEmploiType:', this.membreEmploiType);
       } else {
         this.membreEmploiType = new DefaultMembreEmploiType();
         this.membreEmploiType.lienBanque = this.lienBanque;
         if (this.myform) {
           this.myform.reset(this.membreEmploiType);
         }
-        console.log('we have a new default membreEmploiType');
       }
     });
 
@@ -81,19 +79,15 @@ export class MembreEmploiTypeComponent implements OnInit {
                   this.messageService.add(myMessage);
                   this.onMembreEmploiTypeDelete.emit(membreEmploiType);
                 },
-                (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                  console.log('Error deleting contact', dataserviceerror.message);
-                  const  errMessage = {severity: 'error', summary: 'Delete',
+                ( dataserviceerror) => { 
+                 
+                 
+                   const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageJobTypeDeleteError:The job type could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
                 });
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
@@ -111,10 +105,9 @@ export class MembreEmploiTypeComponent implements OnInit {
                 });
                 this.onMembreEmploiTypeUpdate.emit(modifiedmembreEmploiType);
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating contact', dataserviceerror.message);
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageJobTypeUpdateError:The job type could not be updated: error: ${dataserviceerror.message}`,
@@ -123,7 +116,6 @@ export class MembreEmploiTypeComponent implements OnInit {
               });
     } else {
       modifiedmembreEmploiType.lienBanque = this.lienBanque;
-      console.log('Creating membreEmploiType with content:', modifiedmembreEmploiType);
       this.membreEmploiTypesService.add(modifiedmembreEmploiType)
           .subscribe((newmembreEmploiType) => {
                 this.messageService.add({
@@ -133,10 +125,9 @@ export class MembreEmploiTypeComponent implements OnInit {
                 });
                 this.onMembreEmploiTypeCreate.emit(newmembreEmploiType);
               },
-              (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error creating contact', dataserviceerror.message);
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageJobTypeCreateError:The job type could not be created: error: ${dataserviceerror.message}`,
@@ -155,16 +146,11 @@ export class MembreEmploiTypeComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           membreEmploiTypeForm.reset(oldmembreEmploiType); // reset in-memory object for next open
-          console.log('We have reset the contact form to its original value');
           this.onMembreEmploiTypeQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
-      this.onMembreEmploiTypeQuit.emit();
+        this.onMembreEmploiTypeQuit.emit();
     }
   }
 }

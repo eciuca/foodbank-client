@@ -2,7 +2,7 @@
     <ng-template pTemplate="header">
        {{ getUserTitle() }}
     </ng-template>
-    <form  #userForm="ngForm">
+    <form  #userForm="ngForm" style="padding: 1em">
         <div class="p-formgroup-inline">
             <button i18n-label="@@Delete" *ngIf="booCanDelete" type="button" pButton icon="pi pi-times" (click)="delete($event, user)" label="Delete"></button>
             <button  i18n-label="@@Save" *ngIf="booCanSave" type="button" pButton icon="pi pi-check" (click)="save(user, userForm.value)" label="Save" [disabled] = "userForm.invalid"></button>
@@ -15,7 +15,7 @@
                 <p-message i18n-text="@@UserLoginIsMandatory" *ngIf="myiduser.invalid && userForm.touched" severity="error" text="User Login is required and must be minimum 6 chars long"></p-message>
             </div>
             <div class="p-field p-col-12 p-md-3">
-                <label i18n="@@Employee" for="selectedMembre">Employee</label>
+                <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Employee" for="selectedMembre">Employee</label>
                 <p-autoComplete  [ngModel]="selectedMembre" [suggestions]="filteredMembres" required (completeMethod)="filterMembre($event)"
                                 (onSelect)="setSelectedMembre($event);"
                                 [forceSelection]="true"  id="selectedMembre" name="selectedMembre" field="fullname" [dropdown]="true">
@@ -31,7 +31,30 @@
                 <input #mypassword="ngModel" pInputText id="password" name="password"  required pattern ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}$" [ngModel]="user.password" />
                 <p-message i18n-text="@@UserPasswordIsMandatory" *ngIf="mypassword.invalid && userForm.touched" severity="error" text="Password must contain at least a uppercase and a lowercase letter, a number and contain 8 to 20 characters"></p-message>
             </div>
-
+        </div>
+        <div *ngIf="user.idOrg == 0" class="p-fluid p-formgrid p-grid">
+            <div  class="p-field p-col-12 p-md-2">
+                <label i18n="@@UserRightsManageOCMW" for="gestCpas">Manage Cpas/OCMW ?</label>
+                <p-inputSwitch id="gestCpas" name="gestCpas" [ngModel]="user.gestCpas"></p-inputSwitch>
+            </div>
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@UserRightsManageGifts" for="gestDon">Manage Gifts ?</label>
+                <p-inputSwitch id="gestDon" name="gestDon" [ngModel]="user.gestDon"></p-inputSwitch>
+            </div>
+            <div  *ngIf="user.idOrg == 0" class="p-field p-col-12 p-md-2">
+                <label i18n="@@UserRightsManageStock" for="gestFead">Manage Stock ?</label>
+                <p-inputSwitch id="gestFead" name="gestFead" [ngModel]="user.gestFead"></p-inputSwitch>
+            </div>
+            <div *ngIf="user.gestFead || booIsCreate" pTooltip="{{generateTooltipManageDepot()}}" class="p-field p-col-12 p-md-6">
+                <label i18n="@@UserRightsDepot" for="depot">Managing Which Depot?</label>
+                <p-dropdown [options]="depotOptions" id="depot" name="depot" [ngModel]="user.depot"></p-dropdown>
+            </div>
+            <div *ngIf="user.rights =='Admin_CPAS'" pTooltip="{{generateTooltipAssociatedCpas()}}" class="p-field p-col-12 p-md-6">
+                <label i18n="@@UserCPAS" for="lienCpas">Associated CPAS?</label>
+                <p-dropdown [options]="cpasOptions" id="lienCpas" name="lienCpas" [ngModel]="user.lienCpas"></p-dropdown>
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-3">
                 <label i18n="@@Active" for="actif">Active</label>
                 <p-inputSwitch id="actif" name="actif" [ngModel]="user.actif"></p-inputSwitch>
@@ -44,22 +67,12 @@
                 <label i18n="@@UserRightsManageBeneficiaries" for="gestBen">Manage Beneficiaries ?</label>
                 <p-inputSwitch id="gestBen" name="gestBen" [ngModel]="user.gestBen"></p-inputSwitch>
             </div>
-            <div class="p-field p-col-12 p-md-3">
-                <label *ngIf="user.idOrg > 0" i18n="@@UserRightsManageFead" for="gestFead">Manage Fead ?</label>
-                <label *ngIf="user.idOrg == 0" i18n="@@UserRightsManageStock" for="gestFead">Manage Stock ?</label>
+            <div *ngIf="user.idOrg > 0" class="p-field p-col-12 p-md-3">
+                <label i18n="@@UserRightsManageFead" for="gestFead">Manage Fead ?</label>
                 <p-inputSwitch id="gestFead" name="gestFead" [ngModel]="user.gestFead"></p-inputSwitch>
             </div>
         </div>
-        <div *ngIf="idOrg == 0" class="p-fluid p-formgrid p-grid">
-            <div  class="p-field p-col-12 p-md-6">
-                <label i18n="@@UserRightsManageOCMW" for="gestCpas">Manage Cpas/OCMW ?</label>
-                <p-inputSwitch id="gestCpas" name="gestCpas" [ngModel]="user.gestCpas"></p-inputSwitch>
-            </div>
-            <div class="p-field p-col-12 p-md-6">
-                <label i18n="@@UserRightsManageGifts" for="gestDon">Manage Gifts ?</label>
-                <p-inputSwitch id="gestDon" name="gestDon" [ngModel]="user.gestDon"></p-inputSwitch>
-            </div>
-        </div>
+
         <p-confirmPopup></p-confirmPopup>
 
     </form>

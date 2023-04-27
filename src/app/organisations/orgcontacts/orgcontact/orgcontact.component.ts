@@ -53,14 +53,12 @@ export class OrgcontactComponent implements OnInit {
     orgcontact$.subscribe(orgcontact => {
       if (orgcontact) {
         this.orgcontact = orgcontact;
-        console.log('our orgcontact:', this.orgcontact);
-      } else {
+        } else {
         this.orgcontact = new DefaultOrgcontact();
           if (this.myform) {
               this.myform.reset(this.orgcontact);
           }
-        console.log('we have a new default orgcontact');
-      }
+        }
     });
 
     this.store
@@ -99,19 +97,15 @@ export class OrgcontactComponent implements OnInit {
               this.messageService.add(myMessage);
               this.onOrgcontactDelete.emit(orgcontact);
             },
-                (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                  console.log('Error deleting contact', dataserviceerror.message);
-                  const  errMessage = {severity: 'error', summary: 'Delete',
+                ( dataserviceerror) => { 
+                 
+                 
+                const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: `The contact  ${orgcontact.nom} ${orgcontact.prenom} could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
             });
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
@@ -129,10 +123,9 @@ export class OrgcontactComponent implements OnInit {
             });
             this.onOrgcontactUpdate.emit(modifiedOrgcontact);
           },
-              (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating contact', dataserviceerror.message);
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: `The contact  ${modifiedOrgcontact.nom} ${modifiedOrgcontact.prenom} could not be updated: error: ${dataserviceerror.message}`,
@@ -141,7 +134,6 @@ export class OrgcontactComponent implements OnInit {
               });
     } else {
       modifiedOrgcontact.lienAsso = this.lienAsso;
-      console.log('Creating Orgcontact with content:', modifiedOrgcontact);
       this.orgcontactsService.add(modifiedOrgcontact)
           .subscribe((newOrgcontact) => {
             this.messageService.add({
@@ -151,12 +143,10 @@ export class OrgcontactComponent implements OnInit {
             });
             this.onOrgcontactCreate.emit(newOrgcontact);
           },
-              (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error creating contact', dataserviceerror.message);
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Create',
-                  // tslint:disable-next-line:max-line-length
                   detail: `The contact  ${modifiedOrgcontact.nom} ${modifiedOrgcontact.prenom} could not be created: error: ${dataserviceerror.message}`,
                   life: 6000 };
                 this.messageService.add(errMessage) ;
@@ -173,15 +163,10 @@ export class OrgcontactComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           orgcontactForm.reset(oldOrgcontact); // reset in-memory object for next open
-          console.log('We have reset the contact form to its original value');
-          this.onOrgcontactQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
+           this.onOrgcontactQuit.emit();
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
       this.onOrgcontactQuit.emit();
     }
   }

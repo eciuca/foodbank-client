@@ -7,7 +7,7 @@
         </div>
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-12">
-                <label i18n="@@Donateur" for="selectedDonateur">Donator</label>
+                <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@Donateur" for="selectedDonateur">Donator</label>
                 <p-autoComplete #donateur="ngModel" [(ngModel)]="selectedDonateur" [suggestions]="filteredDonateurs" required (completeMethod)="filterDonateur($event)"
                                 [forceSelection]="true"  id="selectedDonateur" name="selectedDonateur" field="fullname" [dropdown]="true">
                     <ng-template let-donateur pTemplate="item">

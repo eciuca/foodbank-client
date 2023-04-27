@@ -93,14 +93,13 @@ export class AuditsComponent implements OnInit {
       this.banqueService.getAll()
           .pipe(
               tap((banquesEntities) => {
-                console.log('Banques now loaded:', banquesEntities);
-                this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
+               this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
               })
           ).subscribe();
     }
   }
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
+    
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();
@@ -142,14 +141,12 @@ export class AuditsComponent implements OnInit {
   }
 
   changeSetRangeFilter($event: any) {
-    console.log('Range Filter is now:', $event);
     this.booRangeFilter = $event.checked;
     this.changeDateRangeFilter();
   }
   changeDateRangeFilter() {
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Query Parms', latestQueryParams);
     // when we switch from active to archived list and vice versa , we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (this.booRangeFilter ) {

@@ -14,17 +14,22 @@
         <label i18n="@@UserRightsManageBeneficiaries" for="gestBen">Manage Beneficiaries ?</label>
         <p-inputSwitch id="gestBen" name="gestBen" [ngModel]="organisation.gestBen"></p-inputSwitch>
     </div>
-    <div class="p-field p-col-12 p-md-2">
+    <div class="p-field p-col-12 p-md-3">
+        <label i18n="@@FEADManagedByCPAS" pTooltip="{{generateTooltipFEADManagedByCPAS()}}" for="birbyN">CPAS Manages FEAD ?</label>
+        <p-inputSwitch id="birbyN" name="birbyN" [ngModel]="organisation.birbyN"></p-inputSwitch>
+    </div>
+    <div class="p-field p-col-12 p-md-3">
         <label i18n="@@OrganisationPopulation" for="nPers">Registered population</label>
         <p-inputNumber [ngModel]="organisation.nPers" id="nPers" name="nPers" mode="decimal" [showButtons]="true" inputId="nPers" [min]="0" >
         </p-inputNumber>
     </div>
-    <div class="p-field p-col-12 p-md-2">
+    <div class="p-field p-col-12 p-md-3">
         <label i18n="@@OrganisationFamilies" for="nFam">Families</label>
         <p-inputNumber [ngModel]="organisation.nFam" id="nFam" name="nFam" mode="decimal" [showButtons]="true" inputId="nFam" [min]="0" >
         </p-inputNumber>
     </div>
-
+</div>
+<div class="p-fluid p-formgrid p-grid">
     <div class="p-field p-col-12 p-md-2">
         <label i18n="@@OrganisationInfants" for="nNour">Infants (< 6 months)</label>
         <p-inputNumber [ngModel]="organisation.nNour" id="nNour" name="nNour" mode="decimal" [showButtons]="true" inputId="nNour" [min]="0" >

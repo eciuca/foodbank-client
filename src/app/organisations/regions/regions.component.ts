@@ -50,7 +50,6 @@ export class RegionsComponent implements OnInit {
   }
 
   handleSelect(region: Region) {
-    console.log('Region was selected', region);
     this.selectedIdRegion$.next(region.regId);
     this.displayDialog = true;
   }

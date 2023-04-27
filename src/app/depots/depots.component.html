@@ -5,10 +5,10 @@
         <div class="table-header">
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 p-md-2">
-                    <button *ngIf="booIsAdmin" i18n="@@DepotExport" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Depots" i18n-label="@@ExportDepots"></button>
+                    <button *ngIf="booIsAdmin" i18n="@@DepotExport" class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX()" label="Export Depots" i18n-label="@@ExportDepots"></button>
                 </div>
                 <div *ngIf="booCanCreate || (filteredBankShortName && booIsAdmin)" class="p-field p-col-12 p-md-3" pTooltip="{{generateToolTipMessageForOrgsWithoutDepot()}}">
-                    <label i18n="@@FilterDepotOrganisations" for="candidateOrganisation">Add Depot from Organisation</label>
+                    <label pTooltip="{{generateTooltipOrganisation()}}" i18n="@@FilterDepotOrganisations" for="candidateOrganisation">Add Depot from Organisation</label>
                     <p-autoComplete  [(ngModel)]="candidateOrganisation" [suggestions]="candidateOrganisations" (completeMethod)="filterCandidateOrganisations($event)"
                                      (onSelect)="addNewDepotFromOrg($event.idDis);"
                                      [forceSelection]="true"  id="candidateOrganisation" name="candidateOrganisation" field="fullname" [dropdown]="true">

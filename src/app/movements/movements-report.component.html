@@ -1,0 +1,57 @@
+<p-panel>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-2">
+            <label i18n="@@ShowDaily" for="daily">Show Daily?</label>
+            <p-checkbox [value]="booShowDaily" binary="true" name="daily" id="daily" (onChange)="changePeriodFilter($event)"></p-checkbox>
+        </div>
+        <div *ngIf="isAdmin" class="p-field p-col-12 p-md-2">
+            <label i18n="@@Bank" for="bank">Bank</label>
+            <p-dropdown  id="bank" name="bank" [ngModel]="value" [options]="bankOptions" (onChange)="filterBank($event.value)" placeholder="Any" [showClear]="true"></p-dropdown>
+        </div>
+        <div *ngIf="category=='Depot'" class="p-field p-col-12 p-md-2">
+            <label i18n="@@Depot" for="depot">Depot</label>
+            <p-dropdown  id="depot" name="depot" [ngModel]="value" [options]="depotOptions" (onChange)="filterDepot($event.value)" placeholder="Any" [showClear]="true"></p-dropdown>
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+            <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX('month')" label="Export Monthly Statistics" i18n-label="@@ExportDistributionsMonthly"></button>
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+            <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX('day')" label="Export Daily Statistics" i18n-label="@@ExportDistributionsDaily"></button>
+
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+        <div *ngIf="chartDataFoodDeliveriesPrevious1" class="p-field p-col-12 p-md-4 card">
+            <h4>{{ titleFoodDeliveriesPrevious1 }}</h4>
+            <p>{{ getTotalFoodDeliveriesPrevious1()}}</p>
+            <p-chart type="pie" [data]="chartDataFoodDeliveriesPrevious1" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
+        </div>
+        <div *ngIf="chartDataFoodDeliveriesPrevious" class="p-field p-col-12 p-md-4 card">
+            <h4>{{ titleFoodDeliveriesPrevious }}</h4>
+            <p>{{ getTotalFoodDeliveriesPrevious()}}</p>
+            <p-chart type="pie" [data]="chartDataFoodDeliveriesPrevious" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
+        </div>
+        <div *ngIf="chartDataFoodDeliveriesCurrent" class="p-field p-col-12 p-md-4 card">
+            <h4>{{ titleFoodDeliveriesCurrent }}</h4>
+            <p>{{ getTotalFoodDeliveriesCurrent()}}</p>
+            <p-chart type="pie" [data]="chartDataFoodDeliveriesCurrent" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
+        </div>
+
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+
+        <div *ngIf="chartDataFoodDeliveriesFEADAgreedCollectHistory" class="p-field p-col-12 p-md-4 card">
+            <h4>{{ titleFoodDeliveriesFEADAgreedCollectEvolution }}</h4>
+            <p-chart type="bar" [data]="chartDataFoodDeliveriesFEADAgreedCollectHistory" [options]="stackedOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataFoodDeliveriesFEADNonAgreedHistory" class="p-field p-col-12 p-md-4 card">
+            <h4>{{ titleFoodDeliveriesFEADNonAgreedEvolution }}</h4>
+            <p-chart type="bar" [data]="chartDataFoodDeliveriesFEADNonAgreedHistory" [options]="stackedOptions"></p-chart>
+        </div>
+        <div *ngIf="chartDataFoodDeliveriesNonFEADHistory" class="p-field p-col-12 p-md-4 card">
+            <h4>{{ titleFoodDeliveriesNonFEADEvolution}}</h4>
+            <p-chart type="bar" [data]="chartDataFoodDeliveriesNonFEADHistory" [options]="stackedOptions"></p-chart>
+        </div>
+    </div>
+
+</p-panel>

@@ -24,12 +24,19 @@ import {compareOrgPrograms, OrgProgram} from './organisations/model/orgprogram';
 import {compareMembreFunctions, MembreFunction} from './membres/model/membreFunction';
 import {compareMembreEmploiTypes, MembreEmploiType} from './membres/model/membreEmploiType';
 import {AuditChange, compareAuditChanges} from './audits/model/auditChange';
+import {AuditUser, compareAuditUsers} from './audits/model/auditUser';
+import {compareZipCodes, ZipCode} from './cpass/model/zipCode';
 
 
 export const appEntityMetadata: EntityMetadataMap = {
     Audit: {
         sortComparer: compareAudits,
         selectId: (audit: Audit) => audit.auditId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
+    },
+    AuditUser: {
+        sortComparer: compareAuditUsers,
+        selectId: (auditUserReport: AuditUser) => auditUserReport.idUser,
         entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false}
     },
     AuditChange: {
@@ -151,6 +158,11 @@ export const appEntityMetadata: EntityMetadataMap = {
     Trip: {
         sortComparer: compareTrips,
         selectId: (trip: Trip) => trip.tripId,
+        entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
+    },
+    Zipcode: {
+        sortComparer: compareZipCodes,
+        selectId: (zipcode: ZipCode) => zipcode.zipCode,
         entityDispatcherOptions: {optimisticUpdate: false, optimisticDelete: false},
     },
 };

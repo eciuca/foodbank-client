@@ -149,23 +149,18 @@ export class AppComponent implements OnInit {
     }
     openFEAD() {
        const feadUrl = `${this.feadBaseUrl}/isis/general/portal/access.jsp` ;
-       console.log('Opening FEAD Tab', feadUrl);
-        window.open(feadUrl, '_blank');
+       window.open(feadUrl, '_blank');
     }
 
 
     private processAuthState(authState: AuthState) {
-        console.log('User lienbat is:', authState.user?.lienBat, 'Membre Langue is ', authState.user?.membreLangue);
-       // const idLanguage = authState.user?.idLanguage;
-                let idLanguage = null;
+        let idLanguage = null;
         if (authState.user?.membreLangue === 1) {
             idLanguage = 'fr-FR';
         }
         if (authState.user?.membreLangue === 2) {
             idLanguage = 'nl-NL';
         }
-        console.log(environment.availableLocales);
-        console.log(this.locale);
         if (idLanguage && environment.availableLocales.includes(idLanguage) && idLanguage !== this.locale) {
             const url = window.location.href;
             const newLocaleUrl = url.replace(this.locale, idLanguage);
@@ -249,7 +244,7 @@ export class AppComponent implements OnInit {
             );
         }
         // Add Depots
-        if ( ['Bank', 'Admin_Banq'].includes(authState.user.rights)) {
+        if ( ['Bank', 'Admin_Banq','admin'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {label: 'Depots', icon: 'pi pi-fw pi-map', routerLink: ['/depots']}
             );
@@ -308,7 +303,7 @@ export class AppComponent implements OnInit {
                     ]
                 }
             );
-        } else if ( ['Asso', 'Admin_Asso','Admin_CPAS'].includes(authState.user.rights)) {
+        } else if ( ['Asso', 'Admin_Asso'].includes(authState.user.rights)) {
             if (authState.organisation && authState.organisation.depyN === true) {
                 // organisation is depot
                 this.menuLoggedInItems.push(
@@ -323,7 +318,7 @@ export class AppComponent implements OnInit {
         }
        
         // handle members and users
-        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso','admin','Admin_FBBA','Bank_FBBA','Admin_CPAS'].includes(authState.user.rights)) {
+        if ( ['Admin_Banq', 'Bank', 'Asso', 'Admin_Asso','admin','Admin_FBBA','Bank_FBBA'].includes(authState.user.rights)) {
             const commonSubItems = [
                 {label: $localize`:@@menuEmployees:Employees`, icon: 'pi pi-fw pi-users', routerLink: ['/membres']},
                 {label: $localize`:@@menuUsers:Users`, icon: 'pi pi-fw pi-users', routerLink: ['/users']},
@@ -357,7 +352,7 @@ export class AppComponent implements OnInit {
 
         }
           // Add Beneficiaries
-        if (['Admin_Banq', 'Admin_CPAS'].includes(authState.user.rights) || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
+        if (['Admin_Banq'].includes(authState.user.rights) || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
                     this.menuLoggedInItems.push(
                         {
                             label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',
@@ -368,7 +363,17 @@ export class AppComponent implements OnInit {
                                     routerLink: ['/organisations/orgbenefoverview/']
                                 },
                                 {
-                                    label: 'Details',
+                                    label: $localize`:@@BenefListByOrg:Listing of Organisations`,
+                                    icon: 'pi pi-fw pi-heart',
+                                    routerLink: ['/organisations/orgbeneflist/']
+                                },
+                                {
+                                    label: $localize`:@@BenefList:Listing of Beneficiaries`,
+                                    icon: 'pi pi-fw pi-heart',
+                                    routerLink: ['/beneficiaires/list']
+                                },
+                                {
+                                    label: $localize`:@@Management:Management`,
                                     icon: 'pi pi-fw pi-heart',
                                     routerLink: ['/beneficiaires']
                                 }
@@ -377,15 +382,46 @@ export class AppComponent implements OnInit {
                     );
 
             }
-        if (( authState.user.rights === 'Admin_Asso' && authState.organisation.gestBen)
-            || (authState.user.rights === 'Asso' && authState.organisation.gestBen && authState.user.gestBen)
-        )
-        {
+        if (['Admin_CPAS'].includes(authState.user.rights)) {
             this.menuLoggedInItems.push(
                 {
-                    label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart', routerLink: ['/beneficiaires']
-                })
+                    label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',
+                    items: [
 
+                        {
+                            label: $localize`:@@BenefList:Listing of Beneficiaries`,
+                            icon: 'pi pi-fw pi-heart',
+                            routerLink: ['/beneficiaires/list']
+                        },
+                        {
+                            label: $localize`:@@Management:Management`,
+                            icon: 'pi pi-fw pi-heart',
+                            routerLink: ['/beneficiaires']
+                        }
+                    ]
+                }
+            );
+        }
+
+        if (( authState.user.rights === 'Admin_Asso' && authState.organisation.gestBen)
+            || (authState.user.rights === 'Asso' && authState.organisation.gestBen && authState.user.gestBen)
+        ) {
+            this.menuLoggedInItems.push(
+            {
+                label: $localize`:@@menuBeneficiaries:Beneficiaries`, icon: 'pi pi-fw pi-heart',
+                items: [
+                    {
+                        label: $localize`:@@List:List`,
+                        icon: 'pi pi-fw pi-heart',
+                        routerLink: ['/beneficiaires/list']
+                    },
+                    {
+                        label: $localize`:@@Management:Management`,
+                        icon: 'pi pi-fw pi-heart',
+                        routerLink: ['/beneficiaires']
+                    }
+                ]
+            });
         }
             // Add Donateurs
         if (( authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestDon))) {
@@ -399,11 +435,24 @@ export class AppComponent implements OnInit {
                 );
             }
 
-            // add cpass and depots for admin
-            if ( authState.user.rights === 'admin') {
+            // add cpass
+        if ( ['Admin_Banq', 'Bank','admin'].includes(authState.user.rights)) {
                 this.menuLoggedInItems.push(
-                    {label: 'Cpass', icon: 'pi pi-fw pi-users',  routerLink: ['/cpass']},
-                    {label: 'Depots', icon: 'pi pi-fw pi-users',  routerLink: ['/depots']},
+                    {
+                        label: $localize`:@@menuCpas:Cpas`, icon: 'pi pi-fw pi-heart',
+                        items: [
+                            {
+                                label: $localize`:@@List:List`,
+                                icon: 'pi pi-fw pi-map',
+                                routerLink: ['/cpass']
+                            },
+                            {
+                                label: $localize`:@@ZipCodes:ZipCodes`,
+                                icon: 'pi pi-fw pi-map',
+                                routerLink: ['/cpass/zipcodes']
+                            }
+                        ]
+                    }
                  );
             }
             // add mailings
@@ -424,15 +473,25 @@ export class AppComponent implements OnInit {
                             icon: 'pi pi-fw pi-users',
                             routerLink: [`/audits/auditreports`]
                         },
+                        {label: 'Users', icon: 'pi pi-fw pi-users', routerLink: ['/audits/auditusers']},
                         {label: 'Details', icon: 'pi pi-fw pi-users', routerLink: ['/audits']},
                     ]
                 },
                 {label: $localize`:@@menuEntityChanges:Entity Changes`, icon: 'pi pi-fw pi-map', routerLink: [`/audits/entitychanges`]},
-            ]
+              ];
+
             if (['Admin_FBBA', 'admin'].includes(authState.user.rights)) {
                 reportItems.push(
                     {label: $localize`:@@menuReportOrgs:ReportOrgs`, icon: 'pi pi-fw pi-map', routerLink: [`/banques/bankreports`]},
                     {label: $localize`:@@menuReportBenefs:ReportBenefs`, icon: 'pi pi-fw pi-map', routerLink: [`/beneficiaires/reports`]},
+                    {label: $localize`:@@menuReportMovements:ReportMovements`, icon: 'pi pi-fw pi-map', routerLink: [`/movements`]},
+                )
+            }
+            if (['Admin_Banq', 'Bank'].includes(authState.user.rights))  {
+                reportItems.push(
+                    {label: $localize`:@@menuDashboard:Dashboard`, icon: 'pi pi-fw pi-map', routerLink: [`/dashboard`]},
+                    {label: $localize`:@@menuReportBenefs:ReportBenefs`, icon: 'pi pi-fw pi-map', routerLink: [`/beneficiaires/reports`]},
+                    {label: $localize`:@@menuReportMovements:ReportMovements`, icon: 'pi pi-fw pi-map', routerLink: [`/movements`]},
                 )
             }
             this.menuLoggedInItems.push(

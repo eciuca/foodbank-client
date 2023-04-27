@@ -196,7 +196,6 @@ export class OrgReportComponent implements OnInit {
 
           },
           (err: any) => {
-              console.log(err);
               let errorMsg = '';
               if (err.error && err.error.message) {
                   errorMsg = err.error.message;

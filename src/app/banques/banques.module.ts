@@ -23,30 +23,24 @@ import {ConfirmationService} from 'primeng/api';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {ToastModule} from 'primeng/toast';
-import {BanqprogComponent} from './banqprogs/banqprog/banqprog.component';
-import {BanqprogsComponent} from './banqprogs/banqprogs.component';
 import {BanqProgEntityService} from './services/banqprog-entity.service';
 import {BanqProgsDataService} from './services/banqprogs-data.service';
 import {AccordionModule} from 'primeng/accordion';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputNumberModule} from 'primeng/inputnumber';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import {BankreportsComponent} from './bankreports/bankreports.component';
 import {ChartModule} from 'primeng/chart';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {EditorModule} from 'primeng/editor';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import {TooltipModule} from 'primeng/tooltip';
 
 const routes: Routes = [
     {
         path: 'bankreports',
         component: BankreportsComponent
-    },
-    {
-        path: 'banqprogs/',
-        component: BanqprogsComponent
-    },
-    {
-        path: 'banqprog/:lienBanque',
-        component: BanqprogComponent
     },
     {   path: '',
         component: BanquesComponent,
@@ -64,7 +58,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [BanquesComponent, BanqueComponent, BanqprogComponent, BanqprogsComponent, BankreportsComponent],
+  declarations: [BanquesComponent, BanqueComponent,  BankreportsComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -83,6 +77,10 @@ const routes: Routes = [
         AccordionModule,
         InputSwitchModule,
         InputNumberModule,
+        RadioButtonModule,
+        OverlayPanelModule,
+        TooltipModule,
+        EditorModule,
         ChartModule
     ],
   providers: [

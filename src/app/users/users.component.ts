@@ -16,7 +16,7 @@ import {ExcelService} from '../services/excel.service';
 import {AuthService} from '../auth/auth.service';
 import {UserHttpService} from './services/user-http.service';
 import {formatDate} from '@angular/common';
-import {labelActive, labelLanguage, labelRights} from '../shared/functions';
+import {labelActive, labelRights,generateTooltipOrganisation} from '../shared/functions';
 import {MembreEntityService} from '../membres/services/membre-entity.service';
 
 
@@ -30,7 +30,6 @@ export class UsersComponent implements OnInit {
   loadPageSubject$ = new BehaviorSubject(null);
   selectedIdUser$ = new BehaviorSubject(null);
   users: User[];
-  cols: any[];
   totalRecords: number;
   loading: boolean;
   filterBase: any;
@@ -51,13 +50,14 @@ export class UsersComponent implements OnInit {
   first: number;
   booShowOrganisations: boolean;
   booIsAdmin: boolean;
-    lienDepot: number;
+    depotIdDis: number;
     depotName: string;
     bankOptions: any[];
     YNOptions:  any[];
     idOrg: number;
     orgName: string;
     anomalyFilter: any;
+    organisationFilterId: any; // default null
 
   constructor(private userService: UserEntityService,
               private membreService: MembreEntityService,
@@ -83,7 +83,7 @@ export class UsersComponent implements OnInit {
       this.bankid = 0;
       this.bankName = '';
       this.bankShortName = '';
-      this.lienDepot = 0;
+      this.depotIdDis = 0;
       this.depotName = '';
       this.first = 0;
       this.booShowOrganisations = false;
@@ -91,6 +91,7 @@ export class UsersComponent implements OnInit {
       this.orgName = '';
       this.idOrg = 0;
       this.YNOptions = enmYn;
+      this.organisationFilterId = null;
   }
 
   ngOnInit() {
@@ -123,8 +124,7 @@ export class UsersComponent implements OnInit {
             select(globalAuthState),
             filter(authState => authState.isLoggedIn)
         ).subscribe((authState) => {
-            console.log('Entering Users component with authState:', authState);
-          if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'
+           if (authState.banque && authState.user.rights !== 'admin' && authState.user.rights !== 'Admin_FEAD'
               && authState.user.rights !== 'Admin_FBBA' && authState.user.rights !== 'Bank_FBBA' ) {
               this.bankid = authState.banque.bankId;
               this.bankName = authState.banque.bankName;
@@ -151,7 +151,7 @@ export class UsersComponent implements OnInit {
                     case 'Admin_Asso':
                         if (authState.organisation && authState.organisation.depyN === true) {
                             this.booShowOrganisations = true;
-                            this.lienDepot = authState.organisation.idDis;
+                            this.depotIdDis = authState.organisation.idDis;
                             this.depotName = authState.organisation.societe;
                             this.filteredOrganisationsPrepend = [
                                 {idDis: null, fullname: 'Depot' },
@@ -185,7 +185,6 @@ export class UsersComponent implements OnInit {
                             this.filterBase = { };
                             this.banqueService.getAll()
                                 .subscribe( banquesEntities => {
-                                    console.log('Banques now loaded:', banquesEntities);
                                     const bankOptionsPrepend = [{'label': '???', 'value': 999}];
                                     this.bankOptions = bankOptionsPrepend.concat(banquesEntities.map(({
                                                                                                           bankShortName,
@@ -194,7 +193,6 @@ export class UsersComponent implements OnInit {
                                         'label': bankShortName,
                                         'value': bankId
                                     })));
-                                    console.log('Bank Options are:', this.bankOptions);
                                 });
                         }
                         else {
@@ -212,14 +210,14 @@ export class UsersComponent implements OnInit {
                         break;
                     default:
                         console.log('Entering Users component with unsupported user rights, see complete authstate:', authState);
+                        this.filterBase = {'lienBanque': 999};
                 }
 
         });
 
   }
   handleSelect(user) {
-    console.log( 'User was selected', user);
-    this.displayDialog = true;
+      this.displayDialog = true;
       this.selectedIdUser$.next(user.idUser);
   }
     showDialogToAdd() {
@@ -258,7 +256,6 @@ export class UsersComponent implements OnInit {
             select(isLoggedIn),
             filter(isLoggedIn => isLoggedIn))
         .subscribe(_ => {
-            console.log('Lazy Loaded Event', event, 'FilterBase:', this.filterBase);
             this.loading = true;
             const queryParms = {...this.filterBase};
             queryParms['offset'] = event.first.toString();
@@ -269,12 +266,31 @@ export class UsersComponent implements OnInit {
             } else {
                 queryParms['sortField'] =  'idUser';
             }
-            if (this.booShowOrganisations && this.filteredOrganisation && this.filteredOrganisation.idDis != null) {
-                queryParms['idOrg'] = this.filteredOrganisation.idDis;
-            } else {
-                    if ( this.lienDepot !== 0) {
-                        queryParms['idOrg'] = this.lienDepot;
+            if (this.booShowOrganisations) {
+                if (this.depotIdDis != 0) {
+                    // we are logged in as a user of a depot
+                    switch (this.organisationFilterId) {
+                        case 999: // members of all organisations depending of depot
+                            queryParms['lienDepot'] = this.depotIdDis;
+                            break;
+                        case null: // members of depot
+                            queryParms['idOrg'] = this.depotIdDis;
+                            break;
+                        default:    // members of a specific organisation
+                            queryParms['idOrg'] = this.organisationFilterId;
                     }
+                } else {
+                    // we are logged in as a user of a bank
+                    switch (this.organisationFilterId) {
+                        case 999: // members of all organisations depending of bank
+                            queryParms['idOrg'] = 999;
+                            break;
+                        case null: // all members of bank
+                            break;
+                        default:    // members of a specific organisation
+                            queryParms['idOrg'] = this.organisationFilterId;
+                    }
+                }
             }
             if (this.booShowArchived ) {
                 queryParms['actif'] = '0';
@@ -291,11 +307,11 @@ export class UsersComponent implements OnInit {
                 if (event.filters.userName && event.filters.userName.value) {
                     queryParms['userName'] = event.filters.userName.value;
                 }
-                if (event.filters.membreLangue && event.filters.membreLangue.value) {
-                        queryParms['membreLangue'] = event.filters.membreLangue.value;
+                if (event.filters.idLanguage && event.filters.idLanguage.value) {
+                        queryParms['idLanguage'] = event.filters.idLanguage.value;
                 }
-                if (event.filters.membreEmail && event.filters.membreEmail.value) {
-                        queryParms['membreEmail'] = event.filters.membreEmail.value;
+                if (event.filters.email && event.filters.email.value) {
+                        queryParms['email'] = event.filters.email.value;
                 }
                 if (event.filters.rights && event.filters.rights.value) {
                         queryParms['rights'] = event.filters.rights.value;
@@ -307,8 +323,7 @@ export class UsersComponent implements OnInit {
                     this.filteredBankId= event.filters.bankId.value;
                     this.filteredBankShortName = this.bankOptions.find(obj => obj.value === this.filteredBankId).label;
                     queryParms['idCompany'] =this.filteredBankShortName
-                  //  console.log('CurrentFilteredBankIdAndShortName',  this.filteredBankId,this.filteredBankShortName,this.bankOptions);
-                } else {
+                 } else {
                     this.filteredBankId = null;
                     this.filteredBankShortName = null;
                 }
@@ -320,7 +335,6 @@ export class UsersComponent implements OnInit {
   }
 
     filterOrganisation(event ) {
-        console.log('Filter Organisation', event);
         const  queryOrganisationParms: QueryParams = {};
         queryOrganisationParms['actif'] = '1';
         if (this.bankOptions) {
@@ -333,14 +347,14 @@ export class UsersComponent implements OnInit {
             }
         }
         else {
-        if (this.lienDepot === 0) {
+        if (this.depotIdDis === 0) {
                 queryOrganisationParms['lienBanque'] = this.bankid.toString();
             }  else {
-                queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
+                queryOrganisationParms['lienDepot'] = this.depotIdDis.toString();
             }
         }
         if (event.query.length > 0) {
-            queryOrganisationParms['societe'] = event.query.toLowerCase();
+            queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();
         }
         this.orgsummaryService.getWithQuery(queryOrganisationParms)
             .subscribe(filteredOrganisations => {
@@ -349,61 +363,64 @@ export class UsersComponent implements OnInit {
                 ));
             });
     }
-    filterOrganisationUsers(idDis: number) {
-        this.first = 0;
-        const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        latestQueryParams['offset'] = '0';
-
-        if (idDis === 999) {
-
-            if (this.lienDepot != 0) {
-                latestQueryParams['lienDepot'] = this.lienDepot;
-                if (latestQueryParams.hasOwnProperty('idOrg')) {
-                    delete latestQueryParams['idOrg'];
-                }
-            }
-            else {
-                latestQueryParams['idOrg'] = 999;
-            }
-
-        }
-        else if (idDis != null) {
-            latestQueryParams['idOrg'] = idDis;
-            if (latestQueryParams.hasOwnProperty('lienDepot')) {
-                delete latestQueryParams['lienDepot'];
+    setOrganisationFilters(idDis: number,latestQueryParams: any) {
+        this.organisationFilterId =idDis;
+        let newQueryParams = {...latestQueryParams};
+        if (this.depotIdDis != 0) {
+            // we are logged in as a user of a depot
+            switch(idDis) {
+                case 999: // members of all organisations depending of depot
+                    newQueryParams['lienDepot'] = this.depotIdDis;
+                    if (newQueryParams.hasOwnProperty('idOrg')) {
+                        delete newQueryParams['idOrg'];
+                    }
+                    break;
+                case null: // members of depot
+                    newQueryParams['idOrg'] = this.depotIdDis;
+                    if (newQueryParams.hasOwnProperty('lienDepot')) {
+                        delete newQueryParams['lienDepot'];
+                    }
+                    break;
+                default:    // members of a specific organisation
+                    newQueryParams['idOrg'] = idDis;
+                    if (newQueryParams.hasOwnProperty('lienDepot')) {
+                        delete newQueryParams['lienDepot'];
+                    }
             }
         }
         else {
-            if (this.lienDepot != 0) {
-                latestQueryParams['idOrg'] = this.lienDepot;
-                if (latestQueryParams.hasOwnProperty('lienDepot')) {
-                    delete latestQueryParams['lienDepot'];
-                }
-            }
-            else {
-                if (latestQueryParams.hasOwnProperty('idOrg')) {
-                    delete latestQueryParams['idOrg'];
-                }
+            // we are logged in as a user of a bank
+            switch(idDis) {
+                case 999: // members of all organisations depending of bank
+                    newQueryParams['idOrg'] = 999;
+                    break;
+                case null: // all members of bank
+                    if (newQueryParams.hasOwnProperty('idOrg')) {
+                        delete newQueryParams['idOrg'];
+                    }
+                    break;
+                default:    // members of a specific organisation
+                    newQueryParams['idOrg'] = idDis;
             }
         }
+        return newQueryParams;
+    }
+    filterOrganisationUsers(idDis: number) {
+        this.first = 0;
+        const latestQueryParams = this.setOrganisationFilters(idDis,{...this.loadPageSubject$.getValue()});
+        latestQueryParams['offset'] = '0';
 
         this.loadPageSubject$.next(latestQueryParams);
     }
-
-    labelLanguage(membreLangue: number) {
-          return labelLanguage(membreLangue);
-        }
 
     labelRights(rights: string) {
         return labelRights(rights);
 
     }
     changeArchiveFilter($event) {
-        console.log('Archive is now:', $event);
         this.booShowArchived = $event.checked;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Query Parms', latestQueryParams);
         // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (this.booShowArchived ) {
@@ -417,8 +434,7 @@ export class UsersComponent implements OnInit {
        this.anomalyFilter = value;
         this.first = 0;
         const latestQueryParams = {...this.loadPageSubject$.getValue()};
-        console.log('Latest Query Parms', latestQueryParams);
-        // when we switch from active to archived list and vice versa , we need to restart from first page
+       // when we switch from active to archived list and vice versa , we need to restart from first page
         latestQueryParams['offset'] = '0';
         if (this.anomalyFilter ) {
             latestQueryParams['hasAnomalies'] = this.anomalyFilter;
@@ -456,12 +472,36 @@ export class UsersComponent implements OnInit {
             }
         }
     }
-    exportAsXLSX(): void {
-        let lienBanque = null;
-        if (!this.bankOptions) {
-            lienBanque = this.bankid;
+    exportAsXLSX(onlySelection:boolean): void {
+        let excelQueryParams = {...this.loadPageSubject$.getValue()};
+        let label ="";
+        if (onlySelection) {
+            delete excelQueryParams['rows'];
+            delete excelQueryParams['offset'];
+            delete excelQueryParams['sortOrder'];
+            delete excelQueryParams['sortField'];
+            label = "filtered.";
+
         }
-        this.userHttpService.getUserReport(this.authService.accessToken, lienBanque,this.idOrg).subscribe(
+        else {
+
+            excelQueryParams = { 'actif':'1'};
+            if (!this.bankOptions) {
+                excelQueryParams['lienBanque'] = this.bankid;
+            }
+            if(this.idOrg > 0) {
+                excelQueryParams['lienDis'] = this.idOrg;
+            }
+            if(this.depotIdDis > 0) {
+                excelQueryParams['lienDepot'] = this.depotIdDis;
+            }
+
+        }
+        let params = new URLSearchParams();
+        for(let key in excelQueryParams){
+            params.set(key, excelQueryParams[key])
+        }
+        this.userHttpService.getUserReport(this.authService.accessToken,  params.toString()).subscribe(
         (users: any[]) => {
             const cleanedList = [];
             users.map((item) => {
@@ -472,20 +512,19 @@ export class UsersComponent implements OnInit {
                 cleanedItem['idUser'] =item.idUser;
                 cleanedItem[$localize`:@@Name:Name`] =item.userName;
                 cleanedItem[$localize`:@@Organisation:Organisation`] =item.societe;
-                cleanedItem[$localize`:@@Active:Active`] =labelActive(item.actif);
                 cleanedItem[$localize`:@@Language:Language`] =item.idLanguage;
                 cleanedItem[$localize`:@@Rights:Rights`] = labelRights(item.rights);
                 cleanedItem['email'] =item.email;
                 cleanedList.push( cleanedItem);
             });
             if (this.idOrg > 0) {
-                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.idOrg + '.users.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
             }
             else {
                 if (!this.bankOptions) {
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.users.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 } else {
-                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.users.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+                    this.excelService.exportAsExcelFile(cleanedList, 'foodit.users.' + label + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
                 }
             }
         });
@@ -553,13 +592,12 @@ export class UsersComponent implements OnInit {
         const userLanguage = userLanguageObj ? userLanguageObj.label : 'unknown';
         const memberLanguageObj  = enmLanguage.find(obj => obj.value === user.membreLangue);
         const memberLanguage = memberLanguageObj ? memberLanguageObj.label : 'unknown';
-        if (userLanguage != memberLanguage ) return true;
-        return false;
+        return userLanguage != memberLanguage;
     }
-
-
-
     generateLoginTooltip() {
         return $localize`:@@ToolTipNbLogins:Nb Of Logins since 2021`;
+    }
+    generateTooltipOrganisation() {
+        return generateTooltipOrganisation();
     }
 }

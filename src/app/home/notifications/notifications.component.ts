@@ -31,6 +31,7 @@ export class NotificationsComponent implements OnInit {
     first: number;
     languages: any[];
     selectedLanguage: number;
+    isLoggedIn: boolean;
   constructor( private notificationService: NotificationEntityService,
                private router: Router,
                private store: Store<AppState>) {
@@ -44,38 +45,37 @@ export class NotificationsComponent implements OnInit {
           {label: 'Nederlands', value: 2 },
           {label: 'All', value: 0 }
       ];
+      this.isLoggedIn = false;
   }
 
   ngOnInit(): void {
-   this.reload();
-      this.loadPageSubject$
+      this.loading = true;
+      this.totalRecords = 0;
+      this.store
           .pipe(
-              filter(queryParams => !!queryParams),
-              mergeMap(queryParams => this.notificationService.getWithQuery(queryParams))
-          )
-          .subscribe(loadedNotifications => {
-              console.log('Loaded notifications from nextpage: ' + loadedNotifications);
-              if (loadedNotifications.length > 0) {
-                  this.totalRecords = loadedNotifications[0].totalRecords;
-              }  else {
-                  this.totalRecords = 0;
-              }
-              this.notifications  = loadedNotifications;
-              this.loading = false;
-              this.notificationService.setLoaded(true);
-          });
-  }
-    reload() {
-        this.loading = true;
-        this.totalRecords = 0;
-        this.store
-            .pipe(
-                select(globalAuthState),
-                map((authState) => {
-                    this.initializeDependingOnUserRights(authState);
-                })
-            )
-            .subscribe();
+              select(globalAuthState),
+              map((authState) => {
+                  this.initializeDependingOnUserRights(authState);
+                  this.isLoggedIn = authState.isLoggedIn;
+                  this.loadPageSubject$
+                 .pipe(
+                    filter(queryParams => !!queryParams),
+                     mergeMap(queryParams => this.notificationService.getWithQuery(queryParams))
+                    )
+                    .subscribe(loadedNotifications => {
+                     console.log('Loaded notifications from nextpage: ' + loadedNotifications.length);
+                    if (loadedNotifications.length > 0) {
+                    this.totalRecords = loadedNotifications[0].totalRecords;
+                    }  else {
+                    this.totalRecords = 0;
+                     }
+                    this.notifications  = loadedNotifications;
+                    this.loading = false;
+                    this.notificationService.setLoaded(true);
+                });
+             })
+          ).subscribe();
+
     }
     private initializeDependingOnUserRights(authState: AuthState) {
         console.log ('AuthState is at initialization:', authState);
@@ -112,11 +112,19 @@ export class NotificationsComponent implements OnInit {
                 default:
                     this.queryBase = {};
             }
+            this.nextPage(null);
         }
         console.log('initialization sets query base to:', this.queryBase);
-        this.nextPage(null);
+
     }
     nextPage(event: LazyLoadEvent) {
+     /*   if (!this.isLoggedIn) {
+            setTimeout(() => {
+                console.log('ignore notifications initial nextPage and delaying 250ms');
+            }, 250);
+            return;
+        }
+     */
         console.log('Initial Lazy Loaded Event', event, 'Query Base:', this.queryBase);
         // Ignore first nextpage  by testing this.queryBase - initialization not finished and double i18n load side effect
       if (this.queryBase) {

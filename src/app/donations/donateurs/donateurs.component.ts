@@ -81,7 +81,6 @@ export class DonateursComponent implements OnInit {
         .subscribe();
   }
   handleSelect(donateur) {
-    console.log( 'Donateur was selected', donateur);
     this.selectedDonateurId$.next(donateur.donateurId);
     this.displayDialog = true;
   }
@@ -110,7 +109,7 @@ export class DonateursComponent implements OnInit {
     this.displayDialog = false;
   }
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
+    
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();
@@ -125,6 +124,19 @@ export class DonateursComponent implements OnInit {
       if (event.filters.nom && event.filters.nom.value) {
         queryParms['nom'] = event.filters.nom.value;
       }
+      if (event.filters.prenom && event.filters.prenom.value) {
+        queryParms['prenom'] = event.filters.prenom.value;
+      }
+      if (event.filters.adresse && event.filters.adresse.value) {
+        queryParms['adresse'] = event.filters.adresse.value;
+      }
+      if (event.filters.cp && event.filters.cp.value) {
+        queryParms['cp'] = event.filters.cp.value;
+      }
+      if (event.filters.city && event.filters.city.value) {
+        queryParms['city'] = event.filters.city.value;
+      }
+
     }
     this.loadPageSubject$.next(queryParms);
   }

@@ -17,8 +17,21 @@ import {appEntityMetadata} from '../app-entity.metadata';
 import {MessageModule} from 'primeng/message';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
+import { ZipCodesComponent } from './zipcodes/zipcodes.component';
+import {ZipcodesDataService} from './zipcodes/services/zipcodes-data.service';
+import {ZipcodeEntityService} from './zipcodes/services/zipcode-entity.service';
+import { ZipCodeComponent } from './zipcodes/zipcode/zipcode.component';
+import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
+import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {TooltipModule} from 'primeng/tooltip';
+
 
 const routes: Routes = [
+  {
+      path: 'zipcodes',
+      component: ZipCodesComponent,
+  },
   { path: '',
     component: CpassComponent,
   },
@@ -29,23 +42,29 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CpassComponent, CpasComponent],
+  declarations: [CpassComponent, CpasComponent, ZipCodesComponent, ZipCodeComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
         TableModule,
         PanelModule,
         PaginatorModule,
+        AutoCompleteModule,
         InputTextModule,
         ButtonModule,
         DialogModule,
         MessageModule,
         ConfirmPopupModule,
         InputTextareaModule,
+        TooltipModule,
     ],
   providers: [
         CpassDataService,
         CpasEntityService,
+        ZipcodesDataService,
+        ZipcodeEntityService,
+      AuditChangesDataService,
+      AuditChangeEntityService,
         ConfirmationService
   ],
 })
@@ -53,10 +72,14 @@ export class CpassModule {
   constructor(
       private eds: EntityDefinitionService,
       private entityDataService: EntityDataService,
-      private cpassDataService: CpassDataService
+      private cpassDataService: CpassDataService,
+      private zipcodesDataService: ZipcodesDataService,
+      private auditChangesDataService: AuditChangesDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
     entityDataService.registerService('Cpas', cpassDataService);
+    entityDataService.registerService('Zipcode', zipcodesDataService);
+    entityDataService.registerService('AuditChange', auditChangesDataService);
   }
 
 }

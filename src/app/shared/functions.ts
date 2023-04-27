@@ -70,4 +70,47 @@ export function labelActive(active: boolean) {
         return $localize`:@@No:No`;
     }
 }
+export function labelCoeff(coeff: number) {
+    let label = '0%'
+    if (coeff >0) {
+        const percentage = Math.round(100/coeff);
+        label = percentage + '%';
+    }
+    return label;
+
+}
+
+export function getCoeffTooltip() {
+    return $localize`:@@BenefCoeffTooltip:The coefficient shows the percentage of the beneficiary's needs that are covered by the food aid`;
+}
+
+export function generateTooltipOrganisation() {
+    return $localize`:@@OrganisationTooltip:Enter In the rectangle below either the id of the organisation, either a part of the organisation name to see and select the desired organisation`;
+}
+export function generateTooltipSuggestions() {
+    return $localize`:@@SuggestionsTooltip:This is a suggestions List Box. To find the item, clear the text the rectangle below and enter  a part of the name to see and select the desired item`;
+}
+export function getMemberShipMailingTextDefaultFr() {
+    let mailingTextDefaultFr  = `<Strong>NOTE DE DEBIT<br>{{Nom Organisation}}</strong><br>{{Adresse Organisation}}<br>{{Code Postal Organisation}}<br>{{Commune Organisation}}<br><br>`;
+    mailingTextDefaultFr += `Ce mail vous est adressé afin de vous demander de bien vouloir règler votre {{Type Cotisation}}`;
+    mailingTextDefaultFr +=  ` de votre association soit {{Montant Cotisation}}  Euro pour {{Nb de Mois}} mois par bénéficiaire` ;
+    mailingTextDefaultFr += `<br>La moyenne des bénéficiaires pour l'année écoulée pour votre association était de {{Nb de Personnes}} personnes`;
+    mailingTextDefaultFr += `<br>Merci de verser le montant de  {{Montant dû}} € sur le compte {{Numéro Compte Bancaire}} au plus tard le <b> {{Date échéance}} </b> avec la mention <b>"COTISATION MEMBRES {{Année de Cotisation}}.</b><br>`;
+    mailingTextDefaultFr += `<br>Avec nos remerciements anticipés.<br><br>Le trésorier,<br>{{Trésorier}}<br>{{Nom Banque Alimentaire}}<br>N° Entreprise: {{N° Entreprise Banque Alimentaire}} `;
+    mailingTextDefaultFr += `Adresse: {{Adresse Banque Alimentaire}} {{Code Postal Banque Alimentaire}} {{Commune Banque Alimentaire}} {{Téléphone Banque Alimentaire}}`;
+    mailingTextDefaultFr += '<br><br><i>>Note: Facture sur demande</i>';
+    return mailingTextDefaultFr;
+}
+export function getMemberShipMailingTextDefaultNl() {
+    let   mailingTextDefaultNl = `<Strong>DEBETNOTA<br>{{organisatieNaam}}</strong><br>{{organisatieAdres}}<br>{{organisatiePostCode}}<br>{{organisatieGemeente}}<br><br>`;
+    mailingTextDefaultNl += `Geachte mevrouw/mijnheer,<br>Hierbij vindt u het verzoek tot betaling van de {{Type Bijdrage}}`;
+    mailingTextDefaultNl +=  ` van uw liefdadigheidsvereniging aan onze Voedselbank. De basis bijdrage bedraagt {{BijdrageBedrag}}  Euro voor {{Aantal Maanden}} maand per minderbedeelde` ;
+    mailingTextDefaultNl += `<br>Het gemiddeld aantal begunstigden voor het voorbije jaar voor uw vereniging bedroeg {{Aantal Personen}}`;
+    mailingTextDefaultNl += `<br>Gelieve het bedrag van {{Verschuldigd Bedrag}} € te willen storten op ons  rekeningnr {{Bank Rekening Nummer}} ten laatste tegen <b> {{Verval Datum}} </b> met melding <b>"LEDENBIJDRAGE {{Jaar Bijdrage}}"</b>.<br>`;
+    mailingTextDefaultNl += `<br>Met dank bij voorbaat.<br><br>De Penningmeester,<br>{{Schatbewaarder}}<br>{{Naam Voedselbank}}<br>Bedrijfsnummer: {{BedrijfsNummer Voedselbank}} `;
+    mailingTextDefaultNl += `Adres: {{Adres Voedselbank}} {{PostCode Voedselbank}} {{Gemeente Voedselbank}} {{Telefoon Voedselbank}}`;
+    mailingTextDefaultNl += '<br><br><i>Nota: Factuur te verkrijgen op aanvraag</i>';
+    return mailingTextDefaultNl;
+}
+
 

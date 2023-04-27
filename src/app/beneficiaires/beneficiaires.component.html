@@ -8,7 +8,11 @@
                 <div i18n="@@BeneficiariesHeader" class="p-field p-col-12 p-md-12">
                     Beneficiaries of {{bankName}} {{orgName}}
                 </div>
-                <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-5">
+                <div *ngIf="summaryMessage" class="p-field p-col-12 p-md-12 p-text-bold">
+                    {{summaryMessage}}
+                </div>
+                <div *ngIf="booShowOrganisations"  class="p-field p-col-12 p-md-5">
+                    <label pTooltip="{{generateTooltipOrganisation()}}" i18n="@@FilterOnOrganisations" for="filteredOrganisation">Filter on Organisations?</label>
                     <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                      (onSelect)="filterOrganisationBeneficiaries($event.idDis);"
                                      [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">
@@ -24,15 +28,19 @@
                     <p-checkbox [value]="booShowArchived" binary="true" name="actif" id="actif" (onChange)="changeArchiveFilter($event)"></p-checkbox>
                 </div>
                 <div class="p-field p-col-12 p-md-3">
-                    <label i18n="@@ShowDuplicates" for="duplicate">Show Duplicates?</label>
-                    <p-checkbox [value]="booShowDuplicates" binary="true" name="duplicate" id="duplicate" (onChange)="changeDuplicateFilter($event)"></p-checkbox>
+                    <label i18n="@@Showduplicates" for="duplicates" [pTooltip]="findDuplicatesTooltip()">Find Duplicates?</label>
+                    <p-dropdown [ngModel]="duplicateFilter" id="duplicates" [options]="duplicatesOptions" (onChange)="changeDuplicatesFilter($event.value)" placeholder="Any" [showClear]="true">
+                    </p-dropdown>
                 </div>
             </div>
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-3">
-                    <button  type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Beneficiaries" i18n-label="@@ExportBeneficiaries"></button>
+                <div *ngIf="!booShowArchived" class="p-field p-col-12 p-md-3">
+                    <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX(false)" label="Export Beneficiaries" i18n-label="@@ExportBeneficiaries"></button>
                 </div>
-                <div *ngIf="booCanCreate" class="p-field p-col-12 p-md-3">
+                <div *ngIf="!booShowArchived" class="p-field p-col-12 p-md-3">
+                    <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX(true)" label="Export Selected Beneficiaries" i18n-label="@@ExportSelectedBeneficiaries"></button>
+                </div>
+                <div *ngIf="!booShowArchived && booCanCreate" class="p-field p-col-12 p-md-3">
                     <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddBeneficiary" label="Add Beneficiary"></button>
                 </div>
             </div>
@@ -45,8 +53,10 @@
              <th i18n="@@AddressSorted" pSortableColumn="adresse"  colspan="2" >Address<p-sortIcon field="adresse"></p-sortIcon></th>
              <th i18n="@@ZipCodeSorted" pSortableColumn="cp">Zip Code<p-sortIcon field="cp"></p-sortIcon></th>
              <th i18n="@@CitySorted" pSortableColumn="localite">City<p-sortIcon field="localite"></p-sortIcon></th>
-             <th i18n="@@NbDependentsSorted" pSortableColumn="nbDep">Nb Dependents<p-sortIcon field="nbDep"></p-sortIcon></th>
-             <th i18n="@@BeneficiarySuspect" pSortableColumn="coeff">Suspect<p-sortIcon field="coeff"></p-sortIcon></th>
+             <th i18n="@@BirthDateSorted" pSortableColumn="daten">Birth Date<p-sortIcon field="daten"></p-sortIcon></th>
+             <th i18n="@@NbDependentsSorted" pSortableColumn="nbDep" [pTooltip]="getDependentsTooltip()">Nb Dependents<p-sortIcon field="nbDep"></p-sortIcon></th>
+             <th i18n="@@FEAD" pSortableColumn="birb">FEAD<p-sortIcon field="birb"></p-sortIcon></th>
+             <th i18n="@@BeneficiaryCoeffSorted" pSortableColumn="coeff" [pTooltip]="getCoeffTooltip()">Coeff<p-sortIcon field="coeff"></p-sortIcon></th>
          </tr>
          <tr>
              <th>
@@ -66,16 +76,22 @@
                  <p-columnFilter type="text" field="localite" matchMode="contains" [showMenu]="false"></p-columnFilter>
              </th>
              <th>
-
+                 <p-columnFilter type="text" field="daten" matchMode="contains" [showMenu]="false"></p-columnFilter>
              </th>
              <th>
-                 <p-columnFilter field="suspect" matchMode="equals" [showMenu]="false">
+             </th>
+             <th>
+                 <p-columnFilter field="birb" matchMode="equals" [showMenu]="false">
                      <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                         <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                             <ng-template let-option pTemplate="item">
-                                 <span>{{option.label}}</span>
-                             </ng-template>
+                         <p-dropdown [ngModel]="value" [options]="feadStatuses" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
                          </p-dropdown>
+                     </ng-template>
+                 </p-columnFilter>
+             </th>
+             <th>
+                 <p-columnFilter field="coeff" matchMode="equals" [showMenu]="false">
+                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                         <p-checkbox [ngModel]="value" binary="true" name="coeff" id="coeff" (onChange)="filter($event.checked)"></p-checkbox>
                      </ng-template>
                  </p-columnFilter>
              </th>
@@ -100,10 +116,16 @@
                 {{beneficiaire.localite}}
             </td>
             <td>
-                {{beneficiaire.nbDep}}
+                {{beneficiaire.daten}}
+            </td>
+            <td [pTooltip]="getDependentsTooltip()">
+                {{getFamilySize(beneficiaire)}}
             </td>
             <td>
-                {{ getSuspectStatus(beneficiaire.coeff) }}
+                {{labelBirb(beneficiaire.birb)}}
+            </td>
+            <td [pTooltip]="getCoeffTooltip()">
+                {{ labelCoeff(beneficiaire.coeff) }}
             </td>
         </tr>
     </ng-template>
@@ -112,6 +134,7 @@
            There are {{totalRecords}} beneficiaries selected.
         </div>
     </ng-template>
+     <p-toast></p-toast>
 </p-table>
  <p-dialog i18n-header="@@BeneficiaryDetails" header="Beneficiary Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false">
      <app-beneficiaire *ngIf="selectedIdClient$" [idClient$]="selectedIdClient$"  [currentFilteredOrg] ="filteredOrganisation" (onBeneficiaireUpdate)="handleBeneficiaireUpdate($event)"

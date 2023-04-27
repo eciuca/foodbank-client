@@ -6,10 +6,17 @@ import {DependentEntityService} from '../../services/dependent-entity.service';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../reducers';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {enmGender} from '../../../shared/enums';
+import {enmDepPercentages, enmDepTypes, enmGender} from '../../../shared/enums';
 import {map} from 'rxjs/operators';
 import {globalAuthState} from '../../../auth/auth.selectors';
 import {NgForm} from '@angular/forms';
+import {BeneficiaireEntityService} from '../../services/beneficiaire-entity.service';
+import {Beneficiaire} from '../../model/beneficiaire';
+import {DefaultMailing, Mailing} from '../../../mailings/model/mailing';
+import {MailingEntityService} from '../../../mailings/services/mailing-entity.service';
+import {ZipcodeEntityService} from '../../../cpass/zipcodes/services/zipcode-entity.service';
+import {UserHttpService} from '../../../users/services/user-http.service';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-dependent',
@@ -25,30 +32,47 @@ export class DependentComponent implements OnInit {
   @Output() onDependentCreate = new EventEmitter<Dependent>();
   @Output() onDependentDelete = new EventEmitter<Dependent>();
   @Output() onDependentQuit = new EventEmitter<Dependent>();
+    userEmail: string;
   dependent: Dependent;
+  beneficiaire: Beneficiaire;
   booCanSave: boolean;
   booCanDelete: boolean;
-  booCanQuit: boolean;
   genders: any[];
+  depTypes: any[];
+  depPercentages: any[];
   lienBanque: number;
   lienDis: number;
-
+  orgName: string;
+  mailing: Mailing;
+  isCPASHandlingFeadStatus: boolean;
   constructor(
       private dependentsService: DependentEntityService,
+      private beneficiairesService: BeneficiaireEntityService,
+      private userHttpService: UserHttpService,
+      private authService: AuthService,
       private store: Store<AppState>,
+      private mailingService: MailingEntityService,
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
     this.genders = enmGender;
+    this.depTypes = enmDepTypes;
+    this.depPercentages = enmDepPercentages;
     this.booCanDelete = false;
     this.booCanSave = false;
-    this.booCanQuit = true;
     this.lienDis = 0;
     this.lienBanque = 0;
+    this.mailing = new DefaultMailing();
+    this.isCPASHandlingFeadStatus = false;
   }
 
   ngOnInit(): void {
-    this.masterId$.subscribe(masterId => this.masterId = masterId);
+    this.masterId$.subscribe(
+        masterId  => {
+            this.masterId = masterId;
+            this.beneficiairesService.getByKey(masterId).subscribe(
+                beneficiaire => this.beneficiaire = beneficiaire )
+        });
 
     const dependent$ = combineLatest([this.idDep$, this.dependentsService.entities$])
         .pipe(
@@ -57,7 +81,6 @@ export class DependentComponent implements OnInit {
     dependent$.subscribe(dependent => {
       if (dependent) {
         this.dependent = dependent;
-        console.log('our dependent:', this.dependent);
       } else {
         this.dependent = new DefaultDependent();
         this.dependent.lienBanque = this.lienBanque;
@@ -66,7 +89,6 @@ export class DependentComponent implements OnInit {
         if (this.myform) {
           this.myform.reset(this.dependent);
         }
-        console.log('we have a new default dependent');
       }
     });
 
@@ -75,24 +97,27 @@ export class DependentComponent implements OnInit {
             select(globalAuthState),
             map((authState) => {
               if (authState.user) {
+                  this.userEmail= authState.user.email;
                 switch (authState.user.rights) {
                   case 'Bank':
                   case 'Admin_Banq':
                     this.lienBanque = authState.banque.bankId;
-                    if  ((authState.user.rights === 'Admin_Banq') || (( authState.user.rights === 'Bank') && (authState.user.gestBen))) {
-                      this.booCanSave = true;
-                      this.booCanDelete = true;
-                    }
+                      // only organisations can modify dependents
                     break;
+                    case 'Admin_CPAS':
+                        this.lienBanque = authState.banque.bankId;
+                        this.booCanSave = true;
+                        break;
                   case 'Asso':
-                    this.lienBanque = authState.banque.bankId;
-                    this.lienDis = authState.user.idOrg;
-                    break;
                   case 'Admin_Asso':
                     this.lienBanque = authState.banque.bankId;
                     this.lienDis = authState.user.idOrg;
-                    this.booCanSave = true;
-                    this.booCanDelete = true;
+                      this.orgName = authState.organisation.societe;
+                      this.isCPASHandlingFeadStatus = authState.organisation.birbyN;
+                      if  ((authState.user.rights === 'Admin_Asso') || (( authState.user.rights === 'Asso') && (authState.user.gestBen))) {
+                          this.booCanSave = true;
+                          this.booCanDelete = true;
+                      }
                     break;
                   default:
                 }
@@ -118,29 +143,61 @@ export class DependentComponent implements OnInit {
               this.messageService.add(myMessage);
               this.onDependentDelete.emit(dependent);
             },
-                (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                  console.log('Error deleting dependent', dataserviceerror.message);
-                  const  errMessage = {severity: 'error', summary: 'Delete',
+                ( dataserviceerror) => { 
+                     
+                     
+                    const  errMessage = {severity: 'error', summary: 'Delete',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageDependentDeleteError:The dependent  ${dependent.nom} ${dependent.prenom} could not be deleted: error: ${dataserviceerror.message}`,
                     life: 6000 };
                   this.messageService.add(errMessage) ;
                 });
-      },
-      reject: () => {
-        console.log('We do nothing');
       }
     });
   }
+    private notifyCPAS (modifiedDependent: Dependent,mailCPASAdmin: string) {
+        this.mailing.subject = $localize`:@@DependentNotificationCreation: A New Dependent was Registered`;
+        this.mailing.from = this.userEmail;
+        this.mailing.to = mailCPASAdmin;
+        this.mailing.bccMode = false;
+        console.log('mailcpasadmin',mailCPASAdmin);
+        this.mailing.bodyText = $localize`:@@DependentNotificationCreationText: A new dependent ${modifiedDependent.nom} ${modifiedDependent.prenom} was registered for beneficiary ${this.beneficiaire.nom} ${this.beneficiaire.prenom} in organisation ${this.orgName}.<br>Please review its FEAD status`;
+        console.log('Notification mail',this.mailing);
+        this.mailingService.add(this.mailing)
+            .subscribe((myMail: Mailing) => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Creation',
+                    detail: $localize`:@@CPASNotified:The CPAS Administrator ${mailCPASAdmin} has been notified.`
+                });
+            });
 
+    }
   save(oldDependent: Dependent, dependentForm: Dependent) {
-    const modifiedDependent = Object.assign({}, oldDependent, dependentForm);
+      const modifiedDependent = Object.assign({}, oldDependent, dependentForm);
+      let mailCPASAdmin: string = "";
+      const queryParams = {'rights':'Admin_CPAS','lienCpas': this.beneficiaire.lcpas.toString()};
+      let params = new URLSearchParams();
+      for(let key in queryParams){
+          params.set(key, queryParams[key])
+      }
+      this.userHttpService.getUserReport(this.authService.accessToken, params.toString())
+          .subscribe(
+              myUsers => {
+                  if (myUsers.length > 0) {
+                      mailCPASAdmin = myUsers[0].email;
+                  }
+                  this.updateDependent(modifiedDependent,mailCPASAdmin);
+              });
 
+
+
+  }
+    private updateDependent(modifiedDependent: Dependent, mailCPASAdmin: string) {
     if (modifiedDependent.hasOwnProperty('idDep')) {
       this.dependentsService.update(modifiedDependent)
-          .subscribe(() => {
+          .subscribe((savedDependent) => {
+            console.log('SavedDependent',savedDependent);
             this.messageService.add({
               severity: 'success',
               summary: 'Update',
@@ -148,10 +205,9 @@ export class DependentComponent implements OnInit {
             });
             this.onDependentUpdate.emit(modifiedDependent);
           },
-              (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating dependent', dataserviceerror.message);
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Update',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageDependentUpdateError:The dependent  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be updated: error: ${dataserviceerror.message}`,
@@ -159,8 +215,7 @@ export class DependentComponent implements OnInit {
                 this.messageService.add(errMessage) ;
           });
     } else {
-      console.log('Creating Dependent with content:', modifiedDependent);
-      this.dependentsService.add(modifiedDependent)
+       this.dependentsService.add(modifiedDependent)
           .subscribe((newDependent) => {
             this.messageService.add({
               severity: 'success',
@@ -168,11 +223,13 @@ export class DependentComponent implements OnInit {
               detail: $localize`:@@messageDependentCreated:The dependent ${newDependent.nom} ${newDependent.prenom}  has been created`
             });
             this.onDependentCreate.emit(newDependent);
+                  if (this.isCPASHandlingFeadStatus && (mailCPASAdmin != "")) {
+                      this.notifyCPAS(modifiedDependent,mailCPASAdmin);
+                  }
           },
-              (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error creating dependent', dataserviceerror.message);
+              ( dataserviceerror) => { 
+                 
+                 
                 const  errMessage = {severity: 'error', summary: 'Create',
                   // tslint:disable-next-line:max-line-length
                   detail: $localize`:@@messageDependentCreateError:The dependent  ${modifiedDependent.nom} ${modifiedDependent.prenom} could not be created: error: ${dataserviceerror.message}`,
@@ -191,16 +248,11 @@ export class DependentComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           dependentForm.reset(oldDependent); // reset in-memory object for next open
-          console.log('We have reset the dependent form to its original value');
           this.onDependentQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
-      this.onDependentQuit.emit();
+        this.onDependentQuit.emit();
     }
   }
 }

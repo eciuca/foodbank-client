@@ -1,65 +1,41 @@
 export interface  Beneficiaire {
     idClient: number;
-
     idInt: string;
-
     lienDis: number;
-
     nom: string;
-
     prenom: string;
-
     nomconj: string;
-
     prenomconj: string;
-
     civilite: number;
     daten: string;
-
     datenConj: string;
-
     civiliteconj: number;
     adresse: string;
     cp: string;
     localite: string;
-
     pays: string;
     email: string;
     tel: string;
     gsm: string;
-
     connu: string;
-
     genre: number;
-
     actif: boolean;
-
     birb: number;
-
     natnr: string;
-
     dateUpd: string;
-
     regio: string;
-
     lcpas: number;
-
     datUpdBirb: string;
-
     critBirb: number;
-
     coeff: number;
-
     nomsav: string;
-
     prenomsav: string;
-
     genreconj: number;
-
     lbanque: number;
     bankName: string;
     bankShortName: string;
     societe: string; // calculated field
+    nbDep: number; // calculated field
     totalRecords: number;
 }
 export function compareBeneficiaires(c1: Beneficiaire, c2: Beneficiaire) {
@@ -110,6 +86,7 @@ export class DefaultBeneficiaire implements Beneficiaire {
     regio: string;
     tel: string;
     societe: string; // calculated field
+    nbDep: number; // calculated field
     totalRecords: number;
     constructor() {
         this.pays = '1';
@@ -148,5 +125,6 @@ export class DefaultBeneficiaire implements Beneficiaire {
         this.prenomsav = '';
         this.tel = '';
         this.societe = ''; // calculated field
+        this.nbDep = 0 ; // calculated field
     }
 }

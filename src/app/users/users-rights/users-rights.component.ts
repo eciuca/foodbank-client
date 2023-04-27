@@ -11,7 +11,7 @@ import {LazyLoadEvent} from 'primeng/api';
 import {enmLanguage, enmUserRolesAsso, enmUserRolesBankAsso, enmYn} from '../../shared/enums';
 import {QueryParams} from '@ngrx/data';
 import {OrgSummaryEntityService} from '../../organisations/services/orgsummary-entity.service';
-import {labelRights} from '../../shared/functions';
+import {labelRights,generateTooltipOrganisation} from '../../shared/functions';
 
 
 @Component({
@@ -90,7 +90,6 @@ export class UsersRightsComponent implements OnInit {
             select(globalAuthState),
             filter(authState => authState.isLoggedIn)
         ).subscribe((authState) => {
-      console.log('Entering Users component with authState:', authState);
       if (authState.banque) {
         this.bankid = authState.banque.bankId;
         this.bankName = authState.banque.bankName;
@@ -132,13 +131,12 @@ export class UsersRightsComponent implements OnInit {
             break;
           default:
             console.log('Entering Users component with unsupported user rights, see complete authstate:', authState);
+            this.filterBase = {'lienBanque': 999};
         }
       }
-      console.log('Users FilterBase is: ', this.filterBase);
-    });
+        });
   }
   handleSelect(user) {
-    console.log( 'User was selected', user);
     this.displayDialog = true;
     this.selectedIdUser$.next(user.idUser);
   }
@@ -170,7 +168,6 @@ export class UsersRightsComponent implements OnInit {
             select(isLoggedIn),
             filter(isLoggedIn => isLoggedIn))
         .subscribe(_ => {
-          console.log('Lazy Loaded Event', event, 'FilterBase:', this.filterBase);
           this.loading = true;
           const queryParms = {...this.filterBase};
           queryParms['offset'] = event.first.toString();
@@ -227,7 +224,7 @@ export class UsersRightsComponent implements OnInit {
       queryOrganisationParms['lienDepot'] = this.lienDepot.toString();
     }
     if (event.query.length > 0) {
-      queryOrganisationParms['societe'] = event.query.toLowerCase();
+      queryOrganisationParms['societeOrIdDis'] = event.query.toLowerCase();
     }
     this.orgsummaryService.getWithQuery(queryOrganisationParms)
         .subscribe(filteredOrganisations => {
@@ -280,6 +277,9 @@ export class UsersRightsComponent implements OnInit {
       } else {
         return $localize`:@@BankUsersRightsTitle:Rights of Users of bank ${this.bankName} `;
     }
+  }
+  generateTooltipOrganisation() {
+    return generateTooltipOrganisation();
   }
 }
 

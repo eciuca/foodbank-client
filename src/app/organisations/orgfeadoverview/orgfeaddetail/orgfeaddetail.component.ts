@@ -6,12 +6,12 @@ import {combineLatest, Observable} from 'rxjs';
 import {Organisation} from '../../model/organisation';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {NgForm} from '@angular/forms';
-
 import {DataServiceError, QueryParams} from '@ngrx/data';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../reducers';
 import {globalAuthState} from '../../../auth/auth.selectors';
 import {OrgSummaryEntityService} from '../../services/orgsummary-entity.service';
+import { generateTooltipSuggestions } from '../../../shared/functions';
 
 @Component({
   selector: 'app-orgfeaddetail',
@@ -30,6 +30,7 @@ export class OrgfeaddetailComponent implements OnInit {
   userName: string;
   selectedAntenne: any;
   filteredOrganisations: any[];
+  isAntenne: boolean;
 
 
   constructor(
@@ -43,6 +44,7 @@ export class OrgfeaddetailComponent implements OnInit {
   ) {
     this.booCanSave = false;
     this.userName = '' ;
+    this.isAntenne = false;
   }
 
   ngOnInit(): void {
@@ -53,15 +55,14 @@ export class OrgfeaddetailComponent implements OnInit {
         ).subscribe(organisation => {
           if (organisation) {
             this.organisation = organisation;
+            this.isAntenne = false;
             if (organisation.birbCode == "1") {
+              this.isAntenne = true;
               this.orgsummaryService.getByKey(organisation.antenne)
                   .subscribe(
                       antenne => {
                         if (antenne !== null) {
                           this.selectedAntenne = Object.assign({}, antenne, {fullname: antenne.idDis + ' ' + antenne.societe});
-                          console.log('our antenne:', this.selectedAntenne);
-                        } else {
-                          console.log('There is no antenne!');
                         }
                       });
             }
@@ -96,23 +97,21 @@ export class OrgfeaddetailComponent implements OnInit {
     else {
       modifiedOrganisation.antenne = 0;
     }
-    console.log('Modifying Organisation with content:', modifiedOrganisation);
     this.organisationsService.update(modifiedOrganisation)
         .subscribe( ()  => {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Update',
-                detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.societe} was updated`
+                detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.idDis}  ${modifiedOrganisation.societe} was updated`
               });
               this.onOrganisationUpdate.emit(modifiedOrganisation);
             },
-            (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-              console.log('Error updating organisation', dataserviceerror.message);
-              const  errMessage = {severity: 'error', summary: 'Update',
+            ( dataserviceerror) => { 
+                 
+                 
+                const  errMessage = {severity: 'error', summary: 'Update',
                 // tslint:disable-next-line:max-line-length
-                detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
+                detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
                 life: 6000 };
               this.messageService.add(errMessage) ;
             });
@@ -127,33 +126,27 @@ export class OrgfeaddetailComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           orgForm.reset( oldOrganisation); // reset in-memory object for next open
-          console.log('We have reset the form to its original value');
           this.onOrganisationQuit.emit();
-        },
-        reject: () => {
-          console.log('We do nothing');
         }
       });
     } else {
-      console.log('Form is not dirty, closing');
       this.onOrganisationQuit.emit();
     }
   }
-  filterOrganisation(event ) {
-    const  queryOrganisationParms: QueryParams = {};
-    queryOrganisationParms['lienBanque'] = this.organisation.lienBanque.toString();
-    if (event.query.length > 0) {
-      queryOrganisationParms['societe'] = event.query.toLowerCase();
-    }
-    this.orgsummaryService.getWithQuery(queryOrganisationParms)
-        .subscribe(filteredOrganisations => {
-          this.filteredOrganisations = filteredOrganisations.map((organisation) =>
-              Object.assign({}, organisation, {fullname: organisation.idDis + ' ' + organisation.societe})
-          );
-          console.log('Proposed Organisations', this.filteredOrganisations);
-        });
-  }
 
+    handleAntenneStatusChange(e: any) {
+        if (e.checked) {
+            this.organisation.birbCode = "1";
+            this.isAntenne = true;
+        }
+        else {
+            this.organisation.birbCode = "0";
+            this.isAntenne = false;
+            this.organisation.antenne = 0;
+            this.selectedAntenne = 0;
+        }
+
+    }
   generateTooltipAgreed() {
     return $localize`:@@OrgToolTipIsAgreed:Is Organisation Agreed?`;
   }
@@ -169,6 +162,18 @@ export class OrgfeaddetailComponent implements OnInit {
   generateTooltipFEADCode() {
     return $localize`:@@OrgToolTipFEADCode:FEAD Code of the Organisation`;
   }
+
+   generateTooltipIsAntenne() {
+        return $localize`:@@OrgToolTipIsAntenne:Is this Organisation a Subsidiary of another Organisation?`;
+    }
+
+    generateTooltipAntenne() {
+        return $localize`:@@OrgToolTipAntenne:Parent Organisation of this Subsidiary`;
+    }
+    generateTooltipSuggestions() {
+        return generateTooltipSuggestions();
+    }
+
 
 }
 

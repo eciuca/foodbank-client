@@ -54,6 +54,7 @@ export let enmSupplyDay = [
     {label: $localize`:@@Sunday:Sunday` , value: 7}
 ];
 export let enmSupplyWeek = [
+    {label: '-' , value: 0},
     {label: $localize`:@@WeekEvery:Every Week` , value: 5},
     {label: $localize`:@@Week1:Week 1` , value: 1},
     {label: $localize`:@@Week2:Week 2` , value: 2},
@@ -70,40 +71,44 @@ export let enmSupplyWeek = [
 
 ];
 export let enmSupplyMonth = [
+    {label: '-' , value: 0},
     {label: $localize`:@@TourneeUnevenMonth:Uneven Month` , value: 1},
     {label: $localize`:@@TourneeEvenMonth:Even Month` , value: 2},
     {label: $localize`:@@TourneeEveryMonth:Every Month` , value: 3},
 ];
 export let enmUserRoles = [
-    {label: $localize`:@@RoleAdmin:Global admin`, value: 'admin'},
-    {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleOrgUser:Org User`, value: 'Asso'},
     {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
+    {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
+    {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleFBBAUser:FBBA User`, value: 'Bank_FBBA'},
+    {label: $localize`:@@RoleFBBAAdmin:FBBA Admin`, value: 'Admin_FBBA' },
     {label: $localize`:@@RoleCPASAdmin:CPAS Admin`, value: 'Admin_CPAS' },
     {label: $localize`:@@RoleFEADAdmin:FEAD Admin`, value: 'Admin_FEAD'},
     {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'},
-    {label: $localize`:@@RoleFBBAAdmin:FBBA Admin`, value: 'Admin_FBBA' },
-    {label: $localize`:@@RoleOrgUser:Org User`, value: 'Asso'},
-    {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
-    {label: $localize`:@@RoleFBBAUser:FBBA User`, value: 'Bank_FBBA'},
+    {label: $localize`:@@RoleAdmin:Global admin`, value: 'admin'},
 ];
 export let enmUserRolesBankAsso = [
-    {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
-    {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
-    {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
     {label: $localize`:@@RoleOrgUser:Org User`, value: 'Asso'},
+    {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
+    {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
+    {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleCPASAdmin:CPAS Admin`, value: 'Admin_CPAS' },
+    {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'}
 ];
 export let enmUserRolesBank = [
-    {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
     {label: $localize`:@@RoleBankUser:Bank User`, value: 'Bank'},
+    {label: $localize`:@@RoleBankAdmin:Bank Admin`, value: 'Admin_Banq' },
+    {label: $localize`:@@RoleCPASAdmin:CPAS Admin`, value: 'Admin_CPAS' },
     {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'}
 ];
 export let enmUserRolesAsso = [
-    {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
     {label: $localize`:@@RoleOrgUser:Org User`, value: 'Asso'},
+    {label: $localize`:@@RoleOrgAdmin:Org Admin`, value: 'Admin_Asso'},
 ];
 export let enmUserRolesFBBA = [
-    {label: $localize`:@@RoleFBBAAdmin:FBBA Admin`, value: 'Admin_FBBA'},
     {label: $localize`:@@RoleFBBAUser:FBBA User`, value: 'Bank_FBBA'},
+    {label: $localize`:@@RoleFBBAAdmin:FBBA Admin`, value: 'Admin_FBBA'},
     {label: $localize`:@@RoleAdmin:Global admin`, value: 'admin'},
     {label: $localize`:@@RoleEXTAdmin:EXT Admin`, value: 'Admin_EXT'}
 ];
@@ -189,6 +194,8 @@ export let enmDbChangeEntities = [
     {label: $localize`:@@DbChangeEntityBank:Bank` , value: 'Bank'},
     {label: $localize`:@@DbChangeEntityDepot:Depot` , value: 'Depot'},
     {label: $localize`:@@DbChangeEntityClient:Client` , value: 'Client'},
+    {label: 'Donateur' , value: 'Donateur'},
+    {label: $localize`:@@DbChangeEntityGift:Gift` , value: 'Don'},
     {label: 'Email' , value: 'Email'},
 
 ];
@@ -198,6 +205,28 @@ export let enmDbChangeActions = [
     {label: $localize`:@@DbChangeActionDelete:Delete` , value: 'Delete'},
 
 ];
+export let enmDepTypes = [
+    {label: $localize`:@@DepTypeChild:Child` , value: 1 },
+    {label: $localize`:@@DepTypeParent:Parent` , value: 2 },
+    {label: $localize`:@@DepTypeGrandParent:Grand Parent` , value: 3 },
+    {label: $localize`:@@DepTypeGrandChild:Grand Child` , value: 4 },
+    {label: $localize`:@@DepTypeOtherFamily:Other Family Link` , value: 5 },
+    {label: $localize`:@@DepTypeCoHabitant:CoHabitant` , value: 6 },
+    {label: $localize`:@@DepTypeOther:Other` , value: 7 },
+];
+export let enmDepPercentages = [
+    {label: '100%' , value: 1 },
+    {label: '50%' , value: 2 },
+    ];
+export let enmCoeffs = [
+    {label: '100%' , value: 1 },
+    {label: '50%' , value: 2 },
+    {label: '33%' , value: 3 },
+    {label: '25%' , value: 4 },
+    {label: 'Invalid' , value: 0},
+];
+
+
 
 
 

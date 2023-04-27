@@ -36,6 +36,19 @@ import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {ChartModule} from 'primeng/chart';
 import {AuditChangesDataService} from '../audits/services/auditChanges-data.service';
 import {AuditChangeEntityService} from '../audits/services/auditChange-entity.service';
+import {TooltipModule} from 'primeng/tooltip';
+import {OrganisationsDataService} from '../organisations/services/organisations-data.service';
+import {OrganisationEntityService} from '../organisations/services/organisation-entity.service';
+import {BeneficiariesListComponent} from './beneficiaries-list/beneficiaries-list.component';
+import {NgxPrintModule} from 'ngx-print';
+import {ToastModule} from 'primeng/toast';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {MailingsDataService} from '../mailings/services/mailings-data.service';
+import {MailingEntityService} from '../mailings/services/mailing-entity.service';
+import {ZipcodesDataService} from '../cpass/zipcodes/services/zipcodes-data.service';
+import {ZipcodeEntityService} from '../cpass/zipcodes/services/zipcode-entity.service';
+import {UsersDataService} from '../users/services/users-data.service';
+import {UserEntityService} from '../users/services/user-entity.service';
 
 
 const routes: Routes = [
@@ -52,6 +65,10 @@ const routes: Routes = [
         component: BeneficiariesReportComponent,
     },
     {
+        path: 'list',
+        component: BeneficiariesListComponent,
+    },
+    {
         path: '',
         component: BeneficiairesComponent,
     },
@@ -63,7 +80,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [BeneficiairesComponent, BeneficiaireComponent, DependentsComponent, DependentComponent, BeneficiariesReportComponent],
+  declarations: [BeneficiairesComponent, BeneficiaireComponent, DependentsComponent, DependentComponent, BeneficiariesReportComponent,BeneficiariesListComponent],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
@@ -77,24 +94,36 @@ const routes: Routes = [
         AutoCompleteModule,
         CalendarModule,
         MessageModule,
+        ToastModule,
+        ProgressSpinnerModule,
         InputSwitchModule,
         CheckboxModule,
         InputNumberModule,
-        ChartModule
+        TooltipModule,
+        ChartModule,
+        NgxPrintModule
     ],
   providers: [
         BeneficiairesDataService,
         DependentsDataService,
       BanquesDataService,
       BanqueEntityService,
+      OrganisationsDataService,
+      OrganisationEntityService,
         OrgSummariesDataService,
         CpassDataService,
         BeneficiaireEntityService,
         DependentEntityService,
         OrgSummaryEntityService,
         CpasEntityService,
+      ZipcodesDataService,
+      ZipcodeEntityService,
+      UsersDataService,
+      UserEntityService,
       AuditChangesDataService,
       AuditChangeEntityService,
+      MailingsDataService,
+      MailingEntityService,
         ConfirmationService
   ]
 
@@ -106,14 +135,22 @@ export class BeneficiairesModule {
       private beneficiairesDataService: BeneficiairesDataService,
       private banquesDataService: BanquesDataService,
       private cpassDataService: CpassDataService,
+      private zipcodesDataService: ZipcodesDataService,
+      private organisationsDataService: OrganisationsDataService,
       private orgSummariesDataService: OrgSummariesDataService,
+      private usersDataService: UsersDataService,
       private auditChangesDataService: AuditChangesDataService,
+      private mailingsDataService: MailingsDataService,
   ) {
     eds.registerMetadataMap(appEntityMetadata);
+    entityDataService.registerService('Organisation', organisationsDataService);
     entityDataService.registerService('Beneficiaire', beneficiairesDataService);
     entityDataService.registerService('Banque', banquesDataService);
     entityDataService.registerService('Cpas', cpassDataService);
+    entityDataService.registerService('Zipcode', zipcodesDataService);
     entityDataService.registerService('OrgSummary', orgSummariesDataService);
+    entityDataService.registerService('User', usersDataService);
     entityDataService.registerService('AuditChange', auditChangesDataService);
+    entityDataService.registerService('Mailing', mailingsDataService);
   }
 }

@@ -8,9 +8,9 @@
     <div class="p-fluid p-formgrid p-grid">
 
         <div class="p-field p-col-12 p-md-2">
-            <label i18n="@@TitleMandatory" for="titre">Title *</label>
-            <input #nom="ngModel" pInputText id="titre" name="titre" required maxlength="40" [ngModel]="donateur.titre" />
-            <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator Title is required"></p-message>
+            <label i18n="@@Title" for="titre">Title</label>
+            <input #titre="ngModel" pInputText id="titre" name="titre" maxlength="40" [ngModel]="donateur.titre" />
+            <p-message *ngIf="titre.invalid && donateurForm.touched" severity="error" text="Donator Title is required"></p-message>
         </div>
         <div class="p-field p-col-12 p-md-6">
             <label i18n="@@NameMandatory" for="nom">Name *</label>
@@ -18,29 +18,37 @@
             <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator Name is required"></p-message>
         </div>
         <div class="p-field p-col-12 p-md-4">
-            <label i18n="@@NameFirstMandatory" for="prenom">First Name *</label>
-            <input #prenom="ngModel" pInputText id="prenom" name="prenom" required maxlength="30" [ngModel]="donateur.prenom" />
-            <p-message *ngIf="prenom.invalid && donateurForm.touched" severity="error" text="Donator First Name is required"></p-message>
+            <label i18n="@@NameFirst" for="prenom">First Name</label>
+            <input #prenom="ngModel" pInputText id="prenom" name="prenom"  maxlength="30" [ngModel]="donateur.prenom" />
         </div>
+        </div>
+    <div class="p-fluid p-formgrid p-grid" style="min-height:100px">
         <div class="p-field p-col-12 p-md-5">
             <label i18n="@@AdresseMandatory" for="adresse">Address *</label>
-            <input #nom="ngModel" pInputText id="adresse" name="adresse" required  maxlength="100" [ngModel]="donateur.adresse" />
-            <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator Address is required"></p-message>
+            <input #adresse="ngModel" pInputText id="adresse" name="adresse" required  maxlength="100" [ngModel]="donateur.adresse" />
+            <p-message *ngIf="adresse.invalid && donateurForm.touched" severity="error" text="Donator Address is required"></p-message>
         </div>
         <div class="p-field p-col-12 p-md-3">
             <label i18n="@@CityMandatory" for="city">City *</label>
-            <input #nom="ngModel" pInputText id="city" name="city" required  maxlength="50" [ngModel]="donateur.city" />
-            <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator City is required"></p-message>
+            <input #city="ngModel" pInputText id="city" name="city" required  maxlength="50" [ngModel]="donateur.city" />
+            <p-message *ngIf="city.invalid && donateurForm.touched" severity="error" text="Donator City is required"></p-message>
         </div>
         <div class="p-field p-col-12 p-md-2">
             <label i18n="@@ZipCodeMandatory" for="cp">Zip Code *</label>
-            <input #nom="ngModel" pInputText id="cp" name="cp" required  maxlength="8"  pattern ="^[0-9]+$" [ngModel]="donateur.cp" />
-            <p-message *ngIf="nom.invalid && donateurForm.touched" severity="error" text="Donator Zip Code is required and must be numeric"></p-message>
+            <input #cp="ngModel" pInputText id="cp" name="cp" required  maxlength="8"  pattern ="^[0-9]+$" [ngModel]="donateur.cp" />
+            <p-message *ngIf="cp.invalid && donateurForm.touched" severity="error" text="Donator Zip Code is required and must be numeric"></p-message>
         </div>
         <div class="p-field p-col-12 p-md-2">
             <label i18n="@@Country" for="pays">Country</label>
             <p-dropdown [options]="countries" id="pays" name="pays" [ngModel]="donateur.pays" ></p-dropdown>
         </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+     <div class="p-field p-col-12 p-md-6">
+        <label i18n="@@EMail" for="email">E-mail</label>
+        <input #email="ngModel" pInputText id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxLength="60" [ngModel]="donateur.email" />
+        <p-message i18n-text="@@EmailNotValid" *ngIf="email.invalid && donateurForm.touched" severity="error" text="E-mail must be lowercase and valid"></p-message>
+     </div>
     </div>
     <p-confirmPopup></p-confirmPopup>
 </form>

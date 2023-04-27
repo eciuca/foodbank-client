@@ -73,7 +73,6 @@ export class CpassComponent implements OnInit {
   }
 
   handleSelect(cpas) {
-    console.log( 'Cpas was selected', cpas);
     this.selectedCpasid$.next(cpas.cpasId);
     this.displayDialog = true;
   }
@@ -102,7 +101,7 @@ export class CpassComponent implements OnInit {
   }
 
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
+    
     this.loading = true;
     if (event.sortField == null) {
       setTimeout(() => {
@@ -147,10 +146,19 @@ export class CpassComponent implements OnInit {
   private initializeDependingOnUserRights(authState: AuthState) {
     if (authState.banque) {
       switch (authState.user.rights) {
+        case 'Bank':
+          this.filterBase = {'lienBanque': authState.banque.bankId};
+          break;
+        case 'Admin_Banq':
+          this.filterBase = {'lienBanque': authState.banque.bankId};
+          this.booCanCreate = true;
+          break;
         case 'admin':
-         this.booCanCreate = true;
+          this.filterBase = {};
+          // this.booCanCreate = true;
           break;
         default:
+          this.filterBase = {'lienBanque': 999};
       }
     }
   }

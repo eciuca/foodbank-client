@@ -67,7 +67,6 @@ export class BanquesComponent implements OnInit {
 
   }
     handleSelect(banque: Banque) {
-        console.log( 'Banque was selected', banque);
         this.selectedBankid$.next(banque.bankId);
         this.displayDialog = true;
     }

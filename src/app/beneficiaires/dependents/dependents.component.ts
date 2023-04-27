@@ -6,6 +6,7 @@ import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../../auth/auth.selectors';
 import {map} from 'rxjs/operators';
 import {labelCivilite} from '../../shared/functions';
+import {enmDepPercentages, enmDepTypes} from '../../shared/enums';
 
 
 @Component({
@@ -19,10 +20,11 @@ export class DependentsComponent implements OnInit {
   selectedIdDep$ = new BehaviorSubject(0);
   dependents: Dependent[];
   dependent: Dependent = null;
+  depTypes: any[];
+  depPercentages: any[];
   displayDialog: boolean;
   loading: boolean;
   booCanCreate: boolean;
-  booIsAdmin: boolean;
   dependentQuery: any;
   booShowArchived: boolean;
   first: number;
@@ -30,25 +32,29 @@ export class DependentsComponent implements OnInit {
               private store: Store
   ) {
     this.booCanCreate = false;
-    this.booIsAdmin = false;
     this.dependentQuery = {};
     this.booShowArchived = false;
     this.first = 0;
+    this.depTypes = enmDepTypes;
+    this.depPercentages = enmDepPercentages;
   }
   ngOnInit() {
     this.store
         .pipe(
             select(globalAuthState),
             map((authState) => {
-              if (authState.user && ( authState.user.rights === 'Admin_Asso' || authState.user.rights === 'Admin_Banq' || (( authState.user.rights === 'Bank') && (authState.user.gestBen)) ) ) {
-                 this.booIsAdmin = true;
-              }
+                // Only organisations can create dependents
+               if ( authState.user.rights === 'Admin_Asso' ||
+                        (( authState.user.rights === 'Asso') && (authState.user.gestBen))
+              )
+             {
+              this.booCanCreate = true;
+             }
             })
         )
         .subscribe();
     this.masterId$.subscribe(masterId => {
     if (masterId) {
-        console.log('initializing dependents of idClient', masterId);
         this.loading = true;
         this.dependentQuery['lienMast'] = masterId;
         this.dependentQuery['actif'] = '1';
@@ -56,21 +62,15 @@ export class DependentsComponent implements OnInit {
             .subscribe(loadedDependents => {
               console.log('Initial Loaded dependents: ' + loadedDependents.length);
               this.dependents = loadedDependents;
-              if (this.booIsAdmin) {
-                  this.booCanCreate = true;
-              }
               this.loading = false;
               this.dependentService.setLoaded(true);
         });
       } else {
         this.dependents = [];
-        this.booCanCreate = false;
-        console.log(' not yet initializing dependents of masterId, we are creating a new beneficiary !!!');
       }
     });
   }
   handleSelect(dependent) {
-    console.log( 'Dependent was selected', dependent);
     this.selectedIdDep$.next(dependent.idDep);
     this.displayDialog = true;
   }
@@ -104,7 +104,6 @@ export class DependentsComponent implements OnInit {
 
   }
     changeArchiveFilter($event) {
-        console.log('Archive is now:', $event);
         this.first = 0;
         this.booShowArchived = $event.checked;
         if (this.booShowArchived ) {
@@ -114,13 +113,18 @@ export class DependentsComponent implements OnInit {
         }
         this.dependentService.getWithQuery(this.dependentQuery)
             .subscribe(loadedDependents => {
-                console.log('New Loaded dependents: ' + loadedDependents);
+                console.log('New Loaded dependents: ' + loadedDependents.length);
                 this.dependents = loadedDependents;
-                if (this.booIsAdmin) {
-                    this.booCanCreate = true;
-                }
                 this.loading = false;
                 this.dependentService.setLoaded(true);
             });
+    }
+
+    labelRelation(depTyp: number) {
+        return this.depTypes.find(depType => depType.value === depTyp).label;
+    }
+
+    labelDepPercentage(eq: number) {
+        return this.depPercentages.find(depPercentage => depPercentage.value === eq).label;
     }
 }

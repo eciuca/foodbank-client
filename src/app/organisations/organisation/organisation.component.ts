@@ -28,6 +28,7 @@ import {RegionEntityService} from '../services/region-entity.service';
 import {OrgProgramEntityService} from '../services/orgprogram-entity.service';
 import {DefaultOrgProgram, OrgProgram} from '../model/orgprogram';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
+import { generateTooltipSuggestions } from '../../shared/functions';
 
 @Component({
   selector: 'app-organisation',
@@ -66,6 +67,7 @@ export class OrganisationComponent implements OnInit {
     lienBanque: number;
     userName: string;
     userId: string;
+    userAsso: boolean;
     gestBen: boolean;
 
   constructor(
@@ -98,6 +100,7 @@ export class OrganisationComponent implements OnInit {
       this.lienBanque = 0;
       this.userName = '' ;
       this.userId = '' ;
+      this.userAsso = false;
       this.gestBen = false;
   }
 
@@ -107,7 +110,6 @@ export class OrganisationComponent implements OnInit {
       let organisation$: Observable<Organisation>;
       if (!this.idDis$) {
           // we must come from the menu
-          console.log('We initialize a new organisation object from the router!');
              this.booCalledFromTable = false;
              this.booCanQuit = false;
           organisation$ = this.route.paramMap
@@ -138,9 +140,6 @@ export class OrganisationComponent implements OnInit {
                           cpas => {
                               if (cpas !== null) {
                                   this.selectedCpas = {...cpas};
-                                  console.log('our organisation cpas:', this.selectedCpas);
-                              } else {
-                                  console.log('There is no cpas for this organisation!');
                               }
                           });
               }
@@ -150,9 +149,6 @@ export class OrganisationComponent implements OnInit {
                           orgsummary => {
                               if (orgsummary !== null) {
                                   this.selectedDepot = {...orgsummary};
-
-                              } else {
-                                  console.log('There is no depot for this organisation!');
                               }
                           });
               }
@@ -162,8 +158,6 @@ export class OrganisationComponent implements OnInit {
                           orgsummary => {
                               if (orgsummary !== null) {
                                   this.selectedDepotRamasse = {...orgsummary};
-                              } else {
-                                  console.log('There is no ramasse depot for this organisation!');
                               }
                           });
               }
@@ -175,7 +169,6 @@ export class OrganisationComponent implements OnInit {
               this.selectedCpas = null;
               this.selectedDepot = null;
               this.selectedDepotRamasse = null;
-              console.log('we have a new default organisation');
           }
       });
       this.store
@@ -206,7 +199,10 @@ export class OrganisationComponent implements OnInit {
                               this.lienBanque = authState.banque.bankId;
                               regionQuery['lienBanque'] = this.lienBanque.toString();
                               this.booCanSave = true;
+                              this.userAsso = true;
                               break;
+                          case 'Asso':
+                              this.userAsso = true;
                           default:
                       }
                       this.regionService.getWithQuery(regionQuery)
@@ -235,46 +231,41 @@ export class OrganisationComponent implements OnInit {
       }
     modifiedOrganisation.lupdUserName = this.userName;
       if (modifiedOrganisation.hasOwnProperty('idDis')) {
-          console.log('Modifying Organisation with content:', modifiedOrganisation);
-          this.organisationsService.update(modifiedOrganisation)
+         this.organisationsService.update(modifiedOrganisation)
               .subscribe( ()  => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Update',
-                      detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.societe} was updated`
+                      detail: $localize`:@@messageOrganisationUpdated:Organisation ${modifiedOrganisation.idDis}  ${modifiedOrganisation.societe} was updated`
                   });
                   this.onOrganisationUpdate.emit(modifiedOrganisation);
                       this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedOrganisation.lienBanque,modifiedOrganisation.idDis,'Org',
                            ' ' , 'Update' );
               },
-                  (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                      console.log('Error updating organisation', dataserviceerror.message);
+                  ( dataserviceerror) => { 
+                     
+                     
                       const  errMessage = {severity: 'error', summary: 'Update',
-                          // tslint:disable-next-line:max-line-length
-                          detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
-                          life: 6000 };
+                       detail: $localize`:@@messageOrganisationUpdateError:The organisation ${modifiedOrganisation.idDis} ${modifiedOrganisation.societe} could not be updated: error: ${dataserviceerror.message}`,
+                       life: 6000 };
                       this.messageService.add(errMessage) ;
               });
       } else {
           modifiedOrganisation.lienBanque = this.lienBanque;
-          console.log('Creating Organisation with content:', modifiedOrganisation);
           this.organisationsService.add(modifiedOrganisation)
               .subscribe((newOrganisation) => {
                   this.messageService.add({
                       severity: 'success',
                       summary: 'Creation',
-                      detail: $localize`:@@messageOrganisationCreated:Organisation ${newOrganisation.societe} was created`
+                      detail: $localize`:@@messageOrganisationCreated:Organisation ${newOrganisation.idDis}  ${newOrganisation.societe} was created`
                   });
                   this.onOrganisationCreate.emit(newOrganisation);
                   this.auditChangeEntityService.logDbChange(this.userId,this.userName,newOrganisation.lienBanque,newOrganisation.idDis,'Org',
                           ' ' , 'Create' );
               },
-                  (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                      console.log('Error creating organisation', dataserviceerror.message);
+                  ( dataserviceerror) => { 
+                     
+                     
                       const  errMessage = {severity: 'error', summary: 'Creation',
                           // tslint:disable-next-line:max-line-length
                           detail: $localize`:@@messageOrganisationCreateError:The organisation ${modifiedOrganisation.societe} could not be created: error: ${dataserviceerror.message}`,
@@ -286,7 +277,6 @@ export class OrganisationComponent implements OnInit {
     saveOrgProgram(progForm: OrgProgram) {
 
         const modifiedOrgProgram = Object.assign({}, this.orgProg, progForm);
-        console.log('Modified OrgProgram', modifiedOrgProgram);
         this.orgProgramService.update(modifiedOrgProgram)
             .subscribe(() => {
                     this.messageService.add({
@@ -298,10 +288,9 @@ export class OrganisationComponent implements OnInit {
                         ' ', 'Update' );
 
                 },
-                (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                    console.log('Error updating organisation', dataserviceerror.message);
+                ( dataserviceerror) => { 
+                     
+                     
                     const  errMessage = {severity: 'error', summary: 'Update',
                         // tslint:disable-next-line:max-line-length
                         detail: $localize`:@@messageOrgDetailsUpdateError:Org Program for organisation  ${this.organisation.idDis} ${this.organisation.societe} could not be updated: error: ${dataserviceerror.message}`,
@@ -318,7 +307,7 @@ export class OrganisationComponent implements OnInit {
                 const  myMessage = {
                     severity: 'success',
                     summary: 'Delete',
-                    detail: $localize`:@@messageOrganisationDeleted:Organisation ${organisation.societe} was deleted`};
+                    detail: $localize`:@@messageOrganisationDeleted:Organisation ${organisation.idDis} ${organisation.societe} was deleted`};
                 this.organisationsService.delete(organisation)
                     .subscribe( () => {
                         this.messageService.add(myMessage);
@@ -326,10 +315,9 @@ export class OrganisationComponent implements OnInit {
                         this.auditChangeEntityService.logDbChange(this.userId,this.userName,organisation.lienBanque,organisation.idDis,'Org',
                                 ' ' , 'Delete' );
                     },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error deleting organisation', dataserviceerror.message);
+                        ( dataserviceerror) => { 
+                         
+                         
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageOrganisationDeleteError:The organisation ${organisation.idDis} ${organisation.societe} could not be deleted: error: ${dataserviceerror.message}`,
@@ -337,9 +325,6 @@ export class OrganisationComponent implements OnInit {
                             this.messageService.add(errMessage) ;
                         }
                     );
-            },
-            reject: () => {
-                console.log('We do nothing');
             }
         });
     }
@@ -351,16 +336,11 @@ export class OrganisationComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     organisationForm.reset( oldOrganisation); // reset in-memory object for next open
-                    console.log('We have reset the form to its original value');
-                    this.onOrganisationQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
+                   this.onOrganisationQuit.emit();
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
-            this.onOrganisationQuit.emit();
+               this.onOrganisationQuit.emit();
         }
     }
     filterCpas(event ) {
@@ -417,10 +397,9 @@ export class OrganisationComponent implements OnInit {
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,this.organisation.lienBanque,this.organisation.idDis,'OrgProgram',
                                 ' ', 'Delete' );
                         },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error deleting organisation', dataserviceerror.message);
+                        ( dataserviceerror) => { 
+                         
+                         
                             const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageOrgProgramDeleteError:The org program for organisation  ${this.organisation.idDis} ${this.organisation.societe} could not be deleted: error: ${dataserviceerror.message}`,
@@ -428,29 +407,11 @@ export class OrganisationComponent implements OnInit {
                             this.messageService.add(errMessage) ;
                         }
                     );
-            },
-            reject: () => {
-                console.log('We do nothing');
             }
         });
     }
-    /*
-    getFormValidationErrors() {
-
-        console.log('%c ==>> Validation Errors: ', 'color: red; font-weight: bold; font-size:25px;');
-
-        let totalErrors = 0;
-        if (this.myform.errors) {
-            this.myform.errors.forEach(oneError => {
-                totalErrors++;
-                console.log('Validation Error: ' + oneError.toString());
-            });
-        }
-
-        console.log('Number of errors: ' ,totalErrors);
+    generateTooltipSuggestions() {
+        return generateTooltipSuggestions();
     }
-
-     */
-
 }
 

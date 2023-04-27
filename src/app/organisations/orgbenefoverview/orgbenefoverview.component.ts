@@ -17,6 +17,7 @@ import {formatDate} from '@angular/common';
 import {ExcelService} from '../../services/excel.service';
 import {AuthService} from '../../auth/auth.service';
 import {OrganisationHttpService} from '../services/organisation-http.service';
+import * as moment from 'moment/moment';
 
 
 @Component({
@@ -34,6 +35,16 @@ export class OrgbenefoverviewComponent implements OnInit {
   orgCategories: any[];
   displayDialog: boolean;
   totalRecords: number;
+  totalFamilies: number;
+  totalPersons: number;
+  totalInfants: number;
+  totalBabies: number;
+  totalChildren: number;
+  totalTeens: number;
+  totalYoungAdults: number;
+  totalSeniors: number;
+  totalAdults: number;
+  totalEq: number;
   loading: boolean;
   filterBase: any;
   regions: any[];
@@ -79,8 +90,28 @@ export class OrgbenefoverviewComponent implements OnInit {
           console.log('Loaded organisations from nextpage: ' + loadedOrganisations.length);
           if (loadedOrganisations.length > 0) {
             this.totalRecords = loadedOrganisations[0].totalRecords;
+            this.totalFamilies = loadedOrganisations[0].totalFamilies;
+            this.totalPersons = loadedOrganisations[0].totalPersons;
+            this.totalEq = loadedOrganisations[0].totalEq;
+            this.totalInfants = loadedOrganisations[0].totalInfants;
+            this.totalBabies = loadedOrganisations[0].totalBabies;
+            this.totalChildren = loadedOrganisations[0].totalChildren;
+            this.totalTeens = loadedOrganisations[0].totalTeens;
+            this.totalYoungAdults = loadedOrganisations[0].totalYoungAdults;
+            this.totalSeniors = loadedOrganisations[0].totalSeniors;
+            this.totalAdults = this.totalPersons - this.totalInfants - this.totalBabies - this.totalChildren - this.totalTeens - this.totalYoungAdults - this.totalSeniors;
           }  else {
             this.totalRecords = 0;
+            this.totalFamilies = 0;
+            this.totalPersons = 0;
+            this.totalEq = 0;
+            this.totalInfants = 0;
+            this.totalBabies = 0;
+            this.totalChildren = 0;
+            this.totalTeens = 0;
+            this.totalYoungAdults = 0;
+            this.totalSeniors = 0;
+            this.totalAdults = 0;
           }
           this.organisations  = loadedOrganisations;
           this.loading = false;
@@ -103,7 +134,6 @@ export class OrgbenefoverviewComponent implements OnInit {
   }
 
   handleSelect(organisation) {
-    console.log( 'Organisation was selected', organisation);
     this.selectedIdDis$.next(organisation.idDis);
     this.displayDialog = true;
   }
@@ -122,7 +152,6 @@ export class OrgbenefoverviewComponent implements OnInit {
 
 
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();
@@ -144,6 +173,9 @@ export class OrgbenefoverviewComponent implements OnInit {
       if (event.filters.gestBen && event.filters.gestBen.value !== null) {
         queryParms['gestBen'] = event.filters.gestBen.value;
       }
+      if (event.filters.birbyN && event.filters.birbyN.value !== null) {
+        queryParms['birbyN'] = event.filters.birbyN.value;
+      }
       if (this.regionSelected) {
         queryParms['regId'] = this.regionSelected;
       }
@@ -158,8 +190,8 @@ export class OrgbenefoverviewComponent implements OnInit {
     this.loadPageSubject$.next(queryParms);
   }
   private initializeDependingOnUserRights(authState: AuthState) {
-    // exfilter all depots
-    this.filterBase = { 'isDepot': '0' };
+    // don't exfilter all depots
+    this.filterBase = {  };
     if (authState.banque) {
       this.lienBanque = authState.banque.bankId;
       this.filterBase['lienBanque'] = authState.banque.bankId;
@@ -217,11 +249,9 @@ export class OrgbenefoverviewComponent implements OnInit {
   }
 
   filterRegion(regId) {
-    console.log('Region filter is now:', regId);
     this.regionSelected = regId;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Region Query Parms', latestQueryParams);
     // when we switch from active to archived list and vice versa , we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (this.regionSelected) {
@@ -235,11 +265,9 @@ export class OrgbenefoverviewComponent implements OnInit {
     this.loadPageSubject$.next(latestQueryParams);
   }
   filterDepot(idDepot) {
-    console.log('Depot filter is now:', idDepot);
     this.depotSelected = idDepot;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest Depot Query Parms', latestQueryParams);
     // when we switch f we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (this.depotSelected) {
@@ -255,12 +283,10 @@ export class OrgbenefoverviewComponent implements OnInit {
 
 
   filterStatut(statut) {
-    console.log('statut filter is now:', statut);
     this.statutSelected = statut;
     this.first = 0;
     const latestQueryParams = {...this.loadPageSubject$.getValue()};
-    console.log('Latest statut Query Parms', latestQueryParams);
-    // when we switch f, we need to restart from first page
+     // when we switch , we need to restart from first page
     latestQueryParams['offset'] = '0';
     if (statut !== '') {
       latestQueryParams['statut'] = statut;
@@ -271,12 +297,28 @@ export class OrgbenefoverviewComponent implements OnInit {
     }
     this.loadPageSubject$.next(latestQueryParams);
   }
-  exportAsXLSX(): void {
-     const reportOption = this.lienBanque;
-    this.organisationHttpService.getOrganisationReport(this.authService.accessToken, reportOption).subscribe(
+  exportAsXLSX(onlySelection:boolean): void {
+    let excelQueryParams = {...this.loadPageSubject$.getValue()};
+    let label ="";
+    if (onlySelection) {
+      delete excelQueryParams['rows'];
+      delete excelQueryParams['offset'];
+      delete excelQueryParams['sortOrder'];
+      delete excelQueryParams['sortField'];
+      label = "filtered.";
+
+    }
+    else {
+      excelQueryParams = {'actif': '1'};
+      excelQueryParams['lienBanque'] = this.lienBanque;
+    }
+    let params = new URLSearchParams();
+    for(let key in excelQueryParams){
+      params.set(key, excelQueryParams[key])
+    }
+    this.organisationHttpService.getOrganisationReport(this.authService.accessToken, params.toString()).subscribe(
         (organisations: any[]) => {
           const cleanedList = [
-
           ];
           organisations.map((item) => {
             const cleanedItem = {};
@@ -295,11 +337,28 @@ export class OrgbenefoverviewComponent implements OnInit {
             cleanedItem[$localize`:@@TeenAgers:TeenAgers`] =item.nAdo;
             cleanedItem[$localize`:@@YoungAdults:YoungAdults`] =item.n1824;
             cleanedItem['Seniors'] =item.nSen;
-
+            cleanedItem[$localize`:@@Adults:Adults`] =item.nPers - item.nNour - item.nBebe - item.nEnf - item.nAdo - item.n1824 - item.nSen;
+            cleanedItem['Equivalents'] =item.nEq;
             cleanedList.push( cleanedItem);
           });
 
-            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.beneficiaries.' + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
+          cleanedList.push({}); // add empty line
+
+          cleanedList.push({
+            [$localize`:@@Organisation:Organisation`]: organisations.length,
+            [$localize`:@@Families:Families`]: this.totalFamilies,
+            [$localize`:@@Beneficiaries:Beneficiaries`]: this.totalPersons,
+            [$localize`:@@Infants:Infants`]: this.totalInfants,
+            [$localize`:@@Babies:Babies`]: this.totalBabies,
+            [$localize`:@@Children:Children`]: this.totalChildren,
+            [$localize`:@@TeenAgers:TeenAgers`]: this.totalTeens,
+            [$localize`:@@YoungAdults:YoungAdults`]: this.totalYoungAdults,
+            [$localize`:@@Adults:Adults`]: this.totalAdults,
+            ['Seniors']: this.totalSeniors,
+            ['Equivalents']: this.totalEq
+          });
+
+            this.excelService.exportAsExcelFile(cleanedList, 'foodit.' + this.bankShortName + '.organisations.beneficiaries.' + label  + formatDate(new Date(), 'ddMMyyyy.HHmm', 'en-US') + '.xlsx');
 
         });
   }
@@ -337,6 +396,53 @@ export class OrgbenefoverviewComponent implements OnInit {
 
   generateTooltipBenSeniors() {
     return $localize`:@@OrgSeniors:Seniors(> 65 years)`;
+  }
+  getTotalStatistics() {
+    return $localize`:@@OrgTotalStatistics:Total for selection ${this.totalFamilies} families, ${this.totalPersons} persons,${this.totalEq} equivalents,${this.totalInfants} infants,${this.totalBabies} babies,${this.totalChildren} children,${this.totalTeens} teenagers,${this.totalYoungAdults} young adults,${this.totalAdults} adults,${this.totalSeniors} seniors`;
+  }
+
+  hasOrganisationAnomalies(organisation: Organisation) {
+    if (!organisation.gestBen && organisation.nbRegisteredClients > 0) {
+      return true;     }
+    if (organisation.gestBen && organisation.nbRegisteredClients === 0) {
+      return true;
+    }
+    if (organisation.gestBen && organisation.latestClientUpdate !== null) {
+      const dayDifference = - moment(organisation.latestClientUpdate, 'DD/MM/YYYY').diff(moment(),'days');
+      if (dayDifference > 60) {
+        return true;
+      }
+    }
+      return false;
+  }
+
+  generateToolTipMessageForOrganisationAnomalies(organisation: Organisation) {
+    if (!organisation.gestBen && organisation.nbRegisteredClients > 0) {
+      return $localize`:@@OrgBenAnomaly1:Anomaly: the organisation says it does not record beneficiaries but has encoded ${organisation.nbRegisteredClients} families`;
+    }
+    if (organisation.gestBen && organisation.nbRegisteredClients === 0) {
+      return $localize`:@@OrgBenAnomaly2:Anomaly: the organisation says it records beneficiaries but has not encoded any families`;
+    }
+    if (organisation.gestBen && organisation.latestClientUpdate !== null) {
+      const dayDifference = - moment(organisation.latestClientUpdate, 'DD/MM/YYYY').diff(moment(),'days');
+      if (dayDifference > 60) {
+        return $localize`:@@OrgBenAnomaly3:Anomaly: the organisation says it records beneficiaries but has not updated its families for ${dayDifference} days`;
+      }
+    }
+    return '';
+  }
+
+
+  generateTooltipRegisteredClients() {
+    return $localize`:@@OrgRegisteredClients:Nombre de familles encodées`;
+  }
+
+  generateTooltipLatestClientUpdate() {
+    return $localize`:@@OrgLatestClientUpdate:Date de dernière mise à jour des familles encodées`;
+  }
+
+  generateTooltipFEADManagedByCPAS() {
+    return $localize`:@@OrgCpasCooperation:Does the public authority validate the access of beneficiaries to FEAD ?`;
   }
 }
 

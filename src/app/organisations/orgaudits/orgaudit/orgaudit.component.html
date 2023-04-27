@@ -7,7 +7,7 @@
         </div>
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-4">
-                <label i18n="@@OrgAuditor" for="selectedAuditor">Auditor</label>
+                <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@OrgAuditor" for="selectedAuditor">Auditor</label>
                 <p-autoComplete  [(ngModel)]="selectedAuditor" [suggestions]="filteredMembres" (completeMethod)="filterMembre($event)"
                                  [forceSelection]="true"  id="selectedAuditor" name="selectedAuditor" field="fullname" [dropdown]="true">
                     <ng-template let-membre pTemplate="item">
@@ -18,13 +18,13 @@
                 </p-autoComplete>
             </div>
             <div  class="p-field p-col-12 p-md-4">
-                <label i18n="@@OrgAuditOrganisation" for="selectedOrganisation">Organisation</label>
+                <label pTooltip="{{generateTooltipOrganisation()}}"  i18n="@@OrgAuditOrganisation" for="selectedOrganisation">Organisation</label>
                 <p-autoComplete  [(ngModel)]="selectedOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                 [forceSelection]="true"  id="selectedOrganisation" name="selectedOrganisation" field="fullname" [dropdown]="true">
                 </p-autoComplete>
             </div>
             <div  class="p-field p-col-12 p-md-4">
-                <label i18n="@@OrgAuditDepot" for="selectedDepot">Depot</label>
+                <label pTooltip="{{generateTooltipSuggestions()}}" i18n="@@OrgAuditDepot" for="selectedDepot">Depot</label>
                 <p-autoComplete  [(ngModel)]="selectedDepot" [suggestions]="filteredDepots"  (completeMethod)="filterDepot($event)"
                                  [forceSelection]="true"  id="selectedDepot" name="selectedDepot" field="fullname" [dropdown]="true">
                 </p-autoComplete>

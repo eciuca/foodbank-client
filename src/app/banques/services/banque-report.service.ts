@@ -13,30 +13,35 @@ export class BanqueReportService {
 
     constructor(private http: HttpClient) {
     }
-    getOrgClientReport(accesstoken: string): Observable<BanqueClientReport[]> {
-        const baseUrl = '/api/banqueOrgClientReport';
+    getOrgClientReport(accesstoken: string,bankShortName:string=null): Observable<BanqueClientReport[]> {
+        let requestUrl = '/api/banqueOrgClientReport/';
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
                 Authorization: 'Bearer ' + accesstoken
             }),
         };
+        if (bankShortName) {
+            requestUrl += '?bankShortName=' + bankShortName;
+        }
 
-        return this.http.get<BanqueClientReport[]>(`${baseUrl}/`, requestOptions);
+        return this.http.get<BanqueClientReport[]>(`${requestUrl}`, requestOptions);
     }
-    getOrgFeadReport(accesstoken: string): Observable<BanqueFeadReport[]> {
-        const baseUrl = '/api/banqueOrgFeadReport';
+    getOrgFeadReport(accesstoken: string,bankShortName:string=null): Observable<BanqueFeadReport[]> {
+        let requestUrl = '/api/banqueOrgFeadReport/';
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
                 Authorization: 'Bearer ' + accesstoken
             }),
         };
-
-        return this.http.get<BanqueFeadReport[]>(`${baseUrl}/`, requestOptions);
+        if (bankShortName) {
+            requestUrl += '?bankShortName=' + bankShortName;
+        }
+        return this.http.get<BanqueFeadReport[]>(`${requestUrl}`, requestOptions);
     }
     getOrgCountReport(accesstoken: string,filter:string): Observable<BanqueCount[]> {
-        const baseUrl = '/api/banqueOrgCount';
+        const requestUrl = '/api/banqueOrgCount';
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
@@ -45,31 +50,35 @@ export class BanqueReportService {
         };
 
         if (filter.length >0) {
-           return this.http.get<BanqueCount[]>(`${baseUrl}/?filter=${filter}`, requestOptions);
+           return this.http.get<BanqueCount[]>(`${requestUrl}/?filter=${filter}`, requestOptions);
         }
-        return this.http.get<BanqueCount[]>(`${baseUrl}/`, requestOptions);
+        return this.http.get<BanqueCount[]>(`${requestUrl}/`, requestOptions);
     }
-    getMembreCountReport(accesstoken: string): Observable<BanqueOrgCount[]> {
-        const baseUrl = '/api/banqueMembreCount';
+    getMembreCountReport(accesstoken: string,bankShortName:string=null): Observable<BanqueOrgCount[]> {
+        let requestUrl = '/api/banqueMembreCount/';
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
                 Authorization: 'Bearer ' + accesstoken
             }),
         };
-
-        return this.http.get<BanqueOrgCount[]>(`${baseUrl}/`, requestOptions);
+        if (bankShortName) {
+            requestUrl += '?bankShortName=' + bankShortName;
+        }
+        return this.http.get<BanqueOrgCount[]>(`${requestUrl}`, requestOptions);
     }
-    getUserCountReport(accesstoken: string): Observable<BanqueOrgCount[]> {
-        const baseUrl = '/api/banqueUserCount';
+    getUserCountReport(accesstoken: string,bankShortName:string=null): Observable<BanqueOrgCount[]> {
+       let requestUrl = '/api/banqueUserCount/';
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
                 Authorization: 'Bearer ' + accesstoken
             }),
         };
-
-        return this.http.get<BanqueOrgCount[]>(`${baseUrl}/`, requestOptions);
+        if (bankShortName) {
+            requestUrl += '?bankShortName=' + bankShortName;
+        }
+        return this.http.get<BanqueOrgCount[]>(`${requestUrl}`, requestOptions);
     }
 
 }

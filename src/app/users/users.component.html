@@ -18,7 +18,7 @@
                         </p-dropdown>
                     </div>
                     <div *ngIf="booShowOrganisations" class="p-field p-col-12 p-md-5">
-                        <label i18n="@@FilterOnOrganisations" for="filteredOrganisation">Filter on Organisations?</label>
+                        <label pTooltip="{{generateTooltipOrganisation()}}" i18n="@@FilterOnOrganisations" for="filteredOrganisation">Filter on Organisations?</label>
                         <p-autoComplete  [(ngModel)]="filteredOrganisation" [suggestions]="filteredOrganisations" (completeMethod)="filterOrganisation($event)"
                                          (onSelect)="filterOrganisationUsers($event.idDis);"
                                          [forceSelection]="true"  id="filteredOrganisation" name="filteredOrganisation" field="fullname" [dropdown]="true">
@@ -31,10 +31,13 @@
                     </div>
                 </div>
                 <div class="p-fluid p-formgrid p-grid">
-                    <div  class="p-field p-col-12 p-md-2">
-                        <button i18n="@@UserExport" class="p-ai-md-end" type="button" pButton icon="pi pi-plus" (click)="exportAsXLSX()" label="Export Users" i18n-label="@@ExportUsers"></button>
+                    <div *ngIf="!booShowArchived"  class="p-field p-col-12 p-md-3">
+                        <button class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX(false)" label="Export Users" i18n-label="@@ExportUsers"></button>
                     </div>
-                    <div *ngIf="booCanCreate || (filteredBankShortName && booIsAdmin)" class="p-field p-col-12 p-md-2">
+                    <div *ngIf="!booShowArchived"  class="p-field p-col-12 p-md-3">
+                        <button class="p-ai-md-end" type="button" pButton icon="pi pi-download" (click)="exportAsXLSX(true)" label="Export Selected Users" i18n-label="@@ExportUsersSelected"></button>
+                    </div>
+                    <div *ngIf="!booShowArchived && (booCanCreate || (filteredBankShortName && booIsAdmin))" class="p-field p-col-12 p-md-2">
                         <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" i18n-label="@@AddUser" label="Add User"></button>
                     </div>
                 </div>
@@ -136,9 +139,8 @@
             There are {{totalRecords}} users selected.
             </div>
         </ng-template>
-
+        <p-toast></p-toast>
 </p-table>
-<p-toast></p-toast>
 <p-dialog i18n-header="@@UserDetails" header="User Details" [(visible)]="displayDialog" [responsive]="true" [contentStyle]="{'overflow': 'scroll'}" [modal]="true" [closable]="false" >
     <app-user *ngIf="selectedIdUser$" [idUser$]="selectedIdUser$"
               [currentFilteredBankId] = "filteredBankId" [currentFilteredBankShortName] = "filteredBankShortName"

@@ -18,10 +18,13 @@ import {globalAuthState} from '../../auth/auth.selectors';
 import {AppState} from '../../reducers';
 import {MembreEntityService} from '../../membres/services/membre-entity.service';
 import {Membre} from '../../membres/model/membre';
-import {DataServiceError} from '@ngrx/data';
+import {DataServiceError, QueryParams} from '@ngrx/data';
 import {combineLatest, Observable, of} from 'rxjs';
 import {Organisation} from '../../organisations/model/organisation';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
+import {DepotEntityService} from '../../depots/services/depot-entity.service';
+import {CpasEntityService} from '../../cpass/services/cpas-entity.service';
+import {generateTooltipSuggestions} from '../../shared/functions';
 
 @Component({
   selector: 'app-user',
@@ -54,10 +57,14 @@ export class UserComponent implements OnInit {
   rights: any[];
     filterMemberBase: any;
     lienDepot: number;
+    lienCpas: number;
     depotName: string;
+    cpasName: string;
     isAdmin: boolean;
     title: string;
     orgName: string;
+    depotOptions: any[];
+    cpasOptions: any[];
     loggedInUserId: string;
     loggedInUserName: string;
     loggedInUserRights: string;
@@ -65,6 +72,8 @@ export class UserComponent implements OnInit {
   constructor(
       private usersService: UserEntityService,
       private membresService: MembreEntityService,
+      private depotService: DepotEntityService,
+      private cpasService: CpasEntityService,
       private auditChangeEntityService: AuditChangeEntityService,
       private route: ActivatedRoute,
       private router: Router,
@@ -83,7 +92,9 @@ export class UserComponent implements OnInit {
       this.idOrg = 0;
       this.idCompany = '';
       this.lienDepot = 0;
+      this.lienCpas = 0;
       this.depotName = '';
+      this.cpasName = '';
       this.booIsOrganisation = false;
       this.booIsCreate = false;
       this.title = '';
@@ -93,7 +104,6 @@ export class UserComponent implements OnInit {
 
       if (!this.idUser$) {
           // we must come from the menu
-          console.log('We initialize a new user object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
           this.booIsCreate = false;
@@ -115,8 +125,14 @@ export class UserComponent implements OnInit {
                         this.rights = enmUserRolesAsso;
                         this.title = $localize`:@@OrgUserExisting:User ${user.idUser} for organisation  ${user.societe}`;
                     } else {
-                        this.rights = enmUserRolesBank;
+                        if (this.currentFilteredBankShortName == 'SPP') {
+                            this.rights = [{label: $localize`:@@RoleFEADAdmin:FEAD Admin`, value: 'Admin_FEAD'}]
+                        } else {
+                            this.rights = enmUserRolesBank;
+                        }
                         this.title = $localize`:@@BankUserExisting:User ${user.idUser} for bank ${this.user.idCompany}`;
+                        this.loadDepotOptions(this.user.idCompany);
+                        this.loadCpasOptions(this.user.lienBanque);
                     }
                     this.booIsCreate = false;
                     this.membresService.getByKey(user.lienBat)
@@ -124,14 +140,10 @@ export class UserComponent implements OnInit {
                             membre => {
                                 if (membre != null && membre.actif == true) {
                                     this.selectedMembre = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                                    console.log('our users membre:', this.selectedMembre);
-                                } else {
-                                    console.log('There is no membre for this user!');
                                 }
                             });
                 } else {
                     this.user = new DefaultUser();
-                    console.log('CurrentFilteredBankAndOrg', this.currentFilteredBankShortName,this.currentFilteredOrg);
                     if (this.isAdmin) {
                         // currentFilteredBankId should always be filled in cfr GUI
                         this.user.lienBanque = this.currentFilteredBankId;
@@ -144,6 +156,8 @@ export class UserComponent implements OnInit {
                         }
                         else {
                             this.user.idOrg = 0;
+                            this.loadDepotOptions(this.user.idCompany);
+                            this.loadCpasOptions(this.user.lienBanque);
                             this.rights = enmUserRolesBank;
                             this.title =  $localize`:@@BankUserNew1:New User for bank ${this.currentFilteredBankShortName} `;
                             if (this.currentFilteredBankShortName == 'FBBA') {
@@ -157,8 +171,6 @@ export class UserComponent implements OnInit {
                     else {
                         this.user.lienBanque = this.lienBanque;
                         this.user.idCompany = this.idCompany;
-                        console.log('CurrentFilteredOrg', this.currentFilteredOrg);
-
                         if (this.idOrg > 0 && this.lienDepot === 0) {
                             // handle  users from single organisation ( logged in as organisation admin
                             this.user.idOrg = this.idOrg;
@@ -182,6 +194,8 @@ export class UserComponent implements OnInit {
                                     this.title = $localize`:@@OrgUserNewB:New User for depot  ${this.depotName}`;
                                 } else {
                                     this.rights = enmUserRolesBank;
+                                    this.loadDepotOptions(this.idCompany);
+                                    this.loadCpasOptions(this.lienBanque);
                                     this.title = $localize`:@@BankUserNew1:New User for bank ${this.idCompany} `;
                                 }
                             }
@@ -202,14 +216,12 @@ export class UserComponent implements OnInit {
                       this.loggedInUserName = authState.user.userName;
                       this.loggedInUserId = authState.user.idUser;
                       this.loggedInUserRights = authState.user.rights
+                      this.lienCpas = authState.user.lienCpas;
                       this.membresService.getByKey(authState.user.lienBat)
                           .subscribe(
                           membre => {
                               if (membre != null) {
                                   this.loggedInMember = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                                  console.log('logged in membre:', this.loggedInMember);
-                              } else {
-                                  console.log('There is no logged in membre !');
                               }
                           });
 
@@ -219,7 +231,6 @@ export class UserComponent implements OnInit {
                       switch (authState.user.rights) {
                           case 'admin':
                           case 'Admin_FBBA':
-                              this.rights = enmUserRoles;
                               this.isAdmin = true;
                               this.booCanSave = true;
                               if (this.booCalledFromTable) {
@@ -227,12 +238,10 @@ export class UserComponent implements OnInit {
                               }
                               break;
                           case 'Bank_FBBA':
-                              this.rights = enmUserRoles;
                               break;
                           case 'Bank':
                           case 'Admin_Banq':
                               this.filterMemberBase['lienBanque'] = authState.banque.bankId;
-                              this.rights = enmUserRolesBankAsso;
                               if (authState.user.rights === 'Admin_Banq') {
                                   this.booCanSave = true;
                                   if (this.booCalledFromTable) {
@@ -253,7 +262,6 @@ export class UserComponent implements OnInit {
                                   this.filterMemberBase['lienDis'] = this.idOrg;
                               }
                               this.booIsOrganisation = true;
-                              this.rights = enmUserRolesAsso;
                               if  (authState.user.rights === 'Admin_Asso') {
                                   this.booCanSave = true;
                                   if (this.booCalledFromTable) {
@@ -286,19 +294,15 @@ export class UserComponent implements OnInit {
                       this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,user.lienBanque,user.idOrg,'User',
                               user.idUser, 'Delete' );
                   },
-                      (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                          console.log('Error deleting user', dataserviceerror.message);
-                          const  errMessage = {severity: 'error', summary: 'Delete',
+                      ( dataserviceerror) => { 
+                         
+                         
+                              const  errMessage = {severity: 'error', summary: 'Delete',
                               // tslint:disable-next-line:max-line-length
                               detail: $localize`:@@messageUserDeleteError:The user ${user.idUser} ${user.userName} could not be deleted: error: ${dataserviceerror.message}`,
                               life: 6000 };
                           this.messageService.add(errMessage) ;
                       });
-          },
-          reject: () => {
-              console.log('We do nothing');
           }
       });
  }
@@ -309,8 +313,7 @@ export class UserComponent implements OnInit {
 
       this.updateUserInfoFromMember( modifiedUser,this.selectedMembre);
       if (!modifiedUser.hasOwnProperty('isNew')) {
-          console.log('Updating User with content:', modifiedUser);
-          this.usersService.update(modifiedUser)
+         this.usersService.update(modifiedUser)
         .subscribe(updatedUser  => {
             this.messageService.add({
                 severity: 'success',
@@ -320,10 +323,9 @@ export class UserComponent implements OnInit {
             this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,modifiedUser.lienBanque,modifiedUser.idOrg,'User',
                     modifiedUser.idUser, 'Update' );
         } ,
-            (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                console.log('Error updating user', dataserviceerror.message);
+            ( dataserviceerror) => { 
+             
+             
                 const  errMessage = {severity: 'error', summary: 'Update',
                     // tslint:disable-next-line:max-line-length
                     detail: $localize`:@@messageUserUpdateError:The user ${modifiedUser.idUser} ${modifiedUser.userName} could not be updated: error: ${dataserviceerror.message}`,
@@ -340,8 +342,6 @@ export class UserComponent implements OnInit {
                       if (membre !== null) {
                           this.updateUserInfoFromMember( modifiedUser,membre);
                           if (  modifiedUser.rights === '') { modifiedUser.rights = this.rights[0].value; } // dropdown box was not touched
-
-                          console.log('Creating User with content:', modifiedUser);
                           this.usersService.add(modifiedUser)
                               .subscribe(() => {
                                       this.messageService.add({
@@ -353,14 +353,13 @@ export class UserComponent implements OnInit {
                                       this.auditChangeEntityService.logDbChange(this.loggedInUserId,this.loggedInUserName,modifiedUser.lienBanque,modifiedUser.idOrg,'User',
                                           modifiedUser.idUser, 'Create' );
                                   },
-                                  (dataserviceerrorFn: () => DataServiceError) => {
-                                      const dataserviceerror = dataserviceerrorFn();
+                                  ( dataserviceerror) => {
+                                       
                                       if (!dataserviceerror.message) {
                                           dataserviceerror.message = dataserviceerror.error().message
                                       }
 
-                                      console.log('Error creating user', dataserviceerror.message);
-                                      const  errMessage = {severity: 'error', summary: 'Create',
+                                   const  errMessage = {severity: 'error', summary: 'Create',
                                           // tslint:disable-next-line:max-line-length
                                           detail: $localize`:@@messageUserCreateError:The user ${modifiedUser.idUser} ${modifiedUser.userName} could not be created: error: ${dataserviceerror.message}`,
                                           life: 6000 };
@@ -368,8 +367,7 @@ export class UserComponent implements OnInit {
                                   }
                             );
                       } else {
-                          console.log('Error creating user: no employee was selected');
-                          const  errMessage = {severity: 'error', summary: 'Create',
+                         const  errMessage = {severity: 'error', summary: 'Create',
                               // tslint:disable-next-line:max-line-length
                               detail: $localize`:@@messageUserCreateErrorNoEmployee:The user ${modifiedUser.idUser}  could not be created: no employee was selected`,
                               life: 6000 };
@@ -388,17 +386,44 @@ export class UserComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     userForm.reset(oldUser); // reset in-memory object for next open
-                    console.log('We have reset the user form to its original value');
                     this.onUserQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
-            this.onUserQuit.emit();
+             this.onUserQuit.emit();
         }
+    }
+    loadDepotOptions(idCompany) {
+        const  queryDepotParms: QueryParams = {};
+        queryDepotParms['offset'] = '0';
+        queryDepotParms['rows'] = '999';
+        queryDepotParms['sortField'] = 'nom';
+        queryDepotParms['sortOrder'] = '1';
+        queryDepotParms['idCompany'] = idCompany;
+        queryDepotParms['actif'] = '1';
+        this.depotService.getWithQuery(queryDepotParms)
+            .subscribe(depots => {
+                this.depotOptions = [{ value: null, label: $localize`:@@All:All`}];
+                depots.map((depot) =>
+                    this.depotOptions.push({value: depot.idDepot, label: depot.nom})
+                );
+            });
+    }
+    loadCpasOptions(lienBanque) {
+        const  queryCpasParms: QueryParams = {};
+        queryCpasParms['offset'] = '0';
+        queryCpasParms['rows'] = '999';
+        queryCpasParms['sortField'] = 'cpasZip';
+        queryCpasParms['sortOrder'] = '1';
+        queryCpasParms['lienBanque'] = lienBanque;
+        queryCpasParms['actif'] = '1';
+        this.cpasService.getWithQuery(queryCpasParms)
+            .subscribe(cpases => {
+                this.cpasOptions = [];
+                cpases.map((cpas) =>
+                    this.cpasOptions.push({value: cpas.cpasId, label: cpas.cpasName})
+                );
+            });
     }
     updateUserInfoFromMember(user:User,membre:Membre) {
         user.userName = membre.nom + ' ' + membre.prenom;
@@ -449,7 +474,6 @@ export class UserComponent implements OnInit {
                 if ( ['Admin_Banq',  'Admin_FBBA','admin'].includes(this.loggedInUserRights)) {
                     this.filteredMembres.push(this.loggedInMember);
                 }
-                console.log("Filtered Members", this.filteredMembres, this.selectedMembre );
             });
     }
 
@@ -464,8 +488,17 @@ export class UserComponent implements OnInit {
         }
 
     }
-
+    generateTooltipManageDepot() {
+        return $localize`:@@OrgToolTipManageDepot:Do you want this user to manage the stock in all depots of the bank, or only the stock of a specific depot?`;
+    }
     setSelectedMembre(membre: Membre) {
         this.selectedMembre = membre;
     }
+
+    generateTooltipAssociatedCpas() {
+        return $localize`:@@OrgToolTipAssociatedCpas:Which is the Cpas the user manages?`;
+    }
+
+
+    protected readonly generateTooltipSuggestions = generateTooltipSuggestions;
 }

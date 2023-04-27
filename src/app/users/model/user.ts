@@ -95,7 +95,7 @@ export class DefaultUser implements User {
     nbLogins: number;
     totalRecords: number;
     userName: string;
-    isNew: boolean; // calculated property to indicate we are creating a new employee
+    isNew: boolean; // calculated property to indicate we are creating a new user
 
     constructor() {
         this.idLanguage = 'nl';

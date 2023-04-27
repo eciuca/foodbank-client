@@ -78,7 +78,6 @@ export class OrgMembershipsComponent implements OnInit {
   }
 
   handleSelect(organisation) {
-    console.log( 'Organisation was selected', organisation);
     this.selectedIdDis$.next(organisation.idDis);
     this.displayDialog = true;
   }
@@ -95,7 +94,6 @@ export class OrgMembershipsComponent implements OnInit {
   }
 
   nextPage(event: LazyLoadEvent) {
-    console.log('Lazy Loaded Event', event);
     this.loading = true;
     const queryParms = {...this.filterBase};
     queryParms['offset'] = event.first.toString();

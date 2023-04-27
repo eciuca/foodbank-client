@@ -15,6 +15,7 @@ import {AppState} from '../../reducers';
 import {BanqProg} from '../model/banqprog';
 import {BanqProgEntityService} from '../services/banqprog-entity.service';
 import {AuditChangeEntityService} from '../../audits/services/auditChange-entity.service';
+import {generateTooltipSuggestions, getMemberShipMailingTextDefaultFr, getMemberShipMailingTextDefaultNl} from '../../shared/functions';
 
 
 @Component({
@@ -25,6 +26,7 @@ import {AuditChangeEntityService} from '../../audits/services/auditChange-entity
 export class BanqueComponent implements OnInit {
     @ViewChild('banqueForm') bankform: NgForm;
     @ViewChild('detailForm') detailform: NgForm;
+    @ViewChild('membershipForm') membershipForm: NgForm;
     @Input() bankId$: Observable<number>;
     @Output() onBanqueCreate = new EventEmitter<Banque>();
     @Output() onBanqueUpdate = new EventEmitter<Banque>();
@@ -32,6 +34,7 @@ export class BanqueComponent implements OnInit {
     @Output() onBanqueQuit = new EventEmitter<Banque>();
     userId: string;
     userName: string;
+    userLanguage: string;
     booCalledFromTable: boolean;
     booCanSave: boolean;
     booCanDelete: boolean;
@@ -56,6 +59,16 @@ export class BanqueComponent implements OnInit {
     selectedQuality: Membre;
 
     filteredMembres: Membre[];
+    isCotCustomText: boolean;
+    mailingText: string;
+    mailingTextCurrentLanguage: string;
+    mailingTextNl: string;
+    mailingTextFr: string;
+    mailingTextDefaultNl: string;
+    mailingTextDefaultFr: string;
+
+    baseurl: string;
+
 
   constructor(
       private banquesService: BanqueEntityService,
@@ -68,11 +81,19 @@ export class BanqueComponent implements OnInit {
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
+      this.baseurl = window.location.origin;
       this.booCalledFromTable = true;
       this.booCanDelete = false;
       this.booCanSave = false;
       this.booCanQuit = true;
       this.booIsCreate = false;
+      this.isCotCustomText = false;
+      this.mailingTextDefaultFr = getMemberShipMailingTextDefaultFr();
+      this.mailingTextDefaultNl = getMemberShipMailingTextDefaultNl();
+      this.mailingText = "";
+      this.mailingTextNl = "";
+      this.mailingTextFr = "";
+
     }
 
   ngOnInit(): void {
@@ -80,7 +101,6 @@ export class BanqueComponent implements OnInit {
       // or sometimes via a router link via the Main Menu
       if (!this.bankId$) {
           // we must come from the menu
-         // console.log('We initialize a new banque object from the router!');
           this.booCalledFromTable = false;
           this.booCanQuit = false;
           this.booIsCreate = false;
@@ -105,6 +125,21 @@ export class BanqueComponent implements OnInit {
                       banqProg => {
                           if (banqProg !== null) {
                               this.banqProg = banqProg;
+                              this.isCotCustomText = banqProg.cotTextCustom;
+                              if (banqProg.cotTextFr === null || banqProg.cotTextFr === "") {
+                                    this.mailingTextFr = this.mailingTextDefaultFr;
+                              }
+                              else {
+                                  this.mailingTextFr = banqProg.cotTextFr;
+                              }
+                              if (banqProg.cotTextNl === null || banqProg.cotTextNl === "") {
+                                this.mailingTextNl = this.mailingTextDefaultNl;
+                              }
+                              else {
+                                this.mailingTextNl = banqProg.cotTextNl;
+                              }
+                              this.mailingTextCurrentLanguage = "fr"
+                              this.mailingText = this.mailingTextFr;
                           }
                       });
               this.membresService.getByKey(banque.idMemberPres)
@@ -112,9 +147,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedPresident = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our president:', this.selectedPresident);
-                          } else {
-                              console.log('There is no president!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberVp)
@@ -122,9 +154,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedVicePresident = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  vice president:', this.selectedVicePresident);
-                          } else {
-                              console.log('There is no vice-president!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberCeo)
@@ -132,9 +161,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedCEO = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  CEO:', this.selectedCEO);
-                          } else {
-                              console.log('There is no CEO!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberSec)
@@ -142,9 +168,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedSecretary = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our secretary:', this.selectedSecretary);
-                          } else {
-                              console.log('There is no secretary!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberTres)
@@ -152,9 +175,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedTreasurer = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Treasurer:', this.selectedTreasurer);
-                          } else {
-                              console.log('There is no Treasurer!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberRh)
@@ -162,9 +182,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedHR = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  HR:', this.selectedHR);
-                          } else {
-                              console.log('There is no HR!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberLog)
@@ -172,9 +189,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedLogistics = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our resp logistics:', this.selectedLogistics);
-                          } else {
-                              console.log('There is no resp logistics!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberSh)
@@ -182,19 +196,13 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedSecHygiene = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp Sec&Hygiene:', this.selectedSecHygiene);
-                          } else {
-                              console.log('There is no Resp Sec&Hygiene!');
-                          }
+                           }
                       });
               this.membresService.getByKey(banque.idMemberIt)
                   .subscribe(
                       membre => {
                           if (membre !== null) {
                               this.selectedIT = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp IT:', this.selectedIT);
-                          } else {
-                              console.log('There is no Resp IT!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberAppro)
@@ -202,9 +210,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedSupply = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our resp Supply:', this.selectedSupply);
-                          } else {
-                              console.log('There is no resp Supply!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberPp)
@@ -212,9 +217,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedPress = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp Press:', this.selectedPress);
-                          } else {
-                              console.log('There is no Resp Press!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberAsso)
@@ -222,9 +224,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedAssocRel = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp Assoc Rel:', this.selectedAssocRel);
-                          } else {
-                              console.log('There is no Resp Assoc Rel!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberPubrel)
@@ -232,9 +231,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedPubRel = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp PubRel:', this.selectedPubRel);
-                          } else {
-                              console.log('There is no Resp PubRel!');
                           }
                       });
               this.membresService.getByKey(banque.idMemberFead)
@@ -242,9 +238,6 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedFEAD = Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp FEAD:', this.selectedFEAD);
-                          } else {
-                              console.log('There is no Resp FEAD!');
                           }
                       });
 
@@ -253,10 +246,7 @@ export class BanqueComponent implements OnInit {
                       membre => {
                           if (membre !== null) {
                               this.selectedQuality =  Object.assign({}, membre, {fullname: this.setMembreFullName(membre)});
-                              console.log('our  Resp Quality:', this.selectedQuality);
-                          } else {
-                              console.log('There is no Resp Quality!');
-                          }
+                           }
                       });
 
       } else {
@@ -265,8 +255,7 @@ export class BanqueComponent implements OnInit {
               this.bankform.reset(this.banque);
           }
           this.booIsCreate = true;
-          console.log('we have a new default banque');
-      }
+        }
       }); // End of Subscribe
       this.store
           .pipe(
@@ -275,6 +264,7 @@ export class BanqueComponent implements OnInit {
                   if (authState.user) {
                       this.userId= authState.user.idUser;
                       this.userName = authState.user.membreNom + ' ' + authState.user.membrePrenom;
+                      this.userLanguage = authState.user.idLanguage;
                       switch (authState.user.rights) {
                         case 'admin':
                         case 'Admin_FBBA':
@@ -323,7 +313,6 @@ export class BanqueComponent implements OnInit {
     }
 
  save(oldBanque: Banque, banqueForm: Banque) {
-      console.log('Banque Form value', banqueForm);
       const modifiedBanque = Object.assign({}, oldBanque, banqueForm);
       modifiedBanque.idMemberPres = this.selectedPresident? this.selectedPresident.batId : 0;
       modifiedBanque.idMemberVp = this.selectedVicePresident ? this.selectedVicePresident.batId : 0;
@@ -352,19 +341,15 @@ export class BanqueComponent implements OnInit {
                  this.auditChangeEntityService.logDbChange(this.userId,this.userName,modifiedBanque.bankId,0,'Bank',
                      modifiedBanque.bankShortName , 'Update' );
              },
-                 (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                     console.log('Error updating bank', dataserviceerror.message);
-                     const  errMessage = {severity: 'error', summary: 'Update',
+                 (dataserviceerror) => {
+                      const  errMessage = {severity: 'error', summary: 'Update',
                          // tslint:disable-next-line:max-line-length
                          detail: $localize`:@@messageBankUpdateError:The bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName} could not be updated: error: ${dataserviceerror.message}`,
                          life: 6000 };
-                     this.messageService.add(errMessage) ;
+                    this.messageService.add(errMessage) ;
                  });
      } else {
-         console.log('Creating Banque with content:', modifiedBanque);
-         this.banquesService.add(modifiedBanque)
+          this.banquesService.add(modifiedBanque)
              .subscribe((newBanque) => {
                  this.messageService.add({
                      severity: 'success',
@@ -375,11 +360,8 @@ export class BanqueComponent implements OnInit {
                      this.auditChangeEntityService.logDbChange(this.userId,this.userName,newBanque.bankId,0,'Bank',
                          newBanque.bankShortName, 'Create' );
              },
-                 (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                     console.log('Error creating bank', dataserviceerror.message);
-                     const  errMessage = {severity: 'error', summary: 'Create',
+                 ( dataserviceerror) => {
+                      const  errMessage = {severity: 'error', summary: 'Create',
                          // tslint:disable-next-line:max-line-length
                          detail: $localize`:@@messageBankCreateError:The bank ${modifiedBanque.bankShortName} ${modifiedBanque.bankName} could not be created: error: ${dataserviceerror.message}`,
                          life: 6000 };
@@ -405,20 +387,16 @@ export class BanqueComponent implements OnInit {
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,banque.bankId,0,'Bank',
                                 banque.bankShortName , 'Delete' );
                     },
-                        (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                            console.log('Error deleting bank', dataserviceerror.message);
-                            const  errMessage = {severity: 'error', summary: 'Delete',
+                        ( dataserviceerror) => { 
+                             
+                             
+                                const  errMessage = {severity: 'error', summary: 'Delete',
                                 // tslint:disable-next-line:max-line-length
                                 detail: $localize`:@@messageBankDeleteError:The bank ${banque.bankId} ${banque.bankShortName} ${banque.bankName} could not be deleted: error: ${dataserviceerror.message}`,
                                 life: 6000 };
                             this.messageService.add(errMessage) ;
                         }
                         );
-            },
-            reject: () => {
-                console.log('We do nothing');
             }
         });
     }
@@ -430,22 +408,24 @@ export class BanqueComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     banqueForm.reset( oldBanque); // reset in-memory object for next open
-                    console.log('We have reset the form to its original value');
                     this.onBanqueQuit.emit();
-                },
-                reject: () => {
-                    console.log('We do nothing');
                 }
             });
         } else {
-            console.log('Form is not dirty, closing');
             this.onBanqueQuit.emit();
         }
     }
     saveDetails(oldBanqProg: BanqProg, banqProgForm: BanqProg) {
-        console.log('Entering SaveDetails - BanqProg Form value', banqProgForm);
         const modifiedBanqProg = Object.assign({}, oldBanqProg, banqProgForm);
-        console.log('Modified BanqProg', modifiedBanqProg);
+        modifiedBanqProg.cotTextCustom = this.isCotCustomText;
+        if (this.mailingTextCurrentLanguage === 'fr') {
+            modifiedBanqProg.cotTextNl = this.mailingTextNl;
+            modifiedBanqProg.cotTextFr = this.mailingText; // to pickup the changes made in the editor
+        }
+        if (this.mailingTextCurrentLanguage === 'nl') {
+            modifiedBanqProg.cotTextFr = this.mailingTextFr;
+            modifiedBanqProg.cotTextNl = this.mailingText; // to pickup the changes made in the editor
+        }
         this.banqProgService.update(modifiedBanqProg)
             .subscribe(() => {
                     this.messageService.add({
@@ -455,16 +435,61 @@ export class BanqueComponent implements OnInit {
                     });
                     this.onBanqueUpdate.emit();
                 },
-                (dataserviceerrorFn: () => DataServiceError) => { 
- const dataserviceerror = dataserviceerrorFn(); 
- if (!dataserviceerror.message) { dataserviceerror.message = dataserviceerror.error().message }
-                    console.log('Error updating bank', dataserviceerror.message);
+                ( dataserviceerror) => { 
+                     
+                     
                     const  errMessage = {severity: 'error', summary: 'Update',
                         // tslint:disable-next-line:max-line-length
                         detail: $localize`:@@messageBankDetailsUpdateError:The bank  ${this.banque.bankShortName} ${this.banque.bankName} details could not be updated: error: ${dataserviceerror.message}`,
                         life: 6000 };
                     this.messageService.add(errMessage) ;
                 });
+    }
+
+    switchCotMailLanguage(language: string) {
+
+        if (language === 'fr') {
+            this.mailingTextNl = this.mailingText;
+            this.mailingText = this.mailingTextFr;
+            this.mailingTextCurrentLanguage = 'fr';
+        }
+        else {
+            this.mailingTextFr = this.mailingText;
+            this.mailingText = this.mailingTextNl;
+            this.mailingTextCurrentLanguage = 'nl';
+        }
+    }
+
+    loadDefaultText() {
+        if (this.mailingTextCurrentLanguage === 'fr') {
+            this.mailingTextFr = this.mailingTextDefaultFr;
+            this.mailingText = this.mailingTextFr;
+        }
+        else {
+            this.mailingTextNl = this.mailingTextDefaultNl;
+            this.mailingText = this.mailingTextNl;
+        }
+    }
+    getCotMailingRecommendationsfr() {
+        return `Choisissez la langue du texte que vous voulez adapter avec les boutons radio Français - Nederlands. \n
+        Commencez ou Recommencez par charger le texte par défaut avec le bouton "Charger le texte par défaut". \n
+        Modifiez le texte à votre guise mais veillez à ne rien changer dans les valeurs entre {{ }} . \n
+        Les valeurs entre {{ }} sont des valeurs qui seront remplacées lors de la création des mails pour une association. \n
+        Si vous modifiez le texte entre {{ }} la subsitution n'aura plus lieu. \n
+        Si vous ne tenez pas à afficher une valeur de substitution vous pouvez enlever cette valeur entre {{ }} du texte. \n
+        Enregistrez le texte avec le bouton "Sauver".` ;
+    }
+    getCotMailingRecommendationsnl() {
+        return `Kies de taal van de tekst die u wilt aanpassen met de radioknoppen Frans - Nederlands. \n
+        Begin of herlaad de standaard tekst met de knop "Laad de standaard tekst". \n
+        Pas de tekst naar eigen inzicht aan, maar zorg ervoor dat u niets verandert tussen {{ }} . \n
+        De waarden tussen {{ }} zijn waarden die worden vervangen bij het maken van de e-mails voor een vereniging. \n
+        Als u de tekst tussen {{ }} wijzigt, vindt de vervanging niet meer plaats. \n
+        Als u geen waarde voor vervanging wilt weergeven, kunt u deze waarde tussen {{ }} uit de tekst verwijderen. \n
+        Sla de tekst op met de knop "Opslaan"`;
+    }
+    generateTooltipSuggestions() {
+        return generateTooltipSuggestions();
     }
 }
 

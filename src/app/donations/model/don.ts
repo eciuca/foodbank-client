@@ -9,6 +9,7 @@ export interface Don {
     date: string;
     donateurNom: string;
     donateurPrenom: string;
+    totalAmount: number;
     totalRecords: number;
 }
 export function compareDons(c1: Don, c2: Don) {
@@ -30,6 +31,7 @@ export class DefaultDon implements Don {
     date: string;
     donateurNom: string;
     donateurPrenom: string;
+    totalAmount: number;
     totalRecords: number;
     constructor() {
       this.amount = 0;
