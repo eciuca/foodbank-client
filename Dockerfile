@@ -1,4 +1,4 @@
-FROM node:14-alpine as dist-build
+FROM node:20-alpine as dist-build
 RUN mkdir -p /dist-build && chown -R node:node /dist-build
 WORKDIR /dist-build
 USER node
