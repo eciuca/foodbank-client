@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Organisation} from '../model/organisation';
+import {AuditUser} from '../model/auditUser';
 
 @Injectable({
     providedIn: 'root'
 })
-export class OrganisationHttpService {
-    private baseUrl = '/api/organisationsall';
+export class AuditHttpService {
+
     constructor(private http: HttpClient) {
     }
-    getOrganisationReport(accesstoken: string,queryParams: string ): Observable<Organisation[]> {
+    getAuditUserReport(accesstoken: string,queryParams: string ): Observable<AuditUser[]> {
+        const baseUrl = '/api/auditusersall';
         const requestOptions = {
             headers: new HttpHeaders({
                 responseType: 'json',
@@ -18,11 +19,11 @@ export class OrganisationHttpService {
             }),
         };
         if(queryParams) {
-            return this.http.get<Organisation[]>(`${this.baseUrl}/?${queryParams}`, requestOptions);
+            return this.http.get<AuditUser[]>(`${baseUrl}/?${queryParams}`, requestOptions);
         }
 
         else {
-            return this.http.get<Organisation[]>(`${this.baseUrl}/`, requestOptions);
+            return this.http.get<AuditUser[]>(`${baseUrl}/`, requestOptions);
 
         }
     }

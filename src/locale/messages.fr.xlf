@@ -7,7 +7,7 @@
         <target>Ceci est un système de test</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">5,8</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="RoleBankUser" datatype="html">
@@ -199,7 +199,7 @@
         <target>Organisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">263,262</context>
+          <context context-type="linenumber">263</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
@@ -219,7 +219,7 @@
         <target>FEAD</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">267,266</context>
+          <context context-type="linenumber">267</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
@@ -231,7 +231,7 @@
         <target>Regions</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">281,280</context>
+          <context context-type="linenumber">281</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuMemberships" datatype="html">
@@ -239,7 +239,7 @@
         <target>Cotisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">285,284</context>
+          <context context-type="linenumber">285</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuMembershipMgt" datatype="html">
@@ -247,7 +247,7 @@
         <target>Gestion des Cotisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">288,287</context>
+          <context context-type="linenumber">288</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuMembershipMailing" datatype="html">
@@ -255,7 +255,7 @@
         <target>Mailing des Cotisations</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">293,292</context>
+          <context context-type="linenumber">293</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOrgaudits" datatype="html">
@@ -263,7 +263,7 @@
         <target>Audits</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">300,299</context>
+          <context context-type="linenumber">300</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuOrganisationsDepot" datatype="html">
@@ -327,7 +327,7 @@
         <target>Membres</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">348,347</context>
+          <context context-type="linenumber">348</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBeneficiaries" datatype="html">
@@ -335,15 +335,15 @@
         <target>Bénéficiaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">358,357</context>
+          <context context-type="linenumber">358</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">388,387</context>
+          <context context-type="linenumber">388</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">411,410</context>
+          <context context-type="linenumber">411</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuBenefOverview" datatype="html">
@@ -351,7 +351,7 @@
         <target>Sommaire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">361,360</context>
+          <context context-type="linenumber">361</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BenefListByOrg" datatype="html">
@@ -359,7 +359,7 @@
         <target>Tableau par Organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">366,365</context>
+          <context context-type="linenumber">366</context>
         </context-group>
       </trans-unit>
       <trans-unit id="BenefList" datatype="html">
@@ -367,11 +367,11 @@
         <target>Liste des bénéficiaires</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">371,370</context>
+          <context context-type="linenumber">371</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">392,391</context>
+          <context context-type="linenumber">392</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Management" datatype="html">
@@ -379,15 +379,15 @@
         <target>Gestion</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">376,375</context>
+          <context context-type="linenumber">376</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">397,396</context>
+          <context context-type="linenumber">397</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">419,418</context>
+          <context context-type="linenumber">419</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/organisations/organisation/organisation.component.html</context>
@@ -399,11 +399,11 @@
         <target>Liste</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">414,413</context>
+          <context context-type="linenumber">414</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">445,444</context>
+          <context context-type="linenumber">445</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuDonations" datatype="html">
@@ -435,7 +435,7 @@
         <target>CPAS</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">442,441</context>
+          <context context-type="linenumber">442</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ZipCodes" datatype="html">
@@ -443,7 +443,7 @@
         <target>Codes Postaux</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">450,449</context>
+          <context context-type="linenumber">450</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuMailings" datatype="html">
@@ -459,7 +459,7 @@
         <target>Sommaire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">472,471</context>
+          <context context-type="linenumber">472</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuEntityChanges" datatype="html">
@@ -515,7 +515,7 @@
         <target>Rapports</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">499,498</context>
+          <context context-type="linenumber">499</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuFEADApplication" datatype="html">
@@ -523,7 +523,7 @@
         <target>Vers la Gestion du Stock</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">510,509</context>
+          <context context-type="linenumber">510</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
@@ -631,7 +631,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
@@ -659,7 +659,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
@@ -679,7 +679,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
@@ -695,7 +695,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
@@ -711,7 +711,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audits.component.html</context>
@@ -870,12 +870,20 @@
           <context context-type="linenumber">516</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="ExportSelectedLogins" datatype="html">
+        <source>Export Selected Logins</source>
+        <target>Exporter les Logins sélectionnées</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="AuditUsersSelected" datatype="html">
         <source> There are <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/> users in the selection. </source>
         <target> Il y a <x id="INTERPOLATION" equiv-text="{{totalRecords}}"/>  utilisateurs dans la sélection.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/audits/audit-users.component.html</context>
-          <context context-type="linenumber">105,107</context>
+          <context context-type="linenumber">108,110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="LoginDateFilter" datatype="html">
@@ -2179,7 +2187,7 @@
         <target>La banque <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/> n'a pas pu être mise à jour: erreur: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">349</context>
+          <context context-type="linenumber">347</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankCreated" datatype="html">
@@ -2187,7 +2195,7 @@
         <target>La banque <x id="PH" equiv-text="newBanque.bankName"/> a été créée</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">359</context>
+          <context context-type="linenumber">357</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankCreateError" datatype="html">
@@ -2195,7 +2203,7 @@
         <target>La banque <x id="PH" equiv-text="modifiedBanque.bankShortName"/> <x id="PH_1" equiv-text="modifiedBanque.bankName"/> n'a pas pu être créée: erreur: <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">370</context>
+          <context context-type="linenumber">366</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDeleted" datatype="html">
@@ -2203,7 +2211,7 @@
         <target>La banque <x id="PH" equiv-text="banque.bankName"/> a été supprimée</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">381</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDeleteError" datatype="html">
@@ -2211,7 +2219,7 @@
         <target>La banque <x id="PH" equiv-text="banque.bankId"/> <x id="PH_1" equiv-text="banque.bankShortName"/> <x id="PH_2" equiv-text="banque.bankName"/> n'a pas pu être supprimée: erreur: <x id="PH_3" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">399</context>
+          <context context-type="linenumber">395</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageChangesMayBeLost" datatype="html">
@@ -2219,7 +2227,7 @@
         <target>Vos modifications peuvent être perdues. Êtes-vous sûr de vouloir continuer?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">411</context>
+          <context context-type="linenumber">407</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/beneficiaires/beneficiaire/beneficiaire.component.ts</context>
@@ -2239,7 +2247,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">173</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/donations/donateurs/donateur/donateur.component.ts</context>
@@ -2307,7 +2315,7 @@
         <target>Les détails de la banque alimentaire <x id="PH" equiv-text="this.banque.bankShortName"/> <x id="PH_1" equiv-text="this.banque.bankName"/> ont été mises à jour</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">438</context>
+          <context context-type="linenumber">434</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageBankDetailsUpdateError" datatype="html">
@@ -2315,7 +2323,7 @@
         <target>Les détails de la banque alimentaire <x id="PH" equiv-text="this.banque.bankShortName"/> <x id="PH_1" equiv-text="this.banque.bankName"/> n'ont pas pu être mises à jour : erreur : <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/banques/banque/banque.component.ts</context>
-          <context context-type="linenumber">447</context>
+          <context context-type="linenumber">443</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReport" datatype="html">
@@ -4624,7 +4632,7 @@
         <target>Le dépôt <x id="PH" equiv-text="depot.idDepot"/> <x id="PH_1" equiv-text="depot.nom"/> n'a pas pu être supprimé : erreur : <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDepotNotDeletedConstraint" datatype="html">
@@ -4632,7 +4640,7 @@
         <target>Le dépôt <x id="PH" equiv-text="depot.idDepot"/> <x id="PH_1" equiv-text="depot.nom"/> n'a pas pu être supprimé : des mouvements existent pour ce dépôt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDepotUpdated" datatype="html">
@@ -4640,7 +4648,7 @@
         <target>Le dépôt <x id="PH" equiv-text="modifiedDepot.idDepot"/> <x id="PH_1" equiv-text="modifiedDepot.nom"/> a été mis à jour</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="messageDepotNotUpdated" datatype="html">
@@ -4648,7 +4656,7 @@
         <target>Le dépôt <x id="PH" equiv-text="modifiedDepot.idDepot"/> <x id="PH_1" equiv-text="modifiedDepot.nom"/> n'a pas pu être mis à jour : erreur : <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">161</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotFieldNoAnomaly" datatype="html">
@@ -4656,7 +4664,7 @@
         <target>Les informations du champ Dépôt {field} sont cohérentes avec ses informations d'organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotNoOrganisation" datatype="html">
@@ -4664,7 +4672,7 @@
         <target>Le dépôt <x id="PH" equiv-text="this.depot.idDepot"/> n'a pas d'entité d'organisation correspondante</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">191</context>
+          <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotFieldAnomaly" datatype="html">
@@ -4672,7 +4680,7 @@
         <target>Le champ Dépôt <x id="PH" equiv-text="field"/> n'est pas cohérent avec son champ Organisation <x id="PH_1" equiv-text="anomaly"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">194</context>
+          <context context-type="linenumber">192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotIpMainAddress" datatype="html">
@@ -4680,7 +4688,7 @@
         <target>Spécifiez ici l'adresse IP par défaut pour ce dépôt - nécessaire pour les scanners</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depot/depot.component.ts</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">215</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ExportDepots" datatype="html">
@@ -4740,7 +4748,7 @@
         <target>Le dépôt <x id="PH" equiv-text="modifiedDepot.idDepot"/> <x id="PH_1" equiv-text="modifiedDepot.nom"/> n'a pas pu être créé : erreur : <x id="PH_2" equiv-text="dataserviceerror.message"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotNoAnomalies" datatype="html">
@@ -4748,7 +4756,7 @@
         <target>Les informations sur le dépôt sont cohérentes avec ses informations sur l'organisation</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">294</context>
+          <context context-type="linenumber">292</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipDepotAnomalies" datatype="html">
@@ -4756,7 +4764,7 @@
         <target>Les informations sur le dépôt ne sont pas cohérentes avec les informations sur l'organisation - voir les détails du dépôt</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">295</context>
+          <context context-type="linenumber">293</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ToolTipOrgsWithoutDepot" datatype="html">
@@ -4764,7 +4772,7 @@
         <target><x id="PH" equiv-text="this.candidateOrganisations.length"/> organisations sans dépôt proposées</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/depots/depots.component.ts</context>
-          <context context-type="linenumber">298</context>
+          <context context-type="linenumber">296</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Title" datatype="html">

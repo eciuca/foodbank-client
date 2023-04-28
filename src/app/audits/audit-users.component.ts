@@ -4,12 +4,15 @@ import {AuditUserEntityService} from './services/audit-user-entity.service';
 import {BehaviorSubject} from 'rxjs';
 import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {LazyLoadEvent} from 'primeng/api';
-import {DatePipe} from '@angular/common';
+import {DatePipe, formatDate} from '@angular/common';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
 import {enmApp,  enmUserRoles} from '../shared/enums';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {AuthState} from '../auth/reducers';
+import {AuditHttpService} from './services/audit-http.service';
+import {AuthService} from '../auth/auth.service';
+import {ExcelService} from '../services/excel.service';
 
 @Component({
     selector: 'app-audit-users',
@@ -36,6 +39,9 @@ export class AuditUsersComponent implements OnInit {
     constructor(
         private auditUserService: AuditUserEntityService,
         private banqueService: BanqueEntityService,
+        private auditHttpService: AuditHttpService,
+        private excelService: ExcelService,
+        private authService: AuthService,
         private store: Store,
         public datepipe: DatePipe
     ) {
@@ -159,7 +165,22 @@ export class AuditUsersComponent implements OnInit {
         }
         this.loadPageSubject$.next(latestQueryParams);
     }
-
+    exportAsXLSX(): void {
+        let excelQueryParams = {...this.loadPageSubject$.getValue()};
+        delete excelQueryParams['rows'];
+        delete excelQueryParams['offset'];
+        delete excelQueryParams['sortOrder'];
+        delete excelQueryParams['sortField'];
+        let params = new URLSearchParams();
+        for(let key in excelQueryParams){
+            params.set(key, excelQueryParams[key])
+        }
+        this.auditHttpService.getAuditUserReport(this.authService.accessToken, params.toString()).subscribe(
+            (auditusers: AuditUser[] ) => {
+                const cleanedList = auditusers.map(({ totalRecords, ...item }) => item);
+                this.excelService.exportAsExcelFile(cleanedList, 'foodit.selected.userLogins.' + formatDate(new Date(),'ddMMyyyy.HHmm','en-US') + '.xlsx');
+            });
+    }
 
 }
 

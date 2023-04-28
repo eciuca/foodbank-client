@@ -6,7 +6,7 @@
         <div class="table-header">
             <div class="p-fluid p-formgrid p-grid">
 
-                <div class="p-field p-col-12 p-md-2">
+                <div class="p-field p-col-12 p-md-3">
                     <label i18n="@@DateFilter" for="onselect">Filter on Date?</label>
                     <p-checkbox [(ngModel)]="booRangeFilter" binary="true" name="onselect" id="onselect" (onChange)="userSetRangeFilter($event)"></p-checkbox>
                 </div>
@@ -15,6 +15,9 @@
                 </div>
                 <div class="p-field p-col-12 p-md-3">
                     <p-calendar [(ngModel)]="toDate" dateFormat="dd/mm/yy" (onSelect)="userDateRangeFilter()"></p-calendar>
+                </div>
+                <div  class="p-field p-col-12 p-md-3">
+                    <button  type="button" pButton icon="pi pi-download" (click)="exportAsXLSX()" label="Export Selected Logins" i18n-label="@@ExportSelectedLogins"></button>
                 </div>
             </div>
         </div>
