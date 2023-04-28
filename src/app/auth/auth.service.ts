@@ -1,6 +1,6 @@
 /* eslint-disable brace-style */
 
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
@@ -109,7 +109,7 @@ export class AuthService {
       mergeMap(userInfo => {
         const userId = userInfo.sub.split(':')[2];
         const groups = userInfo['groups'];
-        const header = { headers: { 'Authorization': this.oauthService.authorizationHeader()  } };
+        const header = { headers: new HttpHeaders({ 'Authorization': this.oauthService.authorizationHeader()  }) };
         return this.http.get<User>(`/api/user/${userId}`, header).pipe(
           mergeMap(user => this.createAuthPrincipalFromUser(user, groups, header))
         );
@@ -224,7 +224,7 @@ export class AuthService {
       });
   }
 
-  private createAuthPrincipalFromUser(user: User, groups: string[], header): Observable<IAuthPrincipal> {
+  private createAuthPrincipalFromUser(user: User, groups: string[], header: { headers: HttpHeaders }): Observable<IAuthPrincipal> {
       const authBanque$ = !user.idCompany
           ? of(undefined)
           : this.http.get<Banque>(`/api/banque/getByShortName/${user.idCompany}`, header).pipe(catchError(err => this.handleNotFound(err)));
