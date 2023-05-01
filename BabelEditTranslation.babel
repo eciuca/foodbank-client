@@ -3720,6 +3720,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>DbChangeEntityZipCode</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>DebDateInvalid</name>
                         <description/>
                         <comment/>
@@ -8765,6 +8785,26 @@
                     </concept_node>
                     <concept_node>
                         <name>OrgBeneficiaryNewC</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>OrgBeneficiaryStatistics</name>
                         <description/>
                         <comment/>
                         <default_text/>

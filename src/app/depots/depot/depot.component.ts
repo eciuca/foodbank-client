@@ -114,7 +114,7 @@ export class DepotComponent implements OnInit {
                             this.messageService.add(myMessage);
                             this.onDepotDelete.emit(depot);
                             this.auditChangeEntityService.logDbChange(this.userId,this.userName,depot.lienBanque,0,'Depot',
-                                depot.idDepot + ' ' + depot.nom, 'Update' );
+                                depot.idDepot + ' ' + depot.nom, 'Delete' );
                         },
                         (dataserviceerror) => {
                            let  errMessage = {severity: 'error', summary: 'Delete',

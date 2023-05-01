@@ -194,9 +194,14 @@ export let enmDbChangeEntities = [
     {label: $localize`:@@DbChangeEntityBank:Bank` , value: 'Bank'},
     {label: $localize`:@@DbChangeEntityDepot:Depot` , value: 'Depot'},
     {label: $localize`:@@DbChangeEntityClient:Client` , value: 'Client'},
+    {label: $localize`:@@DbChangeEntityZipCode:ZipCode` , value: 'ZipCode'},
     {label: 'Donateur' , value: 'Donateur'},
     {label: $localize`:@@DbChangeEntityGift:Gift` , value: 'Don'},
     {label: 'Email' , value: 'Email'},
+    {label: 'movements_daily' , value: 'movements_daily'},
+    {label: 'movements_monthly' , value: 'movements_monthly'},
+    {label: 'population' , value: 'population'},
+    {label: 'populationDepot' , value: 'populationDepot'},
 
 ];
 export let enmDbChangeActions = [

@@ -101,7 +101,7 @@
                     </div>
                 </ng-template>
             </p-table>
-
+            <p-progressSpinner *ngIf="loading"></p-progressSpinner>
         </p-accordionTab>
         <p-accordionTab i18n-header="@@Mail Content" header="Mail Content">
             <form  #sendForm="ngForm">
