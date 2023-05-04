@@ -94,8 +94,7 @@ export class AuditChangesComponent implements OnInit {
     if (authState.user.rights === 'admin') {
       this.lienBanque = 0;
       this.filterBase = {};
-      this.entityOptions = [...enmDbChangeEntities];
-      this.entityOptions.concat([...enmDbChangeEntitiesAdmin]);
+      this.entityOptions = [...enmDbChangeEntities].concat([...enmDbChangeEntitiesAdmin]);
       console.log('entityOptions', this.entityOptions);
       this.banqueService.getAll()
           .pipe(
