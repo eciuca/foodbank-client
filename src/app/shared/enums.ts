@@ -198,12 +198,15 @@ export let enmDbChangeEntities = [
     {label: 'Donateur' , value: 'Donateur'},
     {label: $localize`:@@DbChangeEntityGift:Gift` , value: 'Don'},
     {label: 'Email' , value: 'Email'},
+
+
+];
+export let enmDbChangeEntitiesAdmin = [
     {label: 'movements_daily' , value: 'movements_daily'},
     {label: 'movements_monthly' , value: 'movements_monthly'},
     {label: 'population' , value: 'population'},
     {label: 'populationDepot' , value: 'populationDepot'},
-
-];
+    ];
 export let enmDbChangeActions = [
     {label: $localize`:@@DbChangeActionUpdate:Update` , value: 'Update'},
     {label: $localize`:@@DbChangeActionCreate:Create` , value: 'Create'},

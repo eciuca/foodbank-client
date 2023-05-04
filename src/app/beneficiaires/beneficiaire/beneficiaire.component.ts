@@ -70,7 +70,6 @@ export class BeneficiaireComponent implements OnInit {
     nbAdults: number;
     nbChildren: number;
     povertyIndex: number;
-    feadEligibility: string;
     updateRestricted: boolean;
     mailing: Mailing;
     isCPASHandlingFeadStatus: boolean;
@@ -90,11 +89,10 @@ export class BeneficiaireComponent implements OnInit {
       private messageService: MessageService,
       private confirmationService: ConfirmationService
   ) {
-    this.civilites =  enmGender;
-    this.countries = enmCountry;
-    this.feadStatuses = enmStatutFead;
-    this.coeffPercentages = enmCoeffs;
-    this.feadEligibility = '';
+      this.civilites =  enmGender;
+      this.countries = enmCountry;
+      this.feadStatuses = enmStatutFead;
+      this.coeffPercentages = enmCoeffs;
       this.booCalledFromTable = true;
       this.booCanSave = false;
       this.lienDis = 0;
@@ -122,38 +120,7 @@ export class BeneficiaireComponent implements OnInit {
 
           if (beneficiaire) {
               this.beneficiaire = beneficiaire;
-             /* this.feadEligibility = '';
-              switch (this.beneficiaire.birb) {
-                  case 0:
-                      if (this.userLanguage === 'fr') {
-                        this.feadEligibility = 'Refusé';
-                      } else {
-                            this.feadEligibility = 'Geweigerd';
-                      }
-                      break;
-                    case 2:
-                        if (this.userLanguage === 'fr') {
-                            this.feadEligibility = 'En examen';
-                        } else {
-                            this.feadEligibility = 'In onderzoek';
-                        }
-                        break;
-                  case 1:
-                    this.beneficiaireHttpService.getBirbCat(this.authService.accessToken,this.beneficiaire.critBirb)
-                          .subscribe(birbCat => {
-                        if (birbCat) {
-                            if (this.userLanguage === 'fr') {
-                                this.feadEligibility = birbCat.catName;
-                            } else {
-                                this.feadEligibility = birbCat.catNameNl;
-                            }
-                        }
-                        });
-                        break;
-                  default:
-                      // do nothing
-              }
-              */
+
               this.title = $localize`:@@OrgBeneficiaryExisting:Beneficiary for organisation ${beneficiaire.societe} Updated On ${ beneficiaire.dateUpd}`;
               if (beneficiaire.lcpas && beneficiaire.lcpas !== 0) {
                   this.cpassService.getByKey(beneficiaire.lcpas)

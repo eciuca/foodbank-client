@@ -6,7 +6,7 @@ import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import {LazyLoadEvent} from 'primeng/api';
 import {DatePipe} from '@angular/common';
 import {BanqueEntityService} from '../banques/services/banque-entity.service';
-import {enmApp, enmDbChangeActions, enmDbChangeEntities, enmUserRoles} from '../shared/enums';
+import {enmApp, enmDbChangeActions, enmDbChangeEntities,enmDbChangeEntitiesAdmin, enmUserRoles} from '../shared/enums';
 import {select, Store} from '@ngrx/store';
 import {globalAuthState} from '../auth/auth.selectors';
 import {AuthState} from '../auth/reducers';
@@ -44,7 +44,7 @@ export class AuditChangesComponent implements OnInit {
     this.rightOptions = enmUserRoles;
     this.appOptions = enmApp;
     this.actionOptions = enmDbChangeActions;
-    this.entityOptions = enmDbChangeEntities;
+
   }
 
   ngOnInit() {
@@ -88,11 +88,14 @@ export class AuditChangesComponent implements OnInit {
     if (['Admin_FBBA','Admin_Banq'].includes(authState.user.rights)) {
       this.lienBanque = authState.banque.bankId;
       this.filterBase = { 'bankShortName': authState.banque.bankShortName};
+      this.entityOptions = enmDbChangeEntities;
     }
 
     if (authState.user.rights === 'admin') {
       this.lienBanque = 0;
       this.filterBase = {};
+      this.entityOptions = enmDbChangeEntities;
+      this.entityOptions.push(enmDbChangeEntitiesAdmin);
       this.banqueService.getAll()
           .pipe(
               tap((banquesEntities) => {

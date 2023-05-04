@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Beneficiaire} from '../model/beneficiaire';
 import {Population} from '../model/population';
-import {BirbCat} from '../model/birbcat';
 
 @Injectable({
     providedIn: 'root'
@@ -46,21 +45,5 @@ export class BeneficiaireHttpService {
         return this.http.get<Population[]>(`${baseUrl}`, requestOptions);
     }
 
-    getBirbCat(accesstoken: string,critBirb: number): Observable<BirbCat> {
 
-        const requestOptions = {
-            headers: new HttpHeaders( {
-                responseType: 'json',
-                Authorization:  'Bearer ' + accesstoken
-            }),
-        };
-      try {
-          return this.http.get<BirbCat>(`/api/birbcat/${critBirb.toString()}`, requestOptions);
-      }
-      catch (e) {
-          console.log('BirbCat not found', e);
-          return null;
-      }
-
-    }
 }
