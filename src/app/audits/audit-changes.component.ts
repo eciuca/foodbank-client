@@ -31,8 +31,8 @@ export class AuditChangesComponent implements OnInit {
   appOptions: any[];
   filterBase: any;
   lienBanque: number;
-  actionOptions: any;
-  entityOptions: any;
+  actionOptions: any[];
+  entityOptions: any[];
   constructor(
       private auditChangeService: AuditChangeEntityService,
       private banqueService: BanqueEntityService,
@@ -95,7 +95,7 @@ export class AuditChangesComponent implements OnInit {
       this.lienBanque = 0;
       this.filterBase = {};
       this.entityOptions = [...enmDbChangeEntities];
-      this.entityOptions.push(enmDbChangeEntitiesAdmin);
+      this.entityOptions.concat(enmDbChangeEntitiesAdmin);
       this.banqueService.getAll()
           .pipe(
               tap((banquesEntities) => {
