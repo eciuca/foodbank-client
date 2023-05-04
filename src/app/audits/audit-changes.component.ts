@@ -94,7 +94,7 @@ export class AuditChangesComponent implements OnInit {
     if (authState.user.rights === 'admin') {
       this.lienBanque = 0;
       this.filterBase = {};
-      this.entityOptions = {...enmDbChangeEntities};
+      this.entityOptions = [...enmDbChangeEntities];
       this.entityOptions.push(enmDbChangeEntitiesAdmin);
       this.banqueService.getAll()
           .pipe(
@@ -173,7 +173,13 @@ export class AuditChangesComponent implements OnInit {
     }
     this.loadPageSubject$.next(latestQueryParams);
   }
-
+  labelForEntity(entity: string) {
+    const indexLabel = this.entityOptions.findIndex(obj => obj.value === entity);
+    if (indexLabel >= 0) {
+      return this.entityOptions[indexLabel].label;
+    }
+    return entity; // should not happen if so we return the entity
+  }
 
 }
 
