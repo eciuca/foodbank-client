@@ -95,7 +95,6 @@ export class AuditChangesComponent implements OnInit {
       this.lienBanque = 0;
       this.filterBase = {};
       this.entityOptions = [...enmDbChangeEntities].concat([...enmDbChangeEntitiesAdmin]);
-      console.log('entityOptions', this.entityOptions);
       this.banqueService.getAll()
           .pipe(
               tap((banquesEntities) => {
