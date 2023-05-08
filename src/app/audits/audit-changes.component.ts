@@ -98,7 +98,6 @@ export class AuditChangesComponent implements OnInit {
       this.banqueService.getAll()
           .pipe(
               tap((banquesEntities) => {
-                console.log('Banques now loaded:', banquesEntities.length);
                 this.bankOptions = banquesEntities.map(({bankShortName}) => ({'label': bankShortName, 'value': bankShortName}));
               })
           ).subscribe();

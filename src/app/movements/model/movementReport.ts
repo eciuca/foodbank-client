@@ -4,13 +4,11 @@ export interface MovementReport {
     month: string; // month of the movement
     bankShortName: string;
     idOrg: number;
-
     orgname: string;
-
     category: string;
-
     quantity: number;
-
+    nfamilies: number;
+    npersons: number;
     lastupdated: string;
 
 }

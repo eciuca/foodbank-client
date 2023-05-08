@@ -63,6 +63,13 @@ export class MovementReportComponent implements OnInit {
     totalFoodDeliveriesPrevious: number;
     totalFoodDeliveriesPrevious1: number;
     totalFoodDeliveriesPrevious2: number;
+    totalFoodDeliveriesCurrentPerFamily: number;
+    totalFoodDeliveriesCurrentPerPerson: number;
+    totalFoodDeliveriesPreviousPerFamily: number;
+    totalFoodDeliveriesPreviousPerPerson: number;
+    totalFoodDeliveriesPrevious1PerFamily: number;
+    totalFoodDeliveriesPrevious1PerPerson: number;
+
     reportLabels: any[];
     reportDataSetsNonFEAD: any[];
     reportDataSetsFEADnonAgreed: any[];
@@ -210,7 +217,6 @@ export class MovementReportComponent implements OnInit {
     }
     filterDepot(depotId) {
         this.depotId = depotId;
-        console.log('new depot id:', this.depotId);
         if (this.depotId) {
            this.categoryOptions =[];
         }
@@ -218,7 +224,6 @@ export class MovementReportComponent implements OnInit {
             this.categoryOptions =[...this.depotOptions];
             this.categoryOptions.shift();
             this.categoryOptions.push({label: 'OTHER', value: null});
-            console.log('depot options',this.depotOptions, 'category options',this.categoryOptions);
         }
         this.categoryOptionsFEADAgreedCollect = [...this.categoryOptions];
         this.categoryOptionsFEADNonAgreed = [...this.categoryOptions];
@@ -315,7 +320,6 @@ export class MovementReportComponent implements OnInit {
                     this.createCategoryOptionsForOrgs();
                 }
                 this.initializeChart();
-                console.log('category', this.category,'category options', this.categoryOptions);
                 for (let i = 0; i < this.movementReports.length; i++) {
                     if ( this.movementReports[i].orgname) {
                         this.movementReports[i].orgname = this.movementReports[i].orgname.replace(/[^0-9a-z]/gi, '');
@@ -336,14 +340,32 @@ export class MovementReportComponent implements OnInit {
                         case this.currentPeriod.toString():
                             this.reportDataSetsCurrent[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
+                            if (this.movementReports[i].nfamilies > 0) {
+                                this.totalFoodDeliveriesCurrentPerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
+                            }
+                            if (this.movementReports[i].npersons > 0) {
+                                this.totalFoodDeliveriesCurrentPerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
+                            }
                             break;
                         case this.previousPeriod.toString():
                             this.reportDataSetsPrevious[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;
+                            if (this.movementReports[i].nfamilies > 0) {
+                                this.totalFoodDeliveriesPreviousPerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
+                            }
+                            if (this.movementReports[i].npersons > 0) {
+                                this.totalFoodDeliveriesPreviousPerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
+                            }
                             break;
                         case this.previousPeriod1.toString():
                             this.reportDataSetsPrevious1[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious1 += this.movementReports[i].quantity;
+                            if (this.movementReports[i].nfamilies > 0) {
+                                this.totalFoodDeliveriesPrevious1PerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
+                            }
+                            if (this.movementReports[i].npersons > 0) {
+                                this.totalFoodDeliveriesPrevious1PerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
+                            }
                             break;
 
                         default:
@@ -387,14 +409,32 @@ export class MovementReportComponent implements OnInit {
                         case this.currentPeriod.toString():
                             this.reportDataSetsCurrent[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
+                            if (this.movementReports[i].nfamilies > 0) {
+                                this.totalFoodDeliveriesCurrentPerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
+                            }
+                            if (this.movementReports[i].npersons > 0) {
+                                this.totalFoodDeliveriesCurrentPerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
+                            }
                             break;
                         case this.previousPeriod.toString():
                             this.reportDataSetsPrevious[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;
+                            if (this.movementReports[i].nfamilies > 0) {
+                                this.totalFoodDeliveriesPreviousPerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
+                            }
+                            if (this.movementReports[i].npersons > 0) {
+                                this.totalFoodDeliveriesPreviousPerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
+                            }
                             break;
                         case this.previousPeriod1.toString():
                             this.reportDataSetsPrevious1[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious1 += this.movementReports[i].quantity;
+                            if (this.movementReports[i].nfamilies > 0) {
+                                this.totalFoodDeliveriesPrevious1PerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
+                            }
+                            if (this.movementReports[i].npersons > 0) {
+                                this.totalFoodDeliveriesPrevious1PerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
+                            }
                             break;
 
                         default:
@@ -476,6 +516,12 @@ export class MovementReportComponent implements OnInit {
         this.totalFoodDeliveriesFEADNonAgreed = 0;
         this.totalFoodDeliveriesFEADAgreedCollect = 0;
         this.totalFoodDeliveriesCurrent = 0;
+        this.totalFoodDeliveriesCurrentPerFamily = 0;
+        this.totalFoodDeliveriesCurrentPerPerson = 0;
+        this.totalFoodDeliveriesPreviousPerFamily = 0;
+        this.totalFoodDeliveriesPreviousPerPerson = 0;
+        this.totalFoodDeliveriesPrevious1PerFamily = 0;
+        this.totalFoodDeliveriesPrevious1PerPerson = 0;
         this.totalFoodDeliveriesPrevious = 0;
         this.totalFoodDeliveriesPrevious1 = 0;
         this.totalFoodDeliveriesPrevious2 = 0;
@@ -564,7 +610,6 @@ export class MovementReportComponent implements OnInit {
     }
 
     createReportData() {
-        console.log('previous report dataset',this.reportDataSetsPrevious);
         this.titleFoodDeliveriesNonFEADEvolution = $localize`:@@StatFoodDeliveriesNonFEADHistory:Food Delivered to Non FEAD Orgs(kg)`;
         this.chartDataFoodDeliveriesNonFEADHistory = {
             labels: this.reportLabels,
@@ -596,7 +641,6 @@ export class MovementReportComponent implements OnInit {
             labels: this.categoryOptions.map(({label}) => label),
             datasets: this.reportDataSetsPrevious
         }
-        console.log('chart data previous', this.chartDataFoodDeliveriesPrevious);
         this.titleFoodDeliveriesPrevious1 = $localize`:@@StatFoodDeliveriesPrevious1:Food Delivered in ${this.previousPeriod1}(kg)`;
         this.chartDataFoodDeliveriesPrevious1 = {
             labels: this.categoryOptions.map(({label}) => label),
@@ -610,19 +654,15 @@ export class MovementReportComponent implements OnInit {
     }
 
     getTotalFoodDeliveriesPrevious() {
-        return $localize`:@@StatFoodDeliveriesPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesPrevious)} kg`;
+        return $localize`:@@StatFoodDeliveriesPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesPrevious)} kg( ${this.totalFoodDeliveriesPreviousPerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesPreviousPerPerson.toFixed(2)} kg per person.)`;
     }
 
     getTotalFoodDeliveriesPrevious1() {
-        return $localize`:@@StatFoodDeliveriesPrevious1Total:Total: ${Math.round(this.totalFoodDeliveriesPrevious1)} kg`;
-    }
-
-    getTotalFoodDeliveriesPrevious2() {
-        return $localize`:@@StatFoodDeliveriesPrevious2Total:Total: ${Math.round(this.totalFoodDeliveriesPrevious2)} kg`;
+        return $localize`:@@StatFoodDeliveriesPrevious1Total:Total: ${Math.round(this.totalFoodDeliveriesPrevious1)} kg( ${this.totalFoodDeliveriesPrevious1PerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesPrevious1PerPerson.toFixed(2)} kg per person.)`;
     }
 
     getTotalFoodDeliveriesCurrent() {
-        return $localize`:@@StatFoodDeliveriesCurrentTotal:Total: ${Math.round(this.totalFoodDeliveriesCurrent)} kg`;
+        return $localize`:@@StatFoodDeliveriesCurrentTotal:Total: ${Math.round(this.totalFoodDeliveriesCurrent)} kg( ${this.totalFoodDeliveriesCurrentPerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesCurrentPerPerson.toFixed(2)} kg per person.)`;
     }
 
     getTotalFoodDeliveriesNonFEAD() {
