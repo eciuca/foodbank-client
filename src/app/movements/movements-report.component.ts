@@ -62,7 +62,6 @@ export class MovementReportComponent implements OnInit {
     totalFoodDeliveriesCurrent: number;
     totalFoodDeliveriesPrevious: number;
     totalFoodDeliveriesPrevious1: number;
-    totalFoodDeliveriesPrevious2: number;
     totalFoodDeliveriesCurrentPerFamily: number;
     totalFoodDeliveriesCurrentPerPerson: number;
     totalFoodDeliveriesPreviousPerFamily: number;
@@ -516,15 +515,15 @@ export class MovementReportComponent implements OnInit {
         this.totalFoodDeliveriesFEADNonAgreed = 0;
         this.totalFoodDeliveriesFEADAgreedCollect = 0;
         this.totalFoodDeliveriesCurrent = 0;
+        this.totalFoodDeliveriesPrevious = 0;
+        this.totalFoodDeliveriesPrevious1 = 0;
         this.totalFoodDeliveriesCurrentPerFamily = 0;
         this.totalFoodDeliveriesCurrentPerPerson = 0;
         this.totalFoodDeliveriesPreviousPerFamily = 0;
         this.totalFoodDeliveriesPreviousPerPerson = 0;
         this.totalFoodDeliveriesPrevious1PerFamily = 0;
         this.totalFoodDeliveriesPrevious1PerPerson = 0;
-        this.totalFoodDeliveriesPrevious = 0;
-        this.totalFoodDeliveriesPrevious1 = 0;
-        this.totalFoodDeliveriesPrevious2 = 0;
+
         this.reportLabels = [];
         this.reportDataSetsNonFEAD = [];
         this.reportDataSetsFEADnonAgreed = [];

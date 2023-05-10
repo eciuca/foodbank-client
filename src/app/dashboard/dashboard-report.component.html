@@ -446,7 +446,196 @@
                     </div>
             </p-accordionTab>
 
-            <p-accordionTab i18n-header="@@DistributionActivity" header="Recent Distribution Activity"  >
+            <p-accordionTab i18n-header="@@DistributionActivity" header="Distribution Activity"  >
+                <div  class="p-fluid p-formgrid p-grid p-text-bold">
+                    <div class="p-field p-col-12 p-md-2">
+                        {{labelFoodDeliveries()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{labelPeriod()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                       Nb Orgs
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        Nb Fam
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        Nb Pers
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{labelFoodDelivered()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{labelPerFamily()}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{labelPerPerson()}}
+                    </div>
+                </div>
+                <div *ngFor="let item of categoryOptions;let i=index;">
+                    <div  class="p-fluid p-formgrid p-grid ">
+                        <div class="p-field p-col-12 p-md-2">
+                            {{item.label}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{previousPeriod1}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{previous1OrganisationsByCategory[i]}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{previous1FamiliesByCategory[i]}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{previous1PersonsByCategory[i]}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            {{foodDeliveriesbyCategoryPrevious1[i].toFixed(2)}} kg
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            {{foodDeliveriesbyCategoryPrevious1PerFamily[i].toFixed(2)}} kg
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            {{foodDeliveriesbyCategoryPrevious1PerPerson[i].toFixed(2)}} kg
+                        </div>
+                    </div>
+                    <div  class="p-fluid p-formgrid p-grid ">
+                        <div class="p-field p-col-12 p-md-2">
+                            {{item.label}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{previousPeriod}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{previousOrganisationsByCategory[i]}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{previousFamiliesByCategory[i]}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{previousPersonsByCategory[i]}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            {{foodDeliveriesbyCategoryPrevious[i].toFixed(2)}} kg
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            {{foodDeliveriesbyCategoryPreviousPerFamily[i].toFixed(2)}} kg
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            {{foodDeliveriesbyCategoryPreviousPerPerson[i].toFixed(2)}} kg
+                        </div>
+                    </div>
+                    <div  class="p-fluid p-formgrid p-grid ">
+                        <div class="p-field p-col-12 p-md-2">
+                            {{item.label}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{currentPeriod}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{currentOrganisationsByCategory[i]}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{currentFamiliesByCategory[i]}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            {{currentPersonsByCategory[i]}}
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            {{foodDeliveriesbyCategoryCurrent[i].toFixed(2)}} kg
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            {{foodDeliveriesbyCategoryCurrentPerFamily[i].toFixed(2)}} kg
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            {{foodDeliveriesbyCategoryCurrentPerPerson[i].toFixed(2)}} kg
+                        </div>
+                    </div>
+                </div>
+                <div  class="p-fluid p-formgrid p-grid ">
+                    <div class="p-field p-col-12 p-md-2">
+                        Total
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{previousPeriod1}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{totalFoodDeliveriesPrevious1Organisations}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{totalFoodDeliveryFamiliesCurrent}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{totalFoodDeliveryPersonsCurrent}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalFoodDeliveriesPrevious1.toFixed(2)}} kg
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalFoodDeliveriesPrevious1PerFamily.toFixed(2)}} kg
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalFoodDeliveriesPrevious1PerPerson.toFixed(2)}} kg
+                    </div>
+                </div>
+                <div  class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-2">
+                        Total
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{previousPeriod}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{totalFoodDeliveriesPreviousOrganisations}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{totalFoodDeliveryFamiliesPrevious}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{totalFoodDeliveryPersonsPrevious}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalFoodDeliveriesPrevious.toFixed(2)}} kg
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalFoodDeliveriesPreviousPerFamily.toFixed(2)}} kg
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalFoodDeliveriesPreviousPerPerson.toFixed(2)}} kg
+                    </div>
+                </div>
+                <div  class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-2">
+                        Total
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{currentPeriod}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{totalFoodDeliveriesCurrentOrganisations}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{totalFoodDeliveryFamiliesPrevious1}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-1">
+                        {{totalFoodDeliveryPersonsPrevious1}}
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalFoodDeliveriesCurrent.toFixed(2)}} kg
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalFoodDeliveriesCurrentPerFamily.toFixed(2)}} kg
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        {{totalFoodDeliveriesCurrentPerPerson.toFixed(2)}} kg
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-12 p-text-bold">
+                        {{labelRecentActivity()}}
+                    </div>
+                </div>
                 <div class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
                         <label i18n="@@FilterDay" for="selectedDay">Filter day?</label>

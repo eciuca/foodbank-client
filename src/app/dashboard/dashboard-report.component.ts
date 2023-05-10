@@ -123,6 +123,47 @@ export class DashboardReportComponent implements OnInit {
     memberBankCount: number;
     memberOrgCount: number;
     statuts: any[];
+    totalFoodDeliveryFamiliesCurrent: number;
+    totalFoodDeliveryPersonsCurrent: number;
+    totalFoodDeliveryFamiliesPrevious: number;
+    totalFoodDeliveryPersonsPrevious: number;
+    totalFoodDeliveryFamiliesPrevious1: number;
+    totalFoodDeliveryPersonsPrevious1: number;
+    totalFoodDeliveriesCurrentOrganisations:number;
+    totalFoodDeliveriesPreviousOrganisations:number;
+    totalFoodDeliveriesPrevious1Organisations:number;
+    totalFoodDeliveriesCurrent: number;
+    totalFoodDeliveriesPrevious: number;
+    totalFoodDeliveriesPrevious1: number;
+    totalFoodDeliveriesCurrentPerFamily: number;
+    totalFoodDeliveriesCurrentPerPerson: number;
+    totalFoodDeliveriesPreviousPerFamily: number;
+    totalFoodDeliveriesPreviousPerPerson: number;
+    totalFoodDeliveriesPrevious1PerFamily: number;
+    totalFoodDeliveriesPrevious1PerPerson: number;
+    foodDeliveriesbyCategoryCurrent:number[];
+    foodDeliveriesbyCategoryPrevious:number[];
+    foodDeliveriesbyCategoryPrevious1:number[];
+    foodDeliveriesbyCategoryCurrentPerFamily:number[];
+    foodDeliveriesbyCategoryPreviousPerFamily:number[];
+    foodDeliveriesbyCategoryPrevious1PerFamily:number[];
+    foodDeliveriesbyCategoryCurrentPerPerson:number[];
+    foodDeliveriesbyCategoryPreviousPerPerson:number[];
+    foodDeliveriesbyCategoryPrevious1PerPerson:number[];
+
+    currentOrganisationsByCategory:number[] = [];
+    previousOrganisationsByCategory:number[]= [];
+    previous1OrganisationsByCategory:number[]= [];
+    currentFamiliesByCategory :number[] = [];
+    currentPersonsByCategory :number[] = [];
+    previousFamiliesByCategory :number[] = [];
+    previousPersonsByCategory :number[] = [];
+    previous1FamiliesByCategory :number[] = [];
+    previous1PersonsByCategory :number[] = [];
+
+    currentPeriod:number;
+    previousPeriod: number;
+    previousPeriod1: number;
 
     constructor(
         private movementReportHttpService: MovementReportHttpService,
@@ -145,6 +186,9 @@ export class DashboardReportComponent implements OnInit {
     this.selectedBankItems = [];
     this.selectedOrgItems = [];
     this.statuts = enmStatusCompany;
+    this.currentPeriod = new Date().getFullYear();
+    this.previousPeriod = this.currentPeriod - 1;
+    this.previousPeriod1 = this.currentPeriod - 2;
     }
 
     ngOnInit(): void {
@@ -238,7 +282,7 @@ initializeClientsArrays() {
     this.clientNbofOrgsAgreed= [];
     this.clientNbofOrgsGestBen= [];
 
-    this.categoryOptions.forEach((category) => {
+    for (let i = 0; i < this.categoryOptions.length; i++) {
         this.clientNFam.push(0);
         this.clientNpers.push(0);
         this.clientNNour.push(0);
@@ -269,9 +313,213 @@ initializeClientsArrays() {
         this.clientNbofOrgs.push(0);
         this.clientNbofOrgsAgreed.push(0);
         this.clientNbofOrgsGestBen.push(0);
-    })
+    }
 }
     report() {
+        this.totalFoodDeliveryFamiliesCurrent = 0;
+        this.totalFoodDeliveryPersonsCurrent = 0;
+        this.totalFoodDeliveryFamiliesPrevious = 0;
+        this.totalFoodDeliveryPersonsPrevious = 0;
+        this.totalFoodDeliveryFamiliesPrevious1 = 0;
+        this.totalFoodDeliveryPersonsPrevious1 = 0;
+        this.totalFoodDeliveriesCurrentOrganisations = 0;
+        this.totalFoodDeliveriesPreviousOrganisations = 0;
+        this.totalFoodDeliveriesPrevious1Organisations = 0;
+        this.totalFoodDeliveriesCurrent = 0;
+        this.totalFoodDeliveriesPrevious = 0;
+        this.totalFoodDeliveriesPrevious1 = 0;
+        this.totalFoodDeliveriesCurrentPerFamily = 0;
+        this.totalFoodDeliveriesCurrentPerPerson = 0;
+        this.totalFoodDeliveriesPreviousPerFamily = 0;
+        this.totalFoodDeliveriesPreviousPerPerson = 0;
+        this.totalFoodDeliveriesPrevious1PerFamily = 0;
+        this.totalFoodDeliveriesPrevious1PerPerson = 0;
+        this.foodDeliveriesbyCategoryCurrent = [];
+        this.foodDeliveriesbyCategoryPrevious = [];
+        this.foodDeliveriesbyCategoryPrevious1 = [];
+        this.foodDeliveriesbyCategoryCurrentPerFamily = [];
+        this.foodDeliveriesbyCategoryPreviousPerFamily = [];
+        this.foodDeliveriesbyCategoryPrevious1PerFamily = [];
+        this.foodDeliveriesbyCategoryCurrentPerPerson = [];
+        this.foodDeliveriesbyCategoryPreviousPerPerson = [];
+        this.foodDeliveriesbyCategoryPrevious1PerPerson = [];
+
+        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken,
+            "monthly", 'Depot',this.bankShortName).subscribe(
+            (response: MovementReport[]) => {
+                const movementReports = response;
+                let previousOrganisationData :{idOrg: number, categoryIndex: number,nfamilies: number,npersons: number,norgs:number}[] = [];
+                let currentOrganisationData :{idOrg: number, categoryIndex: number,nfamilies: number,npersons: number;norgs:number}[] = [];
+                let previous1OrganisationData :{idOrg: number, categoryIndex: number,nfamilies: number,npersons: number;norgs:number}[] = [];
+
+                for (let i = 0; i < this.categoryOptions.length; i++) {
+                    this.foodDeliveriesbyCategoryCurrent.push(0);
+                    this.foodDeliveriesbyCategoryPrevious.push(0);
+                    this.foodDeliveriesbyCategoryPrevious1.push(0);
+                    this.foodDeliveriesbyCategoryCurrentPerFamily.push(0);
+                    this.foodDeliveriesbyCategoryPreviousPerFamily.push(0);
+                    this.foodDeliveriesbyCategoryPrevious1PerFamily.push(0);
+                    this.foodDeliveriesbyCategoryCurrentPerPerson.push(0);
+                    this.foodDeliveriesbyCategoryPreviousPerPerson.push(0);
+                    this.foodDeliveriesbyCategoryPrevious1PerPerson.push(0);
+                    this.currentFamiliesByCategory.push(0);
+                    this.currentPersonsByCategory.push(0);
+                    this.currentOrganisationsByCategory.push(0);
+                    this.previousFamiliesByCategory.push(0);
+                    this.previousPersonsByCategory.push(0);
+                    this.previousOrganisationsByCategory.push(0);
+                    this.previous1FamiliesByCategory.push(0);
+                    this.previous1PersonsByCategory.push(0);
+                    this.previous1OrganisationsByCategory.push(0);
+
+                }
+                let currentFamilies= 0;
+                let previousFamilies = 0;
+                let previous1Families = 0;
+                let currentPersons= 0;
+                let previousPersons = 0;
+                let previous1Persons = 0;
+
+                for (let i = 0; i < movementReports.length; i++) {
+                    if (movementReports[i].orgname) {
+                        movementReports[i].orgname = movementReports[i].orgname.replace(/[^0-9a-z]/gi, '');
+                    }
+
+                    let categoryOptionIndex = -1;
+                    if (this.category == 'Depot') {
+                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === movementReports[i].idOrg.toString());
+                    } else {
+                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.label === movementReports[i].bankShortName);
+                    }
+                    if (categoryOptionIndex === -1) {
+                        categoryOptionIndex = this.categoryOptions.length - 1;
+                    }
+                    const movementYear = movementReports[i].key.substr(0, 4);
+                    if (parseInt(movementYear, 10) < this.previousPeriod1) continue;
+                    switch (movementYear) {
+                        case this.currentPeriod.toString():
+                           if (!currentOrganisationData.find(item => item.idOrg === movementReports[i].idOrg)) {
+                                currentOrganisationData.push({idOrg: movementReports[i].idOrg, categoryIndex: categoryOptionIndex,
+                                    nfamilies:movementReports[i].nfamilies, npersons :movementReports[i].npersons,norgs:movementReports[i].norgs});
+                            }
+                            this.foodDeliveriesbyCategoryCurrent[categoryOptionIndex] += movementReports[i].quantity;
+                            this.totalFoodDeliveriesCurrent += movementReports[i].quantity;
+
+                            break;
+                        case this.previousPeriod.toString():
+
+                            if (!previousOrganisationData.find(item => item.idOrg === movementReports[i].idOrg)) {
+                                previousOrganisationData.push({idOrg: movementReports[i].idOrg, categoryIndex: categoryOptionIndex,
+                                    nfamilies:movementReports[i].nfamilies, npersons :movementReports[i].npersons,norgs:movementReports[i].norgs});
+                            }
+                            this.foodDeliveriesbyCategoryPrevious[categoryOptionIndex] += movementReports[i].quantity;
+                            this.totalFoodDeliveriesPrevious += movementReports[i].quantity;
+                            break;
+                        case this.previousPeriod1.toString():
+                            if (!previous1OrganisationData.find(item => item.idOrg === movementReports[i].idOrg)) {
+                                previous1OrganisationData.push({idOrg: movementReports[i].idOrg, categoryIndex: categoryOptionIndex,
+                                    nfamilies:movementReports[i].nfamilies, npersons :movementReports[i].npersons,norgs:movementReports[i].norgs});
+                                console.log("added previous1",movementReports[i]);
+                            }
+                            else {
+                                console.log("found previous1",movementReports[i]);
+                            }
+                            this.foodDeliveriesbyCategoryPrevious1[categoryOptionIndex] += movementReports[i].quantity;
+                            this.totalFoodDeliveriesPrevious1 += movementReports[i].quantity;
+
+                            break;
+
+                        default:
+
+                    }
+                }
+                currentOrganisationData.forEach(item => {
+                    this.totalFoodDeliveryFamiliesCurrent += item.nfamilies;
+                    this.totalFoodDeliveryPersonsCurrent += item.npersons;
+                    this.totalFoodDeliveriesCurrentOrganisations += item.norgs;
+                });
+                previousOrganisationData.forEach(item => {
+                    this.totalFoodDeliveryFamiliesPrevious += item.nfamilies;
+                    this.totalFoodDeliveryPersonsPrevious += item.npersons;
+                    this.totalFoodDeliveriesPreviousOrganisations += item.norgs;
+                });
+                previous1OrganisationData.forEach(item => {
+                    this.totalFoodDeliveryFamiliesPrevious1 += item.nfamilies;
+                    this.totalFoodDeliveryPersonsPrevious1 += item.npersons;
+                    this.totalFoodDeliveriesPrevious1Organisations += item.norgs
+                });
+                if (this.totalFoodDeliveryFamiliesCurrent >0) {
+                    this.totalFoodDeliveriesCurrentPerFamily =
+                        this.totalFoodDeliveriesCurrent / this.totalFoodDeliveryFamiliesCurrent;
+                }
+                if (this.totalFoodDeliveryFamiliesPrevious >0) {
+                    this.totalFoodDeliveriesPreviousPerFamily =
+                        this.totalFoodDeliveriesPrevious / this.totalFoodDeliveryFamiliesPrevious;
+                }
+                if (this.totalFoodDeliveryFamiliesPrevious1 >0) {
+                    this.totalFoodDeliveriesPrevious1PerFamily =
+                        this.totalFoodDeliveriesPrevious1 / this.totalFoodDeliveryFamiliesPrevious1;
+                }
+                if (this.totalFoodDeliveryPersonsCurrent >0) {
+                    this.totalFoodDeliveriesCurrentPerPerson =
+                        this.totalFoodDeliveriesCurrent / this.totalFoodDeliveryPersonsCurrent;
+                }
+                if (this.totalFoodDeliveryPersonsPrevious >0) {
+                    this.totalFoodDeliveriesPreviousPerPerson =
+                        this.totalFoodDeliveriesPrevious / this.totalFoodDeliveryPersonsPrevious;
+                }
+                if (this.totalFoodDeliveryPersonsPrevious1 >0) {
+                    this.totalFoodDeliveriesPrevious1PerPerson =
+                        this.totalFoodDeliveriesPrevious1 / this.totalFoodDeliveryPersonsPrevious1;
+                }
+                for (let i = 0; i < this.categoryOptions.length; i++) {
+                    currentOrganisationData.filter(item => item.categoryIndex ===i)
+                        .map(item => {
+                            this.currentFamiliesByCategory[i] = item.nfamilies;
+                            this.currentPersonsByCategory[i] = item.npersons;
+                            this.currentOrganisationsByCategory[i] = item.norgs;
+                        });
+                    previousOrganisationData.filter(item => item.categoryIndex ===i)
+                        .map(item => {
+                            this.previousFamiliesByCategory[i] = item.nfamilies;
+                            this.previousPersonsByCategory[i] = item.npersons;
+                            this.previousOrganisationsByCategory[i] = item.norgs;
+                        });
+                    previous1OrganisationData.filter(item => item.categoryIndex ===i)
+                        .map(item => {
+                            this.previous1FamiliesByCategory[i] = item.nfamilies;
+                            this.previous1PersonsByCategory[i] = item.npersons;
+                            this.previous1OrganisationsByCategory[i] = item.norgs;
+                        });
+                    if (this.currentFamiliesByCategory[i] >0) {
+                        this.foodDeliveriesbyCategoryCurrentPerFamily[i] =
+                            this.foodDeliveriesbyCategoryCurrent[i] / this.currentFamiliesByCategory[i];
+                    }
+                    if (this.currentPersonsByCategory[i] >0) {
+                        this.foodDeliveriesbyCategoryCurrentPerPerson[i] =
+                            this.foodDeliveriesbyCategoryCurrent[i] / this.currentPersonsByCategory[i];
+                    }
+                    if (this.previousFamiliesByCategory[i] >0) {
+                        this.foodDeliveriesbyCategoryPreviousPerFamily[i] =
+                            this.foodDeliveriesbyCategoryPrevious[i] / this.previousFamiliesByCategory[i];
+                    }
+                    if (this.previousPersonsByCategory[i] >0) {
+                        this.foodDeliveriesbyCategoryPreviousPerPerson[i] =
+                            this.foodDeliveriesbyCategoryPrevious[i] / this.previousPersonsByCategory[i];
+                    }
+                    if (this.previous1FamiliesByCategory[i] >0) {
+                        this.foodDeliveriesbyCategoryPrevious1PerFamily[i] =
+                            this.foodDeliveriesbyCategoryPrevious1[i] / this.previous1FamiliesByCategory[i];
+                    }
+                    if (this.previous1PersonsByCategory[i] >0) {
+                        this.foodDeliveriesbyCategoryPrevious1PerPerson[i] =
+                            this.foodDeliveriesbyCategoryPrevious1[i] / this.previous1PersonsByCategory[i];
+                    }
+
+                }
+
+            })
+
         const lastDays = '10';
 
         this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken,
@@ -517,9 +765,9 @@ initializeClientsArrays() {
     }
     setDropdownDays() {
         console.log("setDropdownDays with " + this.dashboardBankItems.length + " bank items" + this.dashboardOrgItems.length + " org items");
-        var bankDays = this.dashboardBankItems.map(x => x.key); // beware of the key is 'key' for aggregated bank items
-        var orgDays = this.dashboardOrgItems.map(x => x.day); // beware of the key is 'day' for org items
-        var allDays = bankDays.concat(orgDays).filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
+        const bankDays = this.dashboardBankItems.map(x => x.key); // beware of the key is 'key' for aggregated bank items
+        const orgDays = this.dashboardOrgItems.map(x => x.day); // beware of the key is 'day' for org items
+        const allDays = bankDays.concat(orgDays).filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
         this.days = allDays.sort().reverse();
         console.log("setDropdownDays with " + this.days.length + " days");
         this.filterDay(allDays[0]);
@@ -614,5 +862,29 @@ initializeClientsArrays() {
     }
     labelStatus(status: string) {
         return this.statuts.find(statut => statut.value === status).label;
+    }
+
+    labelFoodDeliveries() {
+        return $localize`:@@FoodDeliveries:Food Deliveries`;
+    }
+
+    labelPeriod() {
+        return $localize`:@@Period:Period`;
+    }
+
+    labelFoodDelivered() {
+        return $localize`:@@FoodDelivered:Food Delivered`;
+    }
+
+    labelPerFamily() {
+        return $localize`:@@PerFamily:Per Family`;
+    }
+
+    labelPerPerson() {
+        return $localize`:@@PerPerson:Per Person`;
+    }
+
+    labelRecentActivity() {
+        return $localize`:@@DistributionRecentActivity:Recent Activity`;
     }
 }
