@@ -367,7 +367,7 @@ export class MovementReportComponent implements OnInit {
                     if (categoryOptionIndex === -1) {
                          categoryOptionIndex = this.categoryOptions.length - 1;
                     }
-                    const movementYear = this.movementReports[i].month.substr(0, 4);
+                    const movementYear = String(this.movementReports[i].month).substring(0, 4);
                     if (movementYear < this.previousPeriod2) continue;
                     switch (movementYear) {
                         case this.currentPeriod.toString():
@@ -423,7 +423,7 @@ export class MovementReportComponent implements OnInit {
                         default:
 
                     }
-                    this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i]);
+                    this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i],'month');
 
                 }
                 this.setStatisticsByOrganisation();
@@ -520,7 +520,7 @@ export class MovementReportComponent implements OnInit {
                         default:
 
                     }
-                    this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i]);
+                    this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i],'day');
 
                 }
                 this.setStatisticsByOrganisation();
@@ -579,10 +579,14 @@ export class MovementReportComponent implements OnInit {
                 this.totalFoodDeliveriesPrevious1 / this.totalFoodDeliveryPersonsPrevious1;
         }
     }
-    addMovementReportToSubCategoryReportDataSets(movementReport) {
+    addMovementReportToSubCategoryReportDataSets(movementReport,period:string) {
+            let key = String(movementReport.month);
+            if (period === 'day') {
+                key = movementReport.day;
+            }
 
-            if (!this.reportLabels.includes(movementReport.key)) {
-                this.reportLabels.push(movementReport.key);
+            if (!this.reportLabels.includes(key)) {
+                this.reportLabels.push(key);
                 for (let i = 0; i < this.categoryOptionsNonFEAD.length; i++) {
                     this.reportDataSetsNonFEAD[i].data.push(0);
                 }
@@ -820,7 +824,7 @@ export class MovementReportComponent implements OnInit {
                 const movementReports = response;
                 for (let movementReport of movementReports) {
                     const exportListMonthly = new ExportMovementMonthlyReport();
-                    exportListMonthly.month = movementReport.month;
+                    exportListMonthly.month = String(movementReport.month);
                     exportListMonthly.bank = movementReport.bankShortName;
                     exportListMonthly.category = movementReport.category;
                     exportListMonthly.quantity = movementReport.quantity.toFixed(0);

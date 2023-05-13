@@ -389,7 +389,7 @@ initializeClientsArrays() {
                     if (categoryOptionIndex === -1) {
                         categoryOptionIndex = this.categoryOptions.length - 1;
                     }
-                    const movementYear = movementReports[i].month.substr(0, 4);
+                    const movementYear = String(movementReports[i].month).substring(0, 4);
                     if (parseInt(movementYear, 10) < this.previousPeriod1) continue;
                     switch (movementYear) {
                         case this.currentPeriod.toString():
