@@ -62,6 +62,15 @@ export class MovementReportComponent implements OnInit {
     totalFoodDeliveriesCurrent: number;
     totalFoodDeliveriesPrevious: number;
     totalFoodDeliveriesPrevious1: number;
+    totalFoodDeliveryFamiliesCurrent: number;
+    totalFoodDeliveryPersonsCurrent: number;
+    totalFoodDeliveryFamiliesPrevious: number;
+    totalFoodDeliveryPersonsPrevious: number;
+    totalFoodDeliveryFamiliesPrevious1: number;
+    totalFoodDeliveryPersonsPrevious1: number;
+    totalFoodDeliveriesCurrentOrganisations:number;
+    totalFoodDeliveriesPreviousOrganisations:number;
+    totalFoodDeliveriesPrevious1Organisations:number;
     totalFoodDeliveriesCurrentPerFamily: number;
     totalFoodDeliveriesCurrentPerPerson: number;
     totalFoodDeliveriesPreviousPerFamily: number;
@@ -83,6 +92,9 @@ export class MovementReportComponent implements OnInit {
     previousPeriod1: any;
     previousPeriod2: any;
     previousPeriod3: any;
+    previousOrganisationData :{key: any, categoryIndex: number,nfamilies: number,npersons: number,norgs:number}[] = [];
+    currentOrganisationData :{key: any, categoryIndex: number,nfamilies: number,npersons: number;norgs:number}[] = [];
+    previous1OrganisationData :{key: any, categoryIndex: number,nfamilies: number,npersons: number;norgs:number}[] = [];
     exportListMovementsMonthly:ExportMovementMonthlyReport[];
     exportListMovementsDaily:ExportMovementDailyReport[]
     depotId: string;
@@ -273,31 +285,48 @@ export class MovementReportComponent implements OnInit {
     }
      createCategoryOptionsForOrgs() {
            this.movementReports.forEach(movementReport => {
-               if (this.categoryOptions.length < 9) {
-                   this.categoryOptions.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
-               } else if (this.categoryOptions.length == 9) {
-                   this.categoryOptions.push({value: null,label: 'OTHER'});
+               const index = this.categoryOptions.findIndex(item => item.value === movementReport.idOrg.toString());
+               if  (index === -1) {
+                    if (this.categoryOptions.length < 9) {
+                        this.categoryOptions.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
+                    }
+                    else if (this.categoryOptions.length == 9) {
+                     this.categoryOptions.push({value: null,label: 'OTHER'});
+                    }
                }
                switch (movementReport.category) {
                    case 'NOFEADNONAGREED':
-                       if (this.categoryOptionsNonFEAD.length < 9) {
-                           this.categoryOptionsNonFEAD.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
-                       } else if (this.categoryOptionsNonFEAD.length == 9) {
-                           this.categoryOptionsNonFEAD.push({value: null,label: 'OTHER'});
+
+                       const index1 = this.categoryOptionsNonFEAD.findIndex(item => item.value === movementReport.idOrg.toString());
+                       if  (index1 === -1) {
+                           if (this.categoryOptionsNonFEAD.length < 9) {
+                               this.categoryOptionsNonFEAD.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
+                           }
+                           else if (this.categoryOptionsNonFEAD.length == 9) {
+                               this.categoryOptionsNonFEAD.push({value: null,label: 'OTHER'});
+                           }
                        }
                        break;
                    case 'FEADNONAGREED':
-                       if (this.categoryOptionsFEADNonAgreed.length < 9) {
-                           this.categoryOptionsFEADNonAgreed.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
-                       } else if (this.categoryOptionsFEADNonAgreed.length == 9) {
-                           this.categoryOptionsFEADNonAgreed.push({value: null,label: 'OTHER'});
+                       const index2 = this.categoryOptionsFEADNonAgreed.findIndex(item => item.value === movementReport.idOrg.toString());
+                       if  (index2 === -1) {
+                           if (this.categoryOptionsFEADNonAgreed.length < 9) {
+                               this.categoryOptionsFEADNonAgreed.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
+                           }
+                           else if (this.categoryOptionsFEADNonAgreed.length == 9) {
+                               this.categoryOptionsFEADNonAgreed.push({value: null,label: 'OTHER'});
+                           }
                        }
                        break;
                    case 'AGREEDFEADCOLLECT':
-                       if (this.categoryOptionsFEADAgreedCollect.length < 9) {
-                           this.categoryOptionsFEADAgreedCollect.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
-                       } else if (this.categoryOptionsFEADAgreedCollect.length == 9) {
-                           this.categoryOptionsFEADAgreedCollect.push({value: null,label: 'OTHER'});
+                       const index3 = this.categoryOptionsFEADAgreedCollect.findIndex(item => item.value === movementReport.idOrg.toString());
+                       if  (index3 === -1) {
+                           if (this.categoryOptionsFEADAgreedCollect.length < 9) {
+                               this.categoryOptionsFEADAgreedCollect.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
+                           }
+                           else if (this.categoryOptionsFEADAgreedCollect.length == 9) {
+                               this.categoryOptionsFEADAgreedCollect.push({value: null,label: 'OTHER'});
+                           }
                        }
                        break;
                    default:
@@ -306,26 +335,31 @@ export class MovementReportComponent implements OnInit {
            });
      }
     reportMovementsHistoryMonthly() {
+        this.currentPeriod = new Date().getFullYear();
+        this.previousPeriod = this.currentPeriod - 1;
+        this.previousPeriod1 = this.currentPeriod - 2;
+        const lowRange = `${this.previousPeriod1}01`;
+        const highRange = `${this.currentPeriod}12`;
 
-
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly", this.category,this.bankShortName,this.depotId).subscribe(
+        this.movementReportHttpService.getMovementMonthlyReport(this.authService.accessToken, this.bankShortName,this.depotId, lowRange,highRange).subscribe(
             (response: MovementReport[]) => {
                 this.movementReports = response;
 
-                this.currentPeriod = new Date().getFullYear();
-                this.previousPeriod = this.currentPeriod - 1;
-                this.previousPeriod1 = this.currentPeriod - 2;
+
                 if (this.depotId) {
                     this.createCategoryOptionsForOrgs();
                 }
                 this.initializeChart();
+                this.previousOrganisationData = [];
+                this.currentOrganisationData = [];
+                this.previous1OrganisationData = [];
                 for (let i = 0; i < this.movementReports.length; i++) {
                     if ( this.movementReports[i].orgname) {
                         this.movementReports[i].orgname = this.movementReports[i].orgname.replace(/[^0-9a-z]/gi, '');
                     }
                     let categoryOptionIndex = -1;
                     if (this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].idOrg.toString());
+                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].lienDepot.toString());
                     }
                     else {
                          categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.label === this.movementReports[i].bankShortName);
@@ -333,38 +367,57 @@ export class MovementReportComponent implements OnInit {
                     if (categoryOptionIndex === -1) {
                          categoryOptionIndex = this.categoryOptions.length - 1;
                     }
-                    const movementYear = this.movementReports[i].key.substr(0, 4);
+                    const movementYear = this.movementReports[i].month.substr(0, 4);
                     if (movementYear < this.previousPeriod2) continue;
                     switch (movementYear) {
                         case this.currentPeriod.toString():
+                            let itemKey: any = this.movementReports[i].bankShortName;
+                            if (this.category == 'Depot') {
+                                itemKey = this.movementReports[i].lienDepot;
+                            }
+                            const currentOrganisationDataItem = this.currentOrganisationData.find(item => item.key === itemKey)
+                            if (!currentOrganisationDataItem) {
+                                this.currentOrganisationData.push({key: itemKey, categoryIndex: categoryOptionIndex,
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
+                            }
+                            else {
+                                currentOrganisationDataItem.norgs++;
+                            }
                             this.reportDataSetsCurrent[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
-                            if (this.movementReports[i].nfamilies > 0) {
-                                this.totalFoodDeliveriesCurrentPerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
-                            }
-                            if (this.movementReports[i].npersons > 0) {
-                                this.totalFoodDeliveriesCurrentPerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
-                            }
+
                             break;
                         case this.previousPeriod.toString():
+                            let itemKeyPrevious: any = this.movementReports[i].bankShortName;
+                            if (this.category == 'Depot') {
+                                itemKeyPrevious = this.movementReports[i].lienDepot;
+                            }
+                            const previousOrganisationDataItem = this.previousOrganisationData.find(item => item.key === itemKeyPrevious)
+                            if (!previousOrganisationDataItem) {
+                                this.previousOrganisationData.push({key: itemKeyPrevious, categoryIndex: categoryOptionIndex,
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
+                            }
+                            else {
+                                previousOrganisationDataItem.norgs++;
+                            }
                             this.reportDataSetsPrevious[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;
-                            if (this.movementReports[i].nfamilies > 0) {
-                                this.totalFoodDeliveriesPreviousPerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
-                            }
-                            if (this.movementReports[i].npersons > 0) {
-                                this.totalFoodDeliveriesPreviousPerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
-                            }
                             break;
                         case this.previousPeriod1.toString():
+                            let itemKeyPrevious1: any = this.movementReports[i].bankShortName;
+                            if (this.category == 'Depot') {
+                                itemKeyPrevious1 = this.movementReports[i].lienDepot;
+                            }
+                            const previous1OrganisationDataItem = this.previous1OrganisationData.find(item => item.key === itemKeyPrevious1)
+                            if (!previous1OrganisationDataItem) {
+                                this.previous1OrganisationData.push({key: itemKeyPrevious1, categoryIndex: categoryOptionIndex,
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
+                            }
+                            else {
+                                previous1OrganisationDataItem.norgs++;
+                            }
                             this.reportDataSetsPrevious1[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious1 += this.movementReports[i].quantity;
-                            if (this.movementReports[i].nfamilies > 0) {
-                                this.totalFoodDeliveriesPrevious1PerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
-                            }
-                            if (this.movementReports[i].npersons > 0) {
-                                this.totalFoodDeliveriesPrevious1PerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
-                            }
                             break;
 
                         default:
@@ -373,19 +426,22 @@ export class MovementReportComponent implements OnInit {
                     this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i]);
 
                 }
+                this.setStatisticsByOrganisation();
                 this.createReportData();
 
             });
 
     }
     reportMovementsHistoryDaily() {
-
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "daily", this.category,this.bankShortName,this.depotId).subscribe(
+        this.currentPeriod = moment().format('YYYY-MM');
+        this.previousPeriod = moment().subtract(1, 'months').format('YYYY-MM');
+        this.previousPeriod1 = moment().subtract(2, 'months').format('YYYY-MM');
+        const lowRange = `${this.previousPeriod1}\-01`;
+        const highRange = `${this.currentPeriod}\-31`;
+        this.movementReportHttpService.getMovementDailyReport(this.authService.accessToken, this.bankShortName,this.depotId, lowRange,highRange).subscribe(
             (response: MovementReport[]) => {
                 this.movementReports = response;
-                this.currentPeriod = moment().format('YYYY-MM');
-                this.previousPeriod = moment().subtract(1, 'months').format('YYYY-MM');
-                this.previousPeriod1 = moment().subtract(2, 'months').format('YYYY-MM');
+
                 if (this.depotId) {
                     this.createCategoryOptionsForOrgs();
                 }
@@ -396,26 +452,44 @@ export class MovementReportComponent implements OnInit {
                     }
                     let categoryOptionIndex = -1;
                     if (this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].idOrg.toString());
+                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].lienDepot.toString());
                     } else {
                         categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.label === this.movementReports[i].bankShortName);
                     }
                     if (categoryOptionIndex === -1) {
                             categoryOptionIndex = this.categoryOptions.length - 1;
                     }
-                    const movementDay = this.movementReports[i].key.substr(0, 7);
+                    const movementDay = this.movementReports[i].day.substr(0, 7);
                     switch (movementDay) {
                         case this.currentPeriod.toString():
+                            let itemKey: any = this.movementReports[i].bankShortName;
+                            if (this.category == 'Depot') {
+                                itemKey = this.movementReports[i].lienDepot;
+                            }
+                            const currentOrganisationDataItem = this.currentOrganisationData.find(item => item.key === itemKey)
+                            if (!currentOrganisationDataItem) {
+                                this.currentOrganisationData.push({key: itemKey, categoryIndex: categoryOptionIndex,
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
+                            }
+                            else {
+                                currentOrganisationDataItem.norgs++;
+                            }
                             this.reportDataSetsCurrent[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
-                            if (this.movementReports[i].nfamilies > 0) {
-                                this.totalFoodDeliveriesCurrentPerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
-                            }
-                            if (this.movementReports[i].npersons > 0) {
-                                this.totalFoodDeliveriesCurrentPerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
-                            }
                             break;
                         case this.previousPeriod.toString():
+                            let itemKeyPrevious: any = this.movementReports[i].bankShortName;
+                            if (this.category == 'Depot') {
+                                itemKeyPrevious = this.movementReports[i].lienDepot;
+                            }
+                            const previousOrganisationDataItem = this.previousOrganisationData.find(item => item.key === itemKeyPrevious)
+                            if (!previousOrganisationDataItem) {
+                                this.previousOrganisationData.push({key: itemKeyPrevious, categoryIndex: categoryOptionIndex,
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
+                            }
+                            else {
+                                previousOrganisationDataItem.norgs++;
+                            }
                             this.reportDataSetsPrevious[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;
                             if (this.movementReports[i].nfamilies > 0) {
@@ -426,14 +500,21 @@ export class MovementReportComponent implements OnInit {
                             }
                             break;
                         case this.previousPeriod1.toString():
+                            let itemKeyPrevious1: any = this.movementReports[i].bankShortName;
+                            if (this.category == 'Depot') {
+                                itemKeyPrevious1 = this.movementReports[i].lienDepot;
+                            }
+                            const previous1OrganisationDataItem = this.previous1OrganisationData.find(item => item.key === itemKeyPrevious1)
+                            if (!previous1OrganisationDataItem) {
+                                this.previous1OrganisationData.push({key: itemKeyPrevious1, categoryIndex: categoryOptionIndex,
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
+                            }
+                            else {
+                                previous1OrganisationDataItem.norgs++;
+                            }
                             this.reportDataSetsPrevious1[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious1 += this.movementReports[i].quantity;
-                            if (this.movementReports[i].nfamilies > 0) {
-                                this.totalFoodDeliveriesPrevious1PerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
-                            }
-                            if (this.movementReports[i].npersons > 0) {
-                                this.totalFoodDeliveriesPrevious1PerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
-                            }
+
                             break;
 
                         default:
@@ -442,10 +523,61 @@ export class MovementReportComponent implements OnInit {
                     this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i]);
 
                 }
+                this.setStatisticsByOrganisation();
                 this.createReportData();
 
             });
 
+    }
+    setStatisticsByOrganisation()  {
+        this.totalFoodDeliveryFamiliesCurrent = 0;
+        this.totalFoodDeliveryPersonsCurrent = 0;
+        this.totalFoodDeliveryFamiliesPrevious = 0;
+        this.totalFoodDeliveryPersonsPrevious = 0;
+        this.totalFoodDeliveryFamiliesPrevious1 = 0;
+        this.totalFoodDeliveryPersonsPrevious1 = 0;
+        this.totalFoodDeliveriesCurrentOrganisations = 0;
+        this.totalFoodDeliveriesPreviousOrganisations = 0;
+        this.totalFoodDeliveriesPrevious1Organisations= 0;
+        this.currentOrganisationData.forEach(item => {
+            this.totalFoodDeliveryFamiliesCurrent += item.nfamilies;
+            this.totalFoodDeliveryPersonsCurrent += item.npersons;
+            this.totalFoodDeliveriesCurrentOrganisations += item.norgs;
+        });
+        this.previousOrganisationData.forEach(item => {
+            this.totalFoodDeliveryFamiliesPrevious += item.nfamilies;
+            this.totalFoodDeliveryPersonsPrevious += item.npersons;
+            this.totalFoodDeliveriesPreviousOrganisations += item.norgs;
+        });
+        this.previous1OrganisationData.forEach(item => {
+            this.totalFoodDeliveryFamiliesPrevious1 += item.nfamilies;
+            this.totalFoodDeliveryPersonsPrevious1 += item.npersons;
+            this.totalFoodDeliveriesPrevious1Organisations += item.norgs
+        });
+        if (this.totalFoodDeliveryFamiliesCurrent >0) {
+            this.totalFoodDeliveriesCurrentPerFamily =
+                this.totalFoodDeliveriesCurrent / this.totalFoodDeliveryFamiliesCurrent;
+        }
+        if (this.totalFoodDeliveryFamiliesPrevious >0) {
+            this.totalFoodDeliveriesPreviousPerFamily =
+                this.totalFoodDeliveriesPrevious / this.totalFoodDeliveryFamiliesPrevious;
+        }
+        if (this.totalFoodDeliveryFamiliesPrevious1 >0) {
+            this.totalFoodDeliveriesPrevious1PerFamily =
+                this.totalFoodDeliveriesPrevious1 / this.totalFoodDeliveryFamiliesPrevious1;
+        }
+        if (this.totalFoodDeliveryPersonsCurrent >0) {
+            this.totalFoodDeliveriesCurrentPerPerson =
+                this.totalFoodDeliveriesCurrent / this.totalFoodDeliveryPersonsCurrent;
+        }
+        if (this.totalFoodDeliveryPersonsPrevious >0) {
+            this.totalFoodDeliveriesPreviousPerPerson =
+                this.totalFoodDeliveriesPrevious / this.totalFoodDeliveryPersonsPrevious;
+        }
+        if (this.totalFoodDeliveryPersonsPrevious1 >0) {
+            this.totalFoodDeliveriesPrevious1PerPerson =
+                this.totalFoodDeliveriesPrevious1 / this.totalFoodDeliveryPersonsPrevious1;
+        }
     }
     addMovementReportToSubCategoryReportDataSets(movementReport) {
 
@@ -466,7 +598,7 @@ export class MovementReportComponent implements OnInit {
             switch (movementReport.category) {
                 case 'NOFEADNONAGREED':
                     if (this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptionsNonFEAD.findIndex(obj => obj.value === movementReport.idOrg.toString());
+                        categoryOptionIndex = this.categoryOptionsNonFEAD.findIndex(obj => obj.value === movementReport.lienDepot.toString());
                     }
                     else {
                         categoryOptionIndex = this.categoryOptionsNonFEAD.findIndex(obj => obj.label === movementReport.bankShortName);
@@ -479,7 +611,7 @@ export class MovementReportComponent implements OnInit {
                     break;
                 case 'FEADNONAGREED':
                     if (this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptionsFEADNonAgreed.findIndex(obj => obj.value === movementReport.idOrg.toString());
+                        categoryOptionIndex = this.categoryOptionsFEADNonAgreed.findIndex(obj => obj.value === movementReport.lienDepot.toString());
                     }
                     else {
                         categoryOptionIndex = this.categoryOptionsFEADNonAgreed.findIndex(obj => obj.label === movementReport.bankShortName);
@@ -492,7 +624,7 @@ export class MovementReportComponent implements OnInit {
                     break;
                 case 'AGREEDFEADCOLLECT':
                     if (this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.findIndex(obj => obj.value === movementReport.idOrg.toString());
+                        categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.findIndex(obj => obj.value === movementReport.lienDepot.toString());
                     }
                     else {
                         categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.findIndex(obj => obj.label === movementReport.bankShortName);
@@ -653,15 +785,16 @@ export class MovementReportComponent implements OnInit {
     }
 
     getTotalFoodDeliveriesPrevious() {
-        return $localize`:@@StatFoodDeliveriesPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesPrevious)} kg( ${this.totalFoodDeliveriesPreviousPerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesPreviousPerPerson.toFixed(2)} kg per person.)`;
+        return $localize`:@@StatFoodDeliveriesPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesPrevious)} kg`;
+       // todo later return $localize`:@@StatFoodDeliveriesPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesPrevious)} kg( ${this.totalFoodDeliveriesPreviousPerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesPreviousPerPerson.toFixed(2)} kg per person.)`;
     }
 
     getTotalFoodDeliveriesPrevious1() {
-        return $localize`:@@StatFoodDeliveriesPrevious1Total:Total: ${Math.round(this.totalFoodDeliveriesPrevious1)} kg( ${this.totalFoodDeliveriesPrevious1PerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesPrevious1PerPerson.toFixed(2)} kg per person.)`;
+        return $localize`:@@StatFoodDeliveriesPrevious1Total:Total: ${Math.round(this.totalFoodDeliveriesPrevious1)} kg`;
     }
 
     getTotalFoodDeliveriesCurrent() {
-        return $localize`:@@StatFoodDeliveriesCurrentTotal:Total: ${Math.round(this.totalFoodDeliveriesCurrent)} kg( ${this.totalFoodDeliveriesCurrentPerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesCurrentPerPerson.toFixed(2)} kg per person.)`;
+        return $localize`:@@StatFoodDeliveriesCurrentTotal:Total: ${Math.round(this.totalFoodDeliveriesCurrent)} kg`;
     }
 
     getTotalFoodDeliveriesNonFEAD() {
@@ -681,34 +814,13 @@ export class MovementReportComponent implements OnInit {
         this.exportListMovementsMonthly =[];
         this.exportListMovementsDaily=[];
 
-       // title gets added in the export service
-      /*  if (scope === 'month') {
-            const exportListMonthlyHeader =new ExportMovementMonthlyReport();
-            exportListMonthlyHeader.month = $localize`:@@Month:Month`;
-            exportListMonthlyHeader.bank = $localize`:@@Bank:Bank`;
-            exportListMonthlyHeader.category = $localize`:@@Category:Category`;
-            exportListMonthlyHeader.quantity = $localize`:@@Quantity:Quantity(kg)`
-            exportListMovementsMonthly.push(exportListMonthlyHeader);
-
-        } else {
-            const exportListDailyHeader =new ExportMovementDailyReport();
-            exportListDailyHeader.day = $localize`:@@Day:Day`;
-            exportListDailyHeader.bank = $localize`:@@Bank:Bank`;
-            exportListDailyHeader.idOrg = $localize`:@@OrganisationId :Organisation Id`;
-            exportListDailyHeader.orgname = $localize`:@@OrganisationName:Organisation Name`;
-            exportListDailyHeader.category = $localize`:@@Category:Category`;
-            exportListDailyHeader.quantity = $localize`:@@Quantity:Quantity(kg)`;
-            exportListMovementsDaily.push(exportListDailyHeader);
-        }
-
-*/
         if (scope === 'month') {
-        this.movementReportHttpService.getMovementReportByBank(this.authService.accessToken, "monthly",this.category, this.bankShortName).subscribe(
+        this.movementReportHttpService.getMovementMonthlyReport(this.authService.accessToken, this.bankShortName).subscribe(
             (response: MovementReport[]) => {
                 const movementReports = response;
                 for (let movementReport of movementReports) {
                     const exportListMonthly = new ExportMovementMonthlyReport();
-                    exportListMonthly.month = movementReport.key;
+                    exportListMonthly.month = movementReport.month;
                     exportListMonthly.bank = movementReport.bankShortName;
                     exportListMonthly.category = movementReport.category;
                     exportListMonthly.quantity = movementReport.quantity.toFixed(0);
