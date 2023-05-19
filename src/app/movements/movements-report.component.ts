@@ -30,6 +30,10 @@ export class MovementReportComponent implements OnInit {
     categoryOptionsNonFEAD: any[];
     categoryOptionsFEADNonAgreed: any[];
     categoryOptionsFEADAgreedCollect: any[];
+    orgOptions: any[];
+    orgOptionsNonFEAD: any[];
+    orgOptionsFEADNonAgreed: any[];
+    orgOptionsFEADAgreedCollect: any[];
     category: string;
     bankShortName: string;
     bankId: number;
@@ -283,49 +287,53 @@ export class MovementReportComponent implements OnInit {
             }
         }
     }
-     createCategoryOptionsForOrgs() {
+    createCategoryOptionsForOrgs()  {
+          this.orgOptionsFEADAgreedCollect = [];
+          this.orgOptionsNonFEAD = [];
+          this.orgOptionsFEADNonAgreed = [];
+          this.orgOptions = [];
            this.movementReports.forEach(movementReport => {
-               const index = this.categoryOptions.findIndex(item => item.value === movementReport.idOrg.toString());
+               const index = this.orgOptions.findIndex(item => item.value === movementReport.idOrg.toString());
                if  (index === -1) {
-                    if (this.categoryOptions.length < 9) {
-                        this.categoryOptions.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
+                    if (this.orgOptions.length < 9) {
+                        this.orgOptions.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
                     }
-                    else if (this.categoryOptions.length == 9) {
-                     this.categoryOptions.push({value: null,label: 'OTHER'});
+                    else if (this.orgOptions.length == 9) {
+                     this.orgOptions.push({value: null,label: 'OTHER'});
                     }
                }
                switch (movementReport.category) {
                    case 'NOFEADNONAGREED':
 
-                       const index1 = this.categoryOptionsNonFEAD.findIndex(item => item.value === movementReport.idOrg.toString());
+                       const index1 = this.orgOptionsNonFEAD.findIndex(item => item.value === movementReport.idOrg.toString());
                        if  (index1 === -1) {
-                           if (this.categoryOptionsNonFEAD.length < 9) {
-                               this.categoryOptionsNonFEAD.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
+                           if (this.orgOptionsNonFEAD.length < 9) {
+                               this.orgOptionsNonFEAD.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
                            }
-                           else if (this.categoryOptionsNonFEAD.length == 9) {
-                               this.categoryOptionsNonFEAD.push({value: null,label: 'OTHER'});
+                           else if (this.orgOptionsNonFEAD.length == 9) {
+                               this.orgOptionsNonFEAD.push({value: null,label: 'OTHER'});
                            }
                        }
                        break;
                    case 'FEADNONAGREED':
-                       const index2 = this.categoryOptionsFEADNonAgreed.findIndex(item => item.value === movementReport.idOrg.toString());
+                       const index2 = this.orgOptionsFEADNonAgreed.findIndex(item => item.value === movementReport.idOrg.toString());
                        if  (index2 === -1) {
-                           if (this.categoryOptionsFEADNonAgreed.length < 9) {
-                               this.categoryOptionsFEADNonAgreed.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
+                           if (this.orgOptionsFEADNonAgreed.length < 9) {
+                               this.orgOptionsFEADNonAgreed.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
                            }
-                           else if (this.categoryOptionsFEADNonAgreed.length == 9) {
-                               this.categoryOptionsFEADNonAgreed.push({value: null,label: 'OTHER'});
+                           else if (this.orgOptionsFEADNonAgreed.length == 9) {
+                               this.orgOptionsFEADNonAgreed.push({value: null,label: 'OTHER'});
                            }
                        }
                        break;
                    case 'AGREEDFEADCOLLECT':
-                       const index3 = this.categoryOptionsFEADAgreedCollect.findIndex(item => item.value === movementReport.idOrg.toString());
+                       const index3 = this.orgOptionsFEADAgreedCollect.findIndex(item => item.value === movementReport.idOrg.toString());
                        if  (index3 === -1) {
-                           if (this.categoryOptionsFEADAgreedCollect.length < 9) {
-                               this.categoryOptionsFEADAgreedCollect.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
+                           if (this.orgOptionsFEADAgreedCollect.length < 9) {
+                               this.orgOptionsFEADAgreedCollect.push({value: movementReport.idOrg.toString(), label: movementReport.orgname.replace(/[^0-9a-z]/gi , '')});
                            }
-                           else if (this.categoryOptionsFEADAgreedCollect.length == 9) {
-                               this.categoryOptionsFEADAgreedCollect.push({value: null,label: 'OTHER'});
+                           else if (this.orgOptionsFEADAgreedCollect.length == 9) {
+                               this.orgOptionsFEADAgreedCollect.push({value: null,label: 'OTHER'});
                            }
                        }
                        break;
@@ -358,11 +366,18 @@ export class MovementReportComponent implements OnInit {
                         this.movementReports[i].orgname = this.movementReports[i].orgname.replace(/[^0-9a-z]/gi, '');
                     }
                     let categoryOptionIndex = -1;
-                    if (this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].lienDepot.toString());
+                    if (this.depotId) {
+                        categoryOptionIndex = this.orgOptions.findIndex(obj => obj.value === this.movementReports[i].idOrg.toString());
+                        if (categoryOptionIndex === -1) {
+                            categoryOptionIndex = this.orgOptions.length - 1;
+                        }
                     }
                     else {
-                         categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.label === this.movementReports[i].bankShortName);
+                        if (this.category == 'Depot') {
+                            categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].lienDepot.toString());
+                        } else {
+                            categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.label === this.movementReports[i].bankShortName);
+                        }
                     }
                     if (categoryOptionIndex === -1) {
                          categoryOptionIndex = this.categoryOptions.length - 1;
@@ -426,6 +441,7 @@ export class MovementReportComponent implements OnInit {
                     this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i],'month');
 
                 }
+                console.log( 'Previous1 report data',this.reportDataSetsPrevious1);
                 this.setStatisticsByOrganisation();
                 this.createReportData();
 
@@ -451,13 +467,21 @@ export class MovementReportComponent implements OnInit {
                         this.movementReports[i].orgname = this.movementReports[i].orgname.replace(/[^0-9a-z]/gi, '');
                     }
                     let categoryOptionIndex = -1;
-                    if (this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].lienDepot.toString());
-                    } else {
-                        categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.label === this.movementReports[i].bankShortName);
+                    if (this.depotId) {
+                        categoryOptionIndex = this.orgOptions.findIndex(obj => obj.value === this.movementReports[i].idOrg.toString());
+                        if (categoryOptionIndex === -1) {
+                            categoryOptionIndex = this.orgOptions.length - 1;
+                        }
                     }
-                    if (categoryOptionIndex === -1) {
+                    else {
+                        if (this.category == 'Depot') {
+                            categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.value === this.movementReports[i].lienDepot.toString());
+                        } else {
+                            categoryOptionIndex = this.categoryOptions.findIndex(obj => obj.label === this.movementReports[i].bankShortName);
+                        }
+                        if (categoryOptionIndex === -1) {
                             categoryOptionIndex = this.categoryOptions.length - 1;
+                        }
                     }
                     const movementDay = this.movementReports[i].day.substr(0, 7);
                     switch (movementDay) {
@@ -587,55 +611,89 @@ export class MovementReportComponent implements OnInit {
 
             if (!this.reportLabels.includes(key)) {
                 this.reportLabels.push(key);
-                for (let i = 0; i < this.categoryOptionsNonFEAD.length; i++) {
-                    this.reportDataSetsNonFEAD[i].data.push(0);
+                if (this.depotId) {
+                    for (let i = 0; i < this.orgOptionsNonFEAD.length; i++) {
+                        this.reportDataSetsNonFEAD[i].data.push(0);
+                    }
+                    for (let i = 0; i < this.orgOptionsFEADNonAgreed.length; i++) {
+                        this.reportDataSetsFEADnonAgreed[i].data.push(0);
+                    }
+                    for (let i = 0; i < this.orgOptionsFEADAgreedCollect.length; i++) {
+                        this.reportDataSetsFEADAgreedCollect[i].data.push(0);
+                    }
                 }
-                for (let i = 0; i < this.categoryOptionsFEADNonAgreed.length; i++) {
-                    this.reportDataSetsFEADnonAgreed[i].data.push(0);
-                }
-                for (let i = 0; i < this.categoryOptionsFEADAgreedCollect.length; i++) {
-                    this.reportDataSetsFEADAgreedCollect[i].data.push(0);
+                else {
+                    for (let i = 0; i < this.categoryOptionsNonFEAD.length; i++) {
+                        this.reportDataSetsNonFEAD[i].data.push(0);
+                    }
+                    for (let i = 0; i < this.categoryOptionsFEADNonAgreed.length; i++) {
+                        this.reportDataSetsFEADnonAgreed[i].data.push(0);
+                    }
+                    for (let i = 0; i < this.categoryOptionsFEADAgreedCollect.length; i++) {
+                        this.reportDataSetsFEADAgreedCollect[i].data.push(0);
+                    }
                 }
             }
             const dataIndex = this.reportLabels.length -1;
             let categoryOptionIndex =0;
             switch (movementReport.category) {
                 case 'NOFEADNONAGREED':
-                    if (this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptionsNonFEAD.findIndex(obj => obj.value === movementReport.lienDepot.toString());
+                    if (this.depotId) {
+                        categoryOptionIndex = this.orgOptionsNonFEAD.findIndex(obj => obj.value === movementReport.idOrg.toString());
+                        if (categoryOptionIndex === -1) {
+                            categoryOptionIndex = this.orgOptionsNonFEAD.length - 1;
+                        }
                     }
                     else {
-                        categoryOptionIndex = this.categoryOptionsNonFEAD.findIndex(obj => obj.label === movementReport.bankShortName);
-                    }
-                    if (categoryOptionIndex  === -1) {
-                        categoryOptionIndex = this.categoryOptionsNonFEAD.length -1;
+                        if (this.category == 'Depot') {
+                            categoryOptionIndex = this.categoryOptionsNonFEAD.findIndex(obj => obj.value === movementReport.lienDepot.toString());
+                        } else {
+                            categoryOptionIndex = this.categoryOptionsNonFEAD.findIndex(obj => obj.label === movementReport.bankShortName);
+                        }
+                        if (categoryOptionIndex === -1) {
+                            categoryOptionIndex = this.categoryOptionsNonFEAD.length - 1;
+                        }
                     }
                     this.reportDataSetsNonFEAD[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
                     this.totalFoodDeliveriesNonFEAD += movementReport.quantity;
                     break;
                 case 'FEADNONAGREED':
-                    if (this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptionsFEADNonAgreed.findIndex(obj => obj.value === movementReport.lienDepot.toString());
+                    if (this.depotId) {
+                        categoryOptionIndex = this.orgOptionsFEADNonAgreed.findIndex(obj => obj.value === movementReport.idOrg.toString());
+                        if (categoryOptionIndex === -1) {
+                            categoryOptionIndex = this.orgOptionsFEADNonAgreed.length - 1;
+                        }
                     }
                     else {
-                        categoryOptionIndex = this.categoryOptionsFEADNonAgreed.findIndex(obj => obj.label === movementReport.bankShortName);
-                    }
-                    if (categoryOptionIndex  === -1) {
-                        categoryOptionIndex = this.categoryOptionsFEADNonAgreed.length -1;
+                        if (this.category == 'Depot') {
+                            categoryOptionIndex = this.categoryOptionsFEADNonAgreed.findIndex(obj => obj.value === movementReport.lienDepot.toString());
+                        } else {
+                            categoryOptionIndex = this.categoryOptionsFEADNonAgreed.findIndex(obj => obj.label === movementReport.bankShortName);
+                        }
+                        if (categoryOptionIndex === -1) {
+                            categoryOptionIndex = this.categoryOptionsFEADNonAgreed.length - 1;
+                        }
                     }
                     this.reportDataSetsFEADnonAgreed[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
                     this.totalFoodDeliveriesFEADNonAgreed += movementReport.quantity;
                     break;
                 case 'AGREEDFEADCOLLECT':
-                    if (this.category == 'Depot') {
-                        categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.findIndex(obj => obj.value === movementReport.lienDepot.toString());
+                    if (this.depotId) {
+                        categoryOptionIndex = this.orgOptionsFEADAgreedCollect.findIndex(obj => obj.value === movementReport.idOrg.toString());
+                        if (categoryOptionIndex === -1) {
+                            categoryOptionIndex = this.orgOptionsFEADAgreedCollect.length - 1;
+                        }
                     }
                     else {
-                        categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.findIndex(obj => obj.label === movementReport.bankShortName);
+                        if (this.category == 'Depot') {
+                            categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.findIndex(obj => obj.value === movementReport.lienDepot.toString());
+                        } else {
+                            categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.findIndex(obj => obj.label === movementReport.bankShortName);
+                        }
+                        if (categoryOptionIndex === -1) {
+                            categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.length - 1;
+                        }
                     }
-                   if (categoryOptionIndex  === -1) {
-                       categoryOptionIndex = this.categoryOptionsFEADAgreedCollect.length -1;
-                   }
                     this.reportDataSetsFEADAgreedCollect[categoryOptionIndex].data[dataIndex] += movementReport.quantity;
                     this.totalFoodDeliveriesFEADAgreedCollect += movementReport.quantity;
                     break;
@@ -688,58 +746,114 @@ export class MovementReportComponent implements OnInit {
                 backgroundColor: this.backgroundColors,
             }
         ];
-        for (let i = 0; i < this.categoryOptions.length; i++) {
-            this.reportDataSetsCurrent[0].data.push(0);
-            this.reportDataSetsPrevious[0].data.push(0);
-            this.reportDataSetsPrevious1[0].data.push(0);
-            this.reportDataSetsPrevious2[0].data.push(0);
-        }
-        let colorIndex = 0;
-        this.categoryOptionsNonFEAD.forEach((categoryOption) => {
-            this.reportDataSetsNonFEAD.push(
-                {
-                    type: 'bar',
-                    label: categoryOption.label,
-                    backgroundColor: this.backgroundColors[colorIndex],
-                    data: []
-                });
-            colorIndex++;
-            if (colorIndex >= this.backgroundColors.length) {
-                console.log('Not enough colors in backgroundColors array');
-                colorIndex = 0;
-            }
-        })
-        colorIndex =0;
-        this.categoryOptionsFEADNonAgreed.forEach((categoryOption) => {
-            this.reportDataSetsFEADnonAgreed.push(
-                {
-                    type: 'bar',
-                    label: categoryOption.label,
-                    backgroundColor: this.backgroundColors[colorIndex],
-                    data: []
-                });
-            colorIndex++;
-            if (colorIndex >= this.backgroundColors.length) {
-                console.log('Not enough colors in backgroundColors array');
-                colorIndex = 0;
-            }
-        })
-        colorIndex =0;
-        this.categoryOptionsFEADAgreedCollect.forEach((categoryOption) => {
 
-            this.reportDataSetsFEADAgreedCollect.push(
-                {
-                    type: 'bar',
-                    label: categoryOption.label,
-                    backgroundColor: this.backgroundColors[colorIndex],
-                    data: []
-                });
-            colorIndex++;
-            if (colorIndex >= this.backgroundColors.length) {
-                console.log('Not enough colors in backgroundColors array');
-                colorIndex = 0;
+        let colorIndex = 0;
+        if (this.depotId) {
+            for (let i = 0; i < this.orgOptions.length; i++) {
+                this.reportDataSetsCurrent[0].data.push(0);
+                this.reportDataSetsPrevious[0].data.push(0);
+                this.reportDataSetsPrevious1[0].data.push(0);
+                this.reportDataSetsPrevious2[0].data.push(0);
             }
-        })
+            this.orgOptionsNonFEAD.forEach((orgOption) => {
+                this.reportDataSetsNonFEAD.push(
+                    {
+                        type: 'bar',
+                        label: orgOption.label,
+                        backgroundColor: this.backgroundColors[colorIndex],
+                        data: []
+                    });
+                colorIndex++;
+                if (colorIndex >= this.backgroundColors.length) {
+                    console.log('Not enough colors in backgroundColors array');
+                    colorIndex = 0;
+                }
+            })
+            colorIndex = 0;
+            this.orgOptionsFEADNonAgreed.forEach((orgOption) => {
+                this.reportDataSetsFEADnonAgreed.push(
+                    {
+                        type: 'bar',
+                        label: orgOption.label,
+                        backgroundColor: this.backgroundColors[colorIndex],
+                        data: []
+                    });
+                colorIndex++;
+                if (colorIndex >= this.backgroundColors.length) {
+                    console.log('Not enough colors in backgroundColors array');
+                    colorIndex = 0;
+                }
+            })
+            colorIndex = 0;
+            this.orgOptionsFEADAgreedCollect.forEach((orgOption) => {
+
+                this.reportDataSetsFEADAgreedCollect.push(
+                    {
+                        type: 'bar',
+                        label: orgOption.label,
+                        backgroundColor: this.backgroundColors[colorIndex],
+                        data: []
+                    });
+                colorIndex++;
+                if (colorIndex >= this.backgroundColors.length) {
+                    console.log('Not enough colors in backgroundColors array');
+                    colorIndex = 0;
+                }
+            })
+        }
+        else {
+            for (let i = 0; i < this.categoryOptions.length; i++) {
+                this.reportDataSetsCurrent[0].data.push(0);
+                this.reportDataSetsPrevious[0].data.push(0);
+                this.reportDataSetsPrevious1[0].data.push(0);
+                this.reportDataSetsPrevious2[0].data.push(0);
+            }
+            this.categoryOptionsNonFEAD.forEach((categoryOption) => {
+                this.reportDataSetsNonFEAD.push(
+                    {
+                        type: 'bar',
+                        label: categoryOption.label,
+                        backgroundColor: this.backgroundColors[colorIndex],
+                        data: []
+                    });
+                colorIndex++;
+                if (colorIndex >= this.backgroundColors.length) {
+                    console.log('Not enough colors in backgroundColors array');
+                    colorIndex = 0;
+                }
+            })
+            colorIndex = 0;
+            this.categoryOptionsFEADNonAgreed.forEach((categoryOption) => {
+                this.reportDataSetsFEADnonAgreed.push(
+                    {
+                        type: 'bar',
+                        label: categoryOption.label,
+                        backgroundColor: this.backgroundColors[colorIndex],
+                        data: []
+                    });
+                colorIndex++;
+                if (colorIndex >= this.backgroundColors.length) {
+                    console.log('Not enough colors in backgroundColors array');
+                    colorIndex = 0;
+                }
+            })
+            colorIndex = 0;
+            this.categoryOptionsFEADAgreedCollect.forEach((categoryOption) => {
+
+                this.reportDataSetsFEADAgreedCollect.push(
+                    {
+                        type: 'bar',
+                        label: categoryOption.label,
+                        backgroundColor: this.backgroundColors[colorIndex],
+                        data: []
+                    });
+                colorIndex++;
+                if (colorIndex >= this.backgroundColors.length) {
+                    console.log('Not enough colors in backgroundColors array');
+                    colorIndex = 0;
+                }
+            })
+        }
 
 
     }
@@ -763,27 +877,30 @@ export class MovementReportComponent implements OnInit {
         }
 
         const mthPercentage = this.totalFoodDeliveriesPrevious > 0 ? ((this.totalFoodDeliveriesCurrent  * 100) / this.totalFoodDeliveriesPrevious  ).toFixed(2) : 0;
-
+        let labels = this.categoryOptions.map(({label}) => label);
+        if (this.depotId) {
+            labels = this.orgOptions.map(({label}) => label);
+        }
         this.titleFoodDeliveriesCurrent = $localize`:@@StatFoodDeliveriesCurrent:Food Delivered in ${this.currentPeriod}(kg) ${mthPercentage}% of ${this.previousPeriod}`;
         this.chartDataFoodDeliveriesCurrent = {
-            labels: this.categoryOptions.map(({label}) => label),
+            labels: labels,
             datasets: this.reportDataSetsCurrent
         }
         const growthPercentage = this.totalFoodDeliveriesPrevious1 > 0 ? (((this.totalFoodDeliveriesPrevious - this.totalFoodDeliveriesPrevious1) * 100 )/ this.totalFoodDeliveriesPrevious1).toFixed(2) : 0;
 
         this.titleFoodDeliveriesPrevious = $localize`:@@StatFoodDeliveriesPrevious:Food Delivered in ${this.previousPeriod}(kg) ${growthPercentage}% growth vs ${this.previousPeriod1}`;
         this.chartDataFoodDeliveriesPrevious = {
-            labels: this.categoryOptions.map(({label}) => label),
+            labels: labels,
             datasets: this.reportDataSetsPrevious
         }
         this.titleFoodDeliveriesPrevious1 = $localize`:@@StatFoodDeliveriesPrevious1:Food Delivered in ${this.previousPeriod1}(kg)`;
         this.chartDataFoodDeliveriesPrevious1 = {
-            labels: this.categoryOptions.map(({label}) => label),
+            labels: labels,
             datasets: this.reportDataSetsPrevious1
         }
         this.titleFoodDeliveriesPrevious2 = $localize`:@@StatFoodDeliveriesPrevious2:Food Delivered in ${this.previousPeriod2}(kg)`;
         this.chartDataFoodDeliveriesPrevious2 = {
-            labels: this.categoryOptions.map(({label}) => label),
+            labels: labels,
             datasets: this.reportDataSetsPrevious2
         }
     }
