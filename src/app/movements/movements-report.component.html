@@ -24,16 +24,19 @@
         <div *ngIf="chartDataFoodDeliveriesPrevious1" class="p-field p-col-12 p-md-4 card">
             <h4>{{ titleFoodDeliveriesPrevious1 }}</h4>
             <p>{{ getTotalFoodDeliveriesPrevious1()}}</p>
+            <p>{{ getTotalFoodDeliveriesPrevious1PerFamily()}}</p>
             <p-chart type="pie" [data]="chartDataFoodDeliveriesPrevious1" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
         </div>
         <div *ngIf="chartDataFoodDeliveriesPrevious" class="p-field p-col-12 p-md-4 card">
             <h4>{{ titleFoodDeliveriesPrevious }}</h4>
             <p>{{ getTotalFoodDeliveriesPrevious()}}</p>
+            <p>{{ getTotalFoodDeliveriesPreviousPerFamily()}}</p>
             <p-chart type="pie" [data]="chartDataFoodDeliveriesPrevious" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
         </div>
         <div *ngIf="chartDataFoodDeliveriesCurrent" class="p-field p-col-12 p-md-4 card">
             <h4>{{ titleFoodDeliveriesCurrent }}</h4>
             <p>{{ getTotalFoodDeliveriesCurrent()}}</p>
+            <p>{{ getTotalFoodDeliveriesCurrentPerFamily()}}</p>
             <p-chart type="pie" [data]="chartDataFoodDeliveriesCurrent" [options]="pieOptions"  [style]="{'width': '40%'}"></p-chart>
         </div>
 

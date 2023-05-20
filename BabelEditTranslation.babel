@@ -13724,6 +13724,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>StatFoodDeliveriesCurrentTotalPerFamily</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>StatFoodDeliveriesFEADAgreedCollectHistory</name>
                         <description/>
                         <comment/>
@@ -13904,6 +13924,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>StatFoodDeliveriesPrevious1TotalPerFamily</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>StatFoodDeliveriesPrevious2</name>
                         <description/>
                         <comment/>
@@ -13925,6 +13965,26 @@
                     </concept_node>
                     <concept_node>
                         <name>StatFoodDeliveriesPreviousTotal</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>StatFoodDeliveriesPreviousTotalPerFamily</name>
                         <description/>
                         <comment/>
                         <default_text/>

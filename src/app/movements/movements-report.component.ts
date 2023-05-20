@@ -96,9 +96,9 @@ export class MovementReportComponent implements OnInit {
     previousPeriod1: any;
     previousPeriod2: any;
     previousPeriod3: any;
-    previousOrganisationData :{key: any, categoryIndex: number,nfamilies: number,npersons: number,norgs:number}[] = [];
-    currentOrganisationData :{key: any, categoryIndex: number,nfamilies: number,npersons: number;norgs:number}[] = [];
-    previous1OrganisationData :{key: any, categoryIndex: number,nfamilies: number,npersons: number;norgs:number}[] = [];
+    previousOrganisationData :{idOrg: any,nfamilies: number,npersons: number}[] = [];
+    currentOrganisationData :{idOrg: any, nfamilies: number,npersons: number}[] = [];
+    previous1OrganisationData :{idOrg: any, nfamilies: number,npersons: number}[] = [];
     exportListMovementsMonthly:ExportMovementMonthlyReport[];
     exportListMovementsDaily:ExportMovementDailyReport[]
     depotId: string;
@@ -385,51 +385,29 @@ export class MovementReportComponent implements OnInit {
                     const movementYear = String(this.movementReports[i].month).substring(0, 4);
                     if (movementYear < this.previousPeriod2) continue;
                     switch (movementYear) {
-                        case this.currentPeriod.toString():
-                            let itemKey: any = this.movementReports[i].bankShortName;
-                            if (this.category == 'Depot') {
-                                itemKey = this.movementReports[i].lienDepot;
-                            }
-                            const currentOrganisationDataItem = this.currentOrganisationData.find(item => item.key === itemKey)
+                        case this.currentPeriod.toString():                           
+                            const currentOrganisationDataItem = this.currentOrganisationData.find(item => item.idOrg === this.movementReports[i].idOrg)
                             if (!currentOrganisationDataItem) {
-                                this.currentOrganisationData.push({key: itemKey, categoryIndex: categoryOptionIndex,
-                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
-                            }
-                            else {
-                                currentOrganisationDataItem.norgs++;
+                                this.currentOrganisationData.push({idOrg: this.movementReports[i].idOrg, 
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons});
                             }
                             this.reportDataSetsCurrent[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
-
                             break;
-                        case this.previousPeriod.toString():
-                            let itemKeyPrevious: any = this.movementReports[i].bankShortName;
-                            if (this.category == 'Depot') {
-                                itemKeyPrevious = this.movementReports[i].lienDepot;
-                            }
-                            const previousOrganisationDataItem = this.previousOrganisationData.find(item => item.key === itemKeyPrevious)
+                        case this.previousPeriod.toString():                           
+                            const previousOrganisationDataItem = this.previousOrganisationData.find(item => item.idOrg === this.movementReports[i].idOrg)
                             if (!previousOrganisationDataItem) {
-                                this.previousOrganisationData.push({key: itemKeyPrevious, categoryIndex: categoryOptionIndex,
-                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
-                            }
-                            else {
-                                previousOrganisationDataItem.norgs++;
+                                this.previousOrganisationData.push({idOrg: this.movementReports[i].idOrg, 
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons});
                             }
                             this.reportDataSetsPrevious[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;
                             break;
-                        case this.previousPeriod1.toString():
-                            let itemKeyPrevious1: any = this.movementReports[i].bankShortName;
-                            if (this.category == 'Depot') {
-                                itemKeyPrevious1 = this.movementReports[i].lienDepot;
-                            }
-                            const previous1OrganisationDataItem = this.previous1OrganisationData.find(item => item.key === itemKeyPrevious1)
+                        case this.previousPeriod1.toString():                           
+                            const previous1OrganisationDataItem = this.previous1OrganisationData.find(item => item.idOrg === this.movementReports[i].idOrg)
                             if (!previous1OrganisationDataItem) {
-                                this.previous1OrganisationData.push({key: itemKeyPrevious1, categoryIndex: categoryOptionIndex,
-                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
-                            }
-                            else {
-                                previous1OrganisationDataItem.norgs++;
+                                this.previous1OrganisationData.push({idOrg: this.movementReports[i].idOrg,
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons});
                             }
                             this.reportDataSetsPrevious1[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious1 += this.movementReports[i].quantity;
@@ -486,55 +464,31 @@ export class MovementReportComponent implements OnInit {
                     const movementDay = this.movementReports[i].day.substr(0, 7);
                     switch (movementDay) {
                         case this.currentPeriod.toString():
-                            let itemKey: any = this.movementReports[i].bankShortName;
-                            if (this.category == 'Depot') {
-                                itemKey = this.movementReports[i].lienDepot;
-                            }
-                            const currentOrganisationDataItem = this.currentOrganisationData.find(item => item.key === itemKey)
+                          
+                            const currentOrganisationDataItem = this.currentOrganisationData.find(item => item.idOrg === this.movementReports[i].idOrg)
                             if (!currentOrganisationDataItem) {
-                                this.currentOrganisationData.push({key: itemKey, categoryIndex: categoryOptionIndex,
-                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
-                            }
-                            else {
-                                currentOrganisationDataItem.norgs++;
+                                this.currentOrganisationData.push({idOrg: this.movementReports[i].idOrg, 
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons});
                             }
                             this.reportDataSetsCurrent[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesCurrent += this.movementReports[i].quantity;
                             break;
                         case this.previousPeriod.toString():
-                            let itemKeyPrevious: any = this.movementReports[i].bankShortName;
-                            if (this.category == 'Depot') {
-                                itemKeyPrevious = this.movementReports[i].lienDepot;
-                            }
-                            const previousOrganisationDataItem = this.previousOrganisationData.find(item => item.key === itemKeyPrevious)
+                          
+                            const previousOrganisationDataItem = this.previousOrganisationData.find(item => item.idOrg === this.movementReports[i].idOrg)
                             if (!previousOrganisationDataItem) {
-                                this.previousOrganisationData.push({key: itemKeyPrevious, categoryIndex: categoryOptionIndex,
-                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
-                            }
-                            else {
-                                previousOrganisationDataItem.norgs++;
+                                this.previousOrganisationData.push({idOrg: this.movementReports[i].idOrg,
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons});
                             }
                             this.reportDataSetsPrevious[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
-                            this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;
-                            if (this.movementReports[i].nfamilies > 0) {
-                                this.totalFoodDeliveriesPreviousPerFamily += (this.movementReports[i].quantity / this.movementReports[i].nfamilies);
-                            }
-                            if (this.movementReports[i].npersons > 0) {
-                                this.totalFoodDeliveriesPreviousPerPerson += (this.movementReports[i].quantity / this.movementReports[i].npersons);
-                            }
+                            this.totalFoodDeliveriesPrevious += this.movementReports[i].quantity;                          
                             break;
                         case this.previousPeriod1.toString():
-                            let itemKeyPrevious1: any = this.movementReports[i].bankShortName;
-                            if (this.category == 'Depot') {
-                                itemKeyPrevious1 = this.movementReports[i].lienDepot;
-                            }
-                            const previous1OrganisationDataItem = this.previous1OrganisationData.find(item => item.key === itemKeyPrevious1)
+                           
+                            const previous1OrganisationDataItem = this.previous1OrganisationData.find(item => item.idOrg === this.movementReports[i].idOrg)
                             if (!previous1OrganisationDataItem) {
-                                this.previous1OrganisationData.push({key: itemKeyPrevious1, categoryIndex: categoryOptionIndex,
-                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons,norgs:1});
-                            }
-                            else {
-                                previous1OrganisationDataItem.norgs++;
+                                this.previous1OrganisationData.push({idOrg: this.movementReports[i].idOrg, 
+                                    nfamilies:this.movementReports[i].nfamilies, npersons : this.movementReports[i].npersons});
                             }
                             this.reportDataSetsPrevious1[0].data[categoryOptionIndex] += this.movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious1 += this.movementReports[i].quantity;
@@ -566,18 +520,18 @@ export class MovementReportComponent implements OnInit {
         this.currentOrganisationData.forEach(item => {
             this.totalFoodDeliveryFamiliesCurrent += item.nfamilies;
             this.totalFoodDeliveryPersonsCurrent += item.npersons;
-            this.totalFoodDeliveriesCurrentOrganisations += item.norgs;
         });
+        this.totalFoodDeliveriesCurrentOrganisations = this.currentOrganisationData.length;
         this.previousOrganisationData.forEach(item => {
             this.totalFoodDeliveryFamiliesPrevious += item.nfamilies;
             this.totalFoodDeliveryPersonsPrevious += item.npersons;
-            this.totalFoodDeliveriesPreviousOrganisations += item.norgs;
         });
+        this.totalFoodDeliveriesPreviousOrganisations = this.previousOrganisationData.length;
         this.previous1OrganisationData.forEach(item => {
             this.totalFoodDeliveryFamiliesPrevious1 += item.nfamilies;
             this.totalFoodDeliveryPersonsPrevious1 += item.npersons;
-            this.totalFoodDeliveriesPrevious1Organisations += item.norgs
         });
+        this.totalFoodDeliveriesPrevious1Organisations = this.previous1OrganisationData.length;
         if (this.totalFoodDeliveryFamiliesCurrent >0) {
             this.totalFoodDeliveriesCurrentPerFamily =
                 this.totalFoodDeliveriesCurrent / this.totalFoodDeliveryFamiliesCurrent;
@@ -906,16 +860,23 @@ export class MovementReportComponent implements OnInit {
     }
 
     getTotalFoodDeliveriesPrevious() {
-        return $localize`:@@StatFoodDeliveriesPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesPrevious)} kg`;
-       // todo later return $localize`:@@StatFoodDeliveriesPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesPrevious)} kg( ${this.totalFoodDeliveriesPreviousPerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesPreviousPerPerson.toFixed(2)} kg per person.)`;
+        return $localize`:@@StatFoodDeliveriesPreviousTotal:Total: ${Math.round(this.totalFoodDeliveriesPrevious)} kg for ${this.totalFoodDeliveriesPreviousOrganisations} organisations serving ${this.totalFoodDeliveryFamiliesPrevious} families - ${this.totalFoodDeliveryPersonsPrevious} persons`;
+    }
+    getTotalFoodDeliveriesPreviousPerFamily() {
+      return $localize`:@@StatFoodDeliveriesPreviousTotalPerFamily:${this.totalFoodDeliveriesPreviousPerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesPreviousPerPerson.toFixed(2)} kg per person.`;
     }
 
     getTotalFoodDeliveriesPrevious1() {
-        return $localize`:@@StatFoodDeliveriesPrevious1Total:Total: ${Math.round(this.totalFoodDeliveriesPrevious1)} kg`;
+        return $localize`:@@StatFoodDeliveriesPrevious1Total:Total: ${Math.round(this.totalFoodDeliveriesPrevious1)} kg for ${this.totalFoodDeliveriesPrevious1Organisations} organisations serving ${this.totalFoodDeliveryFamiliesPrevious1} families - ${this.totalFoodDeliveryPersonsPrevious1} persons`;
     }
-
+    getTotalFoodDeliveriesPrevious1PerFamily() {
+        return $localize`:@@StatFoodDeliveriesPrevious1TotalPerFamily:${this.totalFoodDeliveriesPrevious1PerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesPrevious1PerPerson.toFixed(2)} kg per person.`;
+    }
     getTotalFoodDeliveriesCurrent() {
-        return $localize`:@@StatFoodDeliveriesCurrentTotal:Total: ${Math.round(this.totalFoodDeliveriesCurrent)} kg`;
+        return $localize`:@@StatFoodDeliveriesCurrentTotal:Total: ${Math.round(this.totalFoodDeliveriesCurrent)} kg for ${this.totalFoodDeliveriesCurrentOrganisations} organisations serving ${this.totalFoodDeliveryFamiliesCurrent} families - ${this.totalFoodDeliveryPersonsCurrent} persons`;
+    }
+    getTotalFoodDeliveriesCurrentPerFamily() {
+        return $localize`:@@StatFoodDeliveriesCurrentTotalPerFamily:${this.totalFoodDeliveriesCurrentPerFamily.toFixed(2)} kg per family. ${this.totalFoodDeliveriesCurrentPerPerson.toFixed(2)} kg per person.`;
     }
 
     getTotalFoodDeliveriesNonFEAD() {
