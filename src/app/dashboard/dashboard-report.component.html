@@ -648,19 +648,7 @@
                         </p-dropdown>
                     </div>
                 </div>
-                <div *ngFor="let item of selectedBankItems" class="p-fluid p-formgrid p-grid">
-                    <div class="p-field p-col-12 p-md-3">
-                        {{item.key}}
-                    </div>
-                    <div class="p-field p-col-12 p-md-6">
-                        {{labelCategory(item.category)}}
-                    </div>
-                    <div class="p-field p-col-12 p-md-3">
-                        {{formatQuantity(item.quantity)}}
-                    </div>
-
-                </div>
-                <div *ngFor="let item of selectedOrgItems" class="p-fluid p-formgrid p-grid">
+                <div *ngFor="let item of selectedMovements" class="p-fluid p-formgrid p-grid">
                     <div class="p-field p-col-12 p-md-3">
                         {{item.day}}
                     </div>

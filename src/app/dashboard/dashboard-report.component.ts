@@ -30,8 +30,7 @@ export class DashboardReportComponent implements OnInit {
     orgs: string[];
     selectedDay: string;
     selectedOrg: string;
-    booIsLoadedBankItems: boolean;
-    booisLoadedOrgItems: boolean;
+
     booIsLoaded: boolean;
     booIsLoadedMovements: boolean;
     category: string;
@@ -42,10 +41,9 @@ export class DashboardReportComponent implements OnInit {
     categoryOptionsGestBen: any[];
     bankShortName: string;
     bankId: number;
-    dashboardBankItems: MovementReport[];
-    dashboardOrgItems: MovementReport[];
-    selectedBankItems: MovementReport[];
-    selectedOrgItems: MovementReport[];
+    dailyMovements: MovementReport[];
+    selectedMovements: MovementReport[];
+
     banqueOrgReportRecords: BanqueClientReport[];
     clientNFam: number[];
     clientNpers: number[];
@@ -179,12 +177,8 @@ export class DashboardReportComponent implements OnInit {
     this.bankShortName = '';
     this.booIsLoaded = false;
     this.booIsLoadedMovements = false;
-    this.booIsLoadedBankItems = false;
-    this.booisLoadedOrgItems = false;
-    this.dashboardBankItems = [];
-    this.dashboardOrgItems = [];
-    this.selectedBankItems = [];
-    this.selectedOrgItems = [];
+    this.dailyMovements = [];
+    this.selectedMovements = [];
     this.statuts = enmStatusCompany;
     this.currentPeriod = new Date().getFullYear();
     this.previousPeriod = this.currentPeriod - 1;
@@ -348,9 +342,9 @@ initializeClientsArrays() {
             this.bankShortName).subscribe(
             (response: MovementReport[]) => {
                 const movementReports = response;
-                let previousOrganisationData :{key: any, categoryIndex: number,nfamilies: number,npersons: number,norgs:number}[] = [];
-                let currentOrganisationData :{key: any, categoryIndex: number,nfamilies: number,npersons: number;norgs:number}[] = [];
-                let previous1OrganisationData :{key: any, categoryIndex: number,nfamilies: number,npersons: number;norgs:number}[] = [];
+                let previousOrganisationData :{idOrg: number,categoryIndex: number,nfamilies: number,npersons: number}[] = [];
+                let currentOrganisationData :{idOrg: number,categoryIndex: number, nfamilies: number,npersons: number}[]= [];
+                let previous1OrganisationData :{idOrg: number,categoryIndex: number,nfamilies: number,npersons: number}[] = [];
 
                 for (let i = 0; i < this.categoryOptions.length; i++) {
                     this.foodDeliveriesbyCategoryCurrent.push(0);
@@ -393,43 +387,33 @@ initializeClientsArrays() {
                     if (parseInt(movementYear, 10) < this.previousPeriod1) continue;
                     switch (movementYear) {
                         case this.currentPeriod.toString():
-                           const currentOrganisationDataItem = currentOrganisationData.find(item => item.key === movementReports[i].lienDepot)
-                           if (!currentOrganisationDataItem) {
-                                currentOrganisationData.push({key: movementReports[i].lienDepot, categoryIndex: categoryOptionIndex,
-                                    nfamilies:movementReports[i].nfamilies, npersons :movementReports[i].npersons,norgs:1});
+                            const currentOrganisationDataItem = currentOrganisationData.find(item => item.idOrg === movementReports[i].idOrg && item.categoryIndex === categoryOptionIndex)
+                            if (!currentOrganisationDataItem) {
+                                currentOrganisationData.push({idOrg: movementReports[i].idOrg, categoryIndex: categoryOptionIndex,
+                                    nfamilies:movementReports[i].nfamilies, npersons :movementReports[i].npersons});
                             }
-                            else {
-                               currentOrganisationDataItem.norgs++;
-                           }
                             this.foodDeliveriesbyCategoryCurrent[categoryOptionIndex] += movementReports[i].quantity;
                             this.totalFoodDeliveriesCurrent += movementReports[i].quantity;
 
                             break;
                         case this.previousPeriod.toString():
 
-                            const previousOrganisationDataItem = previousOrganisationData.find(item => item.key === movementReports[i].lienDepot)
+                            const previousOrganisationDataItem = previousOrganisationData.find(item => item.idOrg === movementReports[i].idOrg && item.categoryIndex === categoryOptionIndex)
                             if (!previousOrganisationDataItem) {
-                                previousOrganisationData.push({key: movementReports[i].lienDepot, categoryIndex: categoryOptionIndex,
-                                    nfamilies:movementReports[i].nfamilies, npersons :movementReports[i].npersons,norgs:1});
-                            }
-                            else {
-                                previousOrganisationDataItem.norgs++;
+                                previousOrganisationData.push({idOrg: movementReports[i].idOrg,categoryIndex: categoryOptionIndex,
+                                    nfamilies:movementReports[i].nfamilies, npersons :movementReports[i].npersons});
                             }
                             this.foodDeliveriesbyCategoryPrevious[categoryOptionIndex] += movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious += movementReports[i].quantity;
                             break;
                         case this.previousPeriod1.toString():
-                            const previous1OrganisationDataItem = previous1OrganisationData.find(item => item.key === movementReports[i].lienDepot)
+                            const previous1OrganisationDataItem = previous1OrganisationData.find(item => item.idOrg === movementReports[i].idOrg && item.categoryIndex === categoryOptionIndex)
                             if (!previous1OrganisationDataItem) {
-                                previous1OrganisationData.push({key: movementReports[i].lienDepot, categoryIndex: categoryOptionIndex,
-                                    nfamilies:movementReports[i].nfamilies, npersons :movementReports[i].npersons,norgs:1});
-                            }
-                            else {
-                                previous1OrganisationDataItem.norgs++;
+                                previous1OrganisationData.push({idOrg: movementReports[i].idOrg,categoryIndex: categoryOptionIndex,
+                                    nfamilies:movementReports[i].nfamilies, npersons :movementReports[i].npersons});
                             }
                             this.foodDeliveriesbyCategoryPrevious1[categoryOptionIndex] += movementReports[i].quantity;
                             this.totalFoodDeliveriesPrevious1 += movementReports[i].quantity;
-
                             break;
 
                         default:
@@ -439,18 +423,19 @@ initializeClientsArrays() {
                 currentOrganisationData.forEach(item => {
                     this.totalFoodDeliveryFamiliesCurrent += item.nfamilies;
                     this.totalFoodDeliveryPersonsCurrent += item.npersons;
-                    this.totalFoodDeliveriesCurrentOrganisations += item.norgs;
                 });
+                this.totalFoodDeliveriesCurrentOrganisations = currentOrganisationData.length;
                 previousOrganisationData.forEach(item => {
                     this.totalFoodDeliveryFamiliesPrevious += item.nfamilies;
                     this.totalFoodDeliveryPersonsPrevious += item.npersons;
-                    this.totalFoodDeliveriesPreviousOrganisations += item.norgs;
                 });
+                console.log('Previous Organisation data',previousOrganisationData );
+                this.totalFoodDeliveriesPreviousOrganisations = previousOrganisationData.length;
                 previous1OrganisationData.forEach(item => {
                     this.totalFoodDeliveryFamiliesPrevious1 += item.nfamilies;
                     this.totalFoodDeliveryPersonsPrevious1 += item.npersons;
-                    this.totalFoodDeliveriesPrevious1Organisations += item.norgs
                 });
+                this.totalFoodDeliveriesPrevious1Organisations = previous1OrganisationData.length;
                 if (this.totalFoodDeliveryFamiliesCurrent >0) {
                     this.totalFoodDeliveriesCurrentPerFamily =
                         this.totalFoodDeliveriesCurrent / this.totalFoodDeliveryFamiliesCurrent;
@@ -478,21 +463,21 @@ initializeClientsArrays() {
                 for (let i = 0; i < this.categoryOptions.length; i++) {
                     currentOrganisationData.filter(item => item.categoryIndex ===i)
                         .map(item => {
-                            this.currentFamiliesByCategory[i] = item.nfamilies;
-                            this.currentPersonsByCategory[i] = item.npersons;
-                            this.currentOrganisationsByCategory[i] = item.norgs;
+                            this.currentFamiliesByCategory[i] += item.nfamilies;
+                            this.currentPersonsByCategory[i] += item.npersons;
+                            this.currentOrganisationsByCategory[i] ++;
                         });
                     previousOrganisationData.filter(item => item.categoryIndex ===i)
                         .map(item => {
-                            this.previousFamiliesByCategory[i] = item.nfamilies;
-                            this.previousPersonsByCategory[i] = item.npersons;
-                            this.previousOrganisationsByCategory[i] = item.norgs;
+                            this.previousFamiliesByCategory[i] += item.nfamilies;
+                            this.previousPersonsByCategory[i] += item.npersons;
+                            this.previousOrganisationsByCategory[i] ++;
                         });
                     previous1OrganisationData.filter(item => item.categoryIndex ===i)
                         .map(item => {
-                            this.previous1FamiliesByCategory[i] = item.nfamilies;
-                            this.previous1PersonsByCategory[i] = item.npersons;
-                            this.previous1OrganisationsByCategory[i] = item.norgs;
+                            this.previous1FamiliesByCategory[i] += item.nfamilies;
+                            this.previous1PersonsByCategory[i]  += item.npersons;
+                            this.previous1OrganisationsByCategory[i] ++;
                         });
                     if (this.currentFamiliesByCategory[i] >0) {
                         this.foodDeliveriesbyCategoryCurrentPerFamily[i] =
@@ -529,18 +514,17 @@ initializeClientsArrays() {
             this.bankShortName, null,null,null,lastDays).subscribe(
             (response: MovementReport[]) => {
                 const movementsRecords = response;
-                this.dashboardBankItems = [];
+                this.dailyMovements = [];
                 for (let i = 0; i < movementsRecords.length; i++) {
-                    this.dashboardBankItems.push(movementsRecords[i]);
+                    this.dailyMovements.push(movementsRecords[i]);
                 }
-                this.booIsLoadedBankItems = true;
-                this.selectedBankItems = this.dashboardBankItems;
-                if ((!this.booIsLoadedMovements) && this.booisLoadedOrgItems) {
+                this.selectedMovements = this.dailyMovements;
+                if (!this.booIsLoadedMovements)  {
                     this.setDropdownDays();
                     this.setDropdownOrgs();
                     this.booIsLoadedMovements = true;
                 }
-                this.booIsLoadedBankItems = true;
+
 
             });
 
@@ -736,47 +720,31 @@ initializeClientsArrays() {
             });
 
     }
-    labelCategory(category: string) {
-        switch (category) {
-            case "AGREEDFEADCOLLECT":
-                return $localize`:@@MovementCategoryFeadCollect:FEAD and Collect day food deliveries for Agreed Associations`;
-            case "NOFEADNONAGREED":
-                return $localize`:@@MovementCategoryNoFeadNotAgreed: non-FEAD day food deliveries for Not Agreed Associations`;
-            case "FEADNONAGREED":
-                return $localize`:@@MovementCategoryFeadNotAgreed: FEAD day food deliveries for Not Agreed Associations`;
-            default:
-                return category;
-        }
-    }
     formatQuantity(quantity: number) {
         return `${quantity.toFixed(0)} kg`;
     }
     setDropdownDays() {
-        console.log("setDropdownDays with " + this.dashboardBankItems.length + " bank items" + this.dashboardOrgItems.length + " org items");
-        const bankDays = this.dashboardBankItems.map(x => x.key); // beware of the key is 'key' for aggregated bank items
-        const orgDays = this.dashboardOrgItems.map(x => x.day); // beware of the key is 'day' for org items
-        const allDays = bankDays.concat(orgDays).filter((v, i, a) => a.indexOf(v) === i); // remove duplicates
+        const days = this.dailyMovements.map(x => x.day);
+        const allDays = days.filter((value, index) => days.indexOf(value) === index);
         this.days = allDays.sort().reverse();
         console.log("setDropdownDays with " + this.days.length + " days");
         this.filterDay(allDays[0]);
     }
     setDropdownOrgs() {
-        console.log("setDropdownOrgs with " + this.dashboardOrgItems.length + " org items");
-        this.orgs = this.dashboardOrgItems.sort(({idOrg:a}, {idOrg:b}) => a-b).map(x => x.idOrg + ' ' + x.orgname).filter((v, i, a) => a.indexOf(v) === i);
+        console.log("setDropdownOrgs with " + this.dailyMovements.length + " org items");
+        this.orgs = this.dailyMovements.sort(({idOrg:a}, {idOrg:b}) => a-b).map(x => x.idOrg + ' ' + x.orgname).filter((v, i, a) => a.indexOf(v) === i);
         this.orgs.unshift(" ");
         console.log("setDropdownOrgs with " + this.orgs.length + " orgs");
     }
     filterDay(myDay: string) {
         this.selectedDay = myDay;
         this.selectedOrg = " ";
-        this.selectedBankItems = this.dashboardBankItems.filter(x => x.key === myDay);
-        this.selectedOrgItems = this.dashboardOrgItems.filter(x => x.day === myDay);
+        this.selectedMovements = this.dailyMovements.filter(x => x.day === myDay);
     }
     filterOrg(myOrg: string) {
         this.selectedOrg = myOrg;
         this.selectedDay = " ";
-        this.selectedBankItems = [];
-        this.selectedOrgItems = this.dashboardOrgItems.filter(x => (x.idOrg + ' ' + x.orgname) === myOrg);
+        this.selectedMovements = this.dailyMovements.filter(x => (x.idOrg + ' ' + x.orgname) === myOrg);
     }
     labelClientNbOfOrgs() {
         return $localize`:@@ClientNbOfOrgs:Number of Organisations(including Depots)`;

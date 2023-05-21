@@ -96,9 +96,9 @@ export class MovementReportComponent implements OnInit {
     previousPeriod1: any;
     previousPeriod2: any;
     previousPeriod3: any;
-    previousOrganisationData :{idOrg: any,nfamilies: number,npersons: number}[] = [];
-    currentOrganisationData :{idOrg: any, nfamilies: number,npersons: number}[] = [];
-    previous1OrganisationData :{idOrg: any, nfamilies: number,npersons: number}[] = [];
+    previousOrganisationData :{idOrg: number,nfamilies: number,npersons: number}[] = [];
+    currentOrganisationData :{idOrg: number, nfamilies: number,npersons: number}[] = [];
+    previous1OrganisationData :{idOrg: number, nfamilies: number,npersons: number}[] = [];
     exportListMovementsMonthly:ExportMovementMonthlyReport[];
     exportListMovementsDaily:ExportMovementDailyReport[]
     depotId: string;
