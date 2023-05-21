@@ -429,7 +429,6 @@ initializeClientsArrays() {
                     this.totalFoodDeliveryFamiliesPrevious += item.nfamilies;
                     this.totalFoodDeliveryPersonsPrevious += item.npersons;
                 });
-                console.log('Previous Organisation data',previousOrganisationData );
                 this.totalFoodDeliveriesPreviousOrganisations = previousOrganisationData.length;
                 previous1OrganisationData.forEach(item => {
                     this.totalFoodDeliveryFamiliesPrevious1 += item.nfamilies;
@@ -727,14 +726,11 @@ initializeClientsArrays() {
         const days = this.dailyMovements.map(x => x.day);
         const allDays = days.filter((value, index) => days.indexOf(value) === index);
         this.days = allDays.sort().reverse();
-        console.log("setDropdownDays with " + this.days.length + " days");
         this.filterDay(allDays[0]);
     }
     setDropdownOrgs() {
-        console.log("setDropdownOrgs with " + this.dailyMovements.length + " org items");
         this.orgs = this.dailyMovements.sort(({idOrg:a}, {idOrg:b}) => a-b).map(x => x.idOrg + ' ' + x.orgname).filter((v, i, a) => a.indexOf(v) === i);
         this.orgs.unshift(" ");
-        console.log("setDropdownOrgs with " + this.orgs.length + " orgs");
     }
     filterDay(myDay: string) {
         this.selectedDay = myDay;

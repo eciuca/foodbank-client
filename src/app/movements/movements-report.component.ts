@@ -419,7 +419,6 @@ export class MovementReportComponent implements OnInit {
                     this.addMovementReportToSubCategoryReportDataSets(this.movementReports[i],'month');
 
                 }
-                console.log( 'Previous1 report data',this.reportDataSetsPrevious1);
                 this.setStatisticsByOrganisation();
                 this.createReportData();
 
