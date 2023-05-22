@@ -68,14 +68,14 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th *ngIf ="viewOption == '1'" i18n="@@InternalId">Internal ID</th>
+            <th *ngIf ="viewOption == '1' || viewOption == '3'" i18n="@@InternalId">Internal ID</th>
             <th i18n="@@Name" >Name</th>
             <th *ngIf ="viewOption == '1'" i18n="@@Partner">Partner</th>
             <th *ngIf ="viewOption == '1' || viewOption == '2'" i18n="@@Address" >Address</th>
             <th *ngIf ="viewOption == '1' || viewOption == '2'" i18n="@@Tel" >Tel</th>
             <th *ngIf ="viewOption == '1'" >FEAD</th>
-            <th *ngIf ="viewOption == '1'" i18n="@@NbDependents" [pTooltip]="getDependentsTooltip()">Nb Dependents</th>
             <th *ngIf ="viewOption == '1' || viewOption == '3'" [pTooltip]="getCoeffTooltip()">COEFF</th>
+            <th *ngIf ="viewOption == '1' || viewOption == '3'"i18n="@@NbDependents" [pTooltip]="getDependentsTooltip()">Nb Dependents</th>
             <th *ngIf ="viewOption == '3'" style="min-width: 200px"></th>
             <th *ngIf ="viewOption == '3'" style="min-width: 200px"></th>
             <th *ngIf ="viewOption == '3'" style="min-width: 200px"></th>
@@ -89,8 +89,11 @@
             <td *ngIf ="viewOption == '1'">
                 {{beneficiaire.idInt}}
             </td>
-            <td >
+            <td *ngIf ="viewOption == '1' || viewOption == '2'">
                 {{ beneficiaire.nom }}  {{beneficiaire.prenom}}
+            </td>
+            <td *ngIf ="viewOption == '3'">
+                {{generateBeneficiaireNomExtended(beneficiaire)}}
             </td>
             <td *ngIf ="viewOption == '1'">
                 {{beneficiaire.nomconj}} {{beneficiaire.prenomconj}}
@@ -105,12 +108,11 @@
             <td *ngIf ="viewOption == '1'">
                 {{labelBirb(beneficiaire.birb)}}
             </td>
-
-            <td *ngIf ="viewOption == '1'" [pTooltip]="getDependentsTooltip()">
-                {{beneficiaire.nbFamily}}
-            </td>
             <td *ngIf ="viewOption == '1' || viewOption == '3'" [pTooltip]="getCoeffTooltip()">
                 {{labelCoeff(beneficiaire.coeff)}}
+            </td>
+            <td *ngIf ="viewOption == '1' || viewOption == '3'"[pTooltip]="getDependentsTooltip()">
+                {{beneficiaire.nbFamily}}
             </td>
             <td *ngIf ="viewOption == '3'" >
             </td>

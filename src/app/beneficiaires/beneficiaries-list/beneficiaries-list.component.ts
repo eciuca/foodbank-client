@@ -344,4 +344,14 @@ export class BeneficiariesListComponent implements OnInit {
     generateTooltipOrganisation() {
         return generateTooltipOrganisation();
     }
+
+    generateBeneficiaireNomExtended(beneficiaire: Beneficiaire) {
+        let beneficiaireNomExtended = (beneficiaire.nom + " " + beneficiaire.prenom).trim();
+        if (beneficiaire.nomconj.length >0 ) {
+            beneficiaireNomExtended += " - " + (beneficiaire.nomconj + " " + beneficiaire.prenomconj).trim();
+        }
+        beneficiaireNomExtended += " - " + beneficiaire.localite;
+        return beneficiaireNomExtended;
+
+    }
 }
