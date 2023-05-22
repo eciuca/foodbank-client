@@ -69,17 +69,17 @@
     <ng-template pTemplate="header">
         <tr>
             <th *ngIf ="viewOption == '1' || viewOption == '3'" i18n="@@InternalId">Internal ID</th>
-            <th i18n="@@Name" style="min-width: 200px" >Name</th>
+            <th i18n="@@Name" style="min-width: 400px" >Name</th>
             <th *ngIf ="viewOption == '1'" i18n="@@Partner">Partner</th>
             <th *ngIf ="viewOption == '1' || viewOption == '2'" i18n="@@Address" >Address</th>
             <th *ngIf ="viewOption == '1' || viewOption == '2'" i18n="@@Tel" >Tel</th>
             <th *ngIf ="viewOption == '1'" >FEAD</th>
             <th *ngIf ="viewOption == '1' || viewOption == '3'" [pTooltip]="getCoeffTooltip()">COEFF</th>
             <th *ngIf ="viewOption == '1' || viewOption == '3'"i18n="@@NbDependents" [pTooltip]="getDependentsTooltip()">Nb Dependents</th>
-            <th *ngIf ="viewOption == '3'" style="min-width: 200px"></th>
-            <th *ngIf ="viewOption == '3'" style="min-width: 200px"></th>
-            <th *ngIf ="viewOption == '3'" style="min-width: 200px"></th>
-            <th *ngIf ="viewOption == '3'" style="min-width: 200px"></th>
+            <th *ngIf ="viewOption == '3'" style="min-width: 100px"></th>
+            <th *ngIf ="viewOption == '3'" style="min-width: 100px"></th>
+            <th *ngIf ="viewOption == '3'" style="min-width: 100px"></th>
+            <th *ngIf ="viewOption == '3'" style="min-width: 100px"></th>
         </tr>
 
     </ng-template>
