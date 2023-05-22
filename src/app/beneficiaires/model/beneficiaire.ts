@@ -104,7 +104,7 @@ export class DefaultBeneficiaire implements Beneficiaire {
         this.adresse = '';
         this.bankName = '';
         this.bankShortName = '';
-        this.coeff = 0;
+        this.coeff = 1;
         this.cp = '';
         this.critBirb = 0;
         this.datUpdBirb = '';

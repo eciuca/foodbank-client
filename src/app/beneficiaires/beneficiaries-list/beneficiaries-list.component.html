@@ -86,7 +86,7 @@
 
     <ng-template pTemplate="body" let-beneficiaire>
         <tr>
-            <td *ngIf ="viewOption == '1'">
+            <td *ngIf ="viewOption == '1' || viewOption == '3'">
                 {{beneficiaire.idInt}}
             </td>
             <td *ngIf ="viewOption == '1' || viewOption == '2'">
