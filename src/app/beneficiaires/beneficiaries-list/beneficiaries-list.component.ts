@@ -47,7 +47,7 @@ export class BeneficiariesListComponent implements OnInit {
     orgParentsMale: number;
     orgParentsFemale: number;
     feadStatuses: any[];
-    booShowSimpler: boolean;
+    viewOption: any;
     birbFilter: any;
     zipCodeFilter: any;
     booShowDoubles: boolean;
@@ -65,7 +65,7 @@ export class BeneficiariesListComponent implements OnInit {
     ) {
         this.beneficiaires = [];
         this.booIsLoaded = false;
-        this.booShowSimpler = false;
+        this.viewOption = "1";
         this.booShowDoubles = false;
         this.lienCpas = 0;
         this.feadStatuses = enmStatutFead.slice(); // clone because we add a null value

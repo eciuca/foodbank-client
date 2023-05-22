@@ -43,6 +43,7 @@ import {BeneficiariesListComponent} from './beneficiaries-list/beneficiaries-lis
 import {NgxPrintModule} from 'ngx-print';
 import {ToastModule} from 'primeng/toast';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import {MailingsDataService} from '../mailings/services/mailings-data.service';
 import {MailingEntityService} from '../mailings/services/mailing-entity.service';
 import {ZipcodesDataService} from '../cpass/zipcodes/services/zipcodes-data.service';
@@ -88,6 +89,7 @@ const routes: Routes = [
         PaginatorModule,
         InputTextModule,
         ButtonModule,
+        RadioButtonModule,
         PanelModule,
         DialogModule,
         ConfirmPopupModule,
