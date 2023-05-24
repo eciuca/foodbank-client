@@ -4489,7 +4489,7 @@
       </trans-unit>
       <trans-unit id="MemberBankCount" datatype="html">
         <source>Number of Bank Members</source>
-        <target>Aantal  medewerkers van de Bank</target>
+        <target>Aantal  Bank medewerkers</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
           <context context-type="linenumber">799</context>
@@ -4497,7 +4497,7 @@
       </trans-unit>
       <trans-unit id="MemberOrgCount" datatype="html">
         <source>Number of Organisation Members</source>
-        <target>Aantal medewerkers van de Organisaties</target>
+        <target>Aantal medewerkers van Organisaties</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
           <context context-type="linenumber">802</context>
@@ -4505,7 +4505,7 @@
       </trans-unit>
       <trans-unit id="UserBankCount" datatype="html">
         <source>Number of Bank Users</source>
-        <target>Aantal gebruikers</target>
+        <target>Aantal Bank gebruikers</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
           <context context-type="linenumber">805</context>
@@ -4513,7 +4513,7 @@
       </trans-unit>
       <trans-unit id="UserorgCount" datatype="html">
         <source>Number of Organisation Users</source>
-        <target>Aantal Gebruikers van de Organisaties</target>
+        <target>Aantal Gebruikers van Organisaties</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
           <context context-type="linenumber">808</context>
