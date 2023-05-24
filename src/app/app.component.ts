@@ -483,11 +483,9 @@ export class AppComponent implements OnInit {
             if (['Admin_FBBA', 'admin'].includes(authState.user.rights)) {
                 reportItems.push(
                     {label: $localize`:@@menuReportOrgs:ReportOrgs`, icon: 'pi pi-fw pi-map', routerLink: [`/banques/bankreports`]},
-                    {label: $localize`:@@menuReportBenefs:ReportBenefs`, icon: 'pi pi-fw pi-map', routerLink: [`/beneficiaires/reports`]},
-                    {label: $localize`:@@menuReportMovements:ReportMovements`, icon: 'pi pi-fw pi-map', routerLink: [`/movements`]},
                 )
             }
-            if (['Admin_Banq', 'Bank'].includes(authState.user.rights))  {
+            if (['Admin_Banq', 'Bank','Admin_FBBA', 'admin'].includes(authState.user.rights))  {
                 reportItems.push(
                     {label: $localize`:@@menuDashboard:Dashboard`, icon: 'pi pi-fw pi-map', routerLink: [`/dashboard`]},
                     {label: $localize`:@@menuReportBenefs:ReportBenefs`, icon: 'pi pi-fw pi-map', routerLink: [`/beneficiaires/reports`]},

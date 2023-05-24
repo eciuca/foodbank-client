@@ -434,30 +434,22 @@
           <context context-type="linenumber">485</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="menuDashboard" datatype="html">
+        <source>Dashboard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">490</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="menuReportBenefs" datatype="html">
         <source>ReportBenefs</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">486</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">493</context>
+          <context context-type="linenumber">491</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuReportMovements" datatype="html">
         <source>ReportMovements</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">487</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">494</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="menuDashboard" datatype="html">
-        <source>Dashboard</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
           <context context-type="linenumber">492</context>
@@ -467,21 +459,21 @@
         <source>Reports</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">499</context>
+          <context context-type="linenumber">497</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuFEADApplication" datatype="html">
         <source>Stock</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">510</context>
+          <context context-type="linenumber">508</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Logout</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">524</context>
+          <context context-type="linenumber">522</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CurrentPageReportbyPage" datatype="html">
@@ -4023,203 +4015,203 @@
         <source>Number of Organisations(including Depots)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">746</context>
+          <context context-type="linenumber">748</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNFam" datatype="html">
         <source>Families</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">749</context>
+          <context context-type="linenumber">751</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNpers" datatype="html">
         <source>Persons</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">752</context>
+          <context context-type="linenumber">754</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientAdults" datatype="html">
         <source>Adults</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">755</context>
+          <context context-type="linenumber">757</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNNour" datatype="html">
         <source>Infants</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">758</context>
+          <context context-type="linenumber">760</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNBebe" datatype="html">
         <source>Babies</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">761</context>
+          <context context-type="linenumber">763</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientChild" datatype="html">
         <source>Children</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">764</context>
+          <context context-type="linenumber">766</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientNAdo" datatype="html">
         <source>Adolescents</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">767</context>
+          <context context-type="linenumber">769</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientN1824" datatype="html">
         <source>Young Adults</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">770</context>
+          <context context-type="linenumber">772</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ClientSeniors" datatype="html">
         <source>Seniors</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">773</context>
+          <context context-type="linenumber">775</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgsTotal" datatype="html">
         <source>All Organisations</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">776</context>
+          <context context-type="linenumber">778</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgsAgreed" datatype="html">
         <source>Agreed Organisations</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">779</context>
+          <context context-type="linenumber">781</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgsGestBen" datatype="html">
         <source>Organisations Recording Beneficiaries</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">782</context>
+          <context context-type="linenumber">784</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgCount" datatype="html">
-        <source>Number of Organisations of the Bank</source>
+        <source>Number of Organisations</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">785</context>
+          <context context-type="linenumber">787</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgFeadCount" datatype="html">
-        <source>Number of FEAD Organisations of the Bank</source>
+        <source>Number of FEAD Organisations</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">788</context>
+          <context context-type="linenumber">790</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgAgreedCount" datatype="html">
-        <source>Number of Agreed Organisations of the Bank</source>
+        <source>Number of Agreed Organisations</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">791</context>
+          <context context-type="linenumber">793</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgFeadFromUsCount" datatype="html">
-        <source>Number of FEAD Organisations of the Bank receiving food from us</source>
+        <source>Number of FEAD Organisations receiving food from us</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">794</context>
+          <context context-type="linenumber">796</context>
         </context-group>
       </trans-unit>
       <trans-unit id="MemberBankCount" datatype="html">
-        <source>Number of Members of the Bank</source>
+        <source>Number of Bank Members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">797</context>
+          <context context-type="linenumber">799</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="MemberorgCount" datatype="html">
-        <source>Number of Members of the Organisations of the Bank</source>
+      <trans-unit id="MemberOrgCount" datatype="html">
+        <source>Number of Organisation Members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">800</context>
+          <context context-type="linenumber">802</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserBankCount" datatype="html">
-        <source>Number of Users of the Bank</source>
+        <source>Number of Bank Users</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">803</context>
+          <context context-type="linenumber">805</context>
         </context-group>
       </trans-unit>
       <trans-unit id="UserorgCount" datatype="html">
-        <source>Number of Users of the Organisations of the Bank</source>
+        <source>Number of Organisation Users</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">806</context>
+          <context context-type="linenumber">808</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgGuestHousesCount" datatype="html">
         <source>Number of Guest Houses</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">809</context>
+          <context context-type="linenumber">811</context>
         </context-group>
       </trans-unit>
       <trans-unit id="OrgDepots" datatype="html">
-        <source>Number of Depots of the Bank</source>
+        <source>Number of Depots</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">813</context>
+          <context context-type="linenumber">815</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FoodDeliveries" datatype="html">
         <source>Food Deliveries</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">820</context>
+          <context context-type="linenumber">822</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Period" datatype="html">
         <source>Period</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">824</context>
+          <context context-type="linenumber">826</context>
         </context-group>
       </trans-unit>
       <trans-unit id="FoodDelivered" datatype="html">
         <source>Food Delivered</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">828</context>
+          <context context-type="linenumber">830</context>
         </context-group>
       </trans-unit>
       <trans-unit id="PerFamily" datatype="html">
         <source>Per Family</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">832</context>
+          <context context-type="linenumber">834</context>
         </context-group>
       </trans-unit>
       <trans-unit id="PerPerson" datatype="html">
         <source>Per Person</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">836</context>
+          <context context-type="linenumber">838</context>
         </context-group>
       </trans-unit>
       <trans-unit id="DistributionRecentActivity" datatype="html">
         <source>Recent Activity</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/dashboard/dashboard-report.component.ts</context>
-          <context context-type="linenumber">840</context>
+          <context context-type="linenumber">842</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SaveDepotWithSync" datatype="html">

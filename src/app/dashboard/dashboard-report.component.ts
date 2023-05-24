@@ -37,8 +37,6 @@ export class DashboardReportComponent implements OnInit {
     bankOptions: any[];
     depotOptions: any[];
     categoryOptions: any[];
-    categoryOptionsAgreed: any[];
-    categoryOptionsGestBen: any[];
     bankShortName: string;
     bankId: number;
     dailyMovements: MovementReport[];
@@ -209,8 +207,6 @@ export class DashboardReportComponent implements OnInit {
                         this.depotOptions = depots.map(({idDepot, nom}) => ({'value': idDepot, 'label': nom}));
                         this.categoryOptions =[...this.depotOptions];
                         this.categoryOptions.push({label: 'OTHER', value: null});
-                        this.categoryOptionsAgreed = [...this.categoryOptions];
-                        this.categoryOptionsGestBen = [...this.categoryOptions];
                         this.depotOptions.unshift({'value': null, 'label': ' '});
                         if (!this.booIsLoaded) {
                             this.report();
@@ -229,8 +225,6 @@ export class DashboardReportComponent implements OnInit {
                         }));
                         this.categoryOptions =[...this.bankOptions];
                         this.categoryOptions.push({label: 'OTHER', value: null});
-                        this.categoryOptionsAgreed = [...this.categoryOptions];
-                        this.categoryOptionsGestBen = [...this.categoryOptions];
                         this.bankOptions.unshift({'value': null, 'label': ' '});
                         if (!this.booIsLoaded) {
                             this.report();
@@ -643,7 +637,10 @@ initializeClientsArrays() {
                 this.totalClientNAdultsAgreed = this.totalClientNpersAgreed - this.totalClientNNourAgreed - this.totalClientNBebeAgreed - this.totalClientNEnfAgreed - this.totalClientNAdoAgreed - this.totalClientN1824Agreed - this.totalClientNSenAgreed;
                 this.totalClientNAdultsGestBen = this.totalClientNpersGestBen - this.totalClientNNourGestBen - this.totalClientNBebeGestBen - this.totalClientNEnfGestBen - this.totalClientNAdoGestBen - this.totalClientN1824GestBen - this.totalClientNSenGestBen;
             });
-        const queryParams = {'actif': '1','lienBanque':this.bankId };
+        const queryParams = {'actif': '1'};
+        if (this.bankId) {
+            queryParams['lienBanque'] = this.bankId;
+        }
         let params = new URLSearchParams();
         for(let key in queryParams){
             params.set(key, queryParams[key])
@@ -704,18 +701,23 @@ initializeClientsArrays() {
 
                 })
             })
-
-        this.banqueReportService.getMembreCountReport(this.authService.accessToken,this.bankShortName).subscribe(
-            (response: BanqueOrgCount[]) => {
-                const bankMemberCounts: BanqueOrgCount[] = response;
-                this.memberBankCount= bankMemberCounts[0].bankCount;
-                this.memberOrgCount= bankMemberCounts[0].orgCount;
-            });
+        this.memberBankCount= 0;
+        this.memberOrgCount= 0;
+        this.userBankCount= 0;
+        this.userOrgCount= 0;
+            this.banqueReportService.getMembreCountReport(this.authService.accessToken,this.bankShortName).subscribe(
+            (counts: BanqueOrgCount[]) => {
+                counts.map( count => {
+                    this.memberBankCount += count.bankCount;
+                    this.memberOrgCount += count.orgCount;
+                })
+           });
         this.banqueReportService.getUserCountReport(this.authService.accessToken,this.bankShortName).subscribe(
-            (response: BanqueOrgCount[]) => {
-                const bankUserCounts: BanqueOrgCount[] = response;
-                this.userBankCount= bankUserCounts[0].bankCount;
-                this.userOrgCount= bankUserCounts[0].orgCount;
+            (counts: BanqueOrgCount[]) => {
+                counts.map( count => {
+                    this.userBankCount += count.bankCount;
+                    this.userOrgCount += count.orgCount;
+                })
             });
 
     }
@@ -782,35 +784,35 @@ initializeClientsArrays() {
         return $localize`:@@OrgsGestBen:Organisations Recording Beneficiaries`;
     }
     labelOrgCount() {
-        return $localize`:@@OrgCount:Number of Organisations of the Bank`;
+        return $localize`:@@OrgCount:Number of Organisations`;
     }
     labelOrgFeadCount() {
-        return $localize`:@@OrgFeadCount:Number of FEAD Organisations of the Bank`;
+        return $localize`:@@OrgFeadCount:Number of FEAD Organisations`;
     }
     labelOrgAgreedCount() {
-        return $localize`:@@OrgAgreedCount:Number of Agreed Organisations of the Bank`;
+        return $localize`:@@OrgAgreedCount:Number of Agreed Organisations`;
     }
     labelOrgFeadFromUsCount() {
-        return $localize`:@@OrgFeadFromUsCount:Number of FEAD Organisations of the Bank receiving food from us`;
+        return $localize`:@@OrgFeadFromUsCount:Number of FEAD Organisations receiving food from us`;
     }
     labelMemberBankCount() {
-        return $localize`:@@MemberBankCount:Number of Members of the Bank`;
+        return $localize`:@@MemberBankCount:Number of Bank Members`;
     }
     labelMemberOrgCount() {
-        return $localize`:@@MemberorgCount:Number of Members of the Organisations of the Bank`;
+        return $localize`:@@MemberOrgCount:Number of Organisation Members`;
     }
     labelUserBankCount() {
-        return $localize`:@@UserBankCount:Number of Users of the Bank`;
+        return $localize`:@@UserBankCount:Number of Bank Users`;
     }
     labelUserOrgCount() {
-        return $localize`:@@UserorgCount:Number of Users of the Organisations of the Bank`;
+        return $localize`:@@UserorgCount:Number of Organisation Users`;
     }
     labelGuestHouseCount() {
         return $localize`:@@OrgGuestHousesCount:Number of Guest Houses`;
     }
 
     labelDepotCount() {
-        return $localize`:@@OrgDepots:Number of Depots of the Bank`;
+        return $localize`:@@OrgDepots:Number of Depots`;
     }
     labelStatus(status: string) {
         return this.statuts.find(statut => statut.value === status).label;
