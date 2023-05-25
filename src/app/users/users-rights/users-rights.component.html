@@ -30,7 +30,8 @@
             <th colspan="2" i18n="@@MemberNameSorted" pSortableColumn="membreNom">Name<p-sortIcon field="membreNom"></p-sortIcon></th>
             <th colspan="2" i18n="@@Organisation"  *ngIf="booShowOrganisations" >Organisation</th>
             <th i18n="@@RightsSorted" pSortableColumn="rights" >Role<p-sortIcon field="rights"></p-sortIcon></th>
-             <th i18n="@@ManageMembersSorted" pSortableColumn="gestMemb">Manage Members<p-sortIcon field="gestMemb"></p-sortIcon></th>
+            <th i18n="@@ManageOrgsSorted" pSortableColumn="gestAsso">Manage Orgs<p-sortIcon field="gestAsso"></p-sortIcon></th>
+            <th i18n="@@ManageMembersSorted" pSortableColumn="gestMemb">Manage Members<p-sortIcon field="gestMemb"></p-sortIcon></th>
             <th i18n="@@ManageClientsSorted" pSortableColumn="gestBen">Manage Clients<p-sortIcon field="gestBen"></p-sortIcon></th>
             <th i18n="@@ManageFeadSorted" pSortableColumn="gestFead">Manage Fead<p-sortIcon field="gestFead"></p-sortIcon></th>
             <th *ngIf="!booIsorganisation" i18n="@@ManageGiftsSorted" pSortableColumn="gestDon">Manage Gifts<p-sortIcon field="gestDon"></p-sortIcon></th>
@@ -53,6 +54,14 @@
                             <ng-template let-option pTemplate="item">
                                 <span>{{option.label}}</span>
                             </ng-template>
+                        </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter field="gestAsso" matchMode="equals" [showMenu]="false">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="YNOptions" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
                         </p-dropdown>
                     </ng-template>
                 </p-columnFilter>
@@ -120,6 +129,9 @@
 
             <td>
                 {{ labelRights(user.rights )}}
+            </td>
+            <td>
+                <i class="pi" [ngClass]="{'true-icon pi-check-circle': user.gestAsso, 'false-icon pi-times-circle': !user.gestAsso}"></i>
             </td>
             <td>
                 <i class="pi" [ngClass]="{'true-icon pi-check-circle': user.gestMemb, 'false-icon pi-times-circle': !user.gestMemb}"></i>

@@ -7024,6 +7024,26 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>ManageOrgsSorted</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>Management</name>
                         <description/>
                         <comment/>
@@ -15785,6 +15805,26 @@
                     </concept_node>
                     <concept_node>
                         <name>UserRightsManageOCMW</name>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>nl-NL</language>
+                                <approved>true</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>UserRightsManageOrgs</name>
                         <description/>
                         <comment/>
                         <default_text/>

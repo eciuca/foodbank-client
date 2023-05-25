@@ -187,12 +187,15 @@ export class OrganisationComponent implements OnInit {
                               this.booIsAdmin = true;
                               break;
                           case 'Admin_Banq':
+                          case 'Bank':
                               this.lienBanque = authState.banque.bankId;
                               regionQuery['lienBanque'] = this.lienBanque.toString();
-                              this.booCanSave = true;
-                              this.booIsAdmin = true;
-                              if (this.booCalledFromTable ) {
-                                  this.booCanDelete = true;
+                              if (authState.user.rights === 'Admin_Banq' || authState.user.gestAsso) {
+                                  this.booCanSave = true;
+                                  this.booIsAdmin = true;
+                                  if (this.booCalledFromTable) {
+                                      this.booCanDelete = true;
+                                  }
                               }
                               break;
                           case 'Admin_Asso':

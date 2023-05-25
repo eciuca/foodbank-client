@@ -196,6 +196,9 @@ export class UsersRightsComponent implements OnInit {
             if (event.filters.rights && event.filters.rights.value) {
               queryParms['rights'] = event.filters.rights.value;
             }
+            if (event.filters.gestAsso && event.filters.gestAsso.value) {
+              queryParms['gestAsso'] = event.filters.gestAsso.value;
+            }
             if (event.filters.gestMemb && event.filters.gestMemb.value) {
               queryParms['gestMemb'] = event.filters.gestMemb.value;
             }

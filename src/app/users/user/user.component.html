@@ -33,6 +33,10 @@
             </div>
         </div>
         <div *ngIf="user.idOrg == 0" class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-2">
+                <label i18n="@@UserRightsManageOrgs" for="gestOrgs">Manage Orgs ?</label>
+                <p-inputSwitch id="gestOrgs" name="gestOrgs" [ngModel]="user.gestAsso"></p-inputSwitch>
+            </div>
             <div  class="p-field p-col-12 p-md-2">
                 <label i18n="@@UserRightsManageOCMW" for="gestCpas">Manage Cpas/OCMW ?</label>
                 <p-inputSwitch id="gestCpas" name="gestCpas" [ngModel]="user.gestCpas"></p-inputSwitch>
@@ -41,11 +45,11 @@
                 <label i18n="@@UserRightsManageGifts" for="gestDon">Manage Gifts ?</label>
                 <p-inputSwitch id="gestDon" name="gestDon" [ngModel]="user.gestDon"></p-inputSwitch>
             </div>
-            <div  *ngIf="user.idOrg == 0" class="p-field p-col-12 p-md-2">
+            <div  class="p-field p-col-12 p-md-2">
                 <label i18n="@@UserRightsManageStock" for="gestFead">Manage Stock ?</label>
                 <p-inputSwitch id="gestFead" name="gestFead" [ngModel]="user.gestFead"></p-inputSwitch>
             </div>
-            <div *ngIf="user.gestFead || booIsCreate" pTooltip="{{generateTooltipManageDepot()}}" class="p-field p-col-12 p-md-6">
+            <div *ngIf="user.gestFead || booIsCreate" pTooltip="{{generateTooltipManageDepot()}}" class="p-field p-col-12 p-md-4">
                 <label i18n="@@UserRightsDepot" for="depot">Managing Which Depot?</label>
                 <p-dropdown [options]="depotOptions" id="depot" name="depot" [ngModel]="user.depot"></p-dropdown>
             </div>
