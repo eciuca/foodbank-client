@@ -234,7 +234,7 @@ export class OrganisationsComponent implements OnInit {
                 case 'Admin_FEAD':
                 case 'Admin_FBBA':
                 case 'Bank_FBBA':
-                    if (authState.user.rights === 'Admin_Banq' ) { this.booCanCreate = true; }
+                    if ((authState.user.rights === 'Admin_Banq' ) || ((authState.user.rights === 'Bank') && authState.user.gestAsso)) { this.booCanCreate = true; }
                     const  queryDepotParms: QueryParams = {};
                     queryDepotParms['offset'] = '0';
                     queryDepotParms['rows'] = '999';
