@@ -430,8 +430,8 @@ export class MovementReportComponent implements OnInit {
         this.previousPeriod = moment().subtract(1, 'months').format('YYYY-MM');
         this.previousPeriod1 = moment().subtract(2, 'months').format('YYYY-MM');
         const lowRange = `${this.previousPeriod1}\-01`;
-        const highRange = `${this.currentPeriod}\-31`;
-        this.movementReportHttpService.getMovementDailyReport(this.authService.accessToken, this.bankShortName,this.depotId, lowRange,highRange).subscribe(
+
+        this.movementReportHttpService.getMovementDailyReport(this.authService.accessToken, this.bankShortName,this.depotId, lowRange,null).subscribe(
             (response: MovementReport[]) => {
                 this.movementReports = response;
 
