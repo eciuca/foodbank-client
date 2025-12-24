@@ -12,7 +12,7 @@ export const authConfig: AuthConfig = {
 
     // The SPA's id. The SPA is registerd with this id at the auth-server
     // clientId: 'server.code',
-    clientId: 'frontend',
+    clientId: 'frontend-legacy',
 
     // Just needed if your auth server demands a secret. In general, this
     // is a sign that the auth server is not configured with SPAs in mind
